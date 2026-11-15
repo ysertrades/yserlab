@@ -65,6 +65,7 @@ export async function compile(spec) {
   const panels = (Array.isArray(spec?.panels) ? spec.panels : spec?.pattern || spec?.bars ? [spec] : []).slice(0, 2);
   const page = L.makePage("lesson", "YSER Trades");
   page.objects = [];
+  page.background = { ...L.DEFAULT_BG, color: "#ffffff", pattern: "none" }; // clean white, nothing behind the candles
   const add = o => { page.objects.push(o); return o; };
   const title = String(spec?.title ?? "").trim().slice(0, 70);
   if (title) add(L.create("text", 160, 100, 1500, undefined, { text: title, style: { ...L.titleStyle(60) }, auto: false }));
@@ -80,7 +81,7 @@ export async function compile(spec) {
     drawn++;
     const n = bars.length, two = panels.length === 2;
     const areaX = two ? (pi === 0 ? 100 : 1000) : 200, areaW = two ? 820 : 1520;
-    const w = Math.min(two ? 640 : 1160, n * (two ? 120 : 170) + 120), x = areaX + (areaW - w) / 2;
+    const w = Math.min(two ? 640 : 1160, n * (two ? 95 : 130) + 120), x = areaX + (areaW - w) / 2;
     const labelH = panel.label ? 70 : 0, pad = 55; // room above and below the candles for tags, circles and arrowheads
     const h = bottom - top - labelH - pad * 2, y = top + pad;
     const step = w / n, X = i => x + (i - .5) * step, Y = v => y + (1 - v) * h;
@@ -109,8 +110,11 @@ export async function compile(spec) {
     }
 
     // The candles.
-    const series = L.create("series", x, y, w, h, { preset: "custom", bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), labels: panel.numbers === "days" ? "days" : panel.numbers ? "numbers" : "none", gap: .38 });
+    // The house look of the QuantLab cards: slim bodies, thin wicks, light grey up candles and dark grey down candles.
+    const series = L.create("series", x, y, w, h, { preset: "custom", bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), labels: "none", gap: .74, bull: "#dcdcdc", bear: "#646464", outline: true, border: "#8e8e8e" });
     add(series);
+    const underNote = new Set(marks.filter(m => m?.type === "note" && /^(low|bottom)$/.test(parseAnchor(m.at, n)?.field ?? "")).map(m => Math.round(parseAnchor(m.at, n).bar)));
+    if (panel.numbers) bars.forEach((_, i) => !underNote.has(i + 1) && add(L.create("text", X(i + 1) - 30, y + h + 14, 60, undefined, { text: panel.numbers === "days" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i % 7] : String(i + 1), style: { ...L.bodyStyle(26), align: "center", color: NAMED.muted }, auto: false })));
 
     // Levels and lines.
     for (const m of marks.filter(m => m?.type === "level")) {
@@ -124,7 +128,7 @@ export async function compile(spec) {
       const a = point(m.from), b = point(m.to);
       if (!a || !b || Math.hypot(a.x - b.x, a.y - b.y) < 90) continue; // an arrow from a candle to itself says nothing
       const arrow = m.type === "arrow";
-      add(L.withBox(L.create(arrow ? "arrow" : "line", a.x, a.y, 0, 0, { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: colour(m.color, NAMED.ink), strokeWidth: 4, dash: m.dash === "dashed" ? "dashed" : "solid", curve: clamp(num(m.curve, 0), -.8, .8), end: arrow ? "arrow" : "none" })));
+      add(L.withBox(L.create(arrow ? "arrow" : "line", a.x, a.y, 0, 0, { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: colour(m.color, NAMED.ink), strokeWidth: 3, dash: m.dash === "dashed" ? "dashed" : "solid", curve: clamp(num(m.curve, 0), -.8, .8), end: arrow ? "arrow" : "none" })));
       // The label sits past the arrowhead (above it for an arrow that climbs, below it for one that falls), where nothing else is.
       if (m.label) {
         const up = b.y <= a.y;
@@ -135,7 +139,7 @@ export async function compile(spec) {
       const p = point(m.at);
       if (!p) continue;
       const r = m.type === "dot" ? 11 : clamp(num(m.r, 46), 16, 140);
-      add(L.create("ellipse", p.x - r, p.y - r, r * 2, r * 2, m.type === "dot" ? { fill: colour(m.color, NAMED.red), stroke: "transparent" } : { fill: "transparent", stroke: colour(m.color, NAMED.red), strokeWidth: 4, dash: m.dash === "dashed" ? "dashed" : "solid" }));
+      add(L.create("ellipse", p.x - r, p.y - r, r * 2, r * 2, m.type === "dot" ? { fill: colour(m.color, NAMED.red), stroke: "transparent" } : { fill: "transparent", stroke: colour(m.color, NAMED.red), strokeWidth: 3, dash: m.dash === "dashed" ? "dashed" : "solid" }));
     }
     for (const m of marks.filter(m => m?.type === "note")) {
       const p = point(m.at);
