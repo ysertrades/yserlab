@@ -245,12 +245,12 @@ async function viaJson(system, user, max = 1800) {
       if (who === "groq") {
         const body = { model, temperature: 0.3, max_completion_tokens: max, response_format: { type: "json_object" }, messages: [{ role: "system", content: system }, { role: "user", content: user }] };
         if (model.startsWith("openai/gpt-oss")) body.reasoning_effort = "low";
-        const r = await fetch("https://api.groq.com/openai/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${env.groqKey}` }, body: JSON.stringify(body), signal: AbortSignal.timeout(45_000) });
+        const r = await fetch("https://api.groq.com/openai/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${env.groqKey}` }, body: JSON.stringify(body), signal: AbortSignal.timeout(20_000) });
         if (!r.ok) { last = `AI error ${r.status}`; continue; }
         text = String((await r.json()).choices?.[0]?.message?.content ?? "");
       } else {
         const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": env.geminiKey },
-          body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents: [{ role: "user", parts: [{ text: user }] }], generationConfig: { temperature: 0.3, maxOutputTokens: Math.max(2500, max), responseMimeType: "application/json" } }), signal: AbortSignal.timeout(45_000) });
+          body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents: [{ role: "user", parts: [{ text: user }] }], generationConfig: { temperature: 0.3, maxOutputTokens: Math.max(2500, max), responseMimeType: "application/json" } }), signal: AbortSignal.timeout(20_000) });
         if (!r.ok) { last = `AI error ${r.status}`; continue; }
         text = ((await r.json()).candidates?.[0]?.content?.parts ?? []).map(p => p.text ?? "").join("");
       }
@@ -284,14 +284,36 @@ function systemFor(request, doc, lessons) {
 export async function designDiagram(request, { doc } = {}) {
   const lessons = recall(request, { chars: 3600, perLesson: 2 });
   const system = systemFor(request, doc, lessons);
-  let note = "";
-  for (let attempt = 0; attempt < 2; attempt++) {
-    const spec = resolve(await viaJson(system, `Draw: ${request}${note}`));
-    const png = await drawDiagram(spec).catch(() => null);
-    if (png) return { png, spec, lessons: lessons.lessons };
-    note = "\n(Your last reply had nothing that could be drawn. Reply with a template id from the list, or a spec with real panels and a pattern or bars.)";
-  }
-  throw new Error("nothing to draw");
+  let note = "", failure = null;
+  try {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const spec = resolve(await viaJson(system, `Draw: ${request}${note}`));
+      const png = await drawDiagram(spec).catch(() => null);
+      if (png) return { png, spec, lessons: lessons.lessons };
+      note = "\n(Your last reply had nothing that could be drawn. Reply with a template id from the list, or a spec with real panels and a pattern or bars.)";
+    }
+  } catch (e) { failure = e; }
+  // The AI is rate limited or too slow: the hand-drawn template that matches the words still comes out.
+  const spec = quickTemplate(request);
+  const png = spec ? await drawDiagram(spec).catch(() => null) : null;
+  if (png) return { png, spec, lessons: lessons.lessons };
+  throw failure ?? new Error("nothing to draw");
+}
+
+/** The template a request names by its keywords, without any AI (a fallback, and what keeps the common pictures instant). */
+export function quickTemplate(request) {
+  const q = String(request).toLowerCase();
+  const dir = /bear|short|sell|down/.test(q) ? "bearish" : "bullish";
+  const id = /\b3s\b|three.stage/.test(q) ? "stage-3s" : /\b2s\b|two.stage/.test(q) ? "stage-2s"
+    : /\bss\b.*stage|stage.*\bss\b|weak (htf|higher).*strong/.test(q) ? "stage-ss"
+    : /psp first|pivot a|line (turns|goes) blue/.test(q) ? "ss-first"
+    : /no switch|wrong (close|way)|not (a )?switch|doesn.?t switch|neutral star/.test(q) ? "ss-last-no"
+    : /strength switch|\bswitch\b|psp last|\bss\b/.test(q) ? "ss-last"
+    : /inversion|ifvg/.test(q) ? "ifvg" : /fair value|\bfvg\b|imbalance/.test(q) ? "fvg"
+    : /cisd|change in (the )?state/.test(q) ? "cisd" : /order block|\bob\b/.test(q) ? "ob"
+    : /fractal|candle (2|3|4)\b|\bc[234]\b/.test(q) ? "fractal" : /premium|discount|equilibrium/.test(q) ? "pd"
+    : /precision swing|\bpsp\b/.test(q) ? "psp" : /smt|divergence/.test(q) ? "smt" : /sweep|liquidity|raid/.test(q) ? "sweep" : null;
+  return id ? fromTemplate(id, dir) : null;
 }
 
 const SLIDES = n => `\nThe owner wants ${n} separate images that together explain this, like slides of a lesson, in teaching order (the foundation first, then each step building on the last). Each image teaches ONE idea. Reply {"slides":[ ${n} items ]}; each item is a template reply ({"template":"<id>","direction":"..."}), or a spec of your own, with its own short title and subtitle. If a template has steps (marked "has N steps" in the list), you may instead reply {"template":"<id>","steps":true,"direction":"..."} to get its whole step-by-step set.`;
@@ -322,5 +344,6 @@ export async function designSlides(request, { doc, count = 4 } = {}) {
   }
   throw new Error("nothing to draw");
 }
+
 
 
