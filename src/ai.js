@@ -43,13 +43,17 @@ export async function ask({ owner, channelId, text }) {
   const history = (histories.get(channelId) ?? []).filter(h => Date.now() - h.at < FORGET).slice(-KEEP);
   const system = `${SYSTEM}\n\nTHEIR MODEL:\n${doc ? JSON.stringify(doc).slice(0, 14000) : "(no model uploaded yet)"}\n\nTHEIR JOURNAL:\n${summary(rows)}\n\nNow: ${new Date().toString().slice(0, 33)}`;
   const contents = [...history.map(h => ({ role: h.role, parts: [{ text: h.text }] })), { role: "user", parts: [{ text }] }];
-  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${env.geminiModel}:generateContent?key=${env.geminiKey}`, {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents, tools: TOOLS, generationConfig: { temperature: 0.5, maxOutputTokens: 900 } }),
-    signal: AbortSignal.timeout(45_000),
-  });
-  if (!response.ok) throw new Error(`AI error ${response.status}`);
-  const data = await response.json();
+  // The configured model first, then the ones the app itself falls back to.
+  const body = JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents, tools: TOOLS, generationConfig: { temperature: 0.5, maxOutputTokens: 900 } });
+  let data = null, last = "no model answered";
+  for (const name of [...new Set([env.geminiModel, "gemini-flash-lite-latest", "gemini-2.5-flash-lite"])]) {
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${name}:generateContent`, { method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": env.geminiKey }, body, signal: AbortSignal.timeout(30_000) });
+      if (response.ok) { data = await response.json(); break; }
+      last = `AI error ${response.status}`;
+    } catch (e) { last = e.message; }
+  }
+  if (!data) throw new Error(last);
   const parts = data.candidates?.[0]?.content?.parts ?? [];
   const call = parts.find(p => p.functionCall)?.functionCall;
   const answer = parts.map(p => p.text ?? "").join("").trim();

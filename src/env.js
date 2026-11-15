@@ -12,7 +12,7 @@ export const env = {
   supabaseUrl: first("SUPABASE_URL") || "https://aubplblrooadtfskdcfh.supabase.co",
   supabaseKey: first("SUPABASE_SERVICE_KEY", "SUPABASE_SERVICE_ROLE_KEY"),
   geminiKey: first("GEMINI_API_KEY"),
-  geminiModel: first("GEMINI_MODEL") || "gemini-2.5-flash",
+  geminiModel: first("GEMINI_MODEL") || "gemini-flash-lite-latest",
 };
 
 export const missing = () => [
