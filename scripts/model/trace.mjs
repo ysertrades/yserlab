@@ -21,6 +21,39 @@ async function pageImages(pdf, pdfjs, p) {
   return out.filter(im => im?.data && im.width >= 300 && im.height >= 300);
 }
 
+/** The page's picture box (PDF coordinates, y up) from the drawing operators, so text can be told apart as above or below it. */
+async function imageBox(page, pdfjs) {
+  const ops = await page.getOperatorList(), O = pdfjs.OPS, stack = [];
+  let m = [1, 0, 0, 1, 0, 0], best = null;
+  const mul = (a, b) => [a[0] * b[0] + a[2] * b[1], a[1] * b[0] + a[3] * b[1], a[0] * b[2] + a[2] * b[3], a[1] * b[2] + a[3] * b[3], a[0] * b[4] + a[2] * b[5] + a[4], a[1] * b[4] + a[3] * b[5] + a[5]];
+  ops.fnArray.forEach((fn, i) => {
+    if (fn === O.save) stack.push(m);
+    else if (fn === O.restore) m = stack.pop() ?? m;
+    else if (fn === O.transform) m = mul(m, ops.argsArray[i]);
+    else if (fn === O.paintImageXObject || fn === O.paintJpegXObject) { const y0 = m[5], y1 = m[5] + m[3], h = Math.abs(y1 - y0); if (!best || h > best.h) best = { top: Math.max(y0, y1), bottom: Math.min(y0, y1), h }; }
+  });
+  return best;
+}
+
+/** The page's words as lines, then paragraphs: a heading (a short first line), what comes above the picture and what comes below it. */
+async function pageWords(page, pdfjs) {
+  const box = await imageBox(page, pdfjs), content = await page.getTextContent();
+  const items = content.items.filter(i => i.str?.trim()).map(i => ({ s: i.str, x: i.transform[4], y: i.transform[5], h: Math.abs(i.transform[3]) || 10 }));
+  items.sort((a, b) => b.y - a.y || a.x - b.x);
+  const lines = [];
+  for (const it of items) { const l = lines.find(l => Math.abs(l.y - it.y) < 2.5); if (l) { l.s += (l.s.endsWith(" ") || it.s.startsWith(" ") ? "" : " ") + it.s; l.h = Math.max(l.h, it.h); } else lines.push({ y: it.y, s: it.s, h: it.h }); }
+  lines.sort((a, b) => b.y - a.y);
+  let heading = null;
+  { const first = lines[0]; // a heading: a short first line with no full stop, above more text
+    if (first && lines.length > 1 && first.s.trim().split(/\s+/).length <= 6 && !/[.!?,;:]$/.test(first.s.trim()) && (!box || first.y > box.top)) heading = first.s.replace(/\s+/g, " ").trim(); }
+  if (heading) lines.shift();
+  const gaps = lines.slice(1).map((l, i) => lines[i].y - l.y).filter(g => g > 0).sort((a, b) => a - b), line = gaps[0] ?? 14;
+  const paras = []; let cur = null;
+  for (const l of lines) { if (cur && cur.last - l.y <= line * 1.6) { cur.s += " " + l.s; cur.last = l.y; } else { cur = { s: l.s, y: l.y, last: l.y }; paras.push(cur); } }
+  const clean = s => s.replace(/\s+/g, " ").trim();
+  return { heading, before: paras.filter(p => !box || p.y > box.top).map(p => clean(p.s)), after: paras.filter(p => box && p.y <= box.top).map(p => clean(p.s)) };
+}
+
 /** RGBA or RGB pixels to classes: 0 light, 1 dark, 2 blue, 3 red. */
 function classify(im) {
   const { width: W, height: H, data } = im, step = data.length / (W * H), cls = new Uint8Array(W * H);
@@ -163,6 +196,7 @@ for (const f of files) {
   for (let p = 1; p <= pdf.numPages; p++) {
     const imgs = await pageImages(pdf, pdfjs, p);
     const pageText = String(text[p - 1] ?? "").replace(/\s+/g, " ").trim();
+    const words = await pageWords(await pdf.getPage(p), pdfjs);
     for (const im of imgs) {
       const t = traceImage(im);
       const groups = groupCharts(t.candles);
@@ -185,7 +219,7 @@ for (const f of files) {
         for (const c of t.candles) { g.strokeStyle = c.dark ? "#f0a" : "#0b0"; g.strokeRect(c.cx - c.w / 2, c.top, c.w, c.bottom - c.top); g.strokeStyle = "#f60"; g.beginPath(); g.moveTo(c.cx, c.hi); g.lineTo(c.cx, c.lo); g.stroke(); }
         fs.mkdirSync("scratch/trace", { recursive: true }); fs.writeFileSync(`scratch/trace/${name.replace(/\W+/g, "-")}-${p}.png`, cv.toBuffer("image/png"));
       }
-      drawings.push({ pdf: name, page: p, text: pageText, height: ymax - ymin, charts, levels });
+      drawings.push({ pdf: name, page: p, text: pageText, heading: words.heading, before: words.before, after: words.after, height: ymax - ymin, charts, levels });
       console.log(`${name} p${p}: ${t.candles.length} candles in ${charts.length} chart(s), ${levels.length} level(s)`);
     }
   }

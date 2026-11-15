@@ -50,10 +50,19 @@ export function specFromDrawing(d) {
     }
     return { bars: c.candles.map(k => [k.o, k.h, k.l, k.c]), range: [lo, hi], aspect: c.step / span, gap: 1 - c.bodyW / c.step, numbers: c.candles.length <= 8, marks };
   });
+  const fit = (x, n) => !x ? "" : x.length <= n ? x : x.slice(0, Math.max(0, x.lastIndexOf(" ", n - 1))) + "…";
+  const firstSentence = x => (sentences(x ?? "")[0] ?? "");
+  if (d.heading !== undefined) { // read with the page's own structure: its heading, the words above the picture, the words below it
+    const title = String(d.heading ?? String(d.pdf).replace(/^the\s+/i, "")).slice(0, 60);
+    const above = d.before ?? [], below = d.after ?? [];
+    const subtitle = fit(firstSentence(above[0]) || above[0], 125);
+    const second = sentences(above[0] ?? "")[1] ?? "";
+    const caption = fit(below[0] ?? (above.length > 1 ? above[above.length - 1] : second), 110);
+    return { title, subtitle, caption, assumed: `From your PDF: ${d.pdf}, page ${d.page}.`, panels, divider: panels.length === 2 };
+  }
   const title = String(d.pdf).slice(0, 60);
   const body = String(d.text).replace(new RegExp("^\\s*" + title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"), "").trim();
   const s = sentences(body);
-  const fit = (x, n) => !x ? "" : x.length <= n ? x : x.slice(0, Math.max(0, x.lastIndexOf(" ", n - 1))) + "…";
   return { title, subtitle: fit(s[0], 105), caption: fit(s[1], 85), assumed: `From your PDF: ${d.pdf}, page ${d.page}.`, panels, divider: panels.length === 2 };
 }
 
