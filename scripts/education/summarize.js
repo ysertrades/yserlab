@@ -1,4 +1,4 @@
-// Stage 3: distil every lesson (its text, its diagrams, its PDF and its video) into one dense study note, then each course into an overview.
+﻿// Stage 3: distil every lesson (its text, its diagrams, its PDF and its video) into one dense study note, then each course into an overview.
 //   node scripts/education/summarize.js
 // Writes knowledge/ttrades/enrich/summaries.json (resumable). The notes are what the bot reads first; the full text stays searchable behind them.
 import "dotenv/config";
@@ -34,7 +34,7 @@ async function groq(prompt, max = 1400) {
         body: JSON.stringify({ model, temperature: 0.2, max_completion_tokens: max, reasoning_effort: "low", messages: [{ role: "user", content: prompt }] }), signal: AbortSignal.timeout(90_000),
       });
       if (r.ok) { const j = await r.json(); bucket[bucket.length - 1].n = j.usage?.total_tokens ?? est; const t = String(j.choices?.[0]?.message?.content ?? "").trim(); if (t) return t; last = "empty"; }
-      else { last = "HTTP " + r.status; if (r.status === 429) bucket.push({ t: Date.now(), n: 7300 }); }
+      else { last = "HTTP " + r.status + " " + (await r.text()).slice(0, 260); if (r.status === 429) bucket.push({ t: Date.now(), n: 7300 }); }
     } catch (e) { last = e.message; }
     await sleep(1500);
   }
@@ -100,9 +100,14 @@ const overviews = load("overviews.json");
 for (const c of structure.courses) {
   if (overviews[c.slug]) continue;
   const bySlug = new Map(lessons.map(l => [l.slug, l]));
-  const list = c.lessons.filter(s => bySlug.has(s)).map((s, i) => `${i + 1}. ${bySlug.get(s).title}: ${(done[s] ?? "").split("\n")[0].replace(/^SUMMARY:\s*/, "").slice(0, process.env.LLM === "groq" ? 130 : 400)}`).join("\n");
-  overviews[c.slug] = await gemini(`Here is the "${c.name}" course of the TTrades Trading Education Center, lesson by lesson, in the order it is taught.\n\n${list}\n\nWrite the course overview a student needs: (1) what the course is and who it is for, (2) how the lessons build on each other as a learning path (name the lessons by their number and title, grouped into stages), (3) the core ideas that run through the whole course. 350-500 words, plain text, no preamble. Use only what the lessons say.`, 2200);
+  const list = c.lessons.filter(s => s !== "trading-education-center" && bySlug.has(s)).map((s, i) => `${i + 1}. ${bySlug.get(s).title}: ${(done[s] ?? "").split("\n")[0].replace(/^SUMMARY:\s*/, "").slice(0, process.env.LLM === "groq" ? 130 : 400)}`).join("\n");
+  overviews[c.slug] = await gemini(`Here is the "${c.name}" course of the TTrades Trading Education Center, lesson by lesson, in the order the site happens to list them (newest first; that is NOT a teaching order, so do not present the numbers as a sequence to follow).\n\n${list}\n\nWrite the course overview a student needs: (1) what the course is and who it is for, (2) the lessons grouped by topic (name them by title), and how those topics fit together as a path from basics to advanced, which you infer from the titles and notes, (3) the core ideas that run through the whole course. 350-500 words, plain text, no preamble. Use only what the lessons say.`, 2200);
+  fs.writeFileSync(path.join(ENR, "overviews.json"), JSON.stringify(overviews, null, 1));
   console.log("overview:", c.name);
 }
 fs.writeFileSync(path.join(ENR, "overviews.json"), JSON.stringify(overviews, null, 1));
 console.log("finished");
+
+
+
+

@@ -119,7 +119,7 @@ export function recall(query, { chars = 9000, perLesson = 3, limit = 40 } = {}) 
   return { text: picked.map(p => p.block).join("\n\n"), lessons };
 }
 
-/** The shape of the education center: its courses in teaching order, each lesson numbered. */
+/** The shape of the education center: its courses with their lessons numbered as the site lists them (newest first, not a teaching order). */
 export function structureText({ overview = false, titles = true } = {}) {
   const k = knowledge();
   if (!k) return "";

@@ -1,4 +1,4 @@
-// Stage 4: assemble everything into the one file the bot searches: knowledge/ttrades/kb.json
+﻿// Stage 4: assemble everything into the one file the bot searches: knowledge/ttrades/kb.json
 //   node scripts/education/build.js
 // Every lesson becomes passages of several kinds: its study note, its article sections, what each diagram teaches, its PDF handout pages,
 // its video transcript, and its definitions; plus the course overviews and the course structure.
@@ -16,7 +16,8 @@ const lessonsRaw = fs.readdirSync(RAW).filter(f => f.endsWith(".json")).map(f =>
 // Lessons in the order of the courses (a lesson in two courses appears once), then any the courses don't list.
 const order = [...new Set([...structure.courses.flatMap(c => c.lessons), ...lessonsRaw.map(l => l.slug)])];
 const bySlug = new Map(lessonsRaw.map(l => [l.slug, l]));
-const lessons = order.filter(s => bySlug.has(s)).map(s => bySlug.get(s));
+const HUB = "trading-education-center"; // the education center's own front page, not a lesson
+const lessons = order.filter(s => s !== HUB && bySlug.has(s)).map(s => bySlug.get(s));
 
 const chunks = [];
 const add = (l, k, h, t, x) => { t = t.trim(); if (t.length < 25) return; chunks.push(x ? { l, k, h, t, x } : { l, k, h, t }); };
@@ -72,7 +73,7 @@ lessons.forEach((lesson, l) => {
       for (const p of pieces(body, 1300)) add(l, "note", name.toLowerCase(), `${name}: ${p}`);
       // A definition becomes its own passage only if the lesson itself backs it: most of its words must appear in the lesson's own text.
       if (name === "DEFINITIONS") for (const line of body.split("\n")) {
-        const m = line.replace(/^[-*•]\s*/, "").replace(/\*\*/g, "").match(/^([^:–—-]{2,60})\s*[:–—-]+\s*(.{12,})$/);
+        const m = line.replace(/^[-*â€¢]\s*/, "").replace(/\*\*/g, "").match(/^([^:â€“â€”-]{2,60})\s*[:â€“â€”-]+\s*(.{12,})$/);
         if (!m) continue;
         const words = [...new Set(m[2].toLowerCase().match(/[a-z]{4,}/g) ?? [])];
         const known = words.filter(w => lessonWords.has(w)).length;
@@ -86,9 +87,10 @@ for (const c of structure.courses) if (overviews[c.slug]) chunks.push({ l: -1, k
 const kb = {
   built: new Date().toISOString(), source: structure.source,
   lessons: lessons.map(l => ({ slug: l.slug, title: l.title, url: l.url, courses: l.courses, video: l.videos[0] ?? null })),
-  courses: structure.courses.map(c => ({ name: c.name, url: c.url, overview: overviews[c.slug] ?? "", lessons: c.lessons.filter(s => bySlug.has(s)) })),
+  courses: structure.courses.map(c => ({ name: c.name, url: c.url, overview: overviews[c.slug] ?? "", lessons: c.lessons.filter(s => s !== HUB && bySlug.has(s)) })),
   chunks,
 };
 fs.writeFileSync(path.join(OUT, "kb.json"), JSON.stringify(kb));
 const by = {}; for (const c of chunks) by[c.k] = (by[c.k] ?? 0) + 1;
 console.log(`kb.json: ${lessons.length} lessons, ${chunks.length} passages`, by, (fs.statSync(path.join(OUT, "kb.json")).size / 1e6).toFixed(1) + " MB");
+

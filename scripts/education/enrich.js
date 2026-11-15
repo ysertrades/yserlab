@@ -66,7 +66,7 @@ async function download(url, ext) {
   throw new Error("download failed " + url);
 }
 
-const IMAGE_PROMPT = `This picture is from the TTrades trading education material (the TTrades Fractal Model and ICT concepts). Work like a careful note-taker who must leave nothing out.
+const SHORT_PROMPT = `TTrades trading-education picture. Reply in at most 170 words, no preamble: first "TEXT:" every word printed on it, then "WHAT IT SHOWS:" the candles, levels, zones, arrows and order of events, then "WHAT IT TEACHES:" the rule in one sentence.`;`nconst IMAGE_PROMPT = `This picture is from the TTrades trading education material (the TTrades Fractal Model and ICT concepts). Work like a careful note-taker who must leave nothing out.
 1. TEXT: write every word printed on the picture exactly as shown (titles, labels, annotations, bullet points, captions).
 2. WHAT IT SHOWS: describe the diagram precisely: the candles and their colours, the levels and zones drawn (and what each is called), arrows, numbered steps, the order in which things happen, which side is bullish or bearish.
 3. WHAT IT TEACHES: state the rule or idea the picture is demonstrating, in plain words, as a trading student would need it.
@@ -83,11 +83,11 @@ async function groqVision(file, prompt) {
   const url = "data:image/jpeg;base64," + canvas.toBuffer("image/jpeg", 82).toString("base64");
   let last = "";
   for (let attempt = 0; attempt < 8; attempt++) {
-    const at = Math.max(Date.now(), groqGate); groqGate = at + 10500; if (at > Date.now()) await sleep(at - Date.now());
+    const at = Math.max(Date.now(), groqGate); groqGate = at + 14000; if (at > Date.now()) await sleep(at - Date.now());
     try {
       const r = await fetch("https://api.groq.com/openai/v1/chat/completions", {
         method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + process.env.GROQ_API_KEY },
-        body: JSON.stringify({ model: "qwen/qwen3.8-27b", temperature: 0.1, max_completion_tokens: 800, messages: [{ role: "user", content: [{ type: "image_url", image_url: { url } }, { type: "text", text: prompt }] }] }),
+        body: JSON.stringify({ model: "qwen/qwen3.8-27b", temperature: 0.1, max_completion_tokens: 420, messages: [{ role: "user", content: [{ type: "image_url", image_url: { url } }, { type: "text", text: prompt }] }] }),
         signal: AbortSignal.timeout(90_000),
       });
       if (r.ok) { const t = String((await r.json()).choices?.[0]?.message?.content ?? "").replace(/<think>[\s\S]*?<\/think>/g, "").trim(); if (t) return t; last = "empty"; }
@@ -111,7 +111,7 @@ async function images() {
     const mime = ext === "jpg" ? "image/jpeg" : "image/" + ext;
     const bytes = await download(url, "." + ext);
     done[url] = process.env.VISION === "groq"
-      ? await groqVision(bytes, IMAGE_PROMPT)
+      ? await groqVision(bytes, SHORT_PROMPT)
       : await gemini([{ inlineData: { mimeType: mime, data: bytes.toString("base64") } }, { text: IMAGE_PROMPT }]);
   }, () => save("images.json", done));
 }
@@ -145,4 +145,5 @@ if (!which || which === "videos") await videos();
 if (!which || which === "images") await images();
 if (!which || which === "pdfs") await pdfs();
 console.log("finished");
+
 

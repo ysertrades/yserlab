@@ -160,7 +160,7 @@ export function context({ doc, rows, text, history = [], big = false, scale = 1 
   const edu = hasKnowledge() ? recall(query, { chars: room.edu, perLesson: big ? 4 : 3 }) : { text: "", lessons: [] };
   const parts = [SYSTEM, `THEIR MODEL (from the PDFs they uploaded in the app; their playbook, it comes first):\n${big ? modelText(doc, room.model) : modelFor(doc, query, room.model)}`];
   if (edu.text) parts.push(`TTRADES EDUCATION CENTER (the textbook; passages that match the question):\n${edu.text}`);
-  if (hasKnowledge() && (big || asksForStructure(text))) parts.push(`STRUCTURE OF THE EDUCATION CENTER (courses in teaching order):\n${structureText({ overview: big, titles: big || scale >= 1 })}`);
+  if (hasKnowledge() && (big || asksForStructure(text))) parts.push(`STRUCTURE OF THE EDUCATION CENTER (the four courses and their lessons, as the site lists them, newest first; a lesson can belong to more than one course):\n${structureText({ overview: big, titles: big || scale >= 1 })}`);
   parts.push(`THEIR JOURNAL:\n${summary(rows, room.journal)}\n\nNow: ${new Date().toString().slice(0, 33)}`);
   return { system: parts.join("\n\n"), lessons: edu.lessons };
 }
