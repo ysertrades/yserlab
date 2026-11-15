@@ -70,6 +70,30 @@ async function post(client, kind, { force = false } = {}) {
 }
 export const postCard = post;
 
+/** The trades that fall in the day, the Monday-to-Sunday week or the calendar month that `day` is in. */
+export function periodRows(rows, kind, day) {
+  const iso = day.toISODate();
+  if (kind === "daily") return rows.filter(e => e.trade_date === iso);
+  if (kind === "weekly") return rows.filter(e => DateTime.fromISO(e.trade_date, { zone: ZONE }).hasSame(day, "week"));
+  return rows.filter(e => String(e.trade_date).startsWith(iso.slice(0, 7)));
+}
+
+/**
+ * A card on request ("share my weekly pnl card"): { png, label } for this period or the one before it, or null when there is nothing in
+ * it. Drawn by the same code as the scheduled cards, in the style chosen in the control panel.
+ */
+export async function cardOnRequest(owner, kind, last = false) {
+  fonts();
+  const { config } = await settings();
+  const rows = await entries(owner);
+  let day = nowNY();
+  if (last) day = kind === "monthly" ? day.minus({ months: 1 }) : kind === "weekly" ? day.minus({ weeks: 1 }) : day.minus({ days: day.weekday === 1 ? 3 : 1 });
+  if (!periodRows(rows, kind, day).length) return null;
+  const card = await cardSvg(kind, rows, config, day);
+  const label = kind === "daily" ? day.toFormat("cccc d LLL") : kind === "weekly" ? `week of ${day.startOf("week").toFormat("d LLL")}` : day.toFormat("LLLL yyyy");
+  return { png: svgToPng(card.svg, kind === "daily" ? 1200 : 1600), label, name: { daily: "daily-card", weekly: "weekly-card", monthly: "monthly-card" }[kind] };
+}
+
 /** Called every few seconds: sends the card whose time has come, once. */
 export async function checkCards(client) {
   const { config } = await settings();

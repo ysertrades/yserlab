@@ -23,6 +23,10 @@ const TOOLS = [{ functionDeclarations: [{
   name: "draw_diagram",
   description: "Use when the user wants a concept, setup or example SHOWN, drawn or illustrated as an image (\"show me a fair value gap\", \"draw the fractal model\", \"give me a diagram of CISD\", \"visualise it\", \"make an image of what you mean\"). The bot draws it in the YSER slides editor's style. Not for pictures of their own logged trades.",
   parameters: { type: "OBJECT", properties: { what: { type: "STRING", description: "What to draw, in a full sentence with the details that matter (bullish or bearish, which candles, which levels), using the model's own terms." } }, required: ["what"] },
+}, {
+  name: "share_pnl_card",
+  description: "Use when the user asks to share, post, send or show their daily, weekly or monthly PnL card (results card). The bot posts the card picture.",
+  parameters: { type: "OBJECT", properties: { period: { type: "STRING", description: "daily, weekly or monthly" }, which: { type: "STRING", description: "this or last (last week, last month, yesterday). Default this." } }, required: ["period"] },
 }] }];
 
 function summary(rows, recent = 25) {
@@ -50,7 +54,8 @@ How to answer:
 - Be direct and brief: a few sentences for simple questions, a short structured answer (bullets or numbered steps) for how-to or explain-it questions. Plain words, Discord markdown sparingly, no filler.
 - Numbers about their trading come only from the journal summary. Never give financial advice or tell them to take a trade; you help them study, review and stay consistent.
 - If they ask you to send or show a picture, chart or screenshot from a trade THEY logged, call show_trade_chart.
-- If they ask you to show, draw, illustrate, diagram or make an image of a concept, setup or example (not one of their trades), call draw_diagram with a full sentence of what to draw. Never describe a picture in words when they asked to see it; call the tool.`;
+- If they ask you to show, draw, illustrate, diagram or make an image of a concept, setup or example (not one of their trades), call draw_diagram with a full sentence of what to draw. Never describe a picture in words when they asked to see it; call the tool.
+- If they ask to share, post or show their daily, weekly or monthly PnL card (results card), call share_pnl_card.`;
 
 const GROQ_MODELS = () => [...new Set([env.groqModel, "openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.8-27b"].filter(Boolean))];
 const GEMINI_MODELS = () => [...new Set([env.geminiModel, "gemini-flash-lite-latest", "gemini-flash-latest", "gemini-3.5-flash"].filter(Boolean))];
@@ -60,6 +65,7 @@ const GROQ_TOOLS = TOOLS[0].functionDeclarations.map(f => ({ type: "function", f
 function called(name, args) {
   if (name === "show_trade_chart") return { chart: true, timeframe: args?.timeframe || "" };
   if (name === "draw_diagram") return { diagram: String(args?.what || "").slice(0, 400) };
+  if (name === "share_pnl_card") return { card: { period: /week/i.test(args?.period) ? "weekly" : /month/i.test(args?.period) ? "monthly" : "daily", last: /last|prev|yesterday/i.test(String(args?.which ?? "") + " " + String(args?.period ?? "")) } };
   return null;
 }
 
@@ -200,7 +206,7 @@ export async function ask({ owner, channelId, text }) {
   } catch (e) { if (!env.groqKey || !env.geminiKey) throw e; out = await gemini(); }
   const keep = histories.get(channelId) ?? [];
   keep.push({ role: "user", text, at: Date.now() });
-  keep.push({ role: "model", text: out.chart ? "(showed a trade chart picker)" : out.diagram ? `(drew a diagram: ${out.diagram})` : out.text || "…", at: Date.now() });
+  keep.push({ role: "model", text: out.chart ? "(showed a trade chart picker)" : out.diagram ? `(drew a diagram: ${out.diagram})` : out.card ? `(posted the ${out.card.period} card)` : out.text || "…", at: Date.now() });
   histories.set(channelId, keep.slice(-KEEP * 2));
   return out;
 }

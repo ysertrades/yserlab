@@ -11,6 +11,7 @@ import { heartbeat, offline } from "./status.js";
 import * as picker from "./picker.js";
 import { ask, modelDoc } from "./ai.js";
 import { designDiagram } from "./diagram.js";
+import { cardOnRequest } from "./cards.js";
 import { picturePost } from "./post.js";
 import { fonts } from "./render.js";
 
@@ -78,6 +79,18 @@ client.on(Events.MessageCreate, async message => {
     await message.channel.sendTyping().catch(() => {});
     const out = await ask({ owner, channelId, text });
     if (out.chart) { await picker.startChart(message, owner, out.timeframe); return; }
+    if (out.card) {
+      try {
+        const card = await cardOnRequest(owner, out.card.period, out.card.last);
+        if (!card) { await message.reply({ content: `No trades logged for ${out.card.last ? "last" : "this"} ${out.card.period === "daily" ? "day" : out.card.period.replace("ly", "")}, so there's no card to show.`, allowedMentions: { repliedUser: false } }); return; }
+        await message.reply({ ...picturePost({ png: card.png, name: `${card.name}.png`, text: `**${card.label}**` }), allowedMentions: { repliedUser: false } });
+        await log("card", { note: `${out.card.period} card on request` });
+      } catch (e) {
+        await log("card", { error: e?.message ?? String(e) }, false);
+        await message.reply({ content: "I couldn't build that card just now. Try again in a minute.", allowedMentions: { repliedUser: false } });
+      }
+      return;
+    }
     if (out.diagram) {
       // Drawn with the slides editor's own renderer; a failure says so instead of going silent.
       await message.channel.sendTyping().catch(() => {});

@@ -73,6 +73,15 @@ export async function compile(spec) {
   const top = title ? (sub ? 285 : 245) : 150;
   const bottom = 880;
   let drawn = 0;
+  // Labels never sit on each other or on a candle: each is tried where it belongs, then nudged to the nearest free spot.
+  const taken = [];
+  const hit = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
+  const free = r => r.x >= 20 && r.x + r.w <= 1900 && r.y >= top - 20 && r.y + r.h <= bottom + 60 && !taken.some(t => hit(r, t));
+  const spot = r => {
+    for (const d of [0, -1, 1, -2, 2, -3, 3]) for (const dx of [0, 1, -1, 2, -2]) { const c = { ...r, x: r.x + dx * (r.w * .55 + 10), y: r.y + d * (r.h + 8) }; if (free(c)) return c; }
+    return r;
+  };
+  const reserve = r => (taken.push({ x: r.x - 3, y: r.y - 3, w: r.w + 6, h: r.h + 6 }), r);
 
   panels.forEach((panel, pi) => {
     const bars = barsOf(L, panel);
@@ -84,6 +93,7 @@ export async function compile(spec) {
     const w = n * (two ? 56 : 64), x = areaX + (areaW - w) / 2;
     const labelH = panel.label ? 70 : 0, pad = 55; // room above and below the candles for tags, circles and arrowheads
     const h = bottom - top - labelH - pad * 2, y = top + pad;
+    if (panel.label) reserve({ x: x + w / 2 - (two ? 400 : 600), y: bottom - labelH + 24, w: two ? 800 : 1200, h: 45 });
     const step = w / n, X = i => x + (i - .5) * step, Y = v => y + (1 - v) * h;
     const point = a => {
       const p = parseAnchor(a, n);
@@ -106,15 +116,21 @@ export async function compile(spec) {
       const x1 = X(Math.min(fromBar, toBar)) - step * .5 - 24, x2 = X(Math.max(fromBar, toBar)) + step * .5 + 24;
       add(L.create("zone", x1, Math.min(a.y, b.y), x2 - x1, Math.max(14, Math.abs(b.y - a.y)), { fill: colour(m.color, NAMED.zone) }));
       // The zone's name sits just outside its right edge, clear of the candles.
-      if (m.label) add(L.create("text", x2 + 14, (a.y + b.y) / 2 - 18, 220, undefined, { text: String(m.label).slice(0, 40), style: { ...L.bodyStyle(26), color: NAMED.muted }, auto: false }));
+      if (m.label) {
+        const text = String(m.label).slice(0, 40), r = reserve(spot({ x: x2 + 14, y: (a.y + b.y) / 2 - 18, w: Math.min(220, text.length * 15 + 12), h: 36 }));
+        add(L.create("text", r.x, r.y, 220, undefined, { text, style: { ...L.bodyStyle(26), color: NAMED.muted }, auto: false }));
+      }
     }
 
     // The candles.
     // The house look of the QuantLab cards: slim bodies, thin wicks, light grey up candles and dark grey down candles.
     const series = L.create("series", x, y, w, h, { preset: "custom", bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), labels: "none", gap: .24, bull: "#dcdcdc", bear: "#646464", outline: true, border: "#8e8e8e" });
     add(series);
-    const underNote = new Set(marks.filter(m => m?.type === "note" && /^(low|bottom)$/.test(parseAnchor(m.at, n)?.field ?? "")).map(m => Math.round(parseAnchor(m.at, n).bar)));
-    if (panel.numbers) bars.forEach((_, i) => !underNote.has(i + 1) && add(L.create("text", X(i + 1) - 30, y + h + 14, 60, undefined, { text: panel.numbers === "days" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i % 7] : String(i + 1), style: { ...L.bodyStyle(26), align: "center", color: NAMED.muted }, auto: false })));
+    // Nothing else is placed on a candle: its body and wick are taken space.
+    const bw = step * (1 - .24);
+    bars.forEach((b, i) => { reserve({ x: X(i + 1) - bw / 2, y: Y(Math.max(b.o, b.c)), w: bw, h: Math.max(4, Math.abs(Y(b.o) - Y(b.c))) }); reserve({ x: X(i + 1) - 4, y: Y(b.h), w: 8, h: Math.max(4, Y(b.l) - Y(b.h)) }); });
+    if (panel.numbers) bars.forEach((_, i) => add(L.create("text", X(i + 1) - 30, y + h + 14, 60, undefined, { text: panel.numbers === "days" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i % 7] : String(i + 1), style: { ...L.bodyStyle(26), align: "center", color: NAMED.muted }, auto: false })));
+    if (panel.numbers) reserve({ x: x - 10, y: y + h + 10, w: w + 20, h: 40 });
 
     // Levels and lines.
     for (const m of marks.filter(m => m?.type === "level")) {
@@ -123,6 +139,7 @@ export async function compile(spec) {
       const from = clamp(num(m.from, 1), 1, n), to = clamp(num(m.to, n), 1, n);
       const lx = X(Math.min(from, to)) - step * .5 - 40, lw = Math.max(step, X(Math.max(from, to)) - lx + step * .5 + 40 + (m.label ? 120 : 0));
       add(L.create("level", lx, p.y - 20, lw, 40, { color: colour(m.color, NAMED.blue), label: String(m.label ?? "").slice(0, 24), tag: m.label ? "right" : "none", chip: null, dash: m.dash === "dashed" ? "dashed" : "solid" }));
+      if (m.label) { const tagW = Math.max(110, Math.min(24, String(m.label).length) * 12 + 44); reserve({ x: lx + lw - tagW - 4, y: p.y - 18, w: tagW + 8, h: 36 }); }
     }
     for (const m of marks.filter(m => m?.type === "arrow" || m?.type === "line")) {
       const a = point(m.from), b = point(m.to);
@@ -131,8 +148,9 @@ export async function compile(spec) {
       add(L.withBox(L.create(arrow ? "arrow" : "line", a.x, a.y, 0, 0, { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: colour(m.color, NAMED.ink), strokeWidth: 3, dash: m.dash === "dashed" ? "dashed" : "solid", curve: clamp(num(m.curve, 0), -.8, .8), end: arrow ? "arrow" : "none" })));
       // The label sits past the arrowhead (above it for an arrow that climbs, below it for one that falls), where nothing else is.
       if (m.label) {
-        const up = b.y <= a.y;
-        add(L.create("text", b.x - 150, up ? b.y - 62 : b.y + 20, 300, undefined, { text: String(m.label).slice(0, 30), style: { ...L.bodyStyle(28), weight: 600, align: "center", color: colour(m.color, NAMED.ink) }, auto: false }));
+        const up = b.y <= a.y, text = String(m.label).slice(0, 30), tw = Math.min(300, text.length * 17 + 20);
+        const r = reserve(spot({ x: b.x - tw / 2, y: up ? b.y - 62 : b.y + 20, w: tw, h: 40 }));
+        add(L.create("text", r.x + tw / 2 - 150, r.y, 300, undefined, { text, style: { ...L.bodyStyle(28), weight: 600, align: "center", color: colour(m.color, NAMED.ink) }, auto: false }));
       }
     }
     for (const m of marks.filter(m => m?.type === "circle" || m?.type === "dot")) {
@@ -147,8 +165,8 @@ export async function compile(spec) {
       if (!p || !text) continue;
       const size = clamp(num(m.size, 28), 20, 44), tw = clamp(text.length * size * .56 + 56, 120, 560);
       const above = p.field === "high" || p.field === "top", below = p.field === "low" || p.field === "bottom";
-      const nx = p.x + num(m.dx, above || below ? 0 : 70) - (above || below ? tw / 2 : 0);
-      const ny = p.y + num(m.dy, above ? -78 : below ? 30 : -34);
+      const spotted = reserve(spot({ x: p.x + num(m.dx, above || below ? 0 : 70) - (above || below ? tw / 2 : 0), y: p.y + num(m.dy, above ? -78 : below ? 30 : -34), w: tw, h: size + 36 }));
+      const nx = spotted.x, ny = spotted.y;
       add(L.create("card", nx, ny, tw, size + 36, { style: "soft", text, icon: null, color: colour(m.color, NAMED.ink), radius: 18, textStyle: { ...L.bodyStyle(size), font: "inter", weight: 600, color: NAMED.ink, align: "center" } }));
     }
     if (panel.label) add(L.create("text", x + w / 2 - (two ? 400 : 600), bottom - labelH + 24, two ? 800 : 1200, undefined, { text: String(panel.label).slice(0, 50), style: { ...L.bodyStyle(32), weight: 600, align: "center" }, auto: false }));
