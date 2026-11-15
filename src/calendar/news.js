@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
 import { events, pick, onDay, zoneName, ZONE } from "./feed.js";
 import { dayCard, alertCard, weekCard } from "./visuals.js";
+import { publishCalendar } from "./publish.js";
 import { svgToPng, fonts } from "../render.js";
 import { deliver, picturePost } from "../post.js";
 import { mentions } from "../access.js";
@@ -76,6 +77,7 @@ export async function checkAlerts(client, config) {
 
 /** Scheduled posts: each fires once, within ten minutes after its time (so a restart doesn't lose it). */
 export async function checkSchedule(client) {
+  void publishCalendar(); // the app's Economic calendar page reads the same feed from a table; this refreshes it (at most every 20 minutes)
   const { config } = await settings();
   const now = nowNY(), n = config.news;
   const due = (hhmm) => { const d = now.diff(at(now, hhmm), "minutes").minutes; return d >= 0 && d < 10; };
