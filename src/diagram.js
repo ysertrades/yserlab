@@ -299,7 +299,7 @@ const PATTERN_HELP = `Library patterns (bullish, "flip": true draws the bearish 
 const DESIGNER = `You design a trading diagram for the YSER slides editor, then reply with ONE JSON object and nothing else.
 USE A TEMPLATE. These are ready-made, hand-drawn diagrams in the owner's style, and one of them fits almost every request: choose the CLOSEST one, even when it only covers the main idea of a longer request (a CISD after a sweep -> cisd; candle 2 and candle 3 of the fractal model -> fractal; an entry into a gap -> fvg). Reply {"template":"<id>","direction":"bullish" or "bearish"} (the direction the idea is traded; optionally "title" and "subtitle" to reword the headline, at most 6 and 12 words). When the request joins TWO ideas (a sweep, then a CISD), show them side by side: {"templates":[{"template":"<id>","direction":"..."},{"template":"<id>","direction":"..."}],"title":"...","subtitle":"..."}. Templates:
 ${templateList()}
-When the request is an idea ON THE HIGHER TIMEFRAME with its ENTRY ON THE LOWER ONE (a candle 2 closure with a CISD entry; "the fractal model and how I enter it"), it is ONE picture, never several: reply {"compose":{"htf":"c2-closure" or "c3-closure" or "fractal","entry":"cisd","direction":"bullish" or "bearish"}} and the bot draws the higher-timeframe candles with the lower-timeframe candles under them, body to body. To design such a picture yourself, use {"stack":true,"title":..,"panels":[HTF panel with "groups":[how many lower candles sit under each higher candle], LTF panel]} with the SAME number of lower candles as the groups add up to; each higher candle is then as wide as its lower candles.
+When the request is an idea ON THE HIGHER TIMEFRAME with its ENTRY ON THE LOWER ONE (a candle 2 closure with a CISD entry; "the fractal model and how I enter it"), it is ONE picture, never several: reply {"compose":{"htf":"c2-closure" or "c3-closure" or "fractal","entry":"cisd","direction":"bullish" or "bearish"}} and the bot draws the idea on the left and its lower-timeframe entry on the right, side by side, in the owner's candle size, with the same levels on both (add "layout":"stack" only when they ask for the lower candles under the higher ones, body to body). To design such a picture yourself, use {"stack":true,"title":..,"panels":[HTF panel with "groups":[how many lower candles sit under each higher candle], LTF panel]} with the SAME number of lower candles as the groups add up to; each higher candle is then as wide as its lower candles.
 Design your own with the spec below ONLY for an idea that none of these covers (a session, a time window, a particular pattern they are not). Use what the owner said: if they name details (the leg directions, where a PSP sits, which stage), draw exactly those details, adding a PSP star or SMT lines of their own with the marks below. If you cannot tell what they mean, or you cannot draw it faithfully, do NOT guess: reply {"ask":"one short question that names the 2 or 3 nearest things you can draw"}.
 Spec for your own design:
 {"title":"short headline (max 6 words)","subtitle":"optional one line","panels":[ONE or TWO panels, each:
@@ -409,7 +409,7 @@ async function narrate(spec, request, { doc, lessons }) {
     const reply = await Promise.race([new Promise((_, no) => setTimeout(() => no(new Error("too slow")), 14_000).unref()), viaJson(`You write the words on one trading diagram, in the owner's own terms. Reply ONE JSON object: {"title":"at most 7 words","subtitle":"one complete sentence, at most 95 characters","caption":"one complete sentence, at most 95 characters"}. Every claim must be TRUE of the drawing described and of the owner's model below: say what the candles and marks show (which candle sweeps, what closes where, where the entry is), never a stock phrase, never something the drawing does not show, never a sentence that stops half way. Only the higher-timeframe candles are numbered on the picture, so cite those numbers (C1, C2...) and never a lower-timeframe candle number; name lower-timeframe things by what they are (the low, the CISD close, the entry). If the model below says where the entry or the stop is, use exactly that.\n${facts}`,
       `The owner asked: "${request}"\nThe drawing (current words: "${spec.title}" / "${spec.subtitle}" / "${spec.caption}"):\n${describeSpec(spec)}`, 400)]); // a few seconds at most: if the AI is busy the picture goes out with its own (true) words
     const htf = spec.panels?.[0]?.bars?.length ?? 99;
-    const ok = v => typeof v === "string" && v.trim().length >= 8 && ![...v.matchAll(/\bcandles?\s+(\d+)\b/gi)].some(m => Number(m[1]) > htf); // a candle number the picture doesn't show is a false statement
+    const ok = v => typeof v === "string" && v.trim().length >= 8 && ![...v.matchAll(/\b(?:candles?\s+|c)(\d+)\b/gi)].some(m => Number(m[1]) > htf); // a candle number the picture doesn't show is a false statement
     return { ...spec, ...(ok(reply.title) ? { title: fitText(reply.title, 60) } : {}), ...(ok(reply.subtitle) ? { subtitle: fitText(reply.subtitle, 100) } : {}), ...(ok(reply.caption) ? { caption: fitText(reply.caption, 100) } : {}) };
   } catch { return spec; }
 }
@@ -426,7 +426,7 @@ export async function designDiagram(brief, { doc, said } = {}) {
   // Two ideas where one is the entry of the other ("a c2 closure with a CISD entry"): one picture, the higher timeframe over the lower, body to body.
   const combo = compoundOf(request);
   if (combo) {
-    let spec = await composeEntry(combo.htf, /bear|short|sell|down/i.test(request) ? "bearish" : "bullish", { entry: combo.entry }).catch(() => null);
+    let spec = await composeEntry(combo.htf, /bear|short|sell|down/i.test(request) ? "bearish" : "bullish", { entry: combo.entry, layout: combo.layout }).catch(() => null);
     if (spec) spec = await narrate(spec, request, { doc, lessons });
     const png = spec ? await drawDiagram(spec).catch(() => null) : null;
     if (png) return { png, spec, lessons: lessons.lessons };
@@ -458,7 +458,7 @@ export async function designDiagram(brief, { doc, said } = {}) {
     for (let attempt = 0; attempt < 2; attempt++) {
       const reply = await viaJson(system, `Draw: ${brief}${note}\n(The owner's own words: "${request}")`);
       if (reply.ask && !reply.template && !reply.panels) throw new Clarify(String(reply.ask).slice(0, 500));
-      let spec = reply.compose ? await composeEntry(String(reply.compose.htf), reply.compose.direction ?? reply.direction, { entry: String(reply.compose.entry ?? "cisd") }).catch(() => null) : resolve(reply);
+      let spec = reply.compose ? await composeEntry(String(reply.compose.htf), reply.compose.direction ?? reply.direction, { entry: String(reply.compose.entry ?? "cisd"), layout: reply.compose.layout === "stack" ? "stack" : "side" }).catch(() => null) : resolve(reply);
       if (reply.compose && spec) spec = await narrate(spec, request, { doc, lessons });
       const png = spec ? await drawDiagram(spec).catch(() => null) : null;
       if (png) return { png, spec, lessons: lessons.lessons };
@@ -488,9 +488,10 @@ const HTF_NAMES = [[/(c3|candle 3)\s*closure/i, "c3-closure"], [/(c2|candle 2)\s
 export function compoundOf(request) {
   const q = String(request);
   const htf = HTF_NAMES.find(([re]) => re.test(q))?.[1];
-  return htf && /\bcisd\b|change in (the )?state/i.test(q) ? { htf, entry: "cisd" } : null;
+  // Side by side is the default (the owner's candle size on both); stacked, body to body, only when they ask for it.
+  return htf && /\bcisd\b|change in (the )?state/i.test(q) ? { htf, entry: "cisd", layout: /\bstack|on top|above it|under(neath)? it|body to body|aligned|zoom/i.test(q) ? "stack" : "side" } : null;
 }
-export async function composeEntry(htfId, direction = "bullish", { entry = "cisd" } = {}) {
+export async function composeEntry(htfId, direction = "bullish", { entry = "cisd", layout = "side" } = {}) {
   const L = await slides(), base = fromTemplate(htfId, "bullish"), t = TEMPLATES.find(x => x.id === htfId);
   const p0 = base?.panels?.[0];
   if (!p0 || !SWEPT[htfId] || entry !== "cisd") return null;
@@ -500,11 +501,24 @@ export async function composeEntry(htfId, direction = "bullish", { entry = "cisd
   const ltf = ltfFromHtf(rows, { g, sweep });
   const entryBar = (sweep + 1) * g + 1 <= ltf.rows.length ? (sweep + 1) * g + 1 : 0;
   const marks = (p0.marks ?? []).filter(m => !(m.type === "note" && /entry/i.test(m.text ?? ""))).map(m => (m.type === "arrow" ? { ...m, label: "" } : m)); // the entry is named on the lower candles, where the CISD is
-  const spec = {
+  let spec;
+  if (layout === "stack") spec = {
     title: `${base.title} With a CISD Entry`.slice(0, 70), subtitle: base.subtitle ?? "", stack: true,
-    caption: p0.label ?? "", // the template's own words about the entry: they are the owner's rules, so they are true assumed: `Assumed: bullish, ${rows.length} HTF candles with ${g} LTF candles under each.`,
+    caption: p0.label ?? "", // the template's own words about the entry: they are the owner's rules, so they are true
+    assumed: `Assumed: bullish, ${rows.length} HTF candles with ${g} LTF candles under each.`,
     panels: [{ tf: "HTF", numbers: true, bars: rows, groups: rows.map(() => g), marks }, { tf: "LTF", numbers: false, bars: ltf.rows, marks: cisdMarks(ltf.info, entryBar) }],
   };
+  else { // side by side, the owner's candle size on both: the idea on the left, the lower timeframe zoomed into the swept candle and the one after it on the right
+    const sub = ltfFromHtf(rows.slice(sweep, sweep + 2), { g: 5, sweep: 0 }), n = sub.rows.length;
+    const lo = Math.min(...sub.rows.map(r => r[2])), hi = Math.max(...sub.rows.map(r => r[1])), frac = v => ((v - lo) / (hi - lo || 1)).toFixed(3);
+    const price = a => { const m = /^(\d+):(high|low|open|close|top|bottom)$/.exec(String(a)); if (!m) return null; const r = rows[Number(m[1]) - 1]; if (!r) return null; return { high: r[1], low: r[2], open: r[0], close: r[3], top: Math.max(r[0], r[3]), bottom: Math.min(r[0], r[3]) }[m[2]]; };
+    // The idea's own levels (C1's low, the stop) are drawn again at the same price on the lower candles, so both pictures line up.
+    const levels = (p0.marks ?? []).filter(m => m.type === "level").map(m => ({ m, p: price(m.at) })).filter(x => x.p != null && x.p >= lo && x.p <= hi).map(({ m, p }) => ({ ...m, at: `1:@${frac(p)}`, from: 1, to: n }));
+    spec = {
+      title: `${base.title} + CISD Entry`.slice(0, 70), subtitle: base.subtitle ?? "", caption: p0.label ?? "", assumed: `Assumed: bullish, ${rows.length} HTF candles, LTF zoomed into C${sweep + 1} and C${sweep + 2}.`, divider: true,
+      panels: [{ chip: "HTF", numbers: true, bars: rows, marks: p0.marks ?? [] }, { chip: "LTF", numbers: false, bars: sub.rows, marks: [...levels, ...cisdMarks(sub.info, n > 5 ? 6 : 0)] }],
+    };
+  }
   void t;
   return /bear|short|sell|down/i.test(direction) ? mirror(spec) : spec;
 }
