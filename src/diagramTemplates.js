@@ -15,6 +15,24 @@ export const TEMPLATES = [
       { type: "arrow", from: "5:low", to: "6:high", color: "teal", curve: .25, label: "expansion" }] }] },
   },
   {
+    id: "c2-closure", name: "Candle 2 closure entry", native: "bull",
+    about: "from the owner's PDFs: candle 2 wicks past candle 1's low and its body closes back inside candle 1's range; entry at the open of candle 3, stop on the candle 2 swing point",
+    spec: { title: "Candle 2 Closure", subtitle: "C2 takes C1's low and closes back inside; enter on the open of C3", panels: [{ label: "Entry at the open of candle 3, stop on the C2 swing point", pattern: "c2-closure-run", numbers: true, marks: [
+      { type: "level", at: "1:low", label: "C1 low", color: "blue", dash: "dashed", from: 1, to: 4 },
+      { type: "level", at: "2:low", label: "Stop", color: "red", dash: "dashed", from: 2, to: 4 },
+      { type: "circle", at: "2:close", color: "teal" }, { type: "note", at: "3:open", text: "Entry", color: "ink" },
+      { type: "arrow", from: "3:open", to: "4:high", color: "teal", curve: -.2, label: "continuation" }] }] },
+  },
+  {
+    id: "c3-closure", name: "Candle 3 closure entry", native: "bull",
+    about: "from the owner's PDFs: candle 2 fails a standard closure (it does not close back inside candle 1), candle 3 then closes through candle 2's open; entry at the open of candle 4, stop on the candle 2 swing point",
+    spec: { title: "Candle 3 Closure", subtitle: "C2 fails to close inside C1; C3 closes through C2's open; enter on the open of C4", panels: [{ label: "Entry at the open of candle 4, stop on the C2 swing point", pattern: "c3-closure-run", numbers: true, marks: [
+      { type: "level", at: "2:open", label: "C2 open", color: "blue", dash: "dashed", from: 2, to: 4 },
+      { type: "level", at: "2:low", label: "Stop", color: "red", dash: "dashed", from: 2, to: 4 },
+      { type: "circle", at: "3:close", color: "teal" }, { type: "note", at: "4:open", text: "Entry", color: "ink" },
+      { type: "arrow", from: "4:open", to: "4:high", color: "teal", curve: .2, label: "continuation" }] }] },
+  },
+  {
     id: "ifvg", name: "Inversion fair value gap", native: "bear",
     about: "a fair value gap that price closes through, so it flips and rejects price from the other side (IFVG)",
     spec: { title: "Bearish Inversion Fair Value Gap", subtitle: "A bullish gap is closed through, then rejects price", panels: [{ label: "The gap inverts and becomes resistance", numbers: true,

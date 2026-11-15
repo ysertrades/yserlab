@@ -115,6 +115,7 @@ const list = v => (Array.isArray(v) ? v.filter(Boolean) : []);
 const conceptText = c => [
   `## ${c.name}${c.kind ? ` (${c.kind})` : ""}${list(c.timeframes).length ? ` [${c.timeframes.join(", ")}]` : ""}`,
   c.look_for && `Look for: ${c.look_for}`,
+  c.visual && `How the PDF draws it: ${c.visual}`,
   list(c.must).length && `Must hold: ${c.must.join("; ")}`,
   list(c.steps).length && `Steps: ${c.steps.map((s, i) => `${i + 1}) ${s}`).join(" ")}`,
   list(c.not).length && `Doesn't count: ${c.not.join("; ")}`,

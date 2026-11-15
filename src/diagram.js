@@ -189,7 +189,7 @@ export async function compile(spec) {
       const nx = spotted.x, ny = spotted.y;
       add(L.create("card", nx, ny, tw, size + 36, { style: "soft", text, icon: null, color: colour(m.color, NAMED.ink), radius: 18, textStyle: { ...L.bodyStyle(size), font: "inter", weight: 600, color: NAMED.ink, align: "center" } }));
     }
-    if (panel.label) add(L.create("text", x + w / 2 - (two ? 400 : 600), bottom - labelH + 24, two ? 800 : 1200, undefined, { text: String(panel.label).slice(0, 50), style: { ...L.bodyStyle(32), weight: 600, align: "center" }, auto: false }));
+    if (panel.label) add(L.create("text", x + w / 2 - (two ? 400 : 600), bottom - labelH + 24, two ? 800 : 1200, undefined, { text: String(panel.label).slice(0, 80), style: { ...L.bodyStyle(32), weight: 600, align: "center" }, auto: false }));
   });
 
   return drawn ? { page, deck: { brand: "YSER Trades", numbering: false, footer: { ...L.DEFAULT_FOOTER } } } : null;
@@ -306,7 +306,7 @@ export async function designDiagram(request, { doc } = {}) {
 export function quickTemplate(request) {
   const q = String(request).toLowerCase();
   const dir = /bear|short|sell|down/.test(q) ? "bearish" : "bullish";
-  const id = /double confirm/.test(q) ? "ss-double" : /not linked|unlinked|too late|no stage/.test(q) ? "not-linked" : /opposite direction/.test(q) ? "opposite"
+  const id = /(c3|candle 3)\s*closure/.test(q) ? "c3-closure" : /(c2|candle 2)\s*closure/.test(q) ? "c2-closure" : /double confirm/.test(q) ? "ss-double" : /not linked|unlinked|too late|no stage/.test(q) ? "not-linked" : /opposite direction/.test(q) ? "opposite"
     : /(chain|three).*(flip|weak.*strong)/.test(q) ? "chain-flip" : /strong.*then.*weak|strong.*to.*weak|order matters|reversed order/.test(q) ? "stage-2s-order"
     : /psp.*(s2|second)|s2.*psp/.test(q) && /ss|switch/.test(q) ? "ss-s2-psp" : /two smt|pair|leg flip|flip|no psp|without (a )?psp/.test(q) && /ss|switch|stage/.test(q) ? "stage-ss"
     : /\b3s\b|three.stage/.test(q) ? "stage-3s" : /\b2s\b|two.stage/.test(q) ? "stage-2s"
@@ -377,3 +377,4 @@ const clarifyText = request => {
 
 /** A strength switch asked for with no detail: always the two ways it happens, as two images (two SMTs, and a PSP), each with the correlated asset beside it. */
 export const isGenericSs = q => /\b(ss|strength switch)\b/i.test(q) && !/(psp (first|last)|\b[23]s\b|stage|wrong|no switch|not (a )?switch|double|not linked|opposite|chain|strong.*then.*weak|first prompt)/i.test(q);
+
