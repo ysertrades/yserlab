@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Index, tokens } from "./knowledge.js";
+import { leadSentences } from "./text.js";
 
 /**
  * The charts of the owner's own PDFs, traced (scripts/model/trace.mjs) into candles with the PDF's own proportions, and matched to a
@@ -33,6 +34,21 @@ export const pagesOf = pdf => pdfDrawings().filter(d => d.pdf === pdf && !/this 
 
 const sentences = text => String(text).replace(/\s+/g, " ").trim().split(/(?<=[.!?])\s+/).filter(Boolean);
 
+/**
+ * The ONE page of a PDF that answers a request: the page whose own heading is all in the request ("ideal profile" is the page headed Ideal Profile),
+ * else the page with the most candles (the complete picture, with every candle of the formation).
+ */
+export function bestPage(pdf, request) {
+  const q = new Set(tokens(request));
+  let best = null, top = -1;
+  for (const p of pagesOf(pdf)) {
+    const h = p.heading ? tokens(p.heading, { expand: false }) : [];
+    const score = (h.length && h.every(w => q.has(w)) ? 100 : 0) + p.charts.reduce((n, c) => n + c.candles.length, 0);
+    if (score > top) { best = p; top = score; }
+  }
+  return best;
+}
+
 /** One traced page as a drawing spec (panels of candles on one shared price scale, plus the blue levels). */
 export function specFromDrawing(d) {
   let charts = d.charts.filter(c => c.candles.length);
@@ -50,7 +66,7 @@ export function specFromDrawing(d) {
     }
     return { bars: c.candles.map(k => [k.o, k.h, k.l, k.c]), range: [lo, hi], aspect: c.step / span, gap: 1 - c.bodyW / c.step, numbers: c.candles.length <= 8, marks };
   });
-  const fit = (x, n) => !x ? "" : x.length <= n ? x : x.slice(0, Math.max(0, x.lastIndexOf(" ", n - 1))) + "…";
+  const fit = (x, n) => leadSentences(x, n); // whole sentences only: a line from the PDF never stops half way
   const firstSentence = x => (sentences(x ?? "")[0] ?? "");
   if (d.heading !== undefined) { // read with the page's own structure: its heading, the words above the picture, the words below it
     const title = String(d.heading ?? String(d.pdf).replace(/^the\s+/i, "")).slice(0, 60);

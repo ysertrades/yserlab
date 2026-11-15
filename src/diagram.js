@@ -4,8 +4,9 @@ import { Index, recall } from "./knowledge.js";
 import { modelFor } from "./ai.js";
 import { TEMPLATES, fromTemplate, mirror, stepsFromTemplate, templateList, toLtf } from "./diagramTemplates.js";
 import { cisdMarks, ltfFromHtf } from "./compose.js";
+import { fitText } from "./text.js";
 import { SMT_RULES, asksAboutSmt } from "./smtLesson.js";
-import { matchDrawings, namesWholePdf, pagesOf, pdfNamedIn, specFromDrawing } from "./pdfDrawings.js";
+import { bestPage, matchDrawings, namesWholePdf, pagesOf, pdfNamedIn, specFromDrawing } from "./pdfDrawings.js";
 
 /**
  * Diagrams in the slides editor's own look. The editor's renderer is bundled in vendor/slides.mjs (scripts/slides/build.mjs), so a
@@ -25,21 +26,7 @@ const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 /** Every string in a spec with plain spaces (a non-breaking space draws as a missing-glyph box). */
 const clean = v => typeof v === "string" ? v.replace(/[\u2010\u2011\u2012\u2013]/g, "-").replace(/[\u00a0\u2007\u202f\u200b\u2060\ufeff\u00ad]/g, " ").replace(/\s+/g, " ").trim() : Array.isArray(v) ? v.map(clean) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, clean(x)])) : v;
 
-/**
- * A line of text that fits, and still ends: nothing is ever cut mid-thought. Too long, it stops at the last full sentence, else at the last
- * clause (comma, semicolon, dash) that fits and closes with a full stop, and only as a last resort at a word with an ellipsis.
- */
-export function fitText(value, max) {
-  const s = String(value ?? "").replace(/\s+/g, " ").trim();
-  if (s.length <= max) return s;
-  const head = s.slice(0, max + 1);
-  const sentence = [...head.matchAll(/[.!?](?=\s|$)/g)].pop();
-  if (sentence && sentence.index >= max * .45) return head.slice(0, sentence.index + 1);
-  const clause = [...head.slice(0, max).matchAll(/[,;:—–](?=\s)|\s-\s/g)].pop();
-  if (clause && clause.index >= max * .55) return head.slice(0, clause.index).replace(/[\s,;:—–-]+$/, "") + ".";
-  const word = head.slice(0, max).replace(/\s+\S*$/, "").replace(/[\s,;:—–-]+(and|or|the|a|an|to|of|in|on|with|then|but)?$/i, "");
-  return word + "…";
-}
+export { fitText };
 
 /** The pattern library, for the AI to pick from. */
 export async function patternNames() { return Object.keys((await slides()).PATTERNS); }
@@ -402,15 +389,17 @@ function describeSpec(spec) {
  * The words on a picture, written from what it shows and from the owner's own model: a headline, a one-line subtitle and a caption that are true of
  * THIS drawing (not a stock sentence). Falls back to the spec's own words if the AI can't be reached.
  */
-async function narrate(spec, request, { doc, lessons }) {
+async function narrate(spec, request, { doc, lessons }, extra = "") {
   try {
     const concepts = ["", ...(spec.stack ? ["c2 closure", "c3 closure", "fractal", "cisd"].filter(k => new RegExp(k.replace(" ", "\\s*"), "i").test(request)) : [])].map(k => matchConcept(k || request, doc)).filter((c, i, a) => c && a.indexOf(c) === i);
-    const facts = [concepts.map(conceptBrief).join("\n\n"), lessons?.text ? `Lesson material:\n${String(lessons.text).slice(0, 1800)}` : ""].filter(Boolean).join("\n\n");
-    const reply = await Promise.race([new Promise((_, no) => setTimeout(() => no(new Error("too slow")), 14_000).unref()), viaJson(`You write the words on one trading diagram, in the owner's own terms. Reply ONE JSON object: {"title":"at most 7 words","subtitle":"one complete sentence, at most 95 characters","caption":"one complete sentence, at most 95 characters"}. Every claim must be TRUE of the drawing described and of the owner's model below: say what the candles and marks show (which candle sweeps, what closes where, where the entry is), never a stock phrase, never something the drawing does not show, never a sentence that stops half way. Only the higher-timeframe candles are numbered on the picture, so cite those numbers (C1, C2...) and never a lower-timeframe candle number; name lower-timeframe things by what they are (the low, the CISD close, the entry). If the model below says where the entry or the stop is, use exactly that.\n${facts}`,
+    templateIndex ??= new Index(TEMPLATES.map(t => ({ h: t.name, t: `${t.name}. ${t.about}`, id: t.id, name: t.name, about: t.about })));
+    const rule = templateIndex.search(request, 1)[0]?.chunk; // the owner's own one-line rule for the nearest idea
+    const facts = [extra, rule?.about ? `The owner's rule for "${rule.name}": ${rule.about}` : "", concepts.map(conceptBrief).join("\n\n"), lessons?.text ? `Lesson material:\n${String(lessons.text).slice(0, 1800)}` : ""].filter(Boolean).join("\n\n");
+    const reply = await Promise.race([new Promise((_, no) => setTimeout(() => no(new Error("too slow")), 14_000).unref()), viaJson(`You write the words on one trading diagram, in the owner's own terms. Reply ONE JSON object: {"title":"at most 7 words","subtitle":"one complete sentence, at most 95 characters","caption":"one complete sentence, at most 95 characters"}. TEACH the idea: the subtitle is the RULE this picture shows (what must happen, in the owner's words: which candle takes what, what closes where), the caption is what it means for the trade (the confirmation, the entry, the stop) or what comes next. Never describe the picture itself (no "the chart shows", no mention of colours or of what is NOT drawn, like "no entry symbols"), never a stock phrase, never a sentence that stops half way. Every claim must be TRUE of the owner's model and the page text below; if they do not say where the entry or stop is, do not mention one. Only the higher-timeframe candles are numbered on the picture, so cite those numbers (C1, C2...) and never a lower-timeframe candle number; name lower-timeframe things by what they are (the low, the CISD close, the entry). If the model below says where the entry or the stop is, use exactly that.\n${facts}`,
       `The owner asked: "${request}"\nThe drawing (current words: "${spec.title}" / "${spec.subtitle}" / "${spec.caption}"):\n${describeSpec(spec)}`, 400)]); // a few seconds at most: if the AI is busy the picture goes out with its own (true) words
-    const htf = spec.panels?.[0]?.bars?.length ?? 99;
-    const ok = v => typeof v === "string" && v.trim().length >= 8 && ![...v.matchAll(/\b(?:candles?\s+|c)(\d+)\b/gi)].some(m => Number(m[1]) > htf); // a candle number the picture doesn't show is a false statement
-    return { ...spec, ...(ok(reply.title) ? { title: fitText(reply.title, 60) } : {}), ...(ok(reply.subtitle) ? { subtitle: fitText(reply.subtitle, 100) } : {}), ...(ok(reply.caption) ? { caption: fitText(reply.caption, 100) } : {}) };
+    const htf = Math.max(0, ...(spec.panels ?? []).map(p => p.bars?.length ?? 0)) || 99;
+    const ok = v => typeof v === "string" && v.trim().length >= 8 && (!!extra || ![...v.matchAll(/\b(?:candles?\s+|c)(\d+)\b/gi)].some(m => Number(m[1]) > htf)); /* a PDF page's own text may talk about the candle after the picture */ // a candle number the picture doesn't show is a false statement
+    return { ...spec, ...(ok(reply.title) && !extra ? { title: fitText(reply.title, 60) } : {}), /* a PDF page keeps its own heading */ ...(ok(reply.subtitle) ? { subtitle: fitText(reply.subtitle, 100) } : {}), ...(ok(reply.caption) ? { caption: fitText(reply.caption, 100) } : {}) };
   } catch { return spec; }
 }
 
@@ -441,8 +430,11 @@ export async function designDiagram(brief, { doc, said } = {}) {
   const named = pdfNamedIn(request); // a PDF whose whole name is in the request wins over a looser text match: "ideal profile" is the Ideal Profile PDF, never the Ideal Formation
   const hit = named ? { drawing: pagesOf(named)[0], score: 99 } : matchDrawings(request, 3)[0];
   if (hit?.drawing && (hit.score >= 24 || namesWholePdf(request, hit.drawing.pdf))) {
-    const pages = namesWholePdf(request, hit.drawing.pdf) ? pagesOf(hit.drawing.pdf).slice(0, 4) : [hit.drawing];
-    const specs = pages.map(specFromDrawing), drawn = [];
+    // One picture is one image: the page that answers, unless they asked for the whole PDF, all of it, or a series.
+    const many = /\b(all|every|whole|full|entire|pages?|slides?|series|steps?|walk ?through|each|both|pdf)\b|\b\d+\s*(images|pictures|slides)\b/i.test(request);
+    const pages = namesWholePdf(request, hit.drawing.pdf) ? (many ? pagesOf(hit.drawing.pdf).slice(0, 4) : [bestPage(hit.drawing.pdf, request)]) : [hit.drawing];
+    // Each page's words are written from its own text and the picture (a transition like "Below is what a candle 4 continuation looks like" is not a caption).
+    const specs = await Promise.all(pages.filter(Boolean).map(d => narrate(specFromDrawing(d), request, { doc, lessons }, `The PDF page's own text (the source of truth; page ${d.page} of "${d.pdf}"): ${String(d.text).slice(0, 900)}`))), drawn = [];
     for (const spec of specs) { const png = await drawDiagram(spec).catch(() => null); if (png) drawn.push({ png, spec }); }
     if (drawn.length) return { png: drawn[0].png, spec: drawn[0].spec, lessons: lessons.lessons, more: drawn.slice(1) };
   }
