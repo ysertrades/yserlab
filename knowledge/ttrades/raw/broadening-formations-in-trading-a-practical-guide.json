@@ -1,0 +1,220 @@
+{
+ "slug": "broadening-formations-in-trading-a-practical-guide",
+ "id": 3804,
+ "url": "https://ttrades.com/broadening-formations-in-trading-a-practical-guide/",
+ "title": "Broadening Formations in Trading: A Practical Guide",
+ "date": "2025-07-16T11:00:00",
+ "modified": "2026-02-12T17:50:03",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 31
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/07/Broading-Formations.pdf"
+ ],
+ "videos": [
+  "Tjk9bXERZy0"
+ ],
+ "description": "Learn how broadening formations reveal liquidity hunts, failed breakouts, and Seek & Destroy daily profiles. Spot, draw, and trade them effectively.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Broadening formations are a powerful way to understand market expansion, liquidity grabs, and directional intent. They often appear when price repeatedly sweeps both sides of a range, failing to establish a true breakout. This blog breaks down what broadening formations are, how to draw them, how they interact with liquidity and the Power of Three, and how they tie into the Seek and Destroy daily profile."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is a Broadening Formation?"
+  },
+  {
+   "t": "p",
+   "text": "A broadening formation occurs when price keeps expanding beyond a defined range without holding a breakout. Imagine price trapped inside a consolidation, only to constantly sweep one side, then the other. Over time, this creates a pattern of expansion both up and down, leading to a broader range than where it started."
+  },
+  {
+   "t": "p",
+   "text": "Key features:"
+  },
+  {
+   "t": "li",
+   "text": "- Price takes out one side of a range, fails, and trades back inside"
+  },
+  {
+   "t": "li",
+   "text": "- The same process repeats, expanding both sides"
+  },
+  {
+   "t": "li",
+   "text": "- The result is a megaphone-style structure that highlights liquidity hunts"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Broad-Form-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Spot and Draw Broadening Formations"
+  },
+  {
+   "t": "p",
+   "text": "There are two common approaches:"
+  },
+  {
+   "t": "li",
+   "text": "- High-Low Method"
+  },
+  {
+   "t": "li",
+   "text": "- Identify a significant high and lowLook left to see which highs or lows were taken outConnect these points and extend them outward as the range expands"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/draw-option-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- Liquidity-Based MethodIdentify buy-side and sell-side liquidity sweepsEach time liquidity is taken, extend a line from that pointContinue this process as price expands, building out the broadening formation step by step"
+  },
+  {
+   "t": "p",
+   "text": "This approach keeps you focused on liquidity hunts rather than arbitrary points."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Draw-Option-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Broadening Formations in Real Time"
+  },
+  {
+   "t": "li",
+   "text": "- Range Play: Expect price to move from one side of the range to the other"
+  },
+  {
+   "t": "li",
+   "text": "- Targets: Use the edges of the broadening formation as liquidity targets"
+  },
+  {
+   "t": "li",
+   "text": "- Support/Resistance Flip: If a breakout holds, that side may serve as support or resistance"
+  },
+  {
+   "t": "li",
+   "text": "- SMT Divergence: Look for SMT confirmation at the edges to refine trade entries"
+  },
+  {
+   "t": "p",
+   "text": "Example:If price sweeps sell-side liquidity, fails to displace lower, and equal highs form above, both ICT logic and broadening formation logic suggest targeting the buy-side."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Broad-INtraday.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Combining with ICT Concepts"
+  },
+  {
+   "t": "p",
+   "text": "Broadening formations become more powerful when combined with other ICT tools:"
+  },
+  {
+   "t": "li",
+   "text": "- Power of Three (Accumulation, Manipulation, Distribution)The broadening formation often reflects the manipulation phase, where both sides of liquidity are swept before a directional move."
+  },
+  {
+   "t": "li",
+   "text": "- Discount and PremiumMark equilibrium levels of the initial range. Price often reverts to equilibrium if higher time frame order flow aligns."
+  },
+  {
+   "t": "li",
+   "text": "- Box Setup (Session Ranges)Use Asia, London, and New York session highs/lows as the initial consolidation. A broadening formation around these sessions often frames the day’s liquidity hunt."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Broadening Formations on Higher Timeframes"
+  },
+  {
+   "t": "p",
+   "text": "On daily or higher charts, a broadening formation appears as an outside bar, where both the high and low of the previous day are taken. Extending these levels forward provides:"
+  },
+  {
+   "t": "li",
+   "text": "- Reversal zones"
+  },
+  {
+   "t": "li",
+   "text": "- Liquidity targets"
+  },
+  {
+   "t": "li",
+   "text": "- Context for intraday setups"
+  },
+  {
+   "t": "p",
+   "text": "Example: If the daily candle takes both the prior high and low, intraday traders can treat that bar as a higher-timeframe broadening formation."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Broad-Daily-.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Broadening Formations in the Seek & Destroy Daily Profile"
+  },
+  {
+   "t": "p",
+   "text": "The ICT Seek & Destroy profile thrives on identifying false breakouts. Broadening formations naturally complement this idea."
+  },
+  {
+   "t": "li",
+   "text": "- If London sweeps Asia’s high and low without displacing, expect New York to respect London’s range as a new broadening formation"
+  },
+  {
+   "t": "li",
+   "text": "- If multiple sessions fail to displace, the daily profile may remain choppy, and broadening formations help frame liquidity hunts throughout the day"
+  },
+  {
+   "t": "p",
+   "text": "These setups are especially effective during quieter news days or when the market is anticipating a major economic event. In those conditions, broadening formations often frame the back-and-forth liquidity hunts that define the day’s structure."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Broadening formations are more than just chart patterns. They provide a clear way to see how price sweeps liquidity, fails to break out, and shifts direction. When combined with ICT concepts such as SMT, Power of Three, session ranges, and higher timeframe outside bars, they become a reliable tool for anticipating price behavior. Instead of being caught off guard by choppy price action, you can recognize the natural rhythm of expansion and reversal within the market."
+  }
+ ]
+}

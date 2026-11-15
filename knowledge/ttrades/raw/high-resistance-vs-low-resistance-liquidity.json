@@ -1,0 +1,205 @@
+{
+ "slug": "high-resistance-vs-low-resistance-liquidity",
+ "id": 3602,
+ "url": "https://ttrades.com/high-resistance-vs-low-resistance-liquidity/",
+ "title": "High Resistance vs Low Resistance Liquidity",
+ "date": "2025-07-18T11:00:00",
+ "modified": "2025-10-20T14:04:27",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 21
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/HRLR-vs-LRLR-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "FGkb_50BfT8"
+ ],
+ "description": "Learn high vs low resistance liquidity concepts, how failure swings create setups, and how to use them for trade targets and stops.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In trading, understanding liquidity is essential to reading market behavior. ICT concepts dive deep into how price interacts with liquidity, and one of the most practical distinctions is between High Resistance Liquidity (HRLR) and Low Resistance Liquidity (LRLR). These two liquidity types help traders frame market bias, anticipate reversals, and refine entries."
+  },
+  {
+   "t": "p",
+   "text": "Let’s break down what they mean, how they form, and how you can apply them to your trading."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is a Failure Swing?"
+  },
+  {
+   "t": "p",
+   "text": "Before discussing liquidity types, you need to understand the failure swing:"
+  },
+  {
+   "t": "li",
+   "text": "- A failure swing high occurs when price forms a swing high, then a lower high."
+  },
+  {
+   "t": "li",
+   "text": "- A failure swing low occurs when price forms a swing low, then a higher low."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Failure-swings-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Failure swings show areas where liquidity remains untouched, creating opportunities for price to eventually revisit them."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Low Resistance Liquidity (LRLR)"
+  },
+  {
+   "t": "li",
+   "text": "- Definition: Liquidity that forms when price creates a failure swing (swing highs or lows left unswept)."
+  },
+  {
+   "t": "li",
+   "text": "- Visual Example: A lower high next to a swing high, or a higher low next to a swing low."
+  },
+  {
+   "t": "li",
+   "text": "- Why It Matters: LRLR is easy for price to target because liquidity is left behind without being cleared. It often acts as a magnet for price in future moves."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/LRLR.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Think of LRLR as unfinished business, price tends to come back for it."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "High Resistance Liquidity (HRLR)"
+  },
+  {
+   "t": "li",
+   "text": "- Definition: Liquidity that forms when price sweeps a prior high or low before reversing."
+  },
+  {
+   "t": "li",
+   "text": "- Visual Example: Price makes a higher high before reversing lower, or a lower low before reversing higher."
+  },
+  {
+   "t": "li",
+   "text": "- Why It Matters: HRLR signals that liquidity has already been taken, meaning traders can use it as a protective stop."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/HRLR.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "HRLR shows areas where liquidity was cleared, leaving cleaner setups on the opposite side."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Use HRLR and LRLR Together"
+  },
+  {
+   "t": "p",
+   "text": "Combining the two concepts:"
+  },
+  {
+   "t": "li",
+   "text": "- Targeting: Aim for Low Resistance Liquidity as take profit zones."
+  },
+  {
+   "t": "li",
+   "text": "- Stops: Use High Resistance Liquidity for stop placement."
+  },
+  {
+   "t": "li",
+   "text": "- Practical Example:If price sweeps a low (creating HRLR), then shifts structure upward, you can look for a long entry targeting LRLR (failure swing highs).Conversely, if price sweeps a high (HRLR) and shifts structure downward, target LRLR lows."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/HRLR-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Chart Applications"
+  },
+  {
+   "t": "p",
+   "text": "From the examples shown in the lesson:"
+  },
+  {
+   "t": "li",
+   "text": "- Daily Charts: Look for clusters of failure swings (LRLR) to identify liquidity pools. Use sweeps (HRLR) to confirm bias."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/HRLR-ex-1-center.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- Intraday Charts: Notice when price sweeps one side of a range (HRLR) before moving to the opposite side where LRLR rests."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Intraday-ex-1-HRLR.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- Order Blocks: HRLR often aligns with valid order blocks, creating strong confluence for entries."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- LRLR = Failure swings → Targets for price."
+  },
+  {
+   "t": "li",
+   "text": "- HRLR = Swept liquidity → Stop placement."
+  },
+  {
+   "t": "li",
+   "text": "- Use HRLR for invalidation, LRLR for objectives."
+  },
+  {
+   "t": "li",
+   "text": "- The combination of both helps traders refine entries and manage risk effectively."
+  }
+ ]
+}

@@ -1,0 +1,239 @@
+{
+ "slug": "using-psp-to-confirm-swing-points-ttfm",
+ "id": 6445,
+ "url": "https://ttrades.com/using-psp-to-confirm-swing-points-ttfm/",
+ "title": "Using PSP to Confirm Swing Points (TTFM)",
+ "date": "2026-08-01T11:15:00",
+ "modified": "2026-09-04T10:34:00",
+ "categories": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 10
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 17
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/08/TTrades-Using-PSP-to-Confirm-Swing-Points-2.pdf"
+ ],
+ "videos": [
+  "ZAEgtvsD-qQ"
+ ],
+ "description": "Learn how Precision Swing Points (PSP) confirm swing points within the fractal model using correlated assets, SMT, protected swings, and CISD.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Finding a valid swing point is only part of the equation. The next step is determining whether there is enough confirmation to expect continuation."
+  },
+  {
+   "t": "p",
+   "text": "That is where Precision Swing Points (PSP) come in."
+  },
+  {
+   "t": "p",
+   "text": "Within the fractal model, PSP is used as an additional layer of confirmation, not as a reason to frame a trade on its own. By comparing candle closures between correlated assets, PSP helps identify subtle differences in delivery that can add confidence to an existing setup. This guide explains what a Precision Swing Point is, where to look for one, and how it fits within the fractal model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is a Precision Swing Point?"
+  },
+  {
+   "t": "p",
+   "text": "A Precision Swing Point (PSP) is a difference in candle closures between correlated assets."
+  },
+  {
+   "t": "p",
+   "text": "When two correlated markets form the same overall structure, but one candle closes bullish while the other closes bearish, that difference is considered a PSP. Rather than looking for a divergence in price, PSP focuses on a divergence in candle closures."
+  },
+  {
+   "t": "p",
+   "text": "On its own, a PSP is simply information. Its value comes from where it appears within the fractal model."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/PSPP.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "PSP Should Only Be Used Within a Valid Fractal Model"
+  },
+  {
+   "t": "p",
+   "text": "One of the biggest mistakes traders can make is looking for PSP everywhere."
+  },
+  {
+   "t": "p",
+   "text": "A Precision Swing Point is only meaningful when it appears within an existing fractal model. That means the higher timeframe structure must already be valid before PSP is considered. Whether using a Candle 2 or Candle 3 closure, PSP should only be treated as confirmation after the model has already formed."
+  },
+  {
+   "t": "p",
+   "text": "The model comes first."
+  },
+  {
+   "t": "p",
+   "text": "PSP simply adds another layer of confluence to that existing framework."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/WHen.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Two Types of Precision Swing Points"
+  },
+  {
+   "t": "p",
+   "text": "There are two types of Precision Swing Points used within the fractal model."
+  },
+  {
+   "t": "p",
+   "text": "A Candle 1 PSP occurs when Candle 1 closes a different color than the corresponding candle on a correlated asset."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/c1-p.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "A Candle 2 PSP occurs when that difference appears on Candle 2 instead."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/c2-p.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Although they appear in different locations within the model, both serve the same purpose: providing additional confirmation that supports the existing fractal model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "PSP Is Confirmation, Not the Trade"
+  },
+  {
+   "t": "p",
+   "text": "PSP should never be used to create a setup."
+  },
+  {
+   "t": "p",
+   "text": "Instead, it should be used to confirm one."
+  },
+  {
+   "t": "p",
+   "text": "Once the fractal model is valid, a PSP can provide additional confidence before looking for continuation. It is another piece of confluence that supports the model rather than replacing it."
+  },
+  {
+   "t": "p",
+   "text": "Thinking of PSP as confirmation instead of a standalone strategy helps keep the focus on the framework rather than searching for isolated patterns."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Combining PSP With Protected Swings"
+  },
+  {
+   "t": "p",
+   "text": "One of the strongest ways to use PSP is alongside protected swings."
+  },
+  {
+   "t": "p",
+   "text": "After a valid fractal model forms and a PSP provides additional confirmation, the next step is waiting for an intra-candle change in state of delivery to create a new protected swing. Once the protected swing forms, it confirms price is delivering away from the point of interest. This level then becomes the logical location to place your stop and manage risk."
+  },
+  {
+   "t": "p",
+   "text": "Rather than entering simply because a PSP appears, waiting for the protected swing keeps the trade aligned with the fractal model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "PSP and SMT Work Together"
+  },
+  {
+   "t": "p",
+   "text": "Precision Swing Points and SMT complement one another."
+  },
+  {
+   "t": "p",
+   "text": "SMT identifies a divergence in price between correlated assets, while PSP identifies a difference in candle closures. When both appear within the same valid Fractal Model, they can provide even more confirmation for the anticipated delivery."
+  },
+  {
+   "t": "p",
+   "text": "Neither concept should be used in isolation."
+  },
+  {
+   "t": "p",
+   "text": "Both are designed to strengthen an existing model rather than become the model themselves."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/c2-smt-p.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "PSP Is Fractal Across Timeframes"
+  },
+  {
+   "t": "p",
+   "text": "One of the key characteristics of PSP is that it is fractal."
+  },
+  {
+   "t": "p",
+   "text": "Whether analyzing higher timeframe candles or lower timeframe execution, the concept remains the same. As long as a valid fractal model exists, a Precision Swing Point can be used as an additional layer of confirmation."
+  },
+  {
+   "t": "p",
+   "text": "The timeframe changes."
+  },
+  {
+   "t": "p",
+   "text": "The framework does not."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Precision Swing Points are designed to confirm, not predict."
+  },
+  {
+   "t": "p",
+   "text": "By identifying differences in candle closures between correlated assets, PSP adds another layer of confluence to an already valid fractal model. Combined with protected swings, SMT, and an intra-candle change in state of delivery, it helps confirm swing points before looking for continuation opportunities."
+  },
+  {
+   "t": "p",
+   "text": "Like every concept within the fractal model, PSP works best when it is used as part of the framework rather than as a standalone reason to take a trade."
+  }
+ ]
+}

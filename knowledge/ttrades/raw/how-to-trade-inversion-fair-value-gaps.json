@@ -1,0 +1,212 @@
+{
+ "slug": "how-to-trade-inversion-fair-value-gaps",
+ "id": 4791,
+ "url": "https://ttrades.com/how-to-trade-inversion-fair-value-gaps/",
+ "title": "How to Trade Inversion Fair Value Gaps",
+ "date": "2026-01-24T11:00:00",
+ "modified": "2026-01-23T21:37:09",
+ "categories": [
+  "Fractal Model"
+ ],
+ "courses": [
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 42
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/TTrades-IVFG-PDF.pdf"
+ ],
+ "videos": [
+  "FKTBkTzsmUA"
+ ],
+ "description": "Learn how to trade inversion fair value gaps using higher timeframe alignment, liquidity sweeps, and SMT confluence within the Fractal Model.",
+ "keywords": [],
+ "section": [
+  "Fractal Model"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Inversion Fair Value Gaps, or IFVGs, are one of the most misunderstood concepts in trading. Many traders recognize the pattern, but very few understand when it actually works. This blog breaks IFVGs down step by step, explaining what they are, why most traders struggle with them, and how to correctly trade them using higher timeframe alignment within the fractal model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What a Fair Value Gap Actually Is"
+  },
+  {
+   "t": "p",
+   "text": "Before understanding an inversion, you need a clear definition of a fair value gap."
+  },
+  {
+   "t": "p",
+   "text": "A fair value gap is a three candle formation. Candle one moves price, candle two expands, and candle three fails to overlap candle one’s wick. When the wick of candle one and the wick of candle three do not overlap, an imbalance is created."
+  },
+  {
+   "t": "p",
+   "text": "There are two general forms. A bullish fair value gap forms during upward displacement. A bearish fair value gap forms during downward displacement. These gaps represent inefficiencies where price often reacts later."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/FVG.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Makes an Inversion Fair Value Gap"
+  },
+  {
+   "t": "p",
+   "text": "An inversion fair value gap occurs when price does not respect a fair value gap."
+  },
+  {
+   "t": "p",
+   "text": "Instead of reacting, price closes decisively through the gap. When this happens, the fair value gap flips its role. What previously acted as resistance can become support, and what acted as support can become resistance. This flip signals a change in the state of delivery and opens the door for continuation in the direction of the break."
+  },
+  {
+   "t": "p",
+   "text": "On its own, however, an inversion is not a trade signal."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/IFVG.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Biggest Mistake Traders Make With IFVGs"
+  },
+  {
+   "t": "p",
+   "text": "Most traders lose with IFVGs because they treat them as patterns rather than contextual tools."
+  },
+  {
+   "t": "p",
+   "text": "They ignore higher timeframes, fail to identify meaningful swing points, and enter trades simply because an inversion appears. Without context, these trades are often taken directly into opposing structure or liquidity, leading to being stopped out."
+  },
+  {
+   "t": "p",
+   "text": "An inversion only has meaning when it forms with higher timeframe structure."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/Failed-Setup.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Higher Timeframe Alignment Matters"
+  },
+  {
+   "t": "p",
+   "text": "When trading inversions, you are effectively trading candle two within a larger structure. For that candle to be useful, it must support expansion."
+  },
+  {
+   "t": "p",
+   "text": "This means price should sweep a meaningful high or low, form a relatively small wick, and show expansion in the direction of the intended move. A candle with a large opposing wick does not support immediate expansion and often delays continuation until a later candle."
+  },
+  {
+   "t": "p",
+   "text": "Ignoring this concept is one of the fastest ways to misread an inversion."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Valid Inversions in the Fractal Model"
+  },
+  {
+   "t": "p",
+   "text": "High probability IFVGs appear within the fractal model."
+  },
+  {
+   "t": "p",
+   "text": "You want to see price sweep a prior high or low, followed by a candle that shows expansion with limited wick size. After that sweep, the inversion forms as price closes through the fair value gap. Optional confluence can come from SMT divergence between related markets or between candle one and candle two."
+  },
+  {
+   "t": "p",
+   "text": "This sequence shows liquidity has been taken and delivery is ready to continue."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/approach.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Some Inversions Should Be Avoided"
+  },
+  {
+   "t": "p",
+   "text": "Not every inversion deserves attention."
+  },
+  {
+   "t": "p",
+   "text": "Inversions should be avoided when price is consolidating, when displacement is weak, when multiple fair value gaps fail to close cleanly, or when price drifts sideways instead of forming a sharp reversal. Even if price eventually moves, these conditions dramatically reduce probability."
+  },
+  {
+   "t": "p",
+   "text": "Avoiding these situations is a form of risk management."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Multiple Fair Value Gaps as One Zone"
+  },
+  {
+   "t": "p",
+   "text": "In some cases, price leaves several fair value gaps close together. Instead of treating them individually, they should be combined into a single zone."
+  },
+  {
+   "t": "p",
+   "text": "For the inversion to be valid, price must close decisively through the entire area. If price repeatedly stalls or only partially fills the zone, the setup is incomplete and best avoided."
+  },
+  {
+   "t": "p",
+   "text": "This approach filters out many low quality trades."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Large Opposing Runs Change Entry Timing"
+  },
+  {
+   "t": "p",
+   "text": "When price makes a strong opposing move, immediate expansion is less likely."
+  },
+  {
+   "t": "p",
+   "text": "In these situations, candle two forms the reversal rather than expands. Continuation frequently occurs on the next higher timeframe candle. Traders can either wait for that higher timeframe open or look for a continuation entry once structure confirms."
+  },
+  {
+   "t": "p",
+   "text": "Both approaches rely on patience and context rather than speed."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Takeaways on Trading IFVGs"
+  },
+  {
+   "t": "p",
+   "text": "Inversion fair value gaps work best when they are used as part of a larger framework."
+  },
+  {
+   "t": "p",
+   "text": "They should be aligned with higher timeframe expansion, formed after meaningful liquidity sweeps, and supported by candles that show expansion . When used as a change in the state of delivery rather than a standalone pattern, IFVGs become a powerful tool for both continuation and reversal trades within the fractal model."
+  }
+ ]
+}

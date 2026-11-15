@@ -1,0 +1,343 @@
+{
+ "slug": "stop-overcomplicating-trading-heres-the-fix",
+ "id": 6152,
+ "url": "https://ttrades.com/stop-overcomplicating-trading-heres-the-fix/",
+ "title": "Stop Overcomplicating Trading (Here’s the Fix)",
+ "date": "2026-06-06T11:00:00",
+ "modified": "2026-06-06T14:29:51",
+ "categories": [
+  "Fractal Model"
+ ],
+ "courses": [
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 24
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/06/TTrades-Keep-it-Simple.pdf"
+ ],
+ "videos": [
+  "q3nauvjT3q0"
+ ],
+ "description": "Make trading simple using the Fractal Model with daily bias, CISD, protected swings, and trading Candle 3 across multiple timeframes for cleaner execution.",
+ "keywords": [],
+ "section": [
+  "Fractal Model"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Many traders make trading harder than it needs to be. They add more indicators, stack confirmations, and constantly search for new concepts when the real problem is often a lack of structure and execution."
+  },
+  {
+   "t": "p",
+   "text": "In this guide, we break down how to simplify your trading using the Fractal Model by focusing on daily bias, intraday market structure, candle 2 closures, and trading Candle 3 across multiple timeframes. The goal is simple: align higher timeframe direction with lower timeframe continuation so you can trade expansion without cluttering your charts."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding the Goal of the Fractal Model"
+  },
+  {
+   "t": "p",
+   "text": "The Fractal Model is built around timeframe alignment."
+  },
+  {
+   "t": "p",
+   "text": "Rather than trying to predict every market move, the objective is to create directional alignment between higher and lower timeframes."
+  },
+  {
+   "t": "p",
+   "text": "The framework asks four simple questions:"
+  },
+  {
+   "t": "li",
+   "text": "- What is the higher timeframe bias?"
+  },
+  {
+   "t": "li",
+   "text": "- Has market structure confirmed that direction?"
+  },
+  {
+   "t": "li",
+   "text": "- Is a Candle 3 continuation forming across multiple timeframes?"
+  },
+  {
+   "t": "li",
+   "text": "- Do we have a protected swing for execution?"
+  },
+  {
+   "t": "p",
+   "text": "When these factors align, expansion becomes more probable."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Start With Daily Bias"
+  },
+  {
+   "t": "p",
+   "text": "Everything starts with the daily chart."
+  },
+  {
+   "t": "p",
+   "text": "Since intraday price action develops inside the daily candle, establishing higher timeframe bias first creates structure for the rest of the session."
+  },
+  {
+   "t": "p",
+   "text": "The primary setup begins with a candle 2 closure."
+  },
+  {
+   "t": "p",
+   "text": "A candle 2 closure occurs when price:"
+  },
+  {
+   "t": "li",
+   "text": "- Sweeps a previous high or low"
+  },
+  {
+   "t": "li",
+   "text": "- Closes back through that level"
+  },
+  {
+   "t": "p",
+   "text": "Once daily bias is established, lower timeframe confirmation becomes the next step."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/Daily-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Confirm Direction With CISD"
+  },
+  {
+   "t": "p",
+   "text": "After identifying daily bias, move down to the hourly chart and look for confirmation using a Change in State of Delivery (CISD)."
+  },
+  {
+   "t": "p",
+   "text": "This process involves:"
+  },
+  {
+   "t": "li",
+   "text": "- Finding the swing high or swing low"
+  },
+  {
+   "t": "li",
+   "text": "- Identifying the series of candles that created the high or low"
+  },
+  {
+   "t": "li",
+   "text": "- Waiting for price to close through the series of candles"
+  },
+  {
+   "t": "p",
+   "text": "This confirmation helps validate that the higher timeframe wick has likely formed and continuation is possible."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/DA-with-con.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Building Multi-Timeframe Alignment"
+  },
+  {
+   "t": "p",
+   "text": "After bias is confirmed, execution moves lower."
+  },
+  {
+   "t": "p",
+   "text": "The process looks like this:"
+  },
+  {
+   "t": "p",
+   "text": "Daily Bias → Four-Hour or Hourly Confirmation → Execution Timeframe"
+  },
+  {
+   "t": "p",
+   "text": "Typical workflow:"
+  },
+  {
+   "t": "li",
+   "text": "- Daily chart creates directional bias"
+  },
+  {
+   "t": "li",
+   "text": "- Four-hour or hourly chart forms candle 2 closure"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/ID-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- Lower timeframe creates execution opportunity with a protected swing."
+  },
+  {
+   "t": "p",
+   "text": "Execution examples:"
+  },
+  {
+   "t": "li",
+   "text": "- Four-hour setup → Fifteen-minute entry"
+  },
+  {
+   "t": "li",
+   "text": "- Hourly setup → Five-minute entry"
+  },
+  {
+   "t": "p",
+   "text": "The objective is simple: align continuation across multiple timeframes."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/ALL.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Protected Swings for Entries"
+  },
+  {
+   "t": "p",
+   "text": "Protected swings provide structure for both entries and risk management."
+  },
+  {
+   "t": "p",
+   "text": "Execution remains straightforward:"
+  },
+  {
+   "t": "li",
+   "text": "- Allow the wick to form"
+  },
+  {
+   "t": "li",
+   "text": "- Wait for continuation structure"
+  },
+  {
+   "t": "li",
+   "text": "- Use protected swings for invalidation"
+  },
+  {
+   "t": "p",
+   "text": "Common continuation areas include:"
+  },
+  {
+   "t": "li",
+   "text": "- Fair value gaps"
+  },
+  {
+   "t": "li",
+   "text": "- Points of interest"
+  },
+  {
+   "t": "li",
+   "text": "- Continuation swing points"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Expansion Trades Work Better With Alignment"
+  },
+  {
+   "t": "p",
+   "text": "The strength of this model comes from stacking continuation together."
+  },
+  {
+   "t": "p",
+   "text": "For example:"
+  },
+  {
+   "t": "li",
+   "text": "- Daily Candle 3 continuation"
+  },
+  {
+   "t": "li",
+   "text": "- Four-hour Candle 3 continuation"
+  },
+  {
+   "t": "li",
+   "text": "- Lower timeframe continuation from a protected swing"
+  },
+  {
+   "t": "p",
+   "text": "When multiple timeframes point in the same direction, expansion becomes easier to capture."
+  },
+  {
+   "t": "p",
+   "text": "This does not eliminate losses."
+  },
+  {
+   "t": "p",
+   "text": "What it does provide is a repeatable framework for identifying higher probability continuation opportunities."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Common Mistakes That Create Complexity"
+  },
+  {
+   "t": "p",
+   "text": "Many traders overcomplicate execution by:"
+  },
+  {
+   "t": "li",
+   "text": "- Trading too many concepts simultaneously"
+  },
+  {
+   "t": "li",
+   "text": "- Ignoring higher timeframe direction"
+  },
+  {
+   "t": "li",
+   "text": "- Entering before confirmation appears"
+  },
+  {
+   "t": "li",
+   "text": "- Abandoning systems after normal losses"
+  },
+  {
+   "t": "p",
+   "text": "The goal is not complexity.The goal is creating a repeatable system built around structure, execution, and consistency."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Conclusion"
+  },
+  {
+   "t": "p",
+   "text": "Trading does not need to become more complicated to become more effective."
+  },
+  {
+   "t": "p",
+   "text": "The Fractal Model simplifies execution by focusing on higher timeframe bias, intraday structure, Candle 3 continuations, and protected swings across multiple timeframes."
+  },
+  {
+   "t": "p",
+   "text": "When daily direction aligns with lower timeframe continuation, expansion opportunities become easier to identify and easier to execute consistently."
+  },
+  {
+   "t": "p",
+   "text": "Instead of adding more concepts, focus on refining the ones that already create structure."
+  }
+ ]
+}

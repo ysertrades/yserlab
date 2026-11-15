@@ -1,0 +1,231 @@
+{
+ "slug": "understanding-candles-open-high-low-close",
+ "id": 2992,
+ "url": "https://ttrades.com/understanding-candles-open-high-low-close/",
+ "title": "Understanding Candles: Open, High, Low, Close",
+ "date": "2025-07-18T11:00:00",
+ "modified": "2026-09-04T10:58:15",
+ "categories": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 27
+  },
+  {
+   "course": "ICT Core Concepts",
+   "n": 20
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/OHLC20TTrades20PDF.pdf"
+ ],
+ "videos": [
+  "sIcsLFSNoXM"
+ ],
+ "description": "Learn how to read candles using open, high, low, and close. See the three main candle types, directional, reversal, and indecision, and how they guide trading decisions.",
+ "keywords": [],
+ "section": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this post, we’re breaking down one of the most fundamental parts of trading: the open, high, low, and close of candles (OHLC). Every candle on every timeframe tells a story. By understanding what it’s showing you, you can better anticipate direction, identify reversals, and recognize consolidation in the market."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Defining bullish and bearish candles"
+  },
+  {
+   "t": "p",
+   "text": "Every candle has four points:"
+  },
+  {
+   "t": "li",
+   "text": "- Open – where price starts for that time period"
+  },
+  {
+   "t": "li",
+   "text": "- High – the highest price reached"
+  },
+  {
+   "t": "li",
+   "text": "- Low – the lowest price reached"
+  },
+  {
+   "t": "li",
+   "text": "- Close – where price ends for that time period"
+  },
+  {
+   "t": "p",
+   "text": "If the close is below the open, that’s a bearish candle."
+  },
+  {
+   "t": "p",
+   "text": "If the close is above the open, that’s a bullish candle."
+  },
+  {
+   "t": "p",
+   "text": "This structure is the foundation of trading. From here, you can see how higher-timeframe candles are built from lower-timeframe movement and start grouping candles into the three main types."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/ohlc-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Directional candles"
+  },
+  {
+   "t": "p",
+   "text": "A directional candle moves mostly one direction throughout the time period."
+  },
+  {
+   "t": "li",
+   "text": "- Bullish directional: price opens, dips a bit to form the low, trends upward most of the period, and closes near the high."
+  },
+  {
+   "t": "li",
+   "text": "- Bearish directional: price opens, pushes above the open to form the upper wick, trends down most of the period, and closes near the low."
+  },
+  {
+   "t": "p",
+   "text": "The tell: the wick is relatively small compared to the body, signaling a strong, one-sided move. On lower timeframes, you’ll usually see steady continuation in the same direction."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Focus on expansion candles that have a small wick. Small wicks are the key to understanding which candles support expansion."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/ohlc-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Reversal candles"
+  },
+  {
+   "t": "p",
+   "text": "Reversal candles show a shift in control within the same period. The wicks are typically larger than the body."
+  },
+  {
+   "t": "li",
+   "text": "- Bearish reversal: price opens, pushes higher as if continuing up, then flips and closes lower."
+  },
+  {
+   "t": "li",
+   "text": "- Bullish reversal: price opens, dips lower as if continuing down, then flips and closes higher."
+  },
+  {
+   "t": "p",
+   "text": "On lower timeframes, it looks like a trend attempt that fails and snaps back. Seeing these at key levels can be an early cue that a larger turn is forming."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: If trading a reversal candle, focus on targeting: Opening price, current candles high or low."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/ohlc-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Indecision candles"
+  },
+  {
+   "t": "p",
+   "text": "Indecision candles form when the market can’t pick a direction."
+  },
+  {
+   "t": "li",
+   "text": "- Price opens, makes a high and a low, but closes near the open."
+  },
+  {
+   "t": "li",
+   "text": "- Long wicks on both sides with a relatively small body."
+  },
+  {
+   "t": "p",
+   "text": "They often show up after big expansions or during low-volatility sessions. Think of them as a pause before the next push."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Although often avoided, indecision candles can be traded by trading a deviation from a range back to the opening price."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/ohlc-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why this matters"
+  },
+  {
+   "t": "p",
+   "text": "Recognizing these three types helps you frame trades:"
+  },
+  {
+   "t": "li",
+   "text": "- Directional candles favor continuation setups."
+  },
+  {
+   "t": "li",
+   "text": "- Reversal candles warn of shifts in trend at relevant levels."
+  },
+  {
+   "t": "li",
+   "text": "- Indecision candles suggest consolidation and should be avoided."
+  },
+  {
+   "t": "p",
+   "text": "And remember: every higher-timeframe candle is built from smaller candles. Once you internalize OHLC, you can “see” the lower-timeframe path inside any bar."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Putting it into practice"
+  },
+  {
+   "t": "p",
+   "text": "When you study a chart, ask yourself what the previous candle did:"
+  },
+  {
+   "t": "li",
+   "text": "- Did this bar mostly move one way (directional)?"
+  },
+  {
+   "t": "li",
+   "text": "- Did it try one way and then flip (reversal)?"
+  },
+  {
+   "t": "li",
+   "text": "- Or did it lack direction (indecision)?"
+  },
+  {
+   "t": "p",
+   "text": "When you learn to identify the previous candle type, you can layer those reads with your bias and anticipate the next. Blend with the phases of price for extra confluence. Understanding OHLC is how candles stop feeling random and how you learn to anticipate the market."
+  }
+ ]
+}

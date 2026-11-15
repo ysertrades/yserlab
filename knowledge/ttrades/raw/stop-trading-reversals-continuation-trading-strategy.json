@@ -1,0 +1,256 @@
+{
+ "slug": "stop-trading-reversals-continuation-trading-strategy",
+ "id": 7748,
+ "url": "https://ttrades.com/stop-trading-reversals-continuation-trading-strategy/",
+ "title": "Stop Trading Reversals: Continuation Trading Strategy",
+ "date": "2026-11-14T11:15:00",
+ "modified": "2026-11-13T21:17:00",
+ "categories": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 2
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 2
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/11/Stop-Trading-Reversals.pdf"
+ ],
+ "videos": [
+  "7eyu_1TFhm0"
+ ],
+ "description": "Learn why waiting for a continuation can be more effective than trading every reversal. See how higher timeframe candle closures, EQ, and protected swings help identify continuation entries.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "One of the biggest challenges with trading reversals is entering before the market has confirmed a change in direction."
+  },
+  {
+   "t": "p",
+   "text": "Price may take a high or low, form a change in the state of delivery, and give a reason to look for a reversal. But if you enter too early, price can continue moving in its original direction and stop you out. This can happen more than once before the market finally makes the move you anticipated."
+  },
+  {
+   "t": "p",
+   "text": "Instead of trying to catch every reversal, let the reversal form and then look for a continuation entry."
+  },
+  {
+   "t": "p",
+   "text": "In the TTrades Fractal Model, the goal is to let the market show which direction it wants to trade before looking to get on side. This can help avoid premature entries and provide clearer opportunities to trade the next expansion."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Reversals Can Be Difficult to Trade"
+  },
+  {
+   "t": "p",
+   "text": "When looking for a reversal, traders often see a sharp move in one direction followed by a change in the state of delivery. They enter expecting price to move in the opposite direction, but the trade gets stopped out."
+  },
+  {
+   "t": "p",
+   "text": "They may see another change in the state of delivery, take another entry, and get stopped out again. After taking multiple losses, they may stop trading just before price finally moves in their anticipated direction."
+  },
+  {
+   "t": "p",
+   "text": "The problem is trying to anticipate the reversal before price has confirmed that it wants to move away from the level."
+  },
+  {
+   "t": "p",
+   "text": "A change in the state of delivery can give you a reason to watch for a reversal, but it does not automatically mean price is ready to expand in that direction. Higher timeframe candle closures and the continuation that follows are important parts of the process."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/11/03-Then-It-Reverses.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Use Higher Timeframe Candle Closures"
+  },
+  {
+   "t": "p",
+   "text": "Before looking for a reversal, make sure the higher timeframe candle closure supports the direction you want to trade."
+  },
+  {
+   "t": "p",
+   "text": "For example, you may see a change in the state of delivery, but if the higher timeframe candle does not close in a way that supports expansion in that direction, there may not be a strong reason to expect price to continue."
+  },
+  {
+   "t": "p",
+   "text": "A candle two closure with a change in the state of delivery can provide that confirmation. Once the higher timeframe supports the move, you can begin looking for an entry."
+  },
+  {
+   "t": "p",
+   "text": "This is why higher timeframe context matters. A lower timeframe CISD on its own does not always mean price is ready to reverse."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/11/06-Trade-The-Continuation-%E2%80%94-held-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Let the Reversal Form, Then Trade the Continuation"
+  },
+  {
+   "t": "p",
+   "text": "Rather than entering immediately when a reversal appears, wait for the market to show that it wants to move in the new direction."
+  },
+  {
+   "t": "p",
+   "text": "Once the reversal has formed and the higher timeframe supports the move, look for a continuation entry. This can include an intra candle change in the state of delivery or a new protected swing."
+  },
+  {
+   "t": "p",
+   "text": "For example, after a bullish reversal, price may open a new candle, trade lower, and form a protected swing. That swing creates the wick of candle three. Once the continuation develops, you can look to get on side with your stop beyond the protected swing."
+  },
+  {
+   "t": "p",
+   "text": "This approach avoids trying to catch the exact low or high. Instead, it waits for price to show a willingness to move in the intended direction before looking for an entry."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/11/10-Wait-For-IC-CISD-%E2%80%94-B-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Make Sure Your Entry Covers EQ"
+  },
+  {
+   "t": "p",
+   "text": "When looking for a continuation entry, make sure the entry covers equilibrium (EQ) and is positioned around a protected swing."
+  },
+  {
+   "t": "p",
+   "text": "Getting on side too early can lead to being stopped out before the continuation actually develops. Waiting for the protected swing to form gives price time to establish the next move and provides a clearer place to position the stop."
+  },
+  {
+   "t": "p",
+   "text": "The process is:"
+  },
+  {
+   "t": "li",
+   "text": "- Let the reversal form."
+  },
+  {
+   "t": "li",
+   "text": "- Confirm that the higher timeframe candle closure supports the direction."
+  },
+  {
+   "t": "li",
+   "text": "- Wait for the continuation to develop."
+  },
+  {
+   "t": "li",
+   "text": "- Look for an entry that covers EQ and uses the protected swing for the stop."
+  },
+  {
+   "t": "p",
+   "text": "The goal is to enter near the end of the retracement phase while anticipating the next expansion."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Use Higher Timeframes to Keep Your Trades Aligned"
+  },
+  {
+   "t": "p",
+   "text": "This is a fractal concept that can be applied across different timeframes."
+  },
+  {
+   "t": "p",
+   "text": "The higher timeframe you reference depends on the timeframe you are trading. For example:"
+  },
+  {
+   "t": "li",
+   "text": "- When trading the daily timeframe, reference the monthly."
+  },
+  {
+   "t": "li",
+   "text": "- When trading the hourly timeframe, reference the daily."
+  },
+  {
+   "t": "p",
+   "text": "If the higher timeframe candles are bearish and have not shown a bullish closure, there may be no reason to keep looking for bullish reversals."
+  },
+  {
+   "t": "p",
+   "text": "Waiting for a continuation can help keep you out of those trades until price provides confirmation that it is ready to move in the opposite direction."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/11/11-Pair-It-With-The-Model.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What If Price Forms a Consolidation?"
+  },
+  {
+   "t": "p",
+   "text": "Sometimes the reversal forms, but price does not develop a continuation right away."
+  },
+  {
+   "t": "p",
+   "text": "If price takes too long to form a continuation, it may develop a consolidation instead. In that situation, wait for the consolidation to form and follow the required price action around its range."
+  },
+  {
+   "t": "p",
+   "text": "For example, after a bullish reversal, price may consolidate. You would want to see the high taken out before looking for price to trade toward the low."
+  },
+  {
+   "t": "p",
+   "text": "If that continuation does not form, do not force an entry. Let the next phase of price develop first."
+  },
+  {
+   "t": "p",
+   "text": "This is another way waiting for continuation can help. If the market does not provide the conditions for an entry, you do not have to take the trade."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Reversals can be traded, but they are more difficult because you are trying to anticipate a change in direction before the market has fully shown its intentions."
+  },
+  {
+   "t": "p",
+   "text": "A continuation entry allows you to wait for price to demonstrate that it wants to move higher or lower before looking to get on side."
+  },
+  {
+   "t": "p",
+   "text": "By using higher timeframe candle closures, changes in the state of delivery, EQ, and protected swings, you can wait for the retracement to finish and look for the next expansion."
+  },
+  {
+   "t": "p",
+   "text": "The goal is not to catch every high or low. Let the market show its direction, then look for a continuation in that direction."
+  }
+ ]
+}

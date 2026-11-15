@@ -1,0 +1,293 @@
+{
+ "slug": "refining-entries-with-the-fractal-model-precision-with-1-minute-inversions",
+ "id": 1770,
+ "url": "https://ttrades.com/refining-entries-with-the-fractal-model-precision-with-1-minute-inversions/",
+ "title": "Refining Entries with the Fractal Model: Precision with 1-Minute Inversions",
+ "date": "2025-08-03T11:00:00",
+ "modified": "2025-08-17T20:50:23",
+ "categories": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 18
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 62
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/H120M520M120Inversion20TTrades20PDF.pdf"
+ ],
+ "videos": [
+  "4jU547ocod4"
+ ],
+ "description": "Learn how to refine entries using the TTrades Fractal Model with 1-minute inversions inside hourly and 5-minute setups for precision, tighter stops, and consistent results.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In today’s lesson, we’re diving into refining entries within my Fractal Model, specifically by using a 1-minute inversion inside the hourly and 5-minute model. This approach lets you get surgical with your execution, keeping risk tight while staying aligned with the higher-timeframe bias."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Core Idea"
+  },
+  {
+   "t": "p",
+   "text": "If you’ve seen my intro to the Fractal Model Video, you know the goal is to anticipate the open-high-low-close (OHLC) structure of a single candle."
+  },
+  {
+   "t": "li",
+   "text": "- The Daily chart provides a bias"
+  },
+  {
+   "t": "li",
+   "text": "- The higher timeframe provides the structure."
+  },
+  {
+   "t": "li",
+   "text": "- The 5-minute confirms that structure."
+  },
+  {
+   "t": "li",
+   "text": "- The 1-minute provides the refined entry using an inversion level inside the T-Spot, the zone where I expect the wick of the higher timeframe candle to form."
+  },
+  {
+   "t": "p",
+   "text": "When all three are aligned, you can trade the expansion portion of that higher timeframe candle with clarity and consistency."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step-by-Step Process"
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Establish Higher-Timeframe Bias"
+  },
+  {
+   "t": "li",
+   "text": "- On the daily chart, identify a closure to provide a bias."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ttfm-inversion-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Establish Structure"
+  },
+  {
+   "t": "li",
+   "text": "- On the hourly chart, identify a sweep and close back in (classic reversal trigger)."
+  },
+  {
+   "t": "li",
+   "text": "- This gives you the expectation for the next candle’s expansion."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ttfm-inversion-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Align with the 5-Minute"
+  },
+  {
+   "t": "li",
+   "text": "- Wait for a change in the state of delivery (closure through the opposing candle series) in the same direction as your hourly bias."
+  },
+  {
+   "t": "li",
+   "text": "- Once confirmed, the indicator will plot the T-Spot, the expected wick zone."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ttfm-inversion-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Drop to the 1-Minute for Entry"
+  },
+  {
+   "t": "li",
+   "text": "- Inside the T-Spot, look for a 1-minute inversion:For a long: price closes above a bearish fair value gap.For a short: price closes below a bullish fair value gap."
+  },
+  {
+   "t": "li",
+   "text": "- Place your stop just on the invalidation point."
+  },
+  {
+   "t": "li",
+   "text": "- Target 2R or a time-based exit (e.g., the next hourly open if trading the hourly model)."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ttfm-inversion-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example Walkthrough"
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Long Setup"
+  },
+  {
+   "t": "li",
+   "text": "- Hourly Structure: Sweep of a previous low + close back inside. (HTF overlay)"
+  },
+  {
+   "t": "li",
+   "text": "- 5-Minute Confirmation: Change in the state of delivery bullish."
+  },
+  {
+   "t": "li",
+   "text": "- T-Spot Marked: Wait for price to trade into the zone."
+  },
+  {
+   "t": "li",
+   "text": "- 1-Minute Trigger: Price inverts a bearish FVG in the T-Spot."
+  },
+  {
+   "t": "li",
+   "text": "- Execution: Enter on the close or retest of inversion, stop under the low, target 2R or hold into the projected expansion close."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: If using the TTFM [Pro+] indicator, lock the fractal to the 5m – 1H model."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/h1m5inversion1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/h1m5inversion2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Short Setup"
+  },
+  {
+   "t": "li",
+   "text": "- Hourly Structure: Sweep of a high + close back inside."
+  },
+  {
+   "t": "li",
+   "text": "- 5-Minute Confirmation: Change in the state of delivery bearish."
+  },
+  {
+   "t": "li",
+   "text": "- T-Spot Marked: Wait for price to trade up into the zone."
+  },
+  {
+   "t": "li",
+   "text": "- 1-Minute Trigger: Price inverts a bullish FVG in the T-Spot."
+  },
+  {
+   "t": "li",
+   "text": "- Execution: Enter on the close or retest of inversion, stop above the high, target 2R or into time-based candle close."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Experiment. This strategy can also be used with 1 minute CISD and protected swings. Take a moment to mark them in the image below."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: The TTrades Fractal Model works on all assets and timeframes including futures, forex, and crypto."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/h1m5inversion3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/h1m5inversion4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why This Works"
+  },
+  {
+   "t": "li",
+   "text": "- Precision: The 1-minute inversion lets you trade with tighter stops."
+  },
+  {
+   "t": "li",
+   "text": "- Context-Driven: You’re not taking every inversion, only those that align with the higher and middle timeframes."
+  },
+  {
+   "t": "li",
+   "text": "- Repeatability: Same process, same trigger, no guesswork."
+  },
+  {
+   "t": "li",
+   "text": "- Reduced Noise: Avoids over-marking charts with every PD array, focus on one trigger that fits your style."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Pro Tips"
+  },
+  {
+   "t": "li",
+   "text": "- Always consider liquidity: highs and lows act as magnets."
+  },
+  {
+   "t": "li",
+   "text": "- If the T-Spot forms without a wick, anticipate a retracement into it before expansion."
+  },
+  {
+   "t": "li",
+   "text": "- Avoid inversions too late into the higher timeframe candle. Expansion candles have small wicks created early into the candle."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaway:"
+  },
+  {
+   "t": "p",
+   "text": "Refining entries with the Fractal Model means filtering for high-probability, context-backed 1-minute inversions inside the higher timeframe T-Spot. Master one PD array and one entry style, and execution becomes a repeatable process, giving you the precision needed to grow consistency in your trading."
+  }
+ ]
+}

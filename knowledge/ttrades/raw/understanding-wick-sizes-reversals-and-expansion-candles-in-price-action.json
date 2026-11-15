@@ -1,0 +1,324 @@
+{
+ "slug": "understanding-wick-sizes-reversals-and-expansion-candles-in-price-action",
+ "id": 4392,
+ "url": "https://ttrades.com/understanding-wick-sizes-reversals-and-expansion-candles-in-price-action/",
+ "title": "Understanding Wick Sizes, Reversals, and Expansion Candles in Price Action",
+ "date": "2025-10-18T11:00:00",
+ "modified": "2026-09-04T10:59:26",
+ "categories": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 28
+  },
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 12
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 51
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/10/Understanding-Wicks.pdf"
+ ],
+ "videos": [
+  "SlWxhzhLo3A"
+ ],
+ "description": "Learn how wick size and time define expansion vs. reversal candles. Includes tips on CISD, SMT, and realistic trade targeting.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In trading, candle anatomy tells a deeper story than most traders realize. Wick size and location can reveal whether a market is primed for expansion or signaling a reversal. By studying the relationship between wick formation, body size, and time usage within a candle, we can anticipate which moves have the momentum to continue and which are likely to reverse."
+  },
+  {
+   "t": "p",
+   "text": "This guide breaks down the logic behind wick behavior, shows how to identify expansion versus reversal candles, and explains how to adjust trade targets accordingly across different timeframes."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Expansion vs. Reversal Candles"
+  },
+  {
+   "t": "p",
+   "text": "An expansion candle represents continuation and strength in one direction, while a reversal candle signals exhaustion and the likelihood of a shift or retracement."
+  },
+  {
+   "t": "p",
+   "text": "Expansion Candle Traits:"
+  },
+  {
+   "t": "li",
+   "text": "- Small wicks and a large body"
+  },
+  {
+   "t": "li",
+   "text": "- The high or low forms early in the candle"
+  },
+  {
+   "t": "li",
+   "text": "- Price uses minimal range for the opposing move (the “shallow run”)"
+  },
+  {
+   "t": "li",
+   "text": "- Candle closes near its high (in bullish moves) or near its low (in bearish moves)"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/Frame-1681-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "This candle supports expansion because it is efficient, directional, and indicates dominance by one side of the market."
+  },
+  {
+   "t": "p",
+   "text": "Reversal Candle Traits:"
+  },
+  {
+   "t": "li",
+   "text": "- A large opposing wick with a smaller body"
+  },
+  {
+   "t": "li",
+   "text": "- Price spends most of the time forming the wick"
+  },
+  {
+   "t": "li",
+   "text": "- The candle often closes near the opening price"
+  },
+  {
+   "t": "li",
+   "text": "- It indicates exhaustion or a transition between market phases"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/Frame-1682-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "This type does not support expansion. Instead, it often signals that price will revert toward its opening price or nearby liquidity points."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How Wick Size Affects Expansion"
+  },
+  {
+   "t": "p",
+   "text": "The size of the opposing run, which is the wick opposite your bias, determines expansion potential."
+  },
+  {
+   "t": "li",
+   "text": "- A small opposing run supports expansion since there’s ample time left in the candle for price to trend further in your direction."
+  },
+  {
+   "t": "li",
+   "text": "- A large opposing run suggests reversal since most of the time and range have already been consumed forming the wick, leaving limited room for expansion."
+  },
+  {
+   "t": "p",
+   "text": "Example:If price opens, dips slightly (forming a small lower wick), and then rallies for most of the time period, that’s expansion behavior.If price opens, falls deeply (forming a large lower wick), and then goes back towards the open, that’s reversal behavior."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/Frame-1709.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Adjusting Targets Based on Candle Behavior"
+  },
+  {
+   "t": "p",
+   "text": "Your targeting logic changes depending on the candle type."
+  },
+  {
+   "t": "p",
+   "text": "Expansion Candle Targets:"
+  },
+  {
+   "t": "li",
+   "text": "- Expansion points or continuation zones"
+  },
+  {
+   "t": "li",
+   "text": "- Liquidity resting beyond highs or lows"
+  },
+  {
+   "t": "li",
+   "text": "- Average candle range"
+  },
+  {
+   "t": "p",
+   "text": "Reversal Candle Targets:"
+  },
+  {
+   "t": "li",
+   "text": "- The opening price"
+  },
+  {
+   "t": "li",
+   "text": "- Nearby liquidity around the reversal area"
+  },
+  {
+   "t": "p",
+   "text": "This shift in expectation keeps trades realistic and risk-aware, helping you avoid chasing moves that the market structure does not support."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Timeframe Alignment"
+  },
+  {
+   "t": "p",
+   "text": "The most powerful insights come from higher-timeframe candles. When analyzing a 5-minute chart, for instance, look at the 1-hour candle it belongs to. The wick behavior on the hourly often governs what the lower timeframe structure will deliver."
+  },
+  {
+   "t": "p",
+   "text": "A shallow opposing run early in the higher-timeframe candle means you can expect expansion on lower timeframes. A large opposing run means you should anticipate a reversal setup or range-bound conditions."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Three Trading Scenarios"
+  },
+  {
+   "t": "li",
+   "text": "1. Continuation After Reversal (Candle 3 Trade):Wait for the reversal candle with the large wick to close, then trade the next candle that forms a small wick supporting expansion. This is the most reliable setup."
+  },
+  {
+   "t": "li",
+   "text": "2. Reversal to Expansion in the Same Candle:This setup requires identifying a shallow opposing run and a clear Change in State of Delivery (CISD) mid-candle. It is moderately difficult but can offer strong reward when timed correctly."
+  },
+  {
+   "t": "li",
+   "text": "3. Large Wick Reversal Trade:Trading the reversal candle itself carries higher risk. It is best used on higher timeframes, such as the daily chart, with targets back toward the open."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/Frame-1684.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Points"
+  },
+  {
+   "t": "p",
+   "text": "Across multiple examples from markets like silver, oil, and indices, the logic remains consistent:"
+  },
+  {
+   "t": "li",
+   "text": "- A small opposing run indicates that the market can expand strongly in that direction."
+  },
+  {
+   "t": "li",
+   "text": "- A large opposing run suggests that price will likely revert to its open or consolidate."
+  },
+  {
+   "t": "li",
+   "text": "- CISD confirmation adds conviction that the wick is complete and expansion is probable."
+  },
+  {
+   "t": "li",
+   "text": "- SMT divergence strengthens reversal confidence by showing internal weakness or strength across correlated pairs."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example"
+  },
+  {
+   "t": "li",
+   "text": "- A large opposing run suggests that price is unlikely to expand lower."
+  },
+  {
+   "t": "li",
+   "text": "- Focus on the opening price or liquidity around the opening price for targets."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/Large_wick-example.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example"
+  },
+  {
+   "t": "li",
+   "text": "- A small opposing run suggests that price is likely to expand lower."
+  },
+  {
+   "t": "li",
+   "text": "- Focus on the liquidity targets or average daily range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/wick-size-matter-exx.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Every candle is part of a fractal model, meaning the same logic applies from the one-minute chart to the daily timeframe."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Small wicks indicate expansion potential"
+  },
+  {
+   "t": "li",
+   "text": "- Large wicks suggest reversal or a return to the open"
+  },
+  {
+   "t": "li",
+   "text": "- Early wick formation leaves more time for expansion"
+  },
+  {
+   "t": "li",
+   "text": "- CISD and SMT provide valuable confirmation"
+  },
+  {
+   "t": "li",
+   "text": "- Align lower timeframes with higher-timeframe candle structure for consistency"
+  },
+  {
+   "t": "li",
+   "text": "- Let the market reveal whether a candle supports expansion before committing to bias"
+  }
+ ]
+}

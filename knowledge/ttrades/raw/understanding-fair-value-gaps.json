@@ -1,0 +1,233 @@
+{
+ "slug": "understanding-fair-value-gaps",
+ "id": 4876,
+ "url": "https://ttrades.com/understanding-fair-value-gaps/",
+ "title": "Understanding Fair Value Gaps",
+ "date": "2025-06-15T11:23:00",
+ "modified": "2026-09-04T10:25:37",
+ "categories": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 4
+  },
+  {
+   "course": "ICT Core Concepts",
+   "n": 41
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/Fair_Value_Gaps_and_More_TTrades_PDF.pdf"
+ ],
+ "videos": [
+  "ZVUDpCyvxfQ"
+ ],
+ "description": "Learn fair value gaps, SIBIs, BUSIs, consequent encroachment, IFVGS and the difference between volume imbalance and gaps.",
+ "keywords": [],
+ "section": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this blog, we’re breaking down fair value gaps in a clear, practical way. You’ll learn what a fair value gap is, how to identify one correctly, the difference between SIBIs and BUSIs, how consequent encroachment works, when a fair value gap becomes invalid, and how fair value gap inversion turns imbalance into support or resistance. We’ll also finish by clarifying the difference between a fair value gap, a volume imbalance, and a true gap."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is a Fair Value Gap?"
+  },
+  {
+   "t": "p",
+   "text": "A fair value gap is a three candlestick pattern that shows price inefficiency."
+  },
+  {
+   "t": "p",
+   "text": "It forms when the low of the first candle does not overlap with the high of the third candle, or when the high of the first candle does not overlap with the low of the third candle."
+  },
+  {
+   "t": "p",
+   "text": "In simple terms, price moves so aggressively that one side of the market doesn’t get filled properly."
+  },
+  {
+   "t": "p",
+   "text": "This imbalance creates an area where price is often drawn back to later."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/FVGS-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What a Fair Value Gap Looks Like"
+  },
+  {
+   "t": "p",
+   "text": "Here’s how to identify one properly."
+  },
+  {
+   "t": "p",
+   "text": "Take the first candle’s high or low and extend it forward.Take the third candle’s high or low and extend it backward."
+  },
+  {
+   "t": "p",
+   "text": "If there is no overlap, you have a fair value gap."
+  },
+  {
+   "t": "p",
+   "text": "That space between those two prices is the fair value gap."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is Not a Fair Value Gap"
+  },
+  {
+   "t": "p",
+   "text": "If you extend the first candle’s low and the third candle’s high and those two overlap, then there is no fair value gap."
+  },
+  {
+   "t": "p",
+   "text": "The same applies if the first candle’s high overlaps with the third candle’s low."
+  },
+  {
+   "t": "p",
+   "text": "Overlap means efficiency. No overlap means imbalance."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Are SIBIs and BISIs?"
+  },
+  {
+   "t": "p",
+   "text": "These terms describe the directional nature of a fair value gap."
+  },
+  {
+   "t": "p",
+   "text": "A SIBI, sell side imbalance buy side inefficiency, occurs during bearish movement. Sell side was offered, but buy side was inefficient. This is a bearish fair value gap."
+  },
+  {
+   "t": "p",
+   "text": "A BISI, buy side imbalance sell side inefficiency, occurs during bullish movement. Buy side was offered, but sell side was inefficient. This is a bullish fair value gap."
+  },
+  {
+   "t": "p",
+   "text": "The structure is the same, only the directional context changes."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/SIBI.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How Price Reacts When It Returns to a Fair Value Gap"
+  },
+  {
+   "t": "p",
+   "text": "When price revisits a fair value gap, several outcomes are common."
+  },
+  {
+   "t": "p",
+   "text": "Price can tap into the fair value gap, close outside of it, and continue in the original direction.Price can reach the consequent encroachment and respect it.Price can build a new fair value gap within the original one."
+  },
+  {
+   "t": "p",
+   "text": "As long as price does not close beyond the consequent encroachment, the fair value gap is generally considered respected."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Key-Levels.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When a Fair Value Gap Is Invalidated"
+  },
+  {
+   "t": "p",
+   "text": "A fair value gap is invalidated when price closes through the consequent encroachment or closes fully through the fair value gap."
+  },
+  {
+   "t": "p",
+   "text": "Once this happens, the imbalance is no longer being respected, and reversals from that area become less likely."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/stop-losses.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Fair Value Gap Inversion Explained"
+  },
+  {
+   "t": "p",
+   "text": "Fair value gap inversion occurs when a fair value gap fails, price closes through it, and that same imbalance later acts as support or resistance."
+  },
+  {
+   "t": "p",
+   "text": "A failed bearish fair value gap can later act as support.A failed bullish fair value gap can later act as resistance."
+  },
+  {
+   "t": "p",
+   "text": "This inversion does not need to happen immediately and can occur much later after consolidation or additional price development."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/IFVGS.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Fair Value Gap vs Volume Imbalance vs Gap"
+  },
+  {
+   "t": "p",
+   "text": "These concepts are related, but they are not the same."
+  },
+  {
+   "t": "p",
+   "text": "A fair value gap is a three candle structure defined by non overlapping highs and lows."
+  },
+  {
+   "t": "p",
+   "text": "A volume imbalance is a gap between the close of one candle and the open of the next, where price still traded through the highs and lows. This represents inefficient volume, not a true gap."
+  },
+  {
+   "t": "p",
+   "text": "A gap is a complete absence of trading, with no overlap at all between candles. These often occur at session opens or during high impact news."
+  },
+  {
+   "t": "p",
+   "text": "Understanding the difference helps avoid mislabeling structures on your chart."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/3-way.png",
+   "alt": "",
+   "caption": ""
+  }
+ ]
+}

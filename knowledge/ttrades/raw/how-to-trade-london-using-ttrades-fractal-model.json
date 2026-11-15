@@ -1,0 +1,374 @@
+{
+ "slug": "how-to-trade-london-using-ttrades-fractal-model",
+ "id": 6609,
+ "url": "https://ttrades.com/how-to-trade-london-using-ttrades-fractal-model/",
+ "title": "How to Trade London Using TTrades Fractal Model",
+ "date": "2026-09-12T11:20:00",
+ "modified": "2026-09-11T00:04:29",
+ "categories": [
+  "Fractal Model"
+ ],
+ "courses": [
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 11
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/09/TTrades-Trading-London.pdf"
+ ],
+ "videos": [
+  "tUbrCewFdCU"
+ ],
+ "description": "Learn how to trade London using the TTrades fractal model, daily bias, 4 hour candles, protected swings, and 15 minute confirmation.",
+ "keywords": [],
+ "section": [
+  "Fractal Model"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Trading London starts with the higher timeframe."
+  },
+  {
+   "t": "p",
+   "text": "Before dropping down to the lower timeframes, establish a daily bias. Then let the daily wick form, use the 4 hour candle to find the swing you can trade away from, and finally use the 15 minute timeframe to confirm the protected swing."
+  },
+  {
+   "t": "p",
+   "text": "The goal is simple: let the wick form, then trade the body."
+  },
+  {
+   "t": "p",
+   "text": "This blog breaks down how to trade the London Session using the Fractal Model including daily bias, 4 hour wick, 15 minute confirmation, London reversals, and how the same fractal logic can be applied across different sessions."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Start With A Daily Bias"
+  },
+  {
+   "t": "p",
+   "text": "Before looking for a London entry, establish the daily bias."
+  },
+  {
+   "t": "p",
+   "text": "There are different ways to do this using Phases of Price, daily closures, and EQ. The most straightforward approach is a Candle 2 or Candle 3 closure at a point of interest."
+  },
+  {
+   "t": "p",
+   "text": "For example, price can expand into a fair value gap, close back through the series of candles that led into it, and form a new protected swing."
+  },
+  {
+   "t": "p",
+   "text": "Once that closure confirms the reversal, we can anticipate the following candle to expand in that direction."
+  },
+  {
+   "t": "p",
+   "text": "The point is to have a daily narrative before going into the lower timeframes."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/03-Weekly-Bias-%E2%80%94-Candle-2-Closure.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Let The Daily Wick Form"
+  },
+  {
+   "t": "p",
+   "text": "Once the daily bias is established, do not immediately trade the daily candle."
+  },
+  {
+   "t": "p",
+   "text": "The goal is to let the wick form and then trade the body."
+  },
+  {
+   "t": "p",
+   "text": "If the daily bias is bullish, price can still trade lower before the expansion higher begins. If the bias is bearish, price can still trade higher before the expansion lower begins."
+  },
+  {
+   "t": "p",
+   "text": "This is why the daily wick needs to form first."
+  },
+  {
+   "t": "p",
+   "text": "A Candle 2 closure alongside the Phases of Price can give you the structure to anticipate the next candle expanding toward your draw on liquidity."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Use The 4 Hour Candle"
+  },
+  {
+   "t": "p",
+   "text": "Once the daily bias is established, move to the 4 hour timeframe."
+  },
+  {
+   "t": "p",
+   "text": "Now the goal is to find a swing point to trade away from."
+  },
+  {
+   "t": "p",
+   "text": "For a bullish setup, look for a low that forms before the expansion higher."
+  },
+  {
+   "t": "p",
+   "text": "For a bearish setup, look for a high that forms before the expansion lower."
+  },
+  {
+   "t": "p",
+   "text": "A Candle 2 closure can confirm the swing and give you anticipation for Candle 3 expansion."
+  },
+  {
+   "t": "p",
+   "text": "But the same rule still applies."
+  },
+  {
+   "t": "p",
+   "text": "Let the 4 hour wick form before trading the body."
+  },
+  {
+   "t": "p",
+   "text": "This gives you the next layer of the fractal model."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/4h-swing-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Confirm The Swing On The 15 Minute"
+  },
+  {
+   "t": "p",
+   "text": "Once the 4 hour structure is in place, drop to the 15 minute timeframe."
+  },
+  {
+   "t": "p",
+   "text": "The first thing to confirm is the swing point."
+  },
+  {
+   "t": "p",
+   "text": "Look for a change in the state of delivery (CISD)."
+  },
+  {
+   "t": "p",
+   "text": "If price forms a low, find the series of candles that made that low and see whether price closes back through them. If it does, the reversal is confirmed and the low becomes a protected swing."
+  },
+  {
+   "t": "p",
+   "text": "From there, look for the continuation that aligns with the daily and 4 hour direction."
+  },
+  {
+   "t": "p",
+   "text": "This is where you can get on side."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/Frame-1905.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Full Fractal Model"
+  },
+  {
+   "t": "p",
+   "text": "The entire model can be viewed as the same process repeated across timeframes."
+  },
+  {
+   "t": "p",
+   "text": "The daily candle gives you the bias. The 4 hour candle gives you the wick and the expansion structure. The 15 minute timeframe gives you the protected swing and entry."
+  },
+  {
+   "t": "p",
+   "text": "Once those timeframes are aligned, you are simply looking for the lower timeframe confirmation to get on side with the higher timeframe expansion."
+  },
+  {
+   "t": "p",
+   "text": "This is not a separate strategy for every timeframe. It is the same fractal model being applied across multiple timeframes."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/full-model.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "London Session Timing"
+  },
+  {
+   "t": "p",
+   "text": "There can be useful Fractal Model setups during the London session, but the exact kill zone is not extremely important. The setup matters more than the specific time it forms."
+  },
+  {
+   "t": "p",
+   "text": "The important thing is that the higher timeframe candle has formed its wick."
+  },
+  {
+   "t": "p",
+   "text": "Depending on the market and the setup, the reversal can form in Asia or in the beginning parts of London. On the 4 hour profile, this can often be around the 2200 or 2am candle."
+  },
+  {
+   "t": "p",
+   "text": "The clock itself is not what makes the setup valid."
+  },
+  {
+   "t": "p",
+   "text": "The higher timeframe structure is."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "London Reversals"
+  },
+  {
+   "t": "p",
+   "text": "There are also times when London forms the high or low of the day."
+  },
+  {
+   "t": "p",
+   "text": "In that situation, look for a London reversal."
+  },
+  {
+   "t": "p",
+   "text": "The idea is still the same. The 4 hour candle is forming its wick during London, and the 15 minute timeframe gives you the change in the state of delivery or continuation needed to get on side."
+  },
+  {
+   "t": "p",
+   "text": "You are trading the London reversal while staying aligned with the daily bias."
+  },
+  {
+   "t": "p",
+   "text": "A deep opposing run can make these setups more advanced. If there is SMT around the reversal, that can provide additional confirmation before looking for the lower timeframe continuation."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Failure Swings Need More Confirmation"
+  },
+  {
+   "t": "p",
+   "text": "Not every higher timeframe setup will give you a perfect swing."
+  },
+  {
+   "t": "p",
+   "text": "Sometimes the Candle 2 closure creates a failure swing instead."
+  },
+  {
+   "t": "p",
+   "text": "That does not automatically mean the setup cannot be traded, but more confirmation is needed."
+  },
+  {
+   "t": "p",
+   "text": "If trading away from a failure swing, look for clean lower timeframe structure and continuation. SMT can also provide additional confirmation around the swing."
+  },
+  {
+   "t": "p",
+   "text": "The farther price is from the failure swing, the more comfortable the setup can become. But the lower timeframe still needs to give you confirmation of the structure."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Holding The Expansion"
+  },
+  {
+   "t": "p",
+   "text": "When the higher timeframe candle is an expansion candle, there can be a lot of range available after the entry."
+  },
+  {
+   "t": "p",
+   "text": "You can hold toward the highs or lows of the higher timeframe candle, depending on the direction of the trade."
+  },
+  {
+   "t": "p",
+   "text": "You can also hold a runner toward the higher timeframe draw on liquidity."
+  },
+  {
+   "t": "p",
+   "text": "This is where the model can produce strong risk to reward."
+  },
+  {
+   "t": "p",
+   "text": "You are not chasing the initial move. You are getting on side after the wick has formed and then allowing the expansion to deliver."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How To Trade The Model"
+  },
+  {
+   "t": "p",
+   "text": "Keep the process mechanical."
+  },
+  {
+   "t": "p",
+   "text": "Start by establishing the daily bias and letting the daily wick form. From there, move to the 4 hour timeframe and find the swing you are trading away from. Let that 4 hour wick form, then drop to the 15 minute timeframe and wait for the protected swing to confirm with a change in the state of delivery."
+  },
+  {
+   "t": "p",
+   "text": "Once that confirmation is there, get on side with the continuation and trade toward the higher timeframe draw on liquidity."
+  },
+  {
+   "t": "p",
+   "text": "Do not force the entry because London is open."
+  },
+  {
+   "t": "p",
+   "text": "Wait for the structure."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "The London session itself is not the setup."
+  },
+  {
+   "t": "p",
+   "text": "The higher timeframe gives you the direction, the 4 hour candle gives you the wick and expansion structure, and the 15 minute timeframe gives you the confirmation to get on side."
+  },
+  {
+   "t": "p",
+   "text": "Let the daily wick form."
+  },
+  {
+   "t": "p",
+   "text": "Let the 4 hour wick form."
+  },
+  {
+   "t": "p",
+   "text": "Then use the lower timeframe protected swing to trade the body."
+  },
+  {
+   "t": "p",
+   "text": "You do not need to predict the exact high or low."
+  },
+  {
+   "t": "p",
+   "text": "Let the market form the structure first, then trade the expansion."
+  },
+  {
+   "t": "p",
+   "text": "That is the fractal model working exactly as it should."
+  }
+ ]
+}

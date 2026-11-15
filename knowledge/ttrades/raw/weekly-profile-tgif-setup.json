@@ -1,0 +1,512 @@
+{
+ "slug": "weekly-profile-tgif-setup",
+ "id": 5895,
+ "url": "https://ttrades.com/weekly-profile-tgif-setup/",
+ "title": "Weekly Profile – TGIF Setup",
+ "date": "2026-05-09T11:00:00",
+ "modified": "2026-05-09T12:40:17",
+ "categories": [
+  "Fractal Model"
+ ],
+ "courses": [
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 29
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/05/TTrades-Weekly-Profile-TGIF.pdf"
+ ],
+ "videos": [
+  "_CSO5Mf7CM8"
+ ],
+ "description": "Learn how to use the TGIF weekly profile to improve your trading. Learn TGIF conditions, mistakes, liquidity targets and weekly wick formation logic.",
+ "keywords": [],
+ "section": [
+  "Fractal Model"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "The TGIF weekly profile is a continuation-and-retracement framework built around how the weekly candle develops from Monday through Friday. The concept is based on identifying a classic expansion week first, then anticipating Friday’s behavior as the market either retraces into the weekly range or continues toward unfinished objectives."
+  },
+  {
+   "t": "p",
+   "text": "The core idea is simple:"
+  },
+  {
+   "t": "li",
+   "text": "- Early in the week forms the weekly high or low"
+  },
+  {
+   "t": "li",
+   "text": "- Midweek delivers expansion"
+  },
+  {
+   "t": "li",
+   "text": "- Friday creates the weekly wick by retracing back into the range"
+  },
+  {
+   "t": "p",
+   "text": "This profile helps traders anticipate when Friday is likely to become a reversal or retracement day rather than another continuation day."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is a TGIF Setup?"
+  },
+  {
+   "t": "p",
+   "text": "A TGIF setup is essentially the Friday retracement phase of a classic expansion week."
+  },
+  {
+   "t": "p",
+   "text": "In a bullish weekly scenario:"
+  },
+  {
+   "t": "li",
+   "text": "- Monday or Tuesday forms the weekly low"
+  },
+  {
+   "t": "li",
+   "text": "- Price expands upward through Wednesday and Thursday"
+  },
+  {
+   "t": "li",
+   "text": "- A key objective or liquidity target gets hit"
+  },
+  {
+   "t": "li",
+   "text": "- Friday retraces downward into the weekly range, creating the upper wick of the weekly candle"
+  },
+  {
+   "t": "p",
+   "text": "In a bearish weekly scenario, the structure is simply reversed."
+  },
+  {
+   "t": "p",
+   "text": "The retracement is expected because the weekly objective has already been delivered earlier in the week."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/TGIF-1-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Foundation: Classic Expansion Week"
+  },
+  {
+   "t": "p",
+   "text": "Before understanding TGIF, the market first needs to show a valid expansion profile."
+  },
+  {
+   "t": "p",
+   "text": "The structure usually looks like this:"
+  },
+  {
+   "t": "li",
+   "text": "- Monday or Tuesday forms the protected swing high/low"
+  },
+  {
+   "t": "li",
+   "text": "- Wednesday and Thursday continue aggressively in one direction"
+  },
+  {
+   "t": "li",
+   "text": "- Price reaches a higher timeframe objective"
+  },
+  {
+   "t": "p",
+   "text": "Without expansion, there is no TGIF setup."
+  },
+  {
+   "t": "p",
+   "text": "Without a target being reached, there is also no TGIF setup."
+  },
+  {
+   "t": "p",
+   "text": "That second point is critical because many traders try to fade Friday moves too early."
+  },
+  {
+   "t": "p",
+   "text": "If price has not yet reached its higher timeframe draw on liquidity, continuation is still more likely than reversal."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Conditions Required for a Valid TGIF"
+  },
+  {
+   "t": "p",
+   "text": "A valid bullish TGIF setup requires:"
+  },
+  {
+   "t": "li",
+   "text": "- Weekly low formed Monday or Tuesday"
+  },
+  {
+   "t": "li",
+   "text": "- Expansion Tuesday through Thursday"
+  },
+  {
+   "t": "li",
+   "text": "- Higher timeframe objective reached"
+  },
+  {
+   "t": "li",
+   "text": "- Friday reversal or retracement into the range"
+  },
+  {
+   "t": "p",
+   "text": "A bearish setup requires:"
+  },
+  {
+   "t": "li",
+   "text": "- Weekly high formed Monday or Tuesday"
+  },
+  {
+   "t": "li",
+   "text": "- Expansion downward through Thursday"
+  },
+  {
+   "t": "li",
+   "text": "- Price reaches downside objective"
+  },
+  {
+   "t": "li",
+   "text": "- Friday retraces upward into the range"
+  },
+  {
+   "t": "p",
+   "text": "The key lesson is that Friday reversals happen after objectives are met, not before."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Higher Timeframe Objectives Matter"
+  },
+  {
+   "t": "p",
+   "text": "The market needs a reason to reverse. This is where higher timeframe objectives come into play."
+  },
+  {
+   "t": "p",
+   "text": "Examples of valid objectives include:"
+  },
+  {
+   "t": "li",
+   "text": "- Equal highs or equal lows"
+  },
+  {
+   "t": "li",
+   "text": "- Fair value gaps"
+  },
+  {
+   "t": "li",
+   "text": "- Previous swing highs/lows"
+  },
+  {
+   "t": "p",
+   "text": "If price expands all week but has not yet reached one of these objectives, the market often continues trending on Friday instead of retracing."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding the Weekly Wick Concept"
+  },
+  {
+   "t": "p",
+   "text": "The TGIF profile revolves around how the weekly candle forms."
+  },
+  {
+   "t": "p",
+   "text": "For example in a bullish week:"
+  },
+  {
+   "t": "li",
+   "text": "- Monday/Tuesday form the low"
+  },
+  {
+   "t": "li",
+   "text": "- Wednesday/Thursday expand upward"
+  },
+  {
+   "t": "li",
+   "text": "- Friday retraces downward"
+  },
+  {
+   "t": "p",
+   "text": "That Friday retracement becomes the upper wick of the weekly candle."
+  },
+  {
+   "t": "p",
+   "text": "In a bearish week:"
+  },
+  {
+   "t": "li",
+   "text": "- Monday/Tuesday form the high"
+  },
+  {
+   "t": "li",
+   "text": "- Wednesday/Thursday expand downward"
+  },
+  {
+   "t": "li",
+   "text": "- Friday retraces upward"
+  },
+  {
+   "t": "p",
+   "text": "That Friday retracement forms the lower wick of the weekly candle."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/TGIF-2-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Friday Entry Logic"
+  },
+  {
+   "t": "p",
+   "text": "The most common confirmations include:"
+  },
+  {
+   "t": "li",
+   "text": "- Change in the state of delivery"
+  },
+  {
+   "t": "li",
+   "text": "- Candle 2 closures"
+  },
+  {
+   "t": "li",
+   "text": "- Lower timeframe market structure shift"
+  },
+  {
+   "t": "li",
+   "text": "- Hourly or 4-hour reversal confirmation"
+  },
+  {
+   "t": "p",
+   "text": "If Thursday already reverses aggressively, Friday may simply continue the retracement."
+  },
+  {
+   "t": "p",
+   "text": "If Thursday remains strongly trending, Friday itself may need to form the reversal structure."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example of a Valid TGIF Setup"
+  },
+  {
+   "t": "p",
+   "text": "One example of a valid TGIF setup follows this sequence:"
+  },
+  {
+   "t": "li",
+   "text": "- Tuesday forms the weekly low"
+  },
+  {
+   "t": "li",
+   "text": "- Wednesday and Thursday expand higher"
+  },
+  {
+   "t": "li",
+   "text": "- Price takes external liquidity"
+  },
+  {
+   "t": "li",
+   "text": "- Thursday does not reverse"
+  },
+  {
+   "t": "li",
+   "text": "- Friday returns into the range"
+  },
+  {
+   "t": "li",
+   "text": "- Change In the State of Delivery (CISD) on a lower timeframe"
+  },
+  {
+   "t": "li",
+   "text": "- Price retraces into 20–30% of weekly range"
+  },
+  {
+   "t": "p",
+   "text": "This is considered a textbook TGIF structure."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/TGIF-Valid.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example of an Invalid TGIF Setup"
+  },
+  {
+   "t": "p",
+   "text": "In an example of an invalid TGIF setup"
+  },
+  {
+   "t": "li",
+   "text": "- Monday or Tuesday forms the swing"
+  },
+  {
+   "t": "li",
+   "text": "- Expansion occurs through Thursday"
+  },
+  {
+   "t": "li",
+   "text": "- Price never reaches the higher timeframe objective"
+  },
+  {
+   "t": "p",
+   "text": "Result:"
+  },
+  {
+   "t": "li",
+   "text": "- Friday continues trending instead of reversing"
+  },
+  {
+   "t": "p",
+   "text": "This reinforces a major principle:"
+  },
+  {
+   "t": "p",
+   "text": "Do not force Friday reversals simply because the week expanded."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Thursday Reversal vs Friday Reversal"
+  },
+  {
+   "t": "p",
+   "text": "Another important nuance is the role of Thursday."
+  },
+  {
+   "t": "p",
+   "text": "There are two main possibilities:"
+  },
+  {
+   "t": "p",
+   "text": "Scenario 1: Thursday does not reverse"
+  },
+  {
+   "t": "li",
+   "text": "- Friday forms the reversal itself"
+  },
+  {
+   "t": "li",
+   "text": "- Traders wait for confirmation during Friday session"
+  },
+  {
+   "t": "p",
+   "text": "Scenario 2: Thursday already reverses"
+  },
+  {
+   "t": "li",
+   "text": "- Friday becomes continuation of Thursday retracement"
+  },
+  {
+   "t": "li",
+   "text": "- Entries may become easier"
+  },
+  {
+   "t": "p",
+   "text": "This distinction helps traders avoid entering before confirmation."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Core Takeaways From the TGIF Model"
+  },
+  {
+   "t": "p",
+   "text": "The TGIF profile is really about understanding weekly price delivery."
+  },
+  {
+   "t": "p",
+   "text": "The framework teaches traders to think in terms of:"
+  },
+  {
+   "t": "li",
+   "text": "- Weekly structure"
+  },
+  {
+   "t": "li",
+   "text": "- Liquidity objectives"
+  },
+  {
+   "t": "li",
+   "text": "- Phases of Price"
+  },
+  {
+   "t": "li",
+   "text": "- Timing of reversals"
+  },
+  {
+   "t": "li",
+   "text": "- Context before countertrend trading"
+  },
+  {
+   "t": "p",
+   "text": "The biggest lessons are:"
+  },
+  {
+   "t": "li",
+   "text": "- Friday reversals require completed objectives"
+  },
+  {
+   "t": "li",
+   "text": "- Expansion alone is not enough"
+  },
+  {
+   "t": "li",
+   "text": "- Higher timeframe liquidity drives the setup"
+  },
+  {
+   "t": "li",
+   "text": "- Confirmation matters before fading trend"
+  },
+  {
+   "t": "li",
+   "text": "- Weekly candle structure provides direction"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Conclusion"
+  },
+  {
+   "t": "p",
+   "text": "The TGIF profile is a powerful framework because it combines higher timeframe logic with intraday execution. Rather than blindly trading Friday reversals, the setup teaches traders to wait for completed expansion, achieved objectives, and structural confirmation before entering retracements."
+  },
+  {
+   "t": "p",
+   "text": "At its core, the strategy is about reading how the weekly candle is being built in real time."
+  },
+  {
+   "t": "p",
+   "text": "When Monday and Tuesday establish the weekly extreme, Wednesday and Thursday deliver expansion, and liquidity objectives are fulfilled, Friday often becomes the day where the market retraces back into equilibrium and forms the weekly wick."
+  },
+  {
+   "t": "p",
+   "text": "Understanding that structure is what gives the TGIF setup its edge."
+  }
+ ]
+}

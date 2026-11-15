@@ -1,0 +1,316 @@
+{
+ "slug": "introduction-to-futures-trading-and-prop-firms",
+ "id": 4023,
+ "url": "https://ttrades.com/introduction-to-futures-trading-and-prop-firms/",
+ "title": "Introduction to Futures Trading and Prop Firms",
+ "date": "2025-07-12T11:00:00",
+ "modified": "2026-02-12T18:08:29",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 24
+  }
+ ],
+ "pdfs": [],
+ "videos": [
+  "dtsrR8dX2Ro"
+ ],
+ "description": "Learn Futures trading basics, contracts, margins, and prop firm rules. Discover how leverage and evaluations work in simple terms.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 3,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "If you’ve been curious about trading Futures, or maybe you’ve heard of prop firms but aren’t sure how they fit into the trading world, this guide will help you connect the dots. We’ll break down what Futures contracts are, why traders are drawn to them, and how prop firms offer a way to trade with leverage without risking your own capital."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is a Futures Contract?"
+  },
+  {
+   "t": "p",
+   "text": "A Futures contract is a legal agreement to buy or sell an asset at a predetermined price at a specific time in the future. These contracts exist for a wide variety of assets, including:"
+  },
+  {
+   "t": "li",
+   "text": "- Stock indices such as ES (S&P 500) and NQ (Nasdaq)"
+  },
+  {
+   "t": "li",
+   "text": "- Commodities such as gold, oil, orange juice, and lean hogs"
+  },
+  {
+   "t": "li",
+   "text": "- Currencies such as Euro and Yen futures"
+  },
+  {
+   "t": "p",
+   "text": "Unlike options, Futures don’t have Greeks or time decay, they simply track the movement of the underlying asset."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trading Hours and Platforms"
+  },
+  {
+   "t": "p",
+   "text": "Futures trade nearly around the clock, from 6:00 PM to 5:00 PM EST, Sunday through Friday."
+  },
+  {
+   "t": "p",
+   "text": "Popular platforms include Schwab, E*TRADE, NinjaTrader, Tradovate, AMP, and TradeStation."
+  },
+  {
+   "t": "p",
+   "text": "Margin requirements vary widely by broker and contract. For example, trading one ES contract on Schwab requires around $12,000 in margin, while on NinjaTrader the day-trading margin can be as low as $500."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Traders Choose Futures"
+  },
+  {
+   "t": "li",
+   "text": "- No pattern day trading rule as with stocks and options"
+  },
+  {
+   "t": "li",
+   "text": "- Favorable tax treatment compared to equities"
+  },
+  {
+   "t": "li",
+   "text": "- High leverage without complex pricing models"
+  },
+  {
+   "t": "li",
+   "text": "- Transparent bid and ask spreads"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Minis, Micros, Points, and Ticks"
+  },
+  {
+   "t": "p",
+   "text": "Futures contracts come in two common sizes:"
+  },
+  {
+   "t": "li",
+   "text": "- E-minis, the larger standard contracts. For example, NQ moves $20 per point."
+  },
+  {
+   "t": "li",
+   "text": "- Micros, which are one-tenth the size. MNQ moves $2 per point."
+  },
+  {
+   "t": "p",
+   "text": "Price changes are measured in points and ticks:"
+  },
+  {
+   "t": "li",
+   "text": "- A point is a one-unit move in price. If ES moves from 4000 to 4001, that is one point."
+  },
+  {
+   "t": "li",
+   "text": "- A tick is the smallest price increment. ES moves in 0.25 increments, which means four ticks equal one point."
+  },
+  {
+   "t": "li",
+   "text": "- On ES, one tick is worth $12.50, and one point is worth $50."
+  },
+  {
+   "t": "p",
+   "text": "Example: If NQ rises 5 points, one contract gains $100 (5 × $20). Two contracts would double that to $200. Micros follow the same logic but with one-tenth the value, making them a good option for traders managing smaller risk."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Quarterly Contracts and Rollovers"
+  },
+  {
+   "t": "p",
+   "text": "Indices Futures trade on quarterly cycles: March (H), June (M), September (U), and December (Z)."
+  },
+  {
+   "t": "p",
+   "text": "For example, ESM24 represents the June 2024 S&P 500 contract. Traders usually roll into the next contract once volume and open interest shift. Many chart on continuous contracts, which stitch together past contracts for a smoother price history."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Data Feeds and Orders"
+  },
+  {
+   "t": "p",
+   "text": "Real-time data requires a subscription, otherwise prices are delayed by about 15 minutes."
+  },
+  {
+   "t": "p",
+   "text": "Order types include:"
+  },
+  {
+   "t": "li",
+   "text": "- Buy or Sell Limit → Enter at a specific price"
+  },
+  {
+   "t": "li",
+   "text": "- Buy or Sell Stop → Enter once price breaks a level"
+  },
+  {
+   "t": "li",
+   "text": "- Market Orders → Fill immediately at the best available price"
+  },
+  {
+   "t": "p",
+   "text": "An advanced option is OCO (One Cancels the Other), which lets you set both a stop-loss and take-profit. Whichever executes first automatically cancels the other."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Forex vs Futures"
+  },
+  {
+   "t": "p",
+   "text": "While this guide focuses on Futures, it’s useful to compare them with Forex."
+  },
+  {
+   "t": "li",
+   "text": "- Forex uses lots and pips, while Futures use contracts, points, and ticks"
+  },
+  {
+   "t": "li",
+   "text": "- Futures are exchange-traded, no broker manipulation"
+  },
+  {
+   "t": "li",
+   "text": "- Bid and ask spreads are transparent and typically tighter than in Forex"
+  },
+  {
+   "t": "p",
+   "text": "Common comparisons:"
+  },
+  {
+   "t": "li",
+   "text": "- EUR/USD ≈ 6E (Euro Futures)"
+  },
+  {
+   "t": "li",
+   "text": "- SPX500 CFD ≈ ES (S&P 500 Futures)"
+  },
+  {
+   "t": "li",
+   "text": "- NAS100 CFD ≈ NQ (Nasdaq Futures)"
+  },
+  {
+   "t": "li",
+   "text": "- Gold (XAU/USD) ≈ GC (Gold Futures)"
+  },
+  {
+   "t": "li",
+   "text": "- Oil (USOIL) ≈ CL (Crude Oil Futures)"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is a Prop Firm?"
+  },
+  {
+   "t": "p",
+   "text": "A prop trading firm provides traders with capital in exchange for following strict rules. You don’t risk your own funds, the only cost is the evaluation or activation fee."
+  },
+  {
+   "t": "p",
+   "text": "How it works:"
+  },
+  {
+   "t": "li",
+   "text": "1. Purchase an evaluation account"
+  },
+  {
+   "t": "li",
+   "text": "2. Trade according to the rules until you reach the profit target"
+  },
+  {
+   "t": "li",
+   "text": "3. If you pass, pay activation if required, and get funded"
+  },
+  {
+   "t": "li",
+   "text": "4. Withdraw profits once you meet the payout criteria"
+  },
+  {
+   "t": "li",
+   "text": "5. If you fail, restart the evaluation process"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Prop Firm Rules and Drawdowns"
+  },
+  {
+   "t": "p",
+   "text": "Every prop firm structures risk differently, and understanding drawdown types is essential."
+  },
+  {
+   "t": "li",
+   "text": "- Static Drawdown → A fixed loss limit that never changes"
+  },
+  {
+   "t": "li",
+   "text": "- Trailing Drawdown (Unrealized or End-of-Day) → Adjusts as your balance growsUnrealized trailing follows both open and closed equityEnd-of-Day trailing only updates at the daily close"
+  },
+  {
+   "t": "li",
+   "text": "- Daily Loss Limit → Prevents losing too much in a single day"
+  },
+  {
+   "t": "p",
+   "text": "Example: A $50K evaluation account with a $2K drawdown isn’t really a $50K account. It’s closer to $2K in usable risk capital. If the profit target is $3K, you effectively need a 150% return on that $2K buffer to pass."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Cost Comparisons"
+  },
+  {
+   "t": "p",
+   "text": "Prop firms vary in rules, fees, and promotions."
+  },
+  {
+   "t": "li",
+   "text": "- Apex Trader Funding allows up to 20 accounts"
+  },
+  {
+   "t": "li",
+   "text": "- Tradeify has accounts that skip the evaluation"
+  },
+  {
+   "t": "li",
+   "text": "- Lucid has fast payouts"
+  },
+  {
+   "t": "p",
+   "text": "Evaluation fees usually range from $50 to $200 per month. Some firms also charge a one-time activation fee once you pass the evaluation."
+  },
+  {
+   "t": "h",
+   "level": 3,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Futures trading provides flexibility, transparency, and strong tax benefits. Prop firms make it possible to access leverage and trading capital without risking your own savings, but their rules demand discipline and consistency. Whether you are stepping into Futures for the first time or considering prop firm evaluations, understanding contracts, margins, points, ticks, and account structures will give you the foundation to trade confidently."
+  }
+ ]
+}

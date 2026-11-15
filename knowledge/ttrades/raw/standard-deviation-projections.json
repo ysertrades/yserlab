@@ -1,0 +1,232 @@
+{
+ "slug": "standard-deviation-projections",
+ "id": 4692,
+ "url": "https://ttrades.com/standard-deviation-projections/",
+ "title": "Standard Deviation Projections",
+ "date": "2025-06-27T11:39:00",
+ "modified": "2026-01-20T13:37:06",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 36
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/STDV_Projection_TTrades_PDF.pdf"
+ ],
+ "videos": [
+  "kTWXpAo1uE8"
+ ],
+ "description": "Learn standard deviation projections, smart money concepts, PD arrays, and multi-timeframe confluence for precise trade targets.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this guide, we’re breaking down standard deviation projections and how to use them as precise targets for retracements, reversals, and confluence within existing models. The focus is on practical application: how to set up the tool, where to anchor it, what to expect at key deviation levels, and how to pair projections with PD arrays across multiple timeframes."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Standard Deviation Projections Are Used For"
+  },
+  {
+   "t": "p",
+   "text": "Standard deviation projections help define where price can reach relative to a manipulation leg. These areas can be used to identify likely retracement zones, anticipate reversal points, add confluence to an existing strategy, and define max expansion targets."
+  },
+  {
+   "t": "p",
+   "text": "They are especially effective when combined with the TTrades Fractal Model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Fibonacci Settings for Standard Deviation Projections"
+  },
+  {
+   "t": "p",
+   "text": "To build these projections, we use the Fibonacci retracement tool on TradingView with custom levels."
+  },
+  {
+   "t": "p",
+   "text": "The key levels used are:"
+  },
+  {
+   "t": "li",
+   "text": "- 1"
+  },
+  {
+   "t": "li",
+   "text": "- 0"
+  },
+  {
+   "t": "li",
+   "text": "- -1"
+  },
+  {
+   "t": "li",
+   "text": "- -2"
+  },
+  {
+   "t": "li",
+   "text": "- -2.5"
+  },
+  {
+   "t": "li",
+   "text": "- -4"
+  },
+  {
+   "t": "p",
+   "text": "Visual settings include values displayed on the left side, a font size of 10, a clean semi-transparent background, and consistent colors for easy recognition. The most important levels to focus on are the -2 to -2.5 and the -4 standard deviations."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/settings.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Anchor the Tool Correctly"
+  },
+  {
+   "t": "p",
+   "text": "The most important step is anchoring the projection to the correct price leg. You are not projecting random swings. You are projecting the manipulation leg."
+  },
+  {
+   "t": "p",
+   "text": "A manipulation leg is the swing that sweeps liquidity and occurs just before a change in the state of delivery. It is the final high before a bearish CISD or the final low before a bullish CISD."
+  },
+  {
+   "t": "p",
+   "text": "Once identified, bearish setups are projected from high to low, while bullish setups are projected from low to high."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/anchor.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Identifying the Manipulation Leg"
+  },
+  {
+   "t": "p",
+   "text": "A common structure includes price trending in one direction, sweeping liquidity, and then aggressively displacing in the opposite direction."
+  },
+  {
+   "t": "p",
+   "text": "To identify the manipulation leg, ask which leg made the new high before the sell-off or which leg made the new low before the rally. That swing is the leg used for projection.."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/man-leg.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Interpreting the Key Standard Deviation Levels"
+  },
+  {
+   "t": "p",
+   "text": "Each deviation level carries a specific expectation."
+  },
+  {
+   "t": "p",
+   "text": "The -2 to -2.5 standard deviation is the primary area of interest where price often reacts with a retracement or reversal and is commonly considered low-hanging fruit."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/r-or-r.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "If price displaces and closes beyond the -2 or -2.5 level, continuation becomes more likely and increases the probability of reaching max expansion."
+  },
+  {
+   "t": "p",
+   "text": "The -4 standard deviation represents max expansion. Strong reactions are common here, and it is an ideal area to look for discount or premium equilibrium retracements."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/max-e.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Pairing Standard Deviations With PD Arrays"
+  },
+  {
+   "t": "p",
+   "text": "Standard deviation levels gain more significance when they align with PD arrays."
+  },
+  {
+   "t": "p",
+   "text": "Common forms of confluence include equal highs or lows, fair value gaps, or failure swings. For example, a standard deviation level lining up with a fair value gap or resting just beneath equal highs provides context and confirmation rather than a standalone signal."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/pairingv.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Multiple Projections for Added Confluence"
+  },
+  {
+   "t": "p",
+   "text": "Multiple manipulation legs often exist within a single trend. Projecting more than one leg allows deviation levels to overlap."
+  },
+  {
+   "t": "p",
+   "text": "When the -4 standard deviation of one projection aligns with the -2 to -2.5 standard deviation of another, that area becomes a high-probability reaction zone and an important level to monitor."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Applying Standard Deviations Across Timeframes"
+  },
+  {
+   "t": "p",
+   "text": "Standard deviation projections work best in a top-down framework."
+  },
+  {
+   "t": "p",
+   "text": "Higher timeframes define narrative and key PD arrays, mid timeframes identify manipulation and project targets, and lower timeframes refine execution and risk. This alignment allows for objective targets and precise entries."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Standard deviation projections are not a standalone strategy. They are a targeting and confluence tool designed to complement existing strategies such as the TTrades Fractal Model."
+  },
+  {
+   "t": "p",
+   "text": "Used correctly, they help clarify expectations, improve patience, reduce emotional decision-making, and strengthen top-down analysis. When combined with accumulation, manipulation, and distribution, they become a powerful addition to any trading model."
+  }
+ ]
+}

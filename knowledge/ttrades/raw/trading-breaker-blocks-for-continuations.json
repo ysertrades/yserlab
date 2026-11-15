@@ -1,0 +1,209 @@
+{
+ "slug": "trading-breaker-blocks-for-continuations",
+ "id": 2484,
+ "url": "https://ttrades.com/trading-breaker-blocks-for-continuations/",
+ "title": "Trading Breaker Blocks for Continuations",
+ "date": "2025-08-03T11:00:00",
+ "modified": "2025-08-17T20:43:55",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 19
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/Breaker20Continuations20TTrades20PDF.pdf"
+ ],
+ "videos": [
+  "xP-o11jRCyg"
+ ],
+ "description": "Learn how to trade breaker blocks for continuations, not just reversals. Discover bullish and bearish setups, SMT filters, and real chart examples.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Most traders are familiar with breaker blocks as reversal setups. However, in my model, while I primarily use order blocks for continuations, breaker blocks can also be applied effectively to ride ongoing trends. In this breakdown, we’ll cover exactly how to identify and trade continuation breaker blocks, including variations, SMT filters, and chart examples."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is a Breaker Block?"
+  },
+  {
+   "t": "p",
+   "text": "A breaker block is a specific candlestick structure:"
+  },
+  {
+   "t": "li",
+   "text": "- Bearish Breaker Block:A high → low → higher high → lower low pattern.Mark the down-close candles from the high to the low; this is your breaker block. When price revisits this area, it can act as resistance for a continuation lower."
+  },
+  {
+   "t": "li",
+   "text": "- Bullish Breaker Block:A low → high → lower low → higher high pattern.Mark the up-close candles before the move into the lower low; this zone can act as support for a continuation higher."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/Breaker-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Continuation vs. Reversal Breakers"
+  },
+  {
+   "t": "p",
+   "text": "Most traders look for breakers at market reversals, where a trend shifts from bearish to bullish or vice versa."
+  },
+  {
+   "t": "p",
+   "text": "For continuation trading, the process is slightly different:"
+  },
+  {
+   "t": "p",
+   "text": "Identify the trend"
+  },
+  {
+   "t": "li",
+   "text": "- Confirm bias from higher timeframes using structure and protected swings."
+  },
+  {
+   "t": "p",
+   "text": "Wait for a liquidity sweep"
+  },
+  {
+   "t": "li",
+   "text": "- A swing low sweep in an uptrend (or swing high sweep in a downtrend) is necessary to form the breaker."
+  },
+  {
+   "t": "p",
+   "text": "Confirm with structure"
+  },
+  {
+   "t": "li",
+   "text": "- After the sweep, the breaker block forms only once price makes a higher high (in bullish cases) or lower low (in bearish cases)."
+  },
+  {
+   "t": "p",
+   "text": "Execute on retests"
+  },
+  {
+   "t": "li",
+   "text": "- Entries can be taken on the breaker block retest, with stops placed beyond the opposite side of the block."
+  },
+  {
+   "t": "p",
+   "text": "Pro Tip: Focus on breaker blocks that have a strong close over the high (bullish) or strong close below their low (bearish)"
+  },
+  {
+   "t": "img",
+   "src": "https://s.w.org/images/core/emoji/16.0.1/svg/1f4a1.svg",
+   "alt": "💡",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/Breaker-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "SMT Filter"
+  },
+  {
+   "t": "p",
+   "text": "If a swing low/high sweep doesn’t occur, a breaker block may still be valid if paired with an SMT divergence (Smart Money Technique). This acts as a proxy for the sweep, allowing you to treat the zone as protected."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: SMT can also be used on breaker blocks with the proper formation."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/Breaker-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Examples"
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Example – Bullish Breaker Continuation"
+  },
+  {
+   "t": "li",
+   "text": "- Price trades in a range, sweeps the range low, and shifts bullish with a higher high."
+  },
+  {
+   "t": "li",
+   "text": "- Mark the up-close candles before the sweep low; these form the breaker block."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/continuation-breaker-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- Price returns to the the breaker block and sweeps out a low."
+  },
+  {
+   "t": "li",
+   "text": "- After making a new high, a continuation breaker block has formed."
+  },
+  {
+   "t": "li",
+   "text": "- Enter on the continuation with stop below the breaker block."
+  },
+  {
+   "t": "li",
+   "text": "- Target 2R."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/continuation-breaker-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trade Management Tips"
+  },
+  {
+   "t": "li",
+   "text": "- Always align breaker block trades with higher-timeframe bias."
+  },
+  {
+   "t": "li",
+   "text": "- Avoid over-marking; focus on clear, obvious breaker structures."
+  },
+  {
+   "t": "li",
+   "text": "- Use liquidity targets (previous highs/lows) to frame take-profit levels."
+  },
+  {
+   "t": "li",
+   "text": "- Keep stop-loss placement consistent for clean data tracking."
+  }
+ ]
+}

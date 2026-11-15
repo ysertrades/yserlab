@@ -1,0 +1,484 @@
+{
+ "slug": "a-simple-3-step-trading-model-full-breakdown",
+ "id": 6216,
+ "url": "https://ttrades.com/a-simple-3-step-trading-model-full-breakdown/",
+ "title": "A Simple 3-Step Trading Model (Full Breakdown)",
+ "date": "2026-06-20T12:00:00",
+ "modified": "2026-06-19T22:35:02",
+ "categories": [
+  "Fractal Model"
+ ],
+ "courses": [
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 22
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/06/A-Simple-3-Step-Trading-Model-.pdf"
+ ],
+ "videos": [
+  "5Be2jPftFFw"
+ ],
+ "description": "Learn a complete 3-step trading model combining daily bias, 7-hour daily profiles, and fractal model entries. Discover how to identify relevant swings, confirm market direction, and execute with a structured, repeatable framework.",
+ "keywords": [],
+ "section": [
+  "Fractal Model"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Many traders spend too much time reacting to intraday price movement and not enough time building a higher-timeframe narrative. This framework focuses on creating a daily bias first, confirming it with a 7-hour daily profile, and then executing during the New York session using lower timeframe Fractal Model entries."
+  },
+  {
+   "t": "p",
+   "text": "By combining daily bias, 7-hour daily profiles, and lower-timeframe fractal executions, traders can build a structured process that removes much of the guesswork from decision-making and helps them focus on the highest-probability opportunities."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Defining Failure Swings"
+  },
+  {
+   "t": "p",
+   "text": "One of the most important concepts in the framework is the failure swing."
+  },
+  {
+   "t": "p",
+   "text": "A failure swing occurs when price appears to reverse but later makes a deep retracement back into the original reversal area without taking out the extreme. This suggests the reversal has not been properly established."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/failure-swing-am-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "When this occurs, traders should generally avoid treating the reaction as a confirmed reversal point. Instead, the original extreme remains the relevant swing that deserves attention."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/container-1-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Key principles include:"
+  },
+  {
+   "t": "li",
+   "text": "- Strong reversals expand away from the area."
+  },
+  {
+   "t": "li",
+   "text": "- Deep retracements signal weakness."
+  },
+  {
+   "t": "li",
+   "text": "- The original swing remains the most important reference point."
+  },
+  {
+   "t": "p",
+   "text": "Understanding the difference between a true reversal and a failure swing helps traders build a more reliable daily bias."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/failure-swing-am-2-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Identifying Relevant Swings"
+  },
+  {
+   "t": "p",
+   "text": "The foundation of this trading model is identifying relevant swings on the daily chart."
+  },
+  {
+   "t": "p",
+   "text": "A relevant swing is a daily high or low that represents the current extreme of price. When price reaches an extreme and reacts, that reaction carries weight without any doubt. That reaction is how directional bias is established."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/valid-seperation-am-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Valid separation is a key part to the reactions at relevant swings. There must be enough separation from one potential relevant swing to the next so that when one is manipulated, it does not create a failure swing to and daily high or low to the left. If a manipulation creates a new failure swing, then it is an invalid reaction."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/invalid-sep-am-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Two Reactions at Relevant Swings"
+  },
+  {
+   "t": "p",
+   "text": "Small Wick Reversal"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/small-wick-reversal-am-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Daily Continuation"
+  },
+  {
+   "t": "p",
+   "text": "A daily continuation is in place when the market has previously established a reversal at a relevant swing and there is either an opposing target open or price has shown no opposing signs of a new reversal."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/continuation-am-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "When the daily chart is within a continuation, the invalidation point must be set in the previous day candle. Anchor a 0.5 fib tool from the closing price to the opposing high or low of the daily candle."
+  },
+  {
+   "t": "p",
+   "text": "Price should remain above that level if bullish or below if bearish while in the continuation."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/continuation-invalidation-am-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Focus on New York"
+  },
+  {
+   "t": "p",
+   "text": "This model is focused on execution during the New York session for multiple reasons."
+  },
+  {
+   "t": "p",
+   "text": "New York provides:"
+  },
+  {
+   "t": "li",
+   "text": "- Largest range move of the day on average"
+  },
+  {
+   "t": "li",
+   "text": "- Most likely hours to be a directional expansion"
+  },
+  {
+   "t": "li",
+   "text": "- Has context from the overnight session"
+  },
+  {
+   "t": "p",
+   "text": "Rather than trading throughout the day, focus on the session most likely to produce meaningful expansion alongside proper confirmation."
+  },
+  {
+   "t": "p",
+   "text": "This improves consistency while reducing unnecessary screen time."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/why-new-york-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Three 7 Hour Profiles"
+  },
+  {
+   "t": "p",
+   "text": "The framework uses the 7-hour chart because it naturally divides the trading day into three major sessions:"
+  },
+  {
+   "t": "li",
+   "text": "- Asia"
+  },
+  {
+   "t": "li",
+   "text": "- London"
+  },
+  {
+   "t": "li",
+   "text": "- New York"
+  },
+  {
+   "t": "p",
+   "text": "This makes it easier to evaluate how each session contributes to the daily narrative and identify recurring daily profiles that support the established bias."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Three Daily Profiles"
+  },
+  {
+   "t": "p",
+   "text": "The framework identifies three primary daily profiles that help confirm directional expectations."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/container-3-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/where-to-look-daily-profile-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Asia Reversal Profile (18:00)"
+  },
+  {
+   "t": "p",
+   "text": "In this profile:"
+  },
+  {
+   "t": "li",
+   "text": "- Asia forms the intraday high or low."
+  },
+  {
+   "t": "li",
+   "text": "- London expands away from the reversal."
+  },
+  {
+   "t": "li",
+   "text": "- New York continues the move."
+  },
+  {
+   "t": "p",
+   "text": "The market establishes direction early, and New York serves as the continuation."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/container-4-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "London Reversal Profile (01:00)"
+  },
+  {
+   "t": "p",
+   "text": "In this profile:"
+  },
+  {
+   "t": "li",
+   "text": "- Asia fails to establish a meaningful reversal."
+  },
+  {
+   "t": "li",
+   "text": "- London manipulates the range and creates the reversal."
+  },
+  {
+   "t": "li",
+   "text": "- New York continues in the direction established by London."
+  },
+  {
+   "t": "p",
+   "text": "The London session becomes the key driver of the day’s narrative."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/container-5-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "New York Reversal Profile (08:00)"
+  },
+  {
+   "t": "p",
+   "text": "This profile develops when neither Asia nor London create a significant high or low within the daily profile, failing to establish an intraday reversal."
+  },
+  {
+   "t": "p",
+   "text": "In this scenario:"
+  },
+  {
+   "t": "li",
+   "text": "- New York manipulates the intraday high or low."
+  },
+  {
+   "t": "li",
+   "text": "- A reversal forms during New York."
+  },
+  {
+   "t": "li",
+   "text": "- Expansion follows the manipulation."
+  },
+  {
+   "t": "p",
+   "text": "This profile is particularly useful for traders looking to capture reversals directly from New York session activity."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/container-7-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Importance of Invalidation Points"
+  },
+  {
+   "t": "p",
+   "text": "Profiles requires a level that proves the idea wrong."
+  },
+  {
+   "t": "p",
+   "text": "For the 18:00 and 01:00 reversal profiles where the 08:00 candle is set for a continuation:"
+  },
+  {
+   "t": "li",
+   "text": "- Measure from the opposing swing to the 01:00 candle close."
+  },
+  {
+   "t": "li",
+   "text": "- Use 50% of that range as an invalidation level."
+  },
+  {
+   "t": "li",
+   "text": "- Look for the 08:00 candle wick to respect that area."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/container-8-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Entry Types"
+  },
+  {
+   "t": "p",
+   "text": "One of the core principles of the framework is simple:"
+  },
+  {
+   "t": "p",
+   "text": "Let the wick form, then trade the body."
+  },
+  {
+   "t": "p",
+   "text": "This is done by using one of two entry techniques."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "7 Hour and 15 Minute Fractal Model"
+  },
+  {
+   "t": "p",
+   "text": "By using the 7 Hour as the higher time frame, align the 15 minute for entry using the traditional Fractal Model approach."
+  },
+  {
+   "t": "p",
+   "text": "Seek a continuation, or protected swing following the initial reversal CISD."
+  },
+  {
+   "t": "p",
+   "text": "The objective is to confirm that the 08:00 high or low has been formed before entering."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/NY-reversal-m15-1-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Lower Time Frame Aligned Fractal Model"
+  },
+  {
+   "t": "p",
+   "text": "A more refined execution model uses fractal alignment across multiple timeframes."
+  },
+  {
+   "t": "p",
+   "text": "Refined time frames include the Hourly and 5-minute Fractal Model as well as the 30-minute and 3-minute Fractal Model."
+  },
+  {
+   "t": "p",
+   "text": "The 7-hour chart provides the bias and context while the lower timeframe Fractal Model is used for entries."
+  },
+  {
+   "t": "p",
+   "text": "When the daily, 7-hour, and lower timeframe fractal model all align in the same direction, that is when expansion can occur."
+  },
+  {
+   "t": "p",
+   "text": "Entries are taken as normal within the fractal model, seeking an intracandle change in the state of delivery (IC-CISD)."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/entry-technique-fractal-scaled.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Putting the Entire Framework Together"
+  },
+  {
+   "t": "p",
+   "text": "The complete process follows 3 steps:"
+  },
+  {
+   "t": "li",
+   "text": "1. Identify a daily bias using relevant swings"
+  },
+  {
+   "t": "li",
+   "text": "2. Use the 7-hour daily profile for confirmation"
+  },
+  {
+   "t": "li",
+   "text": "3. Seek entries with the Fractal Model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Conclusion"
+  },
+  {
+   "t": "p",
+   "text": "The strength of this 3-step trading model comes from its top-down structure. Rather than searching for random entries, begin with higher-timeframe context, confirm that context through daily profiles, and then execute using the Fractal Model."
+  }
+ ]
+}

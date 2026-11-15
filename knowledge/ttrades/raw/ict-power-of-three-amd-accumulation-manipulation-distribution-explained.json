@@ -1,0 +1,256 @@
+{
+ "slug": "ict-power-of-three-amd-accumulation-manipulation-distribution-explained",
+ "id": 4715,
+ "url": "https://ttrades.com/ict-power-of-three-amd-accumulation-manipulation-distribution-explained/",
+ "title": "ICT Power of Three (AMD): Accumulation, Manipulation, Distribution Explained",
+ "date": "2025-06-26T11:39:00",
+ "modified": "2026-01-31T21:22:25",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 33
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/AMD_PO3.pdf"
+ ],
+ "videos": [
+  "TCFvsZeYvV8"
+ ],
+ "description": "Learn ICT Power of Three trading concepts including accumulation, manipulation distribution, OHLC behavior, session models, and liquidity.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this blog, we are breaking down ICT’s Power of Three, also known as Accumulation, Manipulation, and Distribution. This concept helps traders understand how intraday price action forms within a higher time frame candle, rather than relying on isolated patterns. We will walk through open high low close concepts, define AMD, explain how to identify it, and show how it plays out across time frames and trading sessions."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Open High Low Close and Open Low High Close"
+  },
+  {
+   "t": "p",
+   "text": "Open high low close and open low high close simply describe the sequence in which price forms a higher time frame candle, such as the daily."
+  },
+  {
+   "t": "p",
+   "text": "In an open low high close scenario, price opens, trades lower, then expands higher before closing. In an open high low close scenario, price opens, trades higher, then moves lower before closing."
+  },
+  {
+   "t": "p",
+   "text": "The objective is not to trade every intraday fluctuation, but to capture the expansion phase of the candle. That expansion is where the Power of Three becomes relevant."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/OHLC.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is Power of Three (AMD)"
+  },
+  {
+   "t": "p",
+   "text": "The Power of Three is a framework that explains how price typically moves through three phases during a trading period."
+  },
+  {
+   "t": "p",
+   "text": "Accumulation is where price consolidates in a range. Manipulation is where price runs liquidity outside that range. Distribution is where price expands in the true intended direction."
+  },
+  {
+   "t": "p",
+   "text": "This sequence explains why false breakouts occur and why strong directional moves often follow them."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/AMD.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Accumulation"
+  },
+  {
+   "t": "p",
+   "text": "Accumulation is usually seen as a tight range or consolidation. During this phase, price appears inactive, but liquidity is building on both sides of the range."
+  },
+  {
+   "t": "p",
+   "text": "Buy stops accumulate above the highs of the range, while sell stops accumulate below the lows. This liquidity becomes the fuel for the next phase."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Manipulation"
+  },
+  {
+   "t": "p",
+   "text": "Manipulation occurs when price aggressively breaks out of the accumulation range and then quickly returns back inside it."
+  },
+  {
+   "t": "p",
+   "text": "This move stops out traders who entered early and traps breakout traders in the wrong direction. The key characteristic of manipulation is aggressive displacement outside the range followed by a return back into it."
+  },
+  {
+   "t": "p",
+   "text": "That false breakout is intentional and necessary to clear liquidity."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Distribution"
+  },
+  {
+   "t": "p",
+   "text": "Distribution is the expansion phase that follows manipulation. This is where price delivers the majority of the range."
+  },
+  {
+   "t": "p",
+   "text": "This phase is where traders want to participate, either by entering near the end of manipulation or by joining continuation setups during distribution."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How Entries Are Taken Using AMD"
+  },
+  {
+   "t": "p",
+   "text": "There are two primary ways to approach entries using the Power of Three."
+  },
+  {
+   "t": "p",
+   "text": "One approach is entering during manipulation by looking for reversal behavior after liquidity is swept. This allows traders to capture the entire distribution move."
+  },
+  {
+   "t": "p",
+   "text": "The second approach is entering during distribution using continuation models once price has clearly chosen a direction. This is often more conservative and still highly effective."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Entries.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Fractal Nature of AMD"
+  },
+  {
+   "t": "p",
+   "text": "The Power of Three is fractal, meaning it appears on all time frames."
+  },
+  {
+   "t": "p",
+   "text": "It can be found on very low time frames such as the thirty second or one minute chart, as well as on higher time frames like the daily, monthly, and even yearly charts. The logic remains the same regardless of timeframe."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Lower Time Frame Application"
+  },
+  {
+   "t": "p",
+   "text": "On lower time frames, the process begins by identifying aggressive price action that moves out of a range and then back into it."
+  },
+  {
+   "t": "p",
+   "text": "Once that manipulation is identified, the trader can define the accumulation range that price deviated from. From there, expectations shift toward distribution in the opposite direction."
+  },
+  {
+   "t": "p",
+   "text": "Rather than forcing consolidation boxes, it is more effective to identify manipulation first and then work backward."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Daily Candle Power of Three"
+  },
+  {
+   "t": "p",
+   "text": "On the daily time frame, AMD often aligns with session behavior."
+  },
+  {
+   "t": "p",
+   "text": "Asia commonly forms accumulation. London frequently provides manipulation, creating the wick of the daily candle. New York then delivers distribution, forming the body of the candle."
+  },
+  {
+   "t": "p",
+   "text": "This behavior often results in a clean open low high close or open high low close daily candle."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/PO3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Projecting Distribution"
+  },
+  {
+   "t": "p",
+   "text": "Distribution targets can be estimated by projecting the manipulation leg."
+  },
+  {
+   "t": "p",
+   "text": "By measuring the distance from the high to the low that caused manipulation, traders can project likely expansion areas. These projections become more meaningful when aligned with liquidity such as equal highs, equal lows, prior session levels, or inefficiencies."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Stacked AMDs"
+  },
+  {
+   "t": "p",
+   "text": "Markets often form multiple AMD structures in sequence."
+  },
+  {
+   "t": "p",
+   "text": "After one distribution completes, price may consolidate again, manipulate liquidity, and continue expanding in the higher time frame direction. This is why higher time frame order flow and liquidity draw are critical to context."
+  },
+  {
+   "t": "p",
+   "text": "Without that narrative, AMD becomes a pattern rather than a framework."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Insight"
+  },
+  {
+   "t": "p",
+   "text": "If identifying accumulation feels difficult, shift focus to manipulation."
+  },
+  {
+   "t": "p",
+   "text": "Aggressive movement out and back into a range reveals where accumulation existed. Once that is identified, distribution expectations become much clearer."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "The Power of Three is not a standalone strategy. It is a framework that explains how price moves and why liquidity must be cleared before expansion occurs. When paired with higher time frame bias and liquidity concepts, AMD becomes a powerful tool for anticipating market behavior."
+  }
+ ]
+}

@@ -1,0 +1,251 @@
+{
+ "slug": "mastering-top-down-analysis-aligning-multiple-timeframes-for-expansion-trading",
+ "id": 2508,
+ "url": "https://ttrades.com/mastering-top-down-analysis-aligning-multiple-timeframes-for-expansion-trading/",
+ "title": "Mastering Top-Down Analysis: Aligning Multiple Timeframes for Expansion Trading",
+ "date": "2025-07-31T11:00:00",
+ "modified": "2025-08-17T22:00:11",
+ "categories": [
+  "Fractal Model",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 17
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 65
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/Top20Down20Analysis20TTrades20PDF.pdf"
+ ],
+ "videos": [
+  "iEaMbuFZb24"
+ ],
+ "description": "Learn how to use top-down analysis to align multiple timeframes for precise trading entries. Includes step-by-step process and real trade examples.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In trading, one of the most powerful yet overlooked techniques is top-down analysis, the practice of aligning multiple timeframes to create high-probability setups. Too often, traders enter based on a single timeframe pattern and get stopped out because they’ve ignored the bigger picture. In this guide, we’ll break down why multiple timeframe analysis is essential, how to apply it step-by-step, and walk through real examples that show its effectiveness."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Multiple Timeframe Analysis Matters"
+  },
+  {
+   "t": "p",
+   "text": "A common pitfall is trading off a bullish lower timeframe signal without considering the higher timeframe context. For example, a bullish order block might appear attractive on a 5-minute chart, but if the daily chart is showing bearish expansion, that lower timeframe setup is more likely to fail. When you align all your timeframes in the same direction, you get the kind of price expansion that creates winning trades."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/top-down_.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Establish a Higher Timeframe Bias"
+  },
+  {
+   "t": "p",
+   "text": "Start with a higher timeframe (daily, weekly, or even monthly depending on your trading style) to identify your overall market bias."
+  },
+  {
+   "t": "li",
+   "text": "- Look for swing highs/lows, sweeps of liquidity, and candle closures."
+  },
+  {
+   "t": "li",
+   "text": "- Determine if the higher timeframe is likely to expand higher, expand lower, or consolidate."
+  },
+  {
+   "t": "li",
+   "text": "- Example: If the daily has swept a previous high and closed back inside the range with a bearish engulfing candle, your bias is likely bearish."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/TFA-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Define Structure on an Intermediate Timeframe"
+  },
+  {
+   "t": "p",
+   "text": "Once you have your bias, drop to an intermediate timeframe (e.g., 4H or 1H) to map out structure."
+  },
+  {
+   "t": "li",
+   "text": "- Confirm your higher timeframe bias by checking for a change in the state of delivery (CISD)."
+  },
+  {
+   "t": "li",
+   "text": "- Identify points of interest that align with your higher timeframe bias."
+  },
+  {
+   "t": "li",
+   "text": "- Wait for a reaction, candle closure, or protected swing in that point of interest."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/TFA-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Refine Entry on a Lower Timeframe"
+  },
+  {
+   "t": "p",
+   "text": "The lower timeframe (e.g., 15M or 5M) is where you refine your entry for optimal risk-to-reward."
+  },
+  {
+   "t": "li",
+   "text": "- Following the intermediate timeframe candle closure or reaction, look for a CISD to confirm your alignment. Your higher, intermediate, and lower timeframes should all be pointing in the same direction now."
+  },
+  {
+   "t": "li",
+   "text": "- Seek entries following new protected lows, or continuations order blocks."
+  },
+  {
+   "t": "li",
+   "text": "- Place stops beyond the protected high/low and target higher timeframe objectives."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/TFA-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Bearish Example"
+  },
+  {
+   "t": "p",
+   "text": "Daily Bias: Price has an expansion lower, retracement back up and then a consolidation. Upon sweeping the consolidation range high, there is a bearish daily closure. This gives the anticipation of a move lower the following day."
+  },
+  {
+   "t": "p",
+   "text": "Hourly Structure: Price retraces back into the lower half of the previous days range. Due to the unfavorable close on the daily, price can trade slightly above the EQ as long as the current days wick will remain small (opening price to high of day). With a bearish closure, drop to the 5-minute chart."
+  },
+  {
+   "t": "p",
+   "text": "5 Minute Chart: Wait for a CISD to form a protected high. Once this occurs, look to enter the market or wait for new protected swings, entering using continuation OB’s."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ob-continuation-ex-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ob-continuation-ex-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ob-continuation-ex-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Bullish Example"
+  },
+  {
+   "t": "p",
+   "text": "Daily Bias: Price is a bullish trend. Following expansion higher, price retraces into a fair value gap and then forms a protected swing. After another expansion higher, price takes out a high, retraces into a newly created fair value gap and retests the opening price in the OB. Price has a bullish daily closure."
+  },
+  {
+   "t": "p",
+   "text": "Hourly Structure: Price has a CISD at the reversal point. Following this reversal there is a fair value gap in the upper half of the previous days wick. This is ideally following the Wick video content. Price reaches into the FVG and has a bullish candle closure."
+  },
+  {
+   "t": "p",
+   "text": "Now while you can refine this down to the lower timeframes for entry, it is also valid to take entries on the structure timeframe. Entering upon the new protected swing."
+  },
+  {
+   "t": "p",
+   "text": "Result: Expansion in the bias direction, achieving a 2R trade."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/top-down-ex-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/top-down-ex-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Managing Trades with Top-Down Analysis"
+  },
+  {
+   "t": "li",
+   "text": "- Entry Timing: The lower timeframe lets you enter precisely when momentum shifts in your favor."
+  },
+  {
+   "t": "li",
+   "text": "- Stop Placement: Higher timeframe points of interest help set logical invalidation levels."
+  },
+  {
+   "t": "li",
+   "text": "- Scaling In: You can take multiple entries during a trend when the higher timeframe bias remains intact."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Core Principle"
+  },
+  {
+   "t": "p",
+   "text": "Expansion occurs when all timeframes are aligned:"
+  },
+  {
+   "t": "li",
+   "text": "- Higher timeframe sets direction."
+  },
+  {
+   "t": "li",
+   "text": "- Intermediate timeframe provides structure."
+  },
+  {
+   "t": "li",
+   "text": "- Lower timeframe delivers precision entries."
+  },
+  {
+   "t": "p",
+   "text": "Ignoring this alignment leads to getting caught against the higher timeframe trend."
+  }
+ ]
+}

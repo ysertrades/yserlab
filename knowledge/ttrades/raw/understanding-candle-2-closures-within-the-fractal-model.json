@@ -1,0 +1,322 @@
+{
+ "slug": "understanding-candle-2-closures-within-the-fractal-model",
+ "id": 4532,
+ "url": "https://ttrades.com/understanding-candle-2-closures-within-the-fractal-model/",
+ "title": "Understanding Candle 2 Closures Within the Fractal Model",
+ "date": "2025-11-15T11:00:00",
+ "modified": "2026-09-04T13:20:38",
+ "categories": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 12
+  },
+  {
+   "course": "ICT Core Concepts",
+   "n": 7
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 48
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/11/Candle-2-Closure-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "tyoxl1l-6iI"
+ ],
+ "description": "Learn how Candle 2 closures out of a point of interest provides continuations on multiple aligned time frames.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Candle 2 closures are one of the most important fundamentals of the Fractal Model. They help you identify potential turning points in price and set the foundation for anticipating a continuation in Candle 3. In this guide, we’ll break down exactly what a Candle 2 closure is, how to spot it on the charts and how to use it within aligned time frames."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What a Continuation Closure vs. Reversal Closure Really Means"
+  },
+  {
+   "t": "p",
+   "text": "Before we talk about Candle 2 closures specifically, you need to understand the two major types of closures:"
+  },
+  {
+   "t": "li",
+   "text": "- A continuation closure happens when price takes out the previous candle’s high or low and closes beyond it, showing continuation."
+  },
+  {
+   "t": "li",
+   "text": "- A reversal closure happens when price sweeps the previous candle’s high or low but closes back inside the previous range, showing reversal."
+  },
+  {
+   "t": "p",
+   "text": "A Candle 2 closure is always a reversal closure."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/11/cont-vs-reveral.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Exactly Is a Candle 2 Closure?"
+  },
+  {
+   "t": "p",
+   "text": "A Candle 2 closure forms when:"
+  },
+  {
+   "t": "li",
+   "text": "- Price sweeps the previous candle’s high or low,"
+  },
+  {
+   "t": "li",
+   "text": "- Then closes back inside the previous candle’s range."
+  },
+  {
+   "t": "p",
+   "text": "This signals that price has shifted and that Candle 2 has produced a reversal."
+  },
+  {
+   "t": "p",
+   "text": "In a bullish scenario:"
+  },
+  {
+   "t": "li",
+   "text": "- Price sweeps the previous low."
+  },
+  {
+   "t": "li",
+   "text": "- Closes back above that low."
+  },
+  {
+   "t": "p",
+   "text": "In a bearish scenario:"
+  },
+  {
+   "t": "li",
+   "text": "- Price sweeps the previous high."
+  },
+  {
+   "t": "li",
+   "text": "- Closes back below that high."
+  },
+  {
+   "t": "p",
+   "text": "This reversal inside Candle 2 sets the stage for a potential Candle 3 continuation."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/11/candle_2_closure_2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Candle 2 Closures Need a Point of Interest"
+  },
+  {
+   "t": "p",
+   "text": "A common mistake is treating every reversal closure as valid. Candle 2 closures only matter when they form at a higher-time-frame point of interest, such as a swing high or low, a fair value gap, or in the case that neither are present, an opposing candle. Without a clear point of interest, the setup is not valid."
+  },
+  {
+   "t": "p",
+   "text": "When you combine Candle 2 closures with bias and points of interest, they become a reliable mechanism for anticipating the next phase of price."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How Candle 3 Fits Into the Picture"
+  },
+  {
+   "t": "p",
+   "text": "Once Candle 2 creates a reversal, Candle 3 is expected to provide continuation."
+  },
+  {
+   "t": "p",
+   "text": "Examples:"
+  },
+  {
+   "t": "li",
+   "text": "- In a bullish reversal: Candle 3 often expands upward."
+  },
+  {
+   "t": "li",
+   "text": "- In a bearish reversal: Candle 3 often expands downward."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/11/candle_2_closure_3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "If Candle 3 closes beyond Candle 2’s high or low in the direction of the trend, it usually leads to a Candle 4 expansion as well. This is why the Candle 2 to Candle 3 sequence is such a powerful combination inside the fractal model."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/11/candle_2_closure_4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using EQ and Wick Theory with Candle 2 Closures"
+  },
+  {
+   "t": "p",
+   "text": "You can refine Candle 2 closures using equilibrium concepts:"
+  },
+  {
+   "t": "li",
+   "text": "- If Candle 2 forms a large wick, monitor the midpoint of that wick."
+  },
+  {
+   "t": "li",
+   "text": "- Candle 3 should respect this midpoint for the model to remain intact."
+  },
+  {
+   "t": "li",
+   "text": "- If it doesn’t, the swing point is less likely to hold."
+  },
+  {
+   "t": "p",
+   "text": "This simple EQ concept can filter out many weak or lower-probability reversals."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/11/candle_2_closure_5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Practice Identifying Candle 2 Closures"
+  },
+  {
+   "t": "p",
+   "text": "A practical way to develop your eye for Candle 2 closures is to:"
+  },
+  {
+   "t": "li",
+   "text": "- Pick a higher-time-frame chart."
+  },
+  {
+   "t": "li",
+   "text": "- Mark every swing point."
+  },
+  {
+   "t": "li",
+   "text": "- Review each one and determine whether it actually contains a true Candle 2 closure."
+  },
+  {
+   "t": "p",
+   "text": "You’re looking for a clean sweep, a close back inside the previous candle, and a valid point of interest. This exercise quickly improves your ability to set daily bias."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Fractal Nature of Candle 2 Closures"
+  },
+  {
+   "t": "p",
+   "text": "Candle 2 closures appear on every time frame and follow the same logic no matter how far you zoom in or out."
+  },
+  {
+   "t": "p",
+   "text": "For example:"
+  },
+  {
+   "t": "li",
+   "text": "- A daily Candle 2 can be validated on the hourly chart."
+  },
+  {
+   "t": "li",
+   "text": "- An hourly Candle 2 can be validated on the five-minute chart."
+  },
+  {
+   "t": "li",
+   "text": "- A four-hour Candle 2 can be validated on the fifteen-minute chart."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Candle 2 Closures as Turning Points"
+  },
+  {
+   "t": "p",
+   "text": "Because Candle 2 often forms the turning point of a swing, it can lead to:"
+  },
+  {
+   "t": "li",
+   "text": "- Clean reversals"
+  },
+  {
+   "t": "li",
+   "text": "- Clear directional bias"
+  },
+  {
+   "t": "li",
+   "text": "- Continuation through Candle 3 and Candle 4"
+  },
+  {
+   "t": "li",
+   "text": "- Additional fractal setups on lower time frames"
+  },
+  {
+   "t": "p",
+   "text": "These closures act as “anchors” for understanding where a phase of price is beginning or ending."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Putting It All Together"
+  },
+  {
+   "t": "p",
+   "text": "A valid Candle 2 closure includes:"
+  },
+  {
+   "t": "li",
+   "text": "- A sweep of the previous candle’s high or low"
+  },
+  {
+   "t": "li",
+   "text": "- A close back inside the previous candle’s range"
+  },
+  {
+   "t": "li",
+   "text": "- A higher-time-frame point of interest"
+  },
+  {
+   "t": "li",
+   "text": "- Structure supporting continuation into Candle 3"
+  },
+  {
+   "t": "p",
+   "text": "Once all four elements are in place, you can drop down to your aligned time frame to confirm the change in the state of delivery and look for continuations."
+  }
+ ]
+}

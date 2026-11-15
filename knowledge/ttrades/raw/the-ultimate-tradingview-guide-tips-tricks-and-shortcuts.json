@@ -1,0 +1,271 @@
+{
+ "slug": "the-ultimate-tradingview-guide-tips-tricks-and-shortcuts",
+ "id": 3868,
+ "url": "https://ttrades.com/the-ultimate-tradingview-guide-tips-tricks-and-shortcuts/",
+ "title": "The Ultimate TradingView Guide: Tips, Tricks, and Shortcuts",
+ "date": "2025-07-14T11:00:00",
+ "modified": "2026-02-18T14:15:26",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 22
+  }
+ ],
+ "pdfs": [],
+ "videos": [
+  "JPVhmPZiLKY"
+ ],
+ "description": "Discover TradingView tips, tricks, templates, and shortcuts for cleaner charts and faster analysis. Learn layouts, alerts, drawing tools, and watchlist hacks.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "If you’ve ever opened up TradingView and felt a little overwhelmed by all the settings, tools, and shortcuts—don’t worry, you’re not alone. The platform is powerful, but it’s also highly customizable. With the right tweaks, you can build a clean, efficient setup that makes charting, analysis, and trading far smoother. In this guide, we’ll cover everything from chart settings and indicator templates to shortcuts and advanced layouts. By the end, you’ll have a complete toolkit for mastering TradingView."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Chart Settings"
+  },
+  {
+   "t": "p",
+   "text": "The first place to start is customizing your chart for clarity."
+  },
+  {
+   "t": "li",
+   "text": "- Status Line: Keep it clean by turning off unnecessary labels like OHLC values and logos. Only keep indicator titles so you can toggle them on or off."
+  },
+  {
+   "t": "li",
+   "text": "- Candles: Use custom colors with hex codes. Many traders prefer a green up-close candle and black for everything else."
+  },
+  {
+   "t": "li",
+   "text": "- Scales: Personal preference, but stacking numbers on the left helps some traders."
+  },
+  {
+   "t": "li",
+   "text": "- Canvas: Solid backgrounds (e.g., hex code #F5F5F5) with no grid lines make charts easier on the eyes. Light gray dotted crosshairs at 100% opacity are a popular choice."
+  },
+  {
+   "t": "li",
+   "text": "- Trading/Events: Disable most trading buttons if you don’t use them, and keep only alert lines turned on for a cleaner workspace."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Tickers and Timeframes"
+  },
+  {
+   "t": "p",
+   "text": "Switching symbols and timeframes efficiently saves you clicks."
+  },
+  {
+   "t": "li",
+   "text": "- Type a ticker directly (instead of clicking the symbol box)."
+  },
+  {
+   "t": "li",
+   "text": "- Type timeframes (e.g., “60” for 1-hour or “D” for daily) instead of clicking dropdowns."
+  },
+  {
+   "t": "li",
+   "text": "- Use the favorites bar by starring timeframes and indicators so they appear at the top for quick access."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Indicator Templates"
+  },
+  {
+   "t": "p",
+   "text": "Instead of rebuilding your setup every time, save templates."
+  },
+  {
+   "t": "li",
+   "text": "- Load multiple indicators (e.g., TTFM, Kill Zones)."
+  },
+  {
+   "t": "li",
+   "text": "- Save as an indicator template and star it for quick access."
+  },
+  {
+   "t": "li",
+   "text": "- Create multiple setups: a clean template, a 3-day lookback, or time-specific templates."
+  },
+  {
+   "t": "li",
+   "text": "- Use watermark indicators like AG GFX to keep your chart labeled with symbol, timeframe, and your name across all templates."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Alerts"
+  },
+  {
+   "t": "p",
+   "text": "Alerts are essential for hands-off monitoring."
+  },
+  {
+   "t": "li",
+   "text": "- Add alerts to drawings directly."
+  },
+  {
+   "t": "li",
+   "text": "- Or, create alerts from the price scale on the right side."
+  },
+  {
+   "t": "li",
+   "text": "- Delete old alerts from the alert manager for a clean workspace."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Layouts"
+  },
+  {
+   "t": "p",
+   "text": "Layouts let you track multiple timeframes or assets at once."
+  },
+  {
+   "t": "li",
+   "text": "- Switch between 1, 2, 3, or 4 chart panels."
+  },
+  {
+   "t": "li",
+   "text": "- Sync symbols, crosshairs, and timeframes across charts when needed."
+  },
+  {
+   "t": "li",
+   "text": "- Quick tip: Press the period (.) key to switch layouts instantly."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Shortcuts"
+  },
+  {
+   "t": "p",
+   "text": "Keyboard shortcuts make TradingView extremely efficient."
+  },
+  {
+   "t": "li",
+   "text": "- Alt + R: Reset chart scale."
+  },
+  {
+   "t": "li",
+   "text": "- Alt + Click: Full-screen one panel."
+  },
+  {
+   "t": "li",
+   "text": "- Tab: Cycle between panels."
+  },
+  {
+   "t": "li",
+   "text": "- Shift + F: Toggle full-screen mode."
+  },
+  {
+   "t": "li",
+   "text": "- Ctrl + Shift + S: Copy chart image to clipboard."
+  },
+  {
+   "t": "li",
+   "text": "- Ctrl + Scroll: Zoom into exact areas."
+  },
+  {
+   "t": "li",
+   "text": "- Arrow Keys: Switch symbols in your watchlist."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Object Tree and Drawing Management"
+  },
+  {
+   "t": "p",
+   "text": "Keep your drawings organized."
+  },
+  {
+   "t": "li",
+   "text": "- Group drawings for specific trades, lock them, and hide them when not needed."
+  },
+  {
+   "t": "li",
+   "text": "- Use templates for drawings like liquidity zones, order blocks, and FVGs."
+  },
+  {
+   "t": "li",
+   "text": "- Magnet Mode: Hold Ctrl to snap drawings to highs/lows without leaving magnet mode permanently on."
+  },
+  {
+   "t": "li",
+   "text": "- Shift: Draw straight lines at perfect angles."
+  },
+  {
+   "t": "li",
+   "text": "- Ctrl + Drag: Duplicate drawings quickly."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Custom Drawing Templates"
+  },
+  {
+   "t": "p",
+   "text": "Save time with reusable drawing templates."
+  },
+  {
+   "t": "li",
+   "text": "- Create custom templates for common setups like:High/LowBreaker BlocksFair Value Gaps"
+  },
+  {
+   "t": "li",
+   "text": "- Adjust line thickness, opacity, and color using hex codes."
+  },
+  {
+   "t": "li",
+   "text": "- Save them under templates so you don’t have to reconfigure settings each time."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Favorite Tools Bar"
+  },
+  {
+   "t": "p",
+   "text": "Build your custom toolbox."
+  },
+  {
+   "t": "li",
+   "text": "- Star your most-used tools (trendlines, rectangles, fib retracements, etc.)."
+  },
+  {
+   "t": "li",
+   "text": "- Make sure the favorites bar is enabled in the bottom-left corner."
+  },
+  {
+   "t": "li",
+   "text": "- Use templates within these tools for faster, consistent analysis."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Conclusion"
+  },
+  {
+   "t": "p",
+   "text": "TradingView becomes a completely different platform once you know how to tailor it to your style. With clean chart settings, indicator templates, shortcuts, and drawing templates, you’ll be able to move quickly, keep your charts organized, and focus on analysis rather than fighting with the interface."
+  }
+ ]
+}

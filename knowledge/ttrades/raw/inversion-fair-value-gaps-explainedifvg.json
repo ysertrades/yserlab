@@ -1,0 +1,181 @@
+{
+ "slug": "inversion-fair-value-gaps-explainedifvg",
+ "id": 4276,
+ "url": "https://ttrades.com/inversion-fair-value-gaps-explainedifvg/",
+ "title": "Inversion Fair Value Gaps Explained(IFVG)",
+ "date": "2025-07-02T11:00:00",
+ "modified": "2026-02-06T14:50:08",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 30
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/09/Inversions-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "uDJI2AbyyCs"
+ ],
+ "description": "Learn what inversion fair value gaps are, how they form, and how to trade them using consequent encroachment and liquidity concepts.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "If you’ve been trading with ICT concepts, you’ve likely come across the idea of fair value gaps (shown below). But what happens when those fail? That’s where inversion fair value gaps come in. In this blog, we’ll focus purely on inversions: what they are, how they form, and how traders can use them for entries and continuations."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Fair-value-gap.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is an Inversion Fair Value Gap?"
+  },
+  {
+   "t": "p",
+   "text": "An inversion fair value gap occurs when price closes through and invalidates a fair value gap."
+  },
+  {
+   "t": "li",
+   "text": "- If a bearish FVG is closed above → it inverts into potential support"
+  },
+  {
+   "t": "li",
+   "text": "- If a bullish FVG is closed below → it inverts into potential resistance"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Inversion-Example.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Rather than discarding failed FVGs, inversions help traders reframe them as new opportunities."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Inversions Matter"
+  },
+  {
+   "t": "p",
+   "text": "Inversions tell us when the market shifts from bearish to bullish or bullish to bearish."
+  },
+  {
+   "t": "li",
+   "text": "- They reveal failed inefficiencies that become new price levels of interest"
+  },
+  {
+   "t": "li",
+   "text": "- They align with broader market structure, often signaling continuations within a trend"
+  },
+  {
+   "t": "li",
+   "text": "- They create entry opportunities when retested, especially at the midpoint (consequent encroachment)"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Consequent Encroachment in Inversions"
+  },
+  {
+   "t": "p",
+   "text": "Every FVG has a midpoint called consequent encroachment (CE)."
+  },
+  {
+   "t": "li",
+   "text": "- Mark CE at 50 percent of the gap"
+  },
+  {
+   "t": "li",
+   "text": "- If price respects CE → continuation is likely"
+  },
+  {
+   "t": "li",
+   "text": "- If price violates CE → expect a shift in narrative"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/CE-IFVG.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "For inversions, CE becomes a refined entry point: enter when price retests the midpoint of the inverted gap."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trading Inversions in Trends"
+  },
+  {
+   "t": "p",
+   "text": "In trending markets, inversion fair value gaps serve as continuation zones."
+  },
+  {
+   "t": "li",
+   "text": "- In an uptrend, failed bearish FVGs invert to support new bullish moves"
+  },
+  {
+   "t": "li",
+   "text": "- In a downtrend, failed bullish FVGs invert to resistance for further bearish moves"
+  },
+  {
+   "t": "p",
+   "text": "This allows traders to trade with the trend, using failed zones as new confirmations."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example Scenario"
+  },
+  {
+   "t": "li",
+   "text": "- Price closes above a bearish FVG → inversion created"
+  },
+  {
+   "t": "li",
+   "text": "- On retest, traders look to enter long at the CE level"
+  },
+  {
+   "t": "li",
+   "text": "- Stops are placed just beyond structure, with targets toward liquidity pools or opposing FVGs"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/IFVG-EX.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "These setups often offer tighter risk-to-reward ratios while keeping trades aligned with liquidity structure."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Inversion fair value gaps are a powerful concept within trading. Instead of ignoring failed gaps, traders can use inversions to refine entries, trade with structure, and anticipate liquidity shifts. Mastering this concept adds depth to your market narrative and provides new ways to align with market structure."
+  }
+ ]
+}

@@ -1,0 +1,197 @@
+{
+ "slug": "understanding-projections-in-the-fractal-model-a-complete-guide",
+ "id": 4485,
+ "url": "https://ttrades.com/understanding-projections-in-the-fractal-model-a-complete-guide/",
+ "title": "Understanding Projections in the Fractal Model: A Complete Guide",
+ "date": "2025-11-01T11:00:00",
+ "modified": "2026-09-04T13:19:58",
+ "categories": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 11
+  },
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 11
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 49
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/10/Projections-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "upHS7SDL9kg"
+ ],
+ "description": "Learn to use projections with the Fractal Model. Using Fibonacci Retracement, manipulation legs, and liquidity for effective targeting.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "If you’ve been studying market structure through the fractal model, you’ve likely come across the concept of projections. In this guide, we’ll explore what projections are, how they’re constructed using the Fibonacci tool, and how to apply them as mechanical targets within your trading framework. We’ll also review a few examples so you can see how they work in real market conditions."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What are Projections"
+  },
+  {
+   "t": "p",
+   "text": "Projections are mechanical projection targets derived from a specific swing or manipulation leg following a change in the state of delivery. They help identify where price is most likely to move next, based on the leg that initiated the reversal."
+  },
+  {
+   "t": "p",
+   "text": "They serve two main purposes:• As standalone targets when no clear liquidity levels are visible• As confluence tools when they align with liquidity pools or equal highs and lows"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/projection-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Setting Up the Fibonacci Tool"
+  },
+  {
+   "t": "p",
+   "text": "To create projections, use the Fibonacci retracement tool with customized levels. Set your levels to include:"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/projection-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "These are the levels most commonly used, but you can always add others that work better for your trading model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Identifying and Drawing the Manipulation Leg"
+  },
+  {
+   "t": "p",
+   "text": "Follow these steps to correctly mark a projection:"
+  },
+  {
+   "t": "p",
+   "text": "• Identify Candle 2, which is the reversal point showing a change in the state of delivery"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/projection-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "• Find the manipulation leg. In a bullish setup, locate the low, then the high that made that low. In a bearish setup, find the high, then the low that made that high"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/projection-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "• Anchor your Fibonacci tool to the start and end of that manipulation leg"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/projection-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "• Use the negative Fibonacci levels as your projection targets"
+  },
+  {
+   "t": "p",
+   "text": "These projection levels will represent mechanical target zones for price expansion."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Target Expectations Based on Leg Size"
+  },
+  {
+   "t": "p",
+   "text": "The size of the manipulation leg determines how far price is likely to travel:"
+  },
+  {
+   "t": "p",
+   "text": "• For an average-sized leg, target between -2 and -2.5• For an expanding leg, price may reach -4 to -4.5"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/projection-6.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "• For a large manipulation leg, reduce expectations and target -1 since the range is already extensive"
+  },
+  {
+   "t": "p",
+   "text": "This helps maintain realistic projections and keeps your targets aligned with average price movement."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/projection-7.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Chart Examples"
+  },
+  {
+   "t": "p",
+   "text": "RTY on the five-minute chart paired with the hourly structure shows how projections align with liquidity. After the previous low was swept and a Candle 2 closure confirmed a reversal, the projection drawn from the manipulation leg produced targets that aligned with equal highs. This added confluence and a high-probability target zone."
+  },
+  {
+   "t": "p",
+   "text": "Using the Fractal Model Indicator, projections are automatically plotted as shown in this example."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/10/projection-examples.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "p",
+   "text": "• Always begin your projection setup from Candle 2, the reversal point• Identify the manipulation leg before projecting• Adjust your targets based on the leg’s size• Use projections as confluence with liquidity zones when possible• For wide manipulation legs, limit projections to the negative 1"
+  }
+ ]
+}

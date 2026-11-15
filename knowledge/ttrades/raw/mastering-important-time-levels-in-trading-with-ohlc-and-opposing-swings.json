@@ -1,0 +1,218 @@
+{
+ "slug": "mastering-important-time-levels-in-trading-with-ohlc-and-opposing-swings",
+ "id": 3595,
+ "url": "https://ttrades.com/mastering-important-time-levels-in-trading-with-ohlc-and-opposing-swings/",
+ "title": "Mastering Important Time Levels in Trading with OHLC and Opposing Swings",
+ "date": "2025-07-19T11:00:00",
+ "modified": "2025-09-22T19:34:45",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 29
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/Time-Levels-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "EYzP7c24AwM"
+ ],
+ "description": "Learn how to trade key OHLC times, use midnight & 8:30 as support/resistance, and catch opposing swings at 8:30 & 9:30 for smarter entries.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "One of the most overlooked aspects of trading is time. Just as price creates structure on the chart, time creates predictable behaviors around certain sessions and candle openings. By aligning your strategy with time-based levels, you can anticipate liquidity grabs, reversals, and continuation moves more effectively."
+  },
+  {
+   "t": "p",
+   "text": "In this blog, we’ll break down how to use OHLC levels at specific times, treat midnight (0:00) and 8:30 as support and resistance, and recognize opposing runs at 8:30 and 9:30 to refine your trading setups."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key OHLC Time Levels"
+  },
+  {
+   "t": "p",
+   "text": "There are specific times during the trading day when new candles open on higher timeframes. These open-high-low-close (OHLC) structures give traders valuable insight into where liquidity and order flow may shift."
+  },
+  {
+   "t": "p",
+   "text": "The main OHLC times to watch are:"
+  },
+  {
+   "t": "li",
+   "text": "- 18:00 EST – Daily candle open"
+  },
+  {
+   "t": "li",
+   "text": "- 02:00 EST – 4-hour candle open"
+  },
+  {
+   "t": "li",
+   "text": "- 06:00 EST – 4-hour candle open"
+  },
+  {
+   "t": "li",
+   "text": "- 10:00 EST – 4-hour candle open"
+  },
+  {
+   "t": "li",
+   "text": "- 14:00 EST – 4-hour candle open"
+  },
+  {
+   "t": "p",
+   "text": "How to use them:"
+  },
+  {
+   "t": "li",
+   "text": "- The goal is to let the wick of the daily candle form, thus I am focused on the opposing run from the daily open (18:00) creating that wick."
+  },
+  {
+   "t": "li",
+   "text": "- Each 4-hour open (02:00, 06:00, 10:00, 14:00) provides an intraday structure. Look for the classic pattern: open → low → high → close (bullish) or open → high → low → close (bearish). This helps anticipate how the candle forms."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Important-time-levels-ex-1-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- Be sure to check out my dedicated video on OHLC for a full understanding of this concept."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Midnight and 8:30 as Support and Resistance"
+  },
+  {
+   "t": "p",
+   "text": "Two additional time levels function less as OHLC structures and more as intraday support and resistance markers:"
+  },
+  {
+   "t": "li",
+   "text": "- Midnight (0:00) – The new calendar day open. Often acts as a key level that price will revisit, reject, or use as a pivot for the day’s direction."
+  },
+  {
+   "t": "li",
+   "text": "- 08:30 EST – The release time for major U.S. economic data. Price frequently reacts sharply here, making it a strong reference for support/resistance zones."
+  },
+  {
+   "t": "p",
+   "text": "In practice:"
+  },
+  {
+   "t": "li",
+   "text": "- If price trades above midnight and 8:30 levels in a bearish context, this can be viewed as deep premium or a favorable condition for shorting."
+  },
+  {
+   "t": "li",
+   "text": "- If price trades below them in a bullish context, that’s a deep discount, an attractive area for long entries."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/SR-ex-1-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "8:30 and 9:30 Opposing Runs"
+  },
+  {
+   "t": "p",
+   "text": "An opposing run occurs when the market makes an “opposing run” in the “wrong” direction before reversing into the real move. This often traps traders."
+  },
+  {
+   "t": "li",
+   "text": "- 08:30 EST – News-driven volatility. Expect sudden sweeps of liquidity (highs or lows) before a move back into order flow."
+  },
+  {
+   "t": "li",
+   "text": "- 09:30 EST – New York Stock Exchange open. A powerful moment where volatility increases. Often delivers another opposing run, either running stops above/below short-term levels before trending in the opposite direction. Price can also expand if the manipulation or the 8:30 opposing run already occurred."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip:"
+  },
+  {
+   "t": "li",
+   "text": "- 8:30 opposing run → 9:30 expansion."
+  },
+  {
+   "t": "li",
+   "text": "- No opposing run at 8:30 → 9:30 opposing run. 9:30 / 10:00 expansion."
+  },
+  {
+   "t": "p",
+   "text": "For example:"
+  },
+  {
+   "t": "li",
+   "text": "- In a bullish day, you might see 08:30 make a move lower then a sharp reversal higher."
+  },
+  {
+   "t": "li",
+   "text": "- At 09:30, price may expand higher in line with the higher timeframe trend."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Judas-Swing-EX.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Putting It All Together"
+  },
+  {
+   "t": "p",
+   "text": "Here’s how a trader might structure their day using these time levels:"
+  },
+  {
+   "t": "li",
+   "text": "- Mark 0:00 and 8:30 as support/resistance reference points."
+  },
+  {
+   "t": "li",
+   "text": "- Track OHLC at 18:00, 06:00, 10:00, 14:00, and 02:00 to anticipate intraday structure."
+  },
+  {
+   "t": "li",
+   "text": "- Watch 08:30 and 09:30 for opposing runs."
+  },
+  {
+   "t": "p",
+   "text": "By combining these elements, you create a powerful framework: time tells you when liquidity may be taken, OHLC gives you structure for price delivery, and runs provide invalidations."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Opposing runs create protected swings when reaching into a fair value gap or sweeping out a high (bearish) or low (bullish)"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Trading is not just about price, it’s about when price makes its moves. By mastering the rhythm of OHLC levels, the power of midnight and 8:30 as support/resistance, and opposing runs at 8:30 and 9:30, you can align yourself with institutional timing and gain a sharper edge in the markets."
+  }
+ ]
+}

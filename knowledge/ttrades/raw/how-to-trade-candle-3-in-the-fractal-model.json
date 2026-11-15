@@ -1,0 +1,251 @@
+{
+ "slug": "how-to-trade-candle-3-in-the-fractal-model",
+ "id": 3837,
+ "url": "https://ttrades.com/how-to-trade-candle-3-in-the-fractal-model/",
+ "title": "How to Trade Candle 3 in the Fractal Model",
+ "date": "2025-09-06T11:00:00",
+ "modified": "2026-09-04T13:21:36",
+ "categories": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 13
+  },
+  {
+   "course": "ICT Core Concepts",
+   "n": 8
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 54
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/09/Candle-3-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "qdQYhePcvGE"
+ ],
+ "description": "Learn how to trade Candle 3 continuation setups after reversal candles. Discover wick size rules, continuations , and multi-timeframe alignment.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this blog, we’re diving into Candle 3 within TTrades Fractal Model (TTFM). Candle 2 (the reversal candle), Candle 3 (the continuation), and Candle 4 (the secondary continuation), you’ll see how each plays a role in capturing market structure shifts. Candle 3 is all about continuation moves that follow reversal setups, and learning how to recognize them can sharpen your entries and improve consistency."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The key concept: wick size and expansion"
+  },
+  {
+   "t": "p",
+   "text": "The most important factor when deciding whether to trade Candle 3 is wick size."
+  },
+  {
+   "t": "li",
+   "text": "- Small wick on Candle 2: This usually supports expansion, meaning you can trade Candle 2 directly."
+  },
+  {
+   "t": "li",
+   "text": "- Large wick on Candle 2: This signals a reversal and lack of expansion, so you want to let Candle 2 close and then trade Candle 3 instead."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/09/c3-ex1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "In simple terms:"
+  },
+  {
+   "t": "li",
+   "text": "- Small wick → trade Candle 2."
+  },
+  {
+   "t": "li",
+   "text": "- Large wick → wait for Candle 3."
+  },
+  {
+   "t": "p",
+   "text": "This distinction helps filter whether you’re trading into strength (continuation) or weakness (reversal or consolidation)."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trading Candle 3 after a reversal"
+  },
+  {
+   "t": "p",
+   "text": "When Candle 2 shows a large wick and closes back near its open, it often represents a reversal. That means price has already used much of its range. Instead of forcing a trade, wait for Candle 3, which tends to provide a cleaner, one-sided move."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/09/c3-ex2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/09/c3-ex3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Watch for:"
+  },
+  {
+   "t": "li",
+   "text": "- Higher timeframe reversal candle closure (closing back inside previous candle)"
+  },
+  {
+   "t": "li",
+   "text": "- Lower timeframe change in state of delivery (CISD)"
+  },
+  {
+   "t": "li",
+   "text": "- Reach into a point of interest (FVG, High, Low)"
+  },
+  {
+   "t": "li",
+   "text": "- Protected swing (OB)"
+  },
+  {
+   "t": "p",
+   "text": "Once this occurs, you can trade Candle 3 in alignment with the new directional bias."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/09/c3-ex4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/09/c3-ex5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example: EURUSD daily to hourly"
+  },
+  {
+   "t": "li",
+   "text": "- Daily: Candle 2 showed a strong reversal candle. Price opened, ran lower aggressively, then pushed back up, closing near its open."
+  },
+  {
+   "t": "li",
+   "text": "- Implication: This set up a continuation higher for Candle 3."
+  },
+  {
+   "t": "li",
+   "text": "- Hourly: Dropping lower, traders confirmed the reversal by spotting CISD, SMT, protected swings, and continuation blocks, creating clear long opportunities."
+  },
+  {
+   "t": "p",
+   "text": "This example highlights why Candle 3 is typically easier to trade than Candle 2. Continuations provide smoother, directional moves."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/09/c3-ex-7.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/09/c3-ex8.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When Candle 3 isn’t ideal"
+  },
+  {
+   "t": "p",
+   "text": "Not every Candle 3 is high probability:"
+  },
+  {
+   "t": "li",
+   "text": "- If Candle 2 was already a strong expansion, trading Candle 3 may mean you’re chasing a move that could retrace, consolidate, or reverse."
+  },
+  {
+   "t": "li",
+   "text": "- In these cases, demand more confirmation on lower timeframes such as protected swings, SMT divergence, or multiple continuations lining up."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Combining higher and lower timeframes"
+  },
+  {
+   "t": "p",
+   "text": "Candle 3 trading is most effective when paired with multiple timeframe analysis:"
+  },
+  {
+   "t": "li",
+   "text": "- Higher timeframe: Identifies the reversal (Candle 2) and sets the directional bias for Candle 3"
+  },
+  {
+   "t": "li",
+   "text": "- Intermediate timeframe: Confirms the continuation setup (protected swings, order blocks, CISD)"
+  },
+  {
+   "t": "li",
+   "text": "- Entry timeframe: Offers refined entries with smaller stops and better risk-to-reward"
+  },
+  {
+   "t": "p",
+   "text": "This fractal alignment, continuation inside continuation, provides the most reliable trades."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Review and key takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Wick size dictates whether to trade Candle 2 or Candle 3"
+  },
+  {
+   "t": "li",
+   "text": "- Candle 3 can expand after Candle 2 shows a large wick reversal, setting up a continuation"
+  },
+  {
+   "t": "li",
+   "text": "- Always confirm with lower timeframe price action such as CISD, fair value gaps, and protected swings"
+  },
+  {
+   "t": "li",
+   "text": "- Avoid chasing Candle 3 after strong Candle 2 expansions and instead wait for clean continuation signals"
+  },
+  {
+   "t": "li",
+   "text": "- The highest-probability setups come from multi-timeframe continuation alignment"
+  },
+  {
+   "t": "p",
+   "text": "Candle 3 is the backbone of the model, capturing those strong one-sided moves. Once you understand how to filter when to trade it, you’ll avoid getting chopped in consolidation and instead focus on moves with real momentum."
+  }
+ ]
+}

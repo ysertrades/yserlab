@@ -1,0 +1,235 @@
+{
+ "slug": "easy-daily-bias-a-mechanical-trading-framework",
+ "id": 4575,
+ "url": "https://ttrades.com/easy-daily-bias-a-mechanical-trading-framework/",
+ "title": "Easy Daily Bias: A Mechanical Trading Framework",
+ "date": "2025-12-13T11:00:00",
+ "modified": "2026-09-04T10:54:52",
+ "categories": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 25
+  },
+  {
+   "course": "ICT Core Concepts",
+   "n": 5
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 46
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/12/Easy-Daily-Bias-TTrades.pdf"
+ ],
+ "videos": [
+  "-KKuZb5Z5aU"
+ ],
+ "description": "earn an easy daily bias framework using candle closures, wick size, equilibrium, and reversals vs continuations.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this blog, we’re breaking down a simple daily trading framework designed to give you an easy daily bias. The goal is not prediction, but clarity. Each day, price is doing one of two things: setting up for a reversal or preparing for a continuation. This framework uses candle closures, wick size, and equilibrium to define that bias and guide execution."
+  },
+  {
+   "t": "p",
+   "text": "This framework works best if you already understand equilibrium, candle two and candle three closures, and wick behavior. Those concepts form the foundation of everything discussed in this blog."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Core Idea: Reversal or Continuation"
+  },
+  {
+   "t": "p",
+   "text": "Every trading day starts with one decision: is price more likely to reverse or continue?"
+  },
+  {
+   "t": "p",
+   "text": "Reversals are framed off the previous day’s high or low.Continuations are framed off the equilibrium of the previous day’s range."
+  },
+  {
+   "t": "p",
+   "text": "Once that framework is set, candle closures and wick size determine whether the setup provides an entry or requires confirmation."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/12/Framework.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Framing a Reversal Day"
+  },
+  {
+   "t": "p",
+   "text": "When looking for a reversal, everything starts with an important level, usually the previous day’s high or low."
+  },
+  {
+   "t": "p",
+   "text": "For a bearish reversal after a bullish day, the process is consistent. A bullish daily candle closes near the high. The next day opens and trades into the previous day’s high. A shallow wick forms, and a change in the state of delivery confirms the move. From there, price can be traded back into the range, targeting equilibrium or the previous day’s low."
+  },
+  {
+   "t": "p",
+   "text": "Wick size is critical here. A shallow wick supports expansion in the opposite direction. A large wick does not support expansion, which means waiting for candle three or the following candle is the higher-probability decision."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/12/Reversal.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Wick Size Matters"
+  },
+  {
+   "t": "p",
+   "text": "Wick size provides insight into candle momentum."
+  },
+  {
+   "t": "p",
+   "text": "A small wick supports expansion.A large wick does not support expansion."
+  },
+  {
+   "t": "p",
+   "text": "If the wick is large, the reversal candle itself is usually not the trade. Waiting for confirmation on the next candle keeps execution aligned with probability."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Lower Timeframes for Confirmation"
+  },
+  {
+   "t": "p",
+   "text": "Once price trades into the previous day’s high or low, confirmation is required before entry. This comes from a change in the state of delivery (CISD)."
+  },
+  {
+   "t": "p",
+   "text": "During Asia or London, the hourly or 30-minute charts are typically used. During New York, the 5-minute or 15-minute charts are preferred. That lower-timeframe shift confirms the higher-timeframe wick and allows for structured execution."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Framing a Continuation Day"
+  },
+  {
+   "t": "p",
+   "text": "For continuations, the logic reverses."
+  },
+  {
+   "t": "p",
+   "text": "After a bullish daily candle to closure, the expectation is continuation higher. Ideally, price opens, trades lower first, respects the equilibrium of the previous day’s range, and then trades up and through the previous day’s high."
+  },
+  {
+   "t": "p",
+   "text": "Respecting equilibrium does not mean price must touch it exactly. What matters is that lower-timeframe closures do not occur beyond that level. Once price trades through the previous day’s high, wick size helps determine whether expansion or limited range is more likely."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/12/Continuation.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Continuations in Both Directions"
+  },
+  {
+   "t": "p",
+   "text": "The same mechanical logic applies to bearish continuations."
+  },
+  {
+   "t": "p",
+   "text": "After a bearish candle to closure, equilibrium and the previous day’s low are marked. Price should open, trade higher first into a point of interest, and then continue lower through the previous day’s low."
+  },
+  {
+   "t": "p",
+   "text": "Rather than guessing which fair value gap will react, structure is allowed to form naturally. Once a new protected swing develops, the higher-timeframe wick is confirmed and continuation can be traded with confidence."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Bias Always Comes First"
+  },
+  {
+   "t": "p",
+   "text": "This framework is not meant to be used as a standalone pattern. A higher-timeframe bias is always required."
+  },
+  {
+   "t": "p",
+   "text": "If the daily bias is bullish, a bearish reaction off the previous day’s high may only be a retracement rather than a full reversal. In those cases, patience allows price to complete the pullback before continuation trades are considered."
+  },
+  {
+   "t": "p",
+   "text": "Bias is what keeps the framework mechanical and consistent."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Fractal Nature of the Framework"
+  },
+  {
+   "t": "p",
+   "text": "This framework is most commonly applied using the daily paired with the hourly, or the four-hour paired with the 15-minute. However, it is fully fractal."
+  },
+  {
+   "t": "p",
+   "text": "Hourly reversals can be framed off previous hourly highs and executed on the five-minute chart using the same rules. That said, once the higher timeframe drops below the four-hour, price action tends to become noisier and less reliable."
+  },
+  {
+   "t": "p",
+   "text": "For that reason, reversals are best framed from the daily or four-hour context."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Putting It All Together"
+  },
+  {
+   "t": "p",
+   "text": "For a reversal, price trades into a previous high or low, forms a wick, confirms it with a lower time frame change in the state of delivery, and trades back into the range."
+  },
+  {
+   "t": "p",
+   "text": "For a continuation, a candle closure defines bias, equilibrium marks the area of interest, price reacts correctly at that level, and continuation follows in the direction of the higher timeframe."
+  },
+  {
+   "t": "p",
+   "text": "This is a mechanical framework built around context, not prediction."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "This framework prioritizes clarity over complexity. Candle closures establish intent, wick size tells you whether that intent is ready to play out, and the lower time frame change in the state of delivery prevents premature entries."
+  },
+  {
+   "t": "p",
+   "text": "When applied consistently, this framework provides an easy way to establish daily bias and trade both reversals and continuations with structure across multiple timeframes."
+  }
+ ]
+}

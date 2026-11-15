@@ -1,0 +1,259 @@
+{
+ "slug": "using-order-blocks-for-continuations",
+ "id": 2500,
+ "url": "https://ttrades.com/using-order-blocks-for-continuations/",
+ "title": "Using Order Blocks for Continuations",
+ "date": "2025-08-01T11:00:00",
+ "modified": "2025-08-17T21:41:25",
+ "categories": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 21
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 64
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/OB20Continuations20TTrades20PDF.pdf"
+ ],
+ "videos": [
+  "IJcfC6wAPZU"
+ ],
+ "description": "Learn how to use order blocks to capture continuation trades after a confirmed reversal. Includes examples, lessons, and higher timeframe applications.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In trading, many traders feel they’ve missed their chance if they don’t catch the very first reversal entry. That’s not the case. Once a reversal is confirmed, it often opens the door for continuation entries, structured opportunities to enter with better confirmation and, often, improved risk-to-reward. This guide breaks down how I use order blocks to capture those continuations."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step 1 – Identify the Reversal"
+  },
+  {
+   "t": "p",
+   "text": "Before looking for continuations, you must confirm a reversal sequence."
+  },
+  {
+   "t": "p",
+   "text": "For example:"
+  },
+  {
+   "t": "li",
+   "text": "- Purge (liquidity sweep)"
+  },
+  {
+   "t": "li",
+   "text": "- Change in the State of Delivery (CISD) sets your invalidation point."
+  },
+  {
+   "t": "li",
+   "text": "- Initial entry may come from an order block at this point."
+  },
+  {
+   "t": "p",
+   "text": "If you miss that entry or prefer more confirmation, wait for structure to form, essentially a higher low in an uptrend or a lower high in a downtrend."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/OB-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step 2 – Recognize Points of Interest"
+  },
+  {
+   "t": "p",
+   "text": "For continuations, I focus on:"
+  },
+  {
+   "t": "p",
+   "text": "Fair Value Gaps (FVGs)"
+  },
+  {
+   "t": "li",
+   "text": "- Price retraces into a FVG followed by a CISD."
+  },
+  {
+   "t": "p",
+   "text": "Swept Lows/Highs"
+  },
+  {
+   "t": "li",
+   "text": "- Liquidity sweep followed by a CISD."
+  },
+  {
+   "t": "p",
+   "text": "Correlated Asset SMT Divergence"
+  },
+  {
+   "t": "li",
+   "text": "- If one correlated asset sweeps a level but the other doesn’t, I can still classify the setup as valid."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Continuation OBs formed from a fair value gap or from sweeping a low are Protected Swings."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/OB-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/OB-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step 3 – Confirmation for Entry"
+  },
+  {
+   "t": "p",
+   "text": "After price reaches a point of interest:"
+  },
+  {
+   "t": "li",
+   "text": "- Wait for a closure through the opposing candles (up-close in a short bias, down-close in a long bias)."
+  },
+  {
+   "t": "li",
+   "text": "- This closure validates the order block and sets your stop placement."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Always use the series of candles. Only use the single candle if there are no other opposing candles."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/OB-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example: Bearish Continuation"
+  },
+  {
+   "t": "p",
+   "text": "Daily Context: Following an aggressive bearish expansion, price has a retracement into a bearish fair value gap where it then consolidates. Upon the sweep of the consolidation high, there is a bearish daily closure."
+  },
+  {
+   "t": "p",
+   "text": "Intraday Sequence:"
+  },
+  {
+   "t": "li",
+   "text": "1. Mark out the lower half (EQ) of the daily candle, this is the area we want to see price respect. Due to the unfavorable close of the daily candle, we will allow price to trade a little higher into the range – we just want the daily candle to have a small wick."
+  },
+  {
+   "t": "li",
+   "text": "2. Price then has a bearish closure on the hourly chart."
+  },
+  {
+   "t": "li",
+   "text": "3. Dropping to the 5-minute chart, wait for the CISD forming a protected high"
+  },
+  {
+   "t": "li",
+   "text": "4. Seeking a continuation in the next hourly candle, it is not clean with the consolidation higher into the range. When this occurs, allow for displacement and the market to tell you where it wants to go."
+  },
+  {
+   "t": "li",
+   "text": "5. Following the displacement lower, continue tracking the protected swings and find a continuation order block for entry lower"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ob-continuation-ex-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ob-continuation-ex-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ob-continuation-ex-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Look to target the daily or hourly levels for higher R:R. The 2R trade above becomes 7R when reaching for the previous day low daily target. Even 10R+ when holding until end of day close. Expansion candles tend to close near the high or low of the candle."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ob-continuation-ex-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Managing Continuations"
+  },
+  {
+   "t": "li",
+   "text": "- Aggressive Displacement: In large moves, I often look for retest entries rather than entering immediately. This allows for good R:R"
+  },
+  {
+   "t": "li",
+   "text": "- Grinding Moves: If price trends without sweeping lows/highs or hitting FVGs, I pass on the trade."
+  },
+  {
+   "t": "li",
+   "text": "- Fractal: The same continuation logic works on all timeframes, from 1-minute to monthly."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Missing the reversal isn’t the end, you can trade continuations with clear structure."
+  },
+  {
+   "t": "li",
+   "text": "- Look for price to return to a FVG or sweep liquidity before forming an order block."
+  },
+  {
+   "t": "li",
+   "text": "- Confirmation comes from the closure through the opposing candles in your point of interest."
+  },
+  {
+   "t": "li",
+   "text": "- Apply this approach across all timeframes, it is fractal."
+  },
+  {
+   "t": "li",
+   "text": "- The goal is a repeatable, mechanical process, avoid chasing price and focus on setups that meet your defined criteria."
+  }
+ ]
+}

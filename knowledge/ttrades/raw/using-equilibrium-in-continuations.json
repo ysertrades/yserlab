@@ -1,0 +1,308 @@
+{
+ "slug": "using-equilibrium-in-continuations",
+ "id": 2492,
+ "url": "https://ttrades.com/using-equilibrium-in-continuations/",
+ "title": "Using Equilibrium in Continuations",
+ "date": "2025-08-02T11:00:00",
+ "modified": "2026-09-04T13:17:20",
+ "categories": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 7
+  },
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 20
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 63
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/EQ20Continuations20TTrades20PDF.pdf"
+ ],
+ "videos": [
+  "IPZjNI1B5a0"
+ ],
+ "description": "Learn how to flip the traditional ICT discount and premium approach for expansion-phase trading. Discover Fibonacci measurement, PD array matching, and intraday execution tips.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this guide, we’ll explore how I use equilibrium in price continuations, flipping the common ICT approach to discount and premium. If you’ve watched my discount and premium video, you know ICT teaches discount as a buy zone and premium as a sell zone. I take a different path, adapting the concept to better my expansion phase trading model – The Fractal Model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why I Use Equilibrium Differently"
+  },
+  {
+   "t": "p",
+   "text": "The main reason I use equilibrium opposite to the traditional method comes down to the phases of price. When the market is in an expansion phase, the phase I prefer to trade, it rarely retraces deep enough to reach a traditional discount or premium zone or equilibrium of the range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/EQ-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Instead, I use equilibrium as a dividing line within the current range:"
+  },
+  {
+   "t": "li",
+   "text": "- Upper half respected – bias to trade higher"
+  },
+  {
+   "t": "li",
+   "text": "- Lower half respected – bias to trade lower"
+  },
+  {
+   "t": "p",
+   "text": "If these zones fail to hold, I can choose to flip my bias and anticipate the opposite side of the range being taken."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Fibonacci Setup"
+  },
+  {
+   "t": "p",
+   "text": "I keep my Fibonacci simple:"
+  },
+  {
+   "t": "li",
+   "text": "- Levels: 0, 0.5 and 1 (often removing 0 and 1 to focus only on the midpoint)."
+  },
+  {
+   "t": "li",
+   "text": "- Always measure Wick High to Wick Low."
+  },
+  {
+   "t": "li",
+   "text": "- Ignore candle bodies (unlike when measuring for Change in State of Delivery or order blocks)."
+  },
+  {
+   "t": "p",
+   "text": "This method ensures equilibrium reflects the true price extremes for that candle or range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/EQ-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Applying Equilibrium in Expansions"
+  },
+  {
+   "t": "p",
+   "text": "When price is expanding:"
+  },
+  {
+   "t": "li",
+   "text": "- I expect the upper half of a bullish candle’s range to act as support for continuation higher."
+  },
+  {
+   "t": "li",
+   "text": "- I expect the lower half of a bearish candle’s range to act as resistance for continuation lower."
+  },
+  {
+   "t": "p",
+   "text": "If these levels don’t respect, I reassess bias."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/EQ-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step-by-Step: Using Equilibrium in Continuations"
+  },
+  {
+   "t": "li",
+   "text": "1. Identify the Range or CandleUse previous day’s range or a significant higher-timeframe candle."
+  },
+  {
+   "t": "li",
+   "text": "2. Mark 0.5 (Equilibrium)Wick high to wick low."
+  },
+  {
+   "t": "li",
+   "text": "3. Match PD Arrays Within the Respected HalfLook for supporting elements like fair value gaps, order blocks, or protected highs/lows."
+  },
+  {
+   "t": "li",
+   "text": "4. Wait for ConfirmationLook for a reaction in the given point of interest. Use a candle closure paired with a change in the state of delivery (CISD)."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/EQ-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example – Bullish Continuation"
+  },
+  {
+   "t": "li",
+   "text": "- Previous day shows bullish expansion."
+  },
+  {
+   "t": "li",
+   "text": "- Mark 0.5 of the daily range."
+  },
+  {
+   "t": "li",
+   "text": "- In the upper half, find a fair value gap above a protected low."
+  },
+  {
+   "t": "li",
+   "text": "- Price opens, dips into the fair value gap while sweeping out consolidation lows, has a bullish candle closure, forms a protected swing, then expands higher."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/EQ-ex-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example – Bearish Continuation"
+  },
+  {
+   "t": "li",
+   "text": "- Previous day closes bearish, forming a C3 closure."
+  },
+  {
+   "t": "li",
+   "text": "- Mark 0.5 of the daily range."
+  },
+  {
+   "t": "li",
+   "text": "- In the lower half, identify an POI, in this case a fair value gap."
+  },
+  {
+   "t": "li",
+   "text": "- Price retests and rejects, continuing lower."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: If you miss the reversal, track the protected swings for a continuation, or drop to a lower timeframe for a refined entry using top down analysis."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: If price doesn’t respect the fvg in the EQ area, use the newly created liquidity as a POI."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Pair with standard deviation projections as a target."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/EQ-ex-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Intraday Context"
+  },
+  {
+   "t": "p",
+   "text": "While my main bias comes from daily or 4H candles, I refine entries on the hourly and 15-minute charts:"
+  },
+  {
+   "t": "li",
+   "text": "- Look for EQ respect during the New York session."
+  },
+  {
+   "t": "li",
+   "text": "- Pair with PD arrays for high-probability setups."
+  },
+  {
+   "t": "li",
+   "text": "- Watch for sweeps, SMT divergences, and CISD to trigger entries."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Fractal Nature of the Concept"
+  },
+  {
+   "t": "p",
+   "text": "This equilibrium principle works on any timeframe. I will use a EQ level from a higher timeframe and then monitor how price reacts on a lower timeframe. I use the timeframes discussed throughout my timeframe alignment video:"
+  },
+  {
+   "t": "li",
+   "text": "- Daily EQ → hourly timeframe"
+  },
+  {
+   "t": "li",
+   "text": "- 4 Hour EQ → 15 minute timeframe"
+  },
+  {
+   "t": "li",
+   "text": "- 1 Hour EQ → 5 minute timeframe"
+  },
+  {
+   "t": "li",
+   "text": "- 15 Minute EQ → 1 minute timeframe"
+  },
+  {
+   "t": "p",
+   "text": "The logic is the same, look for price to respect the 0.5 in an expansion phase, align with PD arrays, and trade in the direction of the trend."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Flip the traditional ICT use of discount/premium when trading expansions."
+  },
+  {
+   "t": "li",
+   "text": "- Always measure wick to wick."
+  },
+  {
+   "t": "li",
+   "text": "- Use equilibrium as a bias divider: upper half for longs, lower half for shorts."
+  },
+  {
+   "t": "li",
+   "text": "- Confirm with candle closures and CISD."
+  },
+  {
+   "t": "li",
+   "text": "- The concept is fully fractal across timeframes."
+  }
+ ]
+}

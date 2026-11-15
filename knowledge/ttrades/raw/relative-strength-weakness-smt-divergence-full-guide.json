@@ -1,0 +1,238 @@
+{
+ "slug": "relative-strength-weakness-smt-divergence-full-guide",
+ "id": 5422,
+ "url": "https://ttrades.com/relative-strength-weakness-smt-divergence-full-guide/",
+ "title": "Relative Strength & Weakness + SMT Divergence (Full Guide)",
+ "date": "2026-02-28T11:00:00",
+ "modified": "2026-09-04T11:24:41",
+ "categories": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 42
+  },
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 10
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 37
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/02/Relative-Strength-and-Weakness-TTrades.pdf"
+ ],
+ "videos": [
+  "yH4eYwUgdTY"
+ ],
+ "description": "Learn how to trade relative strength using SMT, structure separation, and candle closures across correlated assets for better trade selection.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Relative strength and weakness is one of the most practical tools you can use when trading correlated assets. The objective is simple. You want to be longing the stronger asset and shorting the weaker one. When you understand how to properly identify which market is leading and which is lagging, your trade selection becomes much clearer."
+  },
+  {
+   "t": "p",
+   "text": "There are three core components used to determine relative strength and weakness. SMT, structure, and candle closures. When you learn how to combine them, you gain a powerful decision making filter that helps you focus on the right instrument instead of guessing."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/S-A-W.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding Correlated Assets"
+  },
+  {
+   "t": "p",
+   "text": "This concept only works with correlated assets. These are markets that generally move in the same direction and share similar structure."
+  },
+  {
+   "t": "p",
+   "text": "For example, the S&P 500 and the NASDAQ typically trend together. Gold futures and Silver Futures often move similarly as well. Because they are correlated, they should form similar highs and lows. When they do not, that difference reveals information."
+  },
+  {
+   "t": "p",
+   "text": "That difference is where opportunity exists."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "SMT: The Clearest Form of Relative Strength"
+  },
+  {
+   "t": "p",
+   "text": "SMT simply means there is a difference in structure between two correlated assets."
+  },
+  {
+   "t": "p",
+   "text": "If one asset makes a higher low while the other makes a lower low, the one making the higher low is stronger. The one making the lower low is weaker."
+  },
+  {
+   "t": "p",
+   "text": "In a bearish scenario, flip the logic. If one makes a lower high and the other makes a higher high, the one failing to expand upward is weaker."
+  },
+  {
+   "t": "p",
+   "text": "SMT is the easiest signal to spot because it is very visual. One market expands structurally while the other fails. When this happens, you already know where your directional focus should be."
+  },
+  {
+   "t": "p",
+   "text": "If you are looking for longs, focus on the stronger asset. If you are looking for shorts, focus on the weaker one."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/SMTTT.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Structure and Separation"
+  },
+  {
+   "t": "p",
+   "text": "Sometimes both assets make the same structural move. They both create higher lows or both create lower highs. In that case, there is no clear SMT divergence."
+  },
+  {
+   "t": "p",
+   "text": "This is when you use separation."
+  },
+  {
+   "t": "p",
+   "text": "Look at the previous extreme low or high. Then measure how far the new retracement is from that level."
+  },
+  {
+   "t": "p",
+   "text": "If one asset creates a higher low that is clearly separated from the previous low, while the other pulls back very close to the previous low, the one with more separation is stronger."
+  },
+  {
+   "t": "p",
+   "text": "The greater the distance from prior liquidity, the stronger the structure."
+  },
+  {
+   "t": "p",
+   "text": "Separation is subtle but extremely effective when SMT is not obvious."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/Structure.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Candle Closures: The Advanced Confirmation"
+  },
+  {
+   "t": "p",
+   "text": "Candle closures add a deeper layer of confirmation."
+  },
+  {
+   "t": "p",
+   "text": "Two assets can sweep the same low, but how they close tells the real story. If one closes strongly bullish above prior candle bodies and the other closes weakly or prints a doji, the stronger close reveals stronger participation."
+  },
+  {
+   "t": "p",
+   "text": "Strong bullish closures after liquidity sweeps suggest buyers are stepping in aggressively. Weak closures suggest hesitation or continued pressure."
+  },
+  {
+   "t": "p",
+   "text": "You should pay close attention to candles that validate continuation or signal a shift in delivery. If one asset closes beyond a key level with conviction and the other fails to do so, that difference matters."
+  },
+  {
+   "t": "p",
+   "text": "Candle behavior often reveals strength and weakness before the larger expansion move occurs."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/Candle-Closures.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Combining All Three"
+  },
+  {
+   "t": "p",
+   "text": "The real power comes from stacking confirmations."
+  },
+  {
+   "t": "p",
+   "text": "First look for SMT. If it is present, that is your primary clue."
+  },
+  {
+   "t": "p",
+   "text": "If SMT is not present, evaluate structural separation."
+  },
+  {
+   "t": "p",
+   "text": "Then use candle closures to confirm which asset is truly showing conviction."
+  },
+  {
+   "t": "p",
+   "text": "When all three align, the direction becomes much clearer. You are not just trading a bias. You are selecting the asset that is most likely to deliver expansion."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Strength Can Rotate"
+  },
+  {
+   "t": "p",
+   "text": "One important thing to understand is that strength is not permanent."
+  },
+  {
+   "t": "p",
+   "text": "An asset that was stronger during one leg of the move can become weaker during consolidation. Candle closures can shift. Separation can narrow. New SMT can appear in the opposite direction."
+  },
+  {
+   "t": "p",
+   "text": "Relative strength must be evaluated continuously, not assumed."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Relative strength and weakness should not be used as a standalone strategy. It is a refinement tool. You still need higher timeframe bias, structure, and a defined entry model."
+  },
+  {
+   "t": "p",
+   "text": "What this concept does is help you choose which correlated asset deserves your attention."
+  },
+  {
+   "t": "p",
+   "text": "When you consistently focus on the stronger asset for longs and the weaker asset for shorts, you stop fighting momentum and start aligning with it."
+  },
+  {
+   "t": "p",
+   "text": "That alignment alone can dramatically improve your consistency."
+  }
+ ]
+}

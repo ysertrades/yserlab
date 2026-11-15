@@ -1,0 +1,270 @@
+{
+ "slug": "using-time-based-exits-for-trading-expansions-ttfm",
+ "id": 7176,
+ "url": "https://ttrades.com/using-time-based-exits-for-trading-expansions-ttfm/",
+ "title": "Using Time Based Exits For Trading Expansions (TTFM)",
+ "date": "2026-11-07T11:15:00",
+ "modified": "2026-11-06T23:19:55",
+ "categories": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 3
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 3
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/11/TTrades-Time-Based-Exits.pdf"
+ ],
+ "videos": [
+  "9JfTGJd464Y"
+ ],
+ "description": "Learn time based exits, expansion candles, higher timeframe candle closes, and how to manage trading positions beyond 2R.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "A trade does not always need to close at a fixed price target. When price is showing expansion, holding toward the close of the higher timeframe candle can allow the trade to capture more of the move."
+  },
+  {
+   "t": "p",
+   "text": "In the TTrades Fractal Model, time based exits use the behavior of the current candle and the closing times of higher timeframes to help determine when to exit. This approach is especially useful when price is expanding, but it is important to understand that an expansion candle can still reverse before it closes."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Three Types of Candles"
+  },
+  {
+   "t": "p",
+   "text": "There are three types of candles to understand:"
+  },
+  {
+   "t": "li",
+   "text": "- Expansion candles"
+  },
+  {
+   "t": "li",
+   "text": "- Reversal candles"
+  },
+  {
+   "t": "li",
+   "text": "- Consolidation candles"
+  },
+  {
+   "t": "p",
+   "text": "Each describes a different type of price behavior. Within the TTrades Fractal Model, a reversal candle can be used for candle two, but the goal is to trade the expansion candle that follows."
+  },
+  {
+   "t": "p",
+   "text": "Understanding these candle types helps identify what price is doing and whether there is an opportunity for expansion."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/11/Types.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Does an Expansion Candle Look Like?"
+  },
+  {
+   "t": "p",
+   "text": "An expansion candle has a large body with a small wick on either side."
+  },
+  {
+   "t": "p",
+   "text": "A bullish expansion candle closes near its high. A bearish expansion candle closes near its low."
+  },
+  {
+   "t": "p",
+   "text": "The small wick shows that price did not spend much of the candle’s range forming that high or low. This leaves more time and range for price to continue moving in the direction of the candle."
+  },
+  {
+   "t": "p",
+   "text": "However, the candle’s formation does not guarantee continued expansion. Price can still reverse before the candle closes."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/11/Expansion-Candles.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How Time Based Exits Work"
+  },
+  {
+   "t": "p",
+   "text": "A time based exit uses the closing time of a higher timeframe candle as a potential exit point."
+  },
+  {
+   "t": "p",
+   "text": "For example, if a trade is entered near the opening price of a higher timeframe candle and price begins to expand, the position can be held toward that candle’s close rather than automatically closing at a fixed target such as 2R."
+  },
+  {
+   "t": "p",
+   "text": "The purpose is to give the expansion more time to develop. If price continues moving in the trade’s direction, holding toward the candle close may capture more of the move."
+  },
+  {
+   "t": "p",
+   "text": "This does not mean every trade should be held beyond 2R. The candle’s behavior still matters, and price can reverse before the scheduled close."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/11/cccc.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When to Use a Time Based Exit Instead of 2R"
+  },
+  {
+   "t": "p",
+   "text": "A fixed 2R target provides a defined exit based on the initial risk. A time based exit instead uses the higher timeframe candle close as a potential exit point."
+  },
+  {
+   "t": "p",
+   "text": "When price is showing expansion, holding toward the candle close may allow the trade to capture more of the move. But if price begins reversing, holding longer can give back profits that could have been secured at 2R."
+  },
+  {
+   "t": "p",
+   "text": "The decision should come from the price action and the type of candle forming, not simply from wanting a larger target."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding Higher Timeframe Candle Closes"
+  },
+  {
+   "t": "p",
+   "text": "When trading on a lower timeframe, it is important to know which higher timeframe candles price is currently trading within and when those candles close."
+  },
+  {
+   "t": "p",
+   "text": "For example, a trade on the 1 minute chart may be taking place inside a 15 minute candle that closes at 9:45. That same price action may also be inside a 30 minute and a 1 hour candle that both close at 10:00."
+  },
+  {
+   "t": "p",
+   "text": "These closing times provide potential exit points to watch."
+  },
+  {
+   "t": "p",
+   "text": "The reason these times matter is that one higher timeframe candle is finishing and another is beginning. This gives you a specific point in time to evaluate the current expansion and decide whether to exit."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/11/Frame-21672.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Multiple Timeframes to Find Exit Times"
+  },
+  {
+   "t": "p",
+   "text": "Multiple higher timeframes can provide different potential exit times for the same trade."
+  },
+  {
+   "t": "p",
+   "text": "For example, a 15 minute candle may close at 9:45, while the 30 minute and 1 hour candles close at 10:00. If price is showing expansion across those timeframes, their closing times can help guide the exit."
+  },
+  {
+   "t": "p",
+   "text": "This does not mean every higher timeframe close requires an exit. These are points to evaluate how price is behaving and whether the expansion is still developing."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Time Based Exits on the Daily Timeframe"
+  },
+  {
+   "t": "p",
+   "text": "This approach can also be applied to the daily timeframe."
+  },
+  {
+   "t": "p",
+   "text": "On a trending day, if price is showing expansion, holding toward the daily candle close may allow the trade to capture more of the day’s move rather than exiting automatically at 2R."
+  },
+  {
+   "t": "p",
+   "text": "However, not every day is a trending day. Price may reverse or consolidate instead of continuing to expand. The daily candle’s behavior should help determine whether holding makes sense."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Important Considerations"
+  },
+  {
+   "t": "p",
+   "text": "Time based exits are not guaranteed to produce a better result than fixed price targets. Holding longer creates the possibility of capturing more expansion, but it also creates the risk of giving back open profits if price reverses."
+  },
+  {
+   "t": "p",
+   "text": "Keep these points in mind:"
+  },
+  {
+   "t": "li",
+   "text": "- Know which higher timeframe candles your trade is taking place within."
+  },
+  {
+   "t": "li",
+   "text": "- Pay attention to when those candles close."
+  },
+  {
+   "t": "li",
+   "text": "- Look for expansion before deciding to hold toward a candle close."
+  },
+  {
+   "t": "li",
+   "text": "- Evaluate price behavior as the candle develops."
+  },
+  {
+   "t": "li",
+   "text": "- Remember that a candle can reverse before its close."
+  },
+  {
+   "t": "p",
+   "text": "The goal is not to hold every trade longer. It is to understand when time and price behavior support giving an expansion more room."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Time based exits provide another way to manage trades within the TTrades Fractal Model. By understanding expansion candles and knowing when higher timeframe candles close, you can use time as part of your exit decision."
+  },
+  {
+   "t": "p",
+   "text": "When price is expanding, holding toward the higher timeframe candle close may allow you to capture more of the move. When price is reversing or consolidating, holding longer may not make sense."
+  },
+  {
+   "t": "p",
+   "text": "The key is to evaluate the candle’s behavior and use its closing time as a potential exit point, rather than assuming to always stay in the trade."
+  }
+ ]
+}

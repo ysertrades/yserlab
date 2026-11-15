@@ -1,0 +1,1578 @@
+{
+ "slug": "ttrades-fractal-model-indicator-full-guide",
+ "id": 5879,
+ "url": "https://ttrades.com/ttrades-fractal-model-indicator-full-guide/",
+ "title": "TTrades Fractal Model Indicator – Full Guide",
+ "date": "2026-05-09T21:26:32",
+ "modified": "2026-10-07T11:04:28",
+ "categories": [
+  "Fractal Model"
+ ],
+ "courses": [
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 28
+  }
+ ],
+ "pdfs": [],
+ "videos": [
+  "CqMIh-Vvhbg"
+ ],
+ "description": "Every question you could have about the indicator, answered in one place.",
+ "keywords": [],
+ "section": [
+  "Fractal Model"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 1,
+   "text": "How to get access and add it to TradingView"
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Purchase Access"
+  },
+  {
+   "t": "p",
+   "text": "Head to the Indicator Page and pick the plan that works for you. There are Monthly, Quarterly, and Yearly plans. Every plan includes the Fractal Model indicator, Indicator course, and exclusive discord access."
+  },
+  {
+   "t": "p",
+   "text": "Once you’ve purchased, go to Whop"
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Whop"
+  },
+  {
+   "t": "li",
+   "text": "- Follow these steps to get access to the Fractal Model [Pro+] (TTrades) Indicator in TradingView.Go to “Access Indicator” in the TTrades Indicator and Mentorship WhopInput your TradingView username and claim access"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-18.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "TradingView"
+  },
+  {
+   "t": "li",
+   "text": "- Open TradingView and refresh the page so the backend can update.Click the Indicators tab on the top of the screenGo to “invite-only”Find the “Fractal Model [Pro+] (TTrades) in your “invite-only”Add the Indicator to your chartRefresh TradingView if you experience any errorsPlease reach out to support with any issues you face."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 1,
+   "text": "How to Join Discord"
+  },
+  {
+   "t": "p",
+   "text": "Follow these steps to get access to your “indicator” role in the TTrades Mentorship and Indicator Discord."
+  },
+  {
+   "t": "li",
+   "text": "- Go to “Discord” in the TTrades Indicator and Mentorship Whop"
+  },
+  {
+   "t": "li",
+   "text": "- Input your Discord Username and claim access"
+  },
+  {
+   "t": "li",
+   "text": "- You will now have access to the Discord and your custom role"
+  },
+  {
+   "t": "p",
+   "text": "Please reach out to support with any issues you face.A reminder that not TTrades nor anyone from TTrades Team will friend request or DM you. Turn off friend requests as well as DMs and do not respond to any DMs. Communication will only be done within the discord."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 1,
+   "text": "Where to reach out for Support"
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Discord"
+  },
+  {
+   "t": "p",
+   "text": "There are multiple ways to get support."
+  },
+  {
+   "t": "p",
+   "text": "For general questions regarding the Indicator, please ask in the Discord chat. For questions related to your subscription or billing, or anything that should be handled privately, please open a support ticket in Discord or through Whop."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-3-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 1,
+   "text": "How to use the indicator"
+  },
+  {
+   "t": "p",
+   "text": "At first glance, the settings panel may seem extensive, but each option is intentionally designed to control a specific part of the Indicator’s behavior. Once you understand what each setting does and how it impacts the output, the entire panel becomes intuitive and easy to navigate. The settings give you the flexibility to fine-tune the tool to match your exact trading style and preferences. Below is a complete breakdown of every setting and how it functions."
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Alert Settings"
+  },
+  {
+   "t": "p",
+   "text": "Alerts are extremely helpful if you would like to be notified of the model formation."
+  },
+  {
+   "t": "p",
+   "text": "To set up alerts, you first have to make sure you have “Alerts?” turned on. If this setting is not checked, the alerts will not work."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Alert Types"
+  },
+  {
+   "t": "p",
+   "text": "The indicator allows you to set alerts for the Model Candles, Early CISD, SMT Divergence, and Protected Swings."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-3-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Model Candles"
+  },
+  {
+   "t": "p",
+   "text": "This alert is used when a full model is printed on the chart. This means a higher timeframe candle 2 or candle 3 closure paired with a lower timeframe CISD or a continuation of that."
+  },
+  {
+   "t": "p",
+   "text": "The alert will show: Candle 2, Candle 3, or Candle 4"
+  },
+  {
+   "t": "p",
+   "text": "If you would like to receive these alerts, make sure this is toggled on prior to setting up the alert."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Early CISD"
+  },
+  {
+   "t": "p",
+   "text": "This alert is used when an early CISD is printed on the chart. This means that price has formed a CISD without having a higher timeframe candle closure."
+  },
+  {
+   "t": "p",
+   "text": "The alert will show: Potential Candle 2"
+  },
+  {
+   "t": "p",
+   "text": "If you would like to receive these alerts, make sure this is toggled on prior to setting up the alert."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "SMT Divergence"
+  },
+  {
+   "t": "p",
+   "text": "This alert is used when a correlated asset has an SMT. This alert will only fire when it is paired with an early CISD or model formation, depending on your selected settings."
+  },
+  {
+   "t": "p",
+   "text": "The alert will show: SMT Divergence"
+  },
+  {
+   "t": "p",
+   "text": "If you would like to receive these alerts, make sure this is toggled on prior to setting up the alert."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Protected Swings"
+  },
+  {
+   "t": "p",
+   "text": "This alert is used when a protected swing is formed (continuation dot). This means price has formed a new protected swing following the reversal CISD."
+  },
+  {
+   "t": "p",
+   "text": "The alert will show: Protected Swing"
+  },
+  {
+   "t": "p",
+   "text": "If you would like to receive these alerts, make sure this is toggled on prior to setting up the alert."
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "How to Set up Alerts"
+  },
+  {
+   "t": "p",
+   "text": "To turn on alerts, follow these steps:"
+  },
+  {
+   "t": "li",
+   "text": "1. Make sure toggle on the “Alerts?”, and your preferred alerts are selected"
+  },
+  {
+   "t": "li",
+   "text": "2. Find, and click on, the three dots next to the indicator title on the top left of your chart, or right click the indicator on the chart"
+  },
+  {
+   "t": "li",
+   "text": "3. Click “Add alert on TTFMº [Pro+]…”"
+  },
+  {
+   "t": "li",
+   "text": "4. Choose the symbol or watchlist which you would like to apply the alerts to."
+  },
+  {
+   "t": "li",
+   "text": "5. Choose the Alert Name, if you wish, and continue by clicking “Create”"
+  },
+  {
+   "t": "p",
+   "text": "Tip : Set alerts on an entire watchlist so you don’t have to individually do it."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-7.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-8.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Adjust or Remove Alerts"
+  },
+  {
+   "t": "p",
+   "text": "If you have adjusted the settings on your indicator and want to update the alerts, they do not adjust automatically. You must delete the old alert and then follow the process above to create a new alert."
+  },
+  {
+   "t": "p",
+   "text": "Please note, if you change any of the settings after setting an alert, it will not adjust the alert. If you want a new alert with new settings, you must repeat the process below."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-6.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Warning and Error Message"
+  },
+  {
+   "t": "p",
+   "text": "By selecting the toggle, the info table will show any errors or warning messages. These errors or warnings are generally when you are on a timeframe higher than the selected fractal model. If unselected, you will not recieve these reminders regarding any errors."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-4-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "General Settings"
+  },
+  {
+   "t": "p",
+   "text": "This is the core of the indicator. It controls which models are shown, which timeframes are used, and how many models you want to see on the chart"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-3-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "History"
+  },
+  {
+   "t": "p",
+   "text": "Controls how many past Fractal Models appear on your chart. Set it to 0 and you’ll only see the current one. Bump it up if you want to see how previous formations played out. Each number higher or lower will include both a bearish and bullish setup. If your chart starts feeling cluttered, you may want to reduce this number."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-4-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Fractal"
+  },
+  {
+   "t": "p",
+   "text": "The fractal toggle sets the timeframe the indicator is using. Automatic will naturally adjusts based on your current chart timeframe, while the other selections will print the selected timeframe, no matter your chart timeframe selection. Custom allows you to use the Custom Fractal drop downs to have a custom timeframe fractal model."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-5-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "C2/C3/C4 toggles show or hide the fractal model inside the specific candles. Useful for decluttering your chart if you only care about specific parts of the formation. C2 will show only candle 2 closure formation. C3 will show only candle 3 closure formation. C4 will show candle 4 continuations."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-6-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Custom Fractal"
+  },
+  {
+   "t": "p",
+   "text": "Only active when Fractal is set to Custom. Lets you dial in a custom timeframe alignment manually rather than using the provided alignments."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Bias"
+  },
+  {
+   "t": "p",
+   "text": "Bias Filters what the indicator displays based on market direction. There are five options.Neutral shows everything, both bullish and bearish Fractal Models at the same time. This is the default option and a good place to start while you’re getting familiar with the indicator.Bullish shows only Bullish Fractal Models, which is useful when you’ve got a clear upside read for the session and want to cut out the noise.Bearish shows only Bearish Fractal Models, which is useful for only seeing bearish setups.Auto Bias 1 automatically references a higher timeframe fractal model one timeframe above your selected fractal.Auto Bias 2 automatically references a higher timeframe fractal model two timeframes above your selected fractal.For example if using the hourly and 5 minute fractal model, auto bias 1 would reference the 4 Hour and 15 Minute model, while auto bias 2 would reference the Daily and 1 Hour model.This is useful if you only want to see the lower timeframe fractal model that is in line with a higher timeframe model.When you’re first starting out with the indicator, try it on Neutral so you can see the full picture. Once you’ve built a directional read for the session, you can then switch to Bullish or Bearish to filter things down."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-7-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Higher Timeframe Candles (HTF Candles)"
+  },
+  {
+   "t": "p",
+   "text": "TThese settings control the Higher Time Frame candles displayed on the right side of your chart. They allow you to analyze higher time frame structure and candle behavior while staying locked in to your execution time frame."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-4-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "HTF Candles"
+  },
+  {
+   "t": "p",
+   "text": "Toggle the time filter on or off, allowing you to control whether the indicator only displays setups within your selected trading sessions or kill zones."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-11.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Size"
+  },
+  {
+   "t": "p",
+   "text": "Size controls how large the HTF candles appear. You can also hide them entirely if you’d rather not view them."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-12.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Offset"
+  },
+  {
+   "t": "p",
+   "text": "Offset pushes the HTF candles horizontally to the right on the chart. If you’re running multiple TTFM indicators at once, use this to keep them from stacking on top of each other. Just bump the offset up on one of the indicators to push it out to the side. 17 is a good number for the second indicator if you are using multiple instances of the indicator."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-13.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Body, Border, Wick"
+  },
+  {
+   "t": "p",
+   "text": "Customize the bullish and bearish candle colors to match your chart setup."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-14.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "HTF Open"
+  },
+  {
+   "t": "p",
+   "text": "The High Time Frame Opens setting plots the opening price of the current higher time frame candle that corresponds with your chart, giving you a clear view of where price opened. For example, on the 5-minute chart it displays the hourly open, automatically plotting the opening price of the higher timeframe in the fractal."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-9.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Vertical Lines"
+  },
+  {
+   "t": "p",
+   "text": "The Vertical Lines setting plots vertical lines aligned with the higher time frame candles of your current chart, allowing you to clearly see when each new higher time frame period begins. These are plotted in the same fractal alignment logic as the High Time Frame Opens setting."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-8-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "L/H Lines"
+  },
+  {
+   "t": "p",
+   "text": "The L/H Lines setting marks out the previous higher timeframe candles lows and highs. Many use these as key levels of liquidity, however by default, TTrades keeps them off."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-10.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Previous EQ"
+  },
+  {
+   "t": "p",
+   "text": "The Previous EQ setting plots the midpoint, or 50% of the previous higher time frame candle. This level represents the equilibrium of the prior candle’s range, which is a vital component of TTrades Fractal Model."
+  },
+  {
+   "t": "p",
+   "text": "Drawing type allows you to choose if you want to see the EQ marked on the HTF candles, lower timeframe chart, or both."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-15.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "HTF Candles Time Labels"
+  },
+  {
+   "t": "p",
+   "text": "The HTF Labels setting displays time labels beneath the HTF Candles, making it easy to identify which higher time frame candle is currently being referenced on your chart."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-6-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Model Style"
+  },
+  {
+   "t": "p",
+   "text": "Everything here is purely visual. None of these change how the indicator works, just how it looks on your chart."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-5-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Show Early C2 CISD"
+  },
+  {
+   "t": "p",
+   "text": "Displays the CISD before the higher time frame candle closes. This is a useful heads-up but not a complete model forming until the candle closes."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-13-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Bullish and Bearish CISD"
+  },
+  {
+   "t": "p",
+   "text": "Toggle and customize the Change in the state of delivery for both directions independently."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-14-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Candle Equilibrium"
+  },
+  {
+   "t": "p",
+   "text": "Show or hide the HTF Equilirbium line and adjust its appearance"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-6-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Candle 1 Sweep"
+  },
+  {
+   "t": "p",
+   "text": "Show or hide the sweep line and customize its style, width, and color."
+  },
+  {
+   "t": "p",
+   "text": "C1 Sweep Display allows you to choose if you want to see the sweep marked on the HTF candles, lower timeframe chart, or both."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-15-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Show TTFM Labels"
+  },
+  {
+   "t": "p",
+   "text": "Toggle the labels on or off for the Fractal Model and change their size. These are the C2, C3, C4 labels you see on the chart."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-17.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "T-Spot"
+  },
+  {
+   "t": "p",
+   "text": "Toggle the T-Spot and customize how both the bullish and bearish versions appear."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-16.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Protected Swings"
+  },
+  {
+   "t": "p",
+   "text": "Protected Swings mark the new continuations that form after the CISD reversal"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Enable Protected Swings"
+  },
+  {
+   "t": "p",
+   "text": "This toggle will display or remove protected swing lines and the dot used to mark them out"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Style"
+  },
+  {
+   "t": "p",
+   "text": "Control the style of your protected swings. Choose the size, width, as well as the color of the bullish and bearish protected swings"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Impact of Early C2 CISD Toggle"
+  },
+  {
+   "t": "p",
+   "text": "Protected swings will only show in Candle 2 when the Early C2 CISD toggle is turned on."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-4-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Asset Correlation"
+  },
+  {
+   "t": "p",
+   "text": "The Asset section focuses on correlated assets. Correlated assets are assets that should generally trade with the same structure and direction."
+  },
+  {
+   "t": "p",
+   "text": "Within this section, the Indicator will mark SMT and PSP between correlated assets.SMT is a divergence between correlated assets, while PSP is a difference in candle closure. If you are not familiar with these concepts, please check out the related videos on YouTube."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-12-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Enable SMT?"
+  },
+  {
+   "t": "p",
+   "text": "This toggle will display or remove the indicator marking out SMT"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "SMT Display"
+  },
+  {
+   "t": "p",
+   "text": "Display type allows you to choose if you want to see the SMT marked on the HTF candles, lower timeframe chart, or both."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-17-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Labels?"
+  },
+  {
+   "t": "p",
+   "text": "Labels allow you to choose whether you would like to see a label showing which asset is providing the SMT or simply a blank line."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-6-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Correlated Pairs"
+  },
+  {
+   "t": "p",
+   "text": "Correlated Pairs allows you to choose which pairs you would like to use for the correlation. By default, this will be set to “Automatic,” which will automatically adjust the correlated pairs based on the current asset."
+  },
+  {
+   "t": "p",
+   "text": "If you would like to use your own pairs, change the selection from “Automatic” to “Custom.” Custom Correlated Pairs will allow you to select one or two correlated assets. To enable a second asset, make sure “Enable Second Pair?” is selected."
+  },
+  {
+   "t": "p",
+   "text": "If you are using correlated pairs that are inverse of each other, make sure to select “Inverse?”."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-4-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Enable PSP"
+  },
+  {
+   "t": "p",
+   "text": "To show PSP on your chart, make sure the “Enable PSP?” toggle is selected."
+  },
+  {
+   "t": "p",
+   "text": "PSP can be shown between Candle 1, Candle 2, or both. PSP will only appear on the model formation when there is a valid candle closure and CISD."
+  },
+  {
+   "t": "p",
+   "text": "This will be displayed as “C2+PSP” or “C3+PSP.” Do not confuse this with a Candle 2 or Candle 3 PSP. This simply represents the model formation paired with a PSP. To see whether it was a Candle 1 or Candle 2 PSP, make sure the dropdown is set to “Both” and look at the higher timeframe candles."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-7-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Standard Deviation Projections"
+  },
+  {
+   "t": "p",
+   "text": "Standard deviation projections provide areas for targets, retracements, or reversals."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-9-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Enable Projections"
+  },
+  {
+   "t": "p",
+   "text": "Turn on the standard deviation projection lines by using the toggle. By default this is turned off."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Labels?"
+  },
+  {
+   "t": "p",
+   "text": "Show or hide the labels and set how large they appear."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Type"
+  },
+  {
+   "t": "p",
+   "text": "Set how the projections are calculated (Wick or Body), which values get projected (-1, -2, -2.5, etc.), and adjust the visual appearance of the lines. If you add custom numbers, make sure to use negative numbers."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-16-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Formation Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "The formation liquidity setting enables the visualization of previous higher time frame highs and lows that are aligned with a valid fractal model. These levels are targets."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-10-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Enable Formation Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "Toggles the liquidity lines that form around the previous highs and lows, marking where liquidity is resting when a model forms."
+  },
+  {
+   "t": "p",
+   "text": "Adjust the style, width, and color of the liquidity lines."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-16-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Time Filter"
+  },
+  {
+   "t": "p",
+   "text": "The Time Filter setting allows you to restrict when the indicator will display setups based on specific user-defined time windows. This gives you the ability to filter models so they only appear during selected trading sessions, allowing you to only see models that form when you are focused on the market."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-5-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Enable Time Filter"
+  },
+  {
+   "t": "p",
+   "text": "Toggle the time filter on or off, allowing you to control whether the indicator only displays setups within your selected trading sessions."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Apply Below"
+  },
+  {
+   "t": "p",
+   "text": "Time filters will only be applied if the current chart’s time frame is below or equal to the selected timeframe."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Custom Timezone"
+  },
+  {
+   "t": "p",
+   "text": "If you do not wish to use EST timezone, please set your custom timezone here."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Filter 1, Filter 2, Filter 3"
+  },
+  {
+   "t": "p",
+   "text": "The Filter 1, 2, and 3 settings allow you to enable up to three separate time windows where the indicator will display setups. Each filter can be configured independently, giving you the flexibility to define multiple trading sessions within the same day for model formation"
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Info Table and Calculation"
+  },
+  {
+   "t": "p",
+   "text": "The Info Table setting displays an overview of the information related to the TTFM model in correlation with your current settings."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Show Info?"
+  },
+  {
+   "t": "p",
+   "text": "The Show Info setting toggles the Info Table on or off, allowing you to enable or disable the display of TTFM model information on your chart. When enabled, you can also adjust the table’s size."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Table Location"
+  },
+  {
+   "t": "p",
+   "text": "The Table Location setting allows you to position the Info Table anywhere on your chart, giving you control over where the TTFM info is displayed. This helps you keep the layout clean and ensures the table does not obstruct price action or other key elements on the chart."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Selections"
+  },
+  {
+   "t": "p",
+   "text": "The Selections area allows you to choose what info is displayed. You can customize the table to show or hide elements such as the asset, chart time frame, fractal alignment, time until candle close, bias, time filter status, and SMT. This gives you full control over the information displayed based on your trading preferences."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-5-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Calculation"
+  },
+  {
+   "t": "p",
+   "text": "The Calculated Bars setting limits the number of historical bars the script will process and display, based on the value specified. This can help improve loading performance by reducing the amount of data the indicator needs to calculate. If set to zero, the script will run on all available bars and display the full historical dataset. Generally the default will work great."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-6-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Inputs, Style Visibility"
+  },
+  {
+   "t": "p",
+   "text": "At the top of the Indicator, you will see three tabs: Inputs, Style, and Visibility. All of the previous settings covered the Inputs tab. The Style tab is not needed, but the Visibility tab can be useful for customizing how the Indicator appears on your chart."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Visibility"
+  },
+  {
+   "t": "p",
+   "text": "The Visibility tab allows you to choose which timeframes or chart intervals display the indicator. Check or uncheck timeframes that you do not want to appear."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-6-6.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Only Show Indicator Below Daily Chart"
+  },
+  {
+   "t": "p",
+   "text": "For example, lets say you only want to view the TTFM indicator when you are below the daily chart. Uncheck the boxes for Days, Weeks, Months. This will mean the indicator will only appear if you are below the daily chart."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-7-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 1,
+   "text": "Indicator Tips"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Creating Templates"
+  },
+  {
+   "t": "p",
+   "text": "Templates are super useful in having multiple different indicator settings that you can change and sort through quickly."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Indicator Templates"
+  },
+  {
+   "t": "p",
+   "text": "To create a template, adjust the TTrades Indicator settings however you please. With your settings adjusted, click the four squares next to the indicators tab on TradingView. Save your Indicator Template and name it something you will remember."
+  },
+  {
+   "t": "p",
+   "text": "If you want this template to always go to the current symbol, you can toggle “Remember Symbol”. If you always want this template to go to the current timeframe, you can select “Remember Interval”."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-7-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Favorite Templates"
+  },
+  {
+   "t": "p",
+   "text": "Star your favorite templates and they will show across the main screen of your TradingView for easy access. This is how to quickly switch between different settings on the indicator using the favorites bar."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-8-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Using the Indicator to Learn TTrades Fractal Model"
+  },
+  {
+   "t": "p",
+   "text": "The Fractal Model [Pro+] (TTrades) Indicator can be extremely useful in learning the TTrades Fractal Model."
+  },
+  {
+   "t": "p",
+   "text": "You can turn the indicator into a personal mentor to help you check to see if you are marking up the charts correctly."
+  },
+  {
+   "t": "p",
+   "text": "This is highly recommended to do once you have gone through the Fractal Model Course."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Create Templates"
+  },
+  {
+   "t": "li",
+   "text": "1. Create two templates using the steps above in the template section."
+  },
+  {
+   "t": "li",
+   "text": "2. First create a template that has all the default settings on it, call it “Check”."
+  },
+  {
+   "t": "li",
+   "text": "3. Next create a template that has C2, C3, C4 turned off in the Fractal section, call it “Quiz”"
+  },
+  {
+   "t": "li",
+   "text": "4. Make sure you have favorited both of these templates so they appear on the main screen."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-15-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Quiz Yourself"
+  },
+  {
+   "t": "p",
+   "text": "With the “Quiz” template selected, go find a valid Fractal Model, practice analyzing and marking up the model. When you have finished with your charting, select the “Check” template and see if you have marked up the model correctly."
+  },
+  {
+   "t": "p",
+   "text": "If you have marked everything correctly, congrats! find another example and keep practicing."
+  },
+  {
+   "t": "p",
+   "text": "If you mis marked something, use it as an opportunity to learn and adjust, then find another example to practice."
+  },
+  {
+   "t": "p",
+   "text": "This is a very hands on approach to learning the model which helps with the learning process."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-16-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Overlaying Indicators"
+  },
+  {
+   "t": "p",
+   "text": "Many people want to see two or more TTrades Indicators’ on the chart at the same time. To do this, you must overlay indicators together."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Adding Multiple Indicators"
+  },
+  {
+   "t": "p",
+   "text": "To add another TTrades Indicator, just go to the indicator section under invite-only and click on Fractal Model [Pro+] (TTrades) to add another indicator.  If you already have the indicator on the chart and are on desktop, you can also right click, copy, and paste the indicator.  Now that you have added another indicator, offset by 17 or more so they are not overlapping, adjust the fractal timeframe so you get the desired timeframes on the chart together. Save this as a template so you don’t have to make it again!"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-7-6.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Adding a Single Daily Candle"
+  },
+  {
+   "t": "p",
+   "text": "Want to see the TTrades Fractal Model Indicator paired with a single daily candle? Follow these steps:"
+  },
+  {
+   "t": "li",
+   "text": "1. Go to the indicator tab"
+  },
+  {
+   "t": "li",
+   "text": "2. Search “HTF”"
+  },
+  {
+   "t": "li",
+   "text": "3. Select “HTF Power of Threeº” from toodegrees"
+  },
+  {
+   "t": "li",
+   "text": "4. Offset by 17 and adjust colors"
+  },
+  {
+   "t": "li",
+   "text": "5. Turn off OHLC Price, L/H lines under inputs"
+  },
+  {
+   "t": "li",
+   "text": "6. Turn off Tables under style"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-8-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-9-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "TTrades Settings"
+  },
+  {
+   "t": "p",
+   "text": "These are the settings that TTrades Personally uses."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Alerts Settings"
+  },
+  {
+   "t": "p",
+   "text": "I do not use the Early CISD alerts because I prefer to wait for alerts on the valid model formation. For alerts, I prefer to use higher timeframe models, such as the daily and hourly model or the 4-hour and 15-minute model. Setting alerts on lower timeframe models can result in too many alerts."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-3-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "General Settings"
+  },
+  {
+   "t": "p",
+   "text": "I use the default settings for general settings. Rarely do I change the settings here unless I want to keep a fractal set to a specific timeframe for an overlay, or adjusting the bias for setting alerts."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-4-6.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "HTF Candles"
+  },
+  {
+   "t": "p",
+   "text": "I use the default settings for the HTF Candles"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-5-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-5-6.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Model Style"
+  },
+  {
+   "t": "p",
+   "text": "With Model Style, I turn on the Early C2 CISD toggle as I like to see the CISD prior to the closure of the higher timeframe candle."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-6-7.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Protected Swings"
+  },
+  {
+   "t": "p",
+   "text": "I make sure protected swings are enabled and adjust the width to 2. I prefer the thicker continuation line.By default this is set to 1 to help you see the difference between the reversal and continuation."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-7-7.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Asset Correlation"
+  },
+  {
+   "t": "p",
+   "text": "Asset Correlation I have SMT and PSP turned on and use the automatic settings."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-8-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Standard Deviation Projections"
+  },
+  {
+   "t": "p",
+   "text": "I do not enable projections."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-9-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Formation Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "Formation Liquidity settings are left as default."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-10-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Time Filter"
+  },
+  {
+   "t": "p",
+   "text": "I do not use time filter. I personally like to see all model formations."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-12-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Info Table and Calculation"
+  },
+  {
+   "t": "p",
+   "text": "Information Table I have set to tiny in the bottom right of the screen. Calculation bars set to 2000."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/opposing-candles-vid-11-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 2,
+   "text": "TTrades Templates"
+  },
+  {
+   "t": "p",
+   "text": "If you haven’t already, please make sure you have looked over the Creating Templates section of the blog first.These are the various templates I use on a day to day basis."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/all.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Template : ALL"
+  },
+  {
+   "t": "p",
+   "text": "This template is my default template, hence the name “ALL”. It has my default settings and automatic timeframe pairings."
+  },
+  {
+   "t": "p",
+   "text": "TTFM Indicator : Default Settings"
+  },
+  {
+   "t": "p",
+   "text": "This is helpful to have a template that I generally return to that has my default settings."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/all-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Template : ALL + D"
+  },
+  {
+   "t": "p",
+   "text": "This template shows the Daily and any lower timeframe Fractal Model. This is the same as the above “ALL” but also paired with the Daily candle."
+  },
+  {
+   "t": "p",
+   "text": "TTFM Indicator : Default settingsHTF PO3 Indicator : Set up as shown in overlaying indicator section. Timeframe Daily, offset 17."
+  },
+  {
+   "t": "p",
+   "text": "This is helpful for alinging any timeframe Fractal model with the Daily chart."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/all-d.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Template : Clean"
+  },
+  {
+   "t": "p",
+   "text": "This template is a template with no indicators at all."
+  },
+  {
+   "t": "p",
+   "text": "This is helpful to have a template that allows me to remove the indicator with a click of the button."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/clean.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Template : Daily"
+  },
+  {
+   "t": "p",
+   "text": "This template is used for analysis on the 4 hour, 1hour, 30 minute timeframes without having anything on the chart besides the daily candles."
+  },
+  {
+   "t": "p",
+   "text": "TTFM Indicator : Remove C2, C3, C4 selections."
+  },
+  {
+   "t": "p",
+   "text": "This is helpful for having a clear view on daily profile."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/daily-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Template : 4 Hour + D"
+  },
+  {
+   "t": "p",
+   "text": "This template shows the Daily and 15m-4H Fractal Model."
+  },
+  {
+   "t": "p",
+   "text": "TTFM Indicator : Set Fractal to 15m-4HHTF PO3 Indicator : Set up as shown in overlaying indicator section. Timeframe Daily, offset 17."
+  },
+  {
+   "t": "p",
+   "text": "This is helpful for aligning the 15 minute entries from the 15m-4H Fractal model with the Daily chart."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/4-Hour-D.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Template : 5 Minute"
+  },
+  {
+   "t": "p",
+   "text": "This template shows the Daily, 4H, and then the 5m-1H Fractal Model."
+  },
+  {
+   "t": "p",
+   "text": "TTFM Indicator 1 : Set Fractal to 5m-1HTTFM Indicator 2 : Set Fractal to 15m-4H, turn off C2, C3, C4. Offset 17HTF PO3 Indicator : Set up as shown in overlaying indicator section. Timeframe Daily, offset 32."
+  },
+  {
+   "t": "p",
+   "text": "This is helpful for aligning the 5 minute entries from the 5m-1H Fractal model with the 4 Hour and Daily chart."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/5-minute.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Template : 3 Minute"
+  },
+  {
+   "t": "p",
+   "text": "This template shows the Daily, 4H, and then the 3m-30m Fractal Model."
+  },
+  {
+   "t": "p",
+   "text": "TTFM Indicator 1 : Set Fractal to 3m-30mTTFM Indicator 2 : Set Fractal to 15m-4H, turn off C2, C3, C4. Offset 17HTF PO3 Indicator : Set up as shown in overlaying indicator section. Timeframe Daily, offset 32."
+  },
+  {
+   "t": "p",
+   "text": "This is helpful for aligning the 3 minute entries from the 3m-30m Fractal model with the 4 Hour and Daily chart."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/3-minute.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Template : Scalping"
+  },
+  {
+   "t": "p",
+   "text": "This template shows the Hourly and 1m-15m Fractal Model.TTFM Indicator : Set Fractal to 1m-15mHTF PO3 Indicator : Set up as shown in overlaying indicator section. Timeframe Hourly, offset 17.This is helpful for aligning the indicators for the scalping model."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/scalping.png",
+   "alt": "",
+   "caption": ""
+  }
+ ]
+}

@@ -1,0 +1,174 @@
+{
+ "slug": "the-easiest-draw-on-liquidity",
+ "id": 4730,
+ "url": "https://ttrades.com/the-easiest-draw-on-liquidity/",
+ "title": "The Easiest Draw on Liquidity",
+ "date": "2025-06-25T11:00:00",
+ "modified": "2026-01-25T15:40:17",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 34
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/Easiest_DOL_TTrades_PDF.pdf"
+ ],
+ "videos": [
+  "FXJBFbZQbck"
+ ],
+ "description": "Learn how previous day high and low act as daily liquidity targets. Master daily bias, trend, and displacement.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this blog, we’re breaking down one of the simplest and most consistent draws on liquidity you’ll find in the market: previous day high and previous day low. This concept shows up almost every trading day and can dramatically simplify how you frame daily bias, targets, and lower time frame entries."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding the Core Idea"
+  },
+  {
+   "t": "p",
+   "text": "Unless price is stuck in a tight consolidation where neither side of the range is taken, price is usually reaching for liquidity. Most of the time, that liquidity is found at previous day high, previous day low, or sometimes both."
+  },
+  {
+   "t": "p",
+   "text": "By staying out of consolidations and identifying whether price is trending up or down, we can anticipate which side of liquidity is more likely to be taken."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/candles-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How Trend Defines the Draw on Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "The easiest way to define trend is very simple."
+  },
+  {
+   "t": "p",
+   "text": "In a bullish trend, price repeatedly takes previous day highs.In a bearish trend, price repeatedly takes previous day lows."
+  },
+  {
+   "t": "p",
+   "text": "If price keeps reaching for previous day high day after day, we are trending up. If price keeps reaching for previous day low day after day, we are trending down. No complicated indicators are required."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trend Explained"
+  },
+  {
+   "t": "p",
+   "text": "When higher time frame arrays such as fair value gaps or order blocks are supporting price higher, continuation is expected. This means marking out previous day high and anticipating price to reach it. If price closes above it, the expectation is for the next day’s high to be targeted again."
+  },
+  {
+   "t": "p",
+   "text": "This repeated behavior is what confirms bullish structure."
+  },
+  {
+   "t": "p",
+   "text": "In a bearish trend, the logic flips. Price seeks previous day lows. If a previous day low is not taken, there is usually a reason, often a fair value gap or another higher time frame inefficiency."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using the Daily Chart to Frame Bias"
+  },
+  {
+   "t": "p",
+   "text": "When opening the daily chart, the first question to ask is whether price is more likely to reach previous day high or previous day low."
+  },
+  {
+   "t": "p",
+   "text": "Once that question is answered, a clear draw on liquidity and a defined target already exist. From there, lower time frames are used to frame entries that align with that daily objective."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/PDH-PDL.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Displacement vs Failure to Displace"
+  },
+  {
+   "t": "p",
+   "text": "Another important factor is displacement around previous day high and previous day low."
+  },
+  {
+   "t": "p",
+   "text": "Failure to displace above previous day high suggests a bearish bias toward previous day low. Failure to displace below previous day low suggests a bullish bias back into the range. Strong displacement through a level signals continuation."
+  },
+  {
+   "t": "p",
+   "text": "For example, if price fails above previous day high and closes back below, the expectation becomes previous day low for the following session. If price displaces below previous day low, continuation lower is expected. If price fails to displace lower and reverses, previous day high becomes the likely draw."
+  },
+  {
+   "t": "p",
+   "text": "This logic creates a clean and repeatable daily narrative."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/failure-to-displace.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Lookback Period"
+  },
+  {
+   "t": "p",
+   "text": "I personally look back three days."
+  },
+  {
+   "t": "p",
+   "text": "On the current day, highs and lows from the previous three sessions are marked and extended forward. These levels frequently act as reaction points, support, resistance, or added confluence."
+  },
+  {
+   "t": "p",
+   "text": "It is common to see price deviate below a prior day low, return to it, and then continue in the intended direction."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/3-day.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Takeaways"
+  },
+  {
+   "t": "p",
+   "text": "Previous day high and previous day low are simple, objective, and present almost every day."
+  },
+  {
+   "t": "p",
+   "text": "When combined with trend, displacement, and daily structure, they form a powerful framework for bias and execution. Even with a clear draw on liquidity, patience is required. The goal is alignment, not forcing trades."
+  }
+ ]
+}

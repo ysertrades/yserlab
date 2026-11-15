@@ -1,0 +1,257 @@
+{
+ "slug": "market-order-vs-limit-order-when-to-use-each-in-trading",
+ "id": 7159,
+ "url": "https://ttrades.com/market-order-vs-limit-order-when-to-use-each-in-trading/",
+ "title": "Market Order vs Limit Order: When to Use Each in Trading",
+ "date": "2026-10-31T11:15:00",
+ "modified": "2026-10-31T17:42:19",
+ "categories": [
+  "Fractal Model"
+ ],
+ "courses": [
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 4
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/10/TTrades-Market-vs-limit-order.pdf"
+ ],
+ "videos": [
+  "cH97e2yqJmY"
+ ],
+ "description": "Learn when to use market orders and limit orders, improve trading entries, manage risk to reward, and understand the risk of missed fills.",
+ "keywords": [],
+ "section": [
+  "Fractal Model"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Knowing when to use a market order or a limit order is an important part of executing a trade. Both order types have their place within the TTrades Fractal Model, but the decision comes down to your entry price and the risk to reward available."
+  },
+  {
+   "t": "p",
+   "text": "A market order gets you into the trade at the best available price when your setup confirms. A limit order allows you to wait for a specific price, which can improve your risk to reward but also creates the possibility of missing the trade."
+  },
+  {
+   "t": "p",
+   "text": "The goal is to know when the market entry already provides 2R and when a limit order or a new continuation makes more sense."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is a Market Order?"
+  },
+  {
+   "t": "p",
+   "text": "A market order fills at the best available price when the order is executed."
+  },
+  {
+   "t": "p",
+   "text": "For example, when price closes through and forms a protected swing, you can enter at market after the closure. Your entry will be around the current price, generally near the opening price at that moment."
+  },
+  {
+   "t": "p",
+   "text": "You are not selecting an exact entry price. You are entering at the best available price when the order is placed."
+  },
+  {
+   "t": "p",
+   "text": "This is generally the preferred entry because it allows you to take the trade when your model presents a valid setup instead of waiting for price to return to a specific level."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is a Limit Order?"
+  },
+  {
+   "t": "p",
+   "text": "A limit order allows you to choose the specific price where you are willing to enter."
+  },
+  {
+   "t": "p",
+   "text": "For example, after a change in the state of delivery or continuation forms, you can place a limit order at an area where you want price to return before entering."
+  },
+  {
+   "t": "p",
+   "text": "Price must reach your limit price for the order to fill. If price continues moving without returning to that area, you will not get into the trade."
+  },
+  {
+   "t": "p",
+   "text": "A limit order can provide a better entry and improve risk to reward, but there is always a chance that price never comes back to fill it."
+  },
+  {
+   "t": "p",
+   "text": "Both order types can work. The important part is knowing when each one makes sense."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/Order-types.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Market Orders Are Generally Preferred"
+  },
+  {
+   "t": "p",
+   "text": "Most of the time, a market order is preferred because it gets you into the trade once your model presents a valid setup."
+  },
+  {
+   "t": "p",
+   "text": "Waiting for a perfect entry with a limit order can cause you to miss the entire move. Price may form the continuation, provide the entry, and expand toward your target without ever returning to your limit price."
+  },
+  {
+   "t": "p",
+   "text": "There is no need to be greedy over a few points when the market entry already provides the 2R target."
+  },
+  {
+   "t": "p",
+   "text": "The focus should be on taking the valid setup with the risk to reward your strategy requires, not trying to get the perfect entry."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When to Use a Limit Order"
+  },
+  {
+   "t": "p",
+   "text": "A limit order becomes useful when price has already expanded too far away from the change in the state of delivery or continuation."
+  },
+  {
+   "t": "p",
+   "text": "As price moves farther away, the distance between your entry and the protected swing can increase the size of your stop loss. This can make it difficult to achieve 2R to your target."
+  },
+  {
+   "t": "p",
+   "text": "If a market entry does not provide the desired risk to reward, there are two options:"
+  },
+  {
+   "t": "p",
+   "text": "• Place a limit order at a price that gives you enough room to reach 2R."
+  },
+  {
+   "t": "p",
+   "text": "• Wait for a new continuation and take a market entry using the new protected swing for your stop loss."
+  },
+  {
+   "t": "p",
+   "text": "The limit order allows you to wait for a better entry rather than taking a market entry with a stop loss that is too large."
+  },
+  {
+   "t": "p",
+   "text": "However, price may never return to your limit. That is the tradeoff."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/why-use.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Choose Between a Market and Limit Order"
+  },
+  {
+   "t": "p",
+   "text": "The decision can be kept simple by asking one question:"
+  },
+  {
+   "t": "p",
+   "text": "Has price expanded too far away from the continuation or change in the state of delivery to provide 2R to the target?"
+  },
+  {
+   "t": "p",
+   "text": "If the answer is no, take the market entry. The setup already provides the desired risk to reward, so there is no need to wait for a better price."
+  },
+  {
+   "t": "p",
+   "text": "If the answer is yes, consider a limit order to improve the entry and bring the risk to reward back to 2R."
+  },
+  {
+   "t": "p",
+   "text": "If price does not return to the limit, you can wait for a new continuation and evaluate another market entry."
+  },
+  {
+   "t": "p",
+   "text": "This keeps the decision based on the risk to reward available rather than trying to predict whether price will provide a perfect retest."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/how-to.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Risk of Waiting for a Limit Order"
+  },
+  {
+   "t": "p",
+   "text": "A limit order can provide excellent risk to reward when price returns to your chosen area. However, the retest is not guaranteed."
+  },
+  {
+   "t": "p",
+   "text": "For example, a reversal may form with SMT and a change in the state of delivery. A market entry after the confirmation can provide 2R to the target."
+  },
+  {
+   "t": "p",
+   "text": "A limit order placed at the retest may improve the risk to reward to approximately 3.5R. But if price never returns to that level, the order does not fill while the market moves toward the target."
+  },
+  {
+   "t": "p",
+   "text": "The same thing can happen with a continuation. Price may form a new protected swing and expand without returning to the previous change in the state of delivery."
+  },
+  {
+   "t": "p",
+   "text": "This is the main risk of using limit orders: you may improve your risk to reward, but you may also miss a winning trade."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Waiting for a New Continuation"
+  },
+  {
+   "t": "p",
+   "text": "If price has expanded too far from the original setup and the market entry no longer provides 2R, waiting for a new continuation is another option."
+  },
+  {
+   "t": "p",
+   "text": "For example, a new continuation may form with enough time and range remaining in the higher timeframe candle. If the new protected swing provides an appropriate stop loss and the entry is still around the opening price, a market entry may offer the desired 2R."
+  },
+  {
+   "t": "p",
+   "text": "This allows you to take a new valid setup rather than chasing the original move or waiting for a retest that may never happen."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Market orders and limit orders both have their place within the TTrades Fractal Model."
+  },
+  {
+   "t": "p",
+   "text": "Most of the time, a market order is preferred when the setup confirms and the entry provides 2R to the target. There is no need to wait for a perfect entry when the trade already meets the requirements."
+  },
+  {
+   "t": "p",
+   "text": "When price has expanded too far and the market entry no longer provides 2R, consider a limit order to improve the risk to reward or wait for a new continuation and evaluate another market entry."
+  },
+  {
+   "t": "p",
+   "text": "Keep the decision simple: if the market entry provides 2R, take the market entry. If it does not, look for a limit entry that makes the risk to reward work or wait for a new continuation."
+  }
+ ]
+}

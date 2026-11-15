@@ -1,0 +1,183 @@
+{
+ "slug": "market-structure-shifts-vs-change-in-the-state-of-delivery-a-clear-comparison",
+ "id": 4287,
+ "url": "https://ttrades.com/market-structure-shifts-vs-change-in-the-state-of-delivery-a-clear-comparison/",
+ "title": "Market Structure Shifts vs Change in the State of Delivery: A Clear Comparison",
+ "date": "2025-07-01T11:15:00",
+ "modified": "2025-10-20T17:01:22",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 31
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/09/CISD-vs-MSS-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "E89d1HArbgM"
+ ],
+ "description": "Learn the key differences between market structure shifts, change in the state of delivery, and inversions to refine your trading strategy.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "If you’ve been diving into smart money concepts, you’ve likely come across market structure shifts (MSS) and change in the state of delivery (CISD). Both are concepts traders use to identify potential reversals, but they are not the same thing. In this blog, we’ll break down what each one means, how they differ, where inversions fit into the mix, and why some traders prefer one over the other."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is a Market Structure Shift (MSS)?"
+  },
+  {
+   "t": "p",
+   "text": "A market structure shift occurs when the market transitions from bullish to bearish or bearish to bullish.• It happens when price displaces and closes above or below a swing high or swing low.• Example: Price creates a swing low, sweeps liquidity, then breaks and closes below that low, signaling a bearish shift in structure."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/MSS.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Essentially, MSS marks a trend change confirmed by displacement."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is the Change in the State of Delivery (CISD)?"
+  },
+  {
+   "t": "p",
+   "text": "The change in the state of delivery (CISD) looks at order flow differently.• Instead of focusing on swing highs or lows, it focuses on the opening price in the series of up-close or down-close candles.• When price displaces and closes beyond that open, it validates the level as an order block."
+  },
+  {
+   "t": "p",
+   "text": "Example: Price closes below the opening price of an up-close candle, confirming a bearish order block."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/CISD.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How MSS and CISD Compare"
+  },
+  {
+   "t": "p",
+   "text": "• Timing: CISD often appears earlier than MSS, you may see order flow shifting before an actual structure break.• Validation: MSS confirms broader trend changes, while CISD validates specific order blocks.• Practical Use: CISD can give earlier entries but sometimes too early, leading to false signals, MSS is slower but often more conservative."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Comparison.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example Breakdown"
+  },
+  {
+   "t": "p",
+   "text": "• In this chart, both CISD and MSS occurred on the same candle, validating an order block and the structure shift simultaneously."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/CISD-MSS-SAME-CANDLE.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "•In this second chart, CISD triggered first, providing an entry opportunity before MSS confirmed. However, sometimes price never retraces after MSS, making CISD the only usable signal."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/MSS-DELAYED.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "This shows the trade-off, CISD = earlier but riskier, MSS = later but safer."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Where Inversions Fit In"
+  },
+  {
+   "t": "p",
+   "text": "Inversions are another piece of the puzzle.• An inversion happens when a fair value gap flips its role, from support to resistance or vice versa.• Example: Price closes above a bearish fair value gap, confirming bullish order flow."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Inversion.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "When combined:• Inversions and CISD often appear before MSS.• MSS confirms the bigger structural change after these early signals."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Putting It All Together"
+  },
+  {
+   "t": "p",
+   "text": "Here’s the general sequence traders may observe:"
+  },
+  {
+   "t": "li",
+   "text": "1. Inversion or CISD shows early order flow weakness."
+  },
+  {
+   "t": "li",
+   "text": "2. MSS confirms the structural shift."
+  },
+  {
+   "t": "li",
+   "text": "3. Price retraces into a premium or discount zone, giving the best entry."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Which One Should You Use?"
+  },
+  {
+   "t": "p",
+   "text": "There’s no one-size-fits-all answer.• Some traders prefer CISD for earlier entries.• Others rely on MSS for higher confirmation.• Many combine inversions, CISD, and MSS to build confluence."
+  },
+  {
+   "t": "p",
+   "text": "Ultimately, the best choice depends on your trading style, risk tolerance, and what your eyes see most clearly in live markets."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Understanding the differences between market structure shifts and the change in the state of delivery (CISD) is crucial for refining entries and managing risk. CISD can offer early positioning, while MSS provides structural confirmation, and inversions add another layer of context. The key is to backtest and find what fits your system best."
+  }
+ ]
+}

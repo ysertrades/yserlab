@@ -1,0 +1,170 @@
+{
+ "slug": "ict-son-model-explained-liquidity-stop-raids-and-precision-entries",
+ "id": 4767,
+ "url": "https://ttrades.com/ict-son-model-explained-liquidity-stop-raids-and-precision-entries/",
+ "title": "ICT Son Model Explained: Liquidity, Stop Raids, and Precision Entries",
+ "date": "2025-06-22T11:35:00",
+ "modified": "2026-02-18T14:45:04",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 38
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/ICT_Sons_Model_TTrades_PDF.pdf"
+ ],
+ "videos": [
+  "q40pRwjuPYQ"
+ ],
+ "description": "Learn the ICT Son Model using liquidity, stop raids, fair value gaps, and lower time frame execution with real NQ examples.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this breakdown, we’re turning a full video walkthrough into a clean, structured explanation of the ICT Son Model. This model is built around liquidity, stop raids, and refined lower time frame execution. The goal is to clearly explain the logic, walk through real examples, and show how the model can be adjusted to match different trading personalities without losing its core framework."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Overview of the ICT Son Model"
+  },
+  {
+   "t": "p",
+   "text": "The ICT Son Model is built on three connected components that create a complete trading narrative. First, price must have a clear draw on liquidity. Second, price must run stops in the opposite direction of that draw. Third, the trader refines entries on a very low time frame, most commonly using fair value gaps."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/timeframe-alignment.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Draw on Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "Everything starts with identifying where price is most likely to go."
+  },
+  {
+   "t": "p",
+   "text": "The draw on liquidity comes from an old high or an old low. These levels are first identified on the one hour chart. If nothing is clear on the one hour, the fifteen minute chart is used instead."
+  },
+  {
+   "t": "p",
+   "text": "Once an old high or low is identified, that level becomes the objective. If price is below an old high, the draw is higher. If price is above an old low, the draw is lower. This directional bias stays in place until price reaches that liquidity."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/DOL.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Stop Raid"
+  },
+  {
+   "t": "p",
+   "text": "After the draw on liquidity is defined, the next step is waiting for a stop raid in the opposite direction."
+  },
+  {
+   "t": "p",
+   "text": "If price is drawing higher, the trader looks for bullish behavior. If price is drawing lower, the trader looks for bearish behavior. This is done on the five minute chart."
+  },
+  {
+   "t": "p",
+   "text": "A stop raid occurs when price takes out a clear swing low or swing high and then closes back into the range or closes in the direction of the intended move. This candle close confirms that liquidity has been taken and that price is likely ready to move toward the original draw."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/STOP-RAID.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Entry on the Thirty Second Chart"
+  },
+  {
+   "t": "p",
+   "text": "Once the stop raid is confirmed, execution shifts to the thirty second chart."
+  },
+  {
+   "t": "p",
+   "text": "On this chart, the focus is on fair value gaps that form in the direction of the trade. The entry is taken on a retracement into the fair value gap after the stop raid has occurred."
+  },
+  {
+   "t": "p",
+   "text": "On NQ, risk is typically kept tight, often twelve points or less. The original version of the model uses a fixed one to one risk to reward, making it very mechanical and repeatable."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/entry.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Adjusting the Model for Higher Risk to Reward"
+  },
+  {
+   "t": "p",
+   "text": "While the fixed one to one approach keeps the model simple, it is not the only way to trade it."
+  },
+  {
+   "t": "p",
+   "text": "Many traders prefer targeting logical structural levels such as previous highs, previous lows, or opposing fair value gaps. These targets align with where price naturally wants to react and often provide higher reward without increasing risk."
+  },
+  {
+   "t": "p",
+   "text": "In several examples, the same entries could produce returns between 1.5R and 2R or more by holding for structure instead of a fixed target."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trading Without Waiting for the Five Minute Close"
+  },
+  {
+   "t": "p",
+   "text": "Another common adjustment is removing the requirement to wait for a five minute candle close."
+  },
+  {
+   "t": "p",
+   "text": "Instead, once a five minute liquidity sweep occurs, the trader immediately drops to the thirty second chart. From there, the focus shifts to displacement, entry models, and short term structure shifts."
+  },
+  {
+   "t": "p",
+   "text": "This approach allows earlier entries, tighter stops, and improved risk to reward while still respecting the core logic of the ICT Son Model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "The ICT Son Model is a complete framework built on narrative and precision. Liquidity defines direction, stop raids confirm intent, and low time frame execution provides control."
+  },
+  {
+   "t": "p",
+   "text": "Whether traded mechanically with fixed targets or adapted for higher risk to reward using structure, the strength of the model lies in its clarity. Once the narrative is understood, execution becomes far more consistent and repeatable."
+  }
+ ]
+}

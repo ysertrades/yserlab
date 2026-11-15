@@ -1,0 +1,264 @@
+{
+ "slug": "phases-of-price-part-5-how-to-blend-expansion-retracement-consolidation-reversal",
+ "id": 2418,
+ "url": "https://ttrades.com/phases-of-price-part-5-how-to-blend-expansion-retracement-consolidation-reversal/",
+ "title": "Phases of Price – Part 5: How to Blend Expansion, Retracement, Consolidation & Reversal",
+ "date": "2025-08-13T11:00:00",
+ "modified": "2026-09-04T11:17:30",
+ "categories": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 36
+  },
+  {
+   "course": "ICT Core Concepts",
+   "n": 10
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/Phases20Of20Price20TTrades20PDF.pdf"
+ ],
+ "videos": [
+  "8BWkRGhuj1k"
+ ],
+ "description": "Learn how to blend expansion, retracement, consolidation, and reversal phases for precise trading entries. Improve bias alignment & execution strategy.",
+ "keywords": [],
+ "section": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In trading, understanding the individual phases of price is important, but true mastery comes from knowing how they interact. Expansion, retracement, consolidation, and reversal don’t exist in isolation; they form a continuous cycle that shapes every market move. This guide blends them together into one framework so you can read price action with confidence, align it to your bias, and execute trades with precision."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/phases_1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Core Concept: Always Start with Expansion"
+  },
+  {
+   "t": "p",
+   "text": "Every market sequence begins with expansion, a strong directional move. From there, price can transition into:"
+  },
+  {
+   "t": "li",
+   "text": "- Retracement → Often signals a continuation setup."
+  },
+  {
+   "t": "li",
+   "text": "- Consolidation → Can lead to continuation or reversal, depending on breakout direction or manipulation."
+  },
+  {
+   "t": "li",
+   "text": "- Reversal → Expansion in one direction met with expansion in the opposite direction."
+  },
+  {
+   "t": "p",
+   "text": "Think of it as a flowchart:"
+  },
+  {
+   "t": "li",
+   "text": "- Expansion → Retracement → Expansion (Continuation)"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/expansion-retracement.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Expansion → Consolidation → Manipulation/Breakout"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/expnasion-consolidation.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Expansion → Expansion (opposite) = Reversal → Continuation in new direction"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/expansion-reversal.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Blending the Phases with Daily Bias"
+  },
+  {
+   "t": "p",
+   "text": "Your daily bias is the filter for interpreting phases."
+  },
+  {
+   "t": "li",
+   "text": "- Bullish bias: Look for manipulation of lows or retracements into fair value gaps to buy."
+  },
+  {
+   "t": "li",
+   "text": "- Bearish bias: Look for manipulation of highs or retracements into fair value gaps to sell."
+  },
+  {
+   "t": "p",
+   "text": "Example:"
+  },
+  {
+   "t": "p",
+   "text": "Expansion → Consolidation → Manipulation of the low → Expansion higher aligning with a bullish bias."
+  },
+  {
+   "t": "p",
+   "text": "Expansion → Retracement → Continuation lower aligning with a bearish bias."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Continuation vs. Reversal Signatures"
+  },
+  {
+   "t": "li",
+   "text": "- Continuation Signature: Expansion followed by retracement or a consolidation."
+  },
+  {
+   "t": "li",
+   "text": "- Reversal Signature: Expansion met directly with expansion in the opposite direction."
+  },
+  {
+   "t": "p",
+   "text": "💡Pro Tip: A reversal becomes far more reliable when it aligns with a daily candle closure confirming the shift."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Practical Scenarios"
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Expansion → Consolidation → Manipulation → Expansion"
+  },
+  {
+   "t": "p",
+   "text": "A common reversal setup. Example: Price expands up, consolidates, manipulates above the high, then expands lower."
+  },
+  {
+   "t": "p",
+   "text": "Trading approach: Sell after reversal is confirmed with a CISD, stop above the current high."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ipda-example-ex-con-rev.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Expansion → Expansion Opposite (Direct Reversal)"
+  },
+  {
+   "t": "p",
+   "text": "Quality reversals often create a “V-shape” and that is what forms higher-timeframe wicks."
+  },
+  {
+   "t": "p",
+   "text": "Trading approach: Use an Inversion or CISD to gain entry on the reversal. Gain entry into the continuation using the next protected swing following the reversal."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/ipda-rev-rev.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Pairing with Protected Swings & Closures"
+  },
+  {
+   "t": "p",
+   "text": "Protected swings and daily closures act as checkpoints for trade validity."
+  },
+  {
+   "t": "li",
+   "text": "- A protected low in bullish setups = strong base for continuation."
+  },
+  {
+   "t": "li",
+   "text": "- A daily close outside prior range = confirmation of continuation."
+  },
+  {
+   "t": "p",
+   "text": "When in doubt, wait for the next candle to clarify whether you’re in a continuation or reversal."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/daily-close-plus-protected-swing-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Intraday Execution Strategy"
+  },
+  {
+   "t": "li",
+   "text": "1. Align with bias based on daily closures"
+  },
+  {
+   "t": "li",
+   "text": "2. Identify the current phase of price on the 1-hour chart"
+  },
+  {
+   "t": "li",
+   "text": "3. Identify a protected swing or wait for one to form."
+  },
+  {
+   "t": "li",
+   "text": "4. Drop to a lower timeframe (1H, 15M, 5M) for entry confirmation."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Every market move is part of an ongoing cycle of expansion, retracement, consolidation, and reversal."
+  },
+  {
+   "t": "li",
+   "text": "- The transition between phases is where opportunity lies."
+  },
+  {
+   "t": "li",
+   "text": "- Always pair phase recognition with confirmation before entering a trade."
+  },
+  {
+   "t": "li",
+   "text": "- Use protected swings, daily closures, and Equilibrium levels to validate trades and manage risk."
+  }
+ ]
+}

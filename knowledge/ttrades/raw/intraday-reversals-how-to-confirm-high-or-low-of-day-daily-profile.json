@@ -1,0 +1,332 @@
+{
+ "slug": "intraday-reversals-how-to-confirm-high-or-low-of-day-daily-profile",
+ "id": 6338,
+ "url": "https://ttrades.com/intraday-reversals-how-to-confirm-high-or-low-of-day-daily-profile/",
+ "title": "Intraday Reversals : How to Confirm High or Low of Day (Daily Profile)",
+ "date": "2026-07-11T11:30:00",
+ "modified": "2026-10-15T16:31:18",
+ "categories": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 29
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 20
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/07/TTrades-Intraday-Reversals.pdf"
+ ],
+ "videos": [
+  "Mo9QMtotQyo"
+ ],
+ "description": "Learn how to confirm the high or low of the day using the daily profile. Discover how candle closures, change in state of delivery, and session volatility help identify intraday reversals.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "One of the biggest challenges traders face is knowing when the high or low of the day has actually formed. Entering too early often leads to getting stopped out before the real move begins, while waiting too long can mean missing the best entry entirely."
+  },
+  {
+   "t": "p",
+   "text": "The goal isn’t to predict where the daily high or low will be. Instead, it’s to wait for price to confirm that the daily wick has formed so you can trade the expansion that follows."
+  },
+  {
+   "t": "p",
+   "text": "In this guide, we’ll break down the process to confirm the high or low of the day using candle closures and change in state of delivery (CISD). We’ll also discuss how volatility changes throughout the trading day and why the timeframe you use for confirmation should change depending on the trading session."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding the Daily Profile"
+  },
+  {
+   "t": "p",
+   "text": "Every trading day develops a profile."
+  },
+  {
+   "t": "p",
+   "text": "On a bullish day, price will open, form the low of the day, and then spend the remainder of the session trading higher."
+  },
+  {
+   "t": "p",
+   "text": "On a bearish day, price will open, form the high of the day, and then trend lower throughout the session."
+  },
+  {
+   "t": "p",
+   "text": "The challenge is identifying when that daily wick has actually formed."
+  },
+  {
+   "t": "p",
+   "text": "Instead of trying to pick the exact turning point, the objective is to let price confirm that the daily profile has established its wick before looking for entries."
+  },
+  {
+   "t": "p",
+   "text": "A simple question should guide your decision-making throughout the day:"
+  },
+  {
+   "t": "p",
+   "text": "“Has the daily wick formed?”"
+  },
+  {
+   "t": "p",
+   "text": "If the answer is no, there is no reason to force a trade."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Two Ways to Confirm the High or Low of the Day"
+  },
+  {
+   "t": "p",
+   "text": "There are two primary ways to confirm that the daily profile has completed its wick."
+  },
+  {
+   "t": "p",
+   "text": "The first is through a change in state of delivery (CISD)."
+  },
+  {
+   "t": "p",
+   "text": "The second is through higher timeframe candle closures."
+  },
+  {
+   "t": "p",
+   "text": "Both methods become significantly more reliable when they align with your daily bias and occur at an point of interest."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/07/Daily-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Change in State of Delivery (CISD)"
+  },
+  {
+   "t": "p",
+   "text": "Rather than trying to predict the high or low of the day, we can wait for a change in state of delivery (CISD) to confirm that the daily wick has formed before looking for entries."
+  },
+  {
+   "t": "p",
+   "text": "The timeframe you use for this confirmation should depend on the volatility of each trading session."
+  },
+  {
+   "t": "p",
+   "text": "During Asia, volatility is typically much lower. Because price moves more slowly, higher timeframe confirmations often provide better opportunities."
+  },
+  {
+   "t": "p",
+   "text": "For this reason, an hourly CISD is generally preferred during the Asia session."
+  },
+  {
+   "t": "p",
+   "text": "As London opens, volatility begins to increase. This allows traders to begin using lower timeframe confirmations."
+  },
+  {
+   "t": "p",
+   "text": "During London, a 15-minute or 30-minute CISD often provides enough confirmation that the high or low of the day has formed."
+  },
+  {
+   "t": "p",
+   "text": "New York is the fastest-moving session of the day."
+  },
+  {
+   "t": "p",
+   "text": "Because price expands much more aggressively, waiting for higher timeframe confirmation will often leave you chasing the move."
+  },
+  {
+   "t": "p",
+   "text": "Instead, confirmations frequently come from a 5-minute or 15-minute CISD."
+  },
+  {
+   "t": "p",
+   "text": "The key isn’t using the same timeframe every day. It’s adjusting your confirmation timeframe to match the volatility of the session."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/07/CISDDDDD.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Candle Closures for Confirmation"
+  },
+  {
+   "t": "p",
+   "text": "The second method is confirming the daily profile through candle closures."
+  },
+  {
+   "t": "p",
+   "text": "Earlier in the trading day, higher timeframe candle closures generally provide stronger confirmation than lower timeframe candles."
+  },
+  {
+   "t": "p",
+   "text": "The four-hour candle is one of the most reliable confirmations during Asia and London because it captures enough market participation to validate the daily profile."
+  },
+  {
+   "t": "p",
+   "text": "As New York begins and volatility increases, hourly candle closures become much more practical."
+  },
+  {
+   "t": "p",
+   "text": "Rather than focusing on every candle, look for Candle 2 or Candle 3 closures after price reaches a point of interest."
+  },
+  {
+   "t": "p",
+   "text": "When these candle closures align with your daily bias, they provide additional confidence that the daily wick has likely formed."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/07/Closure.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Combining Both Forms of Confirmation"
+  },
+  {
+   "t": "p",
+   "text": "While either confirmation method can work independently, they become much more reliable when they occur together."
+  },
+  {
+   "t": "p",
+   "text": "For example, imagine price creates a potential low during the London session."
+  },
+  {
+   "t": "p",
+   "text": "A 30-minute CISD may provide the first confirmation that the high or low of the day has formed."
+  },
+  {
+   "t": "p",
+   "text": "If that move is then followed by a four-hour Candle 2 closure, you now have two independent confirmations supporting the same daily profile."
+  },
+  {
+   "t": "p",
+   "text": "Rather than trying to buy the exact low, you’re allowing price to confirm that the daily wick has likely formed before looking for an entry."
+  },
+  {
+   "t": "p",
+   "text": "This naturally filters out many false reversals throughout the trading day."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Adjust Your Timeframes Based on the Trading Session"
+  },
+  {
+   "t": "p",
+   "text": "One of the biggest mistakes traders make is using the same confirmation timeframe throughout the day."
+  },
+  {
+   "t": "p",
+   "text": "Market conditions change dramatically between sessions, and your confirmation process should adapt as volatility changes."
+  },
+  {
+   "t": "p",
+   "text": "A simple framework looks like this:"
+  },
+  {
+   "t": "li",
+   "text": "- Asia: One-hour CISD or four-hour candle closure."
+  },
+  {
+   "t": "li",
+   "text": "- London: 15-minute or 30-minute CISD, or a four-hour candle closure."
+  },
+  {
+   "t": "li",
+   "text": "- New York: 5-minute or 15-minute CISD, or an hourly candle closure."
+  },
+  {
+   "t": "p",
+   "text": "Following this framework allows your confirmations to remain consistent with current market conditions instead of forcing one approach to fit every trading session."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Daily Bias Comes First"
+  },
+  {
+   "t": "p",
+   "text": "Confirmation techniques are only effective when they are aligned with the correct daily bias."
+  },
+  {
+   "t": "p",
+   "text": "It’s entirely possible to correctly confirm the high or low of the day while still trading against the higher timeframe direction."
+  },
+  {
+   "t": "p",
+   "text": "This is why confirmation should never replace developing a daily bias before the session begins."
+  },
+  {
+   "t": "p",
+   "text": "Your daily bias, equilibrium, draw on liquidity, higher timeframe structure, and points of interest should all support the direction you’re looking to trade."
+  },
+  {
+   "t": "p",
+   "text": "Confirmation simply provides the evidence that the daily wick has likely formed."
+  },
+  {
+   "t": "p",
+   "text": "Think of confirmation as the final piece of the puzzle, not the entire trading idea."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Confirm the Daily Wick, Then Look for Entries"
+  },
+  {
+   "t": "p",
+   "text": "Once the daily wick has been confirmed, that’s when lower timeframe fractal models become valuable."
+  },
+  {
+   "t": "p",
+   "text": "Rather than entering while price is still searching for the high or low of the day, you can begin looking for continuations that align with your confirmed daily profile."
+  },
+  {
+   "t": "p",
+   "text": "Regardless of the entry model you use, this confirmation provides a validated level to trade from."
+  },
+  {
+   "t": "p",
+   "text": "Separating confirmation from execution helps eliminate many unnecessary trades while keeping you aligned with your daily bias."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Confirming the high or low of the day isn’t about predicting where price will reverse. It’s about waiting for price to confirm that the daily wick has formed before committing to a trade."
+  },
+  {
+   "t": "p",
+   "text": "Using change in state of delivery alongside higher timeframe candle closures provides a structured process that adapts to changing volatility throughout the trading day."
+  },
+  {
+   "t": "p",
+   "text": "As you gain experience, continue asking yourself one simple question throughout every session: “Has the daily wick formed?” Once the answer becomes yes, you can begin looking for lower timeframe opportunities that align with your daily bias and trade away from the confirmed high or low of the day."
+  }
+ ]
+}

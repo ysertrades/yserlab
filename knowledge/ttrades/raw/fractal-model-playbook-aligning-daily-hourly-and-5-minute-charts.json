@@ -1,0 +1,367 @@
+{
+ "slug": "fractal-model-playbook-aligning-daily-hourly-and-5-minute-charts",
+ "id": 2427,
+ "url": "https://ttrades.com/fractal-model-playbook-aligning-daily-hourly-and-5-minute-charts/",
+ "title": "Fractal Model Playbook – Aligning Daily, Hourly, and 5-Minute Charts",
+ "date": "2025-08-11T11:00:00",
+ "modified": "2025-08-17T15:40:50",
+ "categories": [
+  "Fractal Model",
+  "ICT Advanced Concepts",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 12
+  },
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 15
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 56
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/TTrades20Playbook20PDF.pdf"
+ ],
+ "videos": [
+  "TNybDCtwBnc"
+ ],
+ "description": "Learn the Fractal Model trading playbook. Align daily, hourly, and 5-minute charts using swing points, CISD, and POIs for high-probability entries.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Advanced Concepts",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "The Fractal Model Playbook is built on the principle that price cannot reverse without forming a swing point. This simple but powerful concept, when paired with a structured top-down approach, helps traders identify high-probability setups by aligning the daily, hourly, and 5-minute charts."
+  },
+  {
+   "t": "p",
+   "text": "In this guide, we’ll break down:"
+  },
+  {
+   "t": "li",
+   "text": "- The candle numbering system for swing points."
+  },
+  {
+   "t": "li",
+   "text": "- How to form a daily bias using closures."
+  },
+  {
+   "t": "li",
+   "text": "- How to confirm change in state of delivery (CISD) on the hourly."
+  },
+  {
+   "t": "li",
+   "text": "- How to refine entries using the 5-minute chart."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Foundation: Swing Points & Candle Numbering"
+  },
+  {
+   "t": "li",
+   "text": "- At the core of the fractal model is the idea that price cannot reverse without a swing point."
+  },
+  {
+   "t": "p",
+   "text": "Candle numbering system:"
+  },
+  {
+   "t": "li",
+   "text": "- Candle 1 – Before the swing point."
+  },
+  {
+   "t": "li",
+   "text": "- Candle 2 – The swing high or swing low."
+  },
+  {
+   "t": "li",
+   "text": "- Candle 3 – After Candle 2."
+  },
+  {
+   "t": "li",
+   "text": "- Candle 4 – After Candle 3."
+  },
+  {
+   "t": "p",
+   "text": "Example:"
+  },
+  {
+   "t": "li",
+   "text": "- Bearish → Bullish: Candle 2 is a swing low."
+  },
+  {
+   "t": "li",
+   "text": "- Bullish → Bearish: Candle 2 is a swing high."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/playbook-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step One – Establishing a Daily Bias"
+  },
+  {
+   "t": "p",
+   "text": "Never drop to the hourly until you have a one-sided daily bias."
+  },
+  {
+   "t": "p",
+   "text": "Daily bias rules:"
+  },
+  {
+   "t": "li",
+   "text": "- If price closes below the previous day’s low – Expect continuation lower."
+  },
+  {
+   "t": "li",
+   "text": "- If price fails to close below the previous day’s low – Expect reversal higher."
+  },
+  {
+   "t": "li",
+   "text": "- Same logic applies for previous day’s high, but inverted."
+  },
+  {
+   "t": "p",
+   "text": "Ideal scenario:"
+  },
+  {
+   "t": "p",
+   "text": "Identify swing points on the daily where a reversal closure occurs, then plan to trade the continuation the next day."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/playbook-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step Two – Hourly Chart Confirmation"
+  },
+  {
+   "t": "p",
+   "text": "Once the daily bias is established:"
+  },
+  {
+   "t": "li",
+   "text": "1. Locate the Candle 2 swing point on the daily."
+  },
+  {
+   "t": "li",
+   "text": "2. On the hourly, confirm a Change in the State of Delivery (CISD) in the same direction as your bias."
+  },
+  {
+   "t": "li",
+   "text": "3. Look for price in the upper/lower half of the previous day’s range and at a Point of Interest (POI) (e.g., fair value gaps, order blocks)."
+  },
+  {
+   "t": "p",
+   "text": "Example:"
+  },
+  {
+   "t": "p",
+   "text": "If you have a bullish daily swing point, find a bullish CISD on the hourly, then find a POI in the upper half of the previous day’s range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/playbook-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step Three – Entry Refinement on the 5-Minute"
+  },
+  {
+   "t": "p",
+   "text": "Once the hourly setup is validated:"
+  },
+  {
+   "t": "li",
+   "text": "1. Drop to the 5-minute chart."
+  },
+  {
+   "t": "li",
+   "text": "2. Confirm a CISD in Candle 2 (hourly) on the 5-minute."
+  },
+  {
+   "t": "li",
+   "text": "3. Align with POIs that match your bias."
+  },
+  {
+   "t": "li",
+   "text": "4. Use protected lows/highs for stops."
+  },
+  {
+   "t": "li",
+   "text": "5. Target logical liquidity pools or higher time frame levels for best R:R."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/playbook-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example Playbook Rules"
+  },
+  {
+   "t": "p",
+   "text": "Daily Chart"
+  },
+  {
+   "t": "li",
+   "text": "- Define one-sided bias using daily closures."
+  },
+  {
+   "t": "li",
+   "text": "- Look for reversal closures at swing points."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Look to target low resistance liquidity on the daily chart."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/playbook-exam-11.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/playbook-exam-21.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Hourly Chart"
+  },
+  {
+   "t": "li",
+   "text": "- Confirm CISD in Candle 2."
+  },
+  {
+   "t": "li",
+   "text": "- Identify POI within previous day’s range."
+  },
+  {
+   "t": "li",
+   "text": "- Wait for candle closure in POI."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: when price reaches a short term target, watch the phases of price. For a continuation it is ideal for price to retrace or consolidate."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/playbook-exam-31.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "5-Minute Chart"
+  },
+  {
+   "t": "li",
+   "text": "- Confirm CISD again."
+  },
+  {
+   "t": "li",
+   "text": "- Place stops at protected swing points or level of invalidation."
+  },
+  {
+   "t": "li",
+   "text": "- Target 2R minimum or higher timeframe levels."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/playbook-exam-44.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Common Mistakes & Lessons Learned"
+  },
+  {
+   "t": "li",
+   "text": "- Entering too early: Waiting for closure (CISD) confirmation prevents false reversals."
+  },
+  {
+   "t": "li",
+   "text": "- Ignoring range EQ: Entries after reaching through range EQ often don’t expand"
+  },
+  {
+   "t": "li",
+   "text": "- Not aligning timeframes: Expansion occurs when all timeframes point in one direction"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Try Backtesting!"
+  },
+  {
+   "t": "p",
+   "text": "Apply this model in a backtesting session:"
+  },
+  {
+   "t": "li",
+   "text": "- Win rate: ~40-80%"
+  },
+  {
+   "t": "li",
+   "text": "- Average R: Minimum 2R"
+  },
+  {
+   "t": "li",
+   "text": "- Minimum target: 2R to remain profitable with >34% win rate."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Start with daily bias, then confirm on the hourly, refine on the 5-minute."
+  },
+  {
+   "t": "li",
+   "text": "- Always confirm CISD before entering."
+  },
+  {
+   "t": "li",
+   "text": "- Align entries with logical POIs and range EQ."
+  },
+  {
+   "t": "li",
+   "text": "- Target 2R+ using higher TF liquidity pools."
+  }
+ ]
+}

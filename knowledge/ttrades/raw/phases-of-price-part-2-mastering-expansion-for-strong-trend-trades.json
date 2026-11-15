@@ -1,0 +1,345 @@
+{
+ "slug": "phases-of-price-part-2-mastering-expansion-for-strong-trend-trades",
+ "id": 1757,
+ "url": "https://ttrades.com/phases-of-price-part-2-mastering-expansion-for-strong-trend-trades/",
+ "title": "Phases of Price – Part 2: Mastering Expansion for Strong Trend Trades",
+ "date": "2025-08-09T23:00:00",
+ "modified": "2026-09-04T11:12:56",
+ "categories": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 33
+  },
+  {
+   "course": "ICT Core Concepts",
+   "n": 14
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/Expansion20TTrades20PDF.pdf"
+ ],
+ "videos": [
+  "4Gm8p6O7Ebs"
+ ],
+ "description": "Learn how to identify and trade expansion phases in the market. Discover the patterns, setups, and key levels that drive strong trend moves.",
+ "keywords": [],
+ "section": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Welcome to Part Two of the Phases of Price series."
+  },
+  {
+   "t": "p",
+   "text": "If you haven’t yet reviewed Part One: Consolidation, I recommend starting there, because expansion often begins right where consolidation ends."
+  },
+  {
+   "t": "p",
+   "text": "In this lesson, we’ll cover:"
+  },
+  {
+   "t": "li",
+   "text": "- What expansion is and how to recognize it."
+  },
+  {
+   "t": "li",
+   "text": "- Where expansion tends to occur in price."
+  },
+  {
+   "t": "li",
+   "text": "- How to trade expansion phases effectively."
+  },
+  {
+   "t": "li",
+   "text": "- Common patterns and pitfalls to watch for."
+  },
+  {
+   "t": "li",
+   "text": "- Real chart examples on both daily and intraday time frames."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is Expansion?"
+  },
+  {
+   "t": "p",
+   "text": "Expansion is a one-sided trending move in the market."
+  },
+  {
+   "t": "p",
+   "text": "It’s defined by:"
+  },
+  {
+   "t": "li",
+   "text": "- Large range candles moving decisively in one direction."
+  },
+  {
+   "t": "li",
+   "text": "- Very shallow moves against the trend, small pullbacks that fail to reach deep discounts (in bullish trends) or premiums (in bearish trends)."
+  },
+  {
+   "t": "li",
+   "text": "- In a bullish expansion, price trends upward with only minor pullbacks."
+  },
+  {
+   "t": "li",
+   "text": "- In a bearish expansion, price trends downward with only minor bounces."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/expansion1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When Does Expansion Occur?"
+  },
+  {
+   "t": "p",
+   "text": "Expansion usually forms after a smaller range:"
+  },
+  {
+   "t": "li",
+   "text": "- After a Consolidation – Price breaks out of a range with momentum."
+  },
+  {
+   "t": "li",
+   "text": "- After a Retracement – A shallow pullback ends and trend resumes."
+  },
+  {
+   "t": "p",
+   "text": "This reflects the market’s natural cycle:"
+  },
+  {
+   "t": "li",
+   "text": "- Small range → large range"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/expect-expansion.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Recognize Expansion"
+  },
+  {
+   "t": "p",
+   "text": "Expansion phases have a signature “look”:"
+  },
+  {
+   "t": "li",
+   "text": "- Shallow pullbacks against the main trend."
+  },
+  {
+   "t": "li",
+   "text": "- Protected swings forming along the way."
+  },
+  {
+   "t": "li",
+   "text": "- Price often respects opposing candles:Bullish trend: Down-close candles act as support.Bearish trend: Up-close candles act as resistance."
+  },
+  {
+   "t": "p",
+   "text": "💡Pro Tip: Use my EQ (Equilibrium) method to focus on the upper half of the higher time frame candle in bullish setups, and the lower half in bearish setups."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/interact-expansion.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Trade Expansion"
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Identify Higher Time Frame Context"
+  },
+  {
+   "t": "li",
+   "text": "- Use the daily chart or higher timeframe to spot reversals or breakouts that could trigger expansion."
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Mark Protected Swings"
+  },
+  {
+   "t": "li",
+   "text": "- After a reversal or breakout, track protected swings on a lower timeframe levels that price should not violate if the trend is to continue."
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Look for POI"
+  },
+  {
+   "t": "li",
+   "text": "- When price taps a point of interest, such as a fair value gap, watch for candle closures over (bullish) or under (bearish) the opposing candles."
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Execute With Trend"
+  },
+  {
+   "t": "li",
+   "text": "- Enter after confirmation."
+  },
+  {
+   "t": "li",
+   "text": "- Place stops with the protected swing."
+  },
+  {
+   "t": "li",
+   "text": "- Target liquidity pools like prior highs or lows."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Chart Examples"
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Example 1 – Gold Hourly + Daily Context"
+  },
+  {
+   "t": "li",
+   "text": "- Daily reversal → hourly expansion phase."
+  },
+  {
+   "t": "li",
+   "text": "- Series of protected swings respected."
+  },
+  {
+   "t": "li",
+   "text": "- Large range days alternate with small range pullbacks."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: When price consolidates after a large range, wait for an external high or low to be taken before engaging in the market. This will help in avoiding consolidations."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/expansion-exam-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 6,
+   "text": "Example 2 – Silver Daily"
+  },
+  {
+   "t": "li",
+   "text": "- Three-day expansion hits an objective."
+  },
+  {
+   "t": "li",
+   "text": "- Market shifts to a new phase, either consolidation, retracement, or reversal."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Avoid trading price in the same direction after 3 days of expansion. It is possible for a new phase of price to occur. This is a general rule from AM Trades."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/expansion-exam-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Expansion Patterns to Watch"
+  },
+  {
+   "t": "li",
+   "text": "- Large Range → Small Range → Large Range: Classic trend continuation pattern."
+  },
+  {
+   "t": "li",
+   "text": "- Three-Day Rule: Extended expansions often give way to consolidation, retracement, or reversal."
+  },
+  {
+   "t": "li",
+   "text": "- Failure to Manipulate: If price fails to manipulate (form a reversal) a key level during consolidation, it often resumes in the direction of expansion (breakout)."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Expansion Across Time Frames"
+  },
+  {
+   "t": "p",
+   "text": "The concept is fractal:"
+  },
+  {
+   "t": "li",
+   "text": "- Works on daily/hourly for swing trading."
+  },
+  {
+   "t": "li",
+   "text": "- Works on hourly/5-minute for intraday."
+  },
+  {
+   "t": "li",
+   "text": "- Works on 15-minute/1-minute for scalping."
+  },
+  {
+   "t": "li",
+   "text": "- Works on monthly/daily for macro setups."
+  },
+  {
+   "t": "p",
+   "text": "Time frame alignment can dramatically increase trade probability."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Expansion = strong, one-sided move with shallow retracements."
+  },
+  {
+   "t": "li",
+   "text": "- Usually follows consolidation or retracement."
+  },
+  {
+   "t": "li",
+   "text": "- Track protected swings to manage risk and confirm trend."
+  },
+  {
+   "t": "li",
+   "text": "- Use higher time frame context for directional bias."
+  },
+  {
+   "t": "li",
+   "text": "- After multiple days of expansion, prepare for a new phase."
+  }
+ ]
+}

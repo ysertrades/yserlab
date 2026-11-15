@@ -1,0 +1,124 @@
+{
+ "slug": "my-favorite-reversal-pattern-orderblocks",
+ "id": 4824,
+ "url": "https://ttrades.com/my-favorite-reversal-pattern-orderblocks/",
+ "title": "My Favorite Reversal Pattern : Orderblocks",
+ "date": "2025-06-19T10:59:00",
+ "modified": "2026-02-18T14:22:22",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 38
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/Fav_Reversal_Pattern_TTrades_PDF.pdf"
+ ],
+ "videos": [
+  "7p9MBFk8EEM"
+ ],
+ "description": "Learn an order block reversal pattern using liquidity sweeps, fair value gaps, and structure across multiple time frames.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this breakdown, I am going to walk you through my favorite entry and reversal pattern built around order blocks, liquidity sweeps, and displacement. This is the exact framework I personally use when analyzing charts across multiple time frames."
+  },
+  {
+   "t": "p",
+   "text": "The Core Idea Behind This Reversal Pattern"
+  },
+  {
+   "t": "p",
+   "text": "Everything starts with context. Before I ever think about entries, I want price interacting with an important level."
+  },
+  {
+   "t": "p",
+   "text": "This can be:• A PD array such as a fair value gap, order block, or prior high or low• Buy side or sell side liquidity• A higher time frame point of interest"
+  },
+  {
+   "t": "p",
+   "text": "Once price approaches that area, I am no longer passive. I am watching for liquidity to be taken and for price to show clear intent."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/fvp.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Identifying the Order Block After a Liquidity Sweep"
+  },
+  {
+   "t": "p",
+   "text": "For bearish reversals, the sequence is very specific."
+  },
+  {
+   "t": "p",
+   "text": "Price runs into an important level.A short term high is formed.Price raids that high."
+  },
+  {
+   "t": "p",
+   "text": "At that point, my eyes go to the series of up close candles responsible for the move. When price closes back below those candles, that area becomes a validated order block. From there, I expect that order block to support price lower."
+  },
+  {
+   "t": "p",
+   "text": "For bullish reversals, the logic is flipped."
+  },
+  {
+   "t": "p",
+   "text": "Price approaches an important level below.A short term low is formed.Price raids that low."
+  },
+  {
+   "t": "p",
+   "text": "Now my focus is on the down close candle or series of down close candles. When price closes back above them, that candle becomes an order block and I expect it to support price higher."
+  },
+  {
+   "t": "p",
+   "text": "The key is not just the candle itself, but the closure and displacement that confirms intent."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways From This Reversal Pattern"
+  },
+  {
+   "t": "p",
+   "text": "A few important points to keep in mind."
+  },
+  {
+   "t": "p",
+   "text": "Order blocks only matter after liquidity is taken.Closure and displacement are what validate the level.The opening price of the candle is often the most important reference.Bodies matter more than wicks.This reversal pattern works on all time frames when context is respected."
+  },
+  {
+   "t": "p",
+   "text": "This is why it remains my favorite way to trade reversals."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "When you combine liquidity, order blocks, and displacement, you stop guessing where price might turn. Instead, you react to what price has already shown you. This reversal pattern is not about prediction. It is about confirmation, structure, and execution."
+  },
+  {
+   "t": "p",
+   "text": "Spend time replaying charts and marking the candles that actually moved the market. That is where this pattern really clicks."
+  }
+ ]
+}

@@ -1,0 +1,257 @@
+{
+ "slug": "how-to-set-price-targets-using-the-fractal-model",
+ "id": 6045,
+ "url": "https://ttrades.com/how-to-set-price-targets-using-the-fractal-model/",
+ "title": "How to Set Price Targets Using the Fractal Model",
+ "date": "2026-05-23T11:00:00",
+ "modified": "2026-09-04T10:52:27",
+ "categories": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 23
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 26
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/05/TTrades-Targets-Using-Fractal-Model.pdf"
+ ],
+ "videos": [
+  "A4NasIa371c"
+ ],
+ "description": "Learn how to set price targets using the fractal model with swing highs, swing lows, and higher time frame structure for better trading precision.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Setting clear price targets is a very important part of trading, yet it’s often where traders become inconsistent. The fractal model offers a structured way to define targets using higher time frame highs and lows."
+  },
+  {
+   "t": "p",
+   "text": "In this approach, price targets are not random projections, they are based on liquidity that already exists on the chart. By understanding how price moves between swing points, traders can set logical objectives before and after entry."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding the Fractal Approach to Targets"
+  },
+  {
+   "t": "p",
+   "text": "The fractal model is built on a simple idea: price expands between structured swing points across multiple time frames."
+  },
+  {
+   "t": "p",
+   "text": "Instead of predicting levels, you:"
+  },
+  {
+   "t": "li",
+   "text": "- Identify structure on a higher time frame"
+  },
+  {
+   "t": "li",
+   "text": "- Use that structure to define targets"
+  },
+  {
+   "t": "li",
+   "text": "- Align entries on a lower time frame"
+  },
+  {
+   "t": "p",
+   "text": "This creates a model where every move has a logical target based on prior highs or lows."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/dt.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Higher Time Frame Highs and Lows"
+  },
+  {
+   "t": "p",
+   "text": "The core method for setting targets is straightforward:"
+  },
+  {
+   "t": "li",
+   "text": "- In bullish conditions → target previous highs"
+  },
+  {
+   "t": "li",
+   "text": "- In bearish conditions → target previous lows"
+  },
+  {
+   "t": "p",
+   "text": "These levels represent areas where liquidity exists, making them natural objectives for price expansion."
+  },
+  {
+   "t": "p",
+   "text": "When selecting targets, focus on:"
+  },
+  {
+   "t": "li",
+   "text": "- Untouched swing highs or lows"
+  },
+  {
+   "t": "li",
+   "text": "- Previous candle highs/lows from higher time frames"
+  },
+  {
+   "t": "p",
+   "text": "If a level has already been taken out, it is no longer valid as a target."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/HFT.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Aligning Lower and Higher Time Frames"
+  },
+  {
+   "t": "p",
+   "text": "One of the most important aspects of the fractal model is time frame alignment."
+  },
+  {
+   "t": "p",
+   "text": "A typical structure looks like:"
+  },
+  {
+   "t": "li",
+   "text": "- Lower time frame (entry execution)"
+  },
+  {
+   "t": "li",
+   "text": "- Higher time frame (target definition)"
+  },
+  {
+   "t": "p",
+   "text": "For example:"
+  },
+  {
+   "t": "li",
+   "text": "- A 5-minute entry targets an hourly swing"
+  },
+  {
+   "t": "li",
+   "text": "- An hourly setup targets a daily swing"
+  },
+  {
+   "t": "li",
+   "text": "- A daily setup targets a weekly swing"
+  },
+  {
+   "t": "p",
+   "text": "When both time frames align in the same direction, probability and trade quality increase significantly."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/at.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Managing Trades with Multiple Targets"
+  },
+  {
+   "t": "p",
+   "text": "The fractal model allows for a dual-target approach:"
+  },
+  {
+   "t": "li",
+   "text": "- Short-term targets → used for partial profit-taking"
+  },
+  {
+   "t": "li",
+   "text": "- Higher time frame targets → used for runners"
+  },
+  {
+   "t": "p",
+   "text": "This structure helps traders:"
+  },
+  {
+   "t": "li",
+   "text": "- Secure profits early"
+  },
+  {
+   "t": "li",
+   "text": "- Reduce emotional decision-making"
+  },
+  {
+   "t": "li",
+   "text": "- Capture extended moves when large expansion occurs"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Swing Highs and Swing Lows as Objective Targets"
+  },
+  {
+   "t": "p",
+   "text": "Every valid target comes back to one principle: swing structure."
+  },
+  {
+   "t": "p",
+   "text": "You are always asking:"
+  },
+  {
+   "t": "li",
+   "text": "- What did price move away from?"
+  },
+  {
+   "t": "li",
+   "text": "- Where is it likely to return or expand toward?"
+  },
+  {
+   "t": "p",
+   "text": "This results in a clean mapping system:"
+  },
+  {
+   "t": "li",
+   "text": "- Swing low → target swing high"
+  },
+  {
+   "t": "li",
+   "text": "- Swing high → target swing low"
+  },
+  {
+   "t": "p",
+   "text": "This keeps target selection objective and consistent across all markets and time frames."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Setting price targets using the fractal model is about understanding structure. By focusing on higher time frame highs and lows, traders can define clear objectives before entering a trade and manage positions with more confidence."
+  },
+  {
+   "t": "p",
+   "text": "When applied correctly, this approach improves consistency and allows traders to capture both short-term profits and larger trend expansions."
+  }
+ ]
+}

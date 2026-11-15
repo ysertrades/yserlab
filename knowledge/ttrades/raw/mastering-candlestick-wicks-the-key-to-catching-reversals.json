@@ -1,0 +1,233 @@
+{
+ "slug": "mastering-candlestick-wicks-the-key-to-catching-reversals",
+ "id": 3535,
+ "url": "https://ttrades.com/mastering-candlestick-wicks-the-key-to-catching-reversals/",
+ "title": "Mastering Candlestick Wicks: The Key to Catching Reversals",
+ "date": "2025-07-28T11:00:00",
+ "modified": "2026-09-04T10:32:25",
+ "categories": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 8
+  },
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 22
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 68
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/07/Wicks-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "LKNQDAdId4s"
+ ],
+ "description": "Learn how candlestick wicks reveal reversals, respected vs. disrespected setups, and multi-timeframe strategies to catch high-probability trades.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "When it comes to trading price action, candlestick wicks often hold more information than traders realize. They can signal reversals out of important levels especially when analyzed across multiple timeframes. This guide breaks down the concept of wicks, how to identify when they are respected versus disrespected, and how you can use them to catch higher-probability trades."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Are Candlestick Wicks?"
+  },
+  {
+   "t": "p",
+   "text": "A wick represents a rejection of price during a given time period. On the lower timeframe, wicks show that price aggressively pushed in one direction, only to snap back before closing."
+  },
+  {
+   "t": "li",
+   "text": "- A lower wick means there was an aggressive move lower met with an aggressive move back up. This is signaling a bullish reversal."
+  },
+  {
+   "t": "li",
+   "text": "- An upper wick means there was an aggressive move higher met with an aggressive move back down. This is signaling a bearish reversal."
+  },
+  {
+   "t": "p",
+   "text": "In essence, wicks are mini-reversals on lower timeframes."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: A good reversal candle (candle with large wick) will have a “V” shape reversal on the lower timeframe."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/wicks-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Respecting vs. Disrespecting Wicks"
+  },
+  {
+   "t": "p",
+   "text": "The key concept is the 50% rule of a wick:"
+  },
+  {
+   "t": "li",
+   "text": "- Mark the midpoint of the wick (from body to high or body to low)."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/wicks-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- If price respects this midpoint, it often signals continuation in the opposite direction of the wick."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/wicks-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/wicks-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- If price closes through this midpoint, the wick is likely disrespected, and price may continue in the original direction."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/wicks-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/wicks-7.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Practical Chart Examples"
+  },
+  {
+   "t": "p",
+   "text": "Bullish Reversal Example"
+  },
+  {
+   "t": "li",
+   "text": "- Daily candle sweeps a previous low and closes back inside the range."
+  },
+  {
+   "t": "li",
+   "text": "- On the hourly, price respects 50% of the wick before rallying upward."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: TTrades Fractal Model Indicator, will automatically mark out 0.5 of the wick on reversal candles that meet the criteria."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Wicks-ex-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Failed Wick Reversal (Disrespected Wick)"
+  },
+  {
+   "t": "li",
+   "text": "- Price does not respect 0.5 of the wick and the result is an expansion to sell side liquidity."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Focus on wicks that reach into a fair value gap or take out a high or low. Don’t focus on wicks that are internal to the range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/wick-ex-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Importance of Context"
+  },
+  {
+   "t": "p",
+   "text": "Not every wick will lead to a perfect reversal. Market structure, session timing, and liquidity runs all influence whether a wick becomes a strong signal."
+  },
+  {
+   "t": "p",
+   "text": "Some considerations:"
+  },
+  {
+   "t": "li",
+   "text": "- Consolidation: Wicks inside choppy ranges are less reliable."
+  },
+  {
+   "t": "li",
+   "text": "- Liquidity sweeps: Wicks that take out highs/lows before reversing often carry more weight."
+  },
+  {
+   "t": "li",
+   "text": "- Time of day: Session opens (London, New York) often see wick-based reversals."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Use Wicks in Your Trading Plan"
+  },
+  {
+   "t": "li",
+   "text": "- Mark out 50% of significant wicks on higher timeframes."
+  },
+  {
+   "t": "li",
+   "text": "- Drop down to lower timeframes to confirm whether price respects or disrespects them."
+  },
+  {
+   "t": "li",
+   "text": "- Use wick zones as potential entry triggers, stop-loss placements, or take-profit targets."
+  },
+  {
+   "t": "li",
+   "text": "- Always pair wick analysis with overall market bias and structure for higher accuracy."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Conclusion"
+  },
+  {
+   "t": "p",
+   "text": "Wicks are more than simple extensions on a candlestick. They reveal moments where the market tested a level but could not hold it, leaving behind valuable clues for traders. By understanding when wicks are respected or disrespected, you can sharpen your entry timing, filter out weak signals, and position yourself for higher-probability setups. While wick analysis is never flawless, combining it with broader market context makes it a reliable tool in a trader’s decision-making process."
+  }
+ ]
+}

@@ -1,0 +1,437 @@
+{
+ "slug": "ttrades-ideal-formation-high-probability-swing-points",
+ "id": 6267,
+ "url": "https://ttrades.com/ttrades-ideal-formation-high-probability-swing-points/",
+ "title": "TTrades Ideal Formation – High Probability Swing Points",
+ "date": "2026-06-27T11:15:00",
+ "modified": "2026-09-04T10:43:55",
+ "categories": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 17
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 21
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/06/TTrades-Ideal-Formation.pdf"
+ ],
+ "videos": [
+  "SF61vCsBl1A"
+ ],
+ "description": "Learn how to identify Ideal Formations and high-probability swing points using Candle 2 and Candle 3 closures, protected swings, and fair value gaps.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "One of the most important concepts within the Fractal Model is understanding the difference between a standard Candle 2 or Candle 3 closure and an Ideal Formation."
+  },
+  {
+   "t": "p",
+   "text": "While many traders focus solely on finding Candle 2 and Candle 3 closures, the highest-probability opportunities occur when those closures simultaneously create a protected swing. This additional layer of confirmation helps validate the swing point and increases the likelihood of continuation away from the level."
+  },
+  {
+   "t": "p",
+   "text": "In this lesson, we’ll break down Ideal Formations, how to identify them, and why they can help improve trade selection within the Fractal Model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is an Ideal Formation?"
+  },
+  {
+   "t": "p",
+   "text": "An Ideal Formation occurs when a Candle 2 or Candle 3 closure simultaneously creates a protected swing."
+  },
+  {
+   "t": "p",
+   "text": "Rather than simply seeing a candle close beyond the previous candle’s body, we want to see price confirm a change in delivery by closing through the opposing series of candles responsible for creating the swing point."
+  },
+  {
+   "t": "p",
+   "text": "When both conditions occur together, the market is providing stronger confirmation that the swing is protected and that price may be ready to expand away from the level."
+  },
+  {
+   "t": "p",
+   "text": "This is what separates an Ideal Formation from an ordinary candle closure."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/Ideal-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding Protected Swings"
+  },
+  {
+   "t": "p",
+   "text": "Protected swings are the foundation of an Ideal Formation."
+  },
+  {
+   "t": "p",
+   "text": "A protected swing is created when price closes through the series of opposing candles that led into a high or low."
+  },
+  {
+   "t": "p",
+   "text": "For a bullish setup:"
+  },
+  {
+   "t": "li",
+   "text": "- Price sweeps liquidity beneath a low."
+  },
+  {
+   "t": "li",
+   "text": "- Candle 2 or Candle 3 closes bullish."
+  },
+  {
+   "t": "li",
+   "text": "- The closure breaks through the series of down-close candles."
+  },
+  {
+   "t": "li",
+   "text": "- A protected swing low is established."
+  },
+  {
+   "t": "p",
+   "text": "For a bearish setup:"
+  },
+  {
+   "t": "li",
+   "text": "- Price sweeps liquidity above a high."
+  },
+  {
+   "t": "li",
+   "text": "- Candle 2 or Candle 3 closes bearish."
+  },
+  {
+   "t": "li",
+   "text": "- The closure breaks through the series of up-close candles."
+  },
+  {
+   "t": "li",
+   "text": "- A protected swing high is established."
+  },
+  {
+   "t": "p",
+   "text": "Once a protected swing forms, the expectation shifts toward continuation away from that level."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Ideal Candle 2 Formation"
+  },
+  {
+   "t": "p",
+   "text": "The strongest version of an Ideal Formation occurs when Candle 2 creates both the closure and the protected swing."
+  },
+  {
+   "t": "p",
+   "text": "For a bullish example:"
+  },
+  {
+   "t": "li",
+   "text": "- Price trades into a point of interest."
+  },
+  {
+   "t": "li",
+   "text": "- Liquidity below a low is swept."
+  },
+  {
+   "t": "li",
+   "text": "- Candle 2 closes bullish."
+  },
+  {
+   "t": "li",
+   "text": "- The closure breaks through the opposing down-close candle series."
+  },
+  {
+   "t": "li",
+   "text": "- A protected swing is created immediately."
+  },
+  {
+   "t": "p",
+   "text": "For a bearish example:"
+  },
+  {
+   "t": "li",
+   "text": "- Price trades into a point of interest."
+  },
+  {
+   "t": "li",
+   "text": "- Liquidity above a high is swept."
+  },
+  {
+   "t": "li",
+   "text": "- Candle 2 closes bearish."
+  },
+  {
+   "t": "li",
+   "text": "- The closure breaks through the opposing up-close candle series."
+  },
+  {
+   "t": "li",
+   "text": "- A protected swing is created immediately."
+  },
+  {
+   "t": "p",
+   "text": "Because both confirmations occur on the same candle, Candle 3 often becomes the expansion candle traders look to participate in."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/C2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Some Candle 2 Closures Are Not Ideal"
+  },
+  {
+   "t": "p",
+   "text": "One of the most common mistakes traders make is assuming every Candle 2 closure is an Ideal Formation."
+  },
+  {
+   "t": "p",
+   "text": "This is not the case."
+  },
+  {
+   "t": "p",
+   "text": "A valid Candle 2 closure only becomes ideal when it also creates a protected swing."
+  },
+  {
+   "t": "p",
+   "text": "If price closes beyond Candle 1’s body but fails to close through the opposing candle series, then the protected swing has not been confirmed."
+  },
+  {
+   "t": "p",
+   "text": "The setup may still be tradable, but it lacks the additional confirmation that makes an Ideal Formation higher probability."
+  },
+  {
+   "t": "p",
+   "text": "This distinction is critical when evaluating trade opportunities within the Fractal Model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Ideal Candle 3 Formation"
+  },
+  {
+   "t": "p",
+   "text": "Not every setup becomes ideal on Candle 2."
+  },
+  {
+   "t": "p",
+   "text": "Sometimes Candle 2 provides the initial closure, but Candle 3 is required to complete the protected swing."
+  },
+  {
+   "t": "p",
+   "text": "In these situations:"
+  },
+  {
+   "t": "li",
+   "text": "- Candle 2 establishes directional intent."
+  },
+  {
+   "t": "li",
+   "text": "- Candle 3 closes strongly through the series of opposing candles."
+  },
+  {
+   "t": "li",
+   "text": "- A protected swing is confirmed."
+  },
+  {
+   "t": "li",
+   "text": "- The setup becomes ideal for trading Candle 4."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/06/c4-ideal.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trading Candle 4 After an Ideal Formation"
+  },
+  {
+   "t": "p",
+   "text": "When the protected swing forms on Candle 3, traders often focus on Candle 4 as the continuation candle."
+  },
+  {
+   "t": "p",
+   "text": "At this stage, the market has:"
+  },
+  {
+   "t": "li",
+   "text": "- Created a valid closure."
+  },
+  {
+   "t": "li",
+   "text": "- Confirmed a protected swing."
+  },
+  {
+   "t": "li",
+   "text": "- Established directional intent."
+  },
+  {
+   "t": "li",
+   "text": "- Completed a valid fractal structure."
+  },
+  {
+   "t": "p",
+   "text": "This provides additional confidence that price may continue away from the level."
+  },
+  {
+   "t": "p",
+   "text": "Rather than chasing the move, traders can monitor key levels and look for a shallow retracement before continuation."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Levels to Mark Out"
+  },
+  {
+   "t": "p",
+   "text": "After identifying an Ideal Formation, there are two primary levels that should be marked on the chart."
+  },
+  {
+   "t": "p",
+   "text": "The first is the opening price of the opposing candle series that created the protected swing."
+  },
+  {
+   "t": "p",
+   "text": "The second is the equilibrium (EQ) of the confirmation candle."
+  },
+  {
+   "t": "p",
+   "text": "These levels often act as support or resistance as the next candle forms."
+  },
+  {
+   "t": "p",
+   "text": "When price respects these levels and produces a shallow wick, it can provide confirmation that the market is continuing in the intended direction."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Point of Interest Matters"
+  },
+  {
+   "t": "p",
+   "text": "An Ideal Formation should never be traded as a standalone pattern."
+  },
+  {
+   "t": "p",
+   "text": "The setup becomes significantly more effective when it forms at a meaningful point of interest."
+  },
+  {
+   "t": "p",
+   "text": "Common examples include:"
+  },
+  {
+   "t": "li",
+   "text": "- Fair Value Gaps (FVGs)"
+  },
+  {
+   "t": "li",
+   "text": "- Liquidity sweeps"
+  },
+  {
+   "t": "li",
+   "text": "- Previous highs and lows"
+  },
+  {
+   "t": "li",
+   "text": "- Premium and discount arrays"
+  },
+  {
+   "t": "li",
+   "text": "- Higher timeframe points of interest"
+  },
+  {
+   "t": "p",
+   "text": "The point of interest provides the reason for the reaction."
+  },
+  {
+   "t": "p",
+   "text": "The Ideal Formation provides confirmation that the reaction is taking place."
+  },
+  {
+   "t": "p",
+   "text": "When both align, traders have a stronger framework for identifying high-probability opportunities."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Common Mistakes Traders Make"
+  },
+  {
+   "t": "p",
+   "text": "Some of the most common mistakes include:"
+  },
+  {
+   "t": "li",
+   "text": "- Treating every Candle 2 closure as ideal."
+  },
+  {
+   "t": "li",
+   "text": "- Ignoring protected swing confirmation."
+  },
+  {
+   "t": "li",
+   "text": "- Trading the pattern without a point of interest."
+  },
+  {
+   "t": "li",
+   "text": "- Marking the wrong series of opposing candles that formed the swing high or low"
+  },
+  {
+   "t": "li",
+   "text": "- Entering before the formation is fully confirmed."
+  },
+  {
+   "t": "p",
+   "text": "The objective is not simply finding a candle closure."
+  },
+  {
+   "t": "p",
+   "text": "The objective is finding a candle closure that confirms a protected swing at a meaningful point of interest in the market."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "In this lesson, we broke down Ideal Formations and how they can be used to identify high-probability swing points within the Fractal Model."
+  },
+  {
+   "t": "p",
+   "text": "By combining Candle 2 or Candle 3 closures with protected swing confirmation, traders can better validate market structure and focus on continuation opportunities with greater confidence."
+  },
+  {
+   "t": "p",
+   "text": "Rather than treating every candle closure equally, focus on the formations that simultaneously confirm a protected swing at a point of interest. These are often the cleanest setups and provide the strongest framework for identifying potential expansion moves."
+  }
+ ]
+}

@@ -1,0 +1,216 @@
+{
+ "slug": "how-to-journal-the-market-in-notion-a-complete-guide",
+ "id": 3880,
+ "url": "https://ttrades.com/how-to-journal-the-market-in-notion-a-complete-guide/",
+ "title": "How to Journal the Market in Notion: A Complete Guide",
+ "date": "2025-07-13T11:00:00",
+ "modified": "2026-02-18T14:16:56",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 23
+  }
+ ],
+ "pdfs": [],
+ "videos": [
+  "wrIZ7CAuFCc"
+ ],
+ "description": "Learn how to journal the market daily in Notion. Track predictions, actual outcomes, news, and chart markups to sharpen your trading analysis.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Many traders keep a journal only when they take trades, but limiting journaling this way can slow your growth. Journaling should go beyond recording entries and exits. It should capture your daily market observations, predictions, and reflections, even on days when no trades are taken."
+  },
+  {
+   "t": "p",
+   "text": "In this guide, you’ll learn how to build a powerful journaling template in Notion. We’ll walk through daily and weekly review templates, how to structure them for market predictions versus actual outcomes, and how to make journaling part of your routine."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Setting Up Your Journal in Notion"
+  },
+  {
+   "t": "p",
+   "text": "Start with a blank page in Notion and create a new table database. Label it “Journal.”"
+  },
+  {
+   "t": "li",
+   "text": "- Add a Date property so you can log each entry by day."
+  },
+  {
+   "t": "li",
+   "text": "- Switch the view to Calendar for quick navigation. This way, you can easily go back to a specific day."
+  },
+  {
+   "t": "p",
+   "text": "From here, you’ll be building templates that load automatically whenever you create a new entry."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Creating the Daily Journal Template"
+  },
+  {
+   "t": "p",
+   "text": "Inside your journal database, create a new template. Call it “Journal Entry.” This will serve as your daily structure."
+  },
+  {
+   "t": "p",
+   "text": "Here’s how to set it up:"
+  },
+  {
+   "t": "li",
+   "text": "- Use a callout block at the top for news (for example, Forex Factory calendar events)."
+  },
+  {
+   "t": "li",
+   "text": "- Add a second callout for notes throughout the day."
+  },
+  {
+   "t": "li",
+   "text": "- Create a two-column layout labeled “Predictions” and “Actual.” This lets you compare your pre-market analysis with what actually happened."
+  },
+  {
+   "t": "li",
+   "text": "- Add a four-column section for the timeframes you analyze: Daily, Hourly, 15-Minute, and 5-Minute."
+  },
+  {
+   "t": "li",
+   "text": "- Repeat the structure for ES and NQ (or whichever markets you track). Use toggle headings so you can collapse each section and keep your journal tidy."
+  },
+  {
+   "t": "p",
+   "text": "For other assets, just duplicate the section and relabel."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Building the Weekly Review Template"
+  },
+  {
+   "t": "p",
+   "text": "Weekly reviews help you zoom out and spot patterns in your market bias and execution."
+  },
+  {
+   "t": "li",
+   "text": "- Start with a callout for weekly news."
+  },
+  {
+   "t": "li",
+   "text": "- Add a two-column section for “Predictions” and “Actual.”"
+  },
+  {
+   "t": "li",
+   "text": "- Below that, add a three-column section for higher timeframes: Daily, 4-Hour, and Hourly."
+  },
+  {
+   "t": "li",
+   "text": "- Duplicate sections for ES, NQ, and any other instruments you’re watching."
+  },
+  {
+   "t": "p",
+   "text": "This weekly structure allows you to see how your longer-term narrative played out compared to your expectations."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Journal Each Day"
+  },
+  {
+   "t": "p",
+   "text": "Once your templates are set, journaling becomes a repeatable process:"
+  },
+  {
+   "t": "li",
+   "text": "1. The Night Before: Fill in your Predictions for ES and NQ (or other assets). Record expectations for daily, hourly, 15-min, and 5-min charts."
+  },
+  {
+   "t": "li",
+   "text": "2. During the Day: Add market news, notes, and screenshots of your TradingView markups."
+  },
+  {
+   "t": "li",
+   "text": "3. After the Session: Fill in the Actual sections. Compare your predictions against what happened."
+  },
+  {
+   "t": "p",
+   "text": "This keeps you accountable and helps identify if your bias was correct—or if you need to refine your analysis."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Screenshots and Chart Markups"
+  },
+  {
+   "t": "p",
+   "text": "TradingView screenshots are an essential part of this workflow. Copy your marked-up charts and paste them into the corresponding sections in Notion."
+  },
+  {
+   "t": "li",
+   "text": "- Daily charts capture the big picture bias."
+  },
+  {
+   "t": "li",
+   "text": "- Hourly charts reveal intraday structure."
+  },
+  {
+   "t": "li",
+   "text": "- 15-minute and 5-minute charts show entry precision and session behavior."
+  },
+  {
+   "t": "p",
+   "text": "This layered approach helps you align lower timeframes with the broader narrative."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why This Works"
+  },
+  {
+   "t": "p",
+   "text": "By journaling predictions versus actual outcomes:"
+  },
+  {
+   "t": "li",
+   "text": "- You test your narrative daily."
+  },
+  {
+   "t": "li",
+   "text": "- You quickly spot where your bias aligns or conflicts with reality."
+  },
+  {
+   "t": "li",
+   "text": "- You build a library of price action behavior across sessions."
+  },
+  {
+   "t": "p",
+   "text": "Over time, this reduces hesitation, sharpens your edge, and strengthens confidence in your process."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Wrapping Up"
+  },
+  {
+   "t": "p",
+   "text": "With this Notion setup, you’ll never have to rebuild your journaling structure from scratch. Simply select your daily or weekly template, fill in your analysis, and reflect on the results."
+  },
+  {
+   "t": "p",
+   "text": "Even without adding trade execution details, this daily journaling routine is one of the strongest practices you can use to accelerate your growth as a trader."
+  }
+ ]
+}

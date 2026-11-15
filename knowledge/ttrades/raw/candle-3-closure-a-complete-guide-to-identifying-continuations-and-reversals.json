@@ -1,0 +1,208 @@
+{
+ "slug": "candle-3-closure-a-complete-guide-to-identifying-continuations-and-reversals",
+ "id": 4548,
+ "url": "https://ttrades.com/candle-3-closure-a-complete-guide-to-identifying-continuations-and-reversals/",
+ "title": "Candle 3 Closure: A Complete Guide to Identifying Continuations and Reversals",
+ "date": "2025-12-03T11:00:00",
+ "modified": "2025-12-02T19:22:22",
+ "categories": [
+  "Fractal Model",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 6
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 47
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/12/Candle-3-Closure-TTrades.pdf"
+ ],
+ "videos": [
+  "MsuEQQl7L6s"
+ ],
+ "description": "Learn candle 3 closures, continuation vs reversal closures, and how to filter swing points using premium/discount and fair value gaps.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Candle 3 closure is the second closure type in the TTrades Fractal Model. If you already understand candle 2 closures, this lesson will expand your knowledge, providing you with all the information regarding candle closure types."
+  },
+  {
+   "t": "p",
+   "text": "This guide breaks everything down in a simple way so you can apply it immediately on your charts."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding Continuation vs. Reversal Closures"
+  },
+  {
+   "t": "p",
+   "text": "Before identifying candle 3 closures, you must understand the two types of closures."
+  },
+  {
+   "t": "p",
+   "text": "• Continuation ClosureWhen price takes out the previous candle’s high or low and closes beyond it.For example: price sweeps the previous low and closes below that low.This signals that the trend is likely to continue."
+  },
+  {
+   "t": "p",
+   "text": "• Reversal ClosureWhen price sweeps the previous candle’s high or low but closes back inside the previous candle’s range.Example: price sweeps a low but closes back above it.This provides evidence for a potential reversal move."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/12/Cont-vs-Reversal-closure.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "These closure types create the foundation for identifying candle 2 and candle 3 closures."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Candle 2 vs. Candle 3 Closure"
+  },
+  {
+   "t": "p",
+   "text": "A candle 2 closure occurs when the reversal condition happens during candle 2.A candle 3 closure occurs when candle 2 fails to give the required closure, forcing you to wait for candle 3."
+  },
+  {
+   "t": "p",
+   "text": "Here is the core difference:"
+  },
+  {
+   "t": "p",
+   "text": "• Candle 2 closure:Price sweeps the previous candle and closes back inside, which confirms the reversal early."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/12/c2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "• Candle 3 closure:Price does not sweep the previous candle, yet candle 3 closes over the body of candle 2 and engulfs it.This delayed confirmation still signals a reversal or continuation depending on context."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/12/C3-new.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When Candle 2 Fails, Candle 3 Can Still Confirm"
+  },
+  {
+   "t": "p",
+   "text": "Sometimes price hits your point of interest: a fair value gap, imbalance, or key level but does not form a reversal closure in candle 2."
+  },
+  {
+   "t": "p",
+   "text": "In this situation, you wait for candle 3 to give one of these conditions:"
+  },
+  {
+   "t": "p",
+   "text": "• In a bullish scenario, candle 3 closes over the body of candle 2.• In a bearish scenario, candle 3 closes below the body of candle 2."
+  },
+  {
+   "t": "p",
+   "text": "When this happens without sweeping the candle 2 high or low, it becomes a candle 3 closure.This allows you to anticipate candle 4 as the expansion candle."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/12/c3-with-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Equilibrium With Candle 3 Closures"
+  },
+  {
+   "t": "p",
+   "text": "After identifying a valid candle 3 closure, mark the full range of candle 3."
+  },
+  {
+   "t": "p",
+   "text": "• In a bullish setup, look for candle 4 to wick into the upper half of candle 3.• In a bearish setup, look for candle 4 to wick into the lower half of candle 3"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/12/c3-eq.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "This equilibrium behavior adds precision to entries and confirms that the expansion move is likely underway."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Chart Examples and How They Apply"
+  },
+  {
+   "t": "p",
+   "text": "In the NQ example below, price reaches a point of interest but does not give a candle 2 closure. Wait for candle 3 to either form a candle 3 closure and anticipate a candle 4 continuation."
+  },
+  {
+   "t": "p",
+   "text": "A swing is only valid when it has both:• A point of interest• A valid closure (candle 2 or candle 3)"
+  },
+  {
+   "t": "p",
+   "text": "If either is missing, the swing point is ignored."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/12/c3-example-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Frame Trades From Candle 3 Closures"
+  },
+  {
+   "t": "p",
+   "text": "Once a candle 3 closure forms, follow a simple process:"
+  },
+  {
+   "t": "p",
+   "text": "• Mark the entire candle 3 range.• Identify the equilibrium• Drop to a lower timeframe, such as 4-Hour to 15-Minute.• Wait for displacement and a refined entry within that half."
+  },
+  {
+   "t": "p",
+   "text": "This workflow keeps your trades structured and avoids guesswork."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Candle 3 closures are a powerful addition to your model. They create structure when a candle 2 closure does not form and offer clean continuation when paired with equilibrium. By combining closures, points of interest, and filtering out invalid swing points, You end up with a consistent framework for cutting out noise and focusing on clean, high-probability setups."
+  }
+ ]
+}

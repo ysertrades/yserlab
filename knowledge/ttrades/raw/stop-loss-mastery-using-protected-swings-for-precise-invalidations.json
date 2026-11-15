@@ -1,0 +1,250 @@
+{
+ "slug": "stop-loss-mastery-using-protected-swings-for-precise-invalidations",
+ "id": 2463,
+ "url": "https://ttrades.com/stop-loss-mastery-using-protected-swings-for-precise-invalidations/",
+ "title": "Stop Loss Mastery – Using Protected Swings for Precise Invalidations",
+ "date": "2025-08-07T11:00:00",
+ "modified": "2026-09-04T10:50:15",
+ "categories": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 21
+  },
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 16
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 59
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/Stop20Losses20TTrades20PDF.pdf"
+ ],
+ "videos": [
+  "JHVaSKtE1Ys"
+ ],
+ "description": "Learn how to use protected swings for precise stop-loss placement, better risk-to-reward, and trend tracking in your trading strategy.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In trading, your stop-loss placement is more than just a safety net, it’s a precision tool that defines risk, validates your setup, and improves reward potential. In this guide, we’ll break down how to use protected swings as your invalidation point, why they improve trade accuracy, and how to adjust for risk-to-reward without sacrificing structure."
+  },
+  {
+   "t": "p",
+   "text": "If you haven’t watched my previous lesson on Protected Swings, I recommend starting there. This concept is the foundation for everything we’ll cover here."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is a Protected Swing?"
+  },
+  {
+   "t": "p",
+   "text": "A protected swing forms in two simple steps:"
+  },
+  {
+   "t": "li",
+   "text": "- Price reaches into an important level (such as sweeping a low or a fair value gap)."
+  },
+  {
+   "t": "li",
+   "text": "- Price then closes over the series of candles that created that move into the important level."
+  },
+  {
+   "t": "p",
+   "text": "Once confirmed, this swing becomes a structural anchor. If you’re bullish, the low of the protected swing should not be broken; if bearish, the high should hold as long as the trend continues."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/SL-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Use Protected Swings for Stop Loss Placement?"
+  },
+  {
+   "t": "p",
+   "text": "Protected swings give you a clear invalidation point based on price structure, not based off a fixed amount unadjusted for current market volatility."
+  },
+  {
+   "t": "li",
+   "text": "- Bullish: If price creates a protected low and you expect higher prices, your stop goes beneath that low."
+  },
+  {
+   "t": "li",
+   "text": "- Bearish: If price creates a protected high and you expect lower prices, your stop goes above that high."
+  },
+  {
+   "t": "p",
+   "text": "This ensures your stop-loss is placed at the exact level where your trade idea is proven wrong."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/SL2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Adjusting for Risk-to-Reward"
+  },
+  {
+   "t": "p",
+   "text": "Sometimes, placing your stop exactly at the protected swing low/high doesn’t give you the R:R you want. In these cases:"
+  },
+  {
+   "t": "li",
+   "text": "- Body of Candle – You can move your stop to the body of the swing candle instead of the wick. This often improves R:R but slightly increases the chance of being wicked out."
+  },
+  {
+   "t": "li",
+   "text": "- Continuation Entries – Instead of forcing the R:R on a reversal, wait for the next protected swing to form in the same direction and use that for a new, potentially smaller stop loss."
+  },
+  {
+   "t": "p",
+   "text": "⚠ Note: Adjusting your stop for R:R is a trade-off, you gain better risk : reward but increase the chance of price stopping you out while never invalidating your trade."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/SL3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example Workflow"
+  },
+  {
+   "t": "p",
+   "text": "Identify Protected Swing"
+  },
+  {
+   "t": "li",
+   "text": "- While bullish, price sweeps a low into a fair value gap, then closes above the down-close candles that created the sweep."
+  },
+  {
+   "t": "p",
+   "text": "Place Invalidation"
+  },
+  {
+   "t": "li",
+   "text": "- Default: Stop at the protected low."
+  },
+  {
+   "t": "li",
+   "text": "- Alternate: Stop at candle body if targeting a nearby liquidity pool for improved R:R."
+  },
+  {
+   "t": "p",
+   "text": "Look for Continuations"
+  },
+  {
+   "t": "li",
+   "text": "- If initial R:R is weak, wait for a new protected swing to form after price retraces into a point of interest."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Only use candle body invalidation if there are big bulking opposing candles. Do not use body invalidations on large wicked opposing candles."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Protected Swings in Trending Markets"
+  },
+  {
+   "t": "p",
+   "text": "In a trending market, you can stack protected swings to trail your stop:"
+  },
+  {
+   "t": "li",
+   "text": "- Reversal Entry: Initial protected swing forms after major liquidity sweep."
+  },
+  {
+   "t": "li",
+   "text": "- Continuation Entry: New protected swing forms after retracement into a fair value gap or T-spot."
+  },
+  {
+   "t": "li",
+   "text": "- Trend Tracking: Repeat the process until the market reaches your higher time frame target."
+  },
+  {
+   "t": "p",
+   "text": "This approach keeps you in winning trades longer while systematically reducing risk."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/SL4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Common Mistakes to Avoid"
+  },
+  {
+   "t": "li",
+   "text": "- Ignoring the Context: A protected swing outside of a relevant point of interest is less reliable."
+  },
+  {
+   "t": "li",
+   "text": "- Premature Confirmation: Wait for a proper close over/under the series of candles before declaring a swing “protected.”"
+  },
+  {
+   "t": "li",
+   "text": "- Chasing After Objectives Hit: Once the higher time frame target is met, expect a new phase of price."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Use protected swings as structural invalidation points for precise stop-loss placement."
+  },
+  {
+   "t": "li",
+   "text": "- Adjust to candle body or wait for continuations to improve Risk : Reward."
+  },
+  {
+   "t": "li",
+   "text": "- Always confirm with a close over the candle series that made the liquidity run"
+  },
+  {
+   "t": "li",
+   "text": "- Trail your stop with new protected swings to stay in the move."
+  },
+  {
+   "t": "li",
+   "text": "- Combine with other phases of price for a complete trading model."
+  },
+  {
+   "t": "p",
+   "text": "By mastering protected swing-based invalidation, you give your trades structure, clarity, and an edge."
+  }
+ ]
+}

@@ -1,0 +1,319 @@
+{
+ "slug": "how-to-have-better-stop-losses-for-trading-ttfm",
+ "id": 7129,
+ "url": "https://ttrades.com/how-to-have-better-stop-losses-for-trading-ttfm/",
+ "title": "How to Have Better Stop Losses for Trading (TTFM)",
+ "date": "2026-10-17T11:15:00",
+ "modified": "2026-10-16T13:53:28",
+ "categories": [
+  "Fractal Model"
+ ],
+ "courses": [
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 6
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/10/TTrades-Stop-Losses.pdf"
+ ],
+ "videos": [
+  "CerC0rE9Rp0"
+ ],
+ "description": "Learn to refine trading stop losses using the opposing run, 50% level, swing points, and candle bodies in the TTrades Fractal Model.",
+ "keywords": [],
+ "section": [
+  "Fractal Model"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Stop losses are a key part of trading, but knowing where to place them can make a significant difference in how a trade plays out. A stop loss should mark the point where your trade idea is invalidated, not simply the closest place you can put it to improve your risk to reward."
+  },
+  {
+   "t": "p",
+   "text": "Within the Fractal Model, there are two main options for stop placement. You can place your stop at the swing point, or you can refine it to the candle body. The important part is knowing when each option is valid."
+  },
+  {
+   "t": "p",
+   "text": "In this breakdown, we will cover how to measure the opposing run, use the 50% level to determine whether a stop can be refined, and recognize when a tighter stop could take you out of a trade that is still valid."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is a Stop Loss?"
+  },
+  {
+   "t": "p",
+   "text": "A stop loss marks the point where your trade idea is wrong. If price reaches that level, the idea has been invalidated, and you should not expect the trade to reach its intended target."
+  },
+  {
+   "t": "p",
+   "text": "Within the TTrades Fractal Model, the general approach is to place the stop loss at the swing point of a continuation or protected swing."
+  },
+  {
+   "t": "p",
+   "text": "For example, once a protected swing forms, you can enter the trade and place your stop at the swing low for a bullish setup or the swing high for a bearish setup."
+  },
+  {
+   "t": "p",
+   "text": "This gives the trade room to develop while keeping the stop tied to the structure that supports your idea."
+  },
+  {
+   "t": "p",
+   "text": "However, sometimes you may want to refine your stop loss to improve your risk to reward. When doing this, you need to make sure the refined stop does not interfere with the actual invalidation of the trade."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/STOP-LOSS-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Two Stop Loss Options"
+  },
+  {
+   "t": "p",
+   "text": "There are two main options when placing your stop loss within the Fractal Model."
+  },
+  {
+   "t": "p",
+   "text": "• The swing point: This is the general stop placement and gives price more room to move while the structure remains valid."
+  },
+  {
+   "t": "p",
+   "text": "• The candle body: This is the refined option, which can reduce the distance to your stop and improve your risk to reward."
+  },
+  {
+   "t": "p",
+   "text": "Both options can be valid, but you cannot automatically assume that placing your stop at the candle body is safe. The opposing run determines whether that refinement is mechanically valid."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/Stop-loss-place.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is the Opposing Run?"
+  },
+  {
+   "t": "p",
+   "text": "The opposing run is the range you measure to determine how far price can retrace while the current structure remains valid."
+  },
+  {
+   "t": "p",
+   "text": "For a bullish continuation, identify the swing low you are trading away from and find the swing high that formed that low. For a bearish continuation, identify the swing high you are trading away from and find the swing low that formed that high."
+  },
+  {
+   "t": "p",
+   "text": "This gives you the opposing run."
+  },
+  {
+   "t": "p",
+   "text": "Once you identify the range, mark its 50% level. You can use the same approach used for measuring projections to establish this midpoint."
+  },
+  {
+   "t": "p",
+   "text": "The key rule is that your refined stop loss needs to be beyond the 50% level of the opposing run. Price can retrace to that midpoint and still respect the structure before continuing in the intended direction."
+  },
+  {
+   "t": "p",
+   "text": "If your stop is placed inside that area, you risk being stopped out before the trade is actually invalidated."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/Opposing-run.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Use the 50% Level to Refine Your Stop"
+  },
+  {
+   "t": "p",
+   "text": "Once you have marked the opposing run and its 50% level, compare that level with the candle body you want to use for your stop."
+  },
+  {
+   "t": "p",
+   "text": "If the opposing candle body is beyond the 50% level, you can use it as a refined stop. The swing point is still a valid option, but the body may give you better risk to reward."
+  },
+  {
+   "t": "p",
+   "text": "If the candle body does not extend beyond the 50% level, the refinement is not valid under this rule. In that case, use the swing point instead."
+  },
+  {
+   "t": "p",
+   "text": "This matters because price can move back into the area around the 50% level without invalidating the structure. A stop placed too close to the entry can be triggered during that retracement, even if price later continues in the direction you expected."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When Both Stop Loss Options Are Valid"
+  },
+  {
+   "t": "p",
+   "text": "Consider a bearish continuation that forms after a Candle 2 closure and a change in the state of delivery."
+  },
+  {
+   "t": "p",
+   "text": "You identify the opposing run by marking the high you are trading away from and the swing low that formed it. After marking the 50% level, you notice that the opposing candle body extends beyond that midpoint."
+  },
+  {
+   "t": "p",
+   "text": "In this situation, both the swing point and the candle body can be valid stop locations."
+  },
+  {
+   "t": "p",
+   "text": "You can choose the swing point for more room or use the candle body to refine the stop and potentially improve the risk to reward."
+  },
+  {
+   "t": "p",
+   "text": "The same principle applies to bullish setups. Measure the opposing run, mark the midpoint, and check whether the body you want to use is beyond that level."
+  },
+  {
+   "t": "p",
+   "text": "The decision comes from the structure, not simply from a preference for tighter stops."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/Valid.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When You Should Not Refine Your Stop Loss"
+  },
+  {
+   "t": "p",
+   "text": "Now consider a setup where the opposing run has been marked, but the candle bodies do not extend beyond its 50% level."
+  },
+  {
+   "t": "p",
+   "text": "If you place your stop at one of those bodies, price may retrace into the area, trigger your stop, and then continue in the intended direction."
+  },
+  {
+   "t": "p",
+   "text": "The problem is not necessarily the trade idea. The problem is that the refined stop does not give the trade enough room to remain valid through that retracement."
+  },
+  {
+   "t": "p",
+   "text": "In this situation, keep the stop at the opposing swing point."
+  },
+  {
+   "t": "p",
+   "text": "This is especially important when the candle bodies are small or shallow. If the body is close to the 50% level, there may not be enough room to refine the stop safely. Giving the trade more room can help you avoid being taken out while the structure remains intact."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/not-valid.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Applying the Rule to Continuations and Reversals"
+  },
+  {
+   "t": "p",
+   "text": "The same stop loss framework applies to both continuation and reversal entries."
+  },
+  {
+   "t": "p",
+   "text": "For a reversal, identify the swing point price is trading away from, then find the series of candles that created the change in the state of delivery. Measure the opposing run and mark its 50% level."
+  },
+  {
+   "t": "p",
+   "text": "For a continuation, identify the opposing swing and measure the range price is retracing against. Once again, check whether the candle body you want to use for your stop extends beyond the midpoint."
+  },
+  {
+   "t": "p",
+   "text": "In both cases, the rule remains the same. You can refine your stop to the body when it is beyond 50% of the opposing run. Otherwise, use the swing point."
+  },
+  {
+   "t": "p",
+   "text": "There is also an additional confirmation you can look for when refining a stop around a change in the state of delivery. Ideally, you want to see the 50% level of the relevant bodies respected as well. However, the primary mechanical requirement for stop placement remains that the stop is beyond 50% of the opposing run."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When the Swing Point Is Too Far Away"
+  },
+  {
+   "t": "p",
+   "text": "There are situations where using the swing point as your stop makes it difficult to achieve your intended risk to reward."
+  },
+  {
+   "t": "p",
+   "text": "For example, you may be looking to target a previous day’s low, but placing the stop at the full swing point means the trade no longer offers 2R to that target. Refining the stop to the candle bodies may make the trade more viable, provided the bodies are beyond the required 50% level."
+  },
+  {
+   "t": "p",
+   "text": "This is where refining your stop can be useful. It can reduce the distance between your entry and stop, allowing you to reach a short term target with better risk to reward."
+  },
+  {
+   "t": "p",
+   "text": "However, if the candle bodies do not meet the rule, do not force the refinement just to make the numbers work. A tighter stop is not automatically a better stop."
+  },
+  {
+   "t": "p",
+   "text": "You need to decide whether the trade offers a valid opportunity with the stop placement that the structure allows."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Refining Your Entry Versus Refining Your Stop"
+  },
+  {
+   "t": "p",
+   "text": "One of the most important distinctions is knowing when to refine your stop and when to refine your entry."
+  },
+  {
+   "t": "p",
+   "text": "If the candle bodies do not extend beyond 50% of the opposing run, placing your stop at the body could get you stopped out while the trade remains valid from the swing point."
+  },
+  {
+   "t": "p",
+   "text": "Instead of forcing a tighter stop, look for a more refined entry within an area that should be respected. A better entry can reduce the distance to your stop while allowing you to maintain a valid invalidation level."
+  },
+  {
+   "t": "p",
+   "text": "This approach keeps the focus on structure rather than trying to achieve better risk to reward by moving the stop too close to price."
+  },
+  {
+   "t": "p",
+   "text": "You may still get stopped out of a valid trade when you choose to refine your stop. That is a risk you accept when attempting to increase your potential R. The goal is to make sure the refinement follows the model’s rules, not to eliminate every losing trade."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Refining your stop loss can improve risk to reward, but only when the structure allows it. The candle body is not automatically a better stop location simply because it is closer to your entry."
+  },
+  {
+   "t": "p",
+   "text": "Use the opposing run to determine whether the body is beyond 50% of the measured range. If it is, you can use the body or the swing point. If it is not, keep the stop at the swing point or look for a more refined entry."
+  },
+  {
+   "t": "p",
+   "text": "The goal is not to use the tightest stop possible. It is to place your stop where the trade idea is invalidated while managing risk when trading the Fractal Model."
+  }
+ ]
+}

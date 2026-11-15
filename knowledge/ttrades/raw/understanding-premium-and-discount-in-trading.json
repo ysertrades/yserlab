@@ -1,0 +1,176 @@
+{
+ "slug": "understanding-premium-and-discount-in-trading",
+ "id": 4842,
+ "url": "https://ttrades.com/understanding-premium-and-discount-in-trading/",
+ "title": "Understanding Premium and Discount in Trading",
+ "date": "2025-06-17T11:34:00",
+ "modified": "2026-01-31T21:57:57",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 39
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/Discount_and_Premium_TTrades_PDF.pdf"
+ ],
+ "videos": [
+  "MlMsG7li9zY"
+ ],
+ "description": "Learn how premium and discount work in trading using ranges, fair value gaps, PD arrays, and risk to reward concepts.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Discount and premium are core concepts in ICT style trading, but they only make sense once you already understand buy side and sell side liquidity. This blog breaks down discount and premium step by step, explains how ranges are formed, and shows why these concepts matter for risk to reward and trade location. By the end, you’ll understand how to frame high probability long and short setups using real market examples."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Prerequisite: Buy Side and Sell Side Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "Before discount and premium can be applied correctly, you must understand liquidity. Buy side liquidity rests above highs, while sell side liquidity rests below lows. Discount and premium help determine where price is trading within a range relative to that liquidity."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Finding the Range"
+  },
+  {
+   "t": "p",
+   "text": "The first step in marking discount and premium is identifying a range. A range is typically defined by a clear swing high and a clear swing low. This should be the most prominent or relevant price leg in the area you are analyzing."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Range.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Once the range is identified, a Fibonacci retracement or range tool is applied. The key level within that range is the 0.5 Fibonacci, also known as equilibrium."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding Equilibrium, Premium, and Discount"
+  },
+  {
+   "t": "p",
+   "text": "The 0.5 Fibonacci represents equilibrium. Anything trading above the 0.5 level is considered premium, and anything trading below the 0.5 level is considered discount. Extending this range forward allows for a clearer visualization of where price is operating relative to equilibrium. This framework helps determine whether price is expensive or cheap within a specific range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/DP-EQ.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Ranges Within Ranges"
+  },
+  {
+   "t": "p",
+   "text": "One of the most confusing aspects of discount and premium is that there is never just one range. Price continuously creates new ranges as it moves. Larger external ranges can contain smaller internal ranges, and strong displacement moves often create entirely new ranges of their own."
+  },
+  {
+   "t": "p",
+   "text": "For example, a major swing can define a primary range. A pullback within that swing creates a secondary range. A strong impulsive move creates another range altogether. Each of these has its own equilibrium, premium, and discount. Understanding which range matters most depends on your timeframe and your trade objective."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Discount and Premium Matter"
+  },
+  {
+   "t": "p",
+   "text": "The primary reason traders use discount and premium is to improve risk to reward. If a trader enters a long position at equilibrium, places a stop at the low, and targets the high, the result is typically a one to one risk to reward. As entries move deeper into discount, the reward potential increases while risk remains relatively fixed."
+  },
+  {
+   "t": "p",
+   "text": "The same concept applies to short positions. Entering a short at equilibrium usually results in poor reward. Entering deeper into premium increases the reward relative to risk. This is why longs are best sought in discount and shorts are best sought in premium."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Frame-2057.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "PD Arrays and Trade Direction"
+  },
+  {
+   "t": "p",
+   "text": "Discount and premium are most effective when paired with PD arrays such as fair value gaps, order blocks, previous highs and lows, and opening prices. When seeking long trades, the focus should be on PD arrays located in discount."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/DIscount.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "When seeking short trades, the focus should be on PD arrays located in premium. This alignment ensures trades are taken where risk to reward is naturally favorable."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Premium-PD-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example: NQ 30-Minute Chart"
+  },
+  {
+   "t": "p",
+   "text": "On the NQ 30 minute chart, a clear swing low leads to a strong move higher. As price continues to expand upward, the equilibrium range must be tracked with it."
+  },
+  {
+   "t": "p",
+   "text": "Once price begins to retrace, attention shifts below equilibrium. This example shows how discount is respected within an uptrend."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Discount-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "p",
+   "text": "Discount and premium are range based concepts. The 0.5 Fibonacci defines equilibrium. Price continuously creates new ranges as it moves. High quality long trades are found in discount, while high quality short trades are found in premium. PD arrays provide precision, and better trade location leads to better risk to reward."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Conclusion"
+  },
+  {
+   "t": "p",
+   "text": "Discount and premium are not indicators. They are frameworks for understanding trade location. When combined with liquidity, PD arrays, and proper range selection, they bring clarity and structure to market analysis. Mastery comes with screen time, but once understood, these concepts dramatically improve trade quality and consistency."
+  }
+ ]
+}

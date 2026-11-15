@@ -1,0 +1,178 @@
+{
+ "slug": "mitigation-blocks-simplified",
+ "id": 4232,
+ "url": "https://ttrades.com/mitigation-blocks-simplified/",
+ "title": "Mitigation Blocks Simplified",
+ "date": "2025-07-06T11:00:00",
+ "modified": "2026-02-18T14:27:49",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 35
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/09/Mitigation-Blocks-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "bbWPoajy2MY"
+ ],
+ "description": "Learn how mitigation blocks work, how they differ from breaker blocks, and how to trade them with fair value gaps and SMT.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In trading, mitigation blocks are a powerful tool that can help refine entries and build confluence. While many traders are familiar with order blocks, breaker blocks, and fair value gaps, mitigation blocks often sit in the background as a less-discussed but highly effective element of price action. In this blog, we’ll walk through what a mitigation block is, how it differs from a breaker block, and where it can be applied effectively in live charts."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is a Mitigation Block?"
+  },
+  {
+   "t": "p",
+   "text": "A mitigation block occurs when price disrespects an old order block but then returns to retest it as a new area of interest. In simple terms, it’s when old supply or demand gets repurposed after being violated."
+  },
+  {
+   "t": "p",
+   "text": "Think of it like this,"
+  },
+  {
+   "t": "li",
+   "text": "- A breaker block forms after a liquidity sweep (e.g., price takes out a high before reversing lower)."
+  },
+  {
+   "t": "li",
+   "text": "- A mitigation block, however, doesn’t require a sweep, it can simply form after a failure swing, where price creates a lower low (in bearish context) or a higher high (in bullish context) without first taking liquidity."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Mit-Block.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "This makes mitigation blocks more subtle, and in some cases, less reliable unless paired with other factors."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Mitigation Blocks vs. Breaker Blocks"
+  },
+  {
+   "t": "p",
+   "text": "Here’s the key distinction between the two,"
+  },
+  {
+   "t": "li",
+   "text": "- Breaker Block, Formed when liquidity is swept (e.g., a high is taken out before a reversal)."
+  },
+  {
+   "t": "li",
+   "text": "- Mitigation Block, Formed from old order blocks that have been violated, but price later respects them as areas of accumulation or redistribution."
+  },
+  {
+   "t": "p",
+   "text": "Example structures,"
+  },
+  {
+   "t": "li",
+   "text": "- Breaker → Low → High → Lower Low → Higher High."
+  },
+  {
+   "t": "li",
+   "text": "- Mitigation → Low → High → Lower High → Lower Low."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trading Mitigation Blocks in Practice"
+  },
+  {
+   "t": "p",
+   "text": "While mitigation blocks can form frequently, not all of them are worth trading. Here’s what to watch for,"
+  },
+  {
+   "t": "li",
+   "text": "- High-Probability SetupsMitigation blocks overlapping with fair value gaps (FVGs) provide stronger reactions."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Fair-Value-Gaps.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- Mitigation blocks aligned with SMT divergence can add confidence. For example, if one index takes a low while another does not, the confluence strengthens the trade."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/SMT.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- Why Avoid Some Mitigation Blocks?Since they don’t require liquidity sweeps, they often result in failure swings.This creates choppy conditions where highs remain untaken, which can limit follow-through."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Mitigation Blocks Inside Market Maker Models"
+  },
+  {
+   "t": "p",
+   "text": "Mitigation blocks become even more powerful when viewed within the context of the Market Maker Model."
+  },
+  {
+   "t": "li",
+   "text": "- On the sell side of the curve, order blocks get violated."
+  },
+  {
+   "t": "li",
+   "text": "- Once structure shifts and the market reverses, those violated blocks can now serve as mitigation points."
+  },
+  {
+   "t": "li",
+   "text": "- Old bearish order blocks become potential bullish mitigation zones when dragged forward."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Mitigation blocks are repurposed order blocks after violation."
+  },
+  {
+   "t": "li",
+   "text": "- They differ from breaker blocks because they don’t require liquidity sweeps."
+  },
+  {
+   "t": "li",
+   "text": "- High-probability mitigation setups often align with fair value gaps, SMT divergence, or higher timeframe points of interest/"
+  },
+  {
+   "t": "li",
+   "text": "- Best applied within a structured framework like the Market Maker Model."
+  },
+  {
+   "t": "p",
+   "text": "Used properly, mitigation blocks can help refine entries, build stronger confluence, and highlight hidden liquidity zones that most traders overlook."
+  }
+ ]
+}

@@ -1,0 +1,254 @@
+{
+ "slug": "quit-moving-your-stop-loss-before-you-know-this-trailing-stop-loss",
+ "id": 6430,
+ "url": "https://ttrades.com/quit-moving-your-stop-loss-before-you-know-this-trailing-stop-loss/",
+ "title": "Quit Moving Your Stop Loss Before You Know This (Trailing Stop Loss)",
+ "date": "2026-07-25T11:20:00",
+ "modified": "2026-09-04T10:52:23",
+ "categories": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 22
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 18
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/07/TTrades-Trailing-Stop-Losses.pdf"
+ ],
+ "videos": [
+  "CKltGYiesHA"
+ ],
+ "description": "Learn when to trail your stop loss using protected swings. Discover how daily range, Fair Value Gaps, and CISD help manage continuation opportunities.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "One of the biggest mistakes traders make is moving their stop loss too early."
+  },
+  {
+   "t": "p",
+   "text": "Trailing a stop loss sounds simple, but doing it at the wrong time often turns good trades into unnecessary losses. Instead of allowing price to reach its draw on liquidity, traders move their stop without a valid reason and end up getting stopped out before the move is complete."
+  },
+  {
+   "t": "p",
+   "text": "Within the fractal model, a stop loss is only trailed when price gives a reason to do so. This guide explains how protected swings determine where a stop loss belongs, when it makes sense to trail your stop versus simply taking profit, and how the average daily range helps make that decision."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Most Traders Trail Their Stop Too Early"
+  },
+  {
+   "t": "p",
+   "text": "Many traders move their stop loss simply because price has moved in their favor."
+  },
+  {
+   "t": "p",
+   "text": "The problem is that price naturally retraces as it expands. If a stop loss is trailed to every small pullback, it will often be hit before price reaches its objective."
+  },
+  {
+   "t": "p",
+   "text": "Instead of asking, “How can profit be locked in?” the better question is:"
+  },
+  {
+   "t": "p",
+   "text": "Has price given a valid reason to move the stop loss?"
+  },
+  {
+   "t": "p",
+   "text": "Within the fractal model, that reason only comes from a new protected swing."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "A Stop Loss Should Only Be Trailed to a Protected Swing"
+  },
+  {
+   "t": "p",
+   "text": "Before a stop loss can be trailed correctly, it is important to understand what a protected swing is."
+  },
+  {
+   "t": "p",
+   "text": "A protected swing forms after price reacts from a valid point of interest, such as a swing high or low or a fair value gap (FVG), and then confirms that reaction with a candle closure. Once that protected swing is created, it becomes the next logical location for a stop loss when expecting continuation."
+  },
+  {
+   "t": "p",
+   "text": "A stop loss should never be trailed to every pullback."
+  },
+  {
+   "t": "p",
+   "text": "Instead, wait for price to form a new protected swing. If one hasn’t formed, the stop loss stays where it is."
+  },
+  {
+   "t": "p",
+   "text": "This simple rule prevents trailing a stop too aggressively while still allowing the trade enough room to develop."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/07/PRO-SWING.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Let the Higher Timeframe Wick Form First"
+  },
+  {
+   "t": "p",
+   "text": "Another common mistake is trailing a stop loss too quickly inside a higher timeframe candle."
+  },
+  {
+   "t": "p",
+   "text": "If continuation is expected, the higher timeframe wick should be allowed to form first."
+  },
+  {
+   "t": "p",
+   "text": "As explained throughout the fractal model, the goal is to let the wick form before trading the body. The same concept applies when managing an open position. If a stop loss is moved too high within the current higher timeframe candle, the next candle may simply form its wick before continuing, stopping the trade out unnecessarily."
+  },
+  {
+   "t": "p",
+   "text": "Waiting for the higher timeframe wick to form keeps the stop loss aligned with how price normally delivers."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Should You Trail Your Stop or Take Profit?"
+  },
+  {
+   "t": "p",
+   "text": "Trailing a stop loss is not always the best decision."
+  },
+  {
+   "t": "p",
+   "text": "Before moving a stop loss, ask two simple questions:"
+  },
+  {
+   "t": "li",
+   "text": "- How much of the daily range has already formed?"
+  },
+  {
+   "t": "li",
+   "text": "- How much room does price have left to reach its draw on liquidity?"
+  },
+  {
+   "t": "p",
+   "text": "If an entry is taken early in the move and there is still plenty of daily range available, trailing to new protected swings makes sense because price still has room to expand."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/07/TRAIl.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "However, if price has already completed most of its average daily range and the objective is close, trailing often works against the trade."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/07/takle.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "In those situations, price may reach a draw on liquidity, react, and reverse back into the stop loss before ever giving the larger continuation."
+  },
+  {
+   "t": "p",
+   "text": "Sometimes the better decision is simply to take profit at the objective rather than trying to squeeze more out of the move."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When Does Moving to Break Even Make Sense?"
+  },
+  {
+   "t": "p",
+   "text": "One of the most common questions traders ask is when to move a trade to break even."
+  },
+  {
+   "t": "p",
+   "text": "The answer is the same."
+  },
+  {
+   "t": "p",
+   "text": "A move to break even should not happen simply because price has moved in favor of the position. A stop loss should only be adjusted when price forms a new protected swing that supports doing so."
+  },
+  {
+   "t": "p",
+   "text": "That keeps every adjustment based on the model instead of emotion."
+  },
+  {
+   "t": "p",
+   "text": "If a protected swing forms around the entry, moving to break even can make sense. If it doesn’t, there isn’t a reason to move the stop loss yet."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "A Protected Swing Can Also Tell You When Conditions Are Changing"
+  },
+  {
+   "t": "p",
+   "text": "Protected swings don’t only help manage risk."
+  },
+  {
+   "t": "p",
+   "text": "They also provide information about the quality of the trend."
+  },
+  {
+   "t": "p",
+   "text": "A newly formed protected swing can also become invalidated. That doesn’t automatically mean the trade has failed, but it often indicates that price is beginning to consolidate or become more choppy instead of continuing to expand cleanly."
+  },
+  {
+   "t": "p",
+   "text": "Managing a stop loss isn’t just about protecting profit."
+  },
+  {
+   "t": "p",
+   "text": "It’s also about understanding what price is communicating as the trade develops."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Trailing a stop loss should never be automatic."
+  },
+  {
+   "t": "p",
+   "text": "Every adjustment should have a reason behind it."
+  },
+  {
+   "t": "p",
+   "text": "Within the fractal model, that reason is a new protected swing. By waiting for valid protected swings, respecting the higher timeframe wick, and considering the remaining daily range, price is given the room it needs to reach its draw on liquidity without getting stopped out too early."
+  },
+  {
+   "t": "p",
+   "text": "A good trade isn’t managed by moving the stop loss as quickly as possible."
+  },
+  {
+   "t": "p",
+   "text": "It’s managed by following the same framework that justified the trade in the first place."
+  }
+ ]
+}

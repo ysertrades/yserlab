@@ -1,0 +1,234 @@
+{
+ "slug": "how-to-identify-important-liquidity-levels",
+ "id": 4741,
+ "url": "https://ttrades.com/how-to-identify-important-liquidity-levels/",
+ "title": "How to Identify Important Liquidity Levels",
+ "date": "2025-06-24T11:00:00",
+ "modified": "2026-01-27T20:56:30",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 35
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/Important_Liquidity_Levels_TTrades_PDF.pdf"
+ ],
+ "videos": [
+  "YESqIoA7Wyg"
+ ],
+ "description": "Learn how to identify liquidity levels using highs, lows, sessions, and displacement to improve trade bias and entries.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this lesson, we’re breaking down how to identify important liquidity levels and why understanding their location is critical for framing bias, entries, and targets. This concept builds directly on kill zones and session timing. If you’re already familiar with those, this will help connect everything together. We’ll walk through how candles behave, how higher timeframe highs and lows act as liquidity magnets, and how session ranges can be used to structure trades throughout the day."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Three Things a Candlestick Can Do"
+  },
+  {
+   "t": "p",
+   "text": "Every candlestick only has three possible behaviors. Once you understand these, price action becomes much easier to read."
+  },
+  {
+   "t": "p",
+   "text": "The first is consolidation.This happens when a candle fails to take out the previous candle’s high or the previous candle’s low. In this situation, price is balanced and ranging, and liquidity on both sides remains untouched."
+  },
+  {
+   "t": "p",
+   "text": "The second is taking one side of the range.Here, price reaches either buy side liquidity above a previous high or sell side liquidity below a previous low, but not both. This usually results in a directional candle and gives insight into short term intent."
+  },
+  {
+   "t": "p",
+   "text": "The third is taking both sides of the range.In this case, price runs both buy side and sell side liquidity within the same candle. These candles are often associated with stop runs, manipulation, or transitions between phases."
+  },
+  {
+   "t": "p",
+   "text": "If price is not consolidating, it is reasonable to anticipate price reaching for a previous high, a previous low, or in some cases both."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Candles.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Previous Highs and Lows Matter"
+  },
+  {
+   "t": "p",
+   "text": "Liquidity naturally pools above highs and below lows. Because of this, price is constantly being drawn toward these areas unless it remains in consolidation."
+  },
+  {
+   "t": "p",
+   "text": "Marking highs and lows across multiple timeframes helps frame draws on liquidity, anticipate reversals, and maintain directional bias. These levels act as reference points rather than predictions."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Previous Month’s High and Low"
+  },
+  {
+   "t": "p",
+   "text": "On the monthly timeframe, previous highs and lows act as major liquidity anchors."
+  },
+  {
+   "t": "p",
+   "text": "Price often reaches a previous month’s low and reacts or reverses, reaches a previous month’s high before rejecting or continuing, or uses these levels to define the next month’s range. Unless price is consolidating, it is typically seeking one side of the prior month’s range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Monthly.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Previous Week’s High and Low"
+  },
+  {
+   "t": "p",
+   "text": "The same idea applies on the weekly timeframe, but with more frequent interaction."
+  },
+  {
+   "t": "p",
+   "text": "Weekly highs and lows are useful for framing intermediate term bias, identifying weekly reversals, and determining whether price is expanding or balancing. When price displaces and closes beyond a weekly level, it often signals continuation toward the opposite side of the range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Weekly.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Previous Day’s High and Low"
+  },
+  {
+   "t": "p",
+   "text": "Previous day highs and lows are some of the most practical liquidity tools for intraday trading."
+  },
+  {
+   "t": "p",
+   "text": "They are frequently used as intraday targets, stop run zones, and reversal points. In trending conditions, price often draws toward one of these levels. When price sweeps one side and fails to continue, that failure itself provides valuable information."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Daily.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding Session Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "Before using session liquidity, it’s important to know when the sessions occur. For indices, the focus is typically on the Asia session, the London session, and the New York AM session."
+  },
+  {
+   "t": "p",
+   "text": "Each session forms its own high and low. Once formed, these levels can be used later in the day as liquidity references."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Killzone.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How Session Highs and Lows Are Used"
+  },
+  {
+   "t": "p",
+   "text": "Session ranges help reveal intent."
+  },
+  {
+   "t": "p",
+   "text": "If price fails to displace above a session high, the probability of a move toward the session low increases. Strong displacement through a session low often signals continuation and expansion."
+  },
+  {
+   "t": "p",
+   "text": "London commonly provides manipulation, while New York tends to deliver distribution. Observing how price reacts around Asia and London ranges often provides clarity on New York direction."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Sessions.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Displacement to Confirm Direction"
+  },
+  {
+   "t": "p",
+   "text": "Displacement is a key confirmation tool."
+  },
+  {
+   "t": "p",
+   "text": "When price sweeps a session high, fails to continue, and then displaces strongly in the opposite direction, that sequence often sets up continuation during the New York session. Areas created by displacement frequently act as inversion levels as price continues."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Aligning Monthly, Daily, and Intraday Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "The highest quality setups occur when multiple timeframes align."
+  },
+  {
+   "t": "p",
+   "text": "A typical sequence involves monthly bias pointing toward a previous high or low, daily price action confirming with displacement or a shift in structure, and intraday sessions providing precise execution through liquidity sweeps and displacement."
+  },
+  {
+   "t": "p",
+   "text": "This top down approach allows entries to remain precise while targets stay logical and objective."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Putting It All Together"
+  },
+  {
+   "t": "p",
+   "text": "Liquidity levels are reference points that reflect trader behavior. By consistently marking previous highs and lows and observing how price reacts around them, structure becomes easier to interpret."
+  },
+  {
+   "t": "p",
+   "text": "When candle behavior, higher timeframe liquidity, session ranges, and displacement align, trade ideas become clearer and more repeatable."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Conclusion"
+  },
+  {
+   "t": "p",
+   "text": "Understanding where liquidity resides gives context to every move price makes. Instead of reacting emotionally, you begin anticipating where price is likely to go and why. When liquidity aligns across timeframes and sessions, execution becomes structured and intentional rather than reactive."
+  }
+ ]
+}

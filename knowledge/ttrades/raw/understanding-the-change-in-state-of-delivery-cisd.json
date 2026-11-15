@@ -1,0 +1,162 @@
+{
+ "slug": "understanding-the-change-in-state-of-delivery-cisd",
+ "id": 4297,
+ "url": "https://ttrades.com/understanding-the-change-in-state-of-delivery-cisd/",
+ "title": "Understanding The Change in State of Delivery (CISD)",
+ "date": "2025-06-29T11:34:00",
+ "modified": "2026-09-04T10:30:12",
+ "categories": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 6
+  },
+  {
+   "course": "ICT Core Concepts",
+   "n": 32
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/09/CISD-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "CHIK5oBRKiw"
+ ],
+ "description": "Learn how to identify CISD in trading. Spot market shifts, refine entries with order blocks, and target liquidity with precision.",
+ "keywords": [],
+ "section": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "One of the most valuable skills in trading is being able to spot when the market is shifting direction. The Change in State of Delivery (CISD) is a key concept that helps traders identify these shifts with clarity. In this blog, we’ll explore what CISD means, how it forms, and why it is such an important confirmation tool in price action trading."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is the Change in State of Delivery (CISD)?"
+  },
+  {
+   "t": "p",
+   "text": "The change in the state of delivery occurs when price action transitions from bullish to bearish, or from bearish to bullish. It signals that the market is no longer delivering in its previous direction and is preparing to move the other way."
+  },
+  {
+   "t": "li",
+   "text": "- Bullish to Bearish: Price forms a series of up-close candles, then closes below the opening price of those candles."
+  },
+  {
+   "t": "li",
+   "text": "- Bearish to Bullish: Price forms a series of down-close candles, then closes above the opening price of those candles."
+  },
+  {
+   "t": "p",
+   "text": "When there are multiple candles, the key level to watch is the opening price of the first candle in the sequence."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/CISD-1-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why CISD Matters in Trading"
+  },
+  {
+   "t": "p",
+   "text": "The significance of the change in state of delivery lies in what it reveals about market intent. It shows:"
+  },
+  {
+   "t": "li",
+   "text": "- A liquidity sweep has likely taken place above a high or below a low."
+  },
+  {
+   "t": "li",
+   "text": "- The previous delivery is no longer valid and has been rejected."
+  },
+  {
+   "t": "li",
+   "text": "- Price is now likely to deliver in the opposite direction."
+  },
+  {
+   "t": "p",
+   "text": "This makes CISD a strong tool to combine with higher time frame levels like order blocks, liquidity pools, or fair value gaps."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Visual Example of CISD"
+  },
+  {
+   "t": "p",
+   "text": "CISD can be seen clearly on charts:"
+  },
+  {
+   "t": "li",
+   "text": "- Bullish to Bearish: Price sweeps a prior high, prints up-close candles, then closes back below their opening price."
+  },
+  {
+   "t": "li",
+   "text": "- Bearish to Bullish: Price sweeps a prior low, prints down-close candles, then closes back above their opening price."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/CISD-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "These confirmations often occur after manipulation and provide traders with precise entry opportunities. Look to pair with SMT for additional confluence."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "A Simple Workflow for Trading CISD"
+  },
+  {
+   "t": "p",
+   "text": "To trade using the change in state of delivery, follow this process:"
+  },
+  {
+   "t": "li",
+   "text": "1. Watch for liquidity sweeps at obvious highs or lows."
+  },
+  {
+   "t": "li",
+   "text": "2. Wait for a close against the previous direction to confirm CISD."
+  },
+  {
+   "t": "li",
+   "text": "3. Refine entries using order blocks or fair value gaps near the CISD level."
+  },
+  {
+   "t": "li",
+   "text": "4. Target liquidity pools, swing highs/lows, or other key levels."
+  },
+  {
+   "t": "p",
+   "text": "This structured approach filters out false moves and keeps entries aligned with confirmed shifts."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "The change in state of delivery is one of the clearest signals that the market is about to transition. By waiting for CISD confirmation, traders can avoid premature entries and align themselves with the true direction of delivery."
+  }
+ ]
+}

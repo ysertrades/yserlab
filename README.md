@@ -19,8 +19,19 @@ No slash commands. Everything is Components V2.
 | `OWNER_ID` | your Discord user id (more than one: comma separated) |
 | `SUPABASE_SERVICE_KEY` | the project's service_role key (secret) |
 | `SUPABASE_URL` | optional, defaults to the YSER project |
-| `GEMINI_API_KEY` | for the AI; without it everything else still works |
-| `GEMINI_MODEL` | optional, default `gemini-2.5-flash` |
+| `GROQ_API_KEY` | the chat AI (Groq, `openai/gpt-oss-120b`; each request is capped at 8000 tokens, so the bot sends only the passages that match the question) |
+| `GEMINI_API_KEY` | the AI's fallback, which has room for the whole model and many lessons; without any AI key everything else still works |
+| `GEMINI_MODEL` | optional, default `gemini-flash-lite-latest` |
+
+## The education center (what the AI has studied)
+`knowledge/ttrades/kb.json` holds the whole TTrades Trading Education Center: every lesson's article, what each diagram teaches (read by Gemini vision), the PDF handouts, the video transcripts, a study note per lesson and a course overview. `src/knowledge.js` searches it per question. To rebuild after the site changes (needs `GEMINI_API_KEY` in `.env`):
+
+```
+node scripts/education/crawl.js       # lessons, structure, images, PDF and video links
+node scripts/education/enrich.js      # read images, PDFs and video transcripts (resumable, slow)
+node scripts/education/summarize.js   # study note per lesson and per course
+node scripts/education/build.js       # assemble kb.json
+```
 
 Start command: `npm install && node src/index.js` (startup file `src/index.js`).
 

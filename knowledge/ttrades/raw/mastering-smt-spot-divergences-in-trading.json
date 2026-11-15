@@ -1,0 +1,146 @@
+{
+ "slug": "mastering-smt-spot-divergences-in-trading",
+ "id": 4227,
+ "url": "https://ttrades.com/mastering-smt-spot-divergences-in-trading/",
+ "title": "Mastering SMT: Spot Divergences in Trading",
+ "date": "2025-07-07T11:00:00",
+ "modified": "2026-02-18T14:30:45",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 34
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/09/SMT-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "27S9gjgcSlI"
+ ],
+ "description": "Learn how to use Smart Money Techniques (SMT) in trading. Spot divergences in correlated assets, confirm reversals, and refine entries for stronger setups.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Smart Money Techniques (SMT) are a powerful way to understand price action when comparing correlated or inversely correlated markets. By spotting divergences between assets that typically move together, traders can identify when strength or weakness is entering the market. This doesn’t mean SMT should be used as a full trading strategy on its own, but rather as a confluence tool to confirm trade ideas built on other models."
+  },
+  {
+   "t": "p",
+   "text": "In this blog, we’ll cover what SMT is, how to identify it, and how to apply it as part of your trading approach."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is SMT?"
+  },
+  {
+   "t": "p",
+   "text": "SMT stands for Smart Money Techniques and at its core it is about divergence. When two assets are correlated, they usually move in sync. If they break that relationship, it can be a signal of imbalance."
+  },
+  {
+   "t": "p",
+   "text": "Examples of correlation include:• ES (S&P 500 futures) and NQ (NASDAQ futures), which usually rise and fall together• EUR/USD and GBP/USD, which often track closely since both are paired against the U.S. dollar• EUR/USD and the U.S. Dollar Index (DXY), which are inversely correlated"
+  },
+  {
+   "t": "p",
+   "text": "An SMT divergence occurs when one asset confirms structure while the other diverges, creating an opportunity to anticipate a reversal or continuation."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Examples of SMT Divergence"
+  },
+  {
+   "t": "p",
+   "text": "Here are the two common types:"
+  },
+  {
+   "t": "li",
+   "text": "- Bullish SMTAsset A makes a lower low, while Asset B makes a higher low. This shows relative strength and often signals a bullish reversal."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Bullishj-SMT.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- Bearish SMTAsset A makes a higher high, while Asset B makes a lower high. This shows relative weakness and often signals a bearish reversal."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Bearish-SMT.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using SMT as Confluence"
+  },
+  {
+   "t": "p",
+   "text": "SMT works best as confirmation, not as the reason for a trade. The idea is to pair it with higher time frame bias and setups from your overall trading model."
+  },
+  {
+   "t": "p",
+   "text": "For example:• If you’re looking for a short from a daily fair value gap, seeing SMT divergence at the session high can strengthen the setup.• If you’re waiting on a reversal at a liquidity pool, SMT can give confidence to hold the bias."
+  },
+  {
+   "t": "p",
+   "text": "By combining SMT with concepts like order blocks, breaker blocks, and liquidity sweeps, you refine entries and filter out unnecessary losses."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Practical Scenarios"
+  },
+  {
+   "t": "p",
+   "text": "• Futures trading exampleES makes a higher high, but NQ does not. That divergence suggests weakness and a possible short."
+  },
+  {
+   "t": "p",
+   "text": "• News-driven exampleDuring events like CPI, one market may sweep liquidity while the other holds. This divergence often highlights the move is fake and price will trade in the other direction."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Lower Timeframe SMTs"
+  },
+  {
+   "t": "p",
+   "text": "SMT can also refine entries on lower time frames. For instance, if you have a higher time frame level such as a 1-hour fair value gap, dropping down to a 5-minute chart and spotting SMT divergence there can give you precision for an entry model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "SMT in Fair Value Gaps"
+  },
+  {
+   "t": "p",
+   "text": "Another way SMT appears is within premium or discount arrays such as fair value gaps. If one asset retraces into the gap while the other does not, that is a divergence. It acts like a built-in lower timeframe confirmation without needing to drill down further."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Smart Money Techniques should be seen as a lens, not the whole strategy. They work best when combined with higher timeframe narrative, structure shifts, and other tools like fair value gaps or order blocks. By practicing spotting SMT divergences across correlated markets, you’ll add another layer of confluence to your trading decisions."
+  }
+ ]
+}

@@ -1,0 +1,186 @@
+{
+ "slug": "ttrades-scalping-model-simple-day-trading-strategy",
+ "id": 4956,
+ "url": "https://ttrades.com/ttrades-scalping-model-simple-day-trading-strategy/",
+ "title": "TTrades Scalping Model – Simple Day Trading Strategy",
+ "date": "2026-02-07T11:00:00",
+ "modified": "2026-09-04T11:23:13",
+ "categories": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 40
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 40
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/02/TTrades-Scalping-Model-2.pdf"
+ ],
+ "videos": [
+  "eywpZT3z6GQ"
+ ],
+ "description": "Learn the TTrades scalping model using hourly bias, fifteen minute swings, and one minute entries with fractal structure and fair value gaps.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this lesson, we are breaking down how to scalp using the TTrades Fractal Model from start to finish. The goal is to show how higher time frame context flows down into precise lower time frame execution, allowing you to scalp with structure instead of randomness. This model focuses on aligning bias, swing structure, and execution so every trade has a clear narrative behind it."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Core Concept of the TTrades Scalping Model"
+  },
+  {
+   "t": "p",
+   "text": "Even though this is a scalping strategy, it is built from the top down. Lower time frames move fast and can easily trap traders who ignore context. The solution is anchoring your trades to a higher time frame candle and using fractals to enter with precision."
+  },
+  {
+   "t": "p",
+   "text": "The structure works as follows• Daily chart sets the broader directional context• Hourly chart defines the scalping bias• Fifteen minute chart forms the swing structure• One minute chart is used for execution"
+  },
+  {
+   "t": "p",
+   "text": "At its core, you are trading the body of an hourly candle using lower time frame price action."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Establishing Hourly Bias"
+  },
+  {
+   "t": "p",
+   "text": "For scalping, the hourly chart replaces the daily as the primary decision making time frame. The objective is to anticipate where the next hourly candle is likely to expand."
+  },
+  {
+   "t": "p",
+   "text": "This is done by identifying candle two or candle three closures on the hourly chart. When these closures occur after liquidity interaction or fair value gap displacement, they often lead to expansion."
+  },
+  {
+   "t": "p",
+   "text": "When expansion is expected, that becomes the bias. Without this bias, lower time frame setups lose their reliability."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/Hourly-Bias.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Finding the Fifteen Minute Swing Point"
+  },
+  {
+   "t": "p",
+   "text": "Once the hourly bias is defined, price action is analyzed on the fifteen minute chart. The purpose of this step is to find the swing point that is forming the wick of the hourly candle."
+  },
+  {
+   "t": "p",
+   "text": "You are looking for a clean swing low or swing high that aligns with the hourly narrative. A candle two closure at this level gives confirmation that price is preparing to continue in the direction of the hourly bias."
+  },
+  {
+   "t": "p",
+   "text": "If the fifteen minute structure supports the hourly expansion, you can confidently move to execution."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/15m-swing.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Entry"
+  },
+  {
+   "t": "p",
+   "text": "The one minute chart is where the trade is executed, not where decisions are made. By the time price reaches this time frame, the narrative should already be clear."
+  },
+  {
+   "t": "p",
+   "text": "On the one minute chart, you are looking for continuation behavior such as• Fair value gap interaction• Change in the state of delivery• Protected swing formation"
+  },
+  {
+   "t": "p",
+   "text": "Stops are placed at logical protected swings, and targets are based on higher time frame objectives rather than arbitrary scalping exits."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/1m.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What You Are Actually Trading"
+  },
+  {
+   "t": "p",
+   "text": "This model becomes much clearer once you understand what is truly being traded."
+  },
+  {
+   "t": "p",
+   "text": "You are trading the body of an hourly expansion candle while the lower time frames form its wick. The fifteen minute and one minute charts are simply tools used to enter that hourly move efficiently."
+  },
+  {
+   "t": "p",
+   "text": "When viewed this way, scalping becomes controlled and intentional instead of reactive."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/1h-15m-1m.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example NQ Bearish Scenario"
+  },
+  {
+   "t": "p",
+   "text": "In a bearish environment on NQ. There is a candle 2 closure on the hourly chart which sets up a candle 3 expansion. Within the candle 3 expansion candle, find the 15 minute and 1 minute fractal model with a protected swing to trade the expansion."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/scalping-model-png.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "The TTrades Scalping Model is not about speed or prediction. It is about alignment."
+  },
+  {
+   "t": "p",
+   "text": "When the hourly bias is clear, the fifteen minute structure confirms it, and the one minute executes it, scalping becomes structured and repeatable."
+  },
+  {
+   "t": "p",
+   "text": "This is how you scalp with context rather than emotion."
+  }
+ ]
+}

@@ -1,0 +1,273 @@
+{
+ "slug": "standard-deviation-projections-combined-with-amd-accumulation-manipulation-distribution",
+ "id": 4679,
+ "url": "https://ttrades.com/standard-deviation-projections-combined-with-amd-accumulation-manipulation-distribution/",
+ "title": "Standard Deviation Projections Combined With AMD (Accumulation, Manipulation, Distribution)",
+ "date": "2025-06-27T11:30:00",
+ "modified": "2026-01-21T13:57:11",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 37
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/PO3AMD-Standard-Deviation-Project-TTrades.PDF.pdf"
+ ],
+ "videos": [
+  "Pcbyc9TdNsU"
+ ],
+ "description": "Learn how to combine standard deviation projections with accumulation, manipulation, and distribution for higher probability trades.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this lesson, we’re going to break down how to combine standard deviation projections with Accumulation, Manipulation, and Distribution (AMD). This approach adds objective targets to an already powerful framework, helping you anticipate where price is likely to deliver after manipulation occurs. By the end, you’ll understand how to identify the manipulation leg, project it forward, and align entries using structure, order blocks, and fair value gaps."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "A Brief Review of Accumulation, Manipulation, and Distribution"
+  },
+  {
+   "t": "p",
+   "text": "Before diving into projections, let’s quickly ground the concept."
+  },
+  {
+   "t": "p",
+   "text": "AMD is a three-phase price behavior:"
+  },
+  {
+   "t": "li",
+   "text": "- Accumulation: consolidation or range-bound price action."
+  },
+  {
+   "t": "li",
+   "text": "- Manipulation: a false move or fake breakout designed to trap participants."
+  },
+  {
+   "t": "li",
+   "text": "- Distribution: the real directional move, opposite the manipulation."
+  },
+  {
+   "t": "p",
+   "text": "On a candlestick chart, this typically appears as price consolidating, making an aggressive move outside the range, then sharply reversing and delivering in the opposite direction."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/AMD-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Identifying the Manipulation Leg"
+  },
+  {
+   "t": "p",
+   "text": "When applying standard deviation projections, the most important piece is the manipulation leg itself."
+  },
+  {
+   "t": "p",
+   "text": "Instead of projecting random swings, we focus on:"
+  },
+  {
+   "t": "li",
+   "text": "- The leg that created the high before the real sell-off"
+  },
+  {
+   "t": "li",
+   "text": "- The leg that created the low before the real buy-side expansion"
+  },
+  {
+   "t": "p",
+   "text": "This often aligns with:"
+  },
+  {
+   "t": "li",
+   "text": "- A breaker formation"
+  },
+  {
+   "t": "li",
+   "text": "- A change in state of delivery"
+  },
+  {
+   "t": "li",
+   "text": "- A market structure shift"
+  },
+  {
+   "t": "p",
+   "text": "Once identified, we measure from the high to the low, or low to high, of that manipulation leg and project it forward."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/AMDD.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Standard Deviation Targets That Matter"
+  },
+  {
+   "t": "p",
+   "text": "When projecting the manipulation leg, there are two areas I prioritize."
+  },
+  {
+   "t": "li",
+   "text": "- The -2 to -2.5 standard deviationThis is the first high-probability reaction zone and often acts as a partial or full target."
+  },
+  {
+   "t": "li",
+   "text": "- The -4 standard deviationThis is the max expansion target when momentum and structure support continuation."
+  },
+  {
+   "t": "p",
+   "text": "These levels give us objective delivery zones instead of guessing how far price might go."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/Standard-dev.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Combining AMD and Projections"
+  },
+  {
+   "t": "p",
+   "text": "In the next example, we integrate AMD with projections"
+  },
+  {
+   "t": "p",
+   "text": "Here’s how it works:"
+  },
+  {
+   "t": "li",
+   "text": "- Identify consolidation using candle bodies"
+  },
+  {
+   "t": "li",
+   "text": "- Anything beyond the box becomes potential manipulation"
+  },
+  {
+   "t": "li",
+   "text": "- Expect distribution back through or beyond the range"
+  },
+  {
+   "t": "p",
+   "text": "Once manipulation is identified:"
+  },
+  {
+   "t": "li",
+   "text": "- Measure the manipulation leg from the high to the low that made the high"
+  },
+  {
+   "t": "li",
+   "text": "- Use the CISD as your entry reference"
+  },
+  {
+   "t": "li",
+   "text": "- Target the proejctions"
+  },
+  {
+   "t": "p",
+   "text": "Focus on a “V-Shaped” reversal at the manipulation point."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/combo.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "AMD Across Trading Sessions"
+  },
+  {
+   "t": "p",
+   "text": "In the final example, we apply AMD between sessions."
+  },
+  {
+   "t": "p",
+   "text": "A common session-based narrative:"
+  },
+  {
+   "t": "li",
+   "text": "- Asia accumulates"
+  },
+  {
+   "t": "li",
+   "text": "- London manipulates"
+  },
+  {
+   "t": "li",
+   "text": "- New York distributes"
+  },
+  {
+   "t": "p",
+   "text": "Asia forms a clean consolidation range. As London opens, price aggressively sweeps the Asia high or low, then displaces back inside. This confirms London manipulation."
+  },
+  {
+   "t": "p",
+   "text": "From there:"
+  },
+  {
+   "t": "li",
+   "text": "- Identify the Manipulation"
+  },
+  {
+   "t": "li",
+   "text": "- Project from that low to the high that made it or from the high to the low that made it"
+  },
+  {
+   "t": "li",
+   "text": "- The -2 to -2.5 standard deviation aligns with a failure swing and prior highs"
+  },
+  {
+   "t": "p",
+   "text": "As New York approaches:"
+  },
+  {
+   "t": "li",
+   "text": "- Price retraces into a point of interest including a Fair Value Gap or sweeping out liquidity"
+  },
+  {
+   "t": "li",
+   "text": "- Entry can be taken with stops below the London low or new protected low"
+  },
+  {
+   "t": "li",
+   "text": "- Target is the projections"
+  },
+  {
+   "t": "p",
+   "text": "Price delivers as expected, completing the AMD cycle across sessions."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "By combining standard deviation projections with AMD, you gain clear manipulation identification, objective delivery targets, and better trade management. This framework removes much of the ambiguity and helps you stay aligned with how price typically delivers after manipulation."
+  }
+ ]
+}

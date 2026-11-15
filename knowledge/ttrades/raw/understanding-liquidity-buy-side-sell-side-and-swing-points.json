@@ -1,0 +1,259 @@
+{
+ "slug": "understanding-liquidity-buy-side-sell-side-and-swing-points",
+ "id": 4861,
+ "url": "https://ttrades.com/understanding-liquidity-buy-side-sell-side-and-swing-points/",
+ "title": "Understanding Liquidity: Buy Side, Sell Side, and Swing Points",
+ "date": "2025-06-16T09:25:00",
+ "modified": "2026-09-04T10:15:53",
+ "categories": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 3
+  },
+  {
+   "course": "ICT Core Concepts",
+   "n": 40
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/Liquidity_Buyside_and_Sellside_TTrades_PDF.pdf"
+ ],
+ "videos": [
+  "U8xH2dEgH5A"
+ ],
+ "description": "Learn buy side liquidity, sell side liquidity, swing points, equal highs and lows, session highs and lows, and how price targets liquidity.",
+ "keywords": [],
+ "section": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Liquidity is one of the most important concepts in trading, yet it’s often misunderstood. In this blog, we’re going to break down buy side liquidity, sell side liquidity, and how they relate to swing points, old highs and lows, equal highs and equal lows, and key time based liquidity levels. The goal is to help you clearly see where liquidity is resting and why price is naturally drawn to those areas."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Are Swing Points and Why They Matter"
+  },
+  {
+   "t": "p",
+   "text": "Before we talk about liquidity, we need to understand swing points, because swing points are how we identify where liquidity is resting."
+  },
+  {
+   "t": "p",
+   "text": "A swing low is formed when there is a low with a higher low to the left and a higher low to the right."
+  },
+  {
+   "t": "p",
+   "text": "A swing high is formed when there is a high with a lower high to the left and a lower high to the right."
+  },
+  {
+   "t": "p",
+   "text": "These structures matter because they reveal trader behavior and decision making in the market."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Swing-High-and-Low.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trader Psychology Behind Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "To understand liquidity, you need to understand how most traders manage risk."
+  },
+  {
+   "t": "p",
+   "text": "When a trader goes long, they typically place their stop below a swing low.When a trader goes short, they typically place their stop above a swing high."
+  },
+  {
+   "t": "p",
+   "text": "This means stops resting below lows are sell stops, and stops resting above highs are buy stops. This collective behavior is what creates liquidity."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Buy Side vs Sell Side Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "With trader psychology in mind, liquidity can be defined clearly."
+  },
+  {
+   "t": "p",
+   "text": "Sell side liquidity refers to the stops resting below swing lows.Buy side liquidity refers to the stops resting above swing highs."
+  },
+  {
+   "t": "p",
+   "text": "Smart money looks to use these areas to efficiently enter or exit positions, which is why price is consistently drawn toward obvious highs and lows."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/bs-ss-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Practicing Swing Point Identification"
+  },
+  {
+   "t": "p",
+   "text": "When you begin marking swing points on a chart, focus on obvious highs and lows, especially on higher timeframes like the four hour chart."
+  },
+  {
+   "t": "p",
+   "text": "As price evolves, swing points are constantly being created and removed. Once a swing high is taken, that buy side liquidity is no longer relevant, and attention shifts to the next clear high. The same applies to swing lows and sell side liquidity."
+  },
+  {
+   "t": "p",
+   "text": "Over time, you will notice a repeating cycle where price forms swing points, targets liquidity, and then shifts focus to the next available area."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Old Highs, Old Lows, and Equal Highs and Lows"
+  },
+  {
+   "t": "p",
+   "text": "There are two main structural liquidity types that show up consistently."
+  },
+  {
+   "t": "p",
+   "text": "Old highs and old lows refer to a single, clear swing high or swing low from the past. These levels often act as magnets for future price."
+  },
+  {
+   "t": "p",
+   "text": "Equal highs and equal lows occur when two or more swing points form at nearly the same price. This clusters liquidity together and makes these levels even more attractive targets for price."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/OLD-HIGH-LOW.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Higher Timeframe Liquidity Levels to Always Track"
+  },
+  {
+   "t": "p",
+   "text": "Certain liquidity levels consistently influence price behavior and should always be on your radar."
+  },
+  {
+   "t": "p",
+   "text": "Previous week high and lowPrevious day high and lowSession highs and session lows"
+  },
+  {
+   "t": "p",
+   "text": "These levels help frame directional bias, identify potential reversals, and define likely price objectives."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Previous Week High and Low"
+  },
+  {
+   "t": "p",
+   "text": "The previous week’s range provides a clean and reliable liquidity framework."
+  },
+  {
+   "t": "p",
+   "text": "Often price will take the previous week high or low, trade back into imbalance or fair value, and then either reverse or continue expanding. This makes weekly levels extremely useful for planning higher timeframe trades."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Previous Day High and Low"
+  },
+  {
+   "t": "p",
+   "text": "Previous day highs and lows function similarly but on a smaller scale."
+  },
+  {
+   "t": "p",
+   "text": "Price may target them as a draw, sweep them before reversing, or use them as fuel for continuation. They are especially useful during London and New York sessions."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/day-and-week.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Session Highs and Lows"
+  },
+  {
+   "t": "p",
+   "text": "Session based liquidity is especially powerful for intraday trading."
+  },
+  {
+   "t": "p",
+   "text": "Each session creates a high and a low that future sessions often target. New York frequently reacts to liquidity created during Asia or London, making session levels a strong framework for intraday narratives."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Session-High-and-Low.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Liquidity With Fair Value Gaps"
+  },
+  {
+   "t": "p",
+   "text": "Liquidity becomes even more effective when combined with displacement and fair value gaps."
+  },
+  {
+   "t": "p",
+   "text": "A common sequence is price taking a session high or low, delivering strong displacement, forming a fair value gap, retracing into that gap, and then continuing toward the next liquidity objective."
+  },
+  {
+   "t": "p",
+   "text": "This creates structured, high probability trade setups with clear entries and targets."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Putting It All Together"
+  },
+  {
+   "t": "p",
+   "text": "Liquidity is not random. Price moves with intention, constantly seeking areas where orders are resting."
+  },
+  {
+   "t": "p",
+   "text": "By focusing on swing highs and swing lows, old highs and lows, equal highs and equal lows, and key time based liquidity levels, you gain a repeatable framework for understanding market behavior."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "If you ever feel lost in the market, return to one simple question. Where is the nearest obvious liquidity that has not yet been taken. In most cases, price will naturally work its way there."
+  }
+ ]
+}

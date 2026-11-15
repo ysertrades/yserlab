@@ -1,0 +1,205 @@
+{
+ "slug": "the-mmxm-traders-twitter-model-explained",
+ "id": 3645,
+ "url": "https://ttrades.com/the-mmxm-traders-twitter-model-explained/",
+ "title": "The MMXM Trader’s Twitter Model Explained",
+ "date": "2025-07-17T11:00:00",
+ "modified": "2026-02-12T17:42:49",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 30
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/Twitter-Model-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "WwmS47Gb3M0"
+ ],
+ "description": "Learn the MMXM Trader’s Twitter Model — a liquidity raid + fair value gap strategy using SMT, MSS, and midnight open filters for precision trading.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "The MMXM Trader’s “Twitter Model” is an ICT-inspired trading framework designed to simplify how traders identify high-probability setups. At its core, the model blends liquidity raids, fair value gaps (FVGs), market structure shifts (MSS), and SMT divergences across multiple timeframes. What makes it powerful is its adaptability — it’s fractal, meaning it can be applied on any timeframe, depending on the market context."
+  },
+  {
+   "t": "p",
+   "text": "Let’s break it down step by step so you can see how this strategy works in practice."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Core Concept of the Twitter Model"
+  },
+  {
+   "t": "p",
+   "text": "The Twitter Model revolves around a liquidity raid → fair value gap → entry confirmation flow."
+  },
+  {
+   "t": "li",
+   "text": "- Liquidity Raid: Identify where price sweeps the previous day’s high (for shorts) or low (for longs)."
+  },
+  {
+   "t": "li",
+   "text": "- Higher Timeframe FVG: After the sweep, locate a fair value gap on the 1-hour chart (bullish for shorts, bearish for longs)."
+  },
+  {
+   "t": "li",
+   "text": "- Entry Timeframe Confirmation: Drop to the 15-minute chart to find a market structure shift (MSS) and SMT divergence for entry refinement."
+  },
+  {
+   "t": "li",
+   "text": "- Midnight Open Filter: Only take shorts above midnight open and longs below midnight open."
+  },
+  {
+   "t": "p",
+   "text": "This framework ensures that entries align with institutional price delivery, not random intraday moves."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example Walkthrough"
+  },
+  {
+   "t": "p",
+   "text": "Here’s how it typically plays out:"
+  },
+  {
+   "t": "li",
+   "text": "1. Daily Chart – Price runs previous day’s high → liquidity grab complete."
+  },
+  {
+   "t": "li",
+   "text": "2. Hourly Chart – Identify a bullish FVG → target for a short."
+  },
+  {
+   "t": "li",
+   "text": "3. 15-Minute Chart – Wait for MSS + SMT divergence. Example: Gold vs Silver or NQ vs ES."
+  },
+  {
+   "t": "li",
+   "text": "4. Execution – Enter short above midnight open, stop behind the shift candle, target the hourly FVG."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/MMXM-Twitter-model-9.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "This process ensures you’re trading with the draw on liquidity rather than against it."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "SMT and Market Structure Shift"
+  },
+  {
+   "t": "li",
+   "text": "- SMT : When two correlated assets behave differently. Example: ES makes a higher high while NQ makes a lower high. This hints at weakness."
+  },
+  {
+   "t": "li",
+   "text": "- MSS : A clear break and close beyond a key swing point, signaling intent."
+  },
+  {
+   "t": "p",
+   "text": "Both tools refine entries so you aren’t blindly entering after a liquidity sweep."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Fractal Application"
+  },
+  {
+   "t": "p",
+   "text": "One strength of this model is that it’s timeframe flexible:"
+  },
+  {
+   "t": "li",
+   "text": "- Daily → Hourly → 15m (standard setup)"
+  },
+  {
+   "t": "li",
+   "text": "- Weekly → 4H → 1H (higher timeframe swing trades)"
+  },
+  {
+   "t": "li",
+   "text": "- Hourly → 5m → 1m (scalping environments)"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/MMXM-Twitter-model-10.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "As long as you respect the same sequence — raid, FVG, MSS/SMT — the model remains valid."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Variations and Adjustments"
+  },
+  {
+   "t": "p",
+   "text": "The MMXM Trader also notes possible adjustments:"
+  },
+  {
+   "t": "li",
+   "text": "- Instead of midnight open, you can filter entries with daily open depending on market context."
+  },
+  {
+   "t": "li",
+   "text": "- Instead of MSS, you may look for inversions or changes in the state of delivery (CISD)."
+  },
+  {
+   "t": "li",
+   "text": "- Order blocks formed after structure shifts can serve as refined entry points."
+  },
+  {
+   "t": "p",
+   "text": "These allow flexibility without breaking the core logic of the model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- The Twitter Model focuses on systematic liquidity raids paired with high-probability confirmations."
+  },
+  {
+   "t": "li",
+   "text": "- Always anchor trades around previous day’s high/low for context."
+  },
+  {
+   "t": "li",
+   "text": "- Entries should be filtered with time-based levels (midnight or daily open)."
+  },
+  {
+   "t": "li",
+   "text": "- SMT + MSS = confirmation"
+  },
+  {
+   "t": "li",
+   "text": "- The strategy is fractal, meaning you can trade any timeframe alignment depending on your trading style."
+  }
+ ]
+}

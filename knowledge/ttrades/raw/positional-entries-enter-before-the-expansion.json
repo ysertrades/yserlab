@@ -1,0 +1,280 @@
+{
+ "slug": "positional-entries-enter-before-the-expansion",
+ "id": 6469,
+ "url": "https://ttrades.com/positional-entries-enter-before-the-expansion/",
+ "title": "Positional Entries – Enter Before The Expansion",
+ "date": "2026-08-08T11:15:00",
+ "modified": "2026-08-07T17:19:55",
+ "categories": [
+  "Fractal Model"
+ ],
+ "courses": [
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 16
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/08/TTrades-Positional-Entires.pdf"
+ ],
+ "videos": [
+  "xMFd_kfmIqI"
+ ],
+ "description": "Learn how positional entries work within the fractal model. Discover when to enter before the expansion using protected swings, CISD, equilibrium, and higher timeframe candle closures.",
+ "keywords": [],
+ "section": [
+  "Fractal Model"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Most traders wait for confirmation before entering a trade. While that approach often makes sense, there are situations where waiting can mean missing the move altogether."
+  },
+  {
+   "t": "p",
+   "text": "A positional entry is designed for those moments."
+  },
+  {
+   "t": "p",
+   "text": "Within the fractal model, a positional entry allows traders to enter at the open of a new higher timeframe candle before the expected expansion begins. The trade is not taken without confirmation. Instead, it is based on a completed fractal model, a valid protected swing, and the expectation that price should respect that protected area if the expansion is going to continue."
+  },
+  {
+   "t": "p",
+   "text": "This guide explains what positional entries are, when they should be used, and how to manage risk when entering before the expansion."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is a Positional Entry?"
+  },
+  {
+   "t": "p",
+   "text": "A positional entry is an entry taken at the open of a new higher timeframe candle before a continuation or intra-candle change in state of delivery forms."
+  },
+  {
+   "t": "p",
+   "text": "Normally, traders wait for additional confirmation after the new candle opens. A positional entry assumes that confirmation may never appear because price could begin expanding immediately. Rather than risk missing the move, the position is established at the open while using a protected swing for risk management."
+  },
+  {
+   "t": "p",
+   "text": "The objective is not to predict price."
+  },
+  {
+   "t": "p",
+   "text": "The objective is to position for an expected expansion when the framework already supports it."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Fractal Model Comes First"
+  },
+  {
+   "t": "p",
+   "text": "A positional entry is never the starting point of a trade."
+  },
+  {
+   "t": "p",
+   "text": "Before considering one, the fractal model must already be complete. That includes a valid higher timeframe Candle 2 or Candle 3 closure, along with a lower timeframe change in state of delivery."
+  },
+  {
+   "t": "p",
+   "text": "Only after those conditions are met does a positional entry become a possibility."
+  },
+  {
+   "t": "p",
+   "text": "The framework creates the opportunity."
+  },
+  {
+   "t": "p",
+   "text": "The positional entry is simply one way of executing it."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/fratclal-lll.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Enter Before the Expansion?"
+  },
+  {
+   "t": "p",
+   "text": "One of the biggest reasons traders miss high-quality setups is because they continue waiting for another confirmation that never comes."
+  },
+  {
+   "t": "p",
+   "text": "Sometimes Candle 3 opens and immediately expands toward its objective."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/expecy.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "When that happens, there is no opportunity to enter on a continuation because the continuation never forms. A positional entry is designed specifically for these situations by allowing the trade to be entered before the expansion begins."
+  },
+  {
+   "t": "p",
+   "text": "It is not about entering early."
+  },
+  {
+   "t": "p",
+   "text": "It is about entering when the framework already suggests expansion is likely."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/entryyy-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Protected Swing Determines the Stop Loss"
+  },
+  {
+   "t": "p",
+   "text": "Every positional entry relies on a protected swing."
+  },
+  {
+   "t": "p",
+   "text": "Before the new higher timeframe candle opens, a protected swing should already be in place. That protected swing becomes the logical location for the stop loss because it represents the level that should remain protected if the anticipated expansion is valid."
+  },
+  {
+   "t": "p",
+   "text": "If price trades through that protected swing, the original expectation for the expansion has changed."
+  },
+  {
+   "t": "p",
+   "text": "That is why the protected swing is the foundation of every positional entry."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/ps.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Not Every Protected Swing Is the Right One"
+  },
+  {
+   "t": "p",
+   "text": "Finding a protected swing is not enough."
+  },
+  {
+   "t": "p",
+   "text": "The protected swing must also make sense within the context of the structure."
+  },
+  {
+   "t": "p",
+   "text": "One of the most important considerations is its relationship to equilibrium (EQ). If the protected swing does not properly protect the area expected to hold during the expansion, it may not provide a logical location for the stop loss."
+  },
+  {
+   "t": "p",
+   "text": "The closest protected swing is not always the correct one."
+  },
+  {
+   "t": "p",
+   "text": "The goal is to choose the protected swing that best aligns with the expected delivery of price."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Risk-to-Reward Still Matters"
+  },
+  {
+   "t": "p",
+   "text": "A valid positional entry does not automatically create a good trade."
+  },
+  {
+   "t": "p",
+   "text": "If placing a stop loss beneath the protected swing results in poor risk-to-reward, adjustments may be necessary. That could mean refining the entry location or deciding that the trade no longer meets the required criteria."
+  },
+  {
+   "t": "p",
+   "text": "The setup may be valid."
+  },
+  {
+   "t": "p",
+   "text": "The execution still has to make sense."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Positional Entries Do Not Replace Standard Entries"
+  },
+  {
+   "t": "p",
+   "text": "A positional entry is simply another execution technique."
+  },
+  {
+   "t": "p",
+   "text": "If a trader chooses not to enter at the open, the traditional entry opportunities still exist. An intra-candle change in state of delivery or a new continuation can provide another opportunity to participate in the move."
+  },
+  {
+   "t": "p",
+   "text": "The positional entry exists to capture moves that expand immediately."
+  },
+  {
+   "t": "p",
+   "text": "It does not replace the standard execution process."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "This Is an Advanced Concept"
+  },
+  {
+   "t": "p",
+   "text": "Positional entries build upon the entire fractal model."
+  },
+  {
+   "t": "p",
+   "text": "Without understanding higher timeframe closures, protected swings, equilibrium, and changes in state of delivery, positional entries lose much of their purpose."
+  },
+  {
+   "t": "p",
+   "text": "That is why they are best viewed as an advanced execution technique rather than a starting point for new traders."
+  },
+  {
+   "t": "p",
+   "text": "The foundation always comes first."
+  },
+  {
+   "t": "p",
+   "text": "Execution techniques come second."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "A positional entry is about preparing for an expansion before it begins."
+  },
+  {
+   "t": "p",
+   "text": "When a valid fractal model is already in place, a protected swing has formed, and the expectation is for price to continue delivering in the current direction, entering at the open of the new higher timeframe candle can prevent missed opportunities."
+  },
+  {
+   "t": "p",
+   "text": "Like every concept within the fractal model, positional entries are not designed to predict what price will do."
+  },
+  {
+   "t": "p",
+   "text": "They are designed to execute a well-defined framework with consistent rules for entry, risk management, and continuation."
+  }
+ ]
+}

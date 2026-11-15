@@ -1,0 +1,195 @@
+{
+ "slug": "understanding-the-new-york-reversal-in-daily-profiles",
+ "id": 3581,
+ "url": "https://ttrades.com/understanding-the-new-york-reversal-in-daily-profiles/",
+ "title": "Understanding the New York Reversal Daily Profile",
+ "date": "2025-07-22T11:00:00",
+ "modified": "2025-10-11T16:31:41",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 27
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/NY-Reversal-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "xdzyejskSKE"
+ ],
+ "description": "Learn the New York Reversal — how London sets the stage, New York hits key levels, and CSD confirms the reversal. Perfect for intraday traders.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "If you’ve been studying ICT concepts, you know how important the daily profile is when framing intraday setups. In part one of the series, London Reversal was the focus. This time, we’re diving into the New York Reversal, a powerful concept that often provides clean intraday setups when London fails to reach a higher time frame level."
+  },
+  {
+   "t": "p",
+   "text": "The New York Reversal centers around price action that unfolds in the New York AM session, typically between 8:30–11:00 AM EST. By understanding its characteristics, traders can better identify where liquidity pools, higher time frame levels, and the change in the state of delivery (CISD) come together to create high-probability trades."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is the New York Reversal?"
+  },
+  {
+   "t": "p",
+   "text": "The New York Reversal occurs when:"
+  },
+  {
+   "t": "li",
+   "text": "- London session makes a retracement or expansion but does not reach a relevant higher time frame PD Array (Premium/Discount Array)."
+  },
+  {
+   "t": "li",
+   "text": "- Price extends further during New York’s AM session, reaching that higher time frame key level."
+  },
+  {
+   "t": "li",
+   "text": "- Once that key level is engaged, a change in the state of delivery (CISD) confirms the shift, often leading to a strong opposing move."
+  },
+  {
+   "t": "p",
+   "text": "Think of it this way:"
+  },
+  {
+   "t": "li",
+   "text": "- London Reversal: London session itself reaches the key level and reverses."
+  },
+  {
+   "t": "li",
+   "text": "- New York Reversal: London falls short, leaving New York to complete the run into the key level before reversing."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Characteristics of a Bullish New York Reversal"
+  },
+  {
+   "t": "li",
+   "text": "- London session trades lower but fails to hit a significant higher time frame support level."
+  },
+  {
+   "t": "li",
+   "text": "- New York session continues that move down, hits the key level, then shifts structure."
+  },
+  {
+   "t": "li",
+   "text": "- After the CISD, price aggressively rallies, often running through multiple liquidity highs."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/NY-reversal-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Characteristics of a Bearish New York Reversal"
+  },
+  {
+   "t": "li",
+   "text": "- London retraces higher but fails to engage a higher time frame resistance."
+  },
+  {
+   "t": "li",
+   "text": "- New York session extends the rally, taps into the resistance, then shifts lower."
+  },
+  {
+   "t": "li",
+   "text": "- After the CISD, price sells off, targeting lows and liquidity resting beneath."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/NY-reversal-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Identify the Setup"
+  },
+  {
+   "t": "p",
+   "text": "When trading New York reversals, look for:"
+  },
+  {
+   "t": "li",
+   "text": "- Liquidity Pools: Equal highs/lows, failure swings, or session highs/lows."
+  },
+  {
+   "t": "li",
+   "text": "- Higher Time Frame Levels: Previous day’s high/low, order blocks, or fair value gaps."
+  },
+  {
+   "t": "li",
+   "text": "- Change in the State of Delivery (CISD): A clear displacement and closure past a series of opposing candles."
+  },
+  {
+   "t": "li",
+   "text": "- Time Alignment: The best setups occur between 8:30 AM and 10:30 AM EST, when volatility aligns with New York’s open and major economic releases."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example Flow of a New York Reversal Trade"
+  },
+  {
+   "t": "li",
+   "text": "1. London Session: Price trades but does not hit a higher time frame PD array."
+  },
+  {
+   "t": "li",
+   "text": "2. New York AM: Price sweeps liquidity into a higher time frame key level."
+  },
+  {
+   "t": "li",
+   "text": "3. Confirmation: Wait for displacement and CISD on a 15M/5M chart."
+  },
+  {
+   "t": "li",
+   "text": "4. Entry: Place entry after the close above/below the CISD level."
+  },
+  {
+   "t": "li",
+   "text": "5. Stops & Targets:Stops: Below the low (for bullish) or above the high (for bearish).Targets: Failure swings, session highs/lows, or low-resistance liquidity pools."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/NY-Reversal-EX-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "The New York Reversal is one of the most consistent intraday setups when understood correctly. By combining daily profiles, liquidity, and change in state of delivery (CISD) traders can filter false moves and anticipate strong reversals."
+  },
+  {
+   "t": "p",
+   "text": "Next time you study your charts, ask: Did London reach a significant PD array? If not, is New York likely to run into that level for the reversal?"
+  },
+  {
+   "t": "p",
+   "text": "Mastering this distinction can drastically improve trade selection and timing."
+  }
+ ]
+}

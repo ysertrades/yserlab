@@ -1,0 +1,287 @@
+{
+ "slug": "why-most-traders-fail-with-ict-the-power-of-focusing-on-one-pd-array",
+ "id": 2471,
+ "url": "https://ttrades.com/why-most-traders-fail-with-ict-the-power-of-focusing-on-one-pd-array/",
+ "title": "Why Most Traders Fail with ICT – The Power of Focusing on One PD Array",
+ "date": "2025-08-05T11:00:00",
+ "modified": "2025-08-17T15:42:52",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 16
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/Why20You20Fail20ICT20TTrades20PDF.pdf"
+ ],
+ "videos": [
+  "r_UF8U-hsL8"
+ ],
+ "description": "Discover why most traders fail with ICT concepts and how mastering just one PD array can simplify your strategy, improve execution, and boost consistency.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this guide, we’re going to tackle a common problem among traders learning ICT concepts: trying to use every single PD array at once."
+  },
+  {
+   "t": "p",
+   "text": "Contrary to what many believe, it’s usually not a lack of knowledge that causes failure, it’s the inability to filter and focus."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding PD Arrays"
+  },
+  {
+   "t": "p",
+   "text": "A PD array refers to an individual price delivery concept, such as:"
+  },
+  {
+   "t": "li",
+   "text": "- Fair Value Gap (FVG)"
+  },
+  {
+   "t": "li",
+   "text": "- Inversion"
+  },
+  {
+   "t": "li",
+   "text": "- Breaker Block"
+  },
+  {
+   "t": "li",
+   "text": "- Order Block (OB / CISD)"
+  },
+  {
+   "t": "li",
+   "text": "- Mitigation Block"
+  },
+  {
+   "t": "li",
+   "text": "- Optimal Trade Entry (OTE) or Fibonacci Levels"
+  },
+  {
+   "t": "p",
+   "text": "Learning each of these is valuable, but when it comes to trading, using all of them in real-time can be detrimental rather than helpful."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/fail-ict-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why You Shouldn’t Use All PD Arrays at Once"
+  },
+  {
+   "t": "p",
+   "text": "If you’ve seen the Reversal Sequence video, you know multiple elements can appear in a reversal, turtle soup, inversion, CISD, breaker block, and fair value gaps."
+  },
+  {
+   "t": "p",
+   "text": "While they may all be present, trying to watch for all of them simultaneously leads to:"
+  },
+  {
+   "t": "li",
+   "text": "- Cluttered charts"
+  },
+  {
+   "t": "li",
+   "text": "- Delayed decision-making"
+  },
+  {
+   "t": "li",
+   "text": "- Inconsistent execution"
+  },
+  {
+   "t": "p",
+   "text": "The solution? Pick one PD array to master."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/fail-ict-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Choose Your PD Array"
+  },
+  {
+   "t": "p",
+   "text": "Ask yourself:"
+  },
+  {
+   "t": "li",
+   "text": "1. Which PD array is easiest for you to see?"
+  },
+  {
+   "t": "li",
+   "text": "2. Which one makes the most sense to you logically?"
+  },
+  {
+   "t": "li",
+   "text": "3. How much confirmation do you prefer before entering?"
+  },
+  {
+   "t": "p",
+   "text": "Example:"
+  },
+  {
+   "t": "li",
+   "text": "- For me, CISD is the easiest to spot, a simple sweep of a high/low followed by a close through the opposing candle series."
+  },
+  {
+   "t": "li",
+   "text": "- If you prefer inversions, stick with that. If fair value gaps are clear to you, use those."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Matching PD Arrays to Your Confirmation Preference"
+  },
+  {
+   "t": "p",
+   "text": "Low Confirmation: Entering right after a liquidity sweep (Turtle Soup), early entry but riskier entry."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/fail-ict-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Medium Confirmation: Waiting for an inversion or CISD before entering."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/fail-ict-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "High Confirmation: Waiting for FVG or breaker block formation after the shift in market structure."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/fail-ict-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Power of Simplicity in Execution"
+  },
+  {
+   "t": "p",
+   "text": "When you lock in on one PD array:"
+  },
+  {
+   "t": "li",
+   "text": "- Entries become consistent."
+  },
+  {
+   "t": "li",
+   "text": "- Stops and targets are easier to define."
+  },
+  {
+   "t": "li",
+   "text": "- You collect cleaner data to refine your trading model."
+  },
+  {
+   "t": "p",
+   "text": "Example using CISD:"
+  },
+  {
+   "t": "li",
+   "text": "1. Identify liquidity sweep."
+  },
+  {
+   "t": "li",
+   "text": "2. Mark the series of opposing candles that made the swing."
+  },
+  {
+   "t": "li",
+   "text": "3. Wait for a close through that series of candles."
+  },
+  {
+   "t": "li",
+   "text": "4. Place stop above/below that swing and target liquidity in the opposite direction."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/fail-ict-6.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Combining PD Arrays with Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "Whatever PD array you choose, pair it with highs and lows."
+  },
+  {
+   "t": "li",
+   "text": "- If you use FVGs, trade them in context of liquidity sweeps."
+  },
+  {
+   "t": "li",
+   "text": "- If you use breaker blocks, use them when they form off key highs/lows."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Avoid “Shiny Object Syndrome”"
+  },
+  {
+   "t": "p",
+   "text": "When you hit a losing streak, resist the urge to abandon your chosen PD array for something new."
+  },
+  {
+   "t": "p",
+   "text": "Refining one strategy and sticking with it is more valuable than constantly learning and switching."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- You don’t fail because you don’t know enough, you fail because you’re doing too much."
+  },
+  {
+   "t": "li",
+   "text": "- Pick one PD array that clicks with you and master it."
+  },
+  {
+   "t": "li",
+   "text": "- Always combine it with liquidity concepts."
+  },
+  {
+   "t": "li",
+   "text": "- Keep your model simple so you can execute in real time, not just mark up charts in hindsight."
+  }
+ ]
+}

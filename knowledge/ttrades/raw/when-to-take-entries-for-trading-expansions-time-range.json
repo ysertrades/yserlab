@@ -1,0 +1,268 @@
+{
+ "slug": "when-to-take-entries-for-trading-expansions-time-range",
+ "id": 7148,
+ "url": "https://ttrades.com/when-to-take-entries-for-trading-expansions-time-range/",
+ "title": "When To Take Entries For Trading Expansions (Time & Range)",
+ "date": "2026-10-24T11:15:00",
+ "modified": "2026-10-23T17:25:45",
+ "categories": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 4
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 5
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/10/TTrades-Entry-Timing.pdf"
+ ],
+ "videos": [
+  "qMQvqRn3oZU"
+ ],
+ "description": "Learn how to time entries for trading expansions, use higher timeframe candles, evaluate wick formation, and know when to wait for the next candle.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Entry timing is an important part of the TTrades Fractal Model. A valid continuation or reversal can still lead to a poor entry if it is taken too late in the higher timeframe candle. This can leave a trade vulnerable to the next candle’s wick before price moves in the intended direction."
+  },
+  {
+   "t": "p",
+   "text": "When trading expansion candles, two things matter: how much time is left in the candle and how much range is left for price to expand."
+  },
+  {
+   "t": "p",
+   "text": "The goal is to enter early in the higher timeframe candle, around or near its opening price, after the wick has formed. This gives price enough time and range to continue moving in the intended direction."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is an Expansion Candle?"
+  },
+  {
+   "t": "p",
+   "text": "An expansion candle moves away from its opening price and creates range in one direction."
+  },
+  {
+   "t": "p",
+   "text": "Within the Fractal Model, the setup involves a candle two closure, a change in the state of delivery, and an opportunity to trade candle three in the intended direction."
+  },
+  {
+   "t": "p",
+   "text": "For example, if candle two closes bearish and confirms a change in the state of delivery, the goal is to look for an opportunity to trade candle three lower."
+  },
+  {
+   "t": "p",
+   "text": "However, identifying the setup is only part of the process. The higher timeframe candle must also have enough time and range left to expand."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Time and Range Matter"
+  },
+  {
+   "t": "p",
+   "text": "Every higher timeframe candle has a limited amount of time and range. Not every candle will expand several times its usual size, especially if much of its range has already been used to form the wick."
+  },
+  {
+   "t": "p",
+   "text": "The time available depends on the higher timeframe candle. For example, when trading a 5 minute candle within a 1 hour candle, it is important to consider how much of that hour remains."
+  },
+  {
+   "t": "p",
+   "text": "The available range depends on how much price has already moved. If the candle has used most of its range forming a large wick, there may not be much left for expansion."
+  },
+  {
+   "t": "p",
+   "text": "Before entering, ask two questions:"
+  },
+  {
+   "t": "p",
+   "text": "• Is there enough time left for the candle to expand?"
+  },
+  {
+   "t": "p",
+   "text": "• Is there enough range left for price to move in the intended direction?"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why You Want to Enter Around the Opening Price"
+  },
+  {
+   "t": "p",
+   "text": "When trading an expansion candle, the entry should form around or near the higher timeframe candle’s opening price, after the wick has formed."
+  },
+  {
+   "t": "p",
+   "text": "For a bearish expansion, the goal is for the high to form early while price remains in respect to equilibrium, leaving room for the candle to expand lower. For a bullish expansion, the low should form early, leaving room for price to expand higher."
+  },
+  {
+   "t": "p",
+   "text": "The goal is to enter before price has already used too much of its range. If the wick becomes too large, expectations need to be adjusted rather than assuming the candle will continue expanding in the same direction."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/03-Weekly-Bias-%E2%80%94-Candle-2-Closure-6.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When Is It Too Late to Enter?"
+  },
+  {
+   "t": "p",
+   "text": "There is no hard rule for what counts as early or late. However, for a more mechanical guideline, the first half of the higher timeframe candle can be used as a reference."
+  },
+  {
+   "t": "p",
+   "text": "The earlier the entry forms, the more time remains for expansion. If a setup appears after three quarters of a 1 hour candle has passed, there is much less time left for the move to develop."
+  },
+  {
+   "t": "p",
+   "text": "Even if price is still near the opening price, the candle may have used too much time."
+  },
+  {
+   "t": "p",
+   "text": "In that situation, it can be better to wait for the next higher timeframe candle rather than force an entry. The new candle provides another period for price to form its wick and potentially expand."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/Late-entry.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How Wick Formation Affects Expansion"
+  },
+  {
+   "t": "p",
+   "text": "The wick helps show how much range price has used before attempting to expand."
+  },
+  {
+   "t": "p",
+   "text": "For a bearish expansion, the high should form early, ideally while price remains in respect to equilibrium. This leaves room for the candle to expand lower. The same principle applies to bullish expansion candles, where the low should form early."
+  },
+  {
+   "t": "p",
+   "text": "If price does not respect equilibrium and forms a large wick, it has already used more of its range before the expansion begins."
+  },
+  {
+   "t": "p",
+   "text": "For example, a daily candle that forms a large upper wick may not have enough range left to produce the bearish expansion expected. Price may instead move back toward the daily open or intraday lows."
+  },
+  {
+   "t": "p",
+   "text": "There can still be smaller expansions within the daily range, but the day itself may not expand much because it used so much time and range forming its wick."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When You Should Wait for the Next Higher Timeframe Candle"
+  },
+  {
+   "t": "p",
+   "text": "Sometimes the setup is valid, but the timing is not ideal."
+  },
+  {
+   "t": "p",
+   "text": "Price may confirm a change in the state of delivery and form a continuation, but if the candle is already late in its formation, there may not be enough time left for expansion."
+  },
+  {
+   "t": "p",
+   "text": "Instead of forcing the entry, wait for the current candle to close and look for a new wick to form in the next candle. Then evaluate whether enough time and range remain for another expansion."
+  },
+  {
+   "t": "p",
+   "text": "This applies to both continuation and reversal setups. If the setup appears too late, waiting for a new candle can provide a better opportunity rather than entering just before the next candle forms its wick."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Applying Entry Timing Across Multiple Timeframes"
+  },
+  {
+   "t": "p",
+   "text": "Entry timing is a fractal concept that can be applied across timeframes."
+  },
+  {
+   "t": "p",
+   "text": "Whether the chart is 1 minute, 5 minute, 15 minute, or 4 hour, the questions remain the same: has the wick formed, and is there enough time and range left for expansion?"
+  },
+  {
+   "t": "p",
+   "text": "For example, an entry may be taken on the 1 minute chart within a 5 minute candle, or the 15 minute chart may be used to evaluate an entry within a 1 hour candle."
+  },
+  {
+   "t": "p",
+   "text": "The timeframes change, but the principle stays the same. Enter early enough in the higher timeframe candle to leave room for expansion, preferably around or near its opening price."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/03-Weekly-Bias-%E2%80%94-Candle-2-Closure-7.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Protected Swings for Your Entry"
+  },
+  {
+   "t": "p",
+   "text": "A continuation can form a new protected swing that provides a potential entry opportunity. However, the presence of a protected swing does not automatically mean the trade should be taken immediately."
+  },
+  {
+   "t": "p",
+   "text": "If the protected swing forms early and price remains near the higher timeframe opening price, there may be enough time and range left for expansion. If it forms late, waiting for the next candle may be the better option."
+  },
+  {
+   "t": "p",
+   "text": "A positional entry can also be considered when a new protected swing or an area expected to hold in the next candle is present. The stop loss still needs to be placed appropriately, based on what price is expected to respect."
+  },
+  {
+   "t": "p",
+   "text": "A valid entry structure matters, but so does the timing of that entry within the higher timeframe candle."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Trading expansion candles is not just about identifying direction. It also requires evaluating how much time and range remain in the higher timeframe candle."
+  },
+  {
+   "t": "p",
+   "text": "The goal is to enter around or near the opening price, after a shallow wick has formed, and early enough to give price room to expand."
+  },
+  {
+   "t": "p",
+   "text": "If the candle has already used too much time or range, waiting for the next higher timeframe candle is often better than forcing an entry."
+  },
+  {
+   "t": "p",
+   "text": "Keep it simple: is there enough time left, and is there enough range left? Those are the two questions to ask before taking an entry."
+  }
+ ]
+}

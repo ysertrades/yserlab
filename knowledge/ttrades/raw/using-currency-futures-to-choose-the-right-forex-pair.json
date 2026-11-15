@@ -1,0 +1,305 @@
+{
+ "slug": "using-currency-futures-to-choose-the-right-forex-pair",
+ "id": 5686,
+ "url": "https://ttrades.com/using-currency-futures-to-choose-the-right-forex-pair/",
+ "title": "Using Currency Futures to Choose the Right Forex Pair",
+ "date": "2026-03-07T11:00:00",
+ "modified": "2026-02-25T22:16:17",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 9
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/02/Pairing-Currencies-Using-Futures-TTrades.pdf"
+ ],
+ "videos": [
+  "HrjYoxAUb3s"
+ ],
+ "description": "Learn to pair forex using currency futures, DXY analysis, and relative strength for stronger expansion trades.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "If you trade forex and want more consistent expansion moves, understanding how to pair currencies using futures can completely change your framework."
+  },
+  {
+   "t": "p",
+   "text": "This approach is rooted in something surprisingly simple: fractions."
+  },
+  {
+   "t": "p",
+   "text": "Every forex pair is essentially a fraction. Once you understand how the numerator and denominator behave mathematically, you can identify which currency combinations are most likely to produce strong trends and which ones to avoid."
+  },
+  {
+   "t": "p",
+   "text": "Let’s break it down step by step."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Fraction Concept Behind Currency Pairs"
+  },
+  {
+   "t": "p",
+   "text": "Every forex pair works like this:"
+  },
+  {
+   "t": "p",
+   "text": "Currency / Currency"
+  },
+  {
+   "t": "p",
+   "text": "For example, EUR/USD represents Euro over US Dollar, and USD/JPY represents US Dollar over Japanese Yen."
+  },
+  {
+   "t": "p",
+   "text": "Think of it as starting with 1 over 1 equaling 1, which represents neutrality."
+  },
+  {
+   "t": "p",
+   "text": "Now here is where the math matters."
+  },
+  {
+   "t": "p",
+   "text": "If you raise the denominator, the value of the fraction decreases.If you lower the numerator, the value of the fraction decreases.If you raise the numerator and lower the denominator, the value increases strongly.If you lower the numerator and raise the denominator, the value decreases strongly."
+  },
+  {
+   "t": "p",
+   "text": "Translated into currencies, a strong currency paired with a weak creates a bullish pair. A weak currency paired with a strong creates a bearish pair."
+  },
+  {
+   "t": "p",
+   "text": "This is the foundation of currency pairing."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/03/Fractions.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What to Avoid When Pairing Currencies"
+  },
+  {
+   "t": "p",
+   "text": "Not all combinations create strong moves. Some combinations cancel each other out."
+  },
+  {
+   "t": "p",
+   "text": "You want to avoid pairing a strong currency with another strong currency. You also want to avoid pairing a weak currency with another weak currency."
+  },
+  {
+   "t": "p",
+   "text": "When both currencies are moving in the same direction, the pair often consolidates instead of expanding."
+  },
+  {
+   "t": "p",
+   "text": "For example, if both USD and EUR are strong, trading EUR/USD may produce choppy price action instead of a clean trend."
+  },
+  {
+   "t": "p",
+   "text": "You want opposites, not similarities."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/03/FRAC.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Golden Rule Strongest Versus Weakest"
+  },
+  {
+   "t": "p",
+   "text": "The most powerful moves happen when you pair the strongest currency with the weakest currency."
+  },
+  {
+   "t": "p",
+   "text": "If USD is very bullish and EUR is very bearish, trading EUR/USD can produce strong downside expansion."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/03/DXY-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "If USD is bearish and JPY is bullish, trading USD/JPY can produce strong downside expansion."
+  },
+  {
+   "t": "p",
+   "text": "Opposites create momentum. That is the key idea."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/03/DXY-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using the Dollar Index as Your Anchor"
+  },
+  {
+   "t": "p",
+   "text": "The US Dollar Index, often referred to as DXY, measures overall dollar strength."
+  },
+  {
+   "t": "p",
+   "text": "Start your analysis here."
+  },
+  {
+   "t": "p",
+   "text": "If DXY is trending higher, the dollar is strong. In that case, you want to pair it with the weakest available currency."
+  },
+  {
+   "t": "p",
+   "text": "If DXY is trending lower, the dollar is weak. In that case, you want to pair it with the strongest available currency."
+  },
+  {
+   "t": "p",
+   "text": "If DXY is consolidating, the approach changes."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/03/Dollar-Rules.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What to Do When the Dollar Is Consolidating"
+  },
+  {
+   "t": "p",
+   "text": "When the dollar is ranging, you do not need to focus on USD pairs at all. Instead, look for a strong foreign currency and a weak foreign currency and pair them together."
+  },
+  {
+   "t": "p",
+   "text": "For example, If GBP is bearish and NZD is bullish, you could look at GBP/NZD."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/03/EXotic.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "When the dollar is flat, cross pairs often provide cleaner expansion than USD pairs."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Applying This to Futures Traders"
+  },
+  {
+   "t": "p",
+   "text": "If you trade currency futures instead of forex, the logic is the same."
+  },
+  {
+   "t": "p",
+   "text": "If the dollar is bullish, trade the most bearish currency future."
+  },
+  {
+   "t": "p",
+   "text": "If the dollar is bearish, trade the most bullish currency future."
+  },
+  {
+   "t": "p",
+   "text": "If the dollar is consolidating, you can either trade the strongest single future or go long one strong future and short one weak future. That structure mimics trading a cross pair such as EUR/JPY."
+  },
+  {
+   "t": "p",
+   "text": "The math remains identical because the relationship between currencies does not change."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/03/Futures.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "A Simple Execution Framework"
+  },
+  {
+   "t": "p",
+   "text": "Start by checking the trend of the US Dollar Index."
+  },
+  {
+   "t": "p",
+   "text": "Then rank currency futures by strength and weakness."
+  },
+  {
+   "t": "p",
+   "text": "Avoid pairing currencies that are moving in the same direction."
+  },
+  {
+   "t": "p",
+   "text": "Focus on pairing the strongest with the weakest."
+  },
+  {
+   "t": "p",
+   "text": "Accept that some days will offer multiple good options, while other days will require patience."
+  },
+  {
+   "t": "p",
+   "text": "Your goal is not to predict everything. Your goal is to align with relative strength."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "This framework can feel advanced at first, but it becomes intuitive with repetition."
+  },
+  {
+   "t": "li",
+   "text": "- Understand fractions."
+  },
+  {
+   "t": "li",
+   "text": "- Pair opposites."
+  },
+  {
+   "t": "li",
+   "text": "- Avoid similarities."
+  },
+  {
+   "t": "li",
+   "text": "- Start with the dollar."
+  },
+  {
+   "t": "p",
+   "text": "Once you begin thinking in terms of relative strength instead of isolated charts, your pair selection becomes far more intentional."
+  },
+  {
+   "t": "p",
+   "text": "And that is where expansion lives."
+  }
+ ]
+}

@@ -1,0 +1,346 @@
+{
+ "slug": "how-change-in-the-state-of-delivery-cisd-confirms-swing-points",
+ "id": 4641,
+ "url": "https://ttrades.com/how-change-in-the-state-of-delivery-cisd-confirms-swing-points/",
+ "title": "How Change in the State of Delivery (CISD) Confirms Swing Points",
+ "date": "2026-01-10T11:00:00",
+ "modified": "2026-09-04T10:41:04",
+ "categories": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 15
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 44
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/TTrades-CISD-Confirms-Swing-Point.pdf"
+ ],
+ "videos": [
+  "vn1RYjhJUnQ"
+ ],
+ "description": "Learn how change in the state of delivery confirms swing points using candle 2 and candle 3 closures, the fractal model, and trend validation.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "One of the biggest mistakes traders make is assuming a swing point is valid just because price looks like it should reverse. In reality, swing points need confirmation. This is where change in the state of delivery (CISD) becomes critical. When combined correctly with higher time frame candle closures, CISD helps filter out invalid reversals and keeps you aligned with real trend shifts."
+  },
+  {
+   "t": "p",
+   "text": "This blog breaks down exactly what CISD is, how it forms, and how to combine it with candle 2 and candle 3 closures within the Fractal Model to confirm swing points with consistency."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is Change in the State of Delivery?"
+  },
+  {
+   "t": "p",
+   "text": "Change in the state of delivery is the order block formation that occurs when trend shifts. In simple terms, it’s how price proves that control has transferred from buyers to sellers, or vice versa."
+  },
+  {
+   "t": "p",
+   "text": "You’ll typically see CISD form when price:"
+  },
+  {
+   "t": "li",
+   "text": "- Trades into an important level (FVG, high, low)"
+  },
+  {
+   "t": "li",
+   "text": "- Then closes through the series of candles that caused the move into that level"
+  },
+  {
+   "t": "p",
+   "text": "That closure is what matters. Without it, price has not been confirmed."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/CISD.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How CISD Defines Trend Shifts"
+  },
+  {
+   "t": "p",
+   "text": "In a bearish trend, CISD appears when price forms a higher high and closes below the candles that created the high.In a bullish trend, CISD appears when price forms a lower low and closes above the candles that created the low."
+  },
+  {
+   "t": "p",
+   "text": "This closure is the confirmation that delivery has shifted."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How I Use CISD With Swing Points"
+  },
+  {
+   "t": "p",
+   "text": "CISD on its own means nothing to me unless it is paired with a higher time frame candle closure."
+  },
+  {
+   "t": "p",
+   "text": "The process is simple:"
+  },
+  {
+   "t": "li",
+   "text": "- When I get a candle 2 or candle 3 closure on the higher time frame"
+  },
+  {
+   "t": "li",
+   "text": "- I drop down to the lower time frame"
+  },
+  {
+   "t": "li",
+   "text": "- I must see a change in the state of delivery inside that higher time frame candle"
+  },
+  {
+   "t": "p",
+   "text": "If CISD is missing, I ignore the setup completely."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/SWING-CONF.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Valid Candle 2 Closure With CISD"
+  },
+  {
+   "t": "p",
+   "text": "A candle 2 closure happens when price sweeps the previous candle’s high or low and then closes back inside that range."
+  },
+  {
+   "t": "p",
+   "text": "Once that happens, I go to the lower time frame and ask:"
+  },
+  {
+   "t": "li",
+   "text": "- Where is the high or low?"
+  },
+  {
+   "t": "li",
+   "text": "- Which candles created it?"
+  },
+  {
+   "t": "li",
+   "text": "- Did price close through those candles?"
+  },
+  {
+   "t": "p",
+   "text": "If yes, the swing point is confirmed and it is valid to look for continuation.If no, the setup is invalid, even though the candle 2 closure exists."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/Valid-c2-swing.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Invalid Candle 2 Closure Example"
+  },
+  {
+   "t": "p",
+   "text": "There are cases where price sweeps a high and closes back inside, but on the lower time frame price never closes below the candles that created the high."
+  },
+  {
+   "t": "p",
+   "text": "When that happens:"
+  },
+  {
+   "t": "li",
+   "text": "- There is no change in the state of delivery"
+  },
+  {
+   "t": "li",
+   "text": "- The swing point is not confirmed"
+  },
+  {
+   "t": "li",
+   "text": "- I do not look for continuation"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/Invalid-c2-swing.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "This is how CISD filters out invalid setups."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "CISD Without a Higher Time Frame Closure Means Nothing"
+  },
+  {
+   "t": "p",
+   "text": "Even if you see a clean change in the state of delivery on a lower time frame, if there is no candle 2 or candle 3 closure on the higher time frame, it is ignored."
+  },
+  {
+   "t": "p",
+   "text": "CISD only matters when it confirms a higher time frame closure."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/Invalid-c2-swing-pt-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Candle 3 Closure With CISD"
+  },
+  {
+   "t": "p",
+   "text": "A candle 3 closure occurs when candle 2 fails to close properly and candle 3 closes beyond the opening price and range of candle 2."
+  },
+  {
+   "t": "p",
+   "text": "After that closure:"
+  },
+  {
+   "t": "li",
+   "text": "- I drop to the lower time frame"
+  },
+  {
+   "t": "li",
+   "text": "- I find the swing high or low"
+  },
+  {
+   "t": "li",
+   "text": "- I check if price closed through the candles that formed it"
+  },
+  {
+   "t": "p",
+   "text": "When both conditions are met, it becomes valid to look for continuation in candle 4.If CISD fails, price typically consolidates instead of trending."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/c3-swing.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "CISD and Consolidation"
+  },
+  {
+   "t": "p",
+   "text": "When CISD fails to form, price often consolidates, sweeps one side of the range, and then trades to the opposite side. Recognizing the absence of CISD helps you stay patient and avoid forcing trades."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/01/c3-no-cisd.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What a High-Quality CISD Looks Like"
+  },
+  {
+   "t": "p",
+   "text": "Not all closures are equal."
+  },
+  {
+   "t": "p",
+   "text": "High-quality CISD usually shows:"
+  },
+  {
+   "t": "li",
+   "text": "- A clean V-shaped reversal or strong displacement"
+  },
+  {
+   "t": "li",
+   "text": "- A decisive close through structure"
+  },
+  {
+   "t": "li",
+   "text": "- Minimal sideways consolidation before the close"
+  },
+  {
+   "t": "p",
+   "text": "If price chops for a large portion of the candle and barely closes through structure, it is usually consolidation rather than a true shift in delivery."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Fractal Nature of the Model"
+  },
+  {
+   "t": "p",
+   "text": "This model works on any time frame. Monthly pairs with daily, daily pairs with intraday, and intraday pairs with lower intraday time frames."
+  },
+  {
+   "t": "p",
+   "text": "The rules stay the same:"
+  },
+  {
+   "t": "li",
+   "text": "- Higher time frame closure first"
+  },
+  {
+   "t": "li",
+   "text": "- Lower time frame change in the state of delivery"
+  },
+  {
+   "t": "li",
+   "text": "- Only then do we look for continuation"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Takeaway"
+  },
+  {
+   "t": "p",
+   "text": "A swing point is not valid simply because liquidity is swept."
+  },
+  {
+   "t": "p",
+   "text": "A swing point becomes valid when:"
+  },
+  {
+   "t": "li",
+   "text": "- The higher time frame confirms it with a candle 2 or candle 3 closure"
+  },
+  {
+   "t": "li",
+   "text": "- The lower time frame confirms it with a change in the state of delivery"
+  },
+  {
+   "t": "p",
+   "text": "When both align, continuation becomes likely. When either is missing, patience protects your capital."
+  }
+ ]
+}

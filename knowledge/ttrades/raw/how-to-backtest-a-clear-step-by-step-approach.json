@@ -1,0 +1,163 @@
+{
+ "slug": "how-to-backtest-a-clear-step-by-step-approach",
+ "id": 3731,
+ "url": "https://ttrades.com/how-to-backtest-a-clear-step-by-step-approach/",
+ "title": "How to Backtest – A Clear Step-by-Step Approach",
+ "date": "2025-08-24T11:00:00",
+ "modified": "2025-08-23T22:53:25",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 9
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/How-To-Backtest-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "MvD7fQQ0szE"
+ ],
+ "description": "Discover the right way to backtest a strategy and gain the confidence to apply it effectively in live market conditions.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Backtesting is one of the most powerful tools in trading. Done correctly, it allows you to validate your ideas, refine your execution, and gain confidence before risking real money. But many traders make the mistake of rushing into backtesting too early without fully understanding their model. This often leads to frustration, poor results, and the belief that backtesting doesn’t work."
+  },
+  {
+   "t": "p",
+   "text": "In this blog, we’ll break down a structured approach to backtesting that ensures your efforts are meaningful and actually improve your trading. The process follows three steps: learn the model, reverse engineer the model, then backtest the model."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step One: Learn a Model"
+  },
+  {
+   "t": "p",
+   "text": "Before you can backtest, you need a clear, rule-based framework. Without rules, your backtest will produce inconsistent and meaningless data."
+  },
+  {
+   "t": "li",
+   "text": "- Pick one strategy or model to focus on"
+  },
+  {
+   "t": "li",
+   "text": "- Study and understand every concept used within the given model"
+  },
+  {
+   "t": "li",
+   "text": "- Understand not just the entries and exits, but the context such as market structure, phases of price, and conditions for validity"
+  },
+  {
+   "t": "p",
+   "text": "The key here is depth over breadth. You don’t want five half-baked strategies; you want one model you know inside and out."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step Two: Reverse Engineer the Model"
+  },
+  {
+   "t": "p",
+   "text": "This is where many traders skip ahead, but it’s the most important step before backtesting. Reverse engineering means studying past charts in hindsight to understand why price behaved the way it did and how your model would have handled it."
+  },
+  {
+   "t": "p",
+   "text": "Here’s how to do it:"
+  },
+  {
+   "t": "li",
+   "text": "1. Open a chart on TradingView and identify a clear example that fits your model. If you trade expansions, pick a day where expansion occurred."
+  },
+  {
+   "t": "li",
+   "text": "2. Ask key questions:Why did price expand this day?Where was the bias formed?Where did a swing form?What was the structure telling me?"
+  },
+  {
+   "t": "li",
+   "text": "3. Drop to your intraday timeframe to confirm bias. Look for:The formation of the day’s low or highShifts in delivery or order flow that confirm directionPoints of interest that align with your model"
+  },
+  {
+   "t": "li",
+   "text": "4. Refine on your entry timeframe. Identify:Where you would enterWhere your stop should beWhat realistic targets exist"
+  },
+  {
+   "t": "p",
+   "text": "The purpose here is not to test yourself in real time. You already know how the day played out. The goal is to train your eye to see how your model unfolds on clean examples."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step Three: Backtest the Model"
+  },
+  {
+   "t": "p",
+   "text": "Once you’ve done extensive reverse engineering (50–100 examples is a solid baseline), only then should you move to formal backtesting with software like TradeZella."
+  },
+  {
+   "t": "p",
+   "text": "When backtesting:"
+  },
+  {
+   "t": "li",
+   "text": "- Take trades exactly as your model defines them"
+  },
+  {
+   "t": "li",
+   "text": "- Stay consistent and don’t bend rules to fit results"
+  },
+  {
+   "t": "li",
+   "text": "- Journal each trade with entries, stops, targets, and management notes"
+  },
+  {
+   "t": "li",
+   "text": "- Track outcomes over a large sample size"
+  },
+  {
+   "t": "p",
+   "text": "With enough data, you can begin making small adjustments to refine the model. Backtesting becomes powerful when paired with your reverse-engineering study, because you’re no longer guessing; you know what your model is supposed to look like."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Putting It All Together"
+  },
+  {
+   "t": "p",
+   "text": "The reason most traders fail with backtesting isn’t because backtesting doesn’t work. It’s because they skip the preparation. If you don’t deeply understand your model, your data will be inconsistent and useless."
+  },
+  {
+   "t": "p",
+   "text": "The flow should always be:"
+  },
+  {
+   "t": "li",
+   "text": "1. Learn the model"
+  },
+  {
+   "t": "li",
+   "text": "2. Reverse engineer it with hindsight study"
+  },
+  {
+   "t": "li",
+   "text": "3. Backtest it in a structured, rule-based way"
+  },
+  {
+   "t": "p",
+   "text": "Do this properly, and backtesting becomes not just a numbers game, but a practical tool that improves your confidence and execution in the live markets."
+  }
+ ]
+}

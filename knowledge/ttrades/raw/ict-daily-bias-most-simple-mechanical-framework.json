@@ -1,0 +1,192 @@
+{
+ "slug": "ict-daily-bias-most-simple-mechanical-framework",
+ "id": 4038,
+ "url": "https://ttrades.com/ict-daily-bias-most-simple-mechanical-framework/",
+ "title": "ICT Daily Bias: Most Simple Mechanical Framework",
+ "date": "2025-07-09T11:00:00",
+ "modified": "2026-09-04T10:54:13",
+ "categories": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 24
+  },
+  {
+   "course": "ICT Core Concepts",
+   "n": 26
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/07/Daily-Bias-TTrades.pdf"
+ ],
+ "videos": [
+  "g3oDYq4P9ZE"
+ ],
+ "description": "Learn how to use daily and weekly highs/lows, swing points, and the next day model to frame bias and identify liquidity draws in trading.",
+ "keywords": [],
+ "section": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In trading, establishing a daily bias and understanding the concept of a draw on liquidity are essential for navigating price action. This help traders anticipate where price is likely headed and how to frame both continuations or reversals. One of the simplest yet most effective ways to do this is by using previous day’s highs and lows as reference points. This guide will walk you through how to build bias using these levels, how liquidity drives price, and how to apply these ideas with both daily and weekly ranges."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Previous Day Highs and Lows"
+  },
+  {
+   "t": "p",
+   "text": "The most basic approach to daily bias starts with marking out the previous day’s high and low. Price is unlikely to remain trapped between both without eventually taking one side."
+  },
+  {
+   "t": "li",
+   "text": "- If price is trending up, bias favors a run on the previous day’s high."
+  },
+  {
+   "t": "li",
+   "text": "- If trending down, bias favors a run on the previous day’s low."
+  },
+  {
+   "t": "li",
+   "text": "- If price sweeps one side but fails to displace beyond it, this can set up a reversal toward the opposite side."
+  },
+  {
+   "t": "p",
+   "text": "Example scenarios:"
+  },
+  {
+   "t": "li",
+   "text": "- Price takes out yesterday’s high but closes back inside the range → bias shifts bearish"
+  },
+  {
+   "t": "li",
+   "text": "- Price takes out yesterday’s low but fails to hold below → bias shifts bullish"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/PDH.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "By simply watching the daily chart, you can create a map for where liquidity is most likely to be targeted next."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Weekly Highs and Lows"
+  },
+  {
+   "t": "p",
+   "text": "The same principle applies on the weekly scale. Marking the prior week’s high and low provides a bigger-picture liquidity map."
+  },
+  {
+   "t": "li",
+   "text": "- Price sweeping last week’s high and closing back below often signals downside continuation."
+  },
+  {
+   "t": "li",
+   "text": "- Price sweeping last week’s low and closes back above it often sets up bullish reversals."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/L.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Weekly levels act as larger liquidity pools, and price frequently oscillates between them while forming swing moves."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Swing Points and Failure to Displace"
+  },
+  {
+   "t": "p",
+   "text": "Beyond just daily and weekly highs/lows, swing points serve as magnets for liquidity. Old highs and lows resting in the market are natural liquidity targets."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Swing-Point.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Key idea: failure to displace"
+  },
+  {
+   "t": "li",
+   "text": "- If price fails to displace below a swing low, bias shifts bullish."
+  },
+  {
+   "t": "li",
+   "text": "- If price fails to displace above a swing high, bias shifts bearish."
+  },
+  {
+   "t": "p",
+   "text": "This is a key concept for recognizing false breakouts and setting up next-day expectations."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/FTD.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Next Day Model"
+  },
+  {
+   "t": "p",
+   "text": "The next day model takes advantage of failed displacements. If a high or low is swept but price closes back inside the range, the following day often produces a candle in the opposite direction."
+  },
+  {
+   "t": "p",
+   "text": "For example:"
+  },
+  {
+   "t": "li",
+   "text": "- Sweep above a high, close back inside → anticipate a bearish next day (Open-High-Low-Close structure)."
+  },
+  {
+   "t": "li",
+   "text": "- Sweep below a low, close back inside → anticipate a bullish next day (Open-Low-High-Close structure)."
+  },
+  {
+   "t": "p",
+   "text": "This approach refines daily bias and creates clear trade setups in line with liquidity behavior."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/NDM.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Wrapping It Up"
+  },
+  {
+   "t": "p",
+   "text": "By combining previous day highs/lows, weekly levels, swing points, displacement failures, and the next day model, you can consistently frame where liquidity is drawing. While not every day is textbook-perfect, this framework equips you with a structured way to track bias, reversals, and high-probability setups."
+  }
+ ]
+}

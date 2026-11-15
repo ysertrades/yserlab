@@ -1,0 +1,414 @@
+{
+ "slug": "how-to-use-smt-divergence-ttrades-fractal-model",
+ "id": 6134,
+ "url": "https://ttrades.com/how-to-use-smt-divergence-ttrades-fractal-model/",
+ "title": "How To Use SMT Divergence – TTrades Fractal Model",
+ "date": "2026-05-30T11:00:00",
+ "modified": "2026-09-04T10:33:16",
+ "categories": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 9
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 25
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/05/TTrades-SMT-with-Fractal-Model.pdf"
+ ],
+ "videos": [
+  "-ocfPuD_oqE"
+ ],
+ "description": "Learn how to use SMT Divergence, Reversal SMT, and Continuation SMT within the The Fractal Model to improve trade confluence and market analysis.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "SMT (Smart Money Technique) has become a very powerful but also misunderstood tool within market analysis. Many traders make the mistake of searching for SMT divergences first and then trying to build a trade around them. The approach taught in this framework is the opposite."
+  },
+  {
+   "t": "p",
+   "text": "SMT is not the foundation of a trade. It is a confirmation tool."
+  },
+  {
+   "t": "p",
+   "text": "The primary focus should always be finding a valid fractal model, confirming a change in the state of delivery, and then checking whether SMT exists as additional confluence. When used correctly, SMT can help validate reversals and continuations without becoming the sole reason for entering a trade."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is SMT?"
+  },
+  {
+   "t": "p",
+   "text": "SMT is a divergence between two correlated markets."
+  },
+  {
+   "t": "p",
+   "text": "Correlated markets typically move in the same direction. Examples include:"
+  },
+  {
+   "t": "li",
+   "text": "- NASDAQ (NQ) and S&P 500 (ES)"
+  },
+  {
+   "t": "li",
+   "text": "- Correlated currency pairs"
+  },
+  {
+   "t": "li",
+   "text": "- Correlated precious metals"
+  },
+  {
+   "t": "p",
+   "text": "When one market makes a new high or low while the correlated market fails to do the same, a divergence forms. This divergence is known as SMT."
+  },
+  {
+   "t": "p",
+   "text": "For example:"
+  },
+  {
+   "t": "li",
+   "text": "- ES makes a higher high."
+  },
+  {
+   "t": "li",
+   "text": "- NQ fails to make a higher high."
+  },
+  {
+   "t": "p",
+   "text": "This difference in structure suggests that one market is not confirming the move of the other, which can provide evidence of a potential reversal or continuation."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/SMT-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "SMT Within the Fractal Model"
+  },
+  {
+   "t": "p",
+   "text": "Within the fractal model, traders look for:"
+  },
+  {
+   "t": "li",
+   "text": "- A Candle 2 or Candle 3 closure."
+  },
+  {
+   "t": "li",
+   "text": "- A lower-timeframe change in the state of delivery."
+  },
+  {
+   "t": "li",
+   "text": "- Structural confirmation."
+  },
+  {
+   "t": "li",
+   "text": "- SMT as an additional layer of confluence."
+  },
+  {
+   "t": "p",
+   "text": "Once the framework is present, SMT can help strengthen the trade idea. Many traders reverse this process and end up forcing trades that lack structural confirmation."
+  },
+  {
+   "t": "p",
+   "text": "The key concept is that SMT supports a setup that already exists rather than creating one."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Reversal SMT"
+  },
+  {
+   "t": "p",
+   "text": "A reversal SMT occurs between Candle 1 and Candle 2."
+  },
+  {
+   "t": "p",
+   "text": "In this scenario:"
+  },
+  {
+   "t": "li",
+   "text": "- The primary market creates a higher high."
+  },
+  {
+   "t": "li",
+   "text": "- The correlated market creates a lower high."
+  },
+  {
+   "t": "p",
+   "text": "This divergence suggests weakening momentum and provides evidence that a reversal may be forming."
+  },
+  {
+   "t": "p",
+   "text": "A reversal SMT is often used to support the transition from Candle 1 into Candle 2."
+  },
+  {
+   "t": "p",
+   "text": "Key characteristics:"
+  },
+  {
+   "t": "li",
+   "text": "- Forms when price sweeps a high/low"
+  },
+  {
+   "t": "li",
+   "text": "- Appears during the reversal phase."
+  },
+  {
+   "t": "li",
+   "text": "- Adds confidence to directional bias."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/Frame-1721.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Continuation SMT"
+  },
+  {
+   "t": "p",
+   "text": "A continuation SMT occurs between Candle 2 and Candle 3."
+  },
+  {
+   "t": "p",
+   "text": "Unlike reversal SMT, the market has already shown signs of price reversing."
+  },
+  {
+   "t": "p",
+   "text": "In this case:"
+  },
+  {
+   "t": "li",
+   "text": "- One market takes out a previous high or low."
+  },
+  {
+   "t": "li",
+   "text": "- The correlated market fails to do the same."
+  },
+  {
+   "t": "p",
+   "text": "This divergence suggests that the original move still has strength and may continue."
+  },
+  {
+   "t": "p",
+   "text": "Key characteristics:"
+  },
+  {
+   "t": "li",
+   "text": "- Appears after the reversal."
+  },
+  {
+   "t": "li",
+   "text": "- Supports continuation toward targets."
+  },
+  {
+   "t": "li",
+   "text": "- Often provides additional confidence when holding positions."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/COnt.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Double SMT"
+  },
+  {
+   "t": "p",
+   "text": "A double SMT occurs when both conditions appear."
+  },
+  {
+   "t": "p",
+   "text": "The market shows:"
+  },
+  {
+   "t": "li",
+   "text": "- A reversal SMT between Candle 1 and Candle 2."
+  },
+  {
+   "t": "li",
+   "text": "- A continuation SMT between Candle 2 and Candle 3."
+  },
+  {
+   "t": "p",
+   "text": "This creates multiple layers of confirmation."
+  },
+  {
+   "t": "p",
+   "text": "Although even the best setups can fail, a double SMT can provide stronger evidence that the market may be positioning for a larger move."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/05/Doub.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Context Matters More Than SMT"
+  },
+  {
+   "t": "p",
+   "text": "One of the biggest lessons from the framework is that SMT without context has little value."
+  },
+  {
+   "t": "p",
+   "text": "For example:"
+  },
+  {
+   "t": "li",
+   "text": "- A market may show a clear SMT divergence."
+  },
+  {
+   "t": "li",
+   "text": "- However, no valid change in the state of delivery exists."
+  },
+  {
+   "t": "li",
+   "text": "- No proper candle closure has occurred."
+  },
+  {
+   "t": "li",
+   "text": "- No valid fractal model has appeared"
+  },
+  {
+   "t": "p",
+   "text": "In this situation, the SMT should be ignored."
+  },
+  {
+   "t": "p",
+   "text": "The framework always comes first."
+  },
+  {
+   "t": "p",
+   "text": "Only after structural confirmation is present should SMT become relevant."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When SMT Fails"
+  },
+  {
+   "t": "p",
+   "text": "Even perfect-looking SMT setups can fail."
+  },
+  {
+   "t": "p",
+   "text": "A valid setup may include:"
+  },
+  {
+   "t": "li",
+   "text": "- Candle closure."
+  },
+  {
+   "t": "li",
+   "text": "- Change in the state of delivery."
+  },
+  {
+   "t": "li",
+   "text": "- Clear SMT divergence."
+  },
+  {
+   "t": "p",
+   "text": "Yet price can still invalidate the setup."
+  },
+  {
+   "t": "p",
+   "text": "Because of this:"
+  },
+  {
+   "t": "li",
+   "text": "- SMT should increase confidence, not certainty."
+  },
+  {
+   "t": "li",
+   "text": "- Risk management remains essential."
+  },
+  {
+   "t": "li",
+   "text": "- Intraday confirmation should still be respected."
+  },
+  {
+   "t": "p",
+   "text": "The presence of SMT does not eliminate the need for disciplined execution and risk management."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using SMT for Candle 2 Reversals"
+  },
+  {
+   "t": "p",
+   "text": "Some traders prefer entering during Candle 2 rather than waiting for Candle 3 continuation."
+  },
+  {
+   "t": "p",
+   "text": "When doing this, additional caution is required."
+  },
+  {
+   "t": "p",
+   "text": "The reversal candle should show characteristics that support expansion, such as:"
+  },
+  {
+   "t": "li",
+   "text": "- Strong rejection."
+  },
+  {
+   "t": "li",
+   "text": "- Small opposing wick."
+  },
+  {
+   "t": "li",
+   "text": "- Clear directional intent."
+  },
+  {
+   "t": "p",
+   "text": "If these conditions are absent, SMT alone is not enough to justify an entry."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "SMT is best viewed as a confirmation tool or a confluence rather than a trading strategy."
+  },
+  {
+   "t": "p",
+   "text": "The strongest takeaway from the fractal model is that structure comes first. Traders should focus on identifying valid market framework, candle closures, and changes in price delivery before paying attention to divergence."
+  },
+  {
+   "t": "p",
+   "text": "When SMT aligns with a valid model, it can provide valuable confluence for both reversals and continuations. When the model is absent, the SMT should be ignored."
+  }
+ ]
+}

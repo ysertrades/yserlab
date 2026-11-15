@@ -2,6 +2,7 @@ import { PermissionFlagsBits } from "discord.js";
 import { env } from "./env.js";
 import { writeStatus, settings } from "./store.js";
 import { feedState, events, pick } from "./calendar/feed.js";
+import { stats } from "./knowledge.js";
 
 const started = Date.now();
 const TEXT_TYPES = new Set([0, 5, 15, 16]); // text, announcement, forum, media
@@ -24,6 +25,6 @@ export async function heartbeat(client) {
   const { config } = await settings();
   let next = null;
   try { const e = pick(await events(), config.news).find(x => x.at.toMillis() > Date.now() && !x.allDay); if (e) next = { title: e.title, currency: e.currency, at: e.at.toISO(), impact: e.impact }; } catch { /* the feed may be down */ }
-  await writeStatus({ online: true, tag: client.user?.tag, uptime: Math.round((Date.now() - started) / 1000), ping: client.ws.ping, guilds, feed: feedState(), next, ai: { ready: !!(env.groqKey || env.geminiKey), model: env.groqKey ? "groq " + (env.groqModel || "openai/gpt-oss-120b") : env.geminiModel }, version: "1.0.0", at: new Date().toISOString() });
+  await writeStatus({ online: true, tag: client.user?.tag, uptime: Math.round((Date.now() - started) / 1000), ping: client.ws.ping, guilds, feed: feedState(), next, ai: { ready: !!(env.groqKey || env.geminiKey), model: env.groqKey ? "groq " + (env.groqModel || "openai/gpt-oss-120b") : env.geminiModel, knowledge: stats() }, version: "1.0.0", at: new Date().toISOString() });
 }
 export const offline = () => writeStatus({ online: false, at: new Date().toISOString() });

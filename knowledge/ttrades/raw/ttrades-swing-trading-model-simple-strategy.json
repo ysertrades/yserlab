@@ -1,0 +1,162 @@
+{
+ "slug": "ttrades-swing-trading-model-simple-strategy",
+ "id": 5170,
+ "url": "https://ttrades.com/ttrades-swing-trading-model-simple-strategy/",
+ "title": "TTrades Swing Trading Model – Simple Strategy",
+ "date": "2026-02-21T11:00:00",
+ "modified": "2026-09-04T11:23:50",
+ "categories": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 41
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 38
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/02/TTFM-Swing-Model.pdf"
+ ],
+ "videos": [
+  "9BY-MQRNy-Y"
+ ],
+ "description": "Learn TTrades swing trading model using fractal timeframe alignment, weekly bias, daily swing points, and hourly entries for structured trades.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Swing trading with the fractal model is all about alignment. Alignment of timeframes. Alignment of bias. Alignment of structure. In this guide, we’ll break down how to use higher timeframe context like the weekly or monthly chart, combine it with daily swing points, and execute with precision on the hourly or four hour timeframe. This approach works across indices, forex, and crypto, and can be adapted depending on whether you’re a swing trader or a higher timeframe position trader."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Core Idea: Timeframe Alignment"
+  },
+  {
+   "t": "p",
+   "text": "At its foundation, this model follows a simple structure. The higher timeframe provides bias. The mid timeframe provides the swing point. The lower timeframe provides the entry. Most commonly this means weekly to daily to hourly. It can also mean monthly to weekly to four hour, or weekly directly to four hour. The key principle is that price is fractal. The same behaviors repeat across timeframes. When multiple timeframes align in one direction, probability increases."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step One: Establish a Weekly Bias"
+  },
+  {
+   "t": "p",
+   "text": "Everything begins with the weekly chart. You are not predicting, you are anticipating based on structure. To form a bias, study liquidity such as previous highs and lows, failure swings, fair value gaps, candle to closure behavior, and changes in the state of delivery. Ask yourself whether price is likely to expand higher or lower. Is it reaching for the previous week’s high or low? Is it respecting or violating prior structure? For example, if you see a bearish candle to closure on the weekly with previous week’s lows resting below price and failure swings underneath, it becomes reasonable to anticipate expansion lower. Now you have context."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/Weekly-bias.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step Two: Wait for a Daily Swing Point"
+  },
+  {
+   "t": "p",
+   "text": "Once your weekly bias is established, move down to the daily timeframe. You are not blindly trading the weekly idea. You need confirmation through structure. On the daily chart, look for a swing point forming in alignment with the weekly bias, a candle to closure in that direction, and a clear shift in delivery. For example, if the weekly bias is bearish and the daily forms a bearish candle to closure that creates a swing high and shifts delivery lower, that alignment confirms your idea. At that point, you can drop down to refine an entry."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/Daily-Swing.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Step Three: Execute on the Hourly or Four Hour"
+  },
+  {
+   "t": "p",
+   "text": "Now you refine your execution. On the lower timeframe, look for V shaped reversals, protected swings, continuations, sweeps into liquidity, and closures through opposing candles. You are entering in the direction of weekly bias confirmed by a daily swing and triggered on the hourly or four hour. Not every continuation is tradable. Sometimes the stop loss is too large. Sometimes the structure is messy. Sometimes the risk to reward is not clean. In those cases, you wait. Discipline is part of the model."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/02/3-way-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding V Shaped Reversals"
+  },
+  {
+   "t": "p",
+   "text": "One common entry model inside this framework is the V shaped reversal. You want to see a sweep of liquidity followed by a sharp rejection and a strong closure away from that level. This creates a protected swing. You can enter on the closure, place your stop beyond the protected swing, and target higher timeframe liquidity. Some trades will work perfectly. Others will fail. Losses are part of trading even when the setup is valid."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When Structure Is Messy"
+  },
+  {
+   "t": "p",
+   "text": "Not every chart is clean. If the hourly looks chaotic, move up to the four hour timeframe and let the structure simplify. Higher timeframes often clean up noise and make consolidations and fair value gaps easier to identify. Timeframe flexibility is part of the edge. You are not locked into a rigid alignment. You are aligned to structure and context."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Monthly to Weekly to Four Hour for Crypto Traders"
+  },
+  {
+   "t": "p",
+   "text": "If you prefer longer holds, especially in crypto markets, you can scale this model up. Use the monthly timeframe to define bias, the weekly to provide swing confirmation, and the four hour for execution. The concept remains identical. Only the timeframe shifts. Fractal behavior exists everywhere in price."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trading Directly From Weekly to Four Hour"
+  },
+  {
+   "t": "p",
+   "text": "You do not always need three timeframes. Sometimes the weekly provides a clear directional bias and the four hour provides clean structure. In those cases, a protected swing and continuation on the four hour chart is enough to justify a trade. The model is structured but adaptable."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Realistic Expectations"
+  },
+  {
+   "t": "p",
+   "text": "Not all trades will win. You will take valid losses. You will miss ideal entries. You will sometimes see price expand without you. That is normal. The goal is not perfection. The goal is higher timeframe alignment, clean structure, acceptable risk to reward ideally two to one or greater, and consistency over time. If you can align timeframes and trade in the direction of expansion, you are trading with flow instead of fighting it."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Actually Makes This Model Work"
+  },
+  {
+   "t": "p",
+   "text": "It is not just the candle three. It is not just the sweep. It is not just the V shaped reversal. It is context, alignment, and patience. When the weekly, daily, and hourly all point in the same direction, you are trading probability rather than hope. That is where the edge comes from."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "The fractal model is flexible. You can use weekly to daily to hourly. You can use weekly to four hour. You can use monthly to weekly to four hour. What matters most is higher timeframe context, swing formation, clean entry structure, and logical risk placement. The rest comes down to execution and personal preference. Find the timeframes that match your personality and trade the structure, not your emotions."
+  }
+ ]
+}

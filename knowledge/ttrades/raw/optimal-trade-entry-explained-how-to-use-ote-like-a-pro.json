@@ -1,0 +1,200 @@
+{
+ "slug": "optimal-trade-entry-explained-how-to-use-ote-like-a-pro",
+ "id": 4811,
+ "url": "https://ttrades.com/optimal-trade-entry-explained-how-to-use-ote-like-a-pro/",
+ "title": "Optimal Trade Entry Explained: How to Use OTE Like a Pro",
+ "date": "2025-06-20T11:57:00",
+ "modified": "2026-01-31T21:33:02",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 37
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/OTE_TTrades_PDF.pdf"
+ ],
+ "videos": [
+  "1YRs4Z1lMws"
+ ],
+ "description": "Learn optimal trade entry using Fibonacci retracements, PD arrays, fair value gaps, and multi timeframe analysis.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this guide, we are breaking down optimal trade entry in a practical, chart focused way. This explanation is designed to mirror how OTE is actually used in real trading, not just theory. The goal is to help you understand the Fibonacci settings, how to draw them correctly, and how to align OTE with other PD arrays for higher probability trades."
+  },
+  {
+   "t": "p",
+   "text": "This assumes you already understand discount and premium. If not, that concept should be reviewed first, because optimal trade entry builds directly on it."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding the Fibonacci Settings for OTE"
+  },
+  {
+   "t": "p",
+   "text": "Before using optimal trade entry, the Fibonacci retracement tool needs to be set correctly."
+  },
+  {
+   "t": "p",
+   "text": "The key levels used are 0 and 1 to define the range, 0.5 for equilibrium, and the 0.62, 0.705, and 0.79 levels."
+  },
+  {
+   "t": "p",
+   "text": "The optimal trade entry zone lives between the .62 and .79 retracement, with special emphasis on the .705 level. This zone represents an ideal retracement area where institutional re entries often occur."
+  },
+  {
+   "t": "p",
+   "text": "Once these levels are added in TradingView, the Fibonacci tool will visually display discount and premium, the OTE zone, and equilibrium."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/fib-set.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How to Draw the Fibonacci Correctly"
+  },
+  {
+   "t": "p",
+   "text": "Using Fibonacci correctly starts with identifying a swing high and a swing low."
+  },
+  {
+   "t": "p",
+   "text": "In a bearish scenario, Fibonacci is drawn from the swing high down to the swing low. In a bullish scenario, it is drawn from the swing low up to the swing high. Once the range is defined, the retracement levels are automatically plotted and the OTE zone is established."
+  },
+  {
+   "t": "p",
+   "text": "If swing highs and lows are unclear, this ties directly into liquidity concepts and market structure."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Anchor-Points.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using OTE in a Bearish Example"
+  },
+  {
+   "t": "p",
+   "text": "In a bearish market structure, price first forms a swing high and then a swing low. Fibonacci is drawn from high to low, and price is expected to retrace into the 62 to 79 OTE zone."
+  },
+  {
+   "t": "p",
+   "text": "Ideally, price taps near the 70.5 midpoint before displacing lower and reaching for sellside liquidity. This is where short entries or lower time frame entry models are typically sought. In real market conditions, price often reacts very precisely from this zone before continuation."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/OTE.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using OTE in a Bullish Example"
+  },
+  {
+   "t": "p",
+   "text": "In a bullish scenario, a swing low is formed first and price expands higher until a swing high is established. Fibonacci is drawn from low to high, and price is expected to retrace into the optimal trade entry zone."
+  },
+  {
+   "t": "p",
+   "text": "From there, the ideal outcome is a reaction higher, often targeting buyside liquidity or inefficiencies such as fair value gaps resting above the range."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Aligning OTE With PD Arrays"
+  },
+  {
+   "t": "p",
+   "text": "Optimal trade entry becomes significantly more effective when aligned with PD arrays."
+  },
+  {
+   "t": "p",
+   "text": "These can include fair value gaps, order blocks, volume imbalances, prior highs or lows, or breakers. When an OTE overlaps with one or more of these areas, it forms a strong point of interest. This overlap adds confluence and increases conviction in the setup."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/PD-ARRAY.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Multiple OTEs Across Timeframes"
+  },
+  {
+   "t": "p",
+   "text": "Optimal trade entry works best when applied through top down analysis."
+  },
+  {
+   "t": "p",
+   "text": "A higher timeframe displacement range can be marked first, followed by waiting for price to retrace into OTE. Once price reaches that area, dropping to a lower timeframe often reveals a new displacement, which creates another OTE. This process allows for layered entries with tighter risk and clearer structure."
+  },
+  {
+   "t": "p",
+   "text": "For example, a daily chart can define the primary range, the hourly chart refines the retracement, and the five or one minute chart provides execution."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Kill Zones and Execution Precision"
+  },
+  {
+   "t": "p",
+   "text": "Timing plays a major role in execution."
+  },
+  {
+   "t": "p",
+   "text": "Even when price enters an OTE zone, trades taken outside of kill zones should be avoided. Often price will generate liquidity first, form equal highs or lows, and then tap into the OTE during a session window. This is typically followed by displacement and a clean entry model."
+  },
+  {
+   "t": "p",
+   "text": "Patience is critical here."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Putting It All Together With Risk to Reward"
+  },
+  {
+   "t": "p",
+   "text": "Once price reacts from optimal trade entry, the risk to reward framework becomes clear."
+  },
+  {
+   "t": "p",
+   "text": "The ideal entry is near the 70.5 level, while a more aggressive entry may be taken at the 62 level. Targets are commonly prior highs or lows, liquidity pools, or session objectives such as the daily open. Many of these setups naturally produce 3R or greater when executed properly."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Optimal trade entry is a framework that works best when combined with market structure, liquidity, PD arrays, kill zones, and multi timeframe analysis. When these elements align, OTE becomes a powerful tool for precision trading."
+  }
+ ]
+}

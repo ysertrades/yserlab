@@ -1,0 +1,240 @@
+{
+ "slug": "reversal-sequence-building-an-entry-model-for-trading",
+ "id": 2954,
+ "url": "https://ttrades.com/reversal-sequence-building-an-entry-model-for-trading/",
+ "title": "Reversal Sequence – Building an Entry Model for Trading",
+ "date": "2025-07-29T11:10:00",
+ "modified": "2025-08-17T15:39:56",
+ "categories": [
+  "Fractal Model",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 19
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 67
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/Reversal-Sequence-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "wik00c9_2nk"
+ ],
+ "description": "Master reversals with TTrades Reversal Sequence. Learn how to blend PD arrays, identify key reversal steps, and use confluences for precise trade entries.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Let’s talk about something every trader wrestles with: how to actually enter a trade with confidence. Building an entry model doesn’t mean memorizing every concept out there—it’s about finding a structure that works for you and sticking to it. In this blog, I’ll walk you through the key ideas, how I use them, and the flow of a reversal so you can start shaping an entry model of your own."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding Kill Zones"
+  },
+  {
+   "t": "p",
+   "text": "The first thing you need to know is when to trade. Markets move all day, but most of the meaningful setups happen during certain windows—what are called kill zones."
+  },
+  {
+   "t": "li",
+   "text": "- New York AM Session (8:30–11:00 EST): This is my main focus when trading indices."
+  },
+  {
+   "t": "li",
+   "text": "- London Session (2:00–5:00 AM EST): Great if you like action earlier in the day."
+  },
+  {
+   "t": "p",
+   "text": "Timeframe also plays a huge role. If you’re impatient, you might prefer lower timeframes, but that often leads to noise. I’ve found the 5-minute chart is a sweet spot—it gives structure but still lines up with daily profiles."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Core Concepts for Entry Models"
+  },
+  {
+   "t": "p",
+   "text": "Here’s where things get fun. Instead of trying to master everything, you only really need a couple of tools. These are the main ones I use:"
+  },
+  {
+   "t": "p",
+   "text": "Fair Value Gap (FVG): A three-candle pattern that leaves imbalance."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Inversion: When a fair value gap gets closed and later flips into support or resistance."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Order Block: The last up or down candle before a move that defines structure."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Breaker Block: A shift in structure where a level that failed gets reused for entry"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Optimal Trade Entry (OTE): Using Fibonacci retracement—especially the 70.5% level—for continuation trades."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-6.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Pick one or two of these, don’t overload yourself."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Adding Confluences"
+  },
+  {
+   "t": "p",
+   "text": "This is where you stack extra confidence on top of your main concept."
+  },
+  {
+   "t": "li",
+   "text": "- Premium & Discount Zones: Think of the 50% line of a range. Above it is premium (sells), below it is discount (buys)."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-7.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- SMT Divergence: When correlated assets disagree—like one makes a higher low and the other makes a lower low—it’s often a clue a reversal is coming."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-8.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "You don’t need all the bells and whistles. Just enough to make you comfortable pulling the trigger."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "How Reversals Form"
+  },
+  {
+   "t": "p",
+   "text": "Reversals aren’t random—they usually follow a sequence. Understanding this keeps you from rushing in too early."
+  },
+  {
+   "t": "p",
+   "text": "Purge / Turtle Soup: A sweep of liquidity at a high or low."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-9.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Inversion: Price reclaims a fair value gap."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-10.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Change in State of Delivery (CISD): A candle closes through opposing candles, confirming the shift."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-11.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Fair Value Gap: Three candle pattern leaving an imbalance."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-12.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Breaker Block: The final piece of structure before price expands the other way."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/RS-13.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "The further down this sequence you go, the more confirmation you have—but that also means your entry might be later."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Finding Your Model"
+  },
+  {
+   "t": "p",
+   "text": "At the end of the day, the best entry model is the one that feels natural to you. If you’re drawn to order blocks, trade them consistently. If fair value gaps are easier on your eyes, build your model around them. The real key is clarity, not complexity. Once you know your model, repeat it until it becomes second nature."
+  }
+ ]
+}

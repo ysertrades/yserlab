@@ -1,0 +1,215 @@
+{
+ "slug": "mastering-position-sizing-the-key-to-profitable-trading",
+ "id": 4270,
+ "url": "https://ttrades.com/mastering-position-sizing-the-key-to-profitable-trading/",
+ "title": "Mastering Position Sizing: The Key to Profitable Trading",
+ "date": "2025-07-03T11:00:00",
+ "modified": "2025-09-23T11:52:46",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 29
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/09/Position-Sizing-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "0OjlQ91TZiU"
+ ],
+ "description": "Learn position sizing strategies for futures, forex, and prop firm trading. Master risk management with fixed risk methods, calculators, and TradingView tools.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Many traders spend endless hours debating win rate vs. risk-to-reward (R:R) ratios. While those are important, the missing piece of the puzzle is often position sizing. Without consistent and proper position sizing, even the most mathematically sound win rate and R:R setups can crumble."
+  },
+  {
+   "t": "p",
+   "text": "In this blog, we’ll break down how position sizing impacts profitability, explore different methods, and walk through practical tools and strategies for managing risk effectively."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Position Sizing Matters"
+  },
+  {
+   "t": "p",
+   "text": "Position sizing ensures that your risk per trade stays consistent. This consistency is what makes win rate and R:R work in your favor."
+  },
+  {
+   "t": "p",
+   "text": "Consider this example:"
+  },
+  {
+   "t": "li",
+   "text": "- System: 1:2 R:R, 50% win rate"
+  },
+  {
+   "t": "li",
+   "text": "- Risk: $1,000 per trade"
+  },
+  {
+   "t": "p",
+   "text": "If you lose the first trade (-$1,000) and win the second (+$2,000), you’re up +$1,000 overall. That’s how the math should work."
+  },
+  {
+   "t": "p",
+   "text": "But if you lose on the first trade ($1,000 loss) and then cut risk on the second ($500 risk) and it wins (+$1,000 instead of +$2,000), you end up at break-even instead of up (+$1,000). This is why inconsistent sizing undermines trading systems."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Fixed Contract Size vs. Fixed Dollar/Percentage Risk"
+  },
+  {
+   "t": "p",
+   "text": "There are several ways to size positions:"
+  },
+  {
+   "t": "li",
+   "text": "- Fixed Contract Size – e.g., always trading 2 NQ contracts.Problem: Risk fluctuates wildly depending on stop size.Example: Risk could be $400 on one trade and $1,600 on another, creating inconsistent R values."
+  },
+  {
+   "t": "li",
+   "text": "- Fixed Dollar or Percentage Risk – e.g., always risking $1,000 or 1% of account per trade.Advantage: Keeps risk steady across trades, ensuring R:R outcomes remain accurate.Example: Two losses at -$1,000 each followed by a 4R win, +$4,000 win equals +$2,000 net."
+  },
+  {
+   "t": "p",
+   "text": "Fixed contract size makes sense if traders always have the same sized stop loss. Due to the fluctuations in market volatility, this is rarely the case."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Position-size-ex-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Calculating Position Size"
+  },
+  {
+   "t": "p",
+   "text": "To determine the correct size, you’ll need three inputs:"
+  },
+  {
+   "t": "li",
+   "text": "- Defined risk per trade (e.g., $1,000)"
+  },
+  {
+   "t": "li",
+   "text": "- Value per point (instrument specific, e.g., NQ = $20/point)"
+  },
+  {
+   "t": "li",
+   "text": "- Stop size (in points/pips)"
+  },
+  {
+   "t": "p",
+   "text": "Formula:"
+  },
+  {
+   "t": "p",
+   "text": "Contracts = (Risk $) ÷ (Value per point × Stop size)"
+  },
+  {
+   "t": "p",
+   "text": "For example:"
+  },
+  {
+   "t": "li",
+   "text": "- Risk = $1,000"
+  },
+  {
+   "t": "li",
+   "text": "- NQ Value = $20/point"
+  },
+  {
+   "t": "li",
+   "text": "- Stop = 20 points"
+  },
+  {
+   "t": "p",
+   "text": "$1,000 ÷ (20 × 20) = 2.5 contracts"
+  },
+  {
+   "t": "p",
+   "text": "Since you can’t trade half contracts on futures, using micros allows greater flexibility."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Tools for Position Sizing"
+  },
+  {
+   "t": "p",
+   "text": "Manually calculating every trade is time-consuming. Thankfully, there are simple tools to make this process easier:"
+  },
+  {
+   "t": "li",
+   "text": "- Spreadsheets/Calculators – Input account size, desired risk, and stop size to instantly get contract or lot size."
+  },
+  {
+   "t": "li",
+   "text": "- TradingView Risk-Reward Tool – Lets you set entry, stop, and account risk %, then automatically calculates quantity."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Prop Firm Accounts and Position Sizing"
+  },
+  {
+   "t": "p",
+   "text": "Prop firm accounts add a twist. While you may “have” a $25,000 account, the real limiting factor is the drawdown (e.g., $1,500)."
+  },
+  {
+   "t": "li",
+   "text": "- Risking 1% of the account ($250) may actually equal ~17% of drawdown."
+  },
+  {
+   "t": "li",
+   "text": "- This drastically increases the chance of blowing the account after just a few losses."
+  },
+  {
+   "t": "p",
+   "text": "Instead, consider a risk of 7–10% of drawdown per trade, which typically allows 10–15 consecutive losing trades before the account is gone. Once funded, reducing risk further creates more breathing room."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Consistent position sizing is the foundation of trading."
+  },
+  {
+   "t": "li",
+   "text": "- Decide between fixed contract and fixed $ risk. (micros help!)"
+  },
+  {
+   "t": "li",
+   "text": "- Use spreadsheets, or tools on TradingView to size positions correctly."
+  },
+  {
+   "t": "li",
+   "text": "- For prop firm accounts, always size based off the drawdown amount, not account balance."
+  },
+  {
+   "t": "p",
+   "text": "Position sizing isn’t glamorous, but it’s what keeps traders alive long enough to let their strategies work. Master it, and your win rate and R:R finally have a chance to work out."
+  }
+ ]
+}

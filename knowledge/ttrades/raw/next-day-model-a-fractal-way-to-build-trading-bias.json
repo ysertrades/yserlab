@@ -1,0 +1,212 @@
+{
+ "slug": "next-day-model-a-fractal-way-to-build-trading-bias",
+ "id": 3555,
+ "url": "https://ttrades.com/next-day-model-a-fractal-way-to-build-trading-bias/",
+ "title": "Next Day Model: A Fractal Way to Build Trading Bias",
+ "date": "2025-07-26T11:00:00",
+ "modified": "2025-09-18T18:01:02",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 24
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/Next-Day-Model-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "TfHlNgAZ_II"
+ ],
+ "description": "Learn the Next Day Model for trading. Discover how candle closes, reversals, and continuations help build daily bias using fractal concepts across timeframes.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "One of the biggest challenges traders face is knowing where price is most likely to go next. Instead of guessing or reacting late, the Next Day Model (sometimes called the Next Candle Model) provides a structured way to anticipate price behavior using nothing more than the previous candle. This approach is rooted in fractal concepts, meaning it can be applied across all timeframes, from monthly charts to intraday setups."
+  },
+  {
+   "t": "p",
+   "text": "In this blog, we’ll break down how the model works, what defines a continuation versus a reversal, and how to combine it with price phases to create higher-probability trade ideas."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding Continuation vs. Reversal"
+  },
+  {
+   "t": "p",
+   "text": "The foundation of the Next Day Model is the relationship between a candle and its previous high or low:"
+  },
+  {
+   "t": "li",
+   "text": "- Reversal: Price sweeps the previous candle’s high or low, then closes back inside the range.Example: If yesterday’s high is swept, but the candle closes back inside, it signals potential bearish continuation the next day."
+  },
+  {
+   "t": "li",
+   "text": "- Continuation: Price sweeps the previous candle’s high or low, then closes outside the range.Example: If today closes above yesterday’s high, anticipate a bullish continuation the following day."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Frame-681.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "This simple framework allows traders to form a bias for the next candle without overcomplicating analysis."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Blending With Phases of Price Delivery"
+  },
+  {
+   "t": "p",
+   "text": "Price doesn’t move in one straight line. Instead, it cycles through phases:"
+  },
+  {
+   "t": "li",
+   "text": "- Expansion"
+  },
+  {
+   "t": "li",
+   "text": "- Retracement"
+  },
+  {
+   "t": "li",
+   "text": "- Consolidation"
+  },
+  {
+   "t": "li",
+   "text": "- Reversal"
+  },
+  {
+   "t": "p",
+   "text": "When you recognize multiple days of expansion, it’s wise to expect a shift in phase. For example:"
+  },
+  {
+   "t": "li",
+   "text": "- After three consecutive bearish continuations, it is likely for price to enter a new phase of price : retracement, reversal, or consolidation."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Ex-2-next-day-model.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Ex-3-next-day-model.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Instead of forcing continuation trades after price has already expanded, wait for price to enter a new phase of price. This will keep traders from getting caught shorting the low or longing the high."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Practical Examples on the Daily Chart"
+  },
+  {
+   "t": "p",
+   "text": "Looking at daily candles:"
+  },
+  {
+   "t": "li",
+   "text": "- A close outside the previous high → bias for continuation."
+  },
+  {
+   "t": "li",
+   "text": "- A sweep and close back inside → bias for reversal."
+  },
+  {
+   "t": "li",
+   "text": "- Multiple candles expanding in one direction → expect retracement, consolidation, or reversal soon."
+  },
+  {
+   "t": "p",
+   "text": "For example:"
+  },
+  {
+   "t": "li",
+   "text": "- Sweep of a daily high, close back inside the range → anticipate bearish price action the next day."
+  },
+  {
+   "t": "li",
+   "text": "- Closure below the previous candle low → anticipate bearish continuation."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/next-day-model-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/next-day-model-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/next-day-model-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Since the concept is fractal, you can scale it down to the hourly or even 5-minute charts."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why This Works Well in Practice"
+  },
+  {
+   "t": "li",
+   "text": "- It’s mechanical and repeatable, just track the previous candle closes."
+  },
+  {
+   "t": "li",
+   "text": "- It works across all timeframes, making it versatile for swing traders and scalpers alike."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- A close outside the previous candle’s high or low = continuation bias."
+  },
+  {
+   "t": "li",
+   "text": "- A sweep and close back inside = reversal bias."
+  },
+  {
+   "t": "li",
+   "text": "- After multiple continuation candles, expect retracement or reversal."
+  },
+  {
+   "t": "li",
+   "text": "- Use lower timeframes to refine entries once higher-timeframe bias is set."
+  },
+  {
+   "t": "p",
+   "text": "The Next Day Model is a simple, yet powerful model that can be used for bias as well as lower timeframe entries."
+  }
+ ]
+}

@@ -1,0 +1,385 @@
+{
+ "slug": "internal-external-liquidity-using-the-ttrades-fractal-model",
+ "id": 6528,
+ "url": "https://ttrades.com/internal-external-liquidity-using-the-ttrades-fractal-model/",
+ "title": "Internal & External Liquidity Using the TTrades Fractal Model",
+ "date": "2026-08-22T11:15:00",
+ "modified": "2026-08-21T22:32:21",
+ "categories": [
+  "Fractal Model"
+ ],
+ "courses": [
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 14
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/08/TTrades-ERL-IRL-Using-Fractal-Model.pdf"
+ ],
+ "videos": [
+  "vMq1l8Zzzjw"
+ ],
+ "description": "Learn internal and external liquidity using the TTrades Fractal Model, including fair value gaps, swing points, Candle 2, Candle 3, and HTF targets.",
+ "keywords": [],
+ "section": [
+  "Fractal Model"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Internal and external liquidity play an important role in the TTrades Fractal Model. Understanding the relationship between the two gives you a way to identify where price can move next, while the fractal model provides the confirmation needed to actually trade that move."
+  },
+  {
+   "t": "p",
+   "text": "Internal liquidity is defined by fair value gaps, while external liquidity is found at swing highs and lows. Once both are identified, the goal is to watch how price reacts at those levels and use valid Candle 2 or Candle 3 closures to trade between them."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is Internal Liquidity?"
+  },
+  {
+   "t": "p",
+   "text": "Internal liquidity is a fair value gap."
+  },
+  {
+   "t": "p",
+   "text": "A fair value gap is the three-candle pattern where the wick of candle one does not overlap with the wick of candle three, leaving a gap between those wicks."
+  },
+  {
+   "t": "p",
+   "text": "That gap becomes internal liquidity."
+  },
+  {
+   "t": "p",
+   "text": "Simply having a fair value gap does not mean price has to return to it. Price can continue trending without ever reaching the gap. What matters is the reaction when price gets there."
+  },
+  {
+   "t": "p",
+   "text": "If price reaches into internal liquidity and produces a valid candle closure showing a reaction, that can give you the context needed to look toward external liquidity."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/IRL.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is External Liquidity?"
+  },
+  {
+   "t": "p",
+   "text": "External liquidity is a swing high or swing low."
+  },
+  {
+   "t": "p",
+   "text": "A swing high is a high with a lower high on either side, while a swing low has a higher low on either side. These swing points become the external liquidity that price can trade toward."
+  },
+  {
+   "t": "p",
+   "text": "The relationship is straightforward:"
+  },
+  {
+   "t": "li",
+   "text": "- Internal liquidity = fair value gaps"
+  },
+  {
+   "t": "li",
+   "text": "- External liquidity = swing highs and lows"
+  },
+  {
+   "t": "p",
+   "text": "The goal is to identify both and then use the fractal model to determine when the relationship is actually tradable."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/ERl.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Price Moves Between Internal and External Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "Once internal and external liquidity are identified, price can move between the two."
+  },
+  {
+   "t": "p",
+   "text": "For example, price reaches into a fair value gap and produces a Candle 2 closure showing a reversal. If there is an external swing high above, that high can become the target."
+  },
+  {
+   "t": "p",
+   "text": "Price can then take out that external liquidity and later form another reaction at internal liquidity, creating another move in the opposite direction."
+  },
+  {
+   "t": "p",
+   "text": "This relationship can continue as price creates a series of higher highs and higher lows or lower highs and lower lows."
+  },
+  {
+   "t": "p",
+   "text": "The important part is not assuming that price has to move to the next liquidity level. The reaction and candle closure are what give the move context."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/Relationshjip.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Pair Liquidity With the Fractal Model"
+  },
+  {
+   "t": "p",
+   "text": "This is where the concept becomes actionable."
+  },
+  {
+   "t": "p",
+   "text": "Instead of seeing a fair value gap and immediately expecting price to trade toward a swing high or low, wait for a valid Candle 2 or Candle 3 closure."
+  },
+  {
+   "t": "p",
+   "text": "A candle closure at internal liquidity can show that price is actually reacting from that level. From there, the external liquidity becomes a potential target."
+  },
+  {
+   "t": "p",
+   "text": "This gives the framework a simple structure:"
+  },
+  {
+   "t": "p",
+   "text": "Internal liquidity provides the point of interest. External liquidity provides the target. The fractal model provides the confirmation."
+  },
+  {
+   "t": "p",
+   "text": "That confirmation keeps the trade from being based solely on the assumption that price will move between two levels."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/wekk.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Reaction at the Level Matters"
+  },
+  {
+   "t": "p",
+   "text": "A fair value gap does not automatically mean price is going to reverse."
+  },
+  {
+   "t": "p",
+   "text": "Price can reach into internal liquidity and continue trending straight through it. If that happens, there is no reason to blindly expect a move toward external liquidity."
+  },
+  {
+   "t": "p",
+   "text": "Instead, look at the phase of price at the level."
+  },
+  {
+   "t": "p",
+   "text": "A Candle 2 or Candle 3 closure can show that price is actually reacting. Once that closure is in place, the fractal model can be used to look for a continuation toward the external liquidity."
+  },
+  {
+   "t": "p",
+   "text": "This is the difference between simply marking liquidity and actually trading the relationship between it."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Higher Timeframe Liquidity as a Target"
+  },
+  {
+   "t": "p",
+   "text": "The same relationship can be used to build higher timeframe targets."
+  },
+  {
+   "t": "p",
+   "text": "For example, the daily chart may show price reaching into a fair value gap and forming a reversal. The next external swing low can then become the higher timeframe objective."
+  },
+  {
+   "t": "p",
+   "text": "From there, a lower timeframe model can provide the entry."
+  },
+  {
+   "t": "p",
+   "text": "The daily chart establishes the context and target, while the hourly, 15-minute, 5-minute, or even 1-minute chart can provide the fractal model used to get an entry."
+  },
+  {
+   "t": "p",
+   "text": "This can create better risk-to-reward opportunities because the entry can come from a lower timeframe while the target comes from a higher timeframe."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Refining the Entry on a Lower Timeframe"
+  },
+  {
+   "t": "p",
+   "text": "Once the higher timeframe relationship is established, drop to a lower timeframe and wait for a valid fractal model."
+  },
+  {
+   "t": "p",
+   "text": "For example, an hourly internal-to-external setup can be paired with a 5-minute model. The hourly chart establishes the target, while the 5-minute chart provides the entry and invalidation."
+  },
+  {
+   "t": "p",
+   "text": "The lower timeframe model can include a change in the state of delivery, a valid Candle 2 or Candle 3 closure, and a new protected swing."
+  },
+  {
+   "t": "p",
+   "text": "The stop can then be based on the lower timeframe structure rather than forcing a much larger stop around the higher timeframe level."
+  },
+  {
+   "t": "p",
+   "text": "This allows the trade to maintain the higher timeframe objective while using a more refined entry."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/08/11-1D-_-1H-Fractal-Model.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Model Works Across Timeframes"
+  },
+  {
+   "t": "p",
+   "text": "Internal and external liquidity are fractal concepts."
+  },
+  {
+   "t": "p",
+   "text": "The same relationship can be used on the weekly, daily, 4-hour, hourly, 15-minute, 5-minute, or 1-minute chart."
+  },
+  {
+   "t": "p",
+   "text": "For example, a weekly fair value gap can act as internal liquidity while a weekly swing low acts as external liquidity. The 4-hour chart can then provide the fractal model for the entry."
+  },
+  {
+   "t": "p",
+   "text": "The same thing can happen from the daily to hourly, hourly to 5-minute, or 15-minute to 1-minute."
+  },
+  {
+   "t": "p",
+   "text": "The timeframe changes, but the logic stays the same."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trading From Internal to External Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "The easier side of the relationship is generally trading from internal liquidity toward external liquidity in the direction of the higher timeframe trend."
+  },
+  {
+   "t": "p",
+   "text": "For example, price reaches into a higher timeframe fair value gap and gives a Candle 2 closure. If the market is already positioned for expansion lower, the external swing low becomes the target."
+  },
+  {
+   "t": "p",
+   "text": "A lower timeframe fractal model can then be used to enter the move."
+  },
+  {
+   "t": "p",
+   "text": "This gives the trade a clear reason for entry and a clear reason for the target."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Trading From External to Internal Liquidity"
+  },
+  {
+   "t": "p",
+   "text": "The opposite relationship can also occur."
+  },
+  {
+   "t": "p",
+   "text": "Price can take out external liquidity and then reverse back into internal liquidity."
+  },
+  {
+   "t": "p",
+   "text": "However, this generally requires stronger confirmation because the move is trading back into the range rather than following the existing expansion."
+  },
+  {
+   "t": "p",
+   "text": "A reversal at external liquidity needs to show that price is actually changing direction. A valid fractal model and candle closure provide that confirmation before looking back toward the internal liquidity."
+  },
+  {
+   "t": "p",
+   "text": "The goal is never to assume that external liquidity has been taken, so price must immediately reverse."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Keep the Liquidity Framework Simple"
+  },
+  {
+   "t": "p",
+   "text": "The purpose of internal and external liquidity is not to mark every fair value gap and swing point on the chart and assume price will eventually trade between them."
+  },
+  {
+   "t": "p",
+   "text": "Start with the higher timeframe bias."
+  },
+  {
+   "t": "p",
+   "text": "Identify the relevant internal and external liquidity, then wait for price to show a reaction. Once a valid Candle 2 or Candle 3 closure confirms the move, the fractal model gives you a way to participate."
+  },
+  {
+   "t": "p",
+   "text": "The framework comes down to three things:"
+  },
+  {
+   "t": "li",
+   "text": "- Internal liquidity: fair value gaps"
+  },
+  {
+   "t": "li",
+   "text": "- External liquidity: swing highs and lows"
+  },
+  {
+   "t": "li",
+   "text": "- Fractal model: confirmation for trading between them"
+  },
+  {
+   "t": "p",
+   "text": "Once you understand that relationship, liquidity becomes more than something to mark on the chart. It becomes a way to establish context, define targets, and refine entries across multiple timeframes."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Internal and external liquidity work together to give structure to where price can move next."
+  },
+  {
+   "t": "p",
+   "text": "A fair value gap can provide the internal liquidity. A swing high or low can provide the external liquidity. The reaction at those levels, combined with a valid Candle 2 or Candle 3 closure, is what turns that relationship into something that can actually be traded."
+  },
+  {
+   "t": "p",
+   "text": "Then the fractal nature of the model allows the same process to be repeated across timeframes."
+  },
+  {
+   "t": "p",
+   "text": "Find the liquidity. Wait for the reaction. Confirm the fractal model. Trade toward the next relevant liquidity."
+  }
+ ]
+}

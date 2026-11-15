@@ -1,0 +1,282 @@
+{
+ "slug": "understanding-basic-market-structure-in-trading",
+ "id": 4033,
+ "url": "https://ttrades.com/understanding-basic-market-structure-in-trading/",
+ "title": "Understanding Basic Market Structure in Trading",
+ "date": "2025-07-10T11:00:00",
+ "modified": "2025-10-13T13:34:36",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 25
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/09/Basic-Market-Structure-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "sgAnVR6RSDg"
+ ],
+ "description": "Learn basic market structure, swing highs and lows, uptrends, downtrends, and market structure shifts. Perfect for traders mastering price action.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Before diving into advanced trading concepts, it’s critical to understand basic market structure. Market structure forms the foundation of technical analysis, helping traders read price action, spot trends, and identify potential reversals. In this guide, we’ll break down swing highs and lows, trend direction, and what it means when a market shifts from bullish to bearish or vice versa."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Swing Highs, Swing Lows, and Liquidity"
+  },
+  {
+   "t": "li",
+   "text": "- A swing high is a peak in price before the market moves lower."
+  },
+  {
+   "t": "li",
+   "text": "- A swing low is a trough before the market moves higher."
+  },
+  {
+   "t": "li",
+   "text": "- These swings build the framework of market structure, guiding how trends form."
+  },
+  {
+   "t": "li",
+   "text": "- Understanding liquidity is also essential, as it often influences price movement."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Identifying an Uptrend"
+  },
+  {
+   "t": "p",
+   "text": "In an uptrend, price moves through a series of higher highs and higher lows:"
+  },
+  {
+   "t": "li",
+   "text": "- Price makes a low, then a higher high."
+  },
+  {
+   "t": "li",
+   "text": "- A higher low forms relative to the previous low."
+  },
+  {
+   "t": "li",
+   "text": "- The cycle continues: higher highs and higher lows."
+  },
+  {
+   "t": "p",
+   "text": "This sequence confirms bullish structure until a significant breakdown occurs."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Bullish-Trend-Market-Structure.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Identifying a Downtrend"
+  },
+  {
+   "t": "p",
+   "text": "In a downtrend, price follows the opposite sequence:"
+  },
+  {
+   "t": "li",
+   "text": "- Price makes a high, then a lower low."
+  },
+  {
+   "t": "li",
+   "text": "- A lower high forms relative to the previous high."
+  },
+  {
+   "t": "li",
+   "text": "- The cycle continues: lower highs and lower lows."
+  },
+  {
+   "t": "p",
+   "text": "This structure confirms bearish conditions until price shifts upward."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Market-structure-bearish-trend-ex.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Market Structure Shifts"
+  },
+  {
+   "t": "p",
+   "text": "A market structure shift occurs when the prevailing trend reverses:"
+  },
+  {
+   "t": "li",
+   "text": "- From bearish to bullish: price stops making lower lows and begins forming higher highs."
+  },
+  {
+   "t": "li",
+   "text": "- From bullish to bearish: price stops making higher highs and starts forming lower lows."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Change-in-Trend-bullish-1024x576.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Change-In-Trend-Bearish-1024x576.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "The key confirmation is displacement (strong price movement with momentum) that breaks prior structure."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Higher Time Frame vs. Lower Time Frame"
+  },
+  {
+   "t": "p",
+   "text": "One of the biggest mistakes traders make is ignoring the higher time frame trend:"
+  },
+  {
+   "t": "li",
+   "text": "- On a lower time frame, a sudden drop may look like a bearish shift."
+  },
+  {
+   "t": "li",
+   "text": "- On the higher time frame, the same move may just be a retracement before continuation higher."
+  },
+  {
+   "t": "li",
+   "text": "- Always align trades with the higher time frame bias for higher probability setups."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Basic-Market-Structure-HTF.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Practical Example of an Uptrend"
+  },
+  {
+   "t": "li",
+   "text": "- Price forms a higher high."
+  },
+  {
+   "t": "li",
+   "text": "- A higher low develops."
+  },
+  {
+   "t": "li",
+   "text": "- Another higher high confirms continuation."
+  },
+  {
+   "t": "li",
+   "text": "- Repeating this process shows the flow of a bullish trend."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/basic-Market-structure-uptrend.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Practical Example of a Downtrend"
+  },
+  {
+   "t": "li",
+   "text": "- Price forms a lower low."
+  },
+  {
+   "t": "li",
+   "text": "- A lower high develops."
+  },
+  {
+   "t": "li",
+   "text": "- Another lower low confirms continuation."
+  },
+  {
+   "t": "li",
+   "text": "- This sequence maps out bearish price action."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/Basic-Market-Structure-down-trend.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Recognizing False Shifts"
+  },
+  {
+   "t": "p",
+   "text": "Not every break of structure is a full reversal. Sometimes:"
+  },
+  {
+   "t": "li",
+   "text": "- A lower time frame “trend shift” is just a pullback into a discount or premium area on a higher time frame."
+  },
+  {
+   "t": "li",
+   "text": "- Traders who ignore this often get stopped out by retracements."
+  },
+  {
+   "t": "li",
+   "text": "- The solution: always zoom out and confirm the dominant trend before making entries."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Practice is Essential"
+  },
+  {
+   "t": "p",
+   "text": "The best way to master market structure is through consistent chart study:"
+  },
+  {
+   "t": "li",
+   "text": "- Mark swing highs and swing lows."
+  },
+  {
+   "t": "li",
+   "text": "- Identify whether the market is making higher highs/lows or lower highs/lows."
+  },
+  {
+   "t": "li",
+   "text": "- Watch for displacement and structural breaks."
+  },
+  {
+   "t": "p",
+   "text": "Over time, you’ll train your eye to quickly recognize shifts and opportunities."
+  }
+ ]
+}

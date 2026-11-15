@@ -1,0 +1,374 @@
+{
+ "slug": "understanding-dealing-ranges-in-trading-get-better-risk-reward",
+ "id": 6688,
+ "url": "https://ttrades.com/understanding-dealing-ranges-in-trading-get-better-risk-reward/",
+ "title": "Understanding Dealing Ranges in Trading (Get Better Risk Reward)",
+ "date": "2026-09-19T11:20:00",
+ "modified": "2026-09-19T14:17:22",
+ "categories": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 6
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 10
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/09/TTrades-Dealing-Ranges.pdf"
+ ],
+ "videos": [
+  "yb3Te7tiGRk"
+ ],
+ "description": "Learn dealing ranges, premium, discount, EQ, fractal setups, and higher timeframe targets to improve entries and risk reward.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "A dealing range is the overall range you are trading within or toward."
+  },
+  {
+   "t": "p",
+   "text": "Within the TTrades Fractal Model, the fractal gives you the setup. The dealing range gives you the range around that setup."
+  },
+  {
+   "t": "p",
+   "text": "Find the swing point you are trading away from, find the higher timeframe swing that created it, and mark the range."
+  },
+  {
+   "t": "p",
+   "text": "From there, use premium, discount, and EQ to position the trade and measure the available risk reward."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/Frame-21441.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is A Dealing Range?"
+  },
+  {
+   "t": "p",
+   "text": "A dealing range is the range between the swing point you are trading away from and the higher timeframe swing you are trading toward."
+  },
+  {
+   "t": "p",
+   "text": "For a bullish range, start with the low you are trading away from. Find the higher timeframe swing high that made that low and mark the range."
+  },
+  {
+   "t": "p",
+   "text": "For a bearish range, start with the high you are trading away from. Find the higher timeframe swing low that made that high and mark the range."
+  },
+  {
+   "t": "p",
+   "text": "That is the dealing range."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Finding A Bullish Dealing Range"
+  },
+  {
+   "t": "p",
+   "text": "Start with a valid fractal model."
+  },
+  {
+   "t": "p",
+   "text": "If you have a Candle 2 closure and are looking to trade Candle 3 higher, start with the Candle 2 low."
+  },
+  {
+   "t": "p",
+   "text": "Move to the higher timeframe and find the swing high that made that low."
+  },
+  {
+   "t": "p",
+   "text": "It will not always be Candle 1. Keep moving through the higher timeframe until you find the swing high."
+  },
+  {
+   "t": "p",
+   "text": "Mark the high to the low."
+  },
+  {
+   "t": "p",
+   "text": "That is your bullish dealing range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/Frame-21438.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Finding A Bearish Dealing Range"
+  },
+  {
+   "t": "p",
+   "text": "The bearish range works the same way."
+  },
+  {
+   "t": "p",
+   "text": "Start with a valid fractal model and find the high you are trading away from."
+  },
+  {
+   "t": "p",
+   "text": "Move to the higher timeframe and find the swing low that made that high."
+  },
+  {
+   "t": "p",
+   "text": "Mark the high to the low."
+  },
+  {
+   "t": "p",
+   "text": "That is your bearish dealing range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/Frame-21510.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Premium, Discount, And EQ"
+  },
+  {
+   "t": "p",
+   "text": "Split the dealing range at 50%."
+  },
+  {
+   "t": "p",
+   "text": "The upper half is premium."
+  },
+  {
+   "t": "p",
+   "text": "The lower half is discount."
+  },
+  {
+   "t": "p",
+   "text": "EQ sits in the middle."
+  },
+  {
+   "t": "p",
+   "text": "For bullish setups, look for longs in discount or around EQ."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/Frame-21444.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "For bearish setups, look for shorts in premium or around EQ."
+  },
+  {
+   "t": "p",
+   "text": "The goal is simple. Enter with enough range between the entry and the target to reach your risk reward."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/Frame-21453.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Entry Position Matters"
+  },
+  {
+   "t": "p",
+   "text": "If you are long from discount, you have more range between your entry and the dealing range high."
+  },
+  {
+   "t": "p",
+   "text": "If you are long from premium, you are already closer to the target."
+  },
+  {
+   "t": "p",
+   "text": "The same applies to shorts."
+  },
+  {
+   "t": "p",
+   "text": "A short in premium has more range toward the dealing range low. A short deep in discount is already closer to the target."
+  },
+  {
+   "t": "p",
+   "text": "The setup can still work from a poor location. The issue is how much range is left for the trade."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/Frame-21512.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Dealing Ranges Are Fractal"
+  },
+  {
+   "t": "p",
+   "text": "Dealing ranges can form on every timeframe."
+  },
+  {
+   "t": "p",
+   "text": "You can have a daily dealing range, an hourly dealing range, and another dealing range on the 15 minute or 5 minute."
+  },
+  {
+   "t": "p",
+   "text": "The process stays the same."
+  },
+  {
+   "t": "p",
+   "text": "Find the swing point you are trading away from. Find the swing that created it. Mark the range. Then use premium, discount, and EQ."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Dealing Ranges To Avoid Poor Entries"
+  },
+  {
+   "t": "p",
+   "text": "A bearish setup deep in discount may still work, but the target is already close."
+  },
+  {
+   "t": "p",
+   "text": "A bullish setup high in premium has the same problem."
+  },
+  {
+   "t": "p",
+   "text": "Price can continue, but there may not be enough range for the risk reward you want."
+  },
+  {
+   "t": "p",
+   "text": "The dealing range gives you a mechanical way to see how much room is left before entering."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using The Dealing Range Target"
+  },
+  {
+   "t": "p",
+   "text": "The dealing range high is the target for a bullish range."
+  },
+  {
+   "t": "p",
+   "text": "The dealing range low is the target for a bearish range."
+  },
+  {
+   "t": "p",
+   "text": "Use that target to measure the available risk reward before entering."
+  },
+  {
+   "t": "p",
+   "text": "Once the first target is taken, runners can continue toward the dealing range target."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Multiple Dealing Ranges"
+  },
+  {
+   "t": "p",
+   "text": "Multiple dealing ranges can overlap."
+  },
+  {
+   "t": "p",
+   "text": "A lower timeframe setup can form inside a higher timeframe dealing range."
+  },
+  {
+   "t": "p",
+   "text": "For example, a short can form in premium of both the 5 minute and higher timeframe dealing ranges."
+  },
+  {
+   "t": "p",
+   "text": "Now the entry is positioned within both ranges."
+  },
+  {
+   "t": "p",
+   "text": "The same process applies to bullish setups."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Putting It All Together"
+  },
+  {
+   "t": "p",
+   "text": "Start with the fractal model."
+  },
+  {
+   "t": "p",
+   "text": "Find the swing point you are trading away from. Find the higher timeframe swing that created it. Mark the range."
+  },
+  {
+   "t": "p",
+   "text": "Then split it at EQ."
+  },
+  {
+   "t": "p",
+   "text": "Look for longs in discount or around EQ. Look for shorts in premium or around EQ."
+  },
+  {
+   "t": "p",
+   "text": "Use the dealing range target to measure the available risk reward."
+  },
+  {
+   "t": "p",
+   "text": "That is the dealing range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/lol.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "The fractal model gives you the setup."
+  },
+  {
+   "t": "p",
+   "text": "The dealing range gives you the range."
+  },
+  {
+   "t": "p",
+   "text": "Use premium, discount, and EQ to position the trade."
+  },
+  {
+   "t": "p",
+   "text": "Then use the dealing range target to measure the risk reward."
+  },
+  {
+   "t": "p",
+   "text": "Keep it mechanical."
+  }
+ ]
+}

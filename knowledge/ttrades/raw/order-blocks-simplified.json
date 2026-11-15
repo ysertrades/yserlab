@@ -1,0 +1,176 @@
+{
+ "slug": "order-blocks-simplified",
+ "id": 4242,
+ "url": "https://ttrades.com/order-blocks-simplified/",
+ "title": "Order Blocks Simplified",
+ "date": "2025-07-04T11:00:00",
+ "modified": "2026-09-04T10:26:40",
+ "categories": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 5
+  },
+  {
+   "course": "ICT Core Concepts",
+   "n": 28
+  }
+ ],
+ "pdfs": [],
+ "videos": [
+  "DMUiDBnTYc8"
+ ],
+ "description": "Learn order blocks in smart money concepts, validation, mean threshold, liquidity sweeps, stop loss placement, and how to align with institutional flow.",
+ "keywords": [],
+ "section": [
+  "Free Course",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Order blocks are one of the most powerful tools within trading. They help traders identify where institutions are likely entering or exiting the market, giving us a clear edge in timing entries, stop placement, and profit targets."
+  },
+  {
+   "t": "p",
+   "text": "In this guide, we’ll break down what order blocks are, how to validate them, the importance of higher time frame confluence, the mean threshold concept, and how to properly place stop losses. By the end, you’ll have a step-by-step process for recognizing valid order blocks and avoiding common traps."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is an Order Block?"
+  },
+  {
+   "t": "p",
+   "text": "At its core, an order block is the series of last up close (bullish) or down close (bearish) candles before a reversal."
+  },
+  {
+   "t": "p",
+   "text": "Bearish Order Block, The last bullish candles before price aggressively moves downBullish Order Block, The last bearish candles before price aggressively moves up"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/OB-EX-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Role of Important Levels"
+  },
+  {
+   "t": "p",
+   "text": "An order block on its own isn’t enough. For it to matter, it must form at a key higher time frame level, such as,• A previous order block• A fair value gap• A liquidity sweep"
+  },
+  {
+   "t": "p",
+   "text": "Without this confluence, lower-timeframe order blocks often fail because they’re not backed by the higher timeframe candles."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Respecting vs. Invalidating an Order Block"
+  },
+  {
+   "t": "p",
+   "text": "How do you know if an order block will hold?"
+  },
+  {
+   "t": "p",
+   "text": "Respected Order Block, Price retraces into it and continues in the expected direction without closing through the mean threshold Invalidated Order Block, Price closes beyond the mean threshold."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Mean Threshold Concept"
+  },
+  {
+   "t": "p",
+   "text": "The mean threshold is the 50% level of the order block’s body."
+  },
+  {
+   "t": "p",
+   "text": "Draw a Fibonacci from the body low to body highThe 0.5 level marks the mean threshold."
+  },
+  {
+   "t": "p",
+   "text": "This acts as a “line in the sand.” If price respects this level, the order block is still valid. Traders often use it for refined entries with better risk-to-reward."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/OB-MEAN-THRESHOLD.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Buy Side and Sell Side of the Curve"
+  },
+  {
+   "t": "p",
+   "text": "When a smart money reversal shifts the trend, order blocks help us align with the higher timeframes."
+  },
+  {
+   "t": "p",
+   "text": "On the Buy Side, Look for down close candles at important levels that get closed above. These confirm bullish order blocks and continuationOn the Sell Side, Look for up close candles into important levels that get closed below. These confirm bearish order blocks for continuation lower"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Stop Loss Placement with Order Blocks"
+  },
+  {
+   "t": "p",
+   "text": "Stop placement is critical when trading order blocks. Two common approaches,"
+  },
+  {
+   "t": "li",
+   "text": "- Swing High/Low Stop, Safer, less likely to get wicked out, but offers lower R:R"
+  },
+  {
+   "t": "li",
+   "text": "- Other Side of the Order Block, Higher R:R, but risk of being stopped out by wicks even when the trade is still valid"
+  },
+  {
+   "t": "p",
+   "text": "A balanced approach is to refine your entry closer to invalidation while keeping stops at structural swing points."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/OB-STOP-LOSS.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Not every order block is valid, look for higher time frame confluence"
+  },
+  {
+   "t": "li",
+   "text": "- Use the mean threshold for refined entries and confirmation"
+  },
+  {
+   "t": "li",
+   "text": "- Always align entries with the higher timeframes (buy side vs. sell side of the curve)"
+  },
+  {
+   "t": "li",
+   "text": "- Choose stop loss placement that balances safety with risk-to-reward"
+  }
+ ]
+}

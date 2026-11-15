@@ -1,0 +1,258 @@
+{
+ "slug": "breaker-blocks-simplified",
+ "id": 4237,
+ "url": "https://ttrades.com/breaker-blocks-simplified/",
+ "title": "Breaker Blocks Simplified",
+ "date": "2025-07-05T11:00:00",
+ "modified": "2026-02-11T10:58:07",
+ "categories": [
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 27
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/09/Breaker-Blocks-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "75S4vwD4P1U"
+ ],
+ "description": "Learn how to trade breaker blocks with bullish and bearish setups, fair value gaps, and stop loss strategies for higher accuracy.",
+ "keywords": [],
+ "section": [
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Breaker blocks are one of the most powerful yet misunderstood tools in price action trading. If you’ve ever wondered why price sometimes flips a “support” into “resistance” or vice versa, breaker blocks provide the answer. In this blog, we’ll break down what breaker blocks are, how bullish and bearish setups form, and how to combine them with other concepts like fair value gaps (FVG) to increase precision."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is a Breaker Block?"
+  },
+  {
+   "t": "p",
+   "text": "A breaker block is a candlestick formation that occurs when the market structure shifts. It highlights areas where liquidity has been manipulated, and price later respects that same zone."
+  },
+  {
+   "t": "p",
+   "text": "The formation pattern looks like this:"
+  },
+  {
+   "t": "li",
+   "text": "- For a bullish breaker block: Low → High → Lower Low → Higher High."
+  },
+  {
+   "t": "li",
+   "text": "- For a bearish breaker block: High → Low → Higher High → Lower Low."
+  },
+  {
+   "t": "p",
+   "text": "Once this sequence forms, you mark out the series (or single) up-close or down-close candles within that range. That zone becomes your breaker block, and you look for price to retest it for continuation."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example of a Bullish Breaker Block"
+  },
+  {
+   "t": "p",
+   "text": "Imagine price forms:"
+  },
+  {
+   "t": "li",
+   "text": "- A swing low"
+  },
+  {
+   "t": "li",
+   "text": "- A swing high"
+  },
+  {
+   "t": "li",
+   "text": "- A lower low (taking liquidity)"
+  },
+  {
+   "t": "li",
+   "text": "- A higher high (showing strength)"
+  },
+  {
+   "t": "p",
+   "text": "At this point, the up-close candles between the low and the high become your breaker block. When price retraces into that zone, traders look for continuation to the upside.."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/BBB.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Example of a Bearish Breaker Block"
+  },
+  {
+   "t": "p",
+   "text": "The opposite applies for bearish setups:"
+  },
+  {
+   "t": "li",
+   "text": "- A swing high"
+  },
+  {
+   "t": "li",
+   "text": "- A swing low"
+  },
+  {
+   "t": "li",
+   "text": "- A higher high (taking liquidity)"
+  },
+  {
+   "t": "li",
+   "text": "- A lower low (showing weakness)"
+  },
+  {
+   "t": "p",
+   "text": "The down-close candles in that range become your breaker block. When retested, price often reacts by moving lower."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/BBBB.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Unicorn Model: Breaker Blocks + Fair Value Gaps"
+  },
+  {
+   "t": "p",
+   "text": "One of the strongest setups comes when a breaker block overlaps with a fair value gap. This is often called the unicorn model:"
+  },
+  {
+   "t": "li",
+   "text": "- Bullish Unicorn Model: Bullish breaker block + bullish FVG"
+  },
+  {
+   "t": "li",
+   "text": "- Bearish Unicorn Model: Bearish breaker block + bearish FVG"
+  },
+  {
+   "t": "p",
+   "text": "When displacement occurs through the breaker block, leaving behind a fair value gap, the probability of price reacting to that zone increases."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/UNICORN-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Stop Loss Placement with Breaker Blocks"
+  },
+  {
+   "t": "p",
+   "text": "There are two common ways to manage risk:"
+  },
+  {
+   "t": "li",
+   "text": "- Place your stop loss just beyond the breaker block."
+  },
+  {
+   "t": "li",
+   "text": "- Place it at the swing high/low that confirms the breaker pattern."
+  },
+  {
+   "t": "p",
+   "text": "The first option usually offers a tighter stop and better risk-to-reward (RR), while the second provides a safer cushion but may require a larger target."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/SL.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Breaker Blocks vs Order Blocks"
+  },
+  {
+   "t": "p",
+   "text": "Though they look similar, breaker blocks and order blocks are not the same:"
+  },
+  {
+   "t": "li",
+   "text": "- Breaker Block: The failed structure candle(s) that price later respects."
+  },
+  {
+   "t": "li",
+   "text": "- Order Block: The last opposing candle before a displacement move."
+  },
+  {
+   "t": "p",
+   "text": "With a breaker block, you typically mark out the entire candle body and wick, while with an order block, you may just use the open price. Both can work, but they highlight different concepts of liquidity."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/OB-BB.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Projection with Breaker Blocks"
+  },
+  {
+   "t": "p",
+   "text": "Breaker blocks often align with the “manipulation leg” of market structure. By projecting that leg forward, traders can set realistic profit targets, such as 2R, 3R, or measured move extensions."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Higher Time Frame Context"
+  },
+  {
+   "t": "p",
+   "text": "The most effective breaker blocks occur when they align with higher time frame zones (hourly, 4H, daily). By spotting the breaker on a larger chart and refining on a lower timeframe (like 5m), traders can catch high-probability entries with strong RR setups."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- Bullish breaker: Low → High → Lower Low → Higher High."
+  },
+  {
+   "t": "li",
+   "text": "- Bearish breaker: High → Low → Higher High → Lower Low."
+  },
+  {
+   "t": "li",
+   "text": "- Overlap with fair value gaps = stronger setup (unicorn model)."
+  },
+  {
+   "t": "li",
+   "text": "- Stops can go beyond the breaker or at the swing point."
+  },
+  {
+   "t": "li",
+   "text": "- Always pair breaker blocks with displacement for best results."
+  }
+ ]
+}

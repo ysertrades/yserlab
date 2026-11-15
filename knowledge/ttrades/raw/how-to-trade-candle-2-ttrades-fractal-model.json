@@ -1,0 +1,305 @@
+{
+ "slug": "how-to-trade-candle-2-ttrades-fractal-model",
+ "id": 2997,
+ "url": "https://ttrades.com/how-to-trade-candle-2-ttrades-fractal-model/",
+ "title": "How to Trade Candle 2 – TTrades Fractal Model",
+ "date": "2025-08-16T11:00:00",
+ "modified": "2026-09-04T11:29:24",
+ "categories": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "Free Fractal Model Course",
+   "n": 43
+  },
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 14
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 55
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/Candle-2-TTrades-PDF.pdf"
+ ],
+ "videos": [
+  "m4k_1pF5zFI"
+ ],
+ "description": "Learn how to trade reversal candles using wick size, expansion logic, and multi-timeframe analysis for precise targets in the fractal model.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "Free Course",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 2,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In trading, timing and structure matter as much as direction. One of the most important parts in my fractal model is the reversal candle, what I call candle 2. Learning to read its wick, body, and context allows you to anticipate whether the next move will trend aggressively or just retrace. Candle 2 also has the ability to be traded when certain criteria is met. This blog will walk you through the difference between expansion and reversal candles, how wick size affects your targets, and how to apply this knowledge across all timeframes for higher-probability trades."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding Expansion vs. Reversal Candles"
+  },
+  {
+   "t": "p",
+   "text": "An expansion candle has"
+  },
+  {
+   "t": "li",
+   "text": "- Small wicks on both ends"
+  },
+  {
+   "t": "li",
+   "text": "- A large body"
+  },
+  {
+   "t": "li",
+   "text": "- Clear momentum in one direction during its time period"
+  },
+  {
+   "t": "p",
+   "text": "A reversal candle"
+  },
+  {
+   "t": "li",
+   "text": "- Opens, makes a large opposing run (creating a long wick), then closes near its open"
+  },
+  {
+   "t": "li",
+   "text": "- Signals a possible shift in direction, but not all reversals are equally tradeable"
+  },
+  {
+   "t": "p",
+   "text": "Key takeaway: Small wicks support further expansion in the same direction. Large wicks limit expansion potential because the range has already been exhausted."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/c2-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why Wick Size Matters for Target Setting"
+  },
+  {
+   "t": "p",
+   "text": "Small wick reversal: Price hasn’t used much range to create its wick, so it can expand further in one direction. Targets can include the previous candle’s low or high, liquidity points, and standard deviation projections.Large wick reversal: Price used most its range creating its wick. If a reversal is to occur, price is likely to return toward the open price or current candle lows/highs rather than trend far."
+  },
+  {
+   "t": "p",
+   "text": "Think of wick size as a fuel gauge for price movement, less wick, more room to run."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/c2-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Application"
+  },
+  {
+   "t": "p",
+   "text": "When framing a reversal"
+  },
+  {
+   "t": "p",
+   "text": "Mark the previous candle’s high or low on the higher timeframe (daily, 4H, etc.)"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/c2-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Wait for a sweep of that level"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/c2-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Look for a change in the state of delivery (CISD) to form a protected high/low"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/c2-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "Confirm wick size—small wick means you can target deeper liquidity; large wick means keep it tight"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/c2-6.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Execution"
+  },
+  {
+   "t": "p",
+   "text": "Once the higher timeframe wick is forming"
+  },
+  {
+   "t": "li",
+   "text": "- In Asia session, confirm using 1H or 30M charts"
+  },
+  {
+   "t": "li",
+   "text": "- In London, confirm using 1H, 30M or 15M charts"
+  },
+  {
+   "t": "li",
+   "text": "- In New York, you can drop to 15M or 5M for quick reversals"
+  },
+  {
+   "t": "p",
+   "text": "Execution steps"
+  },
+  {
+   "t": "li",
+   "text": "- Identify the wick’s completion intraday"
+  },
+  {
+   "t": "li",
+   "text": "- Look for a CISD on your entry timeframe"
+  },
+  {
+   "t": "li",
+   "text": "- Define targets based on wick size:Small wick: Go for range expansionLarge wick: Aim for session lows/highs or the daily open"
+  },
+  {
+   "t": "p",
+   "text": "💡Pro Tip: During New York Session, focus on the 15M for Continuations and 5M for reversals within the daily profile."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Ideal Example: Small Wick Reversal to Expansion"
+  },
+  {
+   "t": "p",
+   "text": "Daily candle sweeps prior high"
+  },
+  {
+   "t": "p",
+   "text": "Intraday price forms a CISD early in the day"
+  },
+  {
+   "t": "p",
+   "text": "Wick is small, supports expansion lower"
+  },
+  {
+   "t": "p",
+   "text": "Targets: liquidity levels, previous lows/highs, or measured projections"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/candle-2-trade-example-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/candle-2-trade-example-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/candle-2-trade-example-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Large Wick Reversal Example"
+  },
+  {
+   "t": "p",
+   "text": "Daily candle has already made a strong move against your direction"
+  },
+  {
+   "t": "p",
+   "text": "Wick is long, adjust expectations to target daily open, session lows"
+  },
+  {
+   "t": "p",
+   "text": "Expansion occurs back to the daily open and liquidity in surrounding areas. Notice this reversal is a continuation (C3) on a lower timeframe."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/large-wick-example-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/large-wick-example-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/large-wick-example-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Pro Tip: Use Correlated Assets for Confirmation"
+  },
+  {
+   "t": "p",
+   "text": "If one market is at a key reversal level but another correlated market is weaker or stronger, trade the one that aligns best with your bias. This avoids false CISD and improves confluence."
+  },
+  {
+   "t": "p",
+   "text": "Below notice GBPUSD (right) has a reversal off its previous day high. It has a small wick which supports expansion lower. Using SMT on the previous day high, the framework from GBPUSD can be applied the weaker asset EURUSD on the left for a short setup."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/08/large-wick-example-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Reviewing the Logic"
+  },
+  {
+   "t": "p",
+   "text": "Small wick – more potential for range expansionLarge wick – less potential, smaller targetsAlways adjust expectations to wick size and session contextContinuations often come the day after a large wick reversal"
+  }
+ ]
+}

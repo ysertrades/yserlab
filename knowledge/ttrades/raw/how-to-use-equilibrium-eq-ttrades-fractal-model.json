@@ -1,0 +1,289 @@
+{
+ "slug": "how-to-use-equilibrium-eq-ttrades-fractal-model",
+ "id": 7108,
+ "url": "https://ttrades.com/how-to-use-equilibrium-eq-ttrades-fractal-model/",
+ "title": "How To Use Equilibrium (EQ) – TTrades Fractal Model",
+ "date": "2026-10-10T11:15:00",
+ "modified": "2026-10-11T14:00:35",
+ "categories": [
+  "Fractal Model",
+  "ICT Core Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Core Concepts",
+   "n": 2
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 7
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/10/TTrades-EQ-2.pdf"
+ ],
+ "videos": [
+  "Q8JxhjQzZNk"
+ ],
+ "description": "Learn how to use equilibrium (EQ), when to mark the full candle or wick to the close, and how Candle 2 and Candle 3 closures affect continuation across timeframes.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Core Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Equilibrium, or EQ, is 50% of a given range. Within the TTrades Fractal Model, it helps identify where price should form its wick before continuing in the expected direction."
+  },
+  {
+   "t": "p",
+   "text": "The key is knowing which range to measure. With a full bodied candle, you generally use the entire candle’s range. With a candle that has a large wick, the correct range depends on how the candle closes and where the swing point forms."
+  },
+  {
+   "t": "p",
+   "text": "In this blog, we will break down how to mark EQ, when to use the full candle versus the wick to the close, and how to apply the same concept across different timeframes."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is Equilibrium?"
+  },
+  {
+   "t": "p",
+   "text": "Equilibrium is the 50% level of a given range."
+  },
+  {
+   "t": "p",
+   "text": "To mark it, you can use a Fibonacci retracement tool with the 0, 0.5, and 1 levels enabled. For a bullish range, mark from the low to the high. For a bearish range, mark from the high to the low."
+  },
+  {
+   "t": "p",
+   "text": "The important part is not just finding the 50% level. It is identifying which part of the candle should define that range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/03-Weekly-Bias-%E2%80%94-Candle-2-Closure-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using EQ With Full Bodied Candles"
+  },
+  {
+   "t": "p",
+   "text": "When a candle closes with a full body, the general expectation is continuation."
+  },
+  {
+   "t": "p",
+   "text": "In a bullish setup, mark the entire candle from its low to its high. If price is going to continue higher, you want the next candle to form its lower wick in the upper half of the previous candle’s range."
+  },
+  {
+   "t": "p",
+   "text": "In a bearish setup, mark the entire candle from its high to its low. If price is going to continue lower, you want the next candle to form its upper wick in the lower half of the previous candle’s range."
+  },
+  {
+   "t": "p",
+   "text": "This follows the same logic as wick size for expansion. A smaller wick in the expected direction of continuation can support the idea that price is ready to expand."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/03-Weekly-Bias-%E2%80%94-Candle-2-Closure-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using EQ With Large Wicks"
+  },
+  {
+   "t": "p",
+   "text": "When a candle has a large wick, the range you use depends on the candle’s close relative to the swing point."
+  },
+  {
+   "t": "p",
+   "text": "There are two main scenarios to understand."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When Candle 2 Closes Against the Swing Point"
+  },
+  {
+   "t": "p",
+   "text": "At a bullish swing point, if Candle 2 closes bearish, mark from the closing price to the candle’s low. Use the 50% level of that range to determine whether the next candle forms a small enough wick to support expansion higher."
+  },
+  {
+   "t": "p",
+   "text": "At a bearish swing point, if Candle 2 closes bullish, mark from the closing price to the candle’s high. Use the 50% level of that range to determine whether the next candle forms a small enough wick to support expansion lower."
+  },
+  {
+   "t": "p",
+   "text": "In these cases, you are measuring the wick between the close and the extreme of the candle."
+  },
+  {
+   "t": "p",
+   "text": "This range matters because it gives the next candle an area it can open into, respect, and trade away from in the expected direction."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/03-Weekly-Bias-%E2%80%94-Candle-2-Closure-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When Candle 2 Closes With the Swing Point"
+  },
+  {
+   "t": "p",
+   "text": "If Candle 2 closes bullish at a bullish swing point, use the entire candle’s range."
+  },
+  {
+   "t": "p",
+   "text": "If Candle 2 closes bearish at a bearish swing point, also use the entire candle’s range."
+  },
+  {
+   "t": "p",
+   "text": "The same applies to Candle 3. Mark the entire candle’s range and use its EQ to look for continuation into the next candle."
+  },
+  {
+   "t": "p",
+   "text": "The distinction is straightforward. When Candle 2 closes with the direction of the swing point, use the full candle. When it closes against the direction of the swing point, use the wick from the close to the candle’s extreme."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/03-Weekly-Bias-%E2%80%94-Candle-2-Closure-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Why the Range Matters"
+  },
+  {
+   "t": "p",
+   "text": "The reason for marking the wick to the close in certain scenarios is that price needs to be able to open into the range and respect it."
+  },
+  {
+   "t": "p",
+   "text": "For example, in a bearish setup, if Candle 2 closes bullish, you can mark from the close to the high. The next candle can open within that area, form its upper wick, and then continue lower."
+  },
+  {
+   "t": "p",
+   "text": "If you instead mark the entire candle’s range, the EQ level may sit below where the next candle opens. In that case, price cannot respect the level in the way the setup requires."
+  },
+  {
+   "t": "p",
+   "text": "Using the correct range gives you a clear level to monitor for continuation and a way to identify when the setup is no longer behaving as expected."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Applying EQ Across Multiple Timeframes"
+  },
+  {
+   "t": "p",
+   "text": "EQ is a fractal concept. The same logic can be applied across timeframes without changing the rules."
+  },
+  {
+   "t": "p",
+   "text": "You can use it on the daily chart to identify an area for continuation, then move to the 15 minute chart to look for the same structure on a lower timeframe."
+  },
+  {
+   "t": "p",
+   "text": "The process stays the same."
+  },
+  {
+   "t": "p",
+   "text": "Identify a valid Candle 2 or Candle 3 closure, determine whether to use the entire candle or the wick to the close, and mark the 50% level of the correct range."
+  },
+  {
+   "t": "p",
+   "text": "Then watch how price behaves around that level. The goal is to see whether the next candle respects the area and forms the wick needed for continuation."
+  },
+  {
+   "t": "p",
+   "text": "Within the Fractal Model, this can also help you identify where an intra candle change in the state of delivery may form on the lower timeframe."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When EQ Is Not Respected"
+  },
+  {
+   "t": "p",
+   "text": "EQ provides an area to monitor, not a guarantee that price will continue."
+  },
+  {
+   "t": "p",
+   "text": "If price moves through the level and fails to respect the range, the expected continuation may not develop. That gives you information to consider if the setup is valid or not."
+  },
+  {
+   "t": "p",
+   "text": "Do not force a continuation simply because you have marked EQ. Let the candle close and assess whether the required conditions are present. If the setup fails, wait for a new valid swing point or candle closure."
+  },
+  {
+   "t": "p",
+   "text": "The goal is to use EQ as part of the model, alongside candle closures and structure, rather than treating the 50% level as a standalone entry."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Mechanical Process"
+  },
+  {
+   "t": "p",
+   "text": "Start by identifying a valid Candle 2 or Candle 3 closure at a swing point."
+  },
+  {
+   "t": "p",
+   "text": "For Candle 2, check whether the candle closes with or against the direction of the swing point. If it closes with the swing point, mark the entire candle’s range. If it closes against the swing point, mark from the close to the candle’s extreme."
+  },
+  {
+   "t": "p",
+   "text": "For Candle 3, mark the entire candle’s range."
+  },
+  {
+   "t": "p",
+   "text": "Use the 50% level to assess whether the next candle forms its wick in the expected area and supports continuation. If price fails to respect the level, reassess the setup rather than forcing the trade."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/10/03-Weekly-Bias-%E2%80%94-Candle-2-Closure-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "EQ is a vital part of the TTrades Fractal Model because it helps define where price should form its wick before continuing."
+  },
+  {
+   "t": "p",
+   "text": "The main thing to remember is that the range you measure depends on the candle closure. Candle 2 can require the full candle or the wick to the close, while Candle 3 uses the entire candle’s range."
+  },
+  {
+   "t": "p",
+   "text": "Keep the process consistent across timeframes. Mark the correct range, monitor the 50% level, and let price show whether the continuation is valid."
+  },
+  {
+   "t": "p",
+   "text": "Keep it mechanical."
+  }
+ ]
+}

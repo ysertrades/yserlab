@@ -1,0 +1,220 @@
+{
+ "slug": "trading-irl-erl-with-order-blocks-a-practical-guide-to-ict-concepts",
+ "id": 3543,
+ "url": "https://ttrades.com/trading-irl-erl-with-order-blocks-a-practical-guide-to-ict-concepts/",
+ "title": "Trading IRL & ERL With Order Blocks: A Practical Guide to ICT Concepts",
+ "date": "2025-07-27T11:00:00",
+ "modified": "2025-09-14T09:46:23",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 23
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2025/08/IRL-ERL-OB-TTrades-PDF-1.pdf"
+ ],
+ "videos": [
+  "TfHlNgAZ_II"
+ ],
+ "description": "Learn ICT’s internal and external range liquidity concepts with order blocks and CSD for precise trade execution. Improve entries and targets today.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "The relationship between internal range liquidity (IRL) and external range liquidity (ERL) is a cornerstone of ICT concepts. By combining these liquidity models with order blocks and a change in the state of delivery (CISD), traders can structure setups with a clear narrative. In this blog, we’ll break down the IRL–ERL relationship, show how it guides market structure, and explain how order blocks can provide actionable entries."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is Internal Range Liquidity (IRL)?"
+  },
+  {
+   "t": "p",
+   "text": "Internal range liquidity is represented by fair value gaps (FVGs) within a range."
+  },
+  {
+   "t": "li",
+   "text": "- A bullish FVG shows an imbalance where price moved aggressively higher."
+  },
+  {
+   "t": "li",
+   "text": "- A bearish FVG highlights inefficiency where price moved aggressively lower."
+  },
+  {
+   "t": "p",
+   "text": "💡 Pro Tip: Look for a higher low or a lower high to be formed within fair value gaps as a continuation of a trend."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/erl-irl-ob-1.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What is External Range Liquidity (ERL)?"
+  },
+  {
+   "t": "p",
+   "text": "External range liquidity is simply swing points : swing highs and swing lows."
+  },
+  {
+   "t": "li",
+   "text": "- A sweep of a swing low represents a purge of sell-side liquidity"
+  },
+  {
+   "t": "li",
+   "text": "- A sweep of a swing high clears buy-side liquidity"
+  },
+  {
+   "t": "p",
+   "text": "These liquidity pools act as magnets for price, providing clear targets."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/erl-irl-ob-2.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Relationship Between IRL and ERL"
+  },
+  {
+   "t": "p",
+   "text": "Markets often oscillate between these liquidity types:"
+  },
+  {
+   "t": "li",
+   "text": "- After sweeping ERL, price typically retraces into IRL (a FVG)"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/erl-irl-ob-3.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "li",
+   "text": "- From IRL, the next target is often the opposite side’s ERL"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/erl-irl-ob-4.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "This creates a repeating cycle:"
+  },
+  {
+   "t": "p",
+   "text": "ERL → IRL → ERL → IRL … until a trend shift resets the structure."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/erl-irl-ob-5.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Using Higher Time Frame Bias"
+  },
+  {
+   "t": "p",
+   "text": "Before drilling down to trade execution, you need to set a bais:"
+  },
+  {
+   "t": "li",
+   "text": "- Use daily closures, equilibrium, and the phases of price to anticipate trend direction"
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Executing With Order Blocks and CISD"
+  },
+  {
+   "t": "p",
+   "text": "The change in the state of delivery (CISD) is confirmation that momentum has shifted.Steps:"
+  },
+  {
+   "t": "li",
+   "text": "1. Identify a daily bias"
+  },
+  {
+   "t": "li",
+   "text": "2. Use the IRL & ERL relationship to determine an intraday bias"
+  },
+  {
+   "t": "li",
+   "text": "3. At ERL or IRL, locate a stop raid and CISD. This confirms the shift in trend. (in killzone)"
+  },
+  {
+   "t": "li",
+   "text": "4. Enter with stop on protected swing and target 2R"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/erl-irl-ob-7.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Flow Chart"
+  },
+  {
+   "t": "p",
+   "text": "Here is a flowchart of the model to give defined steps. This sequence aligns multiple timeframes into a high-probability setup."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/07/erl-irl-ob-6.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Key Takeaways"
+  },
+  {
+   "t": "li",
+   "text": "- IRL = Fair Value Gaps, retracement points"
+  },
+  {
+   "t": "li",
+   "text": "- ERL = Swing Highs and Lows, liquidity targets"
+  },
+  {
+   "t": "li",
+   "text": "- Price moves rhythmically between IRL and ERL"
+  },
+  {
+   "t": "li",
+   "text": "- CISD and continuation order blocks gives mechanical entries with controlled risk"
+  },
+  {
+   "t": "li",
+   "text": "- Always align trades to a higher-timeframe bias"
+  }
+ ]
+}

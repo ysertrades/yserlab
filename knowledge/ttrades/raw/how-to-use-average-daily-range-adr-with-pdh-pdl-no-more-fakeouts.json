@@ -1,0 +1,388 @@
+{
+ "slug": "how-to-use-average-daily-range-adr-with-pdh-pdl-no-more-fakeouts",
+ "id": 6594,
+ "url": "https://ttrades.com/how-to-use-average-daily-range-adr-with-pdh-pdl-no-more-fakeouts/",
+ "title": "How to Use Average Daily Range (ADR) with PDH / PDL — No More Fakeouts",
+ "date": "2026-09-26T11:20:00",
+ "modified": "2026-09-25T17:27:09",
+ "categories": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 5
+  },
+  {
+   "course": "Fractal Model (TTFM)",
+   "n": 9
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/09/TTrades-ADR.pdf"
+ ],
+ "videos": [
+  "3OIq9HmckH8"
+ ],
+ "description": "Learn how to use ADR with PDH and PDL, open targets, wick size, and daily range to identify valid continuation setups.",
+ "keywords": [],
+ "section": [
+  "Fractal Model",
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "Previous day high and previous day low are some of the easiest draws on liquidity to trade."
+  },
+  {
+   "t": "p",
+   "text": "But taking out PDH or PDL does not automatically mean continuation."
+  },
+  {
+   "t": "p",
+   "text": "The question is simple: how much ADR is left when price takes the level?"
+  },
+  {
+   "t": "p",
+   "text": "If price takes PDH or PDL early in the daily range, continuation can still be valid."
+  },
+  {
+   "t": "p",
+   "text": "If price takes the level after most of the range has already been exhausted, do not expect the same expansion."
+  },
+  {
+   "t": "p",
+   "text": "ADR gives you a mechanical way to measure that."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is ADR?"
+  },
+  {
+   "t": "p",
+   "text": "ADR stands for average daily range."
+  },
+  {
+   "t": "p",
+   "text": "It measures the average range of a daily candle."
+  },
+  {
+   "t": "p",
+   "text": "For example, if three daily candles have ranges of 297 points, 379 points, and 314 points, the total range is 990 points."
+  },
+  {
+   "t": "p",
+   "text": "Divide 990 by three days and the ADR is 330 points."
+  },
+  {
+   "t": "p",
+   "text": "Total daily range ÷ number of days = ADR"
+  },
+  {
+   "t": "p",
+   "text": "Ideally, use more days when calculating ADR. The example simply shows how the calculation works."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/adr.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Start With The Range"
+  },
+  {
+   "t": "p",
+   "text": "Once you have your ADR, look at how much of the current daily range price has already used."
+  },
+  {
+   "t": "p",
+   "text": "Then look at PDH or PDL."
+  },
+  {
+   "t": "p",
+   "text": "If price takes PDH after only using a small portion of the ADR, there is still room for expansion."
+  },
+  {
+   "t": "p",
+   "text": "If price takes PDL after only using a small portion of the ADR, the same logic applies."
+  },
+  {
+   "t": "p",
+   "text": "The process is straightforward. Check the ADR, measure the range already used, identify PDH or PDL, and then look for open targets in the direction of the move."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When Continuation Makes Sense"
+  },
+  {
+   "t": "p",
+   "text": "Imagine the ADR is 900 points."
+  },
+  {
+   "t": "p",
+   "text": "Price takes PDH after moving only 300 points."
+  },
+  {
+   "t": "p",
+   "text": "There is still plenty of range left."
+  },
+  {
+   "t": "p",
+   "text": "If there is also an open target above, continuation has room to develop."
+  },
+  {
+   "t": "p",
+   "text": "The same applies below PDL."
+  },
+  {
+   "t": "p",
+   "text": "If price takes PDL after using only a small portion of the ADR and there is an open target below, continuation can still make sense."
+  },
+  {
+   "t": "p",
+   "text": "You are not expecting continuation because PDH or PDL was taken."
+  },
+  {
+   "t": "p",
+   "text": "You are expecting it because there is still range available and a target left to reach."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/Expect.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "When The Range Is Already Used"
+  },
+  {
+   "t": "p",
+   "text": "Now take the opposite example."
+  },
+  {
+   "t": "p",
+   "text": "The ADR is 900 points and price has already moved 700 points before taking PDH."
+  },
+  {
+   "t": "p",
+   "text": "There is not much range left."
+  },
+  {
+   "t": "p",
+   "text": "Price could still continue another 200 points, but that does not mean you should expect it."
+  },
+  {
+   "t": "p",
+   "text": "Most of the daily range has already been used."
+  },
+  {
+   "t": "p",
+   "text": "At that point, consolidation, retracement, or reversal becomes more reasonable."
+  },
+  {
+   "t": "p",
+   "text": "The same applies when price takes PDL after already using most of the ADR."
+  },
+  {
+   "t": "p",
+   "text": "The level being taken does not change the amount of range price has left."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/Dont-expect.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Wick Size Matters"
+  },
+  {
+   "t": "p",
+   "text": "A large opposing move can change the entire expectation."
+  },
+  {
+   "t": "p",
+   "text": "Price may start the day with a small wick and plenty of room to reach a target."
+  },
+  {
+   "t": "p",
+   "text": "Instead, price spends a long time forming a large opposing move."
+  },
+  {
+   "t": "p",
+   "text": "That wick uses both time and range."
+  },
+  {
+   "t": "p",
+   "text": "By the time price reaches PDH or PDL, much of the ADR may already be gone."
+  },
+  {
+   "t": "p",
+   "text": "Now the same level has a different context."
+  },
+  {
+   "t": "p",
+   "text": "Price can still reach the level, but expecting another large expansion after it is less logical."
+  },
+  {
+   "t": "p",
+   "text": "This is why ADR needs to be combined with wick size and the way the daily candle is forming."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Open Targets Matter"
+  },
+  {
+   "t": "p",
+   "text": "ADR tells you how much range is available."
+  },
+  {
+   "t": "p",
+   "text": "You also need to know what price can reach within that range."
+  },
+  {
+   "t": "p",
+   "text": "If price takes PDH, has plenty of ADR left, and there is an open target above, that target can become the draw."
+  },
+  {
+   "t": "p",
+   "text": "If price takes PDL with range left and an open target below, the same logic applies."
+  },
+  {
+   "t": "p",
+   "text": "But if price has already taken the target, the expectation changes."
+  },
+  {
+   "t": "p",
+   "text": "There may still be ADR left, but there is no longer the same open target supporting continuation."
+  },
+  {
+   "t": "p",
+   "text": "Price can still expand."
+  },
+  {
+   "t": "p",
+   "text": "It can also consolidate, retrace, or reverse."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/open.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Know When To Wait"
+  },
+  {
+   "t": "p",
+   "text": "Sometimes the best decision is to wait for a new daily candle."
+  },
+  {
+   "t": "p",
+   "text": "If price has already used most of the ADR and then takes PDH or PDL, there may not be enough range left for another meaningful expansion."
+  },
+  {
+   "t": "p",
+   "text": "Rather than forcing continuation late in the daily candle, wait for the new daily open."
+  },
+  {
+   "t": "p",
+   "text": "Now you have a new daily range to work with."
+  },
+  {
+   "t": "p",
+   "text": "This is especially important after a large opposing move that has already consumed a significant amount of time and range."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2026/09/Not-open.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "The Mechanical Rule"
+  },
+  {
+   "t": "p",
+   "text": "The rule is simple."
+  },
+  {
+   "t": "p",
+   "text": "If price takes PDH or PDL and there is plenty of ADR left, continuation can be valid."
+  },
+  {
+   "t": "p",
+   "text": "If price takes the level after most of the ADR has already been used, do not expect the same expansion."
+  },
+  {
+   "t": "p",
+   "text": "Then look at the open target and the daily structure."
+  },
+  {
+   "t": "p",
+   "text": "If the target is still open and there is enough range left to reach it, continuation has room to develop."
+  },
+  {
+   "t": "p",
+   "text": "If the target has already been taken or the daily range is close to exhaustion, adjust your expectation."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts"
+  },
+  {
+   "t": "p",
+   "text": "Taking PDH or PDL does not automatically mean continuation."
+  },
+  {
+   "t": "p",
+   "text": "Look at the range price has already used."
+  },
+  {
+   "t": "p",
+   "text": "Look at the range that remains."
+  },
+  {
+   "t": "p",
+   "text": "Look at the open targets."
+  },
+  {
+   "t": "p",
+   "text": "Look at how the daily candle formed."
+  },
+  {
+   "t": "p",
+   "text": "When the range and target support continuation, the move can continue."
+  },
+  {
+   "t": "p",
+   "text": "When the range is exhausted, do not force it."
+  },
+  {
+   "t": "p",
+   "text": "Wait for a new daily candle and reassess."
+  }
+ ]
+}

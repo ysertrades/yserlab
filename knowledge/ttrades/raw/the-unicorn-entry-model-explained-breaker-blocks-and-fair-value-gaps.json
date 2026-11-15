@@ -1,0 +1,135 @@
+{
+ "slug": "the-unicorn-entry-model-explained-breaker-blocks-and-fair-value-gaps",
+ "id": 4778,
+ "url": "https://ttrades.com/the-unicorn-entry-model-explained-breaker-blocks-and-fair-value-gaps/",
+ "title": "The Unicorn Entry Model Explained (Breaker Blocks and Fair Value Gaps)",
+ "date": "2025-06-21T15:00:00",
+ "modified": "2026-02-18T14:47:09",
+ "categories": [
+  "ICT Advanced Concepts"
+ ],
+ "courses": [
+  {
+   "course": "ICT Advanced Concepts",
+   "n": 39
+  }
+ ],
+ "pdfs": [
+  "https://ttrades.com/wp-content/uploads/2026/01/Unicorn_Model_TTrades_PDF.pdf"
+ ],
+ "videos": [
+  "rXMVPUZPw4A"
+ ],
+ "description": "Learn the Unicorn entry model using breaker blocks, fair value gaps, and liquidity for precise trade execution.",
+ "keywords": [],
+ "section": [
+  "ICT Advanced Concepts"
+ ],
+ "body": [
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Introduction"
+  },
+  {
+   "t": "p",
+   "text": "In this guide, we’re breaking down the Unicorn Entry Model, a setup built from two core concepts: breaker blocks and fair value gaps. This model is designed to give precise, high R trade entries by aligning structure, displacement, and imbalance. We’ll walk through the logic step by step."
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding Fair Value Gaps"
+  },
+  {
+   "t": "p",
+   "text": "A fair value gap, often referred to as an FVG, is a three candlestick imbalance that forms during strong displacement. It represents inefficiency in price that the market often revisits."
+  },
+  {
+   "t": "p",
+   "text": "In a bearish fair value gap, the low of the first candle does not overlap with the high of the third candle. This leaves a visible gap where price moved too aggressively downward."
+  },
+  {
+   "t": "p",
+   "text": "In a bullish fair value gap, the high of the first candle does not overlap with the low of the third candle. This creates an imbalance to the upside."
+  },
+  {
+   "t": "p",
+   "text": "These gaps act as areas where price may retrace into before continuing in the original direction."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/FVGS.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Understanding Breaker Blocks"
+  },
+  {
+   "t": "p",
+   "text": "A breaker block is a structural pattern that forms when the market shifts from one narrative to another by sweeping liquidity and displacing structure."
+  },
+  {
+   "t": "p",
+   "text": "A bearish breaker block follows this sequence:• Swing high• Swing low• Higher high• Lower low"
+  },
+  {
+   "t": "p",
+   "text": "This creates a failed bullish structure that flips bearish."
+  },
+  {
+   "t": "p",
+   "text": "A bullish breaker block is the inverse:• Swing low• Swing high• Lower low• Higher high"
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Breaker-Blocks.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "p",
+   "text": "When marking breaker blocks, the focus is not on the entire range but on a specific candle. For bearish breakers, this is the last down close candle prior to the move that swept highs. For bullish breakers, this is the last up close candle prior to the move that swept lows. This candle becomes the breaker block zone."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/BB.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "What Is the Unicorn Model"
+  },
+  {
+   "t": "p",
+   "text": "The Unicorn Model forms when a breaker block overlaps with a fair value gap created by the displacement leg."
+  },
+  {
+   "t": "p",
+   "text": "The general sequence is simple:• Structure forms a breaker block• Price displaces strongly• A fair value gap is created• The fair value gap overlaps the breaker block• Price retraces into that overlap zone• Entry is taken in the direction of displacement"
+  },
+  {
+   "t": "p",
+   "text": "That overlapping area is the unicorn entry zone."
+  },
+  {
+   "t": "img",
+   "src": "https://ttrades.com/wp-content/uploads/2025/06/Unicorn.png",
+   "alt": "",
+   "caption": ""
+  },
+  {
+   "t": "h",
+   "level": 4,
+   "text": "Final Thoughts on the Unicorn Model"
+  },
+  {
+   "t": "p",
+   "text": "The Unicorn Entry Model works because it aligns liquidity, structure, displacement, and imbalance. When all four are present, you are trading with intent rather than anticipation."
+  }
+ ]
+}
