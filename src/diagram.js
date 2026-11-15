@@ -1,0 +1,241 @@
+import { env } from "./env.js";
+import { fonts, svgToPng } from "./render.js";
+import { recall } from "./knowledge.js";
+import { modelFor } from "./ai.js";
+import { fromTemplate, templateList } from "./diagramTemplates.js";
+
+/**
+ * Diagrams in the slides editor's own look. The editor's renderer is bundled in vendor/slides.mjs (scripts/slides/build.mjs), so a
+ * diagram is a real editor page: the same candles, levels, zones, arrows, tags and footer, drawn by the same code.
+ *
+ * The AI never places pixels. It writes a small spec (candles by pattern or by numbers, then marks anchored to candles such as
+ * "2:high"), and `compile` turns that into editor objects. A bad spec drops the bad part and still draws the rest.
+ */
+let lib = null;
+const slides = async () => (lib ??= await import("../vendor/slides.mjs"));
+
+const NAMED = { bull: "#84b884", bear: "#3d3d3d", blue: "#2f6bff", teal: "#0f9d80", red: "#ef3b4b", amber: "#f4b73e", ink: "#3d3d3d", muted: "#8a8a8f", zone: "#fbecb8", tp: "#cfe8e1", sl: "#e2e3e6", green: "#0f9d80", gray: "#8a8a8f", grey: "#8a8a8f", yellow: "#f4b73e", black: "#000000", white: "#ffffff" };
+const colour = (c, fallback) => NAMED[String(c ?? "").toLowerCase()] ?? (/^#[0-9a-f]{6}$/i.test(c ?? "") ? c : fallback);
+const num = (v, d) => Number.isFinite(Number(v)) ? Number(v) : d;
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+/** Every string in a spec with plain spaces (a non-breaking space draws as a missing-glyph box). */
+const clean = v => typeof v === "string" ? v.replace(/[   ​]/g, " ").replace(/\s+/g, " ").trim() : Array.isArray(v) ? v.map(clean) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, clean(x)])) : v;
+
+/** The pattern library, for the AI to pick from. */
+export async function patternNames() { return Object.keys((await slides()).PATTERNS); }
+
+/** One panel's candles as 0 to 1 bars (1 = top), from a library pattern or from [open, high, low, close] rows. */
+function barsOf(L, panel) {
+  let bars;
+  if (Array.isArray(panel.bars) && panel.bars.length >= 1) {
+    const rows = panel.bars.slice(0, 40).map(r => (Array.isArray(r) ? r : [r?.o, r?.h, r?.l, r?.c]).map(Number)).filter(r => r.length === 4 && r.every(Number.isFinite))
+      .map(([o, h, l, c]) => [o, Math.max(h, o, c), Math.min(l, o, c), c]);
+    if (rows.length) {
+      const lo = Math.min(...rows.map(r => r[2])), hi = Math.max(...rows.map(r => r[1])), k = 1 / (hi - lo || 1);
+      bars = rows.map(([o, h, l, c]) => ({ o: (o - lo) * k, h: (h - lo) * k, l: (l - lo) * k, c: (c - lo) * k }));
+      if (panel.flip) bars = bars.map(b => ({ o: 1 - b.o, c: 1 - b.c, h: 1 - b.l, l: 1 - b.h }));
+    }
+  }
+  if (!bars && panel.pattern) {
+    const key = String(panel.pattern).toLowerCase().replace(/[\s_]+/g, "-");
+    if (L.PATTERNS[key]) bars = L.makeBars(key, 0, 1, !!panel.flip);
+    else if (["uptrend", "downtrend", "range", "consolidation", "breakout", "sweep", "vshape", "london-reversal", "ny-reversal", "london-expansion"].includes(key)) bars = L.makeBars(key, clamp(num(panel.count, 14), 4, 30), 7, !!panel.flip);
+  }
+  return bars ?? null;
+}
+
+/** "3:high", "2.5:close", "1:mid": where on which candle. Returns { bar, field } or null. */
+function parseAnchor(a, n) {
+  const s = String(a ?? "");
+  const at = /^\s*(-?\d+(?:\.\d+)?)\s*:\s*@\s*(\d(?:\.\d+)?)\s*$/.exec(s); // "3:@0.5": half way up the panel
+  if (at) return { bar: clamp(Number(at[1]), 1, n), field: "level", level: clamp(Number(at[2]), 0, 1) };
+  const m = /^\s*(-?\d+(?:\.\d+)?)\s*:\s*(high|low|open|close|mid|top|bottom)\s*$/i.exec(s);
+  if (!m) return null;
+  return { bar: clamp(Number(m[1]), 1, n), field: m[2].toLowerCase() };
+}
+
+/**
+ * The spec as an editor page. Panels sit side by side (one or two), each: a run of candles and the marks around it. Everything is
+ * placed from the candles, never from raw coordinates.
+ */
+export async function compile(spec) {
+  const L = await slides();
+  spec = clean(spec);
+  const panels = (Array.isArray(spec?.panels) ? spec.panels : spec?.pattern || spec?.bars ? [spec] : []).slice(0, 2);
+  const page = L.makePage("lesson", "YSER Trades");
+  page.objects = [];
+  const add = o => { page.objects.push(o); return o; };
+  const title = String(spec?.title ?? "").trim().slice(0, 70);
+  if (title) add(L.create("text", 160, 100, 1500, undefined, { text: title, style: { ...L.titleStyle(60) }, auto: false }));
+  const sub = String(spec?.subtitle ?? "").trim().slice(0, 120);
+  if (sub) add(L.create("text", 160, 180, 1500, undefined, { text: sub, style: { ...L.bodyStyle(32), color: NAMED.muted }, auto: false }));
+  const top = title ? (sub ? 285 : 245) : 150;
+  const bottom = 880;
+  let drawn = 0;
+
+  panels.forEach((panel, pi) => {
+    const bars = barsOf(L, panel);
+    if (!bars) return;
+    drawn++;
+    const n = bars.length, two = panels.length === 2;
+    const areaX = two ? (pi === 0 ? 100 : 1000) : 200, areaW = two ? 820 : 1520;
+    const w = Math.min(two ? 640 : 1160, n * (two ? 120 : 170) + 120), x = areaX + (areaW - w) / 2;
+    const labelH = panel.label ? 70 : 0, pad = 55; // room above and below the candles for tags, circles and arrowheads
+    const h = bottom - top - labelH - pad * 2, y = top + pad;
+    const step = w / n, X = i => x + (i - .5) * step, Y = v => y + (1 - v) * h;
+    const point = a => {
+      const p = parseAnchor(a, n);
+      if (!p) return null;
+      const lo = Math.floor(p.bar), hi = Math.min(n, lo + 1), f = p.bar - lo;
+      const pick = (b, field) => {
+        const bar = bars[b - 1];
+        return field === "high" ? bar.h : field === "low" ? bar.l : field === "open" ? bar.o : field === "close" ? bar.c : field === "top" ? Math.max(bar.o, bar.c) : field === "bottom" ? Math.min(bar.o, bar.c) : (bar.h + bar.l) / 2;
+      };
+      const v = p.field === "level" ? p.level : pick(lo, p.field) * (1 - f) + pick(hi, p.field) * f;
+      return { x: X(p.bar), y: Y(v), field: p.field };
+    };
+    const marks = (Array.isArray(panel.marks) ? panel.marks : []).slice(0, 14);
+
+    // Under the candles: zones.
+    for (const m of marks.filter(m => m?.type === "zone")) {
+      const a = point(m.from), b = point(m.to);
+      if (!a || !b) continue;
+      const fromBar = clamp(num(m.fromBar, parseAnchor(m.from, n)?.bar ?? 1), 1, n), toBar = clamp(num(m.toBar, n), 1, n);
+      const x1 = X(Math.min(fromBar, toBar)) - step * .4, x2 = X(Math.max(fromBar, toBar)) + step * .4;
+      add(L.create("zone", x1, Math.min(a.y, b.y), x2 - x1, Math.max(14, Math.abs(b.y - a.y)), { fill: colour(m.color, NAMED.zone) }));
+      // The zone's name sits just outside its right edge, clear of the candles.
+      if (m.label) add(L.create("text", x2 + 14, (a.y + b.y) / 2 - 18, 220, undefined, { text: String(m.label).slice(0, 40), style: { ...L.bodyStyle(26), color: NAMED.muted }, auto: false }));
+    }
+
+    // The candles.
+    const series = L.create("series", x, y, w, h, { preset: "custom", bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), labels: panel.numbers === "days" ? "days" : panel.numbers ? "numbers" : "none", gap: .38 });
+    add(series);
+
+    // Levels and lines.
+    for (const m of marks.filter(m => m?.type === "level")) {
+      const p = point(m.at);
+      if (!p) continue;
+      const from = clamp(num(m.from, 1), 1, n), to = clamp(num(m.to, n), 1, n);
+      const lx = X(Math.min(from, to)) - step * .5, lw = Math.max(step, X(Math.max(from, to)) - lx + step * .5 + (m.label ? 120 : 0));
+      add(L.create("level", lx, p.y - 20, lw, 40, { color: colour(m.color, NAMED.blue), label: String(m.label ?? "").slice(0, 24), tag: m.label ? "right" : "none", chip: null, dash: m.dash === "dashed" ? "dashed" : "solid" }));
+    }
+    for (const m of marks.filter(m => m?.type === "arrow" || m?.type === "line")) {
+      const a = point(m.from), b = point(m.to);
+      if (!a || !b || Math.hypot(a.x - b.x, a.y - b.y) < 90) continue; // an arrow from a candle to itself says nothing
+      const arrow = m.type === "arrow";
+      add(L.withBox(L.create(arrow ? "arrow" : "line", a.x, a.y, 0, 0, { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: colour(m.color, NAMED.ink), strokeWidth: 4, dash: m.dash === "dashed" ? "dashed" : "solid", curve: clamp(num(m.curve, 0), -.8, .8), end: arrow ? "arrow" : "none" })));
+      // The label sits past the arrowhead (above it for an arrow that climbs, below it for one that falls), where nothing else is.
+      if (m.label) {
+        const up = b.y <= a.y;
+        add(L.create("text", b.x - 150, up ? b.y - 62 : b.y + 20, 300, undefined, { text: String(m.label).slice(0, 30), style: { ...L.bodyStyle(28), weight: 600, align: "center", color: colour(m.color, NAMED.ink) }, auto: false }));
+      }
+    }
+    for (const m of marks.filter(m => m?.type === "circle" || m?.type === "dot")) {
+      const p = point(m.at);
+      if (!p) continue;
+      const r = m.type === "dot" ? 11 : clamp(num(m.r, 46), 16, 140);
+      add(L.create("ellipse", p.x - r, p.y - r, r * 2, r * 2, m.type === "dot" ? { fill: colour(m.color, NAMED.red), stroke: "transparent" } : { fill: "transparent", stroke: colour(m.color, NAMED.red), strokeWidth: 4, dash: m.dash === "dashed" ? "dashed" : "solid" }));
+    }
+    for (const m of marks.filter(m => m?.type === "note")) {
+      const p = point(m.at);
+      const text = String(m.text ?? "").slice(0, 60);
+      if (!p || !text) continue;
+      const size = clamp(num(m.size, 28), 20, 44), tw = clamp(text.length * size * .56 + 56, 120, 560);
+      const above = p.field === "high" || p.field === "top", below = p.field === "low" || p.field === "bottom";
+      const nx = p.x + num(m.dx, above || below ? 0 : 70) - (above || below ? tw / 2 : 0);
+      const ny = p.y + num(m.dy, above ? -78 : below ? 30 : -34);
+      add(L.create("card", nx, ny, tw, size + 36, { style: "soft", text, icon: null, color: colour(m.color, NAMED.ink), radius: 18, textStyle: { ...L.bodyStyle(size), font: "inter", weight: 600, color: NAMED.ink, align: "center" } }));
+    }
+    if (panel.label) add(L.create("text", x, bottom - labelH + 24, w, undefined, { text: String(panel.label).slice(0, 50), style: { ...L.bodyStyle(32), weight: 600, align: "center" }, auto: false }));
+  });
+
+  return drawn ? { page, deck: { brand: "YSER Trades", numbering: false, footer: { ...L.DEFAULT_FOOTER } } } : null;
+}
+
+/** The spec as a 1920 x 1080 PNG, or null if there was nothing to draw. */
+export async function drawDiagram(spec, width = 1920) {
+  const built = await compile(spec);
+  if (!built) return null;
+  fonts();
+  const L = await slides();
+  return svgToPng(L.pageSvg(built.page, built.deck, 1), width);
+}
+
+/* ── The designer: turns "show me X" into a spec ── */
+const PATTERN_HELP = `Library patterns (bullish, "flip": true draws the bearish twin): swing-2, swing-3, swing-4 (swing formations); c2-closure, c2-closure-run, c3-closure, c3-closure-run (closures); ideal, ideal-run (ideal formation); wick-eq, wick-eq-run; opposing, opposing-series; sweep-low (liquidity sweep then reversal); fvg, fvg-return (fair value gap, and price returning into it); eq-continuation, eq-reversal; cisd; projection; week-tuesday-low, week-wednesday, week-thursday, week-consolidation, week-monday-low (weekly profiles, 5 daily candles); htf-3, htf-2 (higher timeframe candles); osok-entry. Generated: uptrend, downtrend, range, consolidation, breakout, sweep, vshape, london-reversal, ny-reversal, london-expansion (with "count" 6 to 20).`;
+const DESIGNER = `You design a trading diagram for the YSER slides editor, then reply with ONE JSON object and nothing else.
+USE A TEMPLATE. These are ready-made, hand-drawn diagrams in the owner's style, and one of them fits almost every request: choose the CLOSEST one, even when it only covers the main idea of a longer request (a CISD after a sweep -> cisd; candle 2 and candle 3 of the fractal model -> fractal; an entry into a gap -> fvg). Reply {"template":"<id>","direction":"bullish" or "bearish"} (the direction the idea is traded; optionally "title" and "subtitle" to reword the headline, at most 6 and 12 words). When the request joins TWO ideas (a sweep, then a CISD), show them side by side: {"templates":[{"template":"<id>","direction":"..."},{"template":"<id>","direction":"..."}],"title":"...","subtitle":"..."}. Templates:
+${templateList()}
+Design your own with the spec below ONLY for an idea that none of these covers (a session, a time window, a particular pattern they are not).
+Spec for your own design:
+{"title":"short headline (max 6 words)","subtitle":"optional one line","panels":[ONE or TWO panels, each:
+ {"label":"caption under the panel (optional)",
+  "pattern":"a library pattern name" OR "bars":[[open,high,low,close],...] (your own candles, any consistent price scale, up = bullish, at most 14 candles; use this when no pattern fits),
+  "flip":false,"future":0 (the last N candles drawn pale = the move still to come),"numbers":true (number the candles 1,2,3...),
+  "marks":[ up to 10 of:
+   {"type":"zone","from":"1:high","to":"3:low","fromBar":2,"toBar":5,"color":"amber","label":"FVG"}   a box between two price points, across candles fromBar..toBar
+   {"type":"level","at":"2:high","label":"PDH","color":"blue","dash":"solid|dashed","from":1,"to":6}   a horizontal line with a tag
+   {"type":"arrow","from":"2:close","to":"5:high","color":"teal","curve":0.3,"dash":"solid|dashed","label":"expansion"}
+   {"type":"circle","at":"3:low","color":"red"} or {"type":"dot","at":"3:low"}
+   {"type":"note","at":"3:high","text":"CISD","color":"ink"}   a small tag; sits above a high, below a low
+ ]}]}
+Anchors are "N:field": N is the candle number (1 = first; decimals like 2.5 sit between candles) and field is high, low, open, close, top (body top), bottom (body bottom) or mid.
+${PATTERN_HELP}
+Example (a fair value gap that price returns to, then expands from):
+{"title":"Bullish Fair Value Gap","subtitle":"The gap between candle 1's high and candle 3's low","panels":[{"label":"Price returns to the gap, then expands","pattern":"fvg-return","numbers":true,"marks":[{"type":"zone","from":"1:high","to":"3:low","fromBar":2,"toBar":5,"color":"amber","label":"FVG"},{"type":"level","at":"3:high","label":"C3 high","color":"blue","from":3,"to":6},{"type":"arrow","from":"5:low","to":"6:high","color":"teal","curve":0.25,"label":"expansion"}]}]}
+Second example (a bearish idea: library patterns are all drawn BULLISH, so a bearish idea needs "flip":true):
+{"title":"Bearish CISD","subtitle":"Price closes back through the open of the run","panels":[{"label":"Candle 5 closes below candle 1's open","pattern":"cisd","flip":true,"numbers":true,"marks":[{"type":"level","at":"1:open","label":"CISD level","color":"blue","from":1,"to":6},{"type":"circle","at":"5:close","color":"red"},{"type":"arrow","from":"4:high","to":"6:low","color":"red","curve":0.2,"label":"delivery lower"}]}]}
+How the cisd pattern reads: candles 1 to 3 run one way, candle 4 is a small pause, candle 5 closes back through candle 1's open (that close is the CISD), candle 6 continues. sweep-low: candles 1-4 drift, candle 5 sweeps below the low, then price reverses up (flip it for a sweep of a high). fvg: candle 2 is the big displacement, the gap is between candle 1's high and candle 3's low. A bullish idea uses the pattern as is; a BEARISH idea always gets "flip":true.
+Rules: pick the pattern that already contains the whole story (e.g. fvg-return when price comes back to the gap); an arrow must connect two DIFFERENT candles; never draw a mark that says nothing; check every anchor number is a candle that exists in the pattern (fvg has 3 candles, fvg-return 6, cisd 6, sweep-low 8, ideal 3, ideal-run 4, swing-3 3, projection 8, week profiles 5, htf-3 3, osok-entry 7).
+Taste (the owner's house style, follow it): clean and minimal, white page, nothing decorative. Teach ONE idea per diagram. Few marks, each earning its place: zones for gaps and ranges, levels for liquidity and key prices, arrows for the move, numbers on candles when the lesson talks about candle 1, 2, 3. Labels are 1 to 3 words. Colors: bull/teal for the idea or target, red for invalid or the stop, blue for levels and entry, amber for zones, ink for neutral. Use two panels only for a before/after or bullish/bearish comparison. Draw it exactly as the lesson and the owner's model describe it; if unsure of a detail, keep the diagram simpler instead of inventing.`;
+
+async function viaJson(system, user) {
+  const tries = [];
+  if (env.groqKey) for (const model of ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.8-27b"]) tries.push(["groq", model]);
+  if (env.geminiKey) for (const model of ["gemini-flash-lite-latest", "gemini-flash-latest"]) tries.push(["gemini", model]);
+  let last = "no model answered";
+  for (const [who, model] of tries) {
+    try {
+      let text = "";
+      if (who === "groq") {
+        const body = { model, temperature: 0.3, max_completion_tokens: 1800, response_format: { type: "json_object" }, messages: [{ role: "system", content: system }, { role: "user", content: user }] };
+        if (model.startsWith("openai/gpt-oss")) body.reasoning_effort = "low";
+        const r = await fetch("https://api.groq.com/openai/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${env.groqKey}` }, body: JSON.stringify(body), signal: AbortSignal.timeout(45_000) });
+        if (!r.ok) { last = `AI error ${r.status}`; continue; }
+        text = String((await r.json()).choices?.[0]?.message?.content ?? "");
+      } else {
+        const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": env.geminiKey },
+          body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents: [{ role: "user", parts: [{ text: user }] }], generationConfig: { temperature: 0.3, maxOutputTokens: 2500, responseMimeType: "application/json" } }), signal: AbortSignal.timeout(45_000) });
+        if (!r.ok) { last = `AI error ${r.status}`; continue; }
+        text = ((await r.json()).candidates?.[0]?.content?.parts ?? []).map(p => p.text ?? "").join("");
+      }
+      const json = JSON.parse(text.replace(/<think>[\s\S]*?<\/think>/g, "").replace(/^```(?:json)?|```$/gm, "").trim().replace(/^[^{]*/, "").replace(/[^}]*$/, ""));
+      if (json && typeof json === "object") return json;
+      last = "not JSON";
+    } catch (e) { last = e.message; }
+  }
+  throw new Error(last);
+}
+
+/** "Show me X" -> a PNG. `request` is what the user wants drawn; the lessons and the user's model that match it guide the drawing. */
+export async function designDiagram(request, { doc } = {}) {
+  const lessons = recall(request, { chars: 3600, perLesson: 2 });
+  const system = [DESIGNER, doc ? `THE OWNER'S MODEL (their vocabulary comes first):\n${modelFor(doc, request, 2200)}` : "", lessons.text ? `LESSON MATERIAL ON THIS:\n${lessons.text}` : ""].filter(Boolean).join("\n\n");
+  let note = "";
+  for (let attempt = 0; attempt < 2; attempt++) {
+    let spec = await viaJson(system, `Draw: ${request}${note}`);
+    if (spec.template) { // a ready-made diagram, in the direction asked, with the AI's own headline if it gave one
+      const base = fromTemplate(String(spec.template), spec.direction);
+      if (base) spec = { ...base, ...(spec.title ? { title: spec.title } : {}), ...(spec.subtitle ? { subtitle: spec.subtitle } : {}) };
+    }
+    else if (Array.isArray(spec.templates)) { // two ready-made ideas side by side, each its own panel
+      const parts = spec.templates.slice(0, 2).map(t => fromTemplate(String(t?.template), t?.direction)).filter(Boolean);
+      if (parts.length) spec = { title: spec.title || parts.map(p => p.title).join(" + ").slice(0, 70), subtitle: spec.subtitle || "", panels: parts.map(p => p.panels[0]) };
+    }
+    const png = await drawDiagram(spec).catch(() => null);
+    if (png) return { png, spec, lessons: lessons.lessons };
+    note = "\n(Your last reply had nothing that could be drawn. Reply with a template id from the list, or a spec with real panels and a pattern or bars.)";
+  }
+  throw new Error("nothing to draw");
+}

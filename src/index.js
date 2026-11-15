@@ -9,7 +9,9 @@ import { checkSessions } from "./sessions.js";
 import { checkJobs } from "./jobs.js";
 import { heartbeat, offline } from "./status.js";
 import * as picker from "./picker.js";
-import { ask } from "./ai.js";
+import { ask, modelDoc } from "./ai.js";
+import { designDiagram } from "./diagram.js";
+import { picturePost } from "./post.js";
 import { fonts } from "./render.js";
 
 const gaps = missing();
@@ -76,6 +78,20 @@ client.on(Events.MessageCreate, async message => {
     await message.channel.sendTyping().catch(() => {});
     const out = await ask({ owner, channelId, text });
     if (out.chart) { await picker.startChart(message, owner, out.timeframe); return; }
+    if (out.diagram) {
+      // Drawn with the slides editor's own renderer; a failure says so instead of going silent.
+      await message.channel.sendTyping().catch(() => {});
+      try {
+        const { png, spec, lessons } = await designDiagram(out.diagram, { doc: await modelDoc(owner) });
+        const from = lessons.slice(0, 2).map(l => l.title).join(" · ");
+        await message.reply({ ...picturePost({ png, name: "diagram.png", text: spec.title ? `**${String(spec.title).slice(0, 80)}**` : undefined, footer: from ? `From: ${from}` : undefined }), allowedMentions: { repliedUser: false } });
+        await log("diagram", { note: out.diagram.slice(0, 120) });
+      } catch (e) {
+        await log("diagram", { error: e?.message ?? String(e) }, false);
+        await message.reply({ content: "I couldn't draw that one just now. Try again in a minute, or tell me which candles and levels you want in it.", allowedMentions: { repliedUser: false } });
+      }
+      return;
+    }
     const parts = chunks(out.text);
     await message.reply({ content: parts[0], allowedMentions: { repliedUser: false } });
     for (const part of parts.slice(1)) await message.channel.send(part);

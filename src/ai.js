@@ -19,6 +19,10 @@ const TOOLS = [{ functionDeclarations: [{
   name: "show_trade_chart",
   description: "Use when the user wants a picture (a chart or screenshot) from a trade they logged. The bot then asks which trade.",
   parameters: { type: "OBJECT", properties: { timeframe: { type: "STRING", description: "The timeframe or story step they named, such as H4, M15 or Cover. Leave empty if they didn't say." } } },
+}, {
+  name: "draw_diagram",
+  description: "Use when the user wants a concept, setup or example SHOWN, drawn or illustrated as an image (\"show me a fair value gap\", \"draw the fractal model\", \"give me a diagram of CISD\", \"visualise it\", \"make an image of what you mean\"). The bot draws it in the YSER slides editor's style. Not for pictures of their own logged trades.",
+  parameters: { type: "OBJECT", properties: { what: { type: "STRING", description: "What to draw, in a full sentence with the details that matter (bullish or bearish, which candles, which levels), using the model's own terms." } }, required: ["what"] },
 }] }];
 
 function summary(rows, recent = 25) {
@@ -45,11 +49,19 @@ How to answer:
 - Be precise: give the actual rules, conditions, steps and levels the material states, not generalities. Never invent rules or numbers; if the material doesn't cover it, say so plainly.
 - Be direct and brief: a few sentences for simple questions, a short structured answer (bullets or numbered steps) for how-to or explain-it questions. Plain words, Discord markdown sparingly, no filler.
 - Numbers about their trading come only from the journal summary. Never give financial advice or tell them to take a trade; you help them study, review and stay consistent.
-- If they ask you to send or show a picture, chart or screenshot from a trade, call show_trade_chart.`;
+- If they ask you to send or show a picture, chart or screenshot from a trade THEY logged, call show_trade_chart.
+- If they ask you to show, draw, illustrate, diagram or make an image of a concept, setup or example (not one of their trades), call draw_diagram with a full sentence of what to draw. Never describe a picture in words when they asked to see it; call the tool.`;
 
 const GROQ_MODELS = () => [...new Set([env.groqModel, "openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.8-27b"].filter(Boolean))];
 const GEMINI_MODELS = () => [...new Set([env.geminiModel, "gemini-flash-lite-latest", "gemini-flash-latest", "gemini-3.5-flash"].filter(Boolean))];
-const GROQ_TOOLS = TOOLS[0].functionDeclarations.map(f => ({ type: "function", function: { name: f.name, description: f.description, parameters: { type: "object", properties: { timeframe: { type: "string", description: f.parameters.properties.timeframe.description } } } } }));
+const lower = p => ({ type: "object", properties: Object.fromEntries(Object.entries(p.properties).map(([k, v]) => [k, { type: "string", description: v.description }])), required: p.required });
+const GROQ_TOOLS = TOOLS[0].functionDeclarations.map(f => ({ type: "function", function: { name: f.name, description: f.description, parameters: lower(f.parameters) } }));
+/** The tool the model called, as the answer the bot acts on. */
+function called(name, args) {
+  if (name === "show_trade_chart") return { chart: true, timeframe: args?.timeframe || "" };
+  if (name === "draw_diagram") return { diagram: String(args?.what || "").slice(0, 400) };
+  return null;
+}
 
 class Overloaded extends Error {}
 /** Groq (the chat): an OpenAI-style call with the same tool. Returns { text } or { chart, timeframe }, or throws. */
@@ -63,8 +75,8 @@ async function viaGroq(system, history, text) {
       const response = await fetch("https://api.groq.com/openai/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${env.groqKey}` }, body: JSON.stringify(body), signal: AbortSignal.timeout(40_000) });
       if (!response.ok) { last = `AI error ${response.status}`; if (response.status === 413 || response.status === 429) tooBig = true; continue; }
       const message = (await response.json()).choices?.[0]?.message;
-      const call = message?.tool_calls?.find(c => c.function?.name === "show_trade_chart");
-      if (call) { let args = {}; try { args = JSON.parse(call.function.arguments || "{}"); } catch { /* no arguments */ } return { chart: true, timeframe: args.timeframe || "" }; }
+      const call = message?.tool_calls?.find(c => called(c.function?.name, {}));
+      if (call) { let args = {}; try { args = JSON.parse(call.function.arguments || "{}"); } catch { /* no arguments */ } return called(call.function.name, args); }
       const answer = String(message?.content ?? "").replace(/<think>[\s\S]*?<\/think>/g, "").trim();
       if (answer) return { text: answer };
       last = "empty answer";
@@ -84,7 +96,7 @@ async function viaGemini(system, history, text) {
       if (!response.ok) { last = `AI error ${response.status}`; continue; }
       const parts = (await response.json()).candidates?.[0]?.content?.parts ?? [];
       const call = parts.find(p => p.functionCall)?.functionCall;
-      if (call?.name === "show_trade_chart") return { chart: true, timeframe: call.args?.timeframe || "" };
+      if (call && called(call.name, call.args)) return called(call.name, call.args);
       const answer = parts.map(p => p.text ?? "").join("").trim();
       if (answer) return { text: answer };
     } catch (e) { last = e.message; }
@@ -188,10 +200,11 @@ export async function ask({ owner, channelId, text }) {
   } catch (e) { if (!env.groqKey || !env.geminiKey) throw e; out = await gemini(); }
   const keep = histories.get(channelId) ?? [];
   keep.push({ role: "user", text, at: Date.now() });
-  keep.push({ role: "model", text: out.chart ? "(showed a trade chart picker)" : out.text || "…", at: Date.now() });
+  keep.push({ role: "model", text: out.chart ? "(showed a trade chart picker)" : out.diagram ? `(drew a diagram: ${out.diagram})` : out.text || "…", at: Date.now() });
   histories.set(channelId, keep.slice(-KEEP * 2));
   return out;
 }
 
+export const modelDoc = cachedModel;
 export const knowledgeStats = stats;
 export { viaGroq, viaGemini }; // for scripts/education/ask.js, which tries questions without Discord

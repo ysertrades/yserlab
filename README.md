@@ -40,3 +40,6 @@ Run `supabase/yserlab.sql` from the app repo once (`bot_config`, `bot_status`, `
 
 ## Development
 `npm test` runs the checks; `node scripts/preview.js <folder>` renders sample pictures. `vendor/` holds the app's own card code, bundled with esbuild from the app repo (`src/journal/mediaCard.ts`, `src/journal/shareCards.ts`); rebuild it when those change.
+
+## Diagrams in the slides editor's style
+Ask the bot to show, draw or illustrate a concept ("show me a bearish CISD") and it replies with a 1920x1080 picture drawn by the slides editor's own renderer, bundled in `vendor/slides.mjs`. The AI never places pixels: `src/diagramTemplates.js` holds hand-drawn diagrams (fair value gap, IFVG, CISD, liquidity sweep, fractal model, premium/discount, order block, SMT, PSP) that it picks by name and direction (mirrored for the other direction), or it writes a small spec of candles and marks anchored to candles (`src/diagram.js`). Try one without Discord: `node scripts/diagram.js "show me an order block"`. After the slides editor's look changes, rebuild the bundle with `node scripts/slides/build.mjs` (needs the `charts` repo next to this one, with its `node_modules`).
