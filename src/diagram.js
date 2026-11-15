@@ -316,6 +316,11 @@ export async function designDiagram(request, { doc } = {}) {
     const spec = fromTemplate("ss", /bear|short|sell|down/i.test(request) ? "bearish" : "bullish");
     return { png: await drawDiagram(spec), spec, lessons: lessons.lessons };
   }
+  // A concept named exactly (the c3 closure, a 2S, "no switch"...) is drawn from its own diagram: no guessing which template the AI picks.
+  if (/(c[23]|candle [23])\s*closure|consecutive|\b[23]s\b|psp (first|last)|strong.*then.*weak|no switch|double confirm|below 15|\bon s[12]\b/i.test(request)) {
+    const spec = quickTemplate(request), png = spec ? await drawDiagram(spec).catch(() => null) : null;
+    if (png) return { png, spec, lessons: lessons.lessons };
+  }
   const system = systemFor(request, doc, lessons);
   let note = "", failure = null;
   try {
