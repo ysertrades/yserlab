@@ -98,13 +98,18 @@ client.on(Events.MessageCreate, async message => {
         const doc = await modelDoc(owner);
         if (out.count > 1) { // several images: a lesson in slides, one post, in order
           const { images, lessons } = await designSlides(out.diagram, { doc, count: out.count });
-          const from = lessons.slice(0, 2).map(l => l.title).join(" · ");
+          const from = lessons.slice(0, 2).map(l => l.title.replace(/TTrades\s*/gi, "")).join(" · ");
           await message.reply({ ...galleryPost({ images, text: `**${images.map(i => i.spec.title).filter(Boolean)[0]?.slice(0, 60) ?? "Slides"}** · ${images.length} slides`, footer: from ? `From: ${from}` : undefined }), allowedMentions: { repliedUser: false } });
           await log("diagram", { note: `${images.length} slides: ${out.diagram.slice(0, 100)}` });
           return;
         }
-        const { png, spec, lessons } = await designDiagram(isGenericSs(text) ? text : out.diagram, { doc });
-        const from = lessons.slice(0, 2).map(l => l.title).join(" · ");
+        const { png, spec, lessons, more } = await designDiagram(isGenericSs(text) ? text : out.diagram, { doc });
+        if (more?.length) { // a whole PDF was asked for: its pages, in order, in one post
+          await message.reply({ ...galleryPost({ images: [{ png }, ...more], text: `**${String(spec.title).slice(0, 60)}** · from your PDF` }), allowedMentions: { repliedUser: false } });
+          await log("diagram", { note: `${spec.title}: ${1 + more.length} pages from the PDF` });
+          return;
+        }
+        const from = lessons.slice(0, 2).map(l => l.title.replace(/TTrades\s*/gi, "")).join(" · ");
         await message.reply({ ...picturePost({ png, name: "diagram.png", text: spec.title ? `**${String(spec.title).slice(0, 80)}**` : undefined, footer: from ? `From: ${from}` : undefined }), allowedMentions: { repliedUser: false } });
         await log("diagram", { note: out.diagram.slice(0, 120) });
       } catch (e) {

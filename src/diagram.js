@@ -2,8 +2,9 @@
 import { fonts, svgToPng } from "./render.js";
 import { Index, recall } from "./knowledge.js";
 import { modelFor } from "./ai.js";
-import { TEMPLATES, fromTemplate, stepsFromTemplate, templateList } from "./diagramTemplates.js";
+import { TEMPLATES, fromTemplate, stepsFromTemplate, templateList, toLtf } from "./diagramTemplates.js";
 import { SMT_RULES, asksAboutSmt } from "./smtLesson.js";
+import { matchDrawings, namesWholePdf, pagesOf, specFromDrawing } from "./pdfDrawings.js";
 
 /**
  * Diagrams in the slides editor's own look. The editor's renderer is bundled in vendor/slides.mjs (scripts/slides/build.mjs), so a
@@ -64,7 +65,7 @@ function parseAnchor(a, n) {
 export async function compile(spec) {
   const L = await slides();
   spec = clean(spec);
-  const panels = (Array.isArray(spec?.panels) ? spec.panels : spec?.pattern || spec?.bars ? [spec] : []).slice(0, 2);
+  const panels = (Array.isArray(spec?.panels) ? spec.panels : spec?.pattern || spec?.bars ? [spec] : []).slice(0, 3);
   const page = L.makePage("lesson", "YSER Trades");
   page.objects = [];
   const add = o => { page.objects.push(o); return o; };
@@ -94,15 +95,23 @@ export async function compile(spec) {
     if (!bars) return;
     drawn++;
     const n = bars.length, two = panels.length === 2;
-    const areaX = two ? (pi === 0 ? 100 : 1000) : 200, areaW = two ? 820 : 1520;
+    const k = panels.length, areaW = k === 1 ? 1520 : k === 2 ? 820 : 560, areaX = k === 1 ? 200 : k === 2 ? (pi === 0 ? 100 : 1000) : 80 + pi * 600;
     // Candles the size they are on the QuantLab cards: a body about 40 px wide on a 50 px step, however few candles there are.
-    const roomy = n <= 4; // 3 or 4 candles: equal step and gap, bodies a little wider so the numbers fit inside them
-    const w = n * (roomy ? (two ? 120 : 150) : two ? 56 : 64), x = areaX + (areaW - w) / 2;
-    const labelH = panel.label ? 70 : 0, pad = panels.every(p => (p?.bars?.length ?? 9) <= 4) ? 40 : 55; // room above and below the candles for tags, circles and arrowheads
-    const below = twinAbove ? 60 : hasTwin ? 135 : panels.every(p => (p?.bars?.length ?? 9) <= 4) ? 60 : 90; // below the candles: SMT labels, the star and its twin strip, or the candle numbers
-    const y = top + pad + (twinAbove ? 125 : 0), h = bottom - labelH - below - y;
+    const roomy = false; // never wide, never flat: every chart uses the owner's ideal candle (below)
+    let w = n * 60, x = areaX + (areaW - w) / 2;
+    const labelH = panel.label ? 70 : 0, pad = 55; // room above and below the candles for tags, circles and arrowheads
+    const below = twinAbove ? 60 : hasTwin ? 135 : 90; // below the candles: SMT labels, the star and its twin strip, or the candle numbers
+    let y = top + pad + (twinAbove ? 125 : 0), h = bottom - labelH - below - y;
+    // A chart traced from a PDF keeps the PDF's own proportions: its step is a fixed share of its price range, so candles are as tall and as wide as there.
+    // Anything not traced uses the owner's ideal candle (the QuantLab cards): a step of about 60 px and a body of about 48, however few or many candles.
+    let traceGap = null;
+    {
+      const traced = Number(panel.aspect) > 0, step0 = traced ? Number(panel.aspect) * h : k === 1 ? 64 : k === 2 ? 56 : 48; w = n * step0;
+      if (w > areaW) { const f = areaW / w; y += h * (1 - f) / 2; h *= f; w = areaW; }
+      x = areaX + (areaW - w) / 2; traceGap = traced ? clamp(num(panel.gap, .3), .1, .7) : .24;
+    }
     if (panel.chip) add(L.create("card", x + w / 2 - 110, top - 55, 220, 46, { style: "soft", text: String(panel.chip).slice(0, 24), icon: null, color: NAMED.ink, radius: 23, textStyle: { ...L.bodyStyle(24), font: "inter", weight: 600, color: NAMED.ink, align: "center" } }));
-    if (panel.label) reserve({ x: x + w / 2 - (two ? 400 : 600), y: bottom - labelH + 24, w: two ? 800 : 1200, h: 45 });
+    if (panel.label) reserve({ x: areaX + 10, y: bottom - labelH + 24, w: areaW - 20, h: 45 });
     const step = w / n, X = i => x + (i - .5) * step, Y = v => y + (1 - v) * h;
     const point = a => {
       const p = parseAnchor(a, n);
@@ -133,13 +142,15 @@ export async function compile(spec) {
 
     // The candles.
     // The house look of the QuantLab cards: slim bodies, thin wicks, light grey up candles and dark grey down candles.
-    const series = L.create("series", x, y, w, h, { preset: "custom", bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), labels: roomy && panel.numbers ? "numbers" : "none", gap: roomy ? .5 : .24, bull: "#dcdcdc", bear: "#666666", outline: true, border: "#8a8a8a" });
+    const series = L.create("series", x, y, w, h, { preset: "custom", bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), labels: roomy && panel.numbers ? "numbers" : "none", gap: traceGap ?? (roomy ? .5 : .24), bull: "#dcdcdc", bear: "#666666", outline: true, border: "#8a8a8a" });
     add(series);
     // Nothing else is placed on a candle: its body and wick are taken space.
-    const bw = step * (1 - (roomy ? .5 : .24));
+    const bw = step * (1 - (traceGap ?? (roomy ? .5 : .24)));
     bars.forEach((b, i) => { reserve({ x: X(i + 1) - bw / 2, y: Y(Math.max(b.o, b.c)), w: bw, h: Math.max(4, Math.abs(Y(b.o) - Y(b.c))) }); reserve({ x: X(i + 1) - 4, y: Y(b.h), w: 8, h: Math.max(4, Y(b.l) - Y(b.h)) }); });
-    if (panel.numbers && !roomy) bars.forEach((_, i) => add(L.create("text", X(i + 1) - 30, y + h + 58, 60, undefined, { text: panel.numbers === "days" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i % 7] : String(i + 1), style: { ...L.bodyStyle(26), align: "center", color: NAMED.muted }, auto: false })));
-    if (panel.numbers && !roomy) reserve({ x: x - 10, y: y + h + 54, w: w + 20, h: 40 });
+    const numbersAbove = (hasTwin && !twinAbove) || marks.some(m => m?.type === "bracket"); // under the candles sit the star, its strip and the brackets, so the numbers go above
+    const numY = numbersAbove ? y - 40 : y + h + 58;
+    if (panel.numbers) bars.forEach((_, i) => add(L.create("text", X(i + 1) - 30, numY, 60, undefined, { text: panel.numbers === "days" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i % 7] : String(i + 1), style: { ...L.bodyStyle(26), align: "center", color: NAMED.muted }, auto: false })));
+    if (panel.numbers) reserve({ x: x - 10, y: numY - 4, w: w + 20, h: 40 });
     // A PSP's star (and its two-asset strip) is taken space before any label is placed.
     for (const m of marks.filter(m => m?.type === "psp")) { const p = point(m.at); if (p) reserve({ x: p.x - 70, y: p.y + (p.field === "high" || p.field === "top" ? -150 : 8), w: 140, h: m.twin ? 142 : 46 }); }
 
@@ -216,7 +227,7 @@ export async function compile(spec) {
       const nx = spotted.x, ny = spotted.y;
       add(L.create("card", nx, ny, tw, size + 36, { style: "soft", text, icon: null, color: colour(m.color, NAMED.ink), radius: 18, textStyle: { ...L.bodyStyle(size), font: "inter", weight: 600, color: NAMED.ink, align: "center" } }));
     }
-    if (panel.label) add(L.create("text", x + w / 2 - (two ? 400 : 600), bottom - labelH + 24, two ? 800 : 1200, undefined, { text: String(panel.label).slice(0, 80), style: { ...L.bodyStyle(two ? 25 : 32), weight: 600, align: "center" }, auto: false }));
+    if (panel.label) add(L.create("text", areaX + 10, bottom - labelH + 24, areaW - 20, undefined, { text: String(panel.label).slice(0, 80), style: { ...L.bodyStyle(two ? 25 : 32), weight: 600, align: "center" }, auto: false }));
   });
 
   if (!drawn && Array.isArray(spec?.lines) && spec.lines.length) { // a concept with no picture to draw: its steps as a clean list, in the deck's own type
@@ -339,11 +350,25 @@ function systemFor(request, doc, lessons, concept = null) {
 export async function designDiagram(request, { doc } = {}) {
   const lessons = recall(request, { chars: 3600, perLesson: 2 });
   if (isGenericSs(request)) { // "show me an SS": the owner's default slide, both kinds side by side, at once and without a question
-    const spec = fromTemplate("ss", /bear|short|sell|down/i.test(request) ? "bearish" : "bullish");
+    let spec = fromTemplate("ss", /bear|short|sell|down/i.test(request) ? "bearish" : "bullish"); if (wantsLtf(request)) spec = toLtf(spec);
     return { png: await drawDiagram(spec), spec, lessons: lessons.lessons };
   }
-  // A concept named exactly (the c3 closure, a 2S, "no switch"...) is drawn from its own diagram: no guessing which template the AI picks.
-  if (/ideal (profile|london|new york|ny)|(london|new york|ny) reversal|(c[23]|candle [23])\s*closure|consecutive|\b[23]s\b|psp (first|last)|strong.*then.*weak|no switch|double confirm|below 15|\bon s[12]\b/i.test(request)) {
+  // An SMT / SS / PSP concept named exactly: the owner's own method slides.
+  if (/consecutive|\b(2|3|two|three)[ -]?(s|stages?)\b|psp (first|last)|strong.*then.*weak|no switch|double confirm|below 15|\bon s[12]\b|\b(ltf|lower[- ]?time ?frame)\b.*\b(smt|ss|psp)\b|\b(smt|ss|psp)\b.*\b(ltf|lower[- ]?time ?frame)\b/i.test(request)) {
+    let spec = quickTemplate(request); if (spec && wantsLtf(request)) spec = toLtf(spec);
+    const png = spec ? await drawDiagram(spec).catch(() => null) : null;
+    if (png) return { png, spec, lessons: lessons.lessons };
+  }
+  // The owner's PDFs: the page whose chart is asked for, drawn from the traced candles at the PDF's own proportions.
+  const hit = matchDrawings(request, 3)[0];
+  if (hit && (hit.score >= 24 || namesWholePdf(request, hit.drawing.pdf))) {
+    const pages = namesWholePdf(request, hit.drawing.pdf) ? pagesOf(hit.drawing.pdf).slice(0, 4) : [hit.drawing];
+    const specs = pages.map(specFromDrawing), drawn = [];
+    for (const spec of specs) { const png = await drawDiagram(spec).catch(() => null); if (png) drawn.push({ png, spec }); }
+    if (drawn.length) return { png: drawn[0].png, spec: drawn[0].spec, lessons: lessons.lessons, more: drawn.slice(1) };
+  }
+  // No PDF page for it, but a diagram of the owner's own: the ideal profiles and the closures.
+  if (/ideal (profile|london|new york|ny)|(london|new york|ny) reversal|(c[23]|candle [23])\s*closure/i.test(request)) {
     const spec = quickTemplate(request), png = spec ? await drawDiagram(spec).catch(() => null) : null;
     if (png) return { png, spec, lessons: lessons.lessons };
   }
@@ -373,17 +398,20 @@ export async function designDiagram(request, { doc } = {}) {
 }
 
 /** The template a request names by its keywords, without any AI (a fallback, and what keeps the common pictures instant). */
+/** "on the LTF", "lower timeframe", "on the 5m": the same picture drawn with more candles. */
+const LTF = /\bltf\b|lower[- ]?time ?frame|\blow(er)? tf\b|\b(1|3|5|15|30)\s?(m|min|minutes?)\b/i;
+export const wantsLtf = q => LTF.test(String(q));
 export function quickTemplate(request) {
   const q = String(request).toLowerCase();
   const dir = /bear|short|sell|down/.test(q) ? "bearish" : "bullish";
   const smtWord = /\b(smt|psp|ss|strength switch|2s|3s|stage)\b/.test(q);
   const id = /ideal\s*(new york|ny)|ny reversal|new york reversal/.test(q) ? "ideal-ny" : /ideal\s*london|london reversal/.test(q) ? "ideal-london" : /ideal\s*profile|\bideal\b/.test(q) ? "ideal-profile" : /(c3|candle 3)\s*closure/.test(q) ? "c3-closure" : /(c2|candle 2)\s*closure/.test(q) ? "c2-closure"
     : /consecutive|neighbouring|neighboring|pairs? share/.test(q) ? "consecutive" : /below 15|5m|1m|3m/.test(q) && smtWord ? "below-15m"
-    : /\b3s\b|three.stage/.test(q) ? "stage-3s" : /strong.*then.*weak|order matters/.test(q) ? "stage-2s-order" : /\b2s\b|two.stage/.test(q) ? "stage-2s"
+    : /\b(3|three)[ -]?(s|stages?)\b/.test(q) ? "stage-3s" : /strong.*then.*weak|order matters/.test(q) ? "stage-2s-order" : /\b(2|two)[ -]?(s|stages?)\b/.test(q) ? "stage-2s"
     : /psp (on|at) (s2|the second|c3)|psp.*\bs2\b/.test(q) ? "ss-psp-s2" : /double confirm|psp (on|at) (s1|the shared)|psp.*\bs1\b/.test(q) ? "ss-psp-s1"
     : /psp first|pivot a|line (turns|goes) blue/.test(q) ? "psp-first" : /no switch|wrong (close|way)|not (a )?switch|doesn.?t switch|neutral star/.test(q) ? "no-switch"
     : /(two|2) smts?|no psp|without (a )?psp|leg flip|weak.*then.*strong/.test(q) && smtWord ? "ss-two-smt" : /psp last|smt (and|with|\+) (a )?psp|with (a )?psp/.test(q) && smtWord ? "ss-psp"
-    : /\b(ss|strength switch)\b/.test(q) ? "ss"
+    : /\b(ss|strength switch)\b/.test(q) || (LTF.test(q) && smtWord) ? "ss"
     : /inversion|ifvg/.test(q) ? "ifvg" : /fair value|\bfvg\b|imbalance/.test(q) ? "fvg"
     : /cisd|change in (the )?state/.test(q) ? "cisd" : /order block|\bob\b/.test(q) ? "ob"
     : /fractal|candle (2|3|4)\b|\bc[234]\b/.test(q) ? "fractal" : /premium|discount|equilibrium/.test(q) ? "pd"
@@ -432,7 +460,9 @@ let templateIndex = null;
 /** The hand-drawn diagrams closest to what was asked, best first. */
 export function nearest(request, n = 3) {
   templateIndex ??= new Index(TEMPLATES.map(t => ({ h: t.name, t: `${t.name}. ${t.about}`, id: t.id, name: t.name })));
-  return templateIndex.search(request, n).map(h => h.chunk.name);
+  const names = templateIndex.search(request, n).map(h => h.chunk.name);
+  for (const m of matchDrawings(request, 6)) if (!names.includes(m.drawing.pdf) && names.length < n + 2) names.push(m.drawing.pdf + " (your PDF)");
+  return names;
 }
 const clarifyText = request => {
   const near = nearest(request);

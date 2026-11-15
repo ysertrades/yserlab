@@ -29,7 +29,7 @@ export const SMT_TEMPLATES = [
 
   { id: "stage-2s", name: "2S: two linked strong SMTs", native: "bull",
     about: "S1 strong then S2 strong, both solid neutral lines, label 6H • 2S (no strength switch)",
-    spec: one({ title: "2S Stage", subtitle: "Two linked SMTs, both strong", caption: "Strong then strong = 2S. Neighbouring pairs share a candle." },
+    spec: one({ title: "2S Stage", subtitle: "Two linked SMTs, both strong", caption: "Strong then strong = 2S." },
       { bars: [row(106, 108, 100, 102), row(102, 106, 101, 105), row(105, 109, 103, 108)], marks: [smt(1, 2, "6H", { solid: true }), smt(2, 3, "6H • 2S", { solid: true })] }) },
 
   { id: "stage-2s-order", name: "Strong then weak is 2S, not SS (order matters)", native: "bull",

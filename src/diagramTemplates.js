@@ -64,7 +64,7 @@ export const TEMPLATES = [
   {
     id: "fractal", name: "TTrades fractal model (candles 1 to 4)", native: "bull", steps: fractalSteps(),
     about: "C1 sets the range, C2 sweeps one side and closes back inside, C3 expands through the other side, C4 continues",
-    spec: { title: "TTrades Fractal Model", subtitle: "C2 takes liquidity, C3 expands", panels: [{ label: "Four candles on the higher timeframe", numbers: true,
+    spec: { title: "Fractal Model", subtitle: "C2 takes liquidity, C3 expands", panels: [{ label: "Four candles on the higher timeframe", numbers: true,
       bars: [row(40, 62, 36, 58), row(58, 60, 22, 44), row(44, 78, 40, 74), row(74, 92, 70, 88)], marks: [
       { type: "level", at: "1:high", label: "C1 high", color: "blue", dash: "dashed", from: 1, to: 4 },
       { type: "level", at: "1:low", label: "C1 low", color: "red", dash: "dashed", from: 1, to: 4 },
@@ -161,3 +161,58 @@ export function stepsFromTemplate(id, direction) {
 export const templateList = () => TEMPLATES.map(t => `${t.id}: ${t.name}: ${t.about}${t.steps ? ` (has ${t.steps.length} steps)` : ""} (drawn ${t.native === "bull" ? "bullish" : "bearish"} by default)`).join("\n");
 
 
+
+/**
+ * The same slide on the lower timeframe: each candle becomes `k` candles that add up to it (same open, high, low and close), and every
+ * anchor moves to the lower-timeframe candle that holds that point: the low of candle 2 is the sub-candle that made the low.
+ */
+export function toLtf(spec, k = 4) {
+  const seeded = seed => () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
+  const maps = [];
+  const panels = (spec.panels ?? []).map((p, pi) => {
+    if (!Array.isArray(p.bars)) { maps.push(null); return p; }
+    const rnd = seeded(7 + pi * 13), subs = [], map = [];
+    p.bars.forEach(([o, h, l, c]) => {
+      const bull = c >= o, range = h - l || 1;
+      const path = bull ? [[0, o], [.3, l], [.75, h], [1, c]] : [[0, o], [.3, h], [.75, l], [1, c]];
+      const at = t => { for (let i = 1; i < path.length; i++) if (t <= path[i][0]) { const [t0, v0] = path[i - 1], [t1, v1] = path[i]; return v0 + (v1 - v0) * (t - t0) / (t1 - t0); } return c; };
+      const iLow = Math.min(k - 1, Math.floor((bull ? .3 : .75) * k)), iHigh = Math.min(k - 1, Math.floor((bull ? .75 : .3) * k));
+      const first = subs.length + 1;
+      for (let j = 0; j < k; j++) {
+        let so = at(j / k), sc = at((j + 1) / k);
+        if (j > 0 && j < k - 1) { so += (rnd() - .5) * range * .08; sc += (rnd() - .5) * range * .08; }
+        if (j === 0) so = o; if (j === k - 1) sc = c;
+        const wick = range * (.03 + rnd() * .05);
+        let sh = Math.min(h, Math.max(so, sc) + wick), sl = Math.max(l, Math.min(so, sc) - wick);
+        if (j === iLow) { sl = l; if (bull && sc < so) [so, sc] = [sc, so]; }
+        if (j === iHigh) { sh = h; if (!bull && sc > so) [so, sc] = [sc, so]; }
+        subs.push([+so.toFixed(2), +Math.max(sh, so, sc).toFixed(2), +Math.min(sl, so, sc).toFixed(2), +sc.toFixed(2)]);
+      }
+      map.push({ first, last: first + k - 1, low: first + iLow, high: first + iHigh, mid: first + Math.floor(k / 2) });
+    });
+    maps.push(map);
+    return { ...p, bars: subs, numbers: false };
+  });
+  const move = (a, map) => {
+    const m = /^\s*(-?\d+(?:\.\d+)?)\s*:\s*(.+?)\s*$/.exec(String(a));
+    if (!m || !map) return a;
+    const e = map[Math.min(map.length, Math.max(1, Math.round(Number(m[1])))) - 1], f = m[2];
+    const idx = f === "low" || f === "bottom" ? e.low : f === "high" || f === "top" ? e.high : f === "open" ? e.first : f === "close" ? e.last : e.mid;
+    return `${idx}:${f}`;
+  };
+  return {
+    ...spec,
+    panels: panels.map((p, pi) => ({
+      ...p,
+      marks: (p.marks ?? []).filter(m => m.type !== "bracket").map(m => {
+        const map = maps[pi], out = { ...m };
+        for (const key of ["at", "from", "to"]) if (typeof m[key] === "string") out[key] = move(m[key], map);
+        const n = map?.length ?? 0;
+        if (map && m.type === "level") { out.from = map[Math.min(n, Math.max(1, Math.round(Number(m.from ?? 1)))) - 1].first; out.to = map[Math.min(n, Math.max(1, Math.round(Number(m.to ?? n)))) - 1].last; }
+        if (map && m.type === "zone") { if (m.fromBar) out.fromBar = map[Math.min(n, Math.max(1, Math.round(m.fromBar))) - 1].first; if (m.toBar) out.toBar = map[Math.min(n, Math.max(1, Math.round(m.toBar))) - 1].last; }
+        return out;
+      }),
+    })),
+    caption: spec.caption, assumed: String(spec.assumed ?? "").replace(/\.$/, "") + ". Lower timeframe view: each candle drawn as " + k + ".",
+  };
+}

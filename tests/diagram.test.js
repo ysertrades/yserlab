@@ -43,3 +43,24 @@ test("the fractal model comes as four steps that draw, bullish and bearish", asy
   }
 });
 
+
+import { pdfDrawings, specFromDrawing, matchDrawings } from "../src/pdfDrawings.js";
+import fs from "node:fs";
+test("the owner's PDF charts are traced and draw at the PDF's own proportions", { skip: !fs.existsSync("knowledge/model/drawings.json") }, async () => {
+  const all = pdfDrawings();
+  assert.ok(all.length > 100, "traced pages");
+  const hit = matchDrawings("show me an ideal profile", 1)[0];
+  assert.equal(hit.drawing.pdf, "Ideal Profile");
+  const spec = specFromDrawing(hit.drawing);
+  assert.ok(spec.panels.length >= 1 && spec.panels[0].aspect > 0);
+  assert.ok(await drawDiagram(spec, 640));
+});
+
+import { toLtf } from "../src/diagramTemplates.js";
+test("the lower timeframe view has more candles and keeps every anchor on a real candle", async () => {
+  const spec = toLtf(fromTemplate("ss", "bullish"), 4);
+  assert.equal(spec.panels[0].bars.length, 12);
+  const built = await compile(spec);
+  assert.ok(built && built.page.objects.some(o => o.type === "line"));
+  assert.ok(await drawDiagram(spec, 640));
+});
