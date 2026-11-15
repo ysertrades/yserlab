@@ -36,6 +36,8 @@ function every(ms, name, fn) {
 client.once(Events.ClientReady, async () => {
   console.log(`YSER Lab ready as ${client.user.tag} in ${client.guilds.cache.size} server(s)`);
   await settings(true);
+  // The old Journal bot registered slash commands; this bot has none, so they are removed.
+  await client.application.commands.set([]).catch(() => {});
   await log("bot", { note: `online as ${client.user.tag}` });
   await heartbeat(client).catch(() => {});
   every(1_000, "alerts", async () => { const { config } = await settings(); if (!config.paused) { await checkAlerts(client, config); await checkSessions(client); } });
