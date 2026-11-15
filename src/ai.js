@@ -52,12 +52,15 @@ const SYSTEM = `You are YSER Lab, the personal trading mentor of one trader, liv
 How to answer:
 - Never say "TTrades": the fractal model is just "the fractal model", the education center is "the education center"; drop that word from lesson titles when you cite them.
 - Answer from the material below, in the trader's own terms (their model's vocabulary first). Name the lesson you draw from, e.g. "(lesson: Understanding Fair Value Gaps)". If their model and a lesson differ, follow their model and say what the lesson adds or does differently.
-- Be precise: give the actual rules, conditions, steps and levels the material states, not generalities. Never invent rules or numbers; if the material doesn't cover it, say so plainly.
+- You are also a sharp general assistant: when they ask about anything else (markets, economics, news, science, coding, writing, life), answer it properly from your own knowledge, without forcing it back to trading, and say when you are not sure or the facts may have changed.
+- Reason, don't just look up. A request that is new (not word for word in the material) is worked out from the rules you know: combine the concepts (a candle 2 closure whose entry is a CISD on the lower timeframe is ONE idea built from two) and answer or draw the combination, instead of replying that you don't have it.
+- Be precise on THEIR model and the education center: give the actual rules, conditions, steps and levels the material states, not generalities, and never invent rules or numbers there; if the material doesn't cover it, say so plainly and then reason from what it does say.
 - Be direct and brief: a few sentences for simple questions, a short structured answer (bullets or numbered steps) for how-to or explain-it questions. Plain words, Discord markdown sparingly, no filler.
 - Numbers about their trading come only from the journal summary. Never give financial advice or tell them to take a trade; you help them study, review and stay consistent.
 - If they ask you to send or show a picture, chart or screenshot from a trade THEY logged, call show_trade_chart.
 - If they ask you to show, draw, illustrate, diagram or make an image of a concept, setup or example (not one of their trades), call draw_diagram with a full sentence of what to draw (and count when they ask for several images or slides, e.g. "make me 4 images explaining the foundation of the fractal model" is count 4). Never describe a picture in words when they asked to see it; call the tool.
 - If they ask to share, post or show their daily, weekly or monthly PnL card (results card), call share_pnl_card.
+- One picture request is ONE draw_diagram call with the whole sentence, even when it joins two ideas ("show me a c2 closure with a cisd entry" is one picture: the higher timeframe over the lower one, body to body); set count only when they ask for several images.
 - A request to SEE something ("show me how an SS looks") is never answered with questions or a paragraph: call draw_diagram at once and let the defaults decide. Ask a question only when the request contradicts itself.`;
 
 const GROQ_MODELS = () => [...new Set([env.groqModel, "openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.8-27b"].filter(Boolean))];
@@ -192,8 +195,25 @@ export function context({ doc, rows, text, history = [], big = false, scale = 1 
 let modelCache = { owner: null, at: 0, doc: null };
 const cachedModel = async owner => { if (modelCache.owner !== owner || Date.now() - modelCache.at > 60_000) modelCache = { owner, at: Date.now(), doc: await model(owner) }; return modelCache.doc; };
 
+/** Facts that change (news, scores, prices, releases) are looked up on the web, through Gemini's search. Null if it can't. */
+const asksCurrent = q => /\b(news|headlines?|right now|currently|who won|weather|score|release date|earnings|cpi|fomc|nfp|price of|what happened|latest|this week)\b/i.test(q) && !/\b(my|journal|trades?|pnl|model|fractal|cisd|smt|psp|closure)\b/i.test(q);
+async function viaSearch(text) {
+  if (!env.geminiKey) return null;
+  for (const name of GEMINI_MODELS()) {
+    try {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${name}:generateContent`, { method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": env.geminiKey }, signal: AbortSignal.timeout(30_000),
+        body: JSON.stringify({ systemInstruction: { parts: [{ text: `You are YSER Lab, a trader's assistant in Discord. Answer from a web search, briefly and plainly, with the date of what you found. Today is ${new Date().toDateString()}.` }] }, contents: [{ role: "user", parts: [{ text }] }], tools: [{ google_search: {} }], generationConfig: { temperature: 0.3, maxOutputTokens: 900 } }) });
+      if (!r.ok) continue;
+      const answer = ((await r.json()).candidates?.[0]?.content?.parts ?? []).map(p => p.text ?? "").join("").trim();
+      if (answer) return { text: answer };
+    } catch { /* next model */ }
+  }
+  return null;
+}
+
 export async function ask({ owner, channelId, text }) {
   if (!env.groqKey && !env.geminiKey) return { text: "My AI isn't connected yet: add `GROQ_API_KEY` in the host's variables." };
+  if (asksCurrent(text)) { const found = await viaSearch(text); if (found) return found; }
   const [rows, doc] = await Promise.all([entries(owner).catch(() => []), cachedModel(owner)]);
   const history = (histories.get(channelId) ?? []).filter(h => Date.now() - h.at < FORGET).slice(-KEEP);
   const short = history.slice(-4).map(h => ({ ...h, text: h.text.slice(0, 600) })); // Groq's room is small: only the latest turns, trimmed

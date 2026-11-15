@@ -64,3 +64,13 @@ test("the lower timeframe view has more candles and keeps every anchor on a real
   assert.ok(built && built.page.objects.some(o => o.type === "line"));
   assert.ok(await drawDiagram(spec, 640));
 });
+
+import { compoundOf, composeEntry, drawDiagram as _draw } from "../src/diagram.js";
+test("a c2 closure with a CISD entry is one stacked picture", async () => {
+  assert.deepEqual(compoundOf("Show me a c2 closure with the charts of a cisd as an entry"), { htf: "c2-closure", entry: "cisd" });
+  assert.equal(compoundOf("show me a c2 closure"), null);
+  const spec = await composeEntry("c2-closure", "bullish");
+  assert.equal(spec.stack, true);
+  assert.equal(spec.panels[1].bars.length, spec.panels[0].groups.reduce((a, b) => a + b, 0));
+  assert.ok((await _draw(spec)).length > 5000);
+});

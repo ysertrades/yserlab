@@ -2,7 +2,8 @@
 import { fonts, svgToPng } from "./render.js";
 import { Index, recall } from "./knowledge.js";
 import { modelFor } from "./ai.js";
-import { TEMPLATES, fromTemplate, stepsFromTemplate, templateList, toLtf } from "./diagramTemplates.js";
+import { TEMPLATES, fromTemplate, mirror, stepsFromTemplate, templateList, toLtf } from "./diagramTemplates.js";
+import { cisdMarks, ltfFromHtf } from "./compose.js";
 import { SMT_RULES, asksAboutSmt } from "./smtLesson.js";
 import { matchDrawings, namesWholePdf, pagesOf, pdfNamedIn, specFromDrawing } from "./pdfDrawings.js";
 
@@ -77,9 +78,16 @@ export async function compile(spec) {
   const chips = panels.some(p => p?.chip), compact = panels.some(p => (p?.bars?.length ?? 9) <= 4); // a few candles: roomy bodies with their number inside
   const top = (title ? (sub ? 285 : 245) : 150) + (chips ? 55 : 0);
   const bottom = caption ? 850 : 880;
+  const outerTop = top - (spec?.stack ? 45 : 0), outerBottom = bottom;
   const hasTwin = panels.some(p => (p?.marks ?? []).some(m => (m?.type === "psp" && m?.twin) || m?.type === "bracket")); // a PSP needs its two-asset strip below it; brackets need rows
   const twinAbove = panels.some(p => (p?.marks ?? []).some(m => m?.type === "psp" && m?.twin && /:(high|top)$/.test(String(m.at)))); // bearish: the star and its strip sit above the highs
   let drawn = 0;
+  // A stacked spec (`stack`): panel 1 is the higher timeframe, panel 2 the lower one; every higher-timeframe candle is drawn as wide as the lower-timeframe candles
+  // under it, body to body, so the eye reads straight down from the candle to its detail.
+  const stack = !!spec?.stack && panels.length === 2;
+  const stackN = stack ? (barsOf(L, panels[1])?.length ?? 0) : 0, stackStep = stackN ? clamp(1480 / stackN, 26, 64) : 0, stackW = stackN * stackStep, stackX = 200 + (1520 - stackW) / 2;
+  const stackBand = stack ? (bottom - top + 45) : 0, stackGap = 14, stackH1 = Math.round(stackBand * .47);
+  const stackInfo = { edges: [], ltfBottom: 0 };
   // Labels never sit on each other or on a candle: each is tried where it belongs, then nudged to the nearest free spot.
   const taken = [];
   const hit = (a, b) => a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h;
@@ -94,13 +102,14 @@ export async function compile(spec) {
     const bars = barsOf(L, panel);
     if (!bars) return;
     drawn++;
-    const n = bars.length, two = panels.length === 2;
-    const k = panels.length, areaW = k === 1 ? 1520 : k === 2 ? 820 : 560, areaX = k === 1 ? 200 : k === 2 ? (pi === 0 ? 100 : 1000) : 80 + pi * 600;
+    const n = bars.length, two = panels.length === 2 && !stack;
+    const top = stack ? (pi === 0 ? outerTop : outerTop + stackH1 + stackGap) : outerTop, bottom = stack ? (pi === 0 ? outerTop + stackH1 : outerBottom) : outerBottom;
+    const k = stack ? 1 : panels.length, areaW = k === 1 ? 1520 : k === 2 ? 820 : 560, areaX = k === 1 ? 200 : k === 2 ? (pi === 0 ? 100 : 1000) : 80 + pi * 600;
     // Candles the size they are on the QuantLab cards: a body about 40 px wide on a 50 px step, however few candles there are.
     const roomy = false; // never wide, never flat: every chart uses the owner's ideal candle (below)
     let w = n * 60, x = areaX + (areaW - w) / 2;
-    const labelH = panel.label ? 70 : 0, pad = 55; // room above and below the candles for tags, circles and arrowheads
-    const below = twinAbove ? 60 : hasTwin ? 135 : 90; // below the candles: SMT labels, the star and its twin strip, or the candle numbers
+    const labelH = panel.label ? 70 : 0, pad = stack ? (pi === 0 ? 62 : 44) : 55; // room above and below the candles for tags, circles and arrowheads
+    const below = stack ? (pi === 0 ? 26 : 86) : twinAbove ? 60 : hasTwin ? 135 : 90; // below the candles: SMT labels, the star and its twin strip, or the candle numbers
     let y = top + pad + (twinAbove ? 125 : 0), h = bottom - labelH - below - y;
     // A chart traced from a PDF keeps the PDF's own proportions: its step is a fixed share of its price range, so candles are as tall and as wide as there.
     // Anything not traced uses the owner's ideal candle (the QuantLab cards): a step of about 60 px and a body of about 48, however few or many candles.
@@ -110,9 +119,22 @@ export async function compile(spec) {
       if (w > areaW) { const f = areaW / w; y += h * (1 - f) / 2; h *= f; w = areaW; }
       x = areaX + (areaW - w) / 2; traceGap = traced ? clamp(num(panel.gap, .3), .1, .7) : .24;
     }
+    // Stacked: both rows share one left edge and one width, so a higher-timeframe candle sits exactly over its lower-timeframe candles.
+    let groups = null, gStart = null;
+    if (stack) {
+      w = stackW; x = stackX; traceGap = .24;
+      if (pi === 0) { // the lower-timeframe candles under each higher-timeframe candle (equal by default)
+        const given = Array.isArray(panel.groups) && panel.groups.length === n && panel.groups.every(g => Number(g) >= 1) ? panel.groups.map(Number) : null;
+        groups = given && given.reduce((a, b) => a + b, 0) === stackN ? given : Array.from({ length: n }, (_, i) => Math.floor(stackN / n) + (i < stackN % n ? 1 : 0));
+        gStart = groups.reduce((acc, g, i) => (acc.push((acc[i] ?? 0) + g), acc), [0]);
+      }
+    }
+    if (panel.tf) add(L.create("text", 40, y + h / 2 - 20, 150, undefined, { text: String(panel.tf).slice(0, 8), style: { ...L.bodyStyle(30), weight: 700, color: NAMED.muted }, auto: false }));
     if (panel.chip) add(L.create("card", x + w / 2 - 110, top - 55, 220, 46, { style: "soft", text: String(panel.chip).slice(0, 24), icon: null, color: NAMED.ink, radius: 23, textStyle: { ...L.bodyStyle(24), font: "inter", weight: 600, color: NAMED.ink, align: "center" } }));
     if (panel.label) reserve({ x: areaX + 10, y: bottom - labelH + 24, w: areaW - 20, h: 45 });
-    const step = w / n, X = i => x + (i - .5) * step, Y = v => y + (1 - v) * h;
+    const step = w / n, Y = v => y + (1 - v) * h;
+    const centre = j => x + (gStart[j] + groups[j] / 2) * stackStep; // the middle of the lower-timeframe candles under higher-timeframe candle j
+    const X = groups ? (i => { const j = clamp(Math.floor(i) - 1, 0, n - 1), j2 = Math.min(n - 1, j + 1), f = clamp(i - Math.floor(i), 0, 1); return centre(j) * (1 - f) + centre(j2) * f; }) : (i => x + (i - .5) * step);
     const point = a => {
       const p = parseAnchor(a, n);
       if (!p) return null;
@@ -142,12 +164,16 @@ export async function compile(spec) {
 
     // The candles.
     // The house look of the QuantLab cards: slim bodies, thin wicks, light grey up candles and dark grey down candles.
-    const series = L.create("series", x, y, w, h, { preset: "custom", bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), labels: roomy && panel.numbers ? "numbers" : "none", gap: traceGap ?? (roomy ? .5 : .24), bull: "#dcdcdc", bear: "#666666", outline: true, border: "#8a8a8a" });
-    add(series);
+    const look = { preset: "custom", labels: "none", bull: "#dcdcdc", bear: "#666666", outline: true, border: "#8a8a8a" };
+    const edge = stackStep * .12; // the gap each lower-timeframe candle keeps from its neighbour, so the higher candle's body ends exactly where the last one's does
+    if (groups) bars.forEach((b, i) => add(L.create("series", x + gStart[i] * stackStep + edge, y, groups[i] * stackStep - 2 * edge, h, { ...look, bars: [b], count: 1, future: 0, gap: 0 })));
+    else add(L.create("series", x, y, w, h, { ...look, bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), gap: traceGap ?? (roomy ? .5 : .24) }));
     // Nothing else is placed on a candle: its body and wick are taken space.
     const bw = step * (1 - (traceGap ?? (roomy ? .5 : .24)));
-    bars.forEach((b, i) => { reserve({ x: X(i + 1) - bw / 2, y: Y(Math.max(b.o, b.c)), w: bw, h: Math.max(4, Math.abs(Y(b.o) - Y(b.c))) }); reserve({ x: X(i + 1) - 4, y: Y(b.h), w: 8, h: Math.max(4, Y(b.l) - Y(b.h)) }); });
-    const numbersAbove = (hasTwin && !twinAbove) || marks.some(m => m?.type === "bracket"); // under the candles sit the star, its strip and the brackets, so the numbers go above
+    bars.forEach((b, i) => { const cw = groups ? groups[i] * stackStep - 2 * edge : bw; reserve({ x: X(i + 1) - cw / 2, y: Y(Math.max(b.o, b.c)), w: cw, h: Math.max(4, Math.abs(Y(b.o) - Y(b.c))) }); reserve({ x: X(i + 1) - 4, y: Y(b.h), w: 8, h: Math.max(4, Y(b.l) - Y(b.h)) }); });
+    if (groups) stackInfo.edges = bars.map((b, i) => ({ l: x + gStart[i] * stackStep + edge, r: x + (gStart[i] + groups[i]) * stackStep - edge, y: Y(Math.min(b.o, b.c)) }));
+    else if (stack) stackInfo.ltfBottom = y + h;
+    const numbersAbove = !!groups || (hasTwin && !twinAbove) || marks.some(m => m?.type === "bracket"); // under the candles sit the star, its strip and the brackets, so the numbers go above
     const numY = numbersAbove ? y - 40 : y + h + 58;
     if (panel.numbers) bars.forEach((_, i) => add(L.create("text", X(i + 1) - 30, numY, 60, undefined, { text: panel.numbers === "days" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i % 7] : String(i + 1), style: { ...L.bodyStyle(26), align: "center", color: NAMED.muted }, auto: false })));
     if (panel.numbers) reserve({ x: x - 10, y: numY - 4, w: w + 20, h: 40 });
@@ -230,6 +256,9 @@ export async function compile(spec) {
     if (panel.label) add(L.create("text", areaX + 10, bottom - labelH + 24, areaW - 20, undefined, { text: String(panel.label).slice(0, 80), style: { ...L.bodyStyle(two ? 25 : 32), weight: 600, align: "center" }, auto: false }));
   });
 
+  if (stack && drawn === 2) { // faint guides from each higher-timeframe body edge down through its lower-timeframe candles
+    for (const e of stackInfo.edges) for (const gx of [e.l, e.r]) add(L.withBox(L.create("line", gx, e.y, 0, 0, { x1: gx, y1: e.y, x2: gx, y2: stackInfo.ltfBottom, stroke: "#d9d9d9", strokeWidth: 2, dash: "dashed", curve: 0, end: "none" })));
+  }
   if (!drawn && Array.isArray(spec?.lines) && spec.lines.length) { // a concept with no picture to draw: its steps as a clean list, in the deck's own type
     drawn++;
     spec.lines.slice(0, 7).forEach((line, i) => add(L.create("text", 160, 345 + i * 86, 1600, undefined, { text: String(line).slice(0, 150), style: { ...L.bodyStyle(32), color: i === 0 && spec.firstBold ? "#3a3a3a" : "#3a3a3a" }, auto: false })));
@@ -254,6 +283,7 @@ const PATTERN_HELP = `Library patterns (bullish, "flip": true draws the bearish 
 const DESIGNER = `You design a trading diagram for the YSER slides editor, then reply with ONE JSON object and nothing else.
 USE A TEMPLATE. These are ready-made, hand-drawn diagrams in the owner's style, and one of them fits almost every request: choose the CLOSEST one, even when it only covers the main idea of a longer request (a CISD after a sweep -> cisd; candle 2 and candle 3 of the fractal model -> fractal; an entry into a gap -> fvg). Reply {"template":"<id>","direction":"bullish" or "bearish"} (the direction the idea is traded; optionally "title" and "subtitle" to reword the headline, at most 6 and 12 words). When the request joins TWO ideas (a sweep, then a CISD), show them side by side: {"templates":[{"template":"<id>","direction":"..."},{"template":"<id>","direction":"..."}],"title":"...","subtitle":"..."}. Templates:
 ${templateList()}
+When the request is an idea ON THE HIGHER TIMEFRAME with its ENTRY ON THE LOWER ONE (a candle 2 closure with a CISD entry; "the fractal model and how I enter it"), it is ONE picture, never several: reply {"compose":{"htf":"c2-closure" or "c3-closure" or "fractal","entry":"cisd","direction":"bullish" or "bearish"}} and the bot draws the higher-timeframe candles with the lower-timeframe candles under them, body to body. To design such a picture yourself, use {"stack":true,"title":..,"panels":[HTF panel with "groups":[how many lower candles sit under each higher candle], LTF panel]} with the SAME number of lower candles as the groups add up to; each higher candle is then as wide as its lower candles.
 Design your own with the spec below ONLY for an idea that none of these covers (a session, a time window, a particular pattern they are not). Use what the owner said: if they name details (the leg directions, where a PSP sits, which stage), draw exactly those details, adding a PSP star or SMT lines of their own with the marks below. If you cannot tell what they mean, or you cannot draw it faithfully, do NOT guess: reply {"ask":"one short question that names the 2 or 3 nearest things you can draw"}.
 Spec for your own design:
 {"title":"short headline (max 6 words)","subtitle":"optional one line","panels":[ONE or TWO panels, each:
@@ -355,6 +385,13 @@ export async function designDiagram(brief, { doc, said } = {}) {
     let spec = fromTemplate("ss", /bear|short|sell|down/i.test(request) ? "bearish" : "bullish"); if (wantsLtf(request)) spec = toLtf(spec);
     return { png: await drawDiagram(spec), spec, lessons: lessons.lessons };
   }
+  // Two ideas where one is the entry of the other ("a c2 closure with a CISD entry"): one picture, the higher timeframe over the lower, body to body.
+  const combo = compoundOf(request);
+  if (combo) {
+    const spec = await composeEntry(combo.htf, /bear|short|sell|down/i.test(request) ? "bearish" : "bullish", { entry: combo.entry }).catch(() => null);
+    const png = spec ? await drawDiagram(spec).catch(() => null) : null;
+    if (png) return { png, spec, lessons: lessons.lessons };
+  }
   // An SMT / SS / PSP concept named exactly: the owner's own method slides.
   if (/consecutive|\b(2|3|two|three)[ -]?(s|stages?)\b|psp (first|last)|strong.*then.*weak|no switch|double confirm|below 15|\bon s[12]\b|\b(ltf|lower[- ]?time ?frame)\b.*\b(smt|ss|psp)\b|\b(smt|ss|psp)\b.*\b(ltf|lower[- ]?time ?frame)\b/i.test(request)) {
     let spec = quickTemplate(request); if (spec && wantsLtf(request)) spec = toLtf(spec);
@@ -382,8 +419,8 @@ export async function designDiagram(brief, { doc, said } = {}) {
     for (let attempt = 0; attempt < 2; attempt++) {
       const reply = await viaJson(system, `Draw: ${brief}${note}\n(The owner's own words: "${request}")`);
       if (reply.ask && !reply.template && !reply.panels) throw new Clarify(String(reply.ask).slice(0, 500));
-      const spec = resolve(reply);
-      const png = await drawDiagram(spec).catch(() => null);
+      const spec = reply.compose ? await composeEntry(String(reply.compose.htf), reply.compose.direction ?? reply.direction, { entry: String(reply.compose.entry ?? "cisd") }).catch(() => null) : resolve(reply);
+      const png = spec ? await drawDiagram(spec).catch(() => null) : null;
       if (png) return { png, spec, lessons: lessons.lessons };
       note = "\n(Your last reply had nothing that could be drawn. Reply with a template id from the list, or a spec with real panels and a pattern or bars.)";
     }
@@ -398,6 +435,38 @@ export async function designDiagram(brief, { doc, said } = {}) {
     throw failure ?? new Error("nothing to draw");
   }
   throw new Clarify(clarifyText(request)); // nothing matched: ask what was meant, with the nearest options
+}
+
+/**
+ * An idea on the higher timeframe with its entry on the lower one, as ONE picture: the template's candles on top and, under them, the lower-timeframe
+ * candles that make them up, body to body, with the entry model (a CISD) drawn on those. `htf` is a template id; the candle whose low is taken
+ * (SWEPT, 1-based) is the one the lower candles zoom into.
+ */
+const SWEPT = { "c2-closure": 2, "c3-closure": 3, fractal: 2 };
+const HTF_NAMES = [[/(c3|candle 3)\s*closure/i, "c3-closure"], [/(c2|candle 2)\s*closure/i, "c2-closure"], [/fractal|\bc2 (sweep|takes)/i, "fractal"]];
+/** "a c2 closure with a CISD entry": two ideas where one is the entry of the other. */
+export function compoundOf(request) {
+  const q = String(request);
+  const htf = HTF_NAMES.find(([re]) => re.test(q))?.[1];
+  return htf && /\bcisd\b|change in (the )?state/i.test(q) ? { htf, entry: "cisd" } : null;
+}
+export async function composeEntry(htfId, direction = "bullish", { entry = "cisd" } = {}) {
+  const L = await slides(), base = fromTemplate(htfId, "bullish"), t = TEMPLATES.find(x => x.id === htfId);
+  const p0 = base?.panels?.[0];
+  if (!p0 || !SWEPT[htfId] || entry !== "cisd") return null;
+  let rows = Array.isArray(p0.bars) ? p0.bars.map(r => [...r]) : (L.makeBars(String(p0.pattern), 0, 1, false) ?? []).map(b => [b.o, b.h, b.l, b.c]);
+  if (p0.flip) rows = rows.map(([o, h, l, c]) => [1 - o, 1 - l, 1 - h, 1 - c]);
+  const g = rows.length <= 4 ? 5 : 4, sweep = SWEPT[htfId] - 1;
+  const ltf = ltfFromHtf(rows, { g, sweep });
+  const entryBar = (sweep + 1) * g + 1 <= ltf.rows.length ? (sweep + 1) * g + 1 : 0;
+  const marks = (p0.marks ?? []).filter(m => !(m.type === "note" && /entry/i.test(m.text ?? ""))).map(m => (m.type === "arrow" ? { ...m, label: "" } : m)); // the entry is named on the lower candles, where the CISD is
+  const spec = {
+    title: `${base.title} With a CISD Entry`.slice(0, 70), subtitle: `${String(base.title).replace(/^(Bullish|Bearish)\s+/i, "")} on the HTF, its entry on the LTF`, stack: true,
+    caption: "The CISD inside the swept candle is the entry; the candles sit body to body.", assumed: `Assumed: bullish, ${rows.length} HTF candles with ${g} LTF candles under each.`,
+    panels: [{ tf: "HTF", numbers: true, bars: rows, groups: rows.map(() => g), marks }, { tf: "LTF", numbers: false, bars: ltf.rows, marks: cisdMarks(ltf.info, entryBar) }],
+  };
+  void t;
+  return /bear|short|sell|down/i.test(direction) ? mirror(spec) : spec;
 }
 
 /** The template a request names by its keywords, without any AI (a fallback, and what keeps the common pictures instant). */
