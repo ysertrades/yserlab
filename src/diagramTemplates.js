@@ -130,6 +130,34 @@ function smtTemplates() {
       spec: { title: "3S Stage", subtitle: "Three same-direction SMTs, each starting where the last ended", panels: [{ label: "A chain of strong legs", numbers: true,
         bars: [...ladder([96, 97, 99]).slice(0, 9), row(105, 108, 103, 104), row(104, 105, 101, 102), row(102, 107, 100, 106)], marks: [
         { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H • 2S" }, { type: "smt", from: "9:low", to: "12:low", style: "solid", color: "muted", label: "6H • 3S" }] }] } },
+    { id: "stage-2s-order", name: "Pair: strong then weak = 2S, not SS (order matters)", native: "bull",
+      about: "two linked SMTs where the first leg is strong and the second weak: only a 2S, because SS needs weak then strong",
+      spec: { title: "Strong Then Weak = 2S", subtitle: "Only weak then strong is an SS: order matters", panels: [{ label: "Strong leg, then weak leg: 2S", numbers: true, bars: ladder([96, 98, 96]), marks: [
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H • 2S" }] }] } },
+    { id: "ss-double", name: "Double confirmation: SS pair plus a PSP at the end of the weak first leg", native: "bull",
+      about: "weak then strong pair (SS, blue S2 line) and the first leg's last candle is a PSP that closed the SMT's way (blue star)",
+      spec: { title: "SS With a PSP: Double Confirmation", subtitle: "Blue line from the leg flip, blue star from the weak leg's PSP", panels: [{ label: "Weak, then strong, PSP on the weak leg's last candle", numbers: true,
+        bars: ladder([98, 96, 98]).map((b, i) => i === 4 ? row(97, 103, 96, 101) : b), marks: [
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "ss", label: "6H • SS" }, { type: "psp", at: "5:low", color: "ss" }] }] } },
+    { id: "ss-s2-psp", name: "SS pair with a PSP on S2's first candle (the star stays neutral)", native: "bull",
+      about: "weak then strong pair with a PSP at S2's pivot A: the S2 line is blue from the flip, the star stays neutral because S2 is a strong leg",
+      spec: { title: "SS With a PSP on S2", subtitle: "The line is blue from the flip; S2 is strong, so its star stays neutral", panels: [{ label: "Each colour has its own reason", numbers: true,
+        bars: ladder([98, 96, 98]).map((b, i) => i === 4 ? row(97, 103, 96, 101) : b), marks: [
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "ss", label: "6H • SS" }, { type: "psp", at: "5:low", color: "muted" }] }] } },
+    { id: "not-linked", name: "Not linked: the second SMT starts too late, so there is no stage", native: "bull",
+      about: "two same-direction SMTs but S2 starts three candles after S1 ended and not inside its confirming candle: no stage, no label",
+      spec: { title: "Not Linked: No Stage", subtitle: "S2 starts three candles after S1 ended, so these are two separate SMTs", panels: [{ label: "Timing fails: no stage label", numbers: true,
+        bars: [...ladder([96, 97, 99]).slice(0, 9), row(105, 108, 103, 104), row(104, 105, 101, 102), row(102, 107, 100, 106)], marks: [
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "8:low", to: "12:low", style: "dashed", color: "muted", label: "30M" }] }] } },
+    { id: "opposite", name: "Opposite directions never form a stage", native: "bull",
+      about: "a bullish SMT on lows followed by a bearish SMT on highs: two unrelated SMTs, no stage, no label",
+      spec: { title: "Opposite Directions: No Stage", subtitle: "A bullish and a bearish SMT never link", panels: [{ label: "Two unrelated SMTs", numbers: true, bars: ladder([96, 97, 99]), marks: [
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "bullish" }, { type: "smt", from: "5:high", to: "9:high", style: "dashed", color: "muted", label: "bearish" }] }] } },
+    { id: "chain-flip", name: "Chain of three where the middle link flips weak to strong: SS, not 3S", native: "bull",
+      about: "S1 strong, S2 weak, S3 strong: the weak then strong link makes the chain an SS (blue S3 line), even though it is three stages long",
+      spec: { title: "Chain With a Flip: SS Beats 3S", subtitle: "A weak then strong link makes the chain an SS", panels: [{ label: "Three SMTs, one flip", numbers: true,
+        bars: [...ladder([96, 97, 96]).slice(0, 9), row(105, 108, 103, 104), row(104, 105, 101, 102), row(102, 107, 98, 106)].map((b, i) => i === 8 ? row(101, 106, 96, 105) : b), marks: [
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H • 2S" }, { type: "smt", from: "9:low", to: "12:low", style: "solid", color: "ss", label: "6H • SS" }] }] } },
     { id: "stage-ss", name: "SS: weak HTF leg then strong chart leg", native: "bull",
       about: "the 6H SMT leg is weak (lower low) and the linked chart SMT is strong (higher low): blue solid line, label 6H • SS",
       spec: { title: "SS Stage", subtitle: "Weak HTF leg, then a strong chart leg: blue line", panels: [{ label: "Weak, then strong", numbers: true, bars: ladder([98, 96, 98]), marks: [

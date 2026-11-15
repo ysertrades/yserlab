@@ -130,8 +130,8 @@ export async function compile(spec) {
     // Nothing else is placed on a candle: its body and wick are taken space.
     const bw = step * (1 - .24);
     bars.forEach((b, i) => { reserve({ x: X(i + 1) - bw / 2, y: Y(Math.max(b.o, b.c)), w: bw, h: Math.max(4, Math.abs(Y(b.o) - Y(b.c))) }); reserve({ x: X(i + 1) - 4, y: Y(b.h), w: 8, h: Math.max(4, Y(b.l) - Y(b.h)) }); });
-    if (panel.numbers) bars.forEach((_, i) => add(L.create("text", X(i + 1) - 30, y + h + 14, 60, undefined, { text: panel.numbers === "days" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i % 7] : String(i + 1), style: { ...L.bodyStyle(26), align: "center", color: NAMED.muted }, auto: false })));
-    if (panel.numbers) reserve({ x: x - 10, y: y + h + 10, w: w + 20, h: 40 });
+    if (panel.numbers) bars.forEach((_, i) => add(L.create("text", X(i + 1) - 30, y + h + 58, 60, undefined, { text: panel.numbers === "days" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i % 7] : String(i + 1), style: { ...L.bodyStyle(26), align: "center", color: NAMED.muted }, auto: false })));
+    if (panel.numbers) reserve({ x: x - 10, y: y + h + 54, w: w + 20, h: 40 });
 
     // Levels and lines.
     for (const m of marks.filter(m => m?.type === "level")) {
@@ -162,7 +162,7 @@ export async function compile(spec) {
       add(L.withBox(L.create("line", a.x, a.y, 0, 0, { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: c, strokeWidth: 3, dash: m.style === "solid" ? "solid" : "dashed", curve: 0, end: "dot", start: "dot" })));
       if (m.label) {
         const text = String(m.label).slice(0, 30), tw = Math.min(360, text.length * 17 + 20), mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-        const r = reserve(spot({ x: mx - tw / 2, y: lowSide ? my + 36 : my - 76, w: tw, h: 40 }));
+        const r = reserve(spot({ x: mx - tw / 2, y: lowSide ? my + 50 : my - 92, w: tw, h: 40 }));
         add(L.create("text", r.x + tw / 2 - 180, r.y, 360, undefined, { text, style: { ...L.bodyStyle(28), weight: 600, align: "center", color: c === NAMED.muted ? NAMED.ink : c }, auto: false }));
       }
     }
@@ -170,7 +170,7 @@ export async function compile(spec) {
       const p = point(m.at);
       if (!p) continue;
       const size = 40, below = p.field === "low" || p.field === "bottom";
-      const r = reserve(spot({ x: p.x - size / 2, y: below ? p.y + 26 : p.y - 26 - size, w: size, h: size }));
+      const r = reserve({ x: p.x - size / 2, y: below ? p.y + 14 : p.y - 14 - size, w: size, h: size }); // right on its candle, never nudged away
       add(L.create("polygon", r.x, r.y, size, size, { sides: 4, star: .62, fill: colour(m.color, NAMED.muted), stroke: "transparent" }));
     }
     for (const m of marks.filter(m => m?.type === "circle" || m?.type === "dot")) {
@@ -304,7 +304,10 @@ export async function designDiagram(request, { doc } = {}) {
 export function quickTemplate(request) {
   const q = String(request).toLowerCase();
   const dir = /bear|short|sell|down/.test(q) ? "bearish" : "bullish";
-  const id = /\b3s\b|three.stage/.test(q) ? "stage-3s" : /\b2s\b|two.stage/.test(q) ? "stage-2s"
+  const id = /double confirm/.test(q) ? "ss-double" : /not linked|unlinked|too late|no stage/.test(q) ? "not-linked" : /opposite direction/.test(q) ? "opposite"
+    : /(chain|three).*(flip|weak.*strong)/.test(q) ? "chain-flip" : /strong.*then.*weak|strong.*to.*weak|order matters|reversed order/.test(q) ? "stage-2s-order"
+    : /psp.*(s2|second)|s2.*psp/.test(q) && /ss|switch/.test(q) ? "ss-s2-psp" : /two smt|pair|leg flip|flip|no psp|without (a )?psp/.test(q) && /ss|switch|stage/.test(q) ? "stage-ss"
+    : /\b3s\b|three.stage/.test(q) ? "stage-3s" : /\b2s\b|two.stage/.test(q) ? "stage-2s"
     : /\bss\b.*stage|stage.*\bss\b|weak (htf|higher).*strong/.test(q) ? "stage-ss"
     : /psp first|pivot a|line (turns|goes) blue/.test(q) ? "ss-first"
     : /no switch|wrong (close|way)|not (a )?switch|doesn.?t switch|neutral star/.test(q) ? "ss-last-no"
@@ -344,6 +347,8 @@ export async function designSlides(request, { doc, count = 4 } = {}) {
   }
   throw new Error("nothing to draw");
 }
+
+
 
 
 
