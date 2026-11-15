@@ -1,8 +1,8 @@
 ﻿import { env } from "./env.js";
 import { fonts, svgToPng } from "./render.js";
-import { recall } from "./knowledge.js";
+import { Index, recall } from "./knowledge.js";
 import { modelFor } from "./ai.js";
-import { fromTemplate, stepsFromTemplate, templateList } from "./diagramTemplates.js";
+import { TEMPLATES, fromTemplate, stepsFromTemplate, templateList } from "./diagramTemplates.js";
 import { SMT_RULES, asksAboutSmt } from "./smtLesson.js";
 
 /**
@@ -209,7 +209,7 @@ const PATTERN_HELP = `Library patterns (bullish, "flip": true draws the bearish 
 const DESIGNER = `You design a trading diagram for the YSER slides editor, then reply with ONE JSON object and nothing else.
 USE A TEMPLATE. These are ready-made, hand-drawn diagrams in the owner's style, and one of them fits almost every request: choose the CLOSEST one, even when it only covers the main idea of a longer request (a CISD after a sweep -> cisd; candle 2 and candle 3 of the fractal model -> fractal; an entry into a gap -> fvg). Reply {"template":"<id>","direction":"bullish" or "bearish"} (the direction the idea is traded; optionally "title" and "subtitle" to reword the headline, at most 6 and 12 words). When the request joins TWO ideas (a sweep, then a CISD), show them side by side: {"templates":[{"template":"<id>","direction":"..."},{"template":"<id>","direction":"..."}],"title":"...","subtitle":"..."}. Templates:
 ${templateList()}
-Design your own with the spec below ONLY for an idea that none of these covers (a session, a time window, a particular pattern they are not).
+Design your own with the spec below ONLY for an idea that none of these covers (a session, a time window, a particular pattern they are not). Use what the owner said: if they name details (the leg directions, where a PSP sits, which stage), draw exactly those details, adding a PSP star or SMT lines of their own with the marks below. If you cannot tell what they mean, or you cannot draw it faithfully, do NOT guess: reply {"ask":"one short question that names the 2 or 3 nearest things you can draw"}.
 Spec for your own design:
 {"title":"short headline (max 6 words)","subtitle":"optional one line","panels":[ONE or TWO panels, each:
  {"label":"caption under the panel (optional)",
@@ -287,17 +287,19 @@ export async function designDiagram(request, { doc } = {}) {
   let note = "", failure = null;
   try {
     for (let attempt = 0; attempt < 2; attempt++) {
-      const spec = resolve(await viaJson(system, `Draw: ${request}${note}`));
+      const reply = await viaJson(system, `Draw: ${request}${note}`);
+      if (reply.ask && !reply.template && !reply.panels) throw new Clarify(String(reply.ask).slice(0, 500));
+      const spec = resolve(reply);
       const png = await drawDiagram(spec).catch(() => null);
       if (png) return { png, spec, lessons: lessons.lessons };
       note = "\n(Your last reply had nothing that could be drawn. Reply with a template id from the list, or a spec with real panels and a pattern or bars.)";
     }
-  } catch (e) { failure = e; }
+  } catch (e) { if (e instanceof Clarify) throw e; failure = e; }
   // The AI is rate limited or too slow: the hand-drawn template that matches the words still comes out.
   const spec = quickTemplate(request);
   const png = spec ? await drawDiagram(spec).catch(() => null) : null;
   if (png) return { png, spec, lessons: lessons.lessons };
-  throw failure ?? new Error("nothing to draw");
+  throw new Clarify(clarifyText(request)); // nothing matched: ask what was meant, with the nearest options
 }
 
 /** The template a request names by its keywords, without any AI (a fallback, and what keeps the common pictures instant). */
@@ -325,6 +327,12 @@ const SLIDES = n => `\nThe owner wants ${n} separate images that together explai
 export async function designSlides(request, { doc, count = 4 } = {}) {
   count = clamp(Math.round(num(count, 4)), 2, 6);
   const lessons = recall(request, { chars: 4200, perLesson: 3 });
+  if (isGenericSs(request)) { // "a strength switch": the two ways it happens, two images
+    const dir = /bear|short|sell|down/i.test(request) ? "bearish" : "bullish";
+    const images = [];
+    for (const id of ["ss-pair", "ss-psp"]) { const spec = fromTemplate(id, dir); images.push({ png: await drawDiagram(spec), spec }); }
+    return { images, lessons: lessons.lessons };
+  }
   // The fractal model always comes as its clean build-up, C1 then C2 then C3 then C4, with no AI in the loop (so no rate limits either).
   if (/fractal/i.test(request) && !asksAboutSmt(request) && count <= 4) {
     const specs = stepsFromTemplate("fractal", /bear|short|sell|down/i.test(request) ? "bearish" : "bullish").slice(0, count);
@@ -352,3 +360,20 @@ export async function designSlides(request, { doc, count = 4 } = {}) {
 
 
 
+
+/** Not understood: the question to put back to the owner (instead of a guess or a silent failure). */
+export class Clarify extends Error {}
+
+let templateIndex = null;
+/** The hand-drawn diagrams closest to what was asked, best first. */
+export function nearest(request, n = 3) {
+  templateIndex ??= new Index(TEMPLATES.map(t => ({ h: t.name, t: `${t.name}. ${t.about}`, id: t.id, name: t.name })));
+  return templateIndex.search(request, n).map(h => h.chunk.name);
+}
+const clarifyText = request => {
+  const near = nearest(request);
+  return `I'm not sure I understood which drawing you mean.${near.length ? ` The closest I can draw well: ${near.map(n => `**${n}**`).join("; ")}.` : ""} Tell me which one, or describe the candles, lines and what should be highlighted, and I'll draw it.`;
+};
+
+/** A strength switch asked for with no detail: always the two ways it happens, as two images (two SMTs, and a PSP), each with the correlated asset beside it. */
+export const isGenericSs = q => /\b(ss|strength switch)\b/i.test(q) && !/(psp (first|last)|\b[23]s\b|stage|wrong|no switch|not (a )?switch|double|not linked|opposite|chain|strong.*then.*weak|first prompt)/i.test(q);

@@ -207,13 +207,19 @@ export async function ask({ owner, channelId, text }) {
       }
     }
   } catch (e) { if (!env.groqKey || !env.geminiKey) throw e; out = await gemini(); }
+  // The model sometimes writes a picture's description (or imitates "(drew a diagram: ...)") instead of calling the tool: draw it anyway.
+  if (out.text && (/^\s*\(?\s*(drew|draws|posted|showed|sent)\b[^:]{0,20}:/i.test(out.text) || (wantsPicture(text) && !/\b(trades?|journal|pnl|card|results|stats)\b/i.test(text)))) {
+    out = { diagram: out.text.replace(/^\s*\(?\s*(drew|draws|posted|showed|sent)\b[^:]{0,20}:\s*/i, "").replace(/\)\s*$/, "").slice(0, 400) || text, count: /\b(\d)\s*(images|slides|pictures|diagrams)\b/i.test(text) ? Number(RegExp.$1) : 1 };
+    if (!/\b(draw|diagram|image|picture|slides?)\b/i.test(out.diagram)) out.diagram = text; // what the user asked is the better brief than the model's prose
+  }
   const keep = histories.get(channelId) ?? [];
   keep.push({ role: "user", text, at: Date.now() });
-  keep.push({ role: "model", text: out.chart ? "(showed a trade chart picker)" : out.diagram ? `(drew a diagram: ${out.diagram})` : out.card ? `(posted the ${out.card.period} card)` : out.text || "…", at: Date.now() });
+  keep.push({ role: "model", text: out.chart ? "(showed a trade chart picker)" : out.diagram ? "Sent the picture." : out.card ? `(posted the ${out.card.period} card)` : out.text || "…", at: Date.now() });
   histories.set(channelId, keep.slice(-KEEP * 2));
   return out;
 }
 
+const wantsPicture = q => /\b(draw|diagram|illustrate|visuali[sz]e|images?|pictures?|slides?)\b|\bshow me (a|an|the|how)\b/i.test(q);
 export const modelDoc = cachedModel;
 export const knowledgeStats = stats;
 export { viaGroq, viaGemini }; // for scripts/education/ask.js, which tries questions without Discord

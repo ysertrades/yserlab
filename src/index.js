@@ -1,4 +1,4 @@
-import { Client, Events, GatewayIntentBits, Partials } from "discord.js";
+﻿import { Client, Events, GatewayIntentBits, Partials } from "discord.js";
 import { env, missing } from "./env.js";
 import { settings, log } from "./store.js";
 import { isAdmin, mayUseAi } from "./access.js";
@@ -10,7 +10,7 @@ import { checkJobs } from "./jobs.js";
 import { heartbeat, offline } from "./status.js";
 import * as picker from "./picker.js";
 import { ask, modelDoc } from "./ai.js";
-import { designDiagram, designSlides } from "./diagram.js";
+import { designDiagram, designSlides, isGenericSs, Clarify } from "./diagram.js";
 import { cardOnRequest } from "./cards.js";
 import { picturePost, galleryPost } from "./post.js";
 import { fonts } from "./render.js";
@@ -96,18 +96,19 @@ client.on(Events.MessageCreate, async message => {
       await message.channel.sendTyping().catch(() => {});
       try {
         const doc = await modelDoc(owner);
-        if (out.count > 1) { // several images: a lesson in slides, one post, in order
-          const { images, lessons } = await designSlides(out.diagram, { doc, count: out.count });
-          const from = lessons.slice(0, 2).map(l => l.title).join(" · ");
-          await message.reply({ ...galleryPost({ images, text: `**${images.map(i => i.spec.title).filter(Boolean)[0]?.slice(0, 60) ?? "Slides"}** · ${images.length} slides`, footer: from ? `From: ${from}` : undefined }), allowedMentions: { repliedUser: false } });
+        if (out.count > 1 || isGenericSs(text)) { // several images: a lesson in slides, one post, in order
+          const { images, lessons } = await designSlides(isGenericSs(text) ? text : out.diagram, { doc, count: out.count });
+          const from = lessons.slice(0, 2).map(l => l.title).join(" Â· ");
+          await message.reply({ ...galleryPost({ images, text: `**${images.map(i => i.spec.title).filter(Boolean)[0]?.slice(0, 60) ?? "Slides"}** Â· ${images.length} slides`, footer: from ? `From: ${from}` : undefined }), allowedMentions: { repliedUser: false } });
           await log("diagram", { note: `${images.length} slides: ${out.diagram.slice(0, 100)}` });
           return;
         }
         const { png, spec, lessons } = await designDiagram(out.diagram, { doc });
-        const from = lessons.slice(0, 2).map(l => l.title).join(" · ");
+        const from = lessons.slice(0, 2).map(l => l.title).join(" Â· ");
         await message.reply({ ...picturePost({ png, name: "diagram.png", text: spec.title ? `**${String(spec.title).slice(0, 80)}**` : undefined, footer: from ? `From: ${from}` : undefined }), allowedMentions: { repliedUser: false } });
         await log("diagram", { note: out.diagram.slice(0, 120) });
       } catch (e) {
+        if (e instanceof Clarify) { await message.reply({ content: e.message, allowedMentions: { repliedUser: false } }); return; } // not understood: ask, don't guess
         await log("diagram", { error: e?.message ?? String(e) }, false);
         await message.reply({ content: "I couldn't draw that one just now. Try again in a minute, or tell me which candles and levels you want in it.", allowedMentions: { repliedUser: false } });
       }
@@ -132,3 +133,4 @@ process.on("unhandledRejection", e => console.warn("unhandled:", e?.message ?? e
 process.on("uncaughtException", e => console.warn("uncaught:", e?.message ?? e));
 
 client.login(env.token);
+

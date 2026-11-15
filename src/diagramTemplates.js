@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Hand-drawn diagrams for the ideas the education center teaches, in the slides editor's style. The AI picks one by name and a direction
  * instead of placing marks itself, so the common pictures are always right. Each is drawn in its natural direction (`native`) and is
  * mirrored for the other (flip the candles, swap high and low in every anchor).
@@ -122,28 +122,42 @@ function smtTemplates() {
         bars: [row(104, 106, 102, 103), row(103, 104, 99, 100), row(97, 101, 96, 100), row(100, 103, 97.5, 102), row(102, 106, 101, 105), row(105, 107, 102, 103), row(103, 104, 99, 100), row(100, 101, 96.5, 97.5), row(97.5, 100, 94, 99.5), row(99.5, 104, 99, 103)], marks: [
         { type: "smt", from: "3:low", to: "9:low", style: "dashed", color: "ss", label: "30M" }, { type: "psp", at: "3:low", color: "muted" }] }] } },
     { id: "stage-2s", name: "2S: higher timeframe SMT + one linked chart SMT", native: "bull",
-      about: "a 6H SMT line, then a chart-candle SMT of the same direction that starts where it ends: solid line, label 6H • 2S",
+      about: "a 6H SMT line, then a chart-candle SMT of the same direction that starts where it ends: solid line, label 6H â€¢ 2S",
       spec: { title: "2S Stage", subtitle: "A chart SMT linked to the HTF SMT, same direction", panels: [{ label: "Both legs strong", numbers: true, bars: ladder([96, 97, 99]), marks: [
-        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H • 2S" }] }] } },
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H â€¢ 2S" }] }] } },
     { id: "stage-3s", name: "3S: three same-direction SMTs chained", native: "bull",
-      about: "a third same-direction SMT starts where the 2S chain ends: label 6H • 3S",
+      about: "a third same-direction SMT starts where the 2S chain ends: label 6H â€¢ 3S",
       spec: { title: "3S Stage", subtitle: "Three same-direction SMTs, each starting where the last ended", panels: [{ label: "A chain of strong legs", numbers: true,
         bars: [...ladder([96, 97, 99]).slice(0, 9), row(105, 108, 103, 104), row(104, 105, 101, 102), row(102, 107, 100, 106)], marks: [
-        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H • 2S" }, { type: "smt", from: "9:low", to: "12:low", style: "solid", color: "muted", label: "6H • 3S" }] }] } },
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H â€¢ 2S" }, { type: "smt", from: "9:low", to: "12:low", style: "solid", color: "muted", label: "6H â€¢ 3S" }] }] } },
+    { id: "ss-pair", name: "Strength switch from two SMTs, chart asset next to its correlated asset (no PSP)", native: "bull",
+      about: "two consecutive SMTs on consecutive candles: a weak leg (lower low) then a strong leg (higher low) is an SS; the correlated asset beside it shows who took each low. No PSP needed",
+      spec: { title: "Strength Switch From Two SMTs", subtitle: "Weak leg, then strong leg: an SS, with no PSP needed", panels: [
+        { label: "Chart asset", numbers: true, bars: ladder([98, 96, 98]), marks: [
+          { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "ss", label: "6H â€¢ SS" }] },
+        { label: "Correlated asset", numbers: false, bars: ladder([98, 99, 97]), marks: [
+          { type: "circle", at: "5:low", color: "teal" }, { type: "note", at: "5:low", text: "holds", color: "ink" }, { type: "circle", at: "9:low", color: "red" }, { type: "note", at: "9:low", text: "takes", color: "ink" }] }] } },
+    { id: "ss-psp", name: "Strength switch from a PSP, chart asset next to its correlated asset", native: "bull",
+      about: "one SMT with a weak leg (lower low) whose last candle is a PSP: the chart asset closes bullish while the correlated asset closes bearish, so the star is blue",
+      spec: { title: "Strength Switch From a PSP", subtitle: "A weak leg ending in a PSP that closes the SMT's way", panels: [
+        { label: "Chart asset", numbers: true, bars: [...base, row(97.5, 100, 94, 99.5), row(99.5, 104, 99, 103)], marks: [
+          { type: "smt", from: "3:low", to: "9:low", style: "dashed", color: "muted", label: "30M" }, { type: "psp", at: "9:low", color: "ss" }] },
+        { label: "Correlated asset", numbers: false, bars: [...base.slice(0, 7), row(100, 101, 96.5, 97.5), row(99.5, 100.5, 97, 98), row(98, 101, 97.5, 100)], marks: [
+          { type: "circle", at: "9:mid", r: 40, color: "red" }, { type: "note", at: "9:low", text: "closes bearish", color: "ink" }] }] } },
     { id: "stage-2s-order", name: "Pair: strong then weak = 2S, not SS (order matters)", native: "bull",
       about: "two linked SMTs where the first leg is strong and the second weak: only a 2S, because SS needs weak then strong",
       spec: { title: "Strong Then Weak = 2S", subtitle: "Only weak then strong is an SS: order matters", panels: [{ label: "Strong leg, then weak leg: 2S", numbers: true, bars: ladder([96, 98, 96]), marks: [
-        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H • 2S" }] }] } },
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H â€¢ 2S" }] }] } },
     { id: "ss-double", name: "Double confirmation: SS pair plus a PSP at the end of the weak first leg", native: "bull",
       about: "weak then strong pair (SS, blue S2 line) and the first leg's last candle is a PSP that closed the SMT's way (blue star)",
       spec: { title: "SS With a PSP: Double Confirmation", subtitle: "Blue line from the leg flip, blue star from the weak leg's PSP", panels: [{ label: "Weak, then strong, PSP on the weak leg's last candle", numbers: true,
         bars: ladder([98, 96, 98]).map((b, i) => i === 4 ? row(97, 103, 96, 101) : b), marks: [
-        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "ss", label: "6H • SS" }, { type: "psp", at: "5:low", color: "ss" }] }] } },
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "ss", label: "6H â€¢ SS" }, { type: "psp", at: "5:low", color: "ss" }] }] } },
     { id: "ss-s2-psp", name: "SS pair with a PSP on S2's first candle (the star stays neutral)", native: "bull",
       about: "weak then strong pair with a PSP at S2's pivot A: the S2 line is blue from the flip, the star stays neutral because S2 is a strong leg",
       spec: { title: "SS With a PSP on S2", subtitle: "The line is blue from the flip; S2 is strong, so its star stays neutral", panels: [{ label: "Each colour has its own reason", numbers: true,
         bars: ladder([98, 96, 98]).map((b, i) => i === 4 ? row(97, 103, 96, 101) : b), marks: [
-        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "ss", label: "6H • SS" }, { type: "psp", at: "5:low", color: "muted" }] }] } },
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "ss", label: "6H â€¢ SS" }, { type: "psp", at: "5:low", color: "muted" }] }] } },
     { id: "not-linked", name: "Not linked: the second SMT starts too late, so there is no stage", native: "bull",
       about: "two same-direction SMTs but S2 starts three candles after S1 ended and not inside its confirming candle: no stage, no label",
       spec: { title: "Not Linked: No Stage", subtitle: "S2 starts three candles after S1 ended, so these are two separate SMTs", panels: [{ label: "Timing fails: no stage label", numbers: true,
@@ -157,11 +171,11 @@ function smtTemplates() {
       about: "S1 strong, S2 weak, S3 strong: the weak then strong link makes the chain an SS (blue S3 line), even though it is three stages long",
       spec: { title: "Chain With a Flip: SS Beats 3S", subtitle: "A weak then strong link makes the chain an SS", panels: [{ label: "Three SMTs, one flip", numbers: true,
         bars: [...ladder([96, 97, 96]).slice(0, 9), row(105, 108, 103, 104), row(104, 105, 101, 102), row(102, 107, 98, 106)].map((b, i) => i === 8 ? row(101, 106, 96, 105) : b), marks: [
-        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H • 2S" }, { type: "smt", from: "9:low", to: "12:low", style: "solid", color: "ss", label: "6H • SS" }] }] } },
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H â€¢ 2S" }, { type: "smt", from: "9:low", to: "12:low", style: "solid", color: "ss", label: "6H â€¢ SS" }] }] } },
     { id: "stage-ss", name: "SS: weak HTF leg then strong chart leg", native: "bull",
-      about: "the 6H SMT leg is weak (lower low) and the linked chart SMT is strong (higher low): blue solid line, label 6H • SS",
+      about: "the 6H SMT leg is weak (lower low) and the linked chart SMT is strong (higher low): blue solid line, label 6H â€¢ SS",
       spec: { title: "SS Stage", subtitle: "Weak HTF leg, then a strong chart leg: blue line", panels: [{ label: "Weak, then strong", numbers: true, bars: ladder([98, 96, 98]), marks: [
-        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "ss", label: "6H • SS" }] }] } },
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "ss", label: "6H â€¢ SS" }] }] } },
   ];
 }
 
@@ -202,3 +216,5 @@ export function stepsFromTemplate(id, direction) {
   return want === t.native ? t.steps : t.steps.map(mirror);
 }
 export const templateList = () => TEMPLATES.map(t => `${t.id}: ${t.name}: ${t.about}${t.steps ? ` (has ${t.steps.length} steps)` : ""} (drawn ${t.native === "bull" ? "bullish" : "bearish"} by default)`).join("\n");
+
+
