@@ -5,6 +5,7 @@
  * Anchors: "N:field" = candle N, field high/low/open/close/top/bottom/mid; "N:@0.5" = half way up the panel.
  */
 import { SMT_TEMPLATES } from "./smtTemplates.js";
+import { PROFILE_TEMPLATES } from "./profileTemplates.js";
 const row = (...r) => r;
 export const TEMPLATES = [
   {
@@ -104,6 +105,7 @@ export const TEMPLATES = [
       { label: "ES closes down", bars: [row(30, 38, 28, 36), row(36, 44, 34, 42), row(42, 50, 40, 48), row(48, 56, 46, 54), row(54, 62, 50, 52), row(52, 54, 44, 46)], marks: [{ type: "circle", at: "5:mid", color: "red" }, { type: "note", at: "5:low", text: "PSP", color: "ink" }] }] },
   },
   ...SMT_TEMPLATES,
+  ...PROFILE_TEMPLATES,
 ];
 
 /** The fractal model built up one candle at a time: the candles still to come are drawn pale, so the scale never jumps between slides. */

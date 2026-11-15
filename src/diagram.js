@@ -33,7 +33,8 @@ function barsOf(L, panel) {
     const rows = panel.bars.slice(0, 40).map(r => (Array.isArray(r) ? r : [r?.o, r?.h, r?.l, r?.c]).map(Number)).filter(r => r.length === 4 && r.every(Number.isFinite))
       .map(([o, h, l, c]) => [o, Math.max(h, o, c), Math.min(l, o, c), c]);
     if (rows.length) {
-      const lo = Math.min(...rows.map(r => r[2])), hi = Math.max(...rows.map(r => r[1])), k = 1 / (hi - lo || 1);
+      const [rlo, rhi] = Array.isArray(panel.range) && panel.range.length === 2 ? panel.range.map(Number) : [NaN, NaN]; // `range`: panels that share one price scale
+      const lo = Number.isFinite(rlo) ? rlo : Math.min(...rows.map(r => r[2])), hi = Number.isFinite(rhi) ? rhi : Math.max(...rows.map(r => r[1])), k = 1 / (hi - lo || 1);
       bars = rows.map(([o, h, l, c]) => ({ o: (o - lo) * k, h: (h - lo) * k, l: (l - lo) * k, c: (c - lo) * k }));
       if (panel.flip) bars = bars.map(b => ({ o: 1 - b.o, c: 1 - b.c, h: 1 - b.l, l: 1 - b.h }));
     }
@@ -97,8 +98,8 @@ export async function compile(spec) {
     // Candles the size they are on the QuantLab cards: a body about 40 px wide on a 50 px step, however few candles there are.
     const roomy = n <= 4; // 3 or 4 candles: equal step and gap, bodies a little wider so the numbers fit inside them
     const w = n * (roomy ? (two ? 120 : 150) : two ? 56 : 64), x = areaX + (areaW - w) / 2;
-    const labelH = panel.label ? 70 : 0, pad = roomy ? 40 : 55; // room above and below the candles for tags, circles and arrowheads
-    const below = twinAbove ? 60 : hasTwin ? 135 : roomy ? 60 : 90; // below the candles: SMT labels, the star and its twin strip, or the candle numbers
+    const labelH = panel.label ? 70 : 0, pad = panels.every(p => (p?.bars?.length ?? 9) <= 4) ? 40 : 55; // room above and below the candles for tags, circles and arrowheads
+    const below = twinAbove ? 60 : hasTwin ? 135 : panels.every(p => (p?.bars?.length ?? 9) <= 4) ? 60 : 90; // below the candles: SMT labels, the star and its twin strip, or the candle numbers
     const y = top + pad + (twinAbove ? 125 : 0), h = bottom - labelH - below - y;
     if (panel.chip) add(L.create("card", x + w / 2 - 110, top - 55, 220, 46, { style: "soft", text: String(panel.chip).slice(0, 24), icon: null, color: NAMED.ink, radius: 23, textStyle: { ...L.bodyStyle(24), font: "inter", weight: 600, color: NAMED.ink, align: "center" } }));
     if (panel.label) reserve({ x: x + w / 2 - (two ? 400 : 600), y: bottom - labelH + 24, w: two ? 800 : 1200, h: 45 });
@@ -218,6 +219,10 @@ export async function compile(spec) {
     if (panel.label) add(L.create("text", x + w / 2 - (two ? 400 : 600), bottom - labelH + 24, two ? 800 : 1200, undefined, { text: String(panel.label).slice(0, 80), style: { ...L.bodyStyle(two ? 25 : 32), weight: 600, align: "center" }, auto: false }));
   });
 
+  if (!drawn && Array.isArray(spec?.lines) && spec.lines.length) { // a concept with no picture to draw: its steps as a clean list, in the deck's own type
+    drawn++;
+    spec.lines.slice(0, 7).forEach((line, i) => add(L.create("text", 160, 345 + i * 86, 1600, undefined, { text: String(line).slice(0, 150), style: { ...L.bodyStyle(32), color: i === 0 && spec.firstBold ? "#3a3a3a" : "#3a3a3a" }, auto: false })));
+  }
   if (drawn && panels.length === 2 && spec?.divider) add(L.create("line", 960, top - 60, 0, 0, { x1: 960, y1: top - 60, x2: 960, y2: bottom - 10, stroke: "#e4e4e4", strokeWidth: 2, dash: "solid", curve: 0, end: "none" }));
   if (drawn && caption) add(L.create("text", 160, 872, 1600, undefined, { text: caption, style: { ...L.bodyStyle(30), weight: 600, align: "center", color: "#3a3a3a" }, auto: false }));
   if (drawn && assumed) add(L.create("text", 160, 925, 1600, undefined, { text: assumed, style: { ...L.bodyStyle(24), align: "center", color: NAMED.muted }, auto: false }));
@@ -305,8 +310,29 @@ function resolve(reply) {
   return spec;
 }
 
-function systemFor(request, doc, lessons) {
-  return [DESIGNER, asksAboutSmt(request) ? `THE OWNER'S SMT / PSP / STRENGTH SWITCH RULES (authoritative; they decide every colour and label; below 15M draw no PSP star):\n${SMT_RULES}` : "", doc ? `THE OWNER'S MODEL (their vocabulary comes first):\n${modelFor(doc, request, 2200)}` : "", lessons.text ? `LESSON MATERIAL ON THIS:\n${lessons.text}` : ""].filter(Boolean).join("\n\n");
+const conceptIndexes = new WeakMap();
+const asList = v => (Array.isArray(v) ? v.filter(Boolean) : []);
+/** The concept of the owner's PDFs (their model) that a request is about, or null: matched by name, what to look for and the picture descriptions. */
+export function matchConcept(request, doc) {
+  const concepts = asList(doc?.concepts);
+  if (!concepts.length) return null;
+  let idx = conceptIndexes.get(doc);
+  if (!idx) { idx = new Index(concepts.map(c => ({ title: c.name, h: c.name, t: [c.name, c.look_for, c.visual, ...asList(c.steps), ...asList(c.must)].join(" ") }))); conceptIndexes.set(doc, idx); }
+  const hit = idx.search(request, 1)[0];
+  if (!hit || hit.score < 6) return null;
+  return concepts.find(c => c.name === hit.chunk.title) ?? null;
+}
+const conceptBrief = c => [`${c.name}${asList(c.timeframes).length ? ` [${c.timeframes.join(", ")}]` : ""}`, c.look_for && `Look for: ${c.look_for}`, c.visual && `How the PDF's own picture draws it (draw exactly this, candle by candle): ${c.visual}`,
+  asList(c.steps).length && `Steps: ${c.steps.join(" ")}`, asList(c.must).length && `Must hold: ${c.must.join("; ")}`, asList(c.not).length && `Doesn't count: ${c.not.join("; ")}`, asList(c.rules).length && `Rules: ${c.rules.join("; ")}`].filter(Boolean).join("\n");
+
+/** A concept from the owner's PDFs as a slide of words: what to look for, then its steps. */
+export function conceptSlide(c) {
+  const steps = asList(c.steps).map(s => String(s).replace(/^\s*\d+[.)]\s*/, "")).slice(0, 6).map((s, i) => `${i + 1}. ${s}`);
+  return { title: String(c.name).slice(0, 60), subtitle: String(c.look_for ?? "").slice(0, 105), lines: steps.length ? steps : asList(c.must).slice(0, 6), assumed: "From your PDFs." };
+}
+
+function systemFor(request, doc, lessons, concept = null) {
+  return [DESIGNER, concept ? `THE CONCEPT FROM THE OWNER'S OWN PDFs THAT THIS REQUEST IS ABOUT (the source of truth; draw it faithfully with candles, levels, boxes and labels; never ask what it is, it is defined here):\n${conceptBrief(concept)}` : "", asksAboutSmt(request) ? `THE OWNER'S SMT / PSP / STRENGTH SWITCH RULES (authoritative; they decide every colour and label; below 15M draw no PSP star):\n${SMT_RULES}` : "", doc ? `THE OWNER'S MODEL (their vocabulary comes first):\n${modelFor(doc, request, 2200)}` : "", lessons.text ? `LESSON MATERIAL ON THIS:\n${lessons.text}` : ""].filter(Boolean).join("\n\n");
 }
 
 /** "Show me X" -> a PNG. `request` is what the user wants drawn; the lessons and the user's model that match it guide the drawing. */
@@ -317,11 +343,12 @@ export async function designDiagram(request, { doc } = {}) {
     return { png: await drawDiagram(spec), spec, lessons: lessons.lessons };
   }
   // A concept named exactly (the c3 closure, a 2S, "no switch"...) is drawn from its own diagram: no guessing which template the AI picks.
-  if (/(c[23]|candle [23])\s*closure|consecutive|\b[23]s\b|psp (first|last)|strong.*then.*weak|no switch|double confirm|below 15|\bon s[12]\b/i.test(request)) {
+  if (/ideal (profile|london|new york|ny)|(london|new york|ny) reversal|(c[23]|candle [23])\s*closure|consecutive|\b[23]s\b|psp (first|last)|strong.*then.*weak|no switch|double confirm|below 15|\bon s[12]\b/i.test(request)) {
     const spec = quickTemplate(request), png = spec ? await drawDiagram(spec).catch(() => null) : null;
     if (png) return { png, spec, lessons: lessons.lessons };
   }
-  const system = systemFor(request, doc, lessons);
+  const concept = matchConcept(request, doc);
+  const system = systemFor(request, doc, lessons, concept);
   let note = "", failure = null;
   try {
     for (let attempt = 0; attempt < 2; attempt++) {
@@ -337,6 +364,11 @@ export async function designDiagram(request, { doc } = {}) {
   const spec = quickTemplate(request);
   const png = spec ? await drawDiagram(spec).catch(() => null) : null;
   if (png) return { png, spec, lessons: lessons.lessons };
+  if (concept) { // it IS one of their concepts: never ask what it is; if the AI could not draw it, show what their PDF says, as a clean slide
+    const spec = conceptSlide(concept), png = await drawDiagram(spec).catch(() => null);
+    if (png) return { png, spec, lessons: lessons.lessons };
+    throw failure ?? new Error("nothing to draw");
+  }
   throw new Clarify(clarifyText(request)); // nothing matched: ask what was meant, with the nearest options
 }
 
@@ -345,7 +377,7 @@ export function quickTemplate(request) {
   const q = String(request).toLowerCase();
   const dir = /bear|short|sell|down/.test(q) ? "bearish" : "bullish";
   const smtWord = /\b(smt|psp|ss|strength switch|2s|3s|stage)\b/.test(q);
-  const id = /(c3|candle 3)\s*closure/.test(q) ? "c3-closure" : /(c2|candle 2)\s*closure/.test(q) ? "c2-closure"
+  const id = /ideal\s*(new york|ny)|ny reversal|new york reversal/.test(q) ? "ideal-ny" : /ideal\s*london|london reversal/.test(q) ? "ideal-london" : /ideal\s*profile|\bideal\b/.test(q) ? "ideal-profile" : /(c3|candle 3)\s*closure/.test(q) ? "c3-closure" : /(c2|candle 2)\s*closure/.test(q) ? "c2-closure"
     : /consecutive|neighbouring|neighboring|pairs? share/.test(q) ? "consecutive" : /below 15|5m|1m|3m/.test(q) && smtWord ? "below-15m"
     : /\b3s\b|three.stage/.test(q) ? "stage-3s" : /strong.*then.*weak|order matters/.test(q) ? "stage-2s-order" : /\b2s\b|two.stage/.test(q) ? "stage-2s"
     : /psp (on|at) (s2|the second|c3)|psp.*\bs2\b/.test(q) ? "ss-psp-s2" : /double confirm|psp (on|at) (s1|the shared)|psp.*\bs1\b/.test(q) ? "ss-psp-s1"
