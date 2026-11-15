@@ -81,14 +81,40 @@ async function viaGemini(system, history, text) {
   throw new Error(last);
 }
 
+/**
+ * The model you uploaded, as readable text: what it is, its own vocabulary, each concept with what to look for and what must hold,
+ * and the checklist. Kept within `limit` characters, with the most useful parts first so a trim only loses detail.
+ */
+export function modelText(doc, limit = 22000) {
+  if (!doc) return "(no model uploaded yet)";
+  const list = v => (Array.isArray(v) ? v.filter(Boolean) : []);
+  const parts = [`${doc.title ?? "Trading model"}\n${doc.summary ?? ""}`];
+  if (list(doc.glossary).length) parts.push("VOCABULARY (use these meanings):\n" + doc.glossary.map(g => `- ${g.term}: ${g.means}`).join("\n"));
+  const concepts = list(doc.concepts).map(c => [
+    `## ${c.name}${c.kind ? ` (${c.kind})` : ""}${list(c.timeframes).length ? ` [${c.timeframes.join(", ")}]` : ""}`,
+    c.look_for && `Look for: ${c.look_for}`,
+    list(c.must).length && `Must hold: ${c.must.join("; ")}`,
+    list(c.steps).length && `Steps: ${c.steps.map((s, i) => `${i + 1}) ${s}`).join(" ")}`,
+    list(c.not).length && `Doesn't count: ${c.not.join("; ")}`,
+    list(c.rules).length && `Rules: ${c.rules.join("; ")}`,
+  ].filter(Boolean).join("\n"));
+  parts.push("CONCEPTS:\n" + concepts.join("\n\n"));
+  const phases = list(doc.checklist?.phases);
+  if (phases.length) parts.push("CHECKLIST BEFORE A TRADE:\n" + phases.map(ph => `${ph.name}${ph.timeframe ? ` (${ph.timeframe})` : ""}: ${list(ph.items).map(i => i.text).join(" | ")}`).join("\n"));
+  const text = parts.join("\n\n");
+  return text.length > limit ? text.slice(0, limit) + "\n…(the rest of the model is cut for length)" : text;
+}
+
 export async function ask({ owner, channelId, text }) {
   if (!env.groqKey && !env.geminiKey) return { text: "My AI isn't connected yet: add `GROQ_API_KEY` in the host's variables." };
   const [rows, doc] = await Promise.all([entries(owner).catch(() => []), model(owner)]);
   const history = (histories.get(channelId) ?? []).filter(h => Date.now() - h.at < FORGET).slice(-KEEP);
-  const system = `${SYSTEM}\n\nTHEIR MODEL (read from the PDFs they uploaded in the app):\n${doc ? JSON.stringify(doc).slice(0, 24000) : "(no model uploaded yet)"}\n\nTHEIR JOURNAL:\n${summary(rows)}\n\nNow: ${new Date().toString().slice(0, 33)}`;
+  const build = limit => `${SYSTEM}\n\nTHEIR MODEL (read from the PDFs they uploaded in the app):\n${modelText(doc, limit)}\n\nTHEIR JOURNAL:\n${summary(rows)}\n\nNow: ${new Date().toString().slice(0, 33)}`;
   let out;
-  try { out = env.groqKey ? await viaGroq(system, history, text) : await viaGemini(system, history, text); }
-  catch (e) { if (!env.groqKey || !env.geminiKey) throw e; out = await viaGemini(system, history, text); }
+  try {
+    if (!env.groqKey) out = await viaGemini(build(40000), history, text);
+    else { try { out = await viaGroq(build(22000), history, text); } catch { out = await viaGroq(build(9000), history, text); } } // a per-minute token limit gets the shorter version
+  } catch (e) { if (!env.groqKey || !env.geminiKey) throw e; out = await viaGemini(build(40000), history, text); }
   const keep = histories.get(channelId) ?? [];
   keep.push({ role: "user", text, at: Date.now() });
   keep.push({ role: "model", text: out.chart ? "(showed a trade chart picker)" : out.text || "…", at: Date.now() });
