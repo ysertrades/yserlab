@@ -15,13 +15,13 @@ import { SMT_RULES, asksAboutSmt } from "./smtLesson.js";
 let lib = null;
 const slides = async () => (lib ??= await import("../vendor/slides.mjs"));
 
-const NAMED = { ss: "#2196f3", switch: "#2196f3", bull: "#84b884", bear: "#3d3d3d", blue: "#2f6bff", teal: "#0f9d80", red: "#ef3b4b", amber: "#f4b73e", ink: "#3d3d3d", muted: "#8a8a8f", zone: "#fbecb8", tp: "#cfe8e1", sl: "#e2e3e6", green: "#0f9d80", gray: "#8a8a8f", grey: "#8a8a8f", yellow: "#f4b73e", black: "#000000", white: "#ffffff" };
+const NAMED = { ss: "#2196f3", switch: "#2196f3", bull: "#84b884", bear: "#3d3d3d", blue: "#2f6bff", teal: "#0f9d80", red: "#ef3b4b", amber: "#f4b73e", ink: "#3d3d3d", muted: "#8a8f98", zone: "#fbecb8", tp: "#cfe8e1", sl: "#e2e3e6", green: "#0f9d80", gray: "#8a8a8f", grey: "#8a8a8f", yellow: "#f4b73e", black: "#000000", white: "#ffffff" };
 const colour = (c, fallback) => NAMED[String(c ?? "").toLowerCase()] ?? (/^#[0-9a-f]{6}$/i.test(c ?? "") ? c : fallback);
 const num = (v, d) => Number.isFinite(Number(v)) ? Number(v) : d;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
 /** Every string in a spec with plain spaces (a non-breaking space draws as a missing-glyph box). */
-const clean = v => typeof v === "string" ? v.replace(/[Â â€‡â€¯â€‹]/g, " ").replace(/\s+/g, " ").trim() : Array.isArray(v) ? v.map(clean) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, clean(x)])) : v;
+const clean = v => typeof v === "string" ? v.replace(/[\u00a0\u2007\u202f\u200b]/g, " ").replace(/\s+/g, " ").trim() : Array.isArray(v) ? v.map(clean) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, clean(x)])) : v;
 
 /** The pattern library, for the AI to pick from. */
 export async function patternNames() { return Object.keys((await slides()).PATTERNS); }
@@ -71,8 +71,12 @@ export async function compile(spec) {
   if (title) add(L.create("text", 160, 100, 1500, undefined, { text: title, style: { ...L.titleStyle(60) }, auto: false }));
   const sub = String(spec?.subtitle ?? "").trim().slice(0, 120);
   if (sub) add(L.create("text", 160, 180, 1500, undefined, { text: sub, style: { ...L.bodyStyle(32), color: NAMED.muted }, auto: false }));
-  const top = title ? (sub ? 285 : 245) : 150;
-  const bottom = 880;
+  const caption = String(spec?.caption ?? "").trim().slice(0, 90), assumed = String(spec?.assumed ?? "").trim().slice(0, 90);
+  const chips = panels.some(p => p?.chip), compact = panels.some(p => (p?.bars?.length ?? 9) <= 4); // a few candles: roomy bodies with their number inside
+  const top = (title ? (sub ? 285 : 245) : 150) + (chips ? 55 : 0);
+  const bottom = caption ? 850 : 880;
+  const hasTwin = panels.some(p => (p?.marks ?? []).some(m => (m?.type === "psp" && m?.twin) || m?.type === "bracket")); // a PSP needs its two-asset strip below it; brackets need rows
+  const twinAbove = panels.some(p => (p?.marks ?? []).some(m => m?.type === "psp" && m?.twin && /:(high|top)$/.test(String(m.at)))); // bearish: the star and its strip sit above the highs
   let drawn = 0;
   // Labels never sit on each other or on a candle: each is tried where it belongs, then nudged to the nearest free spot.
   const taken = [];
@@ -91,9 +95,12 @@ export async function compile(spec) {
     const n = bars.length, two = panels.length === 2;
     const areaX = two ? (pi === 0 ? 100 : 1000) : 200, areaW = two ? 820 : 1520;
     // Candles the size they are on the QuantLab cards: a body about 40 px wide on a 50 px step, however few candles there are.
-    const w = n * (two ? 56 : 64), x = areaX + (areaW - w) / 2;
-    const labelH = panel.label ? 70 : 0, pad = 55; // room above and below the candles for tags, circles and arrowheads
-    const h = bottom - top - labelH - pad - 90, y = top + pad; // more room below: SMT lines, their labels and the candle numbers live there
+    const roomy = n <= 4; // 3 or 4 candles: equal step and gap, bodies a little wider so the numbers fit inside them
+    const w = n * (roomy ? (two ? 120 : 150) : two ? 56 : 64), x = areaX + (areaW - w) / 2;
+    const labelH = panel.label ? 70 : 0, pad = roomy ? 40 : 55; // room above and below the candles for tags, circles and arrowheads
+    const below = twinAbove ? 60 : hasTwin ? 135 : roomy ? 60 : 90; // below the candles: SMT labels, the star and its twin strip, or the candle numbers
+    const y = top + pad + (twinAbove ? 125 : 0), h = bottom - labelH - below - y;
+    if (panel.chip) add(L.create("card", x + w / 2 - 110, top - 55, 220, 46, { style: "soft", text: String(panel.chip).slice(0, 24), icon: null, color: NAMED.ink, radius: 23, textStyle: { ...L.bodyStyle(24), font: "inter", weight: 600, color: NAMED.ink, align: "center" } }));
     if (panel.label) reserve({ x: x + w / 2 - (two ? 400 : 600), y: bottom - labelH + 24, w: two ? 800 : 1200, h: 45 });
     const step = w / n, X = i => x + (i - .5) * step, Y = v => y + (1 - v) * h;
     const point = a => {
@@ -125,13 +132,15 @@ export async function compile(spec) {
 
     // The candles.
     // The house look of the QuantLab cards: slim bodies, thin wicks, light grey up candles and dark grey down candles.
-    const series = L.create("series", x, y, w, h, { preset: "custom", bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), labels: "none", gap: .24, bull: "#dcdcdc", bear: "#646464", outline: true, border: "#8e8e8e" });
+    const series = L.create("series", x, y, w, h, { preset: "custom", bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), labels: roomy && panel.numbers ? "numbers" : "none", gap: roomy ? .5 : .24, bull: "#dcdcdc", bear: "#666666", outline: true, border: "#8a8a8a" });
     add(series);
     // Nothing else is placed on a candle: its body and wick are taken space.
-    const bw = step * (1 - .24);
+    const bw = step * (1 - (roomy ? .5 : .24));
     bars.forEach((b, i) => { reserve({ x: X(i + 1) - bw / 2, y: Y(Math.max(b.o, b.c)), w: bw, h: Math.max(4, Math.abs(Y(b.o) - Y(b.c))) }); reserve({ x: X(i + 1) - 4, y: Y(b.h), w: 8, h: Math.max(4, Y(b.l) - Y(b.h)) }); });
-    if (panel.numbers) bars.forEach((_, i) => add(L.create("text", X(i + 1) - 30, y + h + 58, 60, undefined, { text: panel.numbers === "days" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i % 7] : String(i + 1), style: { ...L.bodyStyle(26), align: "center", color: NAMED.muted }, auto: false })));
-    if (panel.numbers) reserve({ x: x - 10, y: y + h + 54, w: w + 20, h: 40 });
+    if (panel.numbers && !roomy) bars.forEach((_, i) => add(L.create("text", X(i + 1) - 30, y + h + 58, 60, undefined, { text: panel.numbers === "days" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i % 7] : String(i + 1), style: { ...L.bodyStyle(26), align: "center", color: NAMED.muted }, auto: false })));
+    if (panel.numbers && !roomy) reserve({ x: x - 10, y: y + h + 54, w: w + 20, h: 40 });
+    // A PSP's star (and its two-asset strip) is taken space before any label is placed.
+    for (const m of marks.filter(m => m?.type === "psp")) { const p = point(m.at); if (p) reserve({ x: p.x - 70, y: p.y + (p.field === "high" || p.field === "top" ? -150 : 8), w: 140, h: m.twin ? 142 : 46 }); }
 
     // Levels and lines.
     for (const m of marks.filter(m => m?.type === "level")) {
@@ -169,9 +178,26 @@ export async function compile(spec) {
     for (const m of marks.filter(m => m?.type === "psp")) {
       const p = point(m.at);
       if (!p) continue;
-      const size = 40, below = p.field === "low" || p.field === "bottom";
-      const r = reserve({ x: p.x - size / 2, y: below ? p.y + 14 : p.y - 14 - size, w: size, h: size }); // right on its candle, never nudged away
-      add(L.create("polygon", r.x, r.y, size, size, { sides: 4, star: .62, fill: colour(m.color, NAMED.muted), stroke: "transparent" }));
+      const size = 36, below = p.field === "low" || p.field === "bottom";
+      const sy = below ? p.y + 12 : p.y - 12 - size; // right on its candle, under a low and over a high
+      add(L.create("polygon", p.x - size / 2, sy, size, size, { sides: 4, star: .62, fill: colour(m.color, NAMED.muted), stroke: "transparent" }));
+      if (Array.isArray(m.twin) && m.twin.length === 2) { // the evidence: the chart asset and the correlated asset closed in opposite colours
+        const dir = below ? 1 : -1, cy = below ? sy + size + 10 : sy - 10 - 44;
+        m.twin.forEach((side, k) => {
+          const up = side === "bull", cx = p.x + (k ? 24 : -52);
+          add(L.create("candle", cx, cy, 28, 44, { open: up ? .75 : .2, close: up ? .2 : .75, body: .8, bull: "#dcdcdc", bear: "#666666", outline: true, border: "#8a8a8a" }));
+          add(L.create("text", cx + 14 - 36, cy + (below ? 48 : -26), 72, undefined, { text: k ? "corr." : "chart", style: { ...L.bodyStyle(18), align: "center", color: NAMED.muted }, auto: false }));
+        });
+        void dir;
+      }
+    }
+    for (const m of marks.filter(m => m?.type === "bracket")) { // "neighbouring pairs": a bracket under bars from..to, on its own row
+      const from = clamp(num(m.from, 1), 1, n), to = clamp(num(m.to, 2), 1, n), row = clamp(num(m.row, 0), 0, 3), by = y + h + 22 + row * 30;
+      const style = { stroke: NAMED.muted, strokeWidth: 2, dash: "solid", curve: 0, start: "none", end: "none" };
+      add(L.withBox(L.create("line", X(from), by, 0, 0, { x1: X(from), y1: by, x2: X(to), y2: by, ...style })));
+      add(L.withBox(L.create("line", X(from), by - 10, 0, 0, { x1: X(from), y1: by - 10, x2: X(from), y2: by, ...style })));
+      add(L.withBox(L.create("line", X(to), by - 10, 0, 0, { x1: X(to), y1: by - 10, x2: X(to), y2: by, ...style })));
+      if (m.label) add(L.create("text", (X(from) + X(to)) / 2 - 80, by + 2, 160, undefined, { text: String(m.label).slice(0, 20), style: { ...L.bodyStyle(20), align: "center", color: NAMED.muted }, auto: false }));
     }
     for (const m of marks.filter(m => m?.type === "circle" || m?.type === "dot")) {
       const p = point(m.at);
@@ -189,9 +215,12 @@ export async function compile(spec) {
       const nx = spotted.x, ny = spotted.y;
       add(L.create("card", nx, ny, tw, size + 36, { style: "soft", text, icon: null, color: colour(m.color, NAMED.ink), radius: 18, textStyle: { ...L.bodyStyle(size), font: "inter", weight: 600, color: NAMED.ink, align: "center" } }));
     }
-    if (panel.label) add(L.create("text", x + w / 2 - (two ? 400 : 600), bottom - labelH + 24, two ? 800 : 1200, undefined, { text: String(panel.label).slice(0, 80), style: { ...L.bodyStyle(32), weight: 600, align: "center" }, auto: false }));
+    if (panel.label) add(L.create("text", x + w / 2 - (two ? 400 : 600), bottom - labelH + 24, two ? 800 : 1200, undefined, { text: String(panel.label).slice(0, 80), style: { ...L.bodyStyle(two ? 25 : 32), weight: 600, align: "center" }, auto: false }));
   });
 
+  if (drawn && panels.length === 2 && spec?.divider) add(L.create("line", 960, top - 60, 0, 0, { x1: 960, y1: top - 60, x2: 960, y2: bottom - 10, stroke: "#e4e4e4", strokeWidth: 2, dash: "solid", curve: 0, end: "none" }));
+  if (drawn && caption) add(L.create("text", 160, 872, 1600, undefined, { text: caption, style: { ...L.bodyStyle(30), weight: 600, align: "center", color: "#3a3a3a" }, auto: false }));
+  if (drawn && assumed) add(L.create("text", 160, 925, 1600, undefined, { text: assumed, style: { ...L.bodyStyle(24), align: "center", color: NAMED.muted }, auto: false }));
   return drawn ? { page, deck: { brand: "YSER Trades", numbering: false, footer: { ...L.DEFAULT_FOOTER } } } : null;
 }
 
@@ -204,7 +233,7 @@ export async function drawDiagram(spec, width = 1920) {
   return svgToPng(L.pageSvg(built.page, built.deck, 1), width);
 }
 
-/* â”€â”€ The designer: turns "show me X" into a spec â”€â”€ */
+/* ── The designer: turns "show me X" into a spec ── */
 const PATTERN_HELP = `Library patterns (bullish, "flip": true draws the bearish twin): swing-2, swing-3, swing-4 (swing formations); c2-closure, c2-closure-run, c3-closure, c3-closure-run (closures); ideal, ideal-run (ideal formation); wick-eq, wick-eq-run; opposing, opposing-series; sweep-low (liquidity sweep then reversal); fvg, fvg-return (fair value gap, and price returning into it); eq-continuation, eq-reversal; cisd; projection; week-tuesday-low, week-wednesday, week-thursday, week-consolidation, week-monday-low (weekly profiles, 5 daily candles); htf-3, htf-2 (higher timeframe candles); osok-entry. Generated: uptrend, downtrend, range, consolidation, breakout, sweep, vshape, london-reversal, ny-reversal, london-expansion (with "count" 6 to 20).`;
 const DESIGNER = `You design a trading diagram for the YSER slides editor, then reply with ONE JSON object and nothing else.
 USE A TEMPLATE. These are ready-made, hand-drawn diagrams in the owner's style, and one of them fits almost every request: choose the CLOSEST one, even when it only covers the main idea of a longer request (a CISD after a sweep -> cisd; candle 2 and candle 3 of the fractal model -> fractal; an entry into a gap -> fvg). Reply {"template":"<id>","direction":"bullish" or "bearish"} (the direction the idea is traded; optionally "title" and "subtitle" to reword the headline, at most 6 and 12 words). When the request joins TWO ideas (a sweep, then a CISD), show them side by side: {"templates":[{"template":"<id>","direction":"..."},{"template":"<id>","direction":"..."}],"title":"...","subtitle":"..."}. Templates:
@@ -221,7 +250,7 @@ Spec for your own design:
    {"type":"arrow","from":"2:close","to":"5:high","color":"teal","curve":0.3,"dash":"solid|dashed","label":"expansion"}
    {"type":"circle","at":"3:low","color":"red"} or {"type":"dot","at":"3:low"}
    {"type":"note","at":"3:high","text":"CISD","color":"ink"}   a small tag; sits above a high, below a low
-   {"type":"smt","from":"3:low","to":"9:low","style":"dashed|solid","color":"muted|ss","label":"6H â€¢ 2S"}   an SMT line between two swing points (pivot A to pivot B)
+   {"type":"smt","from":"3:low","to":"9:low","style":"dashed|solid","color":"muted|ss","label":"6H • 2S"}   an SMT line between two swing points (pivot A to pivot B)
    {"type":"psp","at":"9:low","color":"muted|ss"}   a PSP star on a candle (muted = ordinary, ss = strength switch blue)
  ]}]}
 Anchors are "N:field": N is the candle number (1 = first; decimals like 2.5 sit between candles) and field is high, low, open, close, top (body top), bottom (body bottom) or mid.
@@ -283,6 +312,10 @@ function systemFor(request, doc, lessons) {
 /** "Show me X" -> a PNG. `request` is what the user wants drawn; the lessons and the user's model that match it guide the drawing. */
 export async function designDiagram(request, { doc } = {}) {
   const lessons = recall(request, { chars: 3600, perLesson: 2 });
+  if (isGenericSs(request)) { // "show me an SS": the owner's default slide, both kinds side by side, at once and without a question
+    const spec = fromTemplate("ss", /bear|short|sell|down/i.test(request) ? "bearish" : "bullish");
+    return { png: await drawDiagram(spec), spec, lessons: lessons.lessons };
+  }
   const system = systemFor(request, doc, lessons);
   let note = "", failure = null;
   try {
@@ -306,14 +339,14 @@ export async function designDiagram(request, { doc } = {}) {
 export function quickTemplate(request) {
   const q = String(request).toLowerCase();
   const dir = /bear|short|sell|down/.test(q) ? "bearish" : "bullish";
-  const id = /(c3|candle 3)\s*closure/.test(q) ? "c3-closure" : /(c2|candle 2)\s*closure/.test(q) ? "c2-closure" : /double confirm/.test(q) ? "ss-double" : /not linked|unlinked|too late|no stage/.test(q) ? "not-linked" : /opposite direction/.test(q) ? "opposite"
-    : /(chain|three).*(flip|weak.*strong)/.test(q) ? "chain-flip" : /strong.*then.*weak|strong.*to.*weak|order matters|reversed order/.test(q) ? "stage-2s-order"
-    : /psp.*(s2|second)|s2.*psp/.test(q) && /ss|switch/.test(q) ? "ss-s2-psp" : /two smt|pair|leg flip|flip|no psp|without (a )?psp/.test(q) && /ss|switch|stage/.test(q) ? "stage-ss"
-    : /\b3s\b|three.stage/.test(q) ? "stage-3s" : /\b2s\b|two.stage/.test(q) ? "stage-2s"
-    : /\bss\b.*stage|stage.*\bss\b|weak (htf|higher).*strong/.test(q) ? "stage-ss"
-    : /psp first|pivot a|line (turns|goes) blue/.test(q) ? "ss-first"
-    : /no switch|wrong (close|way)|not (a )?switch|doesn.?t switch|neutral star/.test(q) ? "ss-last-no"
-    : /strength switch|\bswitch\b|psp last|\bss\b/.test(q) ? "ss-last"
+  const smtWord = /\b(smt|psp|ss|strength switch|2s|3s|stage)\b/.test(q);
+  const id = /(c3|candle 3)\s*closure/.test(q) ? "c3-closure" : /(c2|candle 2)\s*closure/.test(q) ? "c2-closure"
+    : /consecutive|neighbouring|neighboring|pairs? share/.test(q) ? "consecutive" : /below 15|5m|1m|3m/.test(q) && smtWord ? "below-15m"
+    : /\b3s\b|three.stage/.test(q) ? "stage-3s" : /strong.*then.*weak|order matters/.test(q) ? "stage-2s-order" : /\b2s\b|two.stage/.test(q) ? "stage-2s"
+    : /psp (on|at) (s2|the second|c3)|psp.*\bs2\b/.test(q) ? "ss-psp-s2" : /double confirm|psp (on|at) (s1|the shared)|psp.*\bs1\b/.test(q) ? "ss-psp-s1"
+    : /psp first|pivot a|line (turns|goes) blue/.test(q) ? "psp-first" : /no switch|wrong (close|way)|not (a )?switch|doesn.?t switch|neutral star/.test(q) ? "no-switch"
+    : /(two|2) smts?|no psp|without (a )?psp|leg flip|weak.*then.*strong/.test(q) && smtWord ? "ss-two-smt" : /psp last|smt (and|with|\+) (a )?psp|with (a )?psp/.test(q) && smtWord ? "ss-psp"
+    : /\b(ss|strength switch)\b/.test(q) ? "ss"
     : /inversion|ifvg/.test(q) ? "ifvg" : /fair value|\bfvg\b|imbalance/.test(q) ? "fvg"
     : /cisd|change in (the )?state/.test(q) ? "cisd" : /order block|\bob\b/.test(q) ? "ob"
     : /fractal|candle (2|3|4)\b|\bc[234]\b/.test(q) ? "fractal" : /premium|discount|equilibrium/.test(q) ? "pd"
@@ -327,12 +360,6 @@ const SLIDES = n => `\nThe owner wants ${n} separate images that together explai
 export async function designSlides(request, { doc, count = 4 } = {}) {
   count = clamp(Math.round(num(count, 4)), 2, 6);
   const lessons = recall(request, { chars: 4200, perLesson: 3 });
-  if (isGenericSs(request)) { // "a strength switch": the two ways it happens, two images
-    const dir = /bear|short|sell|down/i.test(request) ? "bearish" : "bullish";
-    const images = [];
-    for (const id of ["ss-pair", "ss-psp"]) { const spec = fromTemplate(id, dir); images.push({ png: await drawDiagram(spec), spec }); }
-    return { images, lessons: lessons.lessons };
-  }
   // The fractal model always comes as its clean build-up, C1 then C2 then C3 then C4, with no AI in the loop (so no rate limits either).
   if (/fractal/i.test(request) && !asksAboutSmt(request) && count <= 4) {
     const specs = stepsFromTemplate("fractal", /bear|short|sell|down/i.test(request) ? "bearish" : "bullish").slice(0, count);
@@ -376,5 +403,5 @@ const clarifyText = request => {
 };
 
 /** A strength switch asked for with no detail: always the two ways it happens, as two images (two SMTs, and a PSP), each with the correlated asset beside it. */
-export const isGenericSs = q => /\b(ss|strength switch)\b/i.test(q) && !/(psp (first|last)|\b[23]s\b|stage|wrong|no switch|not (a )?switch|double|not linked|opposite|chain|strong.*then.*weak|first prompt)/i.test(q);
+export const isGenericSs = q => /\b(ss|strength switch)\b/i.test(q) && !/(psp (first|last)|\b[23]s\b|stages?\b|wrong|no switch|not (a )?switch|double|not linked|opposite|chain|strong.*then.*weak|consecutive|below 15|\bon s[12]\b|only (the )?(two|psp)|pair)/i.test(q);
 

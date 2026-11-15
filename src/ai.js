@@ -56,7 +56,8 @@ How to answer:
 - Numbers about their trading come only from the journal summary. Never give financial advice or tell them to take a trade; you help them study, review and stay consistent.
 - If they ask you to send or show a picture, chart or screenshot from a trade THEY logged, call show_trade_chart.
 - If they ask you to show, draw, illustrate, diagram or make an image of a concept, setup or example (not one of their trades), call draw_diagram with a full sentence of what to draw (and count when they ask for several images or slides, e.g. "make me 4 images explaining the foundation of the fractal model" is count 4). Never describe a picture in words when they asked to see it; call the tool.
-- If they ask to share, post or show their daily, weekly or monthly PnL card (results card), call share_pnl_card.`;
+- If they ask to share, post or show their daily, weekly or monthly PnL card (results card), call share_pnl_card.
+- A request to SEE something ("show me how an SS looks") is never answered with questions or a paragraph: call draw_diagram at once and let the defaults decide. Ask a question only when the request contradicts itself.`;
 
 const GROQ_MODELS = () => [...new Set([env.groqModel, "openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.8-27b"].filter(Boolean))];
 const GEMINI_MODELS = () => [...new Set([env.geminiModel, "gemini-flash-lite-latest", "gemini-flash-latest", "gemini-3.5-flash"].filter(Boolean))];
