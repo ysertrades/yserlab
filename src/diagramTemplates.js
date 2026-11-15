@@ -84,7 +84,45 @@ export const TEMPLATES = [
       { label: "NQ closes up", bars: [row(30, 38, 28, 36), row(36, 44, 34, 42), row(42, 50, 40, 48), row(48, 56, 46, 54), row(54, 66, 52, 64), row(64, 66, 56, 58)], marks: [{ type: "circle", at: "5:mid", color: "red" }] },
       { label: "ES closes down", bars: [row(30, 38, 28, 36), row(36, 44, 34, 42), row(42, 50, 40, 48), row(48, 56, 46, 54), row(54, 62, 50, 52), row(52, 54, 44, 46)], marks: [{ type: "circle", at: "5:mid", color: "red" }, { type: "note", at: "5:low", text: "PSP", color: "ink" }] }] },
   },
+  ...smtTemplates(),
 ];
+
+/** The SMT, PSP, strength switch and stage diagrams (the owner's rules: see smtLesson.js). Drawn bullish (SMT on lows); mirrored for bearish. */
+function smtTemplates() {
+  const base = [row(104, 106, 102, 103), row(103, 104, 99, 100), row(100, 101, 96, 98), row(98, 103, 97.5, 102), row(102, 106, 101, 105), row(105, 107, 102, 103), row(103, 104, 99, 100), row(100, 101, 96.5, 97.5)];
+  const weakLast = (c9, star, title, sub, label, why) => ({
+    title, subtitle: sub, panels: [{ label, numbers: true, bars: [...base, c9, row(99.5, 104, 99, 103)], marks: [
+      { type: "smt", from: "3:low", to: "9:low", style: "dashed", color: "muted", label: "30M" },
+      { type: "psp", at: "9:low", color: star }] }],
+  });
+  const ladder = lows => [row(104, 106, 102, 103), row(103, 104, lows[0], 100), row(100, 104, 99, 103), row(103, 106, 101, 102), row(102, 103, lows[1], 101), row(101, 106, 100, 105), row(105, 107, 102, 103), row(103, 104, 100, 101), row(101, 106, lows[2], 105), row(105, 109, 104, 108)];
+  return [
+    { id: "ss-last", name: "Strength switch: PSP last (weak leg, PSP closes the SMT's way)", native: "bull",
+      about: "bullish SMT on lows, weak leg (lower low), a PSP at pivot B that closed bullish: the star turns blue",
+      spec: weakLast(row(97.5, 100, 94, 99.5), "ss", "Strength Switch: PSP Last", "Weak leg + a PSP that closed the SMT's way: the star turns blue", "Weak leg, bullish PSP close", "Switch") },
+    { id: "ss-last-no", name: "No strength switch: PSP last closed the wrong way", native: "bull",
+      about: "same weak bullish SMT, but the PSP candle closed bearish: no switch, the star stays neutral",
+      spec: weakLast(row(99.5, 100, 94, 95.5), "muted", "No Switch: Wrong Close", "The PSP candle closed bearish, so the star stays neutral", "Weak leg, bearish PSP close", "No switch") },
+    { id: "ss-first", name: "Strength switch: PSP first (PSP at pivot A turns the line blue)", native: "bull",
+      about: "a weak bullish SMT that starts on a PSP candle that closed bullish: the line turns blue, the star stays neutral",
+      spec: { title: "Strength Switch: PSP First", subtitle: "A PSP at pivot A turns the line blue", panels: [{ label: "PSP at the start of a weak leg", numbers: true,
+        bars: [row(104, 106, 102, 103), row(103, 104, 99, 100), row(97, 101, 96, 100), row(100, 103, 97.5, 102), row(102, 106, 101, 105), row(105, 107, 102, 103), row(103, 104, 99, 100), row(100, 101, 96.5, 97.5), row(97.5, 100, 94, 99.5), row(99.5, 104, 99, 103)], marks: [
+        { type: "smt", from: "3:low", to: "9:low", style: "dashed", color: "ss", label: "30M" }, { type: "psp", at: "3:low", color: "muted" }] }] } },
+    { id: "stage-2s", name: "2S: higher timeframe SMT + one linked chart SMT", native: "bull",
+      about: "a 6H SMT line, then a chart-candle SMT of the same direction that starts where it ends: solid line, label 6H • 2S",
+      spec: { title: "2S Stage", subtitle: "A chart SMT linked to the HTF SMT, same direction", panels: [{ label: "Both legs strong", numbers: true, bars: ladder([96, 97, 99]), marks: [
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H • 2S" }] }] } },
+    { id: "stage-3s", name: "3S: three same-direction SMTs chained", native: "bull",
+      about: "a third same-direction SMT starts where the 2S chain ends: label 6H • 3S",
+      spec: { title: "3S Stage", subtitle: "Three same-direction SMTs, each starting where the last ended", panels: [{ label: "A chain of strong legs", numbers: true,
+        bars: [...ladder([96, 97, 99]).slice(0, 9), row(105, 108, 103, 104), row(104, 105, 101, 102), row(102, 107, 100, 106)], marks: [
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "muted", label: "6H • 2S" }, { type: "smt", from: "9:low", to: "12:low", style: "solid", color: "muted", label: "6H • 3S" }] }] } },
+    { id: "stage-ss", name: "SS: weak HTF leg then strong chart leg", native: "bull",
+      about: "the 6H SMT leg is weak (lower low) and the linked chart SMT is strong (higher low): blue solid line, label 6H • SS",
+      spec: { title: "SS Stage", subtitle: "Weak HTF leg, then a strong chart leg: blue line", panels: [{ label: "Weak, then strong", numbers: true, bars: ladder([98, 96, 98]), marks: [
+        { type: "smt", from: "2:low", to: "5:low", style: "dashed", color: "muted", label: "6H" }, { type: "smt", from: "5:low", to: "9:low", style: "solid", color: "ss", label: "6H • SS" }] }] } },
+  ];
+}
 
 const SWAP = { high: "low", low: "high", top: "bottom", bottom: "top" };
 const mirrorAnchor = a => {

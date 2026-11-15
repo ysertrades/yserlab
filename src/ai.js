@@ -1,6 +1,7 @@
 import { env } from "./env.js";
 import { entries, model } from "./store.js";
 import { isWin, isLoss } from "./cards.js";
+import { SMT_RULES, asksAboutSmt } from "./smtLesson.js";
 import { asksForStructure, hasKnowledge, Index, recall, stats, structureText } from "./knowledge.js";
 
 /**
@@ -175,8 +176,10 @@ export function context({ doc, rows, text, history = [], big = false, scale = 1 
   const room = big
     ? { model: 40000, edu: 36000, journal: 25 }
     : { model: Math.round(6200 * scale), edu: Math.round((journal ? 6000 : 9800) * scale), journal: journal ? 10 : 2 };
+  const smt = asksAboutSmt(query);
+  if (smt && !big) room.edu = Math.round(room.edu * .5); // the owner's SMT rules take that room
   const edu = hasKnowledge() ? recall(query, { chars: room.edu, perLesson: big ? 4 : 3 }) : { text: "", lessons: [] };
-  const parts = [SYSTEM, `THEIR MODEL (from the PDFs they uploaded in the app; their playbook, it comes first):\n${big ? modelText(doc, room.model) : modelFor(doc, query, room.model)}`];
+  const parts = [SYSTEM, ...(smt ? [`THE OWNER'S RULES FOR SMT, 2S/3S, STRENGTH SWITCH AND PSP (authoritative; follow them exactly, and when you teach one, run the strong/weak and switch tests out loud, name the one condition that decided it, and end with a one-line question for the student):\n${SMT_RULES}`] : []),`THEIR MODEL (from the PDFs they uploaded in the app; their playbook, it comes first):\n${big ? modelText(doc, room.model) : modelFor(doc, query, room.model)}`];
   if (edu.text) parts.push(`TTRADES EDUCATION CENTER (the textbook; passages that match the question):\n${edu.text}`);
   if (hasKnowledge() && (big || asksForStructure(text))) parts.push(`STRUCTURE OF THE EDUCATION CENTER (the four courses and their lessons, as the site lists them, newest first; a lesson can belong to more than one course):\n${structureText({ overview: big, titles: big || scale >= 1 })}`);
   parts.push(`THEIR JOURNAL:\n${summary(rows, room.journal)}\n\nNow: ${new Date().toString().slice(0, 33)}`);

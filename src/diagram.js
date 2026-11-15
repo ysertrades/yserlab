@@ -3,6 +3,7 @@ import { fonts, svgToPng } from "./render.js";
 import { recall } from "./knowledge.js";
 import { modelFor } from "./ai.js";
 import { fromTemplate, templateList } from "./diagramTemplates.js";
+import { SMT_RULES, asksAboutSmt } from "./smtLesson.js";
 
 /**
  * Diagrams in the slides editor's own look. The editor's renderer is bundled in vendor/slides.mjs (scripts/slides/build.mjs), so a
@@ -14,7 +15,7 @@ import { fromTemplate, templateList } from "./diagramTemplates.js";
 let lib = null;
 const slides = async () => (lib ??= await import("../vendor/slides.mjs"));
 
-const NAMED = { bull: "#84b884", bear: "#3d3d3d", blue: "#2f6bff", teal: "#0f9d80", red: "#ef3b4b", amber: "#f4b73e", ink: "#3d3d3d", muted: "#8a8a8f", zone: "#fbecb8", tp: "#cfe8e1", sl: "#e2e3e6", green: "#0f9d80", gray: "#8a8a8f", grey: "#8a8a8f", yellow: "#f4b73e", black: "#000000", white: "#ffffff" };
+const NAMED = { ss: "#2196f3", switch: "#2196f3", bull: "#84b884", bear: "#3d3d3d", blue: "#2f6bff", teal: "#0f9d80", red: "#ef3b4b", amber: "#f4b73e", ink: "#3d3d3d", muted: "#8a8a8f", zone: "#fbecb8", tp: "#cfe8e1", sl: "#e2e3e6", green: "#0f9d80", gray: "#8a8a8f", grey: "#8a8a8f", yellow: "#f4b73e", black: "#000000", white: "#ffffff" };
 const colour = (c, fallback) => NAMED[String(c ?? "").toLowerCase()] ?? (/^#[0-9a-f]{6}$/i.test(c ?? "") ? c : fallback);
 const num = (v, d) => Number.isFinite(Number(v)) ? Number(v) : d;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -92,7 +93,7 @@ export async function compile(spec) {
     // Candles the size they are on the QuantLab cards: a body about 40 px wide on a 50 px step, however few candles there are.
     const w = n * (two ? 56 : 64), x = areaX + (areaW - w) / 2;
     const labelH = panel.label ? 70 : 0, pad = 55; // room above and below the candles for tags, circles and arrowheads
-    const h = bottom - top - labelH - pad * 2, y = top + pad;
+    const h = bottom - top - labelH - pad - 90, y = top + pad; // more room below: SMT lines, their labels and the candle numbers live there
     if (panel.label) reserve({ x: x + w / 2 - (two ? 400 : 600), y: bottom - labelH + 24, w: two ? 800 : 1200, h: 45 });
     const step = w / n, X = i => x + (i - .5) * step, Y = v => y + (1 - v) * h;
     const point = a => {
@@ -153,6 +154,25 @@ export async function compile(spec) {
         add(L.create("text", r.x + tw / 2 - 150, r.y, 300, undefined, { text, style: { ...L.bodyStyle(28), weight: 600, align: "center", color: colour(m.color, NAMED.ink) }, auto: false }));
       }
     }
+    // SMT lines join two swing points of the chart asset; PSP is a four-point star on a candle. #2196f3 ("ss") is the strength switch.
+    for (const m of marks.filter(m => m?.type === "smt")) {
+      const a = point(m.from), b = point(m.to);
+      if (!a || !b || Math.hypot(a.x - b.x, a.y - b.y) < 60) continue;
+      const c = colour(m.color, NAMED.muted), lowSide = a.field === "low" || a.field === "bottom";
+      add(L.withBox(L.create("line", a.x, a.y, 0, 0, { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: c, strokeWidth: 3, dash: m.style === "solid" ? "solid" : "dashed", curve: 0, end: "dot", start: "dot" })));
+      if (m.label) {
+        const text = String(m.label).slice(0, 30), tw = Math.min(360, text.length * 17 + 20), mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+        const r = reserve(spot({ x: mx - tw / 2, y: lowSide ? my + 36 : my - 76, w: tw, h: 40 }));
+        add(L.create("text", r.x + tw / 2 - 180, r.y, 360, undefined, { text, style: { ...L.bodyStyle(28), weight: 600, align: "center", color: c === NAMED.muted ? NAMED.ink : c }, auto: false }));
+      }
+    }
+    for (const m of marks.filter(m => m?.type === "psp")) {
+      const p = point(m.at);
+      if (!p) continue;
+      const size = 40, below = p.field === "low" || p.field === "bottom";
+      const r = reserve(spot({ x: p.x - size / 2, y: below ? p.y + 26 : p.y - 26 - size, w: size, h: size }));
+      add(L.create("polygon", r.x, r.y, size, size, { sides: 4, star: .62, fill: colour(m.color, NAMED.muted), stroke: "transparent" }));
+    }
     for (const m of marks.filter(m => m?.type === "circle" || m?.type === "dot")) {
       const p = point(m.at);
       if (!p) continue;
@@ -201,6 +221,8 @@ Spec for your own design:
    {"type":"arrow","from":"2:close","to":"5:high","color":"teal","curve":0.3,"dash":"solid|dashed","label":"expansion"}
    {"type":"circle","at":"3:low","color":"red"} or {"type":"dot","at":"3:low"}
    {"type":"note","at":"3:high","text":"CISD","color":"ink"}   a small tag; sits above a high, below a low
+   {"type":"smt","from":"3:low","to":"9:low","style":"dashed|solid","color":"muted|ss","label":"6H • 2S"}   an SMT line between two swing points (pivot A to pivot B)
+   {"type":"psp","at":"9:low","color":"muted|ss"}   a PSP star on a candle (muted = ordinary, ss = strength switch blue)
  ]}]}
 Anchors are "N:field": N is the candle number (1 = first; decimals like 2.5 sit between candles) and field is high, low, open, close, top (body top), bottom (body bottom) or mid.
 ${PATTERN_HELP}
@@ -243,7 +265,7 @@ async function viaJson(system, user) {
 /** "Show me X" -> a PNG. `request` is what the user wants drawn; the lessons and the user's model that match it guide the drawing. */
 export async function designDiagram(request, { doc } = {}) {
   const lessons = recall(request, { chars: 3600, perLesson: 2 });
-  const system = [DESIGNER, doc ? `THE OWNER'S MODEL (their vocabulary comes first):\n${modelFor(doc, request, 2200)}` : "", lessons.text ? `LESSON MATERIAL ON THIS:\n${lessons.text}` : ""].filter(Boolean).join("\n\n");
+  const system = [DESIGNER, asksAboutSmt(request) ? `THE OWNER'S SMT / PSP / STRENGTH SWITCH RULES (authoritative; they decide every colour and label; below 15M draw no PSP star):\n${SMT_RULES}` : "", doc ? `THE OWNER'S MODEL (their vocabulary comes first):\n${modelFor(doc, request, 2200)}` : "", lessons.text ? `LESSON MATERIAL ON THIS:\n${lessons.text}` : ""].filter(Boolean).join("\n\n");
   let note = "";
   for (let attempt = 0; attempt < 2; attempt++) {
     let spec = await viaJson(system, `Draw: ${request}${note}`);
