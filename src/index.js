@@ -103,7 +103,7 @@ client.on(Events.MessageCreate, async message => {
           await log("diagram", { note: `${images.length} slides: ${out.diagram.slice(0, 100)}` });
           return;
         }
-        const { png, spec, lessons, more } = await designDiagram(isGenericSs(text) ? text : out.diagram, { doc });
+        const { png, spec, lessons, more } = await designDiagram(isGenericSs(text) ? text : out.diagram, { doc, said: text });
         if (more?.length) { // a whole PDF was asked for: its pages, in order, in one post
           await message.reply({ ...galleryPost({ images: [{ png }, ...more], text: `**${String(spec.title).slice(0, 60)}** · from your PDF` }), allowedMentions: { repliedUser: false } });
           await log("diagram", { note: `${spec.title}: ${1 + more.length} pages from the PDF` });

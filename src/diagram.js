@@ -4,7 +4,7 @@ import { Index, recall } from "./knowledge.js";
 import { modelFor } from "./ai.js";
 import { TEMPLATES, fromTemplate, stepsFromTemplate, templateList, toLtf } from "./diagramTemplates.js";
 import { SMT_RULES, asksAboutSmt } from "./smtLesson.js";
-import { matchDrawings, namesWholePdf, pagesOf, specFromDrawing } from "./pdfDrawings.js";
+import { matchDrawings, namesWholePdf, pagesOf, pdfNamedIn, specFromDrawing } from "./pdfDrawings.js";
 
 /**
  * Diagrams in the slides editor's own look. The editor's renderer is bundled in vendor/slides.mjs (scripts/slides/build.mjs), so a
@@ -347,7 +347,9 @@ function systemFor(request, doc, lessons, concept = null) {
 }
 
 /** "Show me X" -> a PNG. `request` is what the user wants drawn; the lessons and the user's model that match it guide the drawing. */
-export async function designDiagram(request, { doc } = {}) {
+export async function designDiagram(brief, { doc, said } = {}) {
+  // `said` is what the owner typed; `brief` is the AI's rewording of it, which can drift ("ideal profile" became "ideal swing formation"). Matching uses their own words.
+  const request = said && said.trim().length >= 3 ? said : brief;
   const lessons = recall(request, { chars: 3600, perLesson: 2 });
   if (isGenericSs(request)) { // "show me an SS": the owner's default slide, both kinds side by side, at once and without a question
     let spec = fromTemplate("ss", /bear|short|sell|down/i.test(request) ? "bearish" : "bullish"); if (wantsLtf(request)) spec = toLtf(spec);
@@ -360,8 +362,9 @@ export async function designDiagram(request, { doc } = {}) {
     if (png) return { png, spec, lessons: lessons.lessons };
   }
   // The owner's PDFs: the page whose chart is asked for, drawn from the traced candles at the PDF's own proportions.
-  const hit = matchDrawings(request, 3)[0];
-  if (hit && (hit.score >= 24 || namesWholePdf(request, hit.drawing.pdf))) {
+  const named = pdfNamedIn(request); // a PDF whose whole name is in the request wins over a looser text match: "ideal profile" is the Ideal Profile PDF, never the Ideal Formation
+  const hit = named ? { drawing: pagesOf(named)[0], score: 99 } : matchDrawings(request, 3)[0];
+  if (hit?.drawing && (hit.score >= 24 || namesWholePdf(request, hit.drawing.pdf))) {
     const pages = namesWholePdf(request, hit.drawing.pdf) ? pagesOf(hit.drawing.pdf).slice(0, 4) : [hit.drawing];
     const specs = pages.map(specFromDrawing), drawn = [];
     for (const spec of specs) { const png = await drawDiagram(spec).catch(() => null); if (png) drawn.push({ png, spec }); }
@@ -377,7 +380,7 @@ export async function designDiagram(request, { doc } = {}) {
   let note = "", failure = null;
   try {
     for (let attempt = 0; attempt < 2; attempt++) {
-      const reply = await viaJson(system, `Draw: ${request}${note}`);
+      const reply = await viaJson(system, `Draw: ${brief}${note}\n(The owner's own words: "${request}")`);
       if (reply.ask && !reply.template && !reply.panels) throw new Clarify(String(reply.ask).slice(0, 500));
       const spec = resolve(reply);
       const png = await drawDiagram(spec).catch(() => null);
