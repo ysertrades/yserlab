@@ -11,6 +11,8 @@ export const env = {
   owners: first("OWNER_ID", "OWNER_IDS").split(/[\s,]+/).filter(Boolean),
   supabaseUrl: first("SUPABASE_URL") || "https://aubplblrooadtfskdcfh.supabase.co",
   supabaseKey: first("SUPABASE_SERVICE_KEY", "SUPABASE_SERVICE_ROLE_KEY"),
+  groqKey: first("GROQ_API_KEY"),
+  groqModel: first("GROQ_MODEL"),
   geminiKey: first("GEMINI_API_KEY"),
   geminiModel: first("GEMINI_MODEL") || "gemini-flash-lite-latest",
 };

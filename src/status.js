@@ -24,6 +24,6 @@ export async function heartbeat(client) {
   const { config } = await settings();
   let next = null;
   try { const e = pick(await events(), config.news).find(x => x.at.toMillis() > Date.now() && !x.allDay); if (e) next = { title: e.title, currency: e.currency, at: e.at.toISO(), impact: e.impact }; } catch { /* the feed may be down */ }
-  await writeStatus({ online: true, tag: client.user?.tag, uptime: Math.round((Date.now() - started) / 1000), ping: client.ws.ping, guilds, feed: feedState(), next, ai: { ready: !!env.geminiKey, model: env.geminiModel }, version: "1.0.0", at: new Date().toISOString() });
+  await writeStatus({ online: true, tag: client.user?.tag, uptime: Math.round((Date.now() - started) / 1000), ping: client.ws.ping, guilds, feed: feedState(), next, ai: { ready: !!(env.groqKey || env.geminiKey), model: env.groqKey ? "groq " + (env.groqModel || "openai/gpt-oss-120b") : env.geminiModel }, version: "1.0.0", at: new Date().toISOString() });
 }
 export const offline = () => writeStatus({ online: false, at: new Date().toISOString() });
