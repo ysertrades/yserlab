@@ -300,6 +300,13 @@ const SLIDES = n => `\nThe owner wants ${n} separate images that together explai
 export async function designSlides(request, { doc, count = 4 } = {}) {
   count = clamp(Math.round(num(count, 4)), 2, 6);
   const lessons = recall(request, { chars: 4200, perLesson: 3 });
+  // The fractal model always comes as its clean build-up, C1 then C2 then C3 then C4, with no AI in the loop (so no rate limits either).
+  if (/fractal/i.test(request) && !asksAboutSmt(request) && count <= 4) {
+    const specs = stepsFromTemplate("fractal", /bear|short|sell|down/i.test(request) ? "bearish" : "bullish").slice(0, count);
+    const images = [];
+    for (const spec of specs) images.push({ png: await drawDiagram(spec), spec });
+    return { images, lessons: lessons.lessons };
+  }
   const system = systemFor(request, doc, lessons);
   let note = "";
   for (let attempt = 0; attempt < 2; attempt++) {
