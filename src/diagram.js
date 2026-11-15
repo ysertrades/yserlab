@@ -23,7 +23,23 @@ const num = (v, d) => Number.isFinite(Number(v)) ? Number(v) : d;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
 /** Every string in a spec with plain spaces (a non-breaking space draws as a missing-glyph box). */
-const clean = v => typeof v === "string" ? v.replace(/[\u00a0\u2007\u202f\u200b]/g, " ").replace(/\s+/g, " ").trim() : Array.isArray(v) ? v.map(clean) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, clean(x)])) : v;
+const clean = v => typeof v === "string" ? v.replace(/[\u2010\u2011\u2012\u2013]/g, "-").replace(/[\u00a0\u2007\u202f\u200b\u2060\ufeff\u00ad]/g, " ").replace(/\s+/g, " ").trim() : Array.isArray(v) ? v.map(clean) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, clean(x)])) : v;
+
+/**
+ * A line of text that fits, and still ends: nothing is ever cut mid-thought. Too long, it stops at the last full sentence, else at the last
+ * clause (comma, semicolon, dash) that fits and closes with a full stop, and only as a last resort at a word with an ellipsis.
+ */
+export function fitText(value, max) {
+  const s = String(value ?? "").replace(/\s+/g, " ").trim();
+  if (s.length <= max) return s;
+  const head = s.slice(0, max + 1);
+  const sentence = [...head.matchAll(/[.!?](?=\s|$)/g)].pop();
+  if (sentence && sentence.index >= max * .45) return head.slice(0, sentence.index + 1);
+  const clause = [...head.slice(0, max).matchAll(/[,;:—–](?=\s)|\s-\s/g)].pop();
+  if (clause && clause.index >= max * .55) return head.slice(0, clause.index).replace(/[\s,;:—–-]+$/, "") + ".";
+  const word = head.slice(0, max).replace(/\s+\S*$/, "").replace(/[\s,;:—–-]+(and|or|the|a|an|to|of|in|on|with|then|but)?$/i, "");
+  return word + "…";
+}
 
 /** The pattern library, for the AI to pick from. */
 export async function patternNames() { return Object.keys((await slides()).PATTERNS); }
@@ -70,11 +86,11 @@ export async function compile(spec) {
   const page = L.makePage("lesson", "YSER Trades");
   page.objects = [];
   const add = o => { page.objects.push(o); return o; };
-  const title = String(spec?.title ?? "").trim().slice(0, 70);
-  if (title) add(L.create("text", 160, 100, 1500, undefined, { text: title, style: { ...L.titleStyle(60) }, auto: false }));
-  const sub = String(spec?.subtitle ?? "").trim().slice(0, 120);
-  if (sub) add(L.create("text", 160, 180, 1500, undefined, { text: sub, style: { ...L.bodyStyle(32), color: NAMED.muted }, auto: false }));
-  const caption = String(spec?.caption ?? "").trim().slice(0, 90), assumed = String(spec?.assumed ?? "").trim().slice(0, 90);
+  const title = fitText(spec?.title, 70);
+  if (title) add(L.create("text", 160, 100, 1500, undefined, { text: title, style: { ...L.titleStyle(title.length > 44 ? 50 : 60) }, auto: false }));
+  const sub = fitText(spec?.subtitle, 130);
+  if (sub) add(L.create("text", 160, 180, 1600, undefined, { text: sub, style: { ...L.bodyStyle(sub.length > 88 ? 27 : 32), color: NAMED.muted }, auto: false }));
+  const caption = fitText(spec?.caption, 120), assumed = fitText(spec?.assumed, 110);
   const chips = panels.some(p => p?.chip), compact = panels.some(p => (p?.bars?.length ?? 9) <= 4); // a few candles: roomy bodies with their number inside
   const top = (title ? (sub ? 285 : 245) : 150) + (chips ? 55 : 0);
   const bottom = caption ? 850 : 880;
@@ -253,7 +269,7 @@ export async function compile(spec) {
       const nx = spotted.x, ny = spotted.y;
       add(L.create("card", nx, ny, tw, size + 36, { style: "soft", text, icon: null, color: colour(m.color, NAMED.ink), radius: 18, textStyle: { ...L.bodyStyle(size), font: "inter", weight: 600, color: NAMED.ink, align: "center" } }));
     }
-    if (panel.label) add(L.create("text", areaX + 10, bottom - labelH + 24, areaW - 20, undefined, { text: String(panel.label).slice(0, 80), style: { ...L.bodyStyle(two ? 25 : 32), weight: 600, align: "center" }, auto: false }));
+    if (panel.label) add(L.create("text", areaX + 10, bottom - labelH + 24, areaW - 20, undefined, { text: fitText(panel.label, two ? 62 : 100), style: { ...L.bodyStyle(two ? 25 : 32), weight: 600, align: "center" }, auto: false }));
   });
 
   if (stack && drawn === 2) { // faint guides from each higher-timeframe body edge down through its lower-timeframe candles
@@ -264,7 +280,7 @@ export async function compile(spec) {
     spec.lines.slice(0, 7).forEach((line, i) => add(L.create("text", 160, 345 + i * 86, 1600, undefined, { text: String(line).slice(0, 150), style: { ...L.bodyStyle(32), color: i === 0 && spec.firstBold ? "#3a3a3a" : "#3a3a3a" }, auto: false })));
   }
   if (drawn && panels.length === 2 && spec?.divider) add(L.create("line", 960, top - 60, 0, 0, { x1: 960, y1: top - 60, x2: 960, y2: bottom - 10, stroke: "#e4e4e4", strokeWidth: 2, dash: "solid", curve: 0, end: "none" }));
-  if (drawn && caption) add(L.create("text", 160, 872, 1600, undefined, { text: caption, style: { ...L.bodyStyle(30), weight: 600, align: "center", color: "#3a3a3a" }, auto: false }));
+  if (drawn && caption) add(L.create("text", 160, 872, 1600, undefined, { text: caption, style: { ...L.bodyStyle(caption.length > 92 ? 25 : 30), weight: 600, align: "center", color: "#3a3a3a" }, auto: false }));
   if (drawn && assumed) add(L.create("text", 160, 925, 1600, undefined, { text: assumed, style: { ...L.bodyStyle(24), align: "center", color: NAMED.muted }, auto: false }));
   return drawn ? { page, deck: { brand: "YSER Trades", numbering: false, footer: { ...L.DEFAULT_FOOTER } } } : null;
 }
@@ -376,6 +392,28 @@ function systemFor(request, doc, lessons, concept = null) {
   return [DESIGNER, concept ? `THE CONCEPT FROM THE OWNER'S OWN PDFs THAT THIS REQUEST IS ABOUT (the source of truth; draw it faithfully with candles, levels, boxes and labels; never ask what it is, it is defined here):\n${conceptBrief(concept)}` : "", asksAboutSmt(request) ? `THE OWNER'S SMT / PSP / STRENGTH SWITCH RULES (authoritative; they decide every colour and label; below 15M draw no PSP star):\n${SMT_RULES}` : "", doc ? `THE OWNER'S MODEL (their vocabulary comes first):\n${modelFor(doc, request, 2200)}` : "", lessons.text ? `LESSON MATERIAL ON THIS:\n${lessons.text}` : ""].filter(Boolean).join("\n\n");
 }
 
+/** What a spec draws, in words: each panel's candle count and its marks, so the headline can be checked against the picture. */
+function describeSpec(spec) {
+  const panels = Array.isArray(spec?.panels) ? spec.panels : [];
+  return panels.map((p, i) => `${spec.stack ? (i ? "LOWER-timeframe row" : "HIGHER-timeframe row") : `Panel ${i + 1}`}: ${(p.bars?.length ?? "a pattern of")} candles${p.groups ? ` (${p.groups.join("+")} lower candles under each)` : ""}; marks: ${(p.marks ?? []).map(m => [m.type, m.label || m.text || "", m.at || (m.from && `${m.from} to ${m.to}`) || ""].filter(Boolean).join(" ")).join("; ") || "none"}`).join("\n");
+}
+
+/**
+ * The words on a picture, written from what it shows and from the owner's own model: a headline, a one-line subtitle and a caption that are true of
+ * THIS drawing (not a stock sentence). Falls back to the spec's own words if the AI can't be reached.
+ */
+async function narrate(spec, request, { doc, lessons }) {
+  try {
+    const concepts = ["", ...(spec.stack ? ["c2 closure", "c3 closure", "fractal", "cisd"].filter(k => new RegExp(k.replace(" ", "\\s*"), "i").test(request)) : [])].map(k => matchConcept(k || request, doc)).filter((c, i, a) => c && a.indexOf(c) === i);
+    const facts = [concepts.map(conceptBrief).join("\n\n"), lessons?.text ? `Lesson material:\n${String(lessons.text).slice(0, 1800)}` : ""].filter(Boolean).join("\n\n");
+    const reply = await Promise.race([new Promise((_, no) => setTimeout(() => no(new Error("too slow")), 14_000).unref()), viaJson(`You write the words on one trading diagram, in the owner's own terms. Reply ONE JSON object: {"title":"at most 7 words","subtitle":"one complete sentence, at most 95 characters","caption":"one complete sentence, at most 95 characters"}. Every claim must be TRUE of the drawing described and of the owner's model below: say what the candles and marks show (which candle sweeps, what closes where, where the entry is), never a stock phrase, never something the drawing does not show, never a sentence that stops half way. Only the higher-timeframe candles are numbered on the picture, so cite those numbers (C1, C2...) and never a lower-timeframe candle number; name lower-timeframe things by what they are (the low, the CISD close, the entry). If the model below says where the entry or the stop is, use exactly that.\n${facts}`,
+      `The owner asked: "${request}"\nThe drawing (current words: "${spec.title}" / "${spec.subtitle}" / "${spec.caption}"):\n${describeSpec(spec)}`, 400)]); // a few seconds at most: if the AI is busy the picture goes out with its own (true) words
+    const htf = spec.panels?.[0]?.bars?.length ?? 99;
+    const ok = v => typeof v === "string" && v.trim().length >= 8 && ![...v.matchAll(/\bcandles?\s+(\d+)\b/gi)].some(m => Number(m[1]) > htf); // a candle number the picture doesn't show is a false statement
+    return { ...spec, ...(ok(reply.title) ? { title: fitText(reply.title, 60) } : {}), ...(ok(reply.subtitle) ? { subtitle: fitText(reply.subtitle, 100) } : {}), ...(ok(reply.caption) ? { caption: fitText(reply.caption, 100) } : {}) };
+  } catch { return spec; }
+}
+
 /** "Show me X" -> a PNG. `request` is what the user wants drawn; the lessons and the user's model that match it guide the drawing. */
 export async function designDiagram(brief, { doc, said } = {}) {
   // `said` is what the owner typed; `brief` is the AI's rewording of it, which can drift ("ideal profile" became "ideal swing formation"). Matching uses their own words.
@@ -388,7 +426,8 @@ export async function designDiagram(brief, { doc, said } = {}) {
   // Two ideas where one is the entry of the other ("a c2 closure with a CISD entry"): one picture, the higher timeframe over the lower, body to body.
   const combo = compoundOf(request);
   if (combo) {
-    const spec = await composeEntry(combo.htf, /bear|short|sell|down/i.test(request) ? "bearish" : "bullish", { entry: combo.entry }).catch(() => null);
+    let spec = await composeEntry(combo.htf, /bear|short|sell|down/i.test(request) ? "bearish" : "bullish", { entry: combo.entry }).catch(() => null);
+    if (spec) spec = await narrate(spec, request, { doc, lessons });
     const png = spec ? await drawDiagram(spec).catch(() => null) : null;
     if (png) return { png, spec, lessons: lessons.lessons };
   }
@@ -419,7 +458,8 @@ export async function designDiagram(brief, { doc, said } = {}) {
     for (let attempt = 0; attempt < 2; attempt++) {
       const reply = await viaJson(system, `Draw: ${brief}${note}\n(The owner's own words: "${request}")`);
       if (reply.ask && !reply.template && !reply.panels) throw new Clarify(String(reply.ask).slice(0, 500));
-      const spec = reply.compose ? await composeEntry(String(reply.compose.htf), reply.compose.direction ?? reply.direction, { entry: String(reply.compose.entry ?? "cisd") }).catch(() => null) : resolve(reply);
+      let spec = reply.compose ? await composeEntry(String(reply.compose.htf), reply.compose.direction ?? reply.direction, { entry: String(reply.compose.entry ?? "cisd") }).catch(() => null) : resolve(reply);
+      if (reply.compose && spec) spec = await narrate(spec, request, { doc, lessons });
       const png = spec ? await drawDiagram(spec).catch(() => null) : null;
       if (png) return { png, spec, lessons: lessons.lessons };
       note = "\n(Your last reply had nothing that could be drawn. Reply with a template id from the list, or a spec with real panels and a pattern or bars.)";
@@ -461,8 +501,8 @@ export async function composeEntry(htfId, direction = "bullish", { entry = "cisd
   const entryBar = (sweep + 1) * g + 1 <= ltf.rows.length ? (sweep + 1) * g + 1 : 0;
   const marks = (p0.marks ?? []).filter(m => !(m.type === "note" && /entry/i.test(m.text ?? ""))).map(m => (m.type === "arrow" ? { ...m, label: "" } : m)); // the entry is named on the lower candles, where the CISD is
   const spec = {
-    title: `${base.title} With a CISD Entry`.slice(0, 70), subtitle: `${String(base.title).replace(/^(Bullish|Bearish)\s+/i, "")} on the HTF, its entry on the LTF`, stack: true,
-    caption: "The CISD inside the swept candle is the entry; the candles sit body to body.", assumed: `Assumed: bullish, ${rows.length} HTF candles with ${g} LTF candles under each.`,
+    title: `${base.title} With a CISD Entry`.slice(0, 70), subtitle: base.subtitle ?? "", stack: true,
+    caption: p0.label ?? "", // the template's own words about the entry: they are the owner's rules, so they are true assumed: `Assumed: bullish, ${rows.length} HTF candles with ${g} LTF candles under each.`,
     panels: [{ tf: "HTF", numbers: true, bars: rows, groups: rows.map(() => g), marks }, { tf: "LTF", numbers: false, bars: ltf.rows, marks: cisdMarks(ltf.info, entryBar) }],
   };
   void t;
