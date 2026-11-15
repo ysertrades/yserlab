@@ -1,8 +1,8 @@
-import { env } from "./env.js";
+﻿import { env } from "./env.js";
 import { fonts, svgToPng } from "./render.js";
 import { recall } from "./knowledge.js";
 import { modelFor } from "./ai.js";
-import { fromTemplate, templateList } from "./diagramTemplates.js";
+import { fromTemplate, stepsFromTemplate, templateList } from "./diagramTemplates.js";
 import { SMT_RULES, asksAboutSmt } from "./smtLesson.js";
 
 /**
@@ -21,7 +21,7 @@ const num = (v, d) => Number.isFinite(Number(v)) ? Number(v) : d;
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
 /** Every string in a spec with plain spaces (a non-breaking space draws as a missing-glyph box). */
-const clean = v => typeof v === "string" ? v.replace(/[   ​]/g, " ").replace(/\s+/g, " ").trim() : Array.isArray(v) ? v.map(clean) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, clean(x)])) : v;
+const clean = v => typeof v === "string" ? v.replace(/[Â â€‡â€¯â€‹]/g, " ").replace(/\s+/g, " ").trim() : Array.isArray(v) ? v.map(clean) : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, clean(x)])) : v;
 
 /** The pattern library, for the AI to pick from. */
 export async function patternNames() { return Object.keys((await slides()).PATTERNS); }
@@ -204,7 +204,7 @@ export async function drawDiagram(spec, width = 1920) {
   return svgToPng(L.pageSvg(built.page, built.deck, 1), width);
 }
 
-/* ── The designer: turns "show me X" into a spec ── */
+/* â”€â”€ The designer: turns "show me X" into a spec â”€â”€ */
 const PATTERN_HELP = `Library patterns (bullish, "flip": true draws the bearish twin): swing-2, swing-3, swing-4 (swing formations); c2-closure, c2-closure-run, c3-closure, c3-closure-run (closures); ideal, ideal-run (ideal formation); wick-eq, wick-eq-run; opposing, opposing-series; sweep-low (liquidity sweep then reversal); fvg, fvg-return (fair value gap, and price returning into it); eq-continuation, eq-reversal; cisd; projection; week-tuesday-low, week-wednesday, week-thursday, week-consolidation, week-monday-low (weekly profiles, 5 daily candles); htf-3, htf-2 (higher timeframe candles); osok-entry. Generated: uptrend, downtrend, range, consolidation, breakout, sweep, vshape, london-reversal, ny-reversal, london-expansion (with "count" 6 to 20).`;
 const DESIGNER = `You design a trading diagram for the YSER slides editor, then reply with ONE JSON object and nothing else.
 USE A TEMPLATE. These are ready-made, hand-drawn diagrams in the owner's style, and one of them fits almost every request: choose the CLOSEST one, even when it only covers the main idea of a longer request (a CISD after a sweep -> cisd; candle 2 and candle 3 of the fractal model -> fractal; an entry into a gap -> fvg). Reply {"template":"<id>","direction":"bullish" or "bearish"} (the direction the idea is traded; optionally "title" and "subtitle" to reword the headline, at most 6 and 12 words). When the request joins TWO ideas (a sweep, then a CISD), show them side by side: {"templates":[{"template":"<id>","direction":"..."},{"template":"<id>","direction":"..."}],"title":"...","subtitle":"..."}. Templates:
@@ -221,7 +221,7 @@ Spec for your own design:
    {"type":"arrow","from":"2:close","to":"5:high","color":"teal","curve":0.3,"dash":"solid|dashed","label":"expansion"}
    {"type":"circle","at":"3:low","color":"red"} or {"type":"dot","at":"3:low"}
    {"type":"note","at":"3:high","text":"CISD","color":"ink"}   a small tag; sits above a high, below a low
-   {"type":"smt","from":"3:low","to":"9:low","style":"dashed|solid","color":"muted|ss","label":"6H • 2S"}   an SMT line between two swing points (pivot A to pivot B)
+   {"type":"smt","from":"3:low","to":"9:low","style":"dashed|solid","color":"muted|ss","label":"6H â€¢ 2S"}   an SMT line between two swing points (pivot A to pivot B)
    {"type":"psp","at":"9:low","color":"muted|ss"}   a PSP star on a candle (muted = ordinary, ss = strength switch blue)
  ]}]}
 Anchors are "N:field": N is the candle number (1 = first; decimals like 2.5 sit between candles) and field is high, low, open, close, top (body top), bottom (body bottom) or mid.
@@ -234,7 +234,7 @@ How the cisd pattern reads: candles 1 to 3 run one way, candle 4 is a small paus
 Rules: pick the pattern that already contains the whole story (e.g. fvg-return when price comes back to the gap); an arrow must connect two DIFFERENT candles; never draw a mark that says nothing; check every anchor number is a candle that exists in the pattern (fvg has 3 candles, fvg-return 6, cisd 6, sweep-low 8, ideal 3, ideal-run 4, swing-3 3, projection 8, week profiles 5, htf-3 3, osok-entry 7).
 Taste (the owner's house style, follow it): clean and minimal, white page, nothing decorative. Teach ONE idea per diagram. Few marks, each earning its place: zones for gaps and ranges, levels for liquidity and key prices, arrows for the move, numbers on candles when the lesson talks about candle 1, 2, 3. Labels are 1 to 3 words. Colors: bull/teal for the idea or target, red for invalid or the stop, blue for levels and entry, amber for zones, ink for neutral. Use two panels only for a before/after or bullish/bearish comparison. Draw it exactly as the lesson and the owner's model describe it; if unsure of a detail, keep the diagram simpler instead of inventing.`;
 
-async function viaJson(system, user) {
+async function viaJson(system, user, max = 1800) {
   const tries = [];
   if (env.groqKey) for (const model of ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.8-27b"]) tries.push(["groq", model]);
   if (env.geminiKey) for (const model of ["gemini-flash-lite-latest", "gemini-flash-latest"]) tries.push(["gemini", model]);
@@ -243,14 +243,14 @@ async function viaJson(system, user) {
     try {
       let text = "";
       if (who === "groq") {
-        const body = { model, temperature: 0.3, max_completion_tokens: 1800, response_format: { type: "json_object" }, messages: [{ role: "system", content: system }, { role: "user", content: user }] };
+        const body = { model, temperature: 0.3, max_completion_tokens: max, response_format: { type: "json_object" }, messages: [{ role: "system", content: system }, { role: "user", content: user }] };
         if (model.startsWith("openai/gpt-oss")) body.reasoning_effort = "low";
         const r = await fetch("https://api.groq.com/openai/v1/chat/completions", { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${env.groqKey}` }, body: JSON.stringify(body), signal: AbortSignal.timeout(45_000) });
         if (!r.ok) { last = `AI error ${r.status}`; continue; }
         text = String((await r.json()).choices?.[0]?.message?.content ?? "");
       } else {
         const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": env.geminiKey },
-          body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents: [{ role: "user", parts: [{ text: user }] }], generationConfig: { temperature: 0.3, maxOutputTokens: 2500, responseMimeType: "application/json" } }), signal: AbortSignal.timeout(45_000) });
+          body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents: [{ role: "user", parts: [{ text: user }] }], generationConfig: { temperature: 0.3, maxOutputTokens: Math.max(2500, max), responseMimeType: "application/json" } }), signal: AbortSignal.timeout(45_000) });
         if (!r.ok) { last = `AI error ${r.status}`; continue; }
         text = ((await r.json()).candidates?.[0]?.content?.parts ?? []).map(p => p.text ?? "").join("");
       }
@@ -262,24 +262,58 @@ async function viaJson(system, user) {
   throw new Error(last);
 }
 
+
+/** The AI's reply as a drawable spec: a template (in a direction, with its own headline if given), two templates side by side, or its own spec. */
+function resolve(reply) {
+  let spec = reply;
+  if (spec?.template) {
+    const base = fromTemplate(String(spec.template), spec.direction);
+    if (base) spec = { ...base, ...(spec.title ? { title: spec.title } : {}), ...(spec.subtitle ? { subtitle: spec.subtitle } : {}) };
+  } else if (Array.isArray(spec?.templates)) {
+    const parts = spec.templates.slice(0, 2).map(t => fromTemplate(String(t?.template), t?.direction)).filter(Boolean);
+    if (parts.length) spec = { title: spec.title || parts.map(p => p.title).join(" + ").slice(0, 70), subtitle: spec.subtitle || "", panels: parts.map(p => p.panels[0]) };
+  }
+  return spec;
+}
+
+function systemFor(request, doc, lessons) {
+  return [DESIGNER, asksAboutSmt(request) ? `THE OWNER'S SMT / PSP / STRENGTH SWITCH RULES (authoritative; they decide every colour and label; below 15M draw no PSP star):\n${SMT_RULES}` : "", doc ? `THE OWNER'S MODEL (their vocabulary comes first):\n${modelFor(doc, request, 2200)}` : "", lessons.text ? `LESSON MATERIAL ON THIS:\n${lessons.text}` : ""].filter(Boolean).join("\n\n");
+}
+
 /** "Show me X" -> a PNG. `request` is what the user wants drawn; the lessons and the user's model that match it guide the drawing. */
 export async function designDiagram(request, { doc } = {}) {
   const lessons = recall(request, { chars: 3600, perLesson: 2 });
-  const system = [DESIGNER, asksAboutSmt(request) ? `THE OWNER'S SMT / PSP / STRENGTH SWITCH RULES (authoritative; they decide every colour and label; below 15M draw no PSP star):\n${SMT_RULES}` : "", doc ? `THE OWNER'S MODEL (their vocabulary comes first):\n${modelFor(doc, request, 2200)}` : "", lessons.text ? `LESSON MATERIAL ON THIS:\n${lessons.text}` : ""].filter(Boolean).join("\n\n");
+  const system = systemFor(request, doc, lessons);
   let note = "";
   for (let attempt = 0; attempt < 2; attempt++) {
-    let spec = await viaJson(system, `Draw: ${request}${note}`);
-    if (spec.template) { // a ready-made diagram, in the direction asked, with the AI's own headline if it gave one
-      const base = fromTemplate(String(spec.template), spec.direction);
-      if (base) spec = { ...base, ...(spec.title ? { title: spec.title } : {}), ...(spec.subtitle ? { subtitle: spec.subtitle } : {}) };
-    }
-    else if (Array.isArray(spec.templates)) { // two ready-made ideas side by side, each its own panel
-      const parts = spec.templates.slice(0, 2).map(t => fromTemplate(String(t?.template), t?.direction)).filter(Boolean);
-      if (parts.length) spec = { title: spec.title || parts.map(p => p.title).join(" + ").slice(0, 70), subtitle: spec.subtitle || "", panels: parts.map(p => p.panels[0]) };
-    }
+    const spec = resolve(await viaJson(system, `Draw: ${request}${note}`));
     const png = await drawDiagram(spec).catch(() => null);
     if (png) return { png, spec, lessons: lessons.lessons };
     note = "\n(Your last reply had nothing that could be drawn. Reply with a template id from the list, or a spec with real panels and a pattern or bars.)";
   }
   throw new Error("nothing to draw");
 }
+
+const SLIDES = n => `\nThe owner wants ${n} separate images that together explain this, like slides of a lesson, in teaching order (the foundation first, then each step building on the last). Each image teaches ONE idea. Reply {"slides":[ ${n} items ]}; each item is a template reply ({"template":"<id>","direction":"..."}), or a spec of your own, with its own short title and subtitle. If a template has steps (marked "has N steps" in the list), you may instead reply {"template":"<id>","steps":true,"direction":"..."} to get its whole step-by-step set.`;
+
+/** "Make me 4 images explaining X" -> several PNGs, in order. Slides that can't be drawn are skipped; none drawable is an error. */
+export async function designSlides(request, { doc, count = 4 } = {}) {
+  count = clamp(Math.round(num(count, 4)), 2, 6);
+  const lessons = recall(request, { chars: 4200, perLesson: 3 });
+  const system = systemFor(request, doc, lessons);
+  let note = "";
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const reply = await viaJson(system, `Draw: ${request}${SLIDES(count)}${note}`, 3800);
+    let specs = [];
+    if (reply.template && reply.steps) specs = stepsFromTemplate(String(reply.template), reply.direction);
+    else if (Array.isArray(reply.slides)) for (const s of reply.slides.slice(0, 6)) specs.push(...(s?.template && s?.steps ? stepsFromTemplate(String(s.template), s.direction) : [resolve(s)]));
+    else specs = [resolve(reply)];
+    const out = [];
+    for (const spec of specs.slice(0, 6)) { const png = await drawDiagram(spec).catch(() => null); if (png) out.push({ png, spec }); }
+    if (out.length) return { images: out, lessons: lessons.lessons };
+    note = "\n(Your last reply had nothing that could be drawn. Use template ids from the list, or specs with real panels and a pattern or bars.)";
+  }
+  throw new Error("nothing to draw");
+}
+
+

@@ -45,3 +45,12 @@ export async function deliver(client, channelIds, build, kind) {
   return sent;
 }
 export { FileBuilder, SeparatorBuilder };
+
+/** Several pictures in one post (a lesson's slides), in order; a V2 gallery shows up to ten. */
+export function galleryPost({ text, images, footer, accent = "accent" }) {
+  const box = new ContainerBuilder().setAccentColor(colour(accent));
+  if (text) box.addTextDisplayComponents(new TextDisplayBuilder().setContent(text));
+  box.addMediaGalleryComponents(new MediaGalleryBuilder().addItems(...images.slice(0, 10).map((_, i) => new MediaGalleryItemBuilder().setURL(`attachment://slide-${i + 1}.png`))));
+  if (footer) box.addTextDisplayComponents(new TextDisplayBuilder().setContent(`-# ${footer}`));
+  return { components: [box], files: images.slice(0, 10).map((im, i) => new AttachmentBuilder(im.png, { name: `slide-${i + 1}.png` })), flags: MessageFlags.IsComponentsV2, allowedMentions: { parse: ["users"] } };
+}

@@ -42,7 +42,7 @@ export const TEMPLATES = [
       { type: "arrow", from: "5:low", to: "8:high", color: "teal", curve: -.25, label: "reversal" }] }] },
   },
   {
-    id: "fractal", name: "TTrades fractal model (candles 1 to 4)", native: "bull",
+    id: "fractal", name: "TTrades fractal model (candles 1 to 4)", native: "bull", steps: fractalSteps(),
     about: "C1 sets the range, C2 sweeps one side and closes back inside, C3 expands through the other side, C4 continues",
     spec: { title: "TTrades Fractal Model", subtitle: "C2 takes liquidity, C3 expands", panels: [{ label: "Four candles on the higher timeframe", numbers: true,
       bars: [row(40, 62, 36, 58), row(58, 60, 22, 44), row(44, 78, 40, 74), row(74, 92, 70, 88)], marks: [
@@ -86,6 +86,19 @@ export const TEMPLATES = [
   },
   ...smtTemplates(),
 ];
+
+/** The fractal model built up one candle at a time: the candles still to come are drawn pale, so the scale never jumps between slides. */
+function fractalSteps() {
+  const bars = [row(40, 62, 36, 58), row(58, 60, 22, 44), row(44, 78, 40, 74), row(74, 92, 70, 88)];
+  const slide = (title, subtitle, label, future, marks) => ({ title, subtitle, panels: [{ label, numbers: true, bars, future, marks }] });
+  const range = [{ type: "level", at: "1:high", label: "C1 high", color: "blue", dash: "dashed", from: 1, to: 4 }, { type: "level", at: "1:low", label: "C1 low", color: "red", dash: "dashed", from: 1, to: 4 }];
+  return [
+    slide("Fractal Model: C1 Sets the Range", "The first candle's high and low are the levels everything else reacts to", "Candle 1: the range", 3, range),
+    slide("Fractal Model: C2 Takes Liquidity", "C2 runs through one side of C1, then closes back inside", "Candle 2: the sweep", 2, [...range, { type: "circle", at: "2:low", color: "red" }, { type: "note", at: "2:low", text: "C2 sweep", color: "ink" }]),
+    slide("Fractal Model: C3 Expands", "C3 leaves the sweep and runs through the other side of C1", "Candle 3: the expansion", 1, [...range, { type: "circle", at: "2:low", color: "red" }, { type: "arrow", from: "2:low", to: "3:high", color: "teal", curve: -.25, label: "C3 expansion" }]),
+    slide("Fractal Model: C4 Continues", "C4 carries on in the direction of the expansion", "Candle 4: the continuation", 0, [...range, { type: "arrow", from: "2:low", to: "3:high", color: "teal", curve: -.25, label: "C3 expansion" }, { type: "arrow", from: "3:high", to: "4:high", color: "teal", curve: -.15, label: "C4" }]),
+  ];
+}
 
 /** The SMT, PSP, strength switch and stage diagrams (the owner's rules: see smtLesson.js). Drawn bullish (SMT on lows); mirrored for bearish. */
 function smtTemplates() {
@@ -153,4 +166,11 @@ export function fromTemplate(id, direction) {
   const want = /bear|short|sell|down/i.test(direction ?? "") ? "bear" : "bull";
   return want === t.native ? t.spec : mirror(t.spec);
 }
-export const templateList = () => TEMPLATES.map(t => `${t.id}: ${t.name}: ${t.about} (drawn ${t.native === "bull" ? "bullish" : "bearish"} by default)`).join("\n");
+/** The step-by-step set of a template (each step a spec), in a direction; [] if it has none. */
+export function stepsFromTemplate(id, direction) {
+  const t = TEMPLATES.find(x => x.id === id);
+  if (!t?.steps) { const one = fromTemplate(id, direction); return one ? [one] : []; }
+  const want = /bear|short|sell|down/i.test(direction ?? "") ? "bear" : "bull";
+  return want === t.native ? t.steps : t.steps.map(mirror);
+}
+export const templateList = () => TEMPLATES.map(t => `${t.id}: ${t.name}: ${t.about}${t.steps ? ` (has ${t.steps.length} steps)` : ""} (drawn ${t.native === "bull" ? "bullish" : "bearish"} by default)`).join("\n");

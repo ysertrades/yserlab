@@ -10,9 +10,9 @@ import { checkJobs } from "./jobs.js";
 import { heartbeat, offline } from "./status.js";
 import * as picker from "./picker.js";
 import { ask, modelDoc } from "./ai.js";
-import { designDiagram } from "./diagram.js";
+import { designDiagram, designSlides } from "./diagram.js";
 import { cardOnRequest } from "./cards.js";
-import { picturePost } from "./post.js";
+import { picturePost, galleryPost } from "./post.js";
 import { fonts } from "./render.js";
 
 const gaps = missing();
@@ -95,7 +95,15 @@ client.on(Events.MessageCreate, async message => {
       // Drawn with the slides editor's own renderer; a failure says so instead of going silent.
       await message.channel.sendTyping().catch(() => {});
       try {
-        const { png, spec, lessons } = await designDiagram(out.diagram, { doc: await modelDoc(owner) });
+        const doc = await modelDoc(owner);
+        if (out.count > 1) { // several images: a lesson in slides, one post, in order
+          const { images, lessons } = await designSlides(out.diagram, { doc, count: out.count });
+          const from = lessons.slice(0, 2).map(l => l.title).join(" · ");
+          await message.reply({ ...galleryPost({ images, text: `**${images.map(i => i.spec.title).filter(Boolean)[0]?.slice(0, 60) ?? "Slides"}** · ${images.length} slides`, footer: from ? `From: ${from}` : undefined }), allowedMentions: { repliedUser: false } });
+          await log("diagram", { note: `${images.length} slides: ${out.diagram.slice(0, 100)}` });
+          return;
+        }
+        const { png, spec, lessons } = await designDiagram(out.diagram, { doc });
         const from = lessons.slice(0, 2).map(l => l.title).join(" · ");
         await message.reply({ ...picturePost({ png, name: "diagram.png", text: spec.title ? `**${String(spec.title).slice(0, 80)}**` : undefined, footer: from ? `From: ${from}` : undefined }), allowedMentions: { repliedUser: false } });
         await log("diagram", { note: out.diagram.slice(0, 120) });

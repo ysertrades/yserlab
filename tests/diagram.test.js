@@ -1,7 +1,7 @@
-import test from "node:test";
+﻿import test from "node:test";
 import assert from "node:assert/strict";
 import { compile, drawDiagram } from "../src/diagram.js";
-import { TEMPLATES, fromTemplate, mirror } from "../src/diagramTemplates.js";
+import { TEMPLATES, fromTemplate, mirror, stepsFromTemplate } from "../src/diagramTemplates.js";
 
 const PNG = Buffer.from([0x89, 0x50, 0x4e, 0x47]);
 
@@ -34,3 +34,12 @@ test("nothing to draw gives null, not a crash", async () => {
   assert.equal(await compile({ panels: [{ pattern: "no-such-thing" }] }), null);
   assert.equal(await compile(null), null);
 });
+
+test("the fractal model comes as four steps that draw, bullish and bearish", async () => {
+  for (const dir of ["bullish", "bearish"]) {
+    const steps = stepsFromTemplate("fractal", dir);
+    assert.equal(steps.length, 4);
+    for (const s of steps) assert.ok(await drawDiagram(s, 640));
+  }
+});
+
