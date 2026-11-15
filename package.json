@@ -1,0 +1,23 @@
+{
+  "name": "yserlab",
+  "version": "1.0.0",
+  "description": "YSER Lab: the Discord bot for the YSER app. Posts cards, economic news and milestones, builds trade cards, and answers about your trading model.",
+  "type": "module",
+  "main": "src/index.js",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.80",
+    "@resvg/resvg-js": "^2.6.2",
+    "@supabase/supabase-js": "^2.118.0",
+    "discord.js": "^14.21.0",
+    "dotenv": "^16.4.5",
+    "luxon": "^3.7.2"
+  }
+}
+

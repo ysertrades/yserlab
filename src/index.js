@@ -1,0 +1,95 @@
+import { Client, Events, GatewayIntentBits, Partials } from "discord.js";
+import { env, missing } from "./env.js";
+import { settings, log } from "./store.js";
+import { isAdmin, mayUseAi } from "./access.js";
+import { checkAlerts, checkSchedule } from "./calendar/news.js";
+import { checkCards } from "./cards.js";
+import { checkMilestones } from "./milestones.js";
+import { checkSessions } from "./sessions.js";
+import { checkJobs } from "./jobs.js";
+import { heartbeat, offline } from "./status.js";
+import * as picker from "./picker.js";
+import { ask } from "./ai.js";
+import { fonts } from "./render.js";
+
+const gaps = missing();
+if (gaps.length) { console.error(`YSER Lab can't start. Missing on the host: ${gaps.join(", ")}`); process.exit(1); }
+fonts();
+
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+  partials: [Partials.Channel],
+  allowedMentions: { parse: [], repliedUser: false },
+});
+
+/** A loop that never overlaps itself and never dies from one bad round. */
+function every(ms, name, fn) {
+  let busy = false;
+  setInterval(async () => {
+    if (busy) return;
+    busy = true;
+    try { await fn(); } catch (e) { console.warn(`${name}:`, e?.message ?? e); }
+    busy = false;
+  }, ms);
+}
+
+client.once(Events.ClientReady, async () => {
+  console.log(`YSER Lab ready as ${client.user.tag} in ${client.guilds.cache.size} server(s)`);
+  await settings(true);
+  await log("bot", { note: `online as ${client.user.tag}` });
+  await heartbeat(client).catch(() => {});
+  every(1_000, "alerts", async () => { const { config } = await settings(); if (!config.paused) { await checkAlerts(client, config); await checkSessions(client); } });
+  every(15_000, "schedule", async () => { const { config } = await settings(); if (!config.paused) { await checkSchedule(client); await checkCards(client); } });
+  every(120_000, "milestones", async () => { const { config } = await settings(); if (!config.paused) await checkMilestones(client); });
+  every(4_000, "jobs", () => checkJobs(client));
+  every(30_000, "status", () => heartbeat(client));
+});
+
+const stripMention = (text, id) => text.replace(new RegExp(`<@!?${id}>`, "g"), "").trim();
+const chunks = text => { const out = []; let rest = text; while (rest.length > 1900) { let cut = rest.lastIndexOf("\n", 1900); if (cut < 800) cut = 1900; out.push(rest.slice(0, cut)); rest = rest.slice(cut).trimStart(); } out.push(rest); return out; };
+
+client.on(Events.MessageCreate, async message => {
+  try {
+    if (message.author.bot || !message.content && !message.attachments.size) return;
+    const { config, owner } = await settings();
+    if (config.paused) return;
+    const tagged = message.mentions.has(client.user, { ignoreEveryone: true, ignoreRoles: true });
+    const channelId = message.channelId, parentId = message.channel.parentId;
+    const open = (config.ai.channels ?? []).includes(channelId) || (!!parentId && (config.ai.channels ?? []).includes(parentId));
+    if (!tagged && !open) return;
+    // A picture with a tag: the trade card flow.
+    if (tagged && [...message.attachments.values()].some(a => a.contentType?.startsWith("image/"))) {
+      if (!isAdmin(config, message.author.id)) return;
+      if (!owner) { await message.reply("Open YSER Lab in the app once so I know whose trades these are."); return; }
+      await picker.startCard(message, owner);
+      return;
+    }
+    if (!config.ai.on || !mayUseAi(config, message.author.id)) {
+      if (tagged) await message.reply({ content: "I only answer my owner here.", allowedMentions: { repliedUser: false } });
+      return;
+    }
+    const text = stripMention(message.content, client.user.id);
+    if (!text) { if (tagged) await message.reply({ content: "Yes? Ask me anything about your model or your trades.", allowedMentions: { repliedUser: false } }); return; }
+    if (!owner) { await message.reply("Open YSER Lab in the app once so I know whose trades and model to use."); return; }
+    await message.channel.sendTyping().catch(() => {});
+    const out = await ask({ owner, channelId, text });
+    if (out.chart) { await picker.startChart(message, owner, out.timeframe); return; }
+    const parts = chunks(out.text);
+    await message.reply({ content: parts[0], allowedMentions: { repliedUser: false } });
+    for (const part of parts.slice(1)) await message.channel.send(part);
+  } catch (e) {
+    await log("message", { error: e?.message ?? String(e) }, false);
+    message.reply({ content: "Something went wrong on my side. Try again in a moment.", allowedMentions: { repliedUser: false } }).catch(() => {});
+  }
+});
+
+client.on(Events.InteractionCreate, async interaction => {
+  try { await picker.handle(interaction); }
+  catch (e) { await log("interaction", { error: e?.message ?? String(e) }, false); }
+});
+
+for (const sig of ["SIGINT", "SIGTERM"]) process.on(sig, async () => { await offline().catch(() => {}); process.exit(0); });
+process.on("unhandledRejection", e => console.warn("unhandled:", e?.message ?? e));
+process.on("uncaughtException", e => console.warn("uncaught:", e?.message ?? e));
+
+client.login(env.token);
