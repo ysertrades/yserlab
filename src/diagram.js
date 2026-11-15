@@ -65,7 +65,6 @@ export async function compile(spec) {
   const panels = (Array.isArray(spec?.panels) ? spec.panels : spec?.pattern || spec?.bars ? [spec] : []).slice(0, 2);
   const page = L.makePage("lesson", "YSER Trades");
   page.objects = [];
-  page.background = { ...L.DEFAULT_BG, color: "#ffffff", pattern: "none" }; // clean white, nothing behind the candles
   const add = o => { page.objects.push(o); return o; };
   const title = String(spec?.title ?? "").trim().slice(0, 70);
   if (title) add(L.create("text", 160, 100, 1500, undefined, { text: title, style: { ...L.titleStyle(60) }, auto: false }));
@@ -81,7 +80,8 @@ export async function compile(spec) {
     drawn++;
     const n = bars.length, two = panels.length === 2;
     const areaX = two ? (pi === 0 ? 100 : 1000) : 200, areaW = two ? 820 : 1520;
-    const w = Math.min(two ? 640 : 1160, n * (two ? 95 : 130) + 120), x = areaX + (areaW - w) / 2;
+    // Candles the size they are on the QuantLab cards: a body about 40 px wide on a 50 px step, however few candles there are.
+    const w = n * (two ? 56 : 64), x = areaX + (areaW - w) / 2;
     const labelH = panel.label ? 70 : 0, pad = 55; // room above and below the candles for tags, circles and arrowheads
     const h = bottom - top - labelH - pad * 2, y = top + pad;
     const step = w / n, X = i => x + (i - .5) * step, Y = v => y + (1 - v) * h;
@@ -103,7 +103,7 @@ export async function compile(spec) {
       const a = point(m.from), b = point(m.to);
       if (!a || !b) continue;
       const fromBar = clamp(num(m.fromBar, parseAnchor(m.from, n)?.bar ?? 1), 1, n), toBar = clamp(num(m.toBar, n), 1, n);
-      const x1 = X(Math.min(fromBar, toBar)) - step * .4, x2 = X(Math.max(fromBar, toBar)) + step * .4;
+      const x1 = X(Math.min(fromBar, toBar)) - step * .5 - 24, x2 = X(Math.max(fromBar, toBar)) + step * .5 + 24;
       add(L.create("zone", x1, Math.min(a.y, b.y), x2 - x1, Math.max(14, Math.abs(b.y - a.y)), { fill: colour(m.color, NAMED.zone) }));
       // The zone's name sits just outside its right edge, clear of the candles.
       if (m.label) add(L.create("text", x2 + 14, (a.y + b.y) / 2 - 18, 220, undefined, { text: String(m.label).slice(0, 40), style: { ...L.bodyStyle(26), color: NAMED.muted }, auto: false }));
@@ -111,7 +111,7 @@ export async function compile(spec) {
 
     // The candles.
     // The house look of the QuantLab cards: slim bodies, thin wicks, light grey up candles and dark grey down candles.
-    const series = L.create("series", x, y, w, h, { preset: "custom", bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), labels: "none", gap: .74, bull: "#dcdcdc", bear: "#646464", outline: true, border: "#8e8e8e" });
+    const series = L.create("series", x, y, w, h, { preset: "custom", bars, count: n, future: clamp(Math.round(num(panel.future, 0)), 0, n - 1), labels: "none", gap: .24, bull: "#dcdcdc", bear: "#646464", outline: true, border: "#8e8e8e" });
     add(series);
     const underNote = new Set(marks.filter(m => m?.type === "note" && /^(low|bottom)$/.test(parseAnchor(m.at, n)?.field ?? "")).map(m => Math.round(parseAnchor(m.at, n).bar)));
     if (panel.numbers) bars.forEach((_, i) => !underNote.has(i + 1) && add(L.create("text", X(i + 1) - 30, y + h + 14, 60, undefined, { text: panel.numbers === "days" ? ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][i % 7] : String(i + 1), style: { ...L.bodyStyle(26), align: "center", color: NAMED.muted }, auto: false })));
@@ -121,7 +121,7 @@ export async function compile(spec) {
       const p = point(m.at);
       if (!p) continue;
       const from = clamp(num(m.from, 1), 1, n), to = clamp(num(m.to, n), 1, n);
-      const lx = X(Math.min(from, to)) - step * .5, lw = Math.max(step, X(Math.max(from, to)) - lx + step * .5 + (m.label ? 120 : 0));
+      const lx = X(Math.min(from, to)) - step * .5 - 40, lw = Math.max(step, X(Math.max(from, to)) - lx + step * .5 + 40 + (m.label ? 120 : 0));
       add(L.create("level", lx, p.y - 20, lw, 40, { color: colour(m.color, NAMED.blue), label: String(m.label ?? "").slice(0, 24), tag: m.label ? "right" : "none", chip: null, dash: m.dash === "dashed" ? "dashed" : "solid" }));
     }
     for (const m of marks.filter(m => m?.type === "arrow" || m?.type === "line")) {
@@ -151,7 +151,7 @@ export async function compile(spec) {
       const ny = p.y + num(m.dy, above ? -78 : below ? 30 : -34);
       add(L.create("card", nx, ny, tw, size + 36, { style: "soft", text, icon: null, color: colour(m.color, NAMED.ink), radius: 18, textStyle: { ...L.bodyStyle(size), font: "inter", weight: 600, color: NAMED.ink, align: "center" } }));
     }
-    if (panel.label) add(L.create("text", x, bottom - labelH + 24, w, undefined, { text: String(panel.label).slice(0, 50), style: { ...L.bodyStyle(32), weight: 600, align: "center" }, auto: false }));
+    if (panel.label) add(L.create("text", x + w / 2 - (two ? 400 : 600), bottom - labelH + 24, two ? 800 : 1200, undefined, { text: String(panel.label).slice(0, 50), style: { ...L.bodyStyle(32), weight: 600, align: "center" }, auto: false }));
   });
 
   return drawn ? { page, deck: { brand: "YSER Trades", numbering: false, footer: { ...L.DEFAULT_FOOTER } } } : null;
