@@ -1,8 +1,11 @@
 import { isAdmin } from "./access.js";
 import { newsPicture } from "./calendar/news.js";
 import { cardOnRequest } from "./cards.js";
-import { picturePost, textPost } from "./post.js";
-import { findPerson, tagText } from "./people.js";
+import { picturePost } from "./post.js";
+const idsIn = t => [...new Set([...String(t ?? "").matchAll(/<@!?(\d{15,})>/g)].map(x => x[1]))];
+/** A plain message (not a card): what the bot says reads as a message, and a tag is a real tag that notifies. */
+const textPost = ({ text }) => ({ content: String(text ?? "").slice(0, 1990), allowedMentions: { users: idsIn(text), parse: [] } });
+import { candidates, findPerson, tagText } from "./people.js";
 import { addCountdown, whenOf } from "./sched.js";
 
 /**
@@ -18,7 +21,11 @@ async function targetOf(message, who) {
   const mentioned = [...message.mentions.users.values()].find(u => u.id !== bot);
   let id = mentioned?.id ?? (/\d{15,}/.exec(String(who ?? ""))?.[0] ?? null);
   if (!id && /^(me|myself)$/i.test(String(who ?? "").trim())) id = message.author.id;
-  if (!id && who) id = findPerson(String(who).replace(/^@/, ""));
+  if (!id && who) {
+    const found = candidates(String(who).replace(/^@/, ""));
+    if (found.length === 1 || (found.length > 1 && found[0].exact && !found[1].exact)) id = found[0].id;
+    else if (found.length) { message.__ambiguous = found.slice(0, 4).map(c => c.id); return null; }
+  }
   if (!id && who) { // a name: the closest member
     try { const found = await message.guild.members.search({ query: String(who).replace(/^@/, "").slice(0, 32), limit: 1 }); id = found.first()?.id ?? null; } catch { /* needs the members list: ask for a tag instead */ }
   }
@@ -34,6 +41,18 @@ function channelOf(message, name) {
   return message.guild?.channels.cache.find(c => c.isTextBased?.() && c.name.toLowerCase().replace(/[^a-z0-9]+/g, "").includes(q)) ?? null;
 }
 const missingPermission = e => /Missing (Permissions|Access)|50013|50001/.test(String(e?.message ?? e)) ? "I don't have the permission for that here. Give my role Manage Messages, Moderate Members, Kick Members or Ban Members as the action needs, and keep it above theirs." : null;
+
+const unsure = message => message.__ambiguous?.length ? `I'm not sure which one you mean: ${message.__ambiguous.map(tag).join(" or ")}. Tag the right one (@name) and I'll do it.` : "I'm not sure who you mean. Tag them (@name) so I get exactly the right person.";
+const YES = /^\s*(y|yes|yeah|yep|yup|confirm|confirmed|do it|go|go ahead|sure|ok|okay)\b/i;
+/** Asks the owner to confirm, in the channel, naming who it is about; true only on a clear yes within 20 seconds. */
+async function confirm(message, text) {
+  if (!message.id || !message.channel?.awaitMessages) return true; // scheduled: nobody to ask
+  const ask = await message.channel.send({ content: `${text}\nReply **yes** within 20 seconds to do it.`, allowedMentions: { users: idsIn(text), parse: [] } });
+  const got = await message.channel.awaitMessages({ filter: m => m.author.id === message.author.id, max: 1, time: 20_000 }).catch(() => null);
+  const reply = got?.first();
+  ask.delete().catch(() => {}); if (reply && YES.test(reply.content)) reply.delete().catch(() => {});
+  return !!reply && YES.test(reply.content);
+}
 
 /** Every channel a request names ("news, results and #general"), or this one. */
 function channelsOf(message, spec) {
@@ -90,7 +109,9 @@ export async function moderate(message, args, config) {
     if (action === "purge") {
       const named = (args.user && !/^(everyone|all|anyone|nobody|none|any)$/i.test(String(args.user).trim())) || [...message.mentions.users.values()].some(u => u.id !== message.client.user.id);
       const userId = named ? await targetOf(message, args.user) : null;
-      if (named && !userId) return textPost({ text: "I couldn't tell who you mean. Tag them (@name) and I'll clear their messages.", accent: "down" });
+      if (named && !userId) return textPost({ text: unsure(message), accent: "down" });
+      const wide = userId || count === "all" || count > 25;
+      if (wide && !(await confirm(message, `🧹 Delete ${count === "all" ? "**all**" : `the last **${count}**`} message${count === 1 ? "" : "s"}${userId ? ` from ${tag(userId)}${userId === message.author.id ? " (that's **you**)" : ""}` : ` in ${channel}`}?`))) return textPost({ text: "Cancelled. Nothing was deleted." });
       const count = String(args.count ?? "").toLowerCase() === "all" ? "all" : Number(args.count) || 1;
       const { deleted, skippedOld } = await purge(channel, { count, userId, keepId: message.id });
       return textPost({ text: `🧹 Deleted **${deleted}** message${deleted === 1 ? "" : "s"}${userId ? ` from ${tag(userId)}` : ""} in ${channel}${count === "all" ? " (all I could reach)" : `, newest first`}.${skippedOld ? `\n-# ${skippedOld} older than I could clear were left.` : ""}`, accent: "accent" });
@@ -100,9 +121,10 @@ export async function moderate(message, args, config) {
     if (action === "unban") { const id = await targetOf(message, args.user); if (!id) return textPost({ text: "Tell me who to unban (their ID or tag).", accent: "down" }); await message.guild.bans.remove(id, reason); return textPost({ text: `✅ ${tag(id)} is unbanned.` }); }
 
     const id = await targetOf(message, args.user);
-    if (!id) return textPost({ text: "Tag the person (or give their ID) so I know exactly who you mean.", accent: "down" });
+    if (!id) return textPost({ text: unsure(message), accent: "down" });
     if (id === message.author.id || isAdmin(config, id) || id === message.client.user.id) return textPost({ text: `I won't do that to ${tag(id)}: they're an admin (or me).`, accent: "down" });
     if (action === "warn") return textPost({ text: `⚠️ ${tag(id)} this is a warning${args.reason ? `: ${args.reason}` : ""}.`, accent: "amber" });
+    if ((action === "ban" || action === "kick") && !(await confirm(message, `${action === "ban" ? "🔨 Ban" : "👢 Kick"} ${tag(id)}?`))) return textPost({ text: "Cancelled." });
     if (action === "ban") { await message.guild.members.ban(id, { reason, deleteMessageSeconds: Math.max(0, Math.min(7, Number(args.days) || 0)) * 86400 }); return textPost({ text: `🔨 ${tag(id)} is **banned**${args.reason ? `: ${args.reason}` : ""}${args.days ? `. Their last ${args.days} day(s) of messages were removed.` : "."}`, accent: "down" }); }
     const member = await message.guild.members.fetch(id).catch(() => null);
     if (!member) return textPost({ text: `${tag(id)} isn't in this server.`, accent: "down" });
@@ -134,7 +156,8 @@ export async function sendFromApp(message, args, { owner, config }) {
       await sendAll(() => picturePost({ png: card.png, name: `${card.name}.png`, text: `**${card.label}**` }));
     } else if (what === "text" || args.text) {
       if (!args.text) return textPost({ text: "What should I write?", accent: "down" });
-      await sendAll(() => textPost({ text: tagText(String(args.text).slice(0, 3800), { me: message.author.id }) }));
+      const words = tagText(String(args.text).slice(0, 1990), { me: message.author.id });
+      await sendAll(() => ({ content: words, allowedMentions: { users: idsIn(words), parse: [] } }));
     } else return textPost({ text: "I can send the news (today, tomorrow or the week), a PnL card, or a message of yours.", accent: "down" });
     return textPost({ text: `📤 Sent to ${targets.join(" ")}.` });
   } catch (e) {
@@ -146,7 +169,7 @@ export async function sendFromApp(message, args, { owner, config }) {
 async function extra(message, args, config, action, channel, reason) {
   const me = message.author.id;
   const text = tagText(String(args.text ?? args.reason ?? ""), { me });
-  if (action === "say" || action === "announce") { if (!text) return textPost({ text: "What should I say?", accent: "down" }); for (const c of channelsOf(message, args.channel)) await c.send(textPost({ text })); return textPost({ text: `📤 Said it in ${channelsOf(message, args.channel).join(" ")}.` }); }
+  if (action === "say" || action === "announce") { if (!text) return textPost({ text: "What should I say?", accent: "down" }); for (const c of channelsOf(message, args.channel)) await c.send({ content: text.slice(0, 1990), allowedMentions: { users: idsIn(text), parse: [] } }); return textPost({ text: `📤 Said it in ${channelsOf(message, args.channel).join(" ")}.` }); }
   if (action === "poll") {
     const options = pollOptions(args.options);
     if (!args.question || options.length < 2) return textPost({ text: "A poll needs a question and at least two options.", accent: "down" });
@@ -170,7 +193,7 @@ async function extra(message, args, config, action, channel, reason) {
   if (["dm", "role_add", "role_remove", "nickname"].includes(action)) {
     const id = await targetOf(message, args.user);
     if (!id) return textPost({ text: "Tag the person so I know exactly who you mean.", accent: "down" });
-    if (action === "dm") { const user = await message.client.users.fetch(id); await user.send(text || "👋"); return textPost({ text: `📨 Sent ${tag(id)} a private message.` }); }
+    if (action === "dm") { const user = await message.client.users.fetch(id); await user.send({ content: text || "👋", allowedMentions: { parse: [] } }); return textPost({ text: `📨 Sent ${tag(id)} a private message.` }); }
     const member = await message.guild.members.fetch(id).catch(() => null);
     if (!member) return textPost({ text: `${tag(id)} isn't in this server.`, accent: "down" });
     if (action === "nickname") { await member.setNickname(args.name ? String(args.name).slice(0, 32) : null, reason); return textPost({ text: `🏷️ ${tag(id)} is now called **${args.name || "their own name"}**.` }); }

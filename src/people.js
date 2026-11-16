@@ -41,12 +41,26 @@ export function findPerson(name) {
 export const nameOf = id => people[id]?.[0] ?? null;
 
 /** "@ahmed said hi" -> "<@123> said hi". `@me` is the owner. Names that aren't known stay as written. */
+const sure = name => { const c = candidates(name); return c.length === 1 || (c.length > 1 && c[0].exact && !c[1].exact) ? c[0].id : null; };
 export function tagText(text, { me } = {}) {
   return String(text ?? "").replace(/@([\p{L}\p{N}_.\-]+)(?: ([\p{L}\p{N}_.\-]+))?/gu, (whole, first, second) => {
     if (/^me$/i.test(first) && me) return `<@${me}>` + (second ? " " + second : "");
     if (/^(everyone|here)$/i.test(first)) return whole;
-    if (second) { const both = findPerson(`${first} ${second}`); if (both) return `<@${both}>`; }
-    const one = findPerson(first);
+    if (second) { const both = sure(`${first} ${second}`); if (both) return `<@${both}>`; }
+    const one = sure(first);
     return one ? `<@${one}>` + (second ? " " + second : "") : whole;
   });
+}
+
+/** Everyone a name could mean, best first, each with whether the match was exact. Nothing is guessed from a part of a name shorter than 3 letters. */
+export function candidates(name) {
+  const q = norm(name);
+  if (!q) return [];
+  const out = [];
+  for (const [id, names] of Object.entries(people)) {
+    let best = 0, exact = false;
+    for (const n of names) { const k = norm(n); if (k === q) { best = 100; exact = true; break; } if (q.length >= 3 && (k.startsWith(q) || k.includes(q))) best = Math.max(best, k.startsWith(q) ? 60 : 30); }
+    if (best) out.push({ id, score: best, exact });
+  }
+  return out.sort((a, b) => b.score - a.score);
 }
