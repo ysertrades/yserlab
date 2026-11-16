@@ -16,6 +16,7 @@ import { picturePost, galleryPost } from "./post.js";
 import { fonts } from "./render.js";
 import { moderate, sendFromApp } from "./mod.js";
 import { remember } from "./people.js";
+import { pollJuice, publishTrump } from "./feeds.js";
 import { cancel, list as listJobs, schedule, tick as tickJobs } from "./sched.js";
 
 const gaps = missing();
@@ -52,6 +53,8 @@ client.once(Events.ClientReady, async () => {
   every(4_000, "jobs", () => checkJobs(client));
   every(1_000, "later", () => tickJobs(client, runLater)); // what the owner asked to happen at a time or after a delay
   every(30_000, "status", () => heartbeat(client));
+  every(3_000, "juice", () => pollJuice()); // FinancialJuice headlines for the app's live wire (a new one reaches the page within seconds)
+  every(60_000, "trump", () => publishTrump()); // the White House schedule (does real work every 4 minutes)
 });
 
 const stripMention = (text, id) => text.replace(new RegExp(`<@!?${id}>`, "g"), "").trim();
