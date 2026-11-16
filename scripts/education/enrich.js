@@ -1,4 +1,4 @@
-﻿// Stage 2: read everything that isn't plain text, so nothing in the education center is skipped.
+// Stage 2: read everything that isn't plain text, so nothing in the education center is skipped.
 //   node scripts/education/enrich.js [images|videos|pdfs]      (no argument = all three)
 //  - images: every diagram/chart in the lessons is read by Gemini's vision: all text on it, then what it teaches
 //  - videos: each lesson's YouTube transcript
@@ -66,7 +66,8 @@ async function download(url, ext) {
   throw new Error("download failed " + url);
 }
 
-const SHORT_PROMPT = `TTrades trading-education picture. Reply in at most 170 words, no preamble: first "TEXT:" every word printed on it, then "WHAT IT SHOWS:" the candles, levels, zones, arrows and order of events, then "WHAT IT TEACHES:" the rule in one sentence.`;`nconst IMAGE_PROMPT = `This picture is from the TTrades trading education material (the TTrades Fractal Model and ICT concepts). Work like a careful note-taker who must leave nothing out.
+const SHORT_PROMPT = `TTrades trading-education picture. Reply in at most 170 words, no preamble: first "TEXT:" every word printed on it, then "WHAT IT SHOWS:" the candles, levels, zones, arrows and order of events, then "WHAT IT TEACHES:" the rule in one sentence.`;
+const IMAGE_PROMPT = `This picture is from the TTrades trading education material (the TTrades Fractal Model and ICT concepts). Work like a careful note-taker who must leave nothing out.
 1. TEXT: write every word printed on the picture exactly as shown (titles, labels, annotations, bullet points, captions).
 2. WHAT IT SHOWS: describe the diagram precisely: the candles and their colours, the levels and zones drawn (and what each is called), arrows, numbered steps, the order in which things happen, which side is bullish or bearish.
 3. WHAT IT TEACHES: state the rule or idea the picture is demonstrating, in plain words, as a trading student would need it.
