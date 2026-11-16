@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { db } from "./store.js";
 
 /**
@@ -15,12 +16,17 @@ const text = html => decode(html).replace(/<\/li>/gi, " · ").replace(/<[^>]+>/g
 
 /* ── FinancialJuice ── */
 const seen = new Set();
-let juiceErr = null, juiceTrim = 0;
+// FinancialJuice answers one request per minute or so from one address and refuses the rest (429), so the bot asks politely: one request
+// a minute, and when it is told to wait it waits longer, instead of hammering the feed. The page still gets each headline the instant it is written.
+let juiceErr = null, juiceTrim = 0, juiceNext = 0, juiceWait = 75_000;
 export async function pollJuice() {
-  if (!db) return 0;
+  if (!db || Date.now() < juiceNext) return 0;
+  juiceNext = Date.now() + 62_000;
   try {
     const res = await fetch("https://www.financialjuice.com/feed.ashx?xy=rss", { headers: UA, signal: AbortSignal.timeout(8000) });
+    if (res.status === 429) { juiceNext = Date.now() + juiceWait; juiceWait = Math.min(juiceWait * 2, 600_000); throw new Error("feed 429 (waiting " + Math.round((juiceNext - Date.now()) / 1000) + "s)"); }
     if (!res.ok) throw new Error("feed " + res.status);
+    juiceWait = 75_000;
     const xml = await res.text();
     const fresh = [];
     for (const m of xml.matchAll(/<item>([\s\S]*?)<\/item>/g)) {
@@ -97,7 +103,7 @@ export async function publishTrump({ force = false } = {}) {
       const base = `${e.date}|${e.time_formatted ?? ""}|${e.details}`;
       const n = (count.get(base) ?? 0) + 1; count.set(base, n);
       rows.push({
-        id: `${e.date}-${Buffer.from(base).toString("base64url").slice(-24)}-${n}`, day: e.date,
+        id: `${e.date}-${createHash("sha1").update(base).digest("base64url").slice(0, 16)}-${n}`, day: e.date,
         clock: e.time_formatted || null, at: atNY(e.date, e.time_formatted), kind: kindOf(e),
         details: String(e.details ?? "").slice(0, 400), place: e.location || null, source: e.type || null, coverage: e.coverage || null,
         updated_at: new Date().toISOString(),
