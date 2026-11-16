@@ -2,6 +2,8 @@ import { isAdmin } from "./access.js";
 import { newsPicture } from "./calendar/news.js";
 import { cardOnRequest } from "./cards.js";
 import { picturePost, textPost } from "./post.js";
+import { findPerson, tagText } from "./people.js";
+import { addCountdown, whenOf } from "./sched.js";
 
 /**
  * Discord moderation and sending, on the owner's word. Every action names the person with a real tag so they (and everyone reading) know who it
@@ -15,19 +17,39 @@ async function targetOf(message, who) {
   const bot = message.client.user.id;
   const mentioned = [...message.mentions.users.values()].find(u => u.id !== bot);
   let id = mentioned?.id ?? (/\d{15,}/.exec(String(who ?? ""))?.[0] ?? null);
+  if (!id && /^(me|myself)$/i.test(String(who ?? "").trim())) id = message.author.id;
+  if (!id && who) id = findPerson(String(who).replace(/^@/, ""));
   if (!id && who) { // a name: the closest member
     try { const found = await message.guild.members.search({ query: String(who).replace(/^@/, "").slice(0, 32), limit: 1 }); id = found.first()?.id ?? null; } catch { /* needs the members list: ask for a tag instead */ }
   }
   return id;
 }
 function channelOf(message, name) {
-  const mentioned = message.mentions.channels.first();
-  if (mentioned) return mentioned;
+  const mentioned = message.mentions.channels?.first?.();
+  if (mentioned && !name) return mentioned;
   if (!name) return message.channel;
+  if (/^\d{15,}$/.test(String(name))) return message.guild?.channels.cache.get(String(name)) ?? null;
+  if (/^(this|here|current)( channel)?$/i.test(String(name).trim())) return message.channel;
   const q = String(name).toLowerCase().replace(/^#/, "").replace(/[^a-z0-9]+/g, "");
   return message.guild?.channels.cache.find(c => c.isTextBased?.() && c.name.toLowerCase().replace(/[^a-z0-9]+/g, "").includes(q)) ?? null;
 }
 const missingPermission = e => /Missing (Permissions|Access)|50013|50001/.test(String(e?.message ?? e)) ? "I don't have the permission for that here. Give my role Manage Messages, Moderate Members, Kick Members or Ban Members as the action needs, and keep it above theirs." : null;
+
+/** Every channel a request names ("news, results and #general"), or this one. */
+function channelsOf(message, spec) {
+  const named = String(spec ?? "").split(/\s*(?:,|&|\+|\band\b)\s*/i).map(x => x.trim()).filter(Boolean);
+  const mentioned = [...(message.mentions.channels?.values?.() ?? [])];
+  const out = named.length ? named.map(n => channelOf(message, n)) : mentioned.length ? mentioned : [message.channel];
+  return [...new Set(out.filter(Boolean))];
+}
+const pollOptions = v => (Array.isArray(v) ? v : String(v ?? "").split(/\s*[|;]\s*|\s*,\s*/)).map(x => String(x).trim()).filter(Boolean).slice(0, 10);
+
+/** The message an action means by "that one": the one replied to, else the newest before the request. */
+async function lastMessage(message, channel) {
+  if (message.reference?.messageId) return channel.messages.fetch(message.reference.messageId).catch(() => null);
+  const batch = await channel.messages.fetch({ limit: 5, before: message.id }).catch(() => null);
+  return batch?.first() ?? null;
+}
 
 /** Deletes messages newest first: the last `count`, or all of them, optionally only one person's. Returns how many went. */
 async function purge(channel, { count, userId, keepId }) {
@@ -59,10 +81,12 @@ const mins = n => { n = Math.round(n); return n >= 1440 ? `${Math.round(n / 1440
 export async function moderate(message, args, config) {
   if (!message.guild) return textPost({ text: "Moderation only works inside a server." });
   const action = String(args.action ?? "").toLowerCase();
-  const channel = channelOf(message, args.channel);
+  const channel = channelsOf(message, args.channel)[0];
   if (!channel) return textPost({ text: `I couldn't find the channel "${args.channel}".`, accent: "down" });
   const reason = String(args.reason || `Asked by ${message.author.tag}`).slice(0, 400);
   try {
+    const done = await extra(message, args, config, action, channel, reason);
+    if (done) return done;
     if (action === "purge") {
       const named = (args.user && !/^(everyone|all|anyone|nobody|none|any)$/i.test(String(args.user).trim())) || [...message.mentions.users.values()].some(u => u.id !== message.client.user.id);
       const userId = named ? await targetOf(message, args.user) : null;
@@ -93,26 +117,68 @@ export async function moderate(message, args, config) {
 
 /** Sends something from the app (the news calendar, a PnL card, or words) to a channel the owner names; returns the reply for where they asked. */
 export async function sendFromApp(message, args, { owner, config }) {
-  const channel = channelOf(message, args.channel);
-  if (!channel?.isSendable?.()) return textPost({ text: `I couldn't find a channel called "${args.channel ?? ""}" that I can send to.`, accent: "down" });
+  const targets = channelsOf(message, args.channel).filter(c => c?.isSendable?.());
+  if (!targets.length) return textPost({ text: `I couldn't find a channel called "${args.channel ?? ""}" that I can send to.`, accent: "down" });
   const what = String(args.what ?? "").toLowerCase();
+  const sendAll = async build => { for (const c of targets) await c.send(build()); };
   try {
-    if (/^news/.test(what)) {
+    if (/^(news|economic|calendar)/.test(what) && !/pnl|card/.test(what)) {
       const kind = /week/.test(what) ? "week" : /tomorrow/.test(what) ? "tomorrow" : "today";
       const pic = await newsPicture(kind, config);
       if (!pic) return textPost({ text: `There's no news to send for ${kind === "week" ? "this week" : kind}.` });
-      await channel.send(picturePost({ png: pic.png, name: pic.name, text: pic.text }));
+      await sendAll(() => picturePost({ png: pic.png, name: pic.name, text: pic.text }));
     } else if (/^pnl|card/.test(what)) {
-      const period = /month/.test(what) ? "monthly" : /week/.test(what) ? "weekly" : "daily";
+      const period = /month|calendar/.test(what) ? "monthly" : /week/.test(what) ? "weekly" : "daily";
       const card = await cardOnRequest(owner, period, /last|prev|yesterday/.test(what + " " + (args.which ?? "")));
       if (!card) return textPost({ text: "No trades logged for that period, so there's no card to send." });
-      await channel.send(picturePost({ png: card.png, name: `${card.name}.png`, text: `**${card.label}**` }));
+      await sendAll(() => picturePost({ png: card.png, name: `${card.name}.png`, text: `**${card.label}**` }));
     } else if (what === "text" || args.text) {
       if (!args.text) return textPost({ text: "What should I write?", accent: "down" });
-      await channel.send(textPost({ text: String(args.text).slice(0, 3800) }));
+      await sendAll(() => textPost({ text: tagText(String(args.text).slice(0, 3800), { me: message.author.id }) }));
     } else return textPost({ text: "I can send the news (today, tomorrow or the week), a PnL card, or a message of yours.", accent: "down" });
-    return textPost({ text: `📤 Sent to ${channel}.` });
+    return textPost({ text: `📤 Sent to ${targets.join(" ")}.` });
   } catch (e) {
     return textPost({ text: missingPermission(e) ?? `I couldn't send that: ${e?.message ?? e}`, accent: "down" });
   }
+}
+
+/** The rest of what the owner can ask for: everything that is a Discord action but not a punishment. Returns a post, or undefined when the action is not one of these. */
+async function extra(message, args, config, action, channel, reason) {
+  const me = message.author.id;
+  const text = tagText(String(args.text ?? args.reason ?? ""), { me });
+  if (action === "say" || action === "announce") { if (!text) return textPost({ text: "What should I say?", accent: "down" }); for (const c of channelsOf(message, args.channel)) await c.send(textPost({ text })); return textPost({ text: `📤 Said it in ${channelsOf(message, args.channel).join(" ")}.` }); }
+  if (action === "poll") {
+    const options = pollOptions(args.options);
+    if (!args.question || options.length < 2) return textPost({ text: "A poll needs a question and at least two options.", accent: "down" });
+    const hours = Math.max(1, Math.min(168, Math.round(Number(args.hours) || 24)));
+    for (const c of channelsOf(message, args.channel)) await c.send({ poll: { question: { text: String(args.question).slice(0, 300) }, answers: options.map(o => ({ text: o.slice(0, 55) })), duration: hours, allowMultiselect: /multi/i.test(String(args.mode ?? "")) } });
+    return textPost({ text: `📊 Poll posted: **${args.question}**` });
+  }
+  if (action === "pin" || action === "unpin") { const m = await lastMessage(message, channel); if (!m) return textPost({ text: "I couldn't find the message.", accent: "down" }); await (action === "pin" ? m.pin(reason) : m.unpin(reason)); return textPost({ text: action === "pin" ? "📌 Pinned." : "Unpinned." }); }
+  if (action === "react") { const m = await lastMessage(message, channel); if (!m || !args.emoji) return textPost({ text: "Tell me which emoji and which message (reply to it).", accent: "down" }); for (const e of String(args.emoji).split(/\s+/).filter(Boolean).slice(0, 10)) await m.react(e).catch(() => {}); return textPost({ text: "Reacted." }); }
+  if (action === "create_channel") { const c = await message.guild.channels.create({ name: String(args.name || "new-channel").slice(0, 90), topic: args.topic ? String(args.topic).slice(0, 1000) : undefined, reason }); return textPost({ text: `✅ Created ${c}.` }); }
+  if (action === "rename_channel") { if (!args.name) return textPost({ text: "What should it be called?", accent: "down" }); await channel.setName(String(args.name).slice(0, 90), reason); return textPost({ text: `✏️ Renamed to ${channel}.` }); }
+  if (action === "topic") { await channel.setTopic(String(args.topic ?? args.text ?? "").slice(0, 1000), reason); return textPost({ text: `📝 Topic set in ${channel}.` }); }
+  if (action === "countdown") {
+    const runAt = whenOf(args);
+    if (!runAt) return textPost({ text: "Tell me when it ends: in how long, or at what time (New York).", accent: "down" });
+    const label = String(args.text || args.name || "Countdown").slice(0, 120);
+    const msg = await channel.send({ content: `⏳ **${label}**` });
+    addCountdown({ args: { text: label }, runAt, channelId: channel.id, messageId: msg.id, guildId: message.guildId, ownerId: me, nextAt: Date.now() + 5000 });
+    return textPost({ text: `⏳ Counting down to **${label}** in ${channel}.` });
+  }
+  if (["dm", "role_add", "role_remove", "nickname"].includes(action)) {
+    const id = await targetOf(message, args.user);
+    if (!id) return textPost({ text: "Tag the person so I know exactly who you mean.", accent: "down" });
+    if (action === "dm") { const user = await message.client.users.fetch(id); await user.send(text || "👋"); return textPost({ text: `📨 Sent ${tag(id)} a private message.` }); }
+    const member = await message.guild.members.fetch(id).catch(() => null);
+    if (!member) return textPost({ text: `${tag(id)} isn't in this server.`, accent: "down" });
+    if (action === "nickname") { await member.setNickname(args.name ? String(args.name).slice(0, 32) : null, reason); return textPost({ text: `🏷️ ${tag(id)} is now called **${args.name || "their own name"}**.` }); }
+    const q = String(args.role ?? "").toLowerCase();
+    const role = message.guild.roles.cache.find(r => r.name.toLowerCase() === q) ?? message.guild.roles.cache.find(r => q && r.name.toLowerCase().includes(q));
+    if (!role) return textPost({ text: `I couldn't find a role called "${args.role ?? ""}".`, accent: "down" });
+    await (action === "role_add" ? member.roles.add(role, reason) : member.roles.remove(role, reason));
+    return textPost({ text: action === "role_add" ? `🎖️ ${tag(id)} now has **${role.name}**.` : `${tag(id)} no longer has **${role.name}**.` });
+  }
+  return undefined;
 }

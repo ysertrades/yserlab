@@ -8,3 +8,5 @@ scratch/
 knowledge/cache/
 knowledge/model/*
 !knowledge/model/drawings.json
+
+data/
