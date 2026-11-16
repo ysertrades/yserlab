@@ -35,7 +35,8 @@ function channelOf(message, name) {
   const mentioned = message.mentions.channels?.first?.();
   if (mentioned && !name) return mentioned;
   if (!name) return message.channel;
-  if (/^\d{15,}$/.test(String(name))) return message.guild?.channels.cache.get(String(name)) ?? null;
+  const raw = String(name).replace(/[<>#!&]/g, "").trim(); // "#123…", "<#123…>" and a bare id all mean the channel with that id
+  if (/^\d{15,}$/.test(raw)) return message.client.channels.cache.get(raw) ?? message.guild?.channels.cache.get(raw) ?? null;
   if (/^(this|here|current)( channel)?$/i.test(String(name).trim())) return message.channel;
   const q = String(name).toLowerCase().replace(/^#/, "").replace(/[^a-z0-9]+/g, "");
   return message.guild?.channels.cache.find(c => c.isTextBased?.() && c.name.toLowerCase().replace(/[^a-z0-9]+/g, "").includes(q)) ?? null;
