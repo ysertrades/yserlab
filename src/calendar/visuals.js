@@ -73,9 +73,10 @@ const wrap = (text, n, lines = 2) => {
  * its forecast and previous as chips; under them a countdown rail from the heads-up to the release with you at the start of it.
  */
 export function alertCard(group, { minutes = 15, now = false } = {}) {
+  if (now) return releasingCard(group);
   const w = 1400, h = 700, first = group[0], hot = group.some(e => e.impact === "High"), accent = tone(hot ? "High" : "Medium");
   const list = group.slice(0, 3), extra = group.length - list.length;
-  const cx = 300, cy = 392, r = 176, C2 = 2 * Math.PI * r, n = Math.max(5, Math.min(20, Math.round(minutes))), seg = C2 / n;
+  const cx = 290, cy = 352, r = 152, C2 = 2 * Math.PI * r, n = Math.max(5, Math.min(20, Math.round(minutes))), seg = C2 / n;
   const ring = now
     ? `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${accent}" stroke-width="14"/><circle cx="${cx}" cy="${cy}" r="${r + 26}" fill="none" stroke="${accent}" stroke-opacity=".35" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="${r + 52}" fill="none" stroke="${accent}" stroke-opacity=".15" stroke-width="3"/>`
     : `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${accent}" stroke-width="14" stroke-dasharray="${(seg - 9).toFixed(2)} 9" transform="rotate(-90 ${cx} ${cy})"/><circle cx="${cx}" cy="${cy}" r="${r - 30}" fill="${C.s1}" stroke="${C.line}"/>`;
@@ -108,12 +109,55 @@ export function alertCard(group, { minutes = 15, now = false } = {}) {
     <text x="132" y="86" font-family="${SANS}" font-weight="800" font-size="26" letter-spacing="3" fill="${C.text}">YSER LAB</text>
     <text x="${w - 64}" y="86" text-anchor="end" font-family="${MONO}" font-size="22" fill="${C.muted}">${esc(first.at.toFormat("cccc d LLL"))}  ·  ${esc(zoneName(first.at))}</text>
     ${ring}
-    <text x="${cx}" y="${now ? cy + 4 : cy + 10}" text-anchor="middle" font-family="${SANS}" font-weight="800" font-size="${now ? 112 : 176}" letter-spacing="-4" fill="${C.text}">${now ? "NOW" : minutes}</text>
-    <text x="${cx}" y="${cy + (now ? 56 : 62)}" text-anchor="middle" font-family="${MONO}" font-size="24" letter-spacing="7" fill="${accent}">${now ? "RELEASING" : minutes === 1 ? "MINUTE" : "MINUTES"}</text>
-    <text x="${cx}" y="${cy + 112}" text-anchor="middle" font-family="${SERIF}" font-style="italic" font-size="38" fill="${C.soft}">${esc(clock(first))} ${esc(zoneName(first.at))}</text>
+    <text x="${cx}" y="${cy + 46}" text-anchor="middle" font-family="${SANS}" font-weight="800" font-size="150" letter-spacing="-4" fill="${C.text}">${minutes}</text>
+    <text x="${cx}" y="${cy + 96}" text-anchor="middle" font-family="${MONO}" font-size="22" letter-spacing="7" fill="${accent}">${minutes === 1 ? "MINUTE" : "MINUTES"}</text>
+    ${timePill(cx, 556, first, accent)}
     <text x="600" y="196" font-family="${MONO}" font-size="22" letter-spacing="5" fill="${accent}">${now ? "RELEASING NOW" : "HEADS-UP"}</text>
     ${extra > 0 ? `<text x="1336" y="196" text-anchor="end" font-family="${MONO}" font-size="20" fill="${C.muted}">+ ${extra} more at this time</text>` : ""}
     ${rows}${rail}`) };
+}
+
+/** The time of a release as a pill: a small clock, the time in the sans, the zone beside it. Never the serif. */
+function timePill(cx, y, e, accent, w = 300) {
+  const x = cx - w / 2;
+  return `<g>
+    <rect x="${x}" y="${y}" width="${w}" height="58" rx="29" fill="${C.s1}" stroke="${C.line2}"/>
+    <circle cx="${x + 36}" cy="${y + 29}" r="12" fill="none" stroke="${accent}" stroke-width="3"/><path d="M${x + 36} ${y + 22}v7l5 3" fill="none" stroke="${accent}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="${x + 62}" y="${y + 40}" font-family="${SANS}" font-weight="800" font-size="30" letter-spacing="-.5" fill="${C.text}">${esc(clock(e))}</text>
+    <text x="${x + w - 24}" y="${y + 37}" text-anchor="end" font-family="${MONO}" font-size="19" letter-spacing="3" fill="${C.muted}">${esc(zoneName(e.at))}</text>
+  </g>`;
+}
+
+/** The release itself: a live banner (not the heads-up's ring). The release's name large, and forecast, previous and the actual to come as three tiles. */
+function releasingCard(group) {
+  const w = 1400, h = 700, first = group[0], accent = tone(group.some(e => e.impact === "High") ? "High" : "Medium");
+  const lines = wrap(first.title, 30, 2), t = tone(first.impact);
+  const tiles = [["FORECAST", first.forecast || "–", C.text, false], ["PREVIOUS", first.previous || "–", C.soft, false], ["ACTUAL", "", accent, true]];
+  const tw = 412, gap = 18, tx = 64, ty = 376, th = 150;
+  const boxes = tiles.map(([k, v, col, live], i) => {
+    const x = tx + i * (tw + gap);
+    return `<g><rect x="${x}" y="${ty}" width="${tw}" height="${th}" rx="26" fill="${C.s1}" stroke="${live ? accent : C.line}" stroke-width="${live ? 3 : 1}"/>
+      <text x="${x + 30}" y="${ty + 46}" font-family="${MONO}" font-size="20" letter-spacing="5" fill="${live ? accent : C.faint}">${k}</text>
+      ${live ? [0, 1, 2].map(d => `<circle cx="${x + 40 + d * 34}" cy="${ty + 100}" r="${10 - d * 2}" fill="${accent}" fill-opacity="${1 - d * .3}"/>`).join("") + `<text x="${x + 150}" y="${ty + 112}" font-family="${SANS}" font-weight="700" font-size="34" fill="${C.soft}">coming in</text>` : `<text x="${x + 30}" y="${ty + 112}" font-family="${SANS}" font-weight="800" font-size="${String(v).length > 8 ? 44 : 62}" letter-spacing="-1" fill="${col}">${esc(v)}</text>`}</g>`;
+  }).join("");
+  const others = group.slice(1, 4);
+  return { w, h, svg: frame(w, h, `${lattice(w, h)}
+    ${mark(64, 56, 54)}
+    <text x="132" y="86" font-family="${SANS}" font-weight="800" font-size="26" letter-spacing="3" fill="${C.text}">YSER LAB</text>
+    <text x="${w - 64}" y="86" text-anchor="end" font-family="${MONO}" font-size="22" fill="${C.muted}">${esc(first.at.toFormat("cccc d LLL"))}</text>
+    <circle cx="80" cy="176" r="11" fill="${accent}"/><circle cx="80" cy="176" r="22" fill="none" stroke="${accent}" stroke-opacity=".4" stroke-width="3"/><circle cx="80" cy="176" r="33" fill="none" stroke="${accent}" stroke-opacity=".15" stroke-width="3"/>
+    <text x="132" y="185" font-family="${MONO}" font-size="24" letter-spacing="7" fill="${accent}">RELEASING NOW</text>
+    ${timePill(w - 64 - 150, 142, first, accent)}
+    <rect x="64" y="226" width="7" height="${lines.length * 70 - 6}" rx="3.5" fill="${t}"/>
+    ${lines.map((l, i) => `<text x="96" y="${278 + i * 70}" font-family="${SANS}" font-weight="800" font-size="62" letter-spacing="-1.5" fill="${C.text}">${esc(l)}</text>`).join("")}
+    <rect x="${96 + 0}" y="${lines.length * 70 + 238}" width="80" height="36" rx="18" fill="${C.s2}" stroke="${C.line2}" opacity="0"/>
+    ${boxes}
+    <g transform="translate(64 576)">
+      ${bars(14, 28, first.impact)}
+      <rect x="62" y="2" width="82" height="38" rx="19" fill="${C.s2}" stroke="${C.line2}"/><text x="103" y="29" text-anchor="middle" font-family="${MONO}" font-size="20" fill="${C.soft}">${esc(first.currency)}</text>
+      <text x="164" y="30" font-family="${MONO}" font-size="20" letter-spacing="3" fill="${C.muted}">${first.impact.toUpperCase()} IMPACT</text>
+      ${others.length ? `<text x="1272" y="30" text-anchor="end" font-family="${MONO}" font-size="20" fill="${C.muted}">+ ${others.map(e => esc(clip(e.title, 22))).join("  ·  ")}${group.length - 1 > others.length ? "  ·  …" : ""}</text>` : ""}
+    </g>`) };
 }
 
 /** The week ahead: one column per weekday. */

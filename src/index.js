@@ -84,7 +84,11 @@ client.on(Events.MessageCreate, async message => {
     if (out.mod || out.send) { // moderation and sending: the owner's word only
       if (!isAdmin(config, message.author.id)) { await message.reply({ content: "Only my owner can do that.", allowedMentions: { repliedUser: false } }); return; }
       const post = out.mod ? await moderate(message, out.mod, config) : await sendFromApp(message, out.send, { owner, config });
-      await message.channel.send(post).catch(async () => message.reply({ content: "Done, but I couldn't post the confirmation here." }).catch(() => {}));
+      const sent = await message.channel.send(post).catch(async () => message.reply({ content: "Done, but I couldn't post the confirmation here." }).catch(() => null));
+      if (out.mod) { // the owner's request goes after the action; a clean-up's confirmation stays four seconds and goes too
+        const quiet = ["purge", "slowmode"].includes(String(out.mod.action).toLowerCase());
+        setTimeout(() => { if (quiet) sent?.delete?.().catch(() => {}); message.delete().catch(() => {}); }, 4000);
+      }
       await log(out.mod ? "mod" : "send", { note: JSON.stringify(out.mod ?? out.send).slice(0, 180) });
       return;
     }
