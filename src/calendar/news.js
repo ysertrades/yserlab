@@ -10,6 +10,23 @@ import { once, settings, log } from "../store.js";
 const nowNY = () => DateTime.now().setZone(ZONE);
 const at = (day, hhmm) => { const [h, m] = String(hhmm || "00:00").split(":").map(Number); return day.set({ hour: h || 0, minute: m || 0, second: 0, millisecond: 0 }); };
 
+/** One news picture on request (today, tomorrow or the week), without posting it: { png, name, text }, or null when there is no news. */
+export async function newsPicture(kind, config) {
+  fonts();
+  const now = nowNY();
+  if (kind === "week") {
+    const monday = now.startOf("week").plus({ days: now.weekday === 7 ? 7 : 0 });
+    const list = pick(await events(), config.news).filter(e => e.at >= monday.startOf("day") && e.at < monday.plus({ days: 5 }).startOf("day"));
+    return list.length ? { png: svgToPng(weekCard(list, monday).svg, 1800), name: "news-week.png", text: `**The week ahead** · ${monday.toFormat("d LLL")} – ${monday.plus({ days: 4 }).toFormat("d LLL")}` } : null;
+  }
+  const day = kind === "tomorrow" ? now.plus({ days: 1 }) : now;
+  const list = onDay(pick(await events(), config.news), day);
+  if (!list.length) return null;
+  const high = list.filter(e => e.impact === "High").length;
+  const card = dayCard(list, day, kind === "tomorrow" ? { kicker: "MARKET OPEN  ·  NEXT DAY", title: "Tomorrow," } : { kicker: "ECONOMIC CALENDAR", title: "Today," });
+  return { png: svgToPng(card.svg, 1400), name: `news-${kind}.png`, text: `**${kind === "tomorrow" ? `Tomorrow, ${day.toFormat("cccc d LLL")}` : "Today's news"}** · ${list.length} release${list.length === 1 ? "" : "s"}${high ? `, ${high} high impact` : ""}` };
+}
+
 /** Today's news, posted in the morning. Nothing is posted when the day has none. */
 export async function postToday(client, config, { force = false } = {}) {
   fonts();
@@ -18,7 +35,7 @@ export async function postToday(client, config, { force = false } = {}) {
   const card = dayCard(list, nowNY(), { kicker: "ECONOMIC CALENDAR", title: "Today," });
   const png = svgToPng(card.svg, 1400);
   const high = list.filter(e => e.impact === "High").length;
-  return deliver(client, config.news.today.channels, () => picturePost({ text: `**Today's news** · ${list.length} release${list.length === 1 ? "" : "s"}${high ? `, ${high} high impact` : ""}`, png, name: "news-today.png", footer: `Times in ${zoneName(nowNY())}` }), "news.today");
+  return deliver(client, config.news.today.channels, () => picturePost({ text: `**Today's news** · ${list.length} release${list.length === 1 ? "" : "s"}${high ? `, ${high} high impact` : ""}`, png, name: "news-today.png" }), "news.today");
 }
 
 /** Tomorrow's news at the market open (Mon-Thu). Skipped when there are none. */
@@ -30,7 +47,7 @@ export async function postTomorrow(client, config, { force = false } = {}) {
   const card = dayCard(list, day, { kicker: "MARKET OPEN  ·  NEXT DAY", title: "Tomorrow," });
   const png = svgToPng(card.svg, 1400);
   const high = list.filter(e => e.impact === "High").length;
-  return deliver(client, config.news.open.channels, () => picturePost({ text: `**Tomorrow, ${day.toFormat("cccc d LLL")}** · ${list.length} release${list.length === 1 ? "" : "s"}${high ? `, ${high} high impact` : ""}`, png, name: "news-tomorrow.png", footer: `Times in ${zoneName(day)}` }), "news.open");
+  return deliver(client, config.news.open.channels, () => picturePost({ text: `**Tomorrow, ${day.toFormat("cccc d LLL")}** · ${list.length} release${list.length === 1 ? "" : "s"}${high ? `, ${high} high impact` : ""}`, png, name: "news-tomorrow.png" }), "news.open");
 }
 
 /** The week ahead, every Sunday. */
@@ -42,7 +59,7 @@ export async function postWeek(client, config, { force = false } = {}) {
   if (!list.length) { if (force) await log("news.weekly", { note: "no news for the week: nothing posted" }); return 0; }
   const card = weekCard(list, monday);
   const png = svgToPng(card.svg, 1800);
-  return deliver(client, config.news.weekly.channels, () => picturePost({ text: `${mentions(config, config.news.alerts.tag)} **The week ahead** · ${monday.toFormat("d LLL")} – ${monday.plus({ days: 4 }).toFormat("d LLL")}`, png, name: "news-week.png", footer: `Times in ${zoneName(monday)}` }), "news.weekly");
+  return deliver(client, config.news.weekly.channels, () => picturePost({ text: `${mentions(config, config.news.alerts.tag)} **The week ahead** · ${monday.toFormat("d LLL")} – ${monday.plus({ days: 4 }).toFormat("d LLL")}`, png, name: "news-week.png" }), "news.weekly");
 }
 
 /**

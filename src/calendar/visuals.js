@@ -54,42 +54,71 @@ export function dayCard(events, day, { kicker = "ECONOMIC CALENDAR", title = "To
   if (more > 0) rows += `<text x="${w / 2}" y="${top + shown.length * rowH + 42}" text-anchor="middle" font-family="${MONO}" font-size="24" fill="${C.muted}">+ ${more} more</text>`;
   const foot = h - 56;
   return { w, h, svg: frame(w, h, `${lattice(w, h)}${header(w, kicker, title, italic || day.toFormat("EEE d LLL"), `${events.length} release${events.length === 1 ? "" : "s"}${high ? `  ·  ${high} high impact` : ""}`)}${rows}
-    <text x="64" y="${foot}" font-family="${MONO}" font-size="21" fill="${C.faint}">All times ${esc(zone)} (New York)</text>
+    <text x="64" y="${foot}" font-family="${MONO}" font-size="21" fill="${C.faint}"></text>
     <g transform="translate(${w - 64} ${foot})" text-anchor="end" font-family="${MONO}" font-size="21" fill="${C.muted}"><text>F forecast   P previous</text></g>`) };
 }
 
-/** A heads-up or the release itself: big and quick to read. */
+/** Words wrapped to at most `lines` lines of about `n` characters (the last line ends with an ellipsis if it had to be cut). */
+const wrap = (text, n, lines = 2) => {
+  const words = String(text ?? "").split(/\s+/).filter(Boolean), out = [];
+  let line = "";
+  for (const w of words) { if ((line + " " + w).trim().length > n && line) { out.push(line); line = w; } else line = (line + " " + w).trim(); }
+  if (line) out.push(line);
+  if (out.length > lines) { const kept = out.slice(0, lines); kept[lines - 1] = clip(out.slice(lines - 1).join(" "), n); return kept; }
+  return out;
+};
+
+/**
+ * A heads-up or the release itself. A ring of one segment per minute of the lead time, all lit, around the number; each release is a row with
+ * its forecast and previous as chips; under them a countdown rail from the heads-up to the release with you at the start of it.
+ */
 export function alertCard(group, { minutes = 15, now = false } = {}) {
-  const w = 1400, h = 700, first = group[0], accent = tone(group.some(e => e.impact === "High") ? "High" : "Medium");
-  const list = group.slice(0, 4);
-  const big = now ? "NOW" : String(minutes);
-  const unit = now ? "RELEASING" : minutes === 1 ? "MINUTE" : "MINUTES";
-  let items = "";
+  const w = 1400, h = 700, first = group[0], hot = group.some(e => e.impact === "High"), accent = tone(hot ? "High" : "Medium");
+  const list = group.slice(0, 3), extra = group.length - list.length;
+  const cx = 300, cy = 392, r = 176, C2 = 2 * Math.PI * r, n = Math.max(5, Math.min(20, Math.round(minutes))), seg = C2 / n;
+  const ring = now
+    ? `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${accent}" stroke-width="14"/><circle cx="${cx}" cy="${cy}" r="${r + 26}" fill="none" stroke="${accent}" stroke-opacity=".35" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="${r + 52}" fill="none" stroke="${accent}" stroke-opacity=".15" stroke-width="3"/>`
+    : `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${accent}" stroke-width="14" stroke-dasharray="${(seg - 9).toFixed(2)} 9" transform="rotate(-90 ${cx} ${cy})"/><circle cx="${cx}" cy="${cy}" r="${r - 30}" fill="${C.s1}" stroke="${C.line}"/>`;
+  let rows = "";
+  const rowH = 108, top = 236;
   list.forEach((e, i) => {
-    const y = 296 + i * 84;
-    items += `<g>${bars(600, y + 4, e.impact)}
-      <rect x="664" y="${y - 30}" width="78" height="38" rx="19" fill="${C.s2}" stroke="${C.line2}"/>
-      <text x="703" y="${y - 3}" text-anchor="middle" font-family="${MONO}" font-size="20" fill="${C.soft}">${esc(e.currency)}</text>
-      <text x="764" y="${y}" font-family="${SANS}" font-weight="700" font-size="32" fill="${C.text}">${esc(clip(e.title, 30))}</text>
-      <text x="764" y="${y + 32}" font-family="${MONO}" font-size="20" fill="${C.muted}">forecast <tspan fill="${C.text}">${esc(e.forecast || "–")}</tspan>   previous <tspan fill="${C.soft}">${esc(e.previous || "–")}</tspan></text></g>`;
+    const y = top + i * (rowH + 14), t = tone(e.impact);
+    const lines = wrap(e.title, 26, 2), chips = [["FORECAST", e.forecast || "–"], ["PREVIOUS", e.previous || "–"]];
+    rows += `<g>
+      <rect x="600" y="${y}" width="736" height="${rowH}" rx="22" fill="${C.s1}" stroke="${C.line}"/>
+      <rect x="600" y="${y}" width="7" height="${rowH}" rx="3.5" fill="${t}"/>
+      ${bars(634, y + 40, e.impact)}
+      <rect x="690" y="${y + 22}" width="80" height="38" rx="19" fill="${C.s2}" stroke="${C.line2}"/>
+      <text x="730" y="${y + 48}" text-anchor="middle" font-family="${MONO}" font-size="20" fill="${C.soft}">${esc(e.currency)}</text>
+      ${lines.map((l, k) => `<text x="792" y="${y + 50 + k * 34 - (lines.length > 1 ? 14 : 0)}" font-family="${SANS}" font-weight="700" font-size="32" fill="${C.text}">${esc(l)}</text>`).join("")}
+      ${chips.map(([k, v], c) => `<g transform="translate(${1328 - (c === 0 ? 392 : 190)} ${y + rowH - 40})"><rect width="${c === 0 ? 184 : 178}" height="30" rx="15" fill="${C.s2}" stroke="${C.line}"/><text x="14" y="21" font-family="${MONO}" font-size="15" letter-spacing="2" fill="${C.faint}">${k}</text><text x="${c === 0 ? 170 : 164}" y="21" text-anchor="end" font-family="${MONO}" font-size="18" fill="${c === 0 ? C.text : C.soft}">${esc(v)}</text></g>`).join("")}
+    </g>`;
   });
-  const extra = group.length - list.length;
+  // the rail: heads-up on the left, the release on the right; you are at the start of it (or at the end, once it is out)
+  const rx1 = 640, rx2 = 1296, ry = 646, marks = [0, 1 / 3, 2 / 3, 1].map(f => rx1 + f * (rx2 - rx1));
+  const left = now ? "0" : String(minutes), dot = now ? rx2 : rx1;
+  const rail = `<line x1="${rx1}" y1="${ry}" x2="${rx2}" y2="${ry}" stroke="${C.line2}" stroke-width="3" stroke-linecap="round"/>
+    <line x1="${rx1}" y1="${ry}" x2="${dot}" y2="${ry}" stroke="${accent}" stroke-width="3" stroke-linecap="round"/>
+    ${marks.map((x, i) => `<circle cx="${x}" cy="${ry}" r="5" fill="${i === 3 ? accent : C.bg}" stroke="${i === 3 ? accent : C.line2}" stroke-width="2"/>`).join("")}
+    <circle cx="${dot}" cy="${ry}" r="11" fill="${accent}"/><circle cx="${dot}" cy="${ry}" r="20" fill="none" stroke="${accent}" stroke-opacity=".4" stroke-width="3"/>
+    <text x="${rx1}" y="${ry + 40}" font-family="${MONO}" font-size="17" letter-spacing="2" fill="${C.muted}">${now ? "HEADS-UP SENT" : "NOW"}</text>
+    <text x="${rx2}" y="${ry + 40}" text-anchor="end" font-family="${MONO}" font-size="17" letter-spacing="2" fill="${accent}">RELEASE ${esc(clock(first).toUpperCase())}</text>`;
   return { w, h, svg: frame(w, h, `${lattice(w, h)}
     ${mark(64, 56, 54)}
     <text x="132" y="86" font-family="${SANS}" font-weight="800" font-size="26" letter-spacing="3" fill="${C.text}">YSER LAB</text>
-    <rect x="64" y="180" width="480" height="440" rx="40" fill="${C.s1}" stroke="${accent}" stroke-width="3"/>
-    <text x="304" y="${now ? 400 : 430}" text-anchor="middle" font-family="${SANS}" font-weight="800" font-size="${now ? 150 : 230}" fill="${C.text}">${big}</text>
-    <text x="304" y="${now ? 470 : 500}" text-anchor="middle" font-family="${MONO}" font-size="30" letter-spacing="8" fill="${accent}">${unit}</text>
-    <text x="304" y="570" text-anchor="middle" font-family="${SERIF}" font-style="italic" font-size="40" fill="${C.soft}">${esc(clock(first))} ${esc(zoneName(first.at))}</text>
-    <text x="600" y="214" font-family="${MONO}" font-size="22" letter-spacing="4" fill="${accent}">${now ? "RELEASING NOW" : "HEADS-UP"}</text>
-    ${items}
-    ${extra > 0 ? `<text x="600" y="${296 + list.length * 84}" font-family="${MONO}" font-size="22" fill="${C.muted}">+ ${extra} more at this time</text>` : ""}
-    <text x="${w - 64}" y="${h - 40}" text-anchor="end" font-family="${MONO}" font-size="20" fill="${C.faint}">${esc(first.at.toFormat("cccc d LLL"))}  ·  ${esc(zoneName(first.at))}</text>`) };
+    <text x="${w - 64}" y="86" text-anchor="end" font-family="${MONO}" font-size="22" fill="${C.muted}">${esc(first.at.toFormat("cccc d LLL"))}  ·  ${esc(zoneName(first.at))}</text>
+    ${ring}
+    <text x="${cx}" y="${now ? cy + 4 : cy + 10}" text-anchor="middle" font-family="${SANS}" font-weight="800" font-size="${now ? 112 : 176}" letter-spacing="-4" fill="${C.text}">${now ? "NOW" : minutes}</text>
+    <text x="${cx}" y="${cy + (now ? 56 : 62)}" text-anchor="middle" font-family="${MONO}" font-size="24" letter-spacing="7" fill="${accent}">${now ? "RELEASING" : minutes === 1 ? "MINUTE" : "MINUTES"}</text>
+    <text x="${cx}" y="${cy + 112}" text-anchor="middle" font-family="${SERIF}" font-style="italic" font-size="38" fill="${C.soft}">${esc(clock(first))} ${esc(zoneName(first.at))}</text>
+    <text x="600" y="196" font-family="${MONO}" font-size="22" letter-spacing="5" fill="${accent}">${now ? "RELEASING NOW" : "HEADS-UP"}</text>
+    ${extra > 0 ? `<text x="1336" y="196" text-anchor="end" font-family="${MONO}" font-size="20" fill="${C.muted}">+ ${extra} more at this time</text>` : ""}
+    ${rows}${rail}`) };
 }
 
 /** The week ahead: one column per weekday. */
 export function weekCard(events, monday) {
-  const w = 1800, gap = 14, left = 64, colW = (w - left * 2 - gap * 4) / 5, top = 340, rowH = 78, max = 9;
+  const w = 1800, gap = 14, left = 64, colW = (w - left * 2 - gap * 4) / 5, top = 340, rowH = 98, max = 8;
   const days = [0, 1, 2, 3, 4].map(i => monday.plus({ days: i }));
   const cols = days.map(d => events.filter(e => e.at.hasSame(d, "day")));
   const tall = Math.min(max, Math.max(1, ...cols.map(c => c.length)));
@@ -105,14 +134,14 @@ export function weekCard(events, monday) {
       <line x1="${x + 28}" x2="${x + colW - 28}" y1="${top + 62}" y2="${top + 62}" stroke="${C.line}"/>`;
     shown.forEach((e, j) => {
       const y = top + 110 + j * rowH;
-      body += `<rect x="${x + 28}" y="${y - 22}" width="5" height="48" rx="2.5" fill="${tone(e.impact)}"/>
+      body += `<rect x="${x + 28}" y="${y - 22}" width="5" height="${wrap(e.title, 20, 2).length > 1 ? 74 : 48}" rx="2.5" fill="${tone(e.impact)}"/>
         <text x="${x + 46}" y="${y}" font-family="${MONO}" font-size="19" fill="${C.muted}">${esc(clock(e))}  <tspan fill="${C.soft}">${esc(e.currency)}</tspan></text>
-        <text x="${x + 46}" y="${y + 28}" font-family="${SANS}" font-weight="600" font-size="22" fill="${C.text}">${esc(clip(e.title, 26))}</text>`;
+        ${wrap(e.title, 20, 2).map((l, k) => `<text x="${x + 46}" y="${y + 28 + k * 26}" font-family="${SANS}" font-weight="600" font-size="22" fill="${C.text}">${esc(l)}</text>`).join("")}`;
     });
     if (more > 0) body += `<text x="${x + 28}" y="${top + 110 + shown.length * rowH}" font-family="${MONO}" font-size="19" fill="${C.muted}">+ ${more} more</text>`;
   });
   const total = events.length, high = events.filter(e => e.impact === "High").length;
   const end = monday.plus({ days: 4 });
   return { w, h, svg: frame(w, h, `${lattice(w, h)}${header(w, "THE WEEK AHEAD", "News,", `${monday.toFormat("d LLL")} – ${end.toFormat("d LLL")}`, `${total} release${total === 1 ? "" : "s"}${high ? `  ·  ${high} high impact` : ""}`)}${body}
-    <text x="64" y="${h - 56}" font-family="${MONO}" font-size="21" fill="${C.faint}">All times ${esc(zone)} (New York)  ·  red high, amber medium</text>`) };
+    <text x="64" y="${h - 56}" font-family="${MONO}" font-size="21" fill="${C.faint}">red high, amber medium</text>`) };
 }

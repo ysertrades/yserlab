@@ -28,6 +28,14 @@ const TOOLS = [{ functionDeclarations: [{
   name: "share_pnl_card",
   description: "Use when the user asks to share, post, send or show their daily, weekly or monthly PnL card (results card). The bot posts the card picture.",
   parameters: { type: "OBJECT", properties: { period: { type: "STRING", description: "daily, weekly or monthly" }, which: { type: "STRING", description: "this or last (last week, last month, yesterday). Default this." } }, required: ["period"] },
+}, {
+  name: "moderate",
+  description: "Use when the owner asks for a Discord moderation action: delete messages (\"delete the last 30 messages\", \"delete all of @x's messages\"), timeout or mute, remove a timeout, kick, ban, unban, warn, slowmode, lock or unlock a channel. Deleting always starts from the newest message. Put the person in `user` (their tag or name) so the bot tags them in its answer.",
+  parameters: { type: "OBJECT", properties: { action: { type: "STRING", description: "purge, timeout, untimeout, kick, ban, unban, warn, slowmode, lock or unlock" }, user: { type: "STRING", description: "Who it is about: their @tag, ID or name. Empty for actions on a channel or for deleting everyone's messages." }, count: { type: "STRING", description: "For purge: how many messages (a number), or \"all\" for every message that person has in the channel (or every message in it)." }, minutes: { type: "STRING", description: "For timeout: how long, in minutes." }, seconds: { type: "STRING", description: "For slowmode: seconds between messages (0 turns it off)." }, days: { type: "STRING", description: "For ban: how many days of their messages to remove (0 to 7)." }, reason: { type: "STRING", description: "Why, in a few words, if the owner gave one." }, channel: { type: "STRING", description: "The channel it applies to, if they named one. Empty means this channel." } }, required: ["action"] },
+}, {
+  name: "send_to_channel",
+  description: "Use when the owner wants something from the app or the bot posted in a Discord channel (this one or another): the news calendar for today, tomorrow or the week, a daily, weekly or monthly PnL card, or a message of their own words (which may tag people).",
+  parameters: { type: "OBJECT", properties: { what: { type: "STRING", description: "news_today, news_tomorrow, news_week, pnl_daily, pnl_weekly, pnl_monthly or text" }, channel: { type: "STRING", description: "The channel name or #mention to send to. Empty means this channel." }, text: { type: "STRING", description: "For text: exactly what to post, keeping any @tags." }, which: { type: "STRING", description: "this or last, for a PnL card." } }, required: ["what"] },
 }] }];
 
 function summary(rows, recent = 25) {
@@ -61,6 +69,8 @@ How to answer:
 - If they ask you to show, draw, illustrate, diagram or make an image of a concept, setup or example (not one of their trades), call draw_diagram with a full sentence of what to draw (and count when they ask for several images or slides, e.g. "make me 4 images explaining the foundation of the fractal model" is count 4). Never describe a picture in words when they asked to see it; call the tool.
 - If they ask to share, post or show their daily, weekly or monthly PnL card (results card), call share_pnl_card.
 - One picture request is ONE draw_diagram call with the whole sentence, even when it joins two ideas ("show me a c2 closure with a cisd entry" is one picture: the higher timeframe over the lower one, body to body); set count only when they ask for several images.
+- Moderation is done with the moderate tool, never described: "delete the last 20 messages" is purge with count 20; "delete 10 of @x's messages" is purge with that user and count 10; "delete everything @x wrote" is purge with count all; also timeout, untimeout, kick, ban, unban, warn, slowmode, lock, unlock. It always starts from the newest message. Always pass the person the owner tagged or named in user. Do it at once when asked; the bot tags the person in its answer.
+- When the owner wants something sent to a channel (news for today, tomorrow or the week, a PnL card, or a message in their words), call send_to_channel with the channel they named.
 - A request to SEE something ("show me how an SS looks") is never answered with questions or a paragraph: call draw_diagram at once and let the defaults decide. Ask a question only when the request contradicts itself.`;
 
 const GROQ_MODELS = () => [...new Set([env.groqModel, "openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.8-27b"].filter(Boolean))];
@@ -72,6 +82,8 @@ function called(name, args) {
   if (name === "show_trade_chart") return { chart: true, timeframe: args?.timeframe || "" };
   if (name === "draw_diagram") return { diagram: String(args?.what || "").slice(0, 400), count: Math.min(6, Math.max(1, parseInt(args?.count, 10) || 1)) };
   if (name === "share_pnl_card") return { card: { period: /week/i.test(args?.period) ? "weekly" : /month/i.test(args?.period) ? "monthly" : "daily", last: /last|prev|yesterday/i.test(String(args?.which ?? "") + " " + String(args?.period ?? "")) } };
+  if (name === "moderate") return { mod: { ...args } };
+  if (name === "send_to_channel") return { send: { ...args } };
   return null;
 }
 
@@ -237,7 +249,7 @@ export async function ask({ owner, channelId, text }) {
   }
   const keep = histories.get(channelId) ?? [];
   keep.push({ role: "user", text, at: Date.now() });
-  keep.push({ role: "model", text: out.chart ? "(showed a trade chart picker)" : out.diagram ? "Sent the picture." : out.card ? `(posted the ${out.card.period} card)` : out.text || "…", at: Date.now() });
+  keep.push({ role: "model", text: out.chart ? "(showed a trade chart picker)" : out.mod ? "(did a moderation action)" : out.send ? "(sent it to the channel)" : out.diagram ? "Sent the picture." : out.card ? `(posted the ${out.card.period} card)` : out.text || "…", at: Date.now() });
   histories.set(channelId, keep.slice(-KEEP * 2));
   return out;
 }

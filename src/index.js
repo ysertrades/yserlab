@@ -14,6 +14,7 @@ import { designDiagram, designSlides, isGenericSs, Clarify } from "./diagram.js"
 import { cardOnRequest } from "./cards.js";
 import { picturePost, galleryPost } from "./post.js";
 import { fonts } from "./render.js";
+import { moderate, sendFromApp } from "./mod.js";
 
 const gaps = missing();
 if (gaps.length) { console.error(`YSER Lab can't start. Missing on the host: ${gaps.join(", ")}`); process.exit(1); }
@@ -55,7 +56,8 @@ const chunks = text => { const out = []; let rest = text; while (rest.length > 1
 
 client.on(Events.MessageCreate, async message => {
   try {
-    if (message.author.bot || !message.content && !message.attachments.size) return;
+    // Never answers a bot, a webhook, a system message or itself (the bot's own posts and other bots' never start a conversation).
+    if (message.author.bot || message.webhookId || message.system || message.author.id === client.user?.id || !message.content && !message.attachments.size) return;
     const { config, owner } = await settings();
     if (config.paused) return;
     const tagged = message.mentions.has(client.user, { ignoreEveryone: true, ignoreRoles: true });
@@ -79,6 +81,13 @@ client.on(Events.MessageCreate, async message => {
     await message.channel.sendTyping().catch(() => {});
     const out = await ask({ owner, channelId, text });
     if (out.chart) { await picker.startChart(message, owner, out.timeframe); return; }
+    if (out.mod || out.send) { // moderation and sending: the owner's word only
+      if (!isAdmin(config, message.author.id)) { await message.reply({ content: "Only my owner can do that.", allowedMentions: { repliedUser: false } }); return; }
+      const post = out.mod ? await moderate(message, out.mod, config) : await sendFromApp(message, out.send, { owner, config });
+      await message.channel.send(post).catch(async () => message.reply({ content: "Done, but I couldn't post the confirmation here." }).catch(() => {}));
+      await log(out.mod ? "mod" : "send", { note: JSON.stringify(out.mod ?? out.send).slice(0, 180) });
+      return;
+    }
     if (out.card) {
       try {
         const card = await cardOnRequest(owner, out.card.period, out.card.last);
