@@ -83,6 +83,7 @@ export function kindOf(e) {
   if (/depart|arrive|en route|motorcade|lands|wheels/.test(d)) return "travel";
   if (/pool call|call time|lid\b/.test(d)) return "pool";
   if (/executive time|private|no public/.test(d)) return "private";
+  if (/photo|summit|ceremony|reception|greets|trade deal|swearing|town hall|forum|conference|award|medal|pardon/.test(d)) return "public";
   if (/remarks|speaks|address|signs|signing|interview|delivers|participates in a (swearing|ceremony)|press|reporters|sprays?|attends|hosts|welcomes/.test(d)) return "public";
   if (/meeting|lunch|dinner|meets|call with|phone call|briefed|receives/.test(d)) return "meeting";
   return "other";
