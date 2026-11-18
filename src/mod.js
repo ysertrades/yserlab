@@ -1,3 +1,4 @@
+import { PermissionFlagsBits as P } from "discord.js";
 import { isAdmin } from "./access.js";
 import { newsPicture } from "./calendar/news.js";
 import { cardOnRequest } from "./cards.js";
@@ -104,6 +105,47 @@ async function purge(channel, { count, userId, keepId }) {
 
 const mins = n => { n = Math.round(n); return n >= 1440 ? `${Math.round(n / 1440)} day${n >= 2880 ? "s" : ""}` : n >= 60 ? `${Math.round(n / 60)} hour${n >= 120 ? "s" : ""}` : `${n} minute${n === 1 ? "" : "s"}`; };
 
+/** What people say for each permission, mapped to Discord's own. "view" is seeing the channel at all; "send" is writing in it: they are different things. */
+const PERMS = [
+  [/\b(view|see|seeing|viewing|visible|visibility|access|show|hide|hidden)\b/, "ViewChannel", "view the channel"],
+  [/\b(read ?(the )?history|history|read messages|past messages)\b/, "ReadMessageHistory", "read message history"],
+  [/\b(send|sending|write|writing|talk|talking|chat|chatting|speak in text|post|posting|messages?)\b/, "SendMessages", "send messages"],
+  [/\b(react|reacting|reactions?)\b/, "AddReactions", "add reactions"],
+  [/\b(attach|attachments?|files?|upload|uploads|images?|pictures?)\b/, "AttachFiles", "attach files"],
+  [/\b(embed|embeds|links?)\b/, "EmbedLinks", "embed links"],
+  [/\b(mention ?everyone|@everyone|everyone ping|ping everyone)\b/, "MentionEveryone", "mention @everyone"],
+  [/\b(external emoji|custom emoji|emojis?)\b/, "UseExternalEmojis", "use external emoji"],
+  [/\b(stickers?)\b/, "UseExternalStickers", "use external stickers"],
+  [/\b(threads?)\b/, "CreatePublicThreads", "create threads"],
+  [/\b(slash|app commands?|bot commands?|commands?)\b/, "UseApplicationCommands", "use commands"],
+  [/\b(polls?)\b/, "SendPolls", "create polls"],
+  [/\b(manage messages|delete messages|pin)\b/, "ManageMessages", "manage messages"],
+  [/\b(invites?)\b/, "CreateInstantInvite", "create invites"],
+  [/\b(connect|join|joining)\b/, "Connect", "connect to voice"],
+  [/\b(speak|speaking|voice|mic|microphone)\b/, "Speak", "speak in voice"],
+  [/\b(stream|streaming|video|camera|screen ?share)\b/, "Stream", "stream"],
+];
+const permsOf = spec => {
+  const out = [];
+  for (const part of String(spec ?? "").toLowerCase().split(/\s*(?:,|&|\+|\band\b|\/)\s*/).filter(Boolean)) {
+    const direct = Object.keys(P).find(k => k.toLowerCase() === part.replace(/[^a-z]/g, ""));
+    if (direct) { out.push([direct, part]); continue; }
+    const hit = PERMS.find(([re]) => re.test(part));
+    if (hit) out.push([hit[1], hit[2]]);
+  }
+  return [...new Map(out.map(x => [x[0], x])).values()];
+};
+const allowOf = v => /^(false|no|off|deny|denied|remove|disable|disallow|block|hide)$/i.test(String(v ?? "").trim()) ? false : /^(true|yes|on|allow|allowed|enable|grant|show|let)$/i.test(String(v ?? "").trim()) ? true : /^(reset|neutral|default|clear|null|inherit)$/i.test(String(v ?? "").trim()) ? null : undefined;
+
+/** The role or person a channel permission is about: "everyone" (default), a role name, or someone tagged. */
+async function permissionTarget(message, who) {
+  const q = String(who ?? "").trim().toLowerCase().replace(/^@/, "");
+  if (!q || /^(everyone|all|everybody|members|the server|default)$/.test(q)) return { target: message.guild.roles.everyone, label: "@everyone" };
+  const role = message.guild.roles.cache.find(r => r.name.toLowerCase() === q) ?? message.guild.roles.cache.find(r => r.name.toLowerCase().includes(q));
+  if (role && !/\d{15,}/.test(q)) return { target: role, label: `**${role.name}**` };
+  const id = await targetOf(message, who);
+  return id ? { target: id, label: tag(id) } : null;
+}
 /** Runs one moderation request; returns the post to reply with. */
 export async function moderate(message, args, config) {
   if (!message.guild) return textPost({ text: "Moderation only works inside a server." });
@@ -139,7 +181,7 @@ export async function moderate(message, args, config) {
     if (action === "kick") { await member.kick(reason); return textPost({ text: `👢 ${tag(id)} was **kicked**${args.reason ? `: ${args.reason}` : ""}.`, accent: "amber" }); }
     if (action === "timeout" || action === "mute") { const m = Math.max(1, Math.min(40320, Number(args.minutes) || 10)); await member.timeout(m * 60_000, reason); return textPost({ text: `🔇 ${tag(id)} is **timed out for ${mins(m)}**${args.reason ? `: ${args.reason}` : ""}.`, accent: "amber" }); }
     if (action === "untimeout" || action === "unmute") { await member.timeout(null, reason); return textPost({ text: `🔊 ${tag(id)} can talk again.` }); }
-    return textPost({ text: `I don't know the action "${action}". I can purge, timeout, untimeout, kick, ban, unban, warn, slowmode, lock and unlock.`, accent: "down" });
+    return textPost({ text: `I don't know the action "${action}". I can purge, timeout, untimeout, kick, ban, unban, warn, slowmode, lock, unlock, hide, unhide, set_permission, create/edit/delete roles and channels, voice mute/move/disconnect, and read the server.`, accent: "down" });
   } catch (e) {
     console.warn("moderation:", e?.message ?? e); // the technical reason goes to the log, never to the channel
     return textPost({ text: missingPermission(e) ?? "I couldn't complete that action, so nothing was changed. Try again, or tell me exactly what you want and I'll take another route.", accent: "down" });
@@ -178,7 +220,59 @@ export async function sendFromApp(message, args, { owner, config }) {
 async function extra(message, args, config, action, channel, reason) {
   const me = message.author.id;
   const text = tagText(String(args.text ?? args.reason ?? ""), { me });
-  if (action === "server_info" || action === "members" || action === "member_count") {
+  if (action === "set_permission" || action === "permission" || action === "permissions") {
+    const wanted = permsOf(args.permission ?? args.permissions ?? args.text);
+    if (!wanted.length) return textPost({ text: "Which permission? For example view the channel, send messages, add reactions, attach files, embed links, read history, mention @everyone, connect or speak.", accent: "down" });
+    const state = allowOf(args.allow ?? args.state ?? args.value);
+    if (state === undefined) return textPost({ text: "Should I allow it, deny it, or reset it to the default?", accent: "down" });
+    const who = await permissionTarget(message, args.target ?? args.role ?? args.user);
+    if (!who) return textPost({ text: unsure(message), accent: "down" });
+    const flags = Object.fromEntries(wanted.map(([k]) => [k, state]));
+    await channel.permissionOverwrites.edit(who.target, flags, { reason });
+    return textPost({ text: `${state === false ? "🚫" : state === true ? "✅" : "↩️"} In ${channel}, ${who.label} ${state === false ? "can no longer" : state === true ? "can now" : "is back to the default for"}: ${wanted.map(w => w[1]).join(", ")}.` });
+  }
+  if (action === "hide" || action === "unhide") {
+    const who = await permissionTarget(message, args.target ?? args.role ?? args.user);
+    if (!who) return textPost({ text: unsure(message), accent: "down" });
+    await channel.permissionOverwrites.edit(who.target, { ViewChannel: action === "hide" ? false : null }, { reason });
+    return textPost({ text: action === "hide" ? `🙈 ${channel} is hidden from ${who.label}: they can't see it at all.` : `👀 ${channel} is visible to ${who.label} again.` });
+  }
+  if (action === "delete_channel") {
+    if (!(await confirm(message, `🗑️ Delete the channel ${channel} for good?`))) return textPost({ text: "Cancelled. Nothing was deleted." });
+    const name = channel.name; const here = channel.id === message.channelId;
+    await channel.delete(reason);
+    return textPost({ text: here ? "🗑️ Deleted this channel." : `🗑️ Deleted **#${name}**.` });
+  }
+  if (action === "create_role" || action === "edit_role" || action === "delete_role") {
+    const q = String(args.role ?? args.name ?? "").trim();
+    if (!q) return textPost({ text: "Which role?", accent: "down" });
+    const find = () => message.guild.roles.cache.find(r => r.name.toLowerCase() === q.toLowerCase()) ?? message.guild.roles.cache.find(r => r.name.toLowerCase().includes(q.toLowerCase()));
+    const color = args.color ? String(args.color).trim().replace(/^#?/, "#") : undefined;
+    if (action === "create_role") { const r = await message.guild.roles.create({ name: q.slice(0, 100), color: color && /^#[0-9a-f]{6}$/i.test(color) ? color : undefined, hoist: /^(true|yes|on)$/i.test(String(args.hoist ?? "")), mentionable: /^(true|yes|on)$/i.test(String(args.mentionable ?? "")), reason }); return textPost({ text: `🎖️ Created the role **${r.name}**${color ? ` in ${color}` : ""}.` }); }
+    const role = find();
+    if (!role) return textPost({ text: `I couldn't find a role called "${q}".`, accent: "down" });
+    if (action === "delete_role") { if (!(await confirm(message, `🗑️ Delete the role **${role.name}**?`))) return textPost({ text: "Cancelled." }); await role.delete(reason); return textPost({ text: `🗑️ Deleted the role **${role.name}**.` }); }
+    const patch = { reason };
+    if (color && /^#[0-9a-f]{6}$/i.test(color)) patch.color = color;
+    if (args.name && args.role) patch.name = String(args.name).slice(0, 100);
+    if (args.hoist != null) patch.hoist = /^(true|yes|on)$/i.test(String(args.hoist));
+    if (args.mentionable != null) patch.mentionable = /^(true|yes|on)$/i.test(String(args.mentionable));
+    await role.edit(patch);
+    return textPost({ text: `🎖️ Updated **${role.name}**${patch.color ? ` (colour ${patch.color})` : ""}.` });
+  }
+  if (action === "nsfw" || action === "age_restrict") { await channel.setNSFW(!/^(false|no|off)$/i.test(String(args.allow ?? "true")), reason); return textPost({ text: `🔞 Age restriction updated in ${channel}.` }); }
+  if (action === "move_channel" || action === "category") { const q = String(args.name ?? args.topic ?? "").toLowerCase().replace(/[^a-z0-9]+/g, ""); const cat = message.guild.channels.cache.find(c => c.type === 4 && c.name.toLowerCase().replace(/[^a-z0-9]+/g, "").includes(q)); if (!cat) return textPost({ text: `I couldn't find a category called "${args.name ?? ""}".`, accent: "down" }); await channel.setParent(cat.id, { lockPermissions: false, reason }); return textPost({ text: `📁 Moved ${channel} to **${cat.name}**.` }); }
+  if (action === "clone_channel") { const c = await channel.clone({ name: args.name ? String(args.name).slice(0, 90) : undefined, reason }); return textPost({ text: `✅ Copied ${channel} as ${c}, with the same permissions.` }); }
+  if (action === "voice_mute" || action === "voice_unmute" || action === "voice_disconnect" || action === "voice_move") {
+    const id = await targetOf(message, args.user); if (!id) return textPost({ text: "Tag the person so I know exactly who you mean.", accent: "down" });
+    const m = await message.guild.members.fetch(id).catch(() => null);
+    if (!m?.voice?.channel) return textPost({ text: `${tag(id)} isn't in a voice channel.`, accent: "down" });
+    if (action === "voice_disconnect") await m.voice.disconnect(reason);
+    else if (action === "voice_move") { const dest = channelOf(message, args.name ?? args.channel); if (!dest?.isVoiceBased?.()) return textPost({ text: "Which voice channel should I move them to?", accent: "down" }); await m.voice.setChannel(dest, reason); }
+    else await m.voice.setMute(action === "voice_mute", reason);
+    return textPost({ text: `🎙️ Done: ${action.replace("voice_", "")} for ${tag(id)}.` });
+  }
+  if (action === "thread_archive" || action === "thread_lock") { if (!channel.isThread?.()) return textPost({ text: "That only works inside a thread.", accent: "down" }); if (action === "thread_lock") await channel.setLocked(true, reason); await channel.setArchived(true, reason); return textPost({ text: "🧵 Thread closed." }); }  if (action === "server_info" || action === "members" || action === "member_count") {
     // Counts come from Discord itself (no member list needed), so they are right even with a large server.
     const g = await message.client.guilds.fetch({ guild: message.guild.id, withCounts: true }).catch(() => message.guild);
     const total = g.approximateMemberCount ?? g.memberCount ?? message.guild.memberCount, online = g.approximatePresenceCount;
