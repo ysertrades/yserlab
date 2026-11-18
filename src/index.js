@@ -15,7 +15,7 @@ import { designDiagram, designSlides, isGenericSs, Clarify } from "./diagram.js"
 import { cardOnRequest } from "./cards.js";
 import { picturePost, galleryPost } from "./post.js";
 import { fonts } from "./render.js";
-import { moderate, sendFromApp } from "./mod.js";
+import { moderate, sendFromApp, waiting } from "./mod.js";
 import { remember } from "./people.js";
 import { pollJuice, publishTrump } from "./feeds.js";
 import { cancel, list as listJobs, schedule, tick as tickJobs } from "./sched.js";
@@ -81,6 +81,7 @@ client.on(Events.MessageCreate, async message => {
     remember(message); // learns who is who, so "tag Ahmed" later means the right person
     // Never answers a bot, a webhook, a system message or itself (the bot's own posts and other bots' never start a conversation).
     if (message.author.bot || message.webhookId || message.system || message.author.id === client.user?.id || !message.content && !message.attachments.size) return;
+    if (waiting.has(`${message.channelId}:${message.author.id}`)) return; // the answer to a question just asked (yes / no), not a new request
     const { config, owner } = await settings();
     if (config.paused) return;
     const tagged = message.mentions.has(client.user, { ignoreEveryone: true, ignoreRoles: true });

@@ -46,8 +46,15 @@ const missingPermission = e => /Missing (Permissions|Access)|50013|50001/.test(S
 const unsure = message => message.__ambiguous?.length ? `I'm not sure which one you mean: ${message.__ambiguous.map(tag).join(" or ")}. Tag the right one (@name) and I'll do it.` : "I'm not sure who you mean. Tag them (@name) so I get exactly the right person.";
 const YES = /^\s*(y|yes|yeah|yep|yup|confirm|confirmed|do it|go|go ahead|sure|ok|okay)\b/i;
 /** Asks the owner to confirm, in the channel, naming who it is about; true only on a clear yes within 20 seconds. */
+/** Who is being asked right now (channel:user). Their reply is the answer to the question, so the main handler must not treat it as a new request. */
+export const waiting = new Set();
 async function confirm(message, text) {
   if (!message.id || !message.channel?.awaitMessages) return true; // scheduled: nobody to ask
+  const key = `${message.channelId}:${message.author.id}`;
+  waiting.add(key);
+  try { return await ask_(message, text); } finally { setTimeout(() => waiting.delete(key), 1500); }
+}
+async function ask_(message, text) {
   const ask = await message.channel.send({ content: `${text}\nReply **yes** within 20 seconds to do it.`, allowedMentions: { users: idsIn(text), parse: [] } });
   const got = await message.channel.awaitMessages({ filter: m => m.author.id === message.author.id, max: 1, time: 20_000 }).catch(() => null);
   const reply = got?.first();
@@ -113,7 +120,7 @@ export async function moderate(message, args, config) {
       if (named && !userId) return textPost({ text: unsure(message), accent: "down" });
       const count = String(args.count ?? "").toLowerCase() === "all" ? "all" : Math.max(1, Math.min(1000, Math.floor(Number(args.count)) || 1));
       const wide = userId || count === "all" || count > 25;
-      if (wide && !(await confirm(message, `🧹 Delete ${count === "all" ? "**all**" : `the last **${count}**`} message${count === 1 ? "" : "s"}${userId ? ` from ${tag(userId)}${userId === message.author.id ? " (that's **you**)" : ""}` : ` in ${channel}`}?`))) return textPost({ text: "Cancelled. Nothing was deleted." });
+      // The owner's own word is enough: no second question (a "yes" reply used to be read as a new request and asked again).
       const { deleted, skippedOld } = await purge(channel, { count, userId, keepId: message.id });
       return textPost({ text: `🧹 Deleted **${deleted}** message${deleted === 1 ? "" : "s"}${userId ? ` from ${tag(userId)}` : ""} in ${channel}${count === "all" ? " (all I could reach)" : `, newest first`}.${skippedOld ? `\n-# ${skippedOld} older than I could clear were left.` : ""}`, accent: "accent" });
     }
@@ -171,7 +178,31 @@ export async function sendFromApp(message, args, { owner, config }) {
 async function extra(message, args, config, action, channel, reason) {
   const me = message.author.id;
   const text = tagText(String(args.text ?? args.reason ?? ""), { me });
-  if (action === "say" || action === "announce") { if (!text) return textPost({ text: "What should I say?", accent: "down" }); for (const c of channelsOf(message, args.channel)) await c.send({ content: text.slice(0, 1990), allowedMentions: { users: idsIn(text), parse: [] } }); return textPost({ text: `📤 Said it in ${channelsOf(message, args.channel).join(" ")}.` }); }
+  if (action === "server_info" || action === "members" || action === "member_count") {
+    // Counts come from Discord itself (no member list needed), so they are right even with a large server.
+    const g = await message.client.guilds.fetch({ guild: message.guild.id, withCounts: true }).catch(() => message.guild);
+    const total = g.approximateMemberCount ?? g.memberCount ?? message.guild.memberCount, online = g.approximatePresenceCount;
+    const ch = message.guild.channels.cache, roles = message.guild.roles.cache.size - 1;
+    const kinds = { text: ch.filter(c => c.isTextBased?.() && !c.isThread?.() && !c.isVoiceBased?.()).size, voice: ch.filter(c => c.isVoiceBased?.()).size };
+    const owner = await message.guild.fetchOwner().catch(() => null);
+    return textPost({ text: `📊 **${message.guild.name}**\n👥 **${total}** members${online != null ? ` · ${online} online` : ""}\n💬 ${kinds.text} text and ${kinds.voice} voice channels · 🎖️ ${roles} roles\n🚀 Boost level ${message.guild.premiumTier} (${message.guild.premiumSubscriptionCount ?? 0} boosts)${owner ? `\n👑 Owner: ${tag(owner.id)}` : ""}\n-# Created ${new Date(message.guild.createdTimestamp).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}` });
+  }
+  if (action === "member_info" || action === "whois") {
+    const id = await targetOf(message, args.user);
+    if (!id) return textPost({ text: "Tag the person so I know exactly who you mean.", accent: "down" });
+    const m = await message.guild.members.fetch(id).catch(() => null);
+    if (!m) return textPost({ text: `${tag(id)} isn't in this server.`, accent: "down" });
+    const when = d => d ? new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "unknown";
+    const roles = m.roles.cache.filter(r => r.id !== message.guild.id).sort((a, b) => b.position - a.position).map(r => r.name).slice(0, 12);
+    return textPost({ text: `👤 ${tag(id)}\nJoined **${when(m.joinedTimestamp)}** · account created ${when(m.user.createdTimestamp)}\nRoles: ${roles.join(", ") || "none"}${m.communicationDisabledUntilTimestamp > Date.now() ? "\n🔇 Timed out right now" : ""}` });
+  }
+  if (action === "read_messages" || action === "recent_messages") {
+    const n = Math.max(1, Math.min(25, Math.floor(Number(args.count)) || 10));
+    const batch = await channel.messages.fetch({ limit: n, before: message.id }).catch(() => null);
+    if (!batch?.size) return textPost({ text: `I couldn't read messages in ${channel}.`, accent: "down" });
+    const lines = [...batch.values()].reverse().map(m => `**${m.member?.displayName ?? m.author.username}**: ${String(m.content || (m.attachments.size ? "[attachment]" : "[embed]")).replace(/\s+/g, " ").slice(0, 160)}`);
+    return textPost({ text: `📜 Last ${lines.length} in ${channel}\n${lines.join("\n")}` });
+  }  if (action === "say" || action === "announce") { if (!text) return textPost({ text: "What should I say?", accent: "down" }); for (const c of channelsOf(message, args.channel)) await c.send({ content: text.slice(0, 1990), allowedMentions: { users: idsIn(text), parse: [] } }); return textPost({ text: `📤 Said it in ${channelsOf(message, args.channel).join(" ")}.` }); }
   if (action === "poll") {
     const options = pollOptions(args.options);
     if (!args.question || options.length < 2) return textPost({ text: "A poll needs a question and at least two options.", accent: "down" });
