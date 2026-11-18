@@ -1,4 +1,4 @@
-﻿import { Client, Events, GatewayIntentBits, Partials } from "discord.js";
+import { Client, Events, GatewayIntentBits, Partials } from "discord.js";
 import { env, missing } from "./env.js";
 import { settings, log } from "./store.js";
 import { isAdmin, mayUseAi } from "./access.js";
@@ -9,7 +9,8 @@ import { checkSessions } from "./sessions.js";
 import { checkJobs } from "./jobs.js";
 import { heartbeat, offline } from "./status.js";
 import * as picker from "./picker.js";
-import { ask, modelDoc } from "./ai.js";
+import { modelDoc } from "./ai.js";
+import { askUnified, ensureLink, publishKnowledge } from "./assistant.js";
 import { designDiagram, designSlides, isGenericSs, Clarify } from "./diagram.js";
 import { cardOnRequest } from "./cards.js";
 import { picturePost, galleryPost } from "./post.js";
@@ -47,6 +48,8 @@ client.once(Events.ClientReady, async () => {
   await client.application.commands.set([]).catch(() => {});
   await log("bot", { note: `online as ${client.user.tag}` });
   await heartbeat(client).catch(() => {});
+  void ensureLink(); void publishKnowledge(); // the assistant function maps the owner's Discord id to the account and reads the education center from storage
+  setInterval(() => void ensureLink(), 10 * 60_000);
   every(1_000, "alerts", async () => { const { config } = await settings(); if (!config.paused) { await checkAlerts(client, config); await checkSessions(client); } });
   every(15_000, "schedule", async () => { const { config } = await settings(); if (!config.paused) { await checkSchedule(client); await checkCards(client); } });
   every(120_000, "milestones", async () => { const { config } = await settings(); if (!config.paused) await checkMilestones(client); });
@@ -99,7 +102,7 @@ client.on(Events.MessageCreate, async message => {
     if (!text) { if (tagged) await message.reply({ content: "Yes? Ask me anything about your model or your trades.", allowedMentions: { repliedUser: false } }); return; }
     if (!owner) { await message.reply("Open YSER Lab in the app once so I know whose trades and model to use."); return; }
     await message.channel.sendTyping().catch(() => {});
-    const out = await ask({ owner, channelId, text });
+    const out = await askUnified({ owner, channelId, discordId: message.author.id, text });
     if (out.chart) { await picker.startChart(message, owner, out.timeframe); return; }
     if (out.schedule) { // looking at, or cancelling, what is scheduled
       if (!isAdmin(config, message.author.id)) return;

@@ -262,4 +262,4 @@ export async function ask({ owner, channelId, text }) {
 const wantsPicture = q => /\b(draw|diagram|illustrate|visuali[sz]e|images?|pictures?|slides?)\b|\bshow me (a|an|the|how)\b/i.test(q);
 export const modelDoc = cachedModel;
 export const knowledgeStats = stats;
-export { viaGroq, viaGemini }; // for scripts/education/ask.js, which tries questions without Discord
+export { viaGroq, viaGemini, called, TOOLS }; // viaGroq and viaGemini: for scripts/education/ask.js, which tries questions without Discord
