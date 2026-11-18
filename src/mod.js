@@ -111,9 +111,9 @@ export async function moderate(message, args, config) {
       const named = (args.user && !/^(everyone|all|anyone|nobody|none|any)$/i.test(String(args.user).trim())) || [...message.mentions.users.values()].some(u => u.id !== message.client.user.id);
       const userId = named ? await targetOf(message, args.user) : null;
       if (named && !userId) return textPost({ text: unsure(message), accent: "down" });
+      const count = String(args.count ?? "").toLowerCase() === "all" ? "all" : Math.max(1, Math.min(1000, Math.floor(Number(args.count)) || 1));
       const wide = userId || count === "all" || count > 25;
       if (wide && !(await confirm(message, `🧹 Delete ${count === "all" ? "**all**" : `the last **${count}**`} message${count === 1 ? "" : "s"}${userId ? ` from ${tag(userId)}${userId === message.author.id ? " (that's **you**)" : ""}` : ` in ${channel}`}?`))) return textPost({ text: "Cancelled. Nothing was deleted." });
-      const count = String(args.count ?? "").toLowerCase() === "all" ? "all" : Number(args.count) || 1;
       const { deleted, skippedOld } = await purge(channel, { count, userId, keepId: message.id });
       return textPost({ text: `🧹 Deleted **${deleted}** message${deleted === 1 ? "" : "s"}${userId ? ` from ${tag(userId)}` : ""} in ${channel}${count === "all" ? " (all I could reach)" : `, newest first`}.${skippedOld ? `\n-# ${skippedOld} older than I could clear were left.` : ""}`, accent: "accent" });
     }
@@ -134,7 +134,8 @@ export async function moderate(message, args, config) {
     if (action === "untimeout" || action === "unmute") { await member.timeout(null, reason); return textPost({ text: `🔊 ${tag(id)} can talk again.` }); }
     return textPost({ text: `I don't know the action "${action}". I can purge, timeout, untimeout, kick, ban, unban, warn, slowmode, lock and unlock.`, accent: "down" });
   } catch (e) {
-    return textPost({ text: missingPermission(e) ?? `That didn't work: ${e?.message ?? e}`, accent: "down" });
+    console.warn("moderation:", e?.message ?? e); // the technical reason goes to the log, never to the channel
+    return textPost({ text: missingPermission(e) ?? "I couldn't complete that action, so nothing was changed. Try again, or tell me exactly what you want and I'll take another route.", accent: "down" });
   }
 }
 
