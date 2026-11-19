@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits as P } from "discord.js";
-import { TOOLS, findRole } from "../admin/tools.js";
+import { TOOLS, findRole, effective } from "../admin/tools.js";
 import { panel } from "../admin/ui.js";
 import { getConvo, setList, setFocus } from "./memory.js";
 
@@ -102,6 +102,23 @@ function showMembers(ctx, members, { title, total, limitation, convo }) {
 }
 
 Object.assign(TOOLS, {
+  channel_visibility: {
+    cap: "info", risk: "read", bot: [], aliases: ["channel_access_list", "visible_channels", "who_can_see_channels"],
+    // Which channels @everyone (or one role) can see, and which are hidden from them: read straight from the channels' permissions.
+    async run({ guild, args, result }) {
+      let role = guild.roles.everyone, label = "@everyone";
+      if (args.role && !/^(everyone|@everyone|all|everybody)$/i.test(String(args.role).trim())) { role = findRole(guild, args.role); if (!role) throw friendly("no role", `I couldn't find a role called "${args.role}".${similarRoles(guild, args.role)}`); label = "**" + role.name + "**"; }
+      const mode = /^(hidden|private|locked|restricted)$/i.test(args.mode ?? "") ? "hidden" : /^read/i.test(args.mode ?? "") ? "readonly" : "visible";
+      const chans = [...guild.channels.cache.values()].filter(c => !c.isThread?.() && c.type !== 4).sort((a, b) => (a.rawPosition ?? a.position ?? 0) - (b.rawPosition ?? b.position ?? 0));
+      const rows = chans.map(c => ({ c, ...effective(c, role) }));
+      const see = rows.filter(r => r.view), hide = rows.filter(r => !r.view), ro = see.filter(r => !r.send);
+      const list = rs => rs.slice(0, 40).map(r => `• ${r.c}${r.c.parent ? " · " + r.c.parent.name : ""}${r.view && !r.send && mode !== "readonly" ? " (read only)" : ""}`).concat(rs.length > 40 ? [`-# and ${rs.length - 40} more`] : []);
+      const pick = mode === "hidden" ? hide : mode === "readonly" ? ro : see;
+      Object.assign(result, { visible: see.length, hidden: hide.length, readonly: ro.length });
+      const title = mode === "hidden" ? `Hidden from ${label} (${hide.length})` : mode === "readonly" ? `Read-only for ${label} (${ro.length})` : `Channels ${label} can see (${see.length} of ${rows.length})`;
+      return panel({ title: title.replace(/\*\*/g, ""), accent: "accent", lines: [pick.length ? list(pick).join("\n") : "None.", mode === "visible" && hide.length ? `\n🔒 Hidden from ${label}: ${hide.length} channel${hide.length === 1 ? "" : "s"}` : "", "-# From each channel's permissions as Discord reports them; a role with Administrator sees everything."].filter(Boolean) });
+    },
+  },
   member_list: {
     cap: "members", risk: "read", bot: [], aliases: ["members", "list_members", "show_members", "all_members", "server_members", "members_by_role", "role_members_list"],
     async run(ctx) {

@@ -1,0 +1,973 @@
+{
+  "timestamp": "2026-11-19T22:14:31.540Z",
+  "filter": {},
+  "scenarios": 245,
+  "passed": 238,
+  "overall": {
+    "intent": {
+      "ok": 243,
+      "n": 244,
+      "rate": 0.9959016393442623
+    },
+    "tool": {
+      "ok": 242,
+      "n": 245,
+      "rate": 0.9877551020408163
+    },
+    "args": {
+      "ok": 100,
+      "n": 104,
+      "rate": 0.9615384615384616
+    },
+    "ref": {
+      "ok": 56,
+      "n": 58,
+      "rate": 0.9655172413793104
+    },
+    "unnecessary": {
+      "ok": 0,
+      "n": 218,
+      "rate": 0
+    },
+    "missing": {
+      "ok": 0,
+      "n": 27,
+      "rate": 0
+    },
+    "confirm": {
+      "ok": 84,
+      "n": 84,
+      "rate": 1
+    },
+    "exec": {
+      "ok": 106,
+      "n": 108,
+      "rate": 0.9814814814814815
+    },
+    "unintended": {
+      "ok": 0,
+      "n": 243,
+      "rate": 0
+    },
+    "scenario": {
+      "ok": 238,
+      "n": 245,
+      "rate": 0.9714285714285714
+    }
+  },
+  "categories": {
+    "members": {
+      "n": 43,
+      "intent": {
+        "ok": 43,
+        "n": 43,
+        "rate": 1
+      },
+      "tool": {
+        "ok": 43,
+        "n": 43,
+        "rate": 1
+      },
+      "args": {
+        "ok": 15,
+        "n": 15,
+        "rate": 1
+      },
+      "ref": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 43,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "exec": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 43,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 43,
+        "n": 43,
+        "rate": 1
+      }
+    },
+    "drafts": {
+      "n": 49,
+      "intent": {
+        "ok": 49,
+        "n": 49,
+        "rate": 1
+      },
+      "tool": {
+        "ok": 49,
+        "n": 49,
+        "rate": 1
+      },
+      "args": {
+        "ok": 27,
+        "n": 28,
+        "rate": 0.9642857142857143
+      },
+      "ref": {
+        "ok": 2,
+        "n": 2,
+        "rate": 1
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 46,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 3,
+        "rate": 0
+      },
+      "confirm": {
+        "ok": 24,
+        "n": 24,
+        "rate": 1
+      },
+      "exec": {
+        "ok": 27,
+        "n": 27,
+        "rate": 1
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 49,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 48,
+        "n": 49,
+        "rate": 0.9795918367346939
+      }
+    },
+    "creation": {
+      "n": 31,
+      "intent": {
+        "ok": 30,
+        "n": 30,
+        "rate": 1
+      },
+      "tool": {
+        "ok": 30,
+        "n": 31,
+        "rate": 0.967741935483871
+      },
+      "args": {
+        "ok": 22,
+        "n": 22,
+        "rate": 1
+      },
+      "ref": {
+        "ok": 10,
+        "n": 10,
+        "rate": 1
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 26,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 5,
+        "rate": 0
+      },
+      "confirm": {
+        "ok": 20,
+        "n": 20,
+        "rate": 1
+      },
+      "exec": {
+        "ok": 23,
+        "n": 23,
+        "rate": 1
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 31,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 30,
+        "n": 31,
+        "rate": 0.967741935483871
+      }
+    },
+    "refs": {
+      "n": 31,
+      "intent": {
+        "ok": 30,
+        "n": 31,
+        "rate": 0.967741935483871
+      },
+      "tool": {
+        "ok": 30,
+        "n": 31,
+        "rate": 0.967741935483871
+      },
+      "args": {
+        "ok": 11,
+        "n": 12,
+        "rate": 0.9166666666666666
+      },
+      "ref": {
+        "ok": 30,
+        "n": 31,
+        "rate": 0.967741935483871
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 27,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 4,
+        "rate": 0
+      },
+      "confirm": {
+        "ok": 17,
+        "n": 17,
+        "rate": 1
+      },
+      "exec": {
+        "ok": 23,
+        "n": 24,
+        "rate": 0.9583333333333334
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 29,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 30,
+        "n": 31,
+        "rate": 0.967741935483871
+      }
+    },
+    "corrections": {
+      "n": 15,
+      "intent": {
+        "ok": 15,
+        "n": 15,
+        "rate": 1
+      },
+      "tool": {
+        "ok": 15,
+        "n": 15,
+        "rate": 1
+      },
+      "args": {
+        "ok": 7,
+        "n": 7,
+        "rate": 1
+      },
+      "ref": {
+        "ok": 4,
+        "n": 4,
+        "rate": 1
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 15,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 4,
+        "n": 4,
+        "rate": 1
+      },
+      "exec": {
+        "ok": 5,
+        "n": 5,
+        "rate": 1
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 15,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 14,
+        "n": 15,
+        "rate": 0.9333333333333333
+      }
+    },
+    "multi": {
+      "n": 15,
+      "intent": {
+        "ok": 15,
+        "n": 15,
+        "rate": 1
+      },
+      "tool": {
+        "ok": 14,
+        "n": 15,
+        "rate": 0.9333333333333333
+      },
+      "args": {
+        "ok": 5,
+        "n": 6,
+        "rate": 0.8333333333333334
+      },
+      "ref": {
+        "ok": 0,
+        "n": 1,
+        "rate": 0
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 15,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 11,
+        "n": 11,
+        "rate": 1
+      },
+      "exec": {
+        "ok": 12,
+        "n": 12,
+        "rate": 1
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 15,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 13,
+        "n": 15,
+        "rate": 0.8666666666666667
+      }
+    },
+    "missing": {
+      "n": 18,
+      "intent": {
+        "ok": 18,
+        "n": 18,
+        "rate": 1
+      },
+      "tool": {
+        "ok": 18,
+        "n": 18,
+        "rate": 1
+      },
+      "args": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "ref": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 3,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 15,
+        "rate": 0
+      },
+      "confirm": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "exec": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 18,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 18,
+        "n": 18,
+        "rate": 1
+      }
+    },
+    "long": {
+      "n": 10,
+      "intent": {
+        "ok": 10,
+        "n": 10,
+        "rate": 1
+      },
+      "tool": {
+        "ok": 10,
+        "n": 10,
+        "rate": 1
+      },
+      "args": {
+        "ok": 7,
+        "n": 7,
+        "rate": 1
+      },
+      "ref": {
+        "ok": 10,
+        "n": 10,
+        "rate": 1
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 10,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 8,
+        "n": 8,
+        "rate": 1
+      },
+      "exec": {
+        "ok": 10,
+        "n": 10,
+        "rate": 1
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 10,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 10,
+        "n": 10,
+        "rate": 1
+      }
+    },
+    "memory": {
+      "n": 10,
+      "intent": {
+        "ok": 10,
+        "n": 10,
+        "rate": 1
+      },
+      "tool": {
+        "ok": 10,
+        "n": 10,
+        "rate": 1
+      },
+      "args": {
+        "ok": 6,
+        "n": 7,
+        "rate": 0.8571428571428571
+      },
+      "ref": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 10,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "exec": {
+        "ok": 6,
+        "n": 7,
+        "rate": 0.8571428571428571
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 10,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 9,
+        "n": 10,
+        "rate": 0.9
+      }
+    },
+    "llm": {
+      "n": 23,
+      "intent": {
+        "ok": 23,
+        "n": 23,
+        "rate": 1
+      },
+      "tool": {
+        "ok": 23,
+        "n": 23,
+        "rate": 1
+      },
+      "args": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "ref": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 23,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "exec": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 23,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 23,
+        "n": 23,
+        "rate": 1
+      }
+    }
+  },
+  "latency": {
+    "avgTurnMs": 0.8694105577689228,
+    "p95TurnMs": 1.6805000000001655,
+    "turns": 502,
+    "memoryRetrievalAvgMs": 0.010526877551020353,
+    "memoryRetrievalMaxMs": 0.11900000000000546
+  },
+  "failureKinds": {
+    "args": 3,
+    "tool": 3,
+    "intent": 1,
+    "state": 2,
+    "said": 1
+  },
+  "failures": [
+    {
+      "id": "drafts-31",
+      "category": "drafts",
+      "difficulty": 3,
+      "say": "send it in annoucements",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "args: channel=\"annoucements\" (wanted /announcements/i)"
+      ],
+      "kinds": [
+        "args"
+      ],
+      "reply": " 📣 Sent in <#100000000000000335>. https://discord.com/channels/g1/100000000000000335/100000000000000338"
+    },
+    {
+      "id": "creation-29",
+      "category": "creation",
+      "difficulty": 3,
+      "say": "create a channel called lessons in the Academy category",
+      "prev": [],
+      "reasons": [
+        "tool: recorded no operation, wanted channel_create"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "reply": "I couldn't find a channel called \"Academy\"."
+    },
+    {
+      "id": "refs-19",
+      "category": "refs",
+      "difficulty": 4,
+      "say": "put those there",
+      "prev": [
+        "create a channel called lessons",
+        "create a channel called quizzes",
+        "create a category called Academy"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.move",
+        "tool: recorded no operation, wanted move_channel",
+        "args: no classification",
+        "state: the resulting state is wrong ()"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "args",
+        "state"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "corrections-15",
+      "category": "corrections",
+      "difficulty": 3,
+      "say": "no I meant channels",
+      "prev": [
+        "list the roles"
+      ],
+      "reasons": [
+        "said: reply lacks /general/"
+      ],
+      "kinds": [
+        "said"
+      ],
+      "reply": " Understood, you meant channels list. Here it is: ### Channels (1) # <#100000000000000977>"
+    },
+    {
+      "id": "multi-08",
+      "category": "multi",
+      "difficulty": 3,
+      "say": "make it private and give access to instructors",
+      "prev": [
+        "Create a channel called announcements"
+      ],
+      "reasons": [
+        "args: roles=undefined (wanted /instructor/i)"
+      ],
+      "kinds": [
+        "args"
+      ],
+      "reply": " 🔒 <#100000000000001026> is private now: @everyone can't see it (administrators still can). To let a role in, say \"give access to <role>\". Verified. ### Access updated <#100000000000001026> 🔒 Only **Instructor** can see it. Verified: @eve"
+    },
+    {
+      "id": "multi-09",
+      "category": "multi",
+      "difficulty": 4,
+      "say": "make it shorter and send it here",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "tool: recorded message_send, wanted no operation"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "reply": " **Draft** · version 2 📣 **the live stream** Join us tomorrow at 9:30 ET! -# Say \"send it\" (here, or \"in #channel\"), or tell me what to change. 📣 Sent in <#100000000000001030>. https://discord.com/channels/g1/100000000000001030/1000000000"
+    },
+    {
+      "id": "memory-06",
+      "category": "memory",
+      "difficulty": 5,
+      "say": "write another announcement about the webinar, use the same format as last time",
+      "prev": [
+        "write an announcement about the live stream",
+        "make it shorter",
+        "send it here"
+      ],
+      "reasons": [
+        "state: the resulting state is wrong ( **Draft** · version 1 📣 **the webinar** Join us tomorrow at 9:30 ET. Bring your question)"
+      ],
+      "kinds": [
+        "state"
+      ],
+      "reply": " **Draft** · version 1 📣 **the webinar** Join us tomorrow at 9:30 ET. Bring your questions and your charts. Everyone is welcome to watch. -# Say \"send it\" (here, or \"in #channel\"), or tell me what to change."
+    }
+  ],
+  "status": {
+    "members-01": true,
+    "members-02": true,
+    "members-03": true,
+    "members-04": true,
+    "members-05": true,
+    "members-06": true,
+    "members-07": true,
+    "members-08": true,
+    "members-09": true,
+    "members-10": true,
+    "members-11": true,
+    "members-12": true,
+    "members-13": true,
+    "members-14": true,
+    "members-15": true,
+    "members-16": true,
+    "members-17": true,
+    "members-18": true,
+    "members-19": true,
+    "members-20": true,
+    "members-21": true,
+    "members-22": true,
+    "members-23": true,
+    "members-24": true,
+    "members-25": true,
+    "members-26": true,
+    "members-27": true,
+    "members-28": true,
+    "members-29": true,
+    "members-30": true,
+    "members-31": true,
+    "members-32": true,
+    "members-33": true,
+    "members-34": true,
+    "members-35": true,
+    "members-36": true,
+    "members-37": true,
+    "members-38": true,
+    "members-39": true,
+    "members-40": true,
+    "members-41": true,
+    "members-42": true,
+    "members-43": true,
+    "drafts-01": true,
+    "drafts-02": true,
+    "drafts-03": true,
+    "drafts-04": true,
+    "drafts-05": true,
+    "drafts-06": true,
+    "drafts-07": true,
+    "drafts-08": true,
+    "drafts-09": true,
+    "drafts-10": true,
+    "drafts-11": true,
+    "drafts-12": true,
+    "drafts-13": true,
+    "drafts-14": true,
+    "drafts-15": true,
+    "drafts-16": true,
+    "drafts-17": true,
+    "drafts-18": true,
+    "drafts-19": true,
+    "drafts-20": true,
+    "drafts-21": true,
+    "drafts-22": true,
+    "drafts-23": true,
+    "drafts-24": true,
+    "drafts-25": true,
+    "drafts-26": true,
+    "drafts-27": true,
+    "drafts-28": true,
+    "drafts-29": true,
+    "drafts-30": true,
+    "drafts-31": false,
+    "drafts-32": true,
+    "drafts-33": true,
+    "drafts-34": true,
+    "drafts-35": true,
+    "drafts-36": true,
+    "drafts-37": true,
+    "drafts-38": true,
+    "drafts-39": true,
+    "drafts-40": true,
+    "drafts-41": true,
+    "drafts-42": true,
+    "drafts-43": true,
+    "drafts-44": true,
+    "drafts-45": true,
+    "drafts-46": true,
+    "drafts-47": true,
+    "drafts-48": true,
+    "drafts-49": true,
+    "creation-01": true,
+    "creation-02": true,
+    "creation-03": true,
+    "creation-04": true,
+    "creation-05": true,
+    "creation-06": true,
+    "creation-07": true,
+    "creation-08": true,
+    "creation-09": true,
+    "creation-10": true,
+    "creation-11": true,
+    "creation-12": true,
+    "creation-13": true,
+    "creation-14": true,
+    "creation-15": true,
+    "creation-16": true,
+    "creation-17": true,
+    "creation-18": true,
+    "creation-19": true,
+    "creation-20": true,
+    "creation-21": true,
+    "creation-22": true,
+    "creation-23": true,
+    "creation-24": true,
+    "creation-25": true,
+    "creation-26": true,
+    "creation-27": true,
+    "creation-28": true,
+    "creation-29": false,
+    "creation-30": true,
+    "creation-31": true,
+    "refs-01": true,
+    "refs-02": true,
+    "refs-03": true,
+    "refs-04": true,
+    "refs-05": true,
+    "refs-06": true,
+    "refs-07": true,
+    "refs-08": true,
+    "refs-09": true,
+    "refs-10": true,
+    "refs-11": true,
+    "refs-12": true,
+    "refs-13": true,
+    "refs-14": true,
+    "refs-15": true,
+    "refs-16": true,
+    "refs-17": true,
+    "refs-18": true,
+    "refs-19": false,
+    "refs-20": true,
+    "refs-21": true,
+    "refs-22": true,
+    "refs-23": true,
+    "refs-24": true,
+    "refs-25": true,
+    "refs-26": true,
+    "refs-27": true,
+    "refs-28": true,
+    "refs-29": true,
+    "refs-30": true,
+    "refs-31": true,
+    "corrections-01": true,
+    "corrections-02": true,
+    "corrections-03": true,
+    "corrections-04": true,
+    "corrections-05": true,
+    "corrections-06": true,
+    "corrections-07": true,
+    "corrections-08": true,
+    "corrections-09": true,
+    "corrections-10": true,
+    "corrections-11": true,
+    "corrections-12": true,
+    "corrections-13": true,
+    "corrections-14": true,
+    "corrections-15": false,
+    "multi-01": true,
+    "multi-02": true,
+    "multi-03": true,
+    "multi-04": true,
+    "multi-05": true,
+    "multi-06": true,
+    "multi-07": true,
+    "multi-08": false,
+    "multi-09": false,
+    "multi-10": true,
+    "multi-11": true,
+    "multi-12": true,
+    "multi-13": true,
+    "multi-14": true,
+    "multi-15": true,
+    "missing-01": true,
+    "missing-02": true,
+    "missing-03": true,
+    "missing-04": true,
+    "missing-05": true,
+    "missing-06": true,
+    "missing-07": true,
+    "missing-08": true,
+    "missing-09": true,
+    "missing-10": true,
+    "missing-11": true,
+    "missing-12": true,
+    "missing-13": true,
+    "missing-14": true,
+    "missing-15": true,
+    "missing-16": true,
+    "missing-17": true,
+    "missing-18": true,
+    "long-01": true,
+    "long-02": true,
+    "long-03": true,
+    "long-04": true,
+    "long-05": true,
+    "long-06": true,
+    "long-07": true,
+    "long-08": true,
+    "long-09": true,
+    "long-10": true,
+    "memory-01": true,
+    "memory-02": true,
+    "memory-03": true,
+    "memory-04": true,
+    "memory-05": true,
+    "memory-06": false,
+    "memory-07": true,
+    "memory-08": true,
+    "memory-09": true,
+    "memory-10": true,
+    "llm-01": true,
+    "llm-02": true,
+    "llm-03": true,
+    "llm-04": true,
+    "llm-05": true,
+    "llm-06": true,
+    "llm-07": true,
+    "llm-08": true,
+    "llm-09": true,
+    "llm-10": true,
+    "llm-11": true,
+    "llm-12": true,
+    "llm-13": true,
+    "llm-14": true,
+    "llm-15": true,
+    "llm-16": true,
+    "llm-17": true,
+    "llm-18": true,
+    "llm-19": true,
+    "llm-20": true,
+    "llm-21": true,
+    "llm-22": true,
+    "llm-23": true
+  }
+}

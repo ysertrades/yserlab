@@ -98,6 +98,13 @@ const HANDLERS = {
   async "server.overview"(env, k) { return simple(env, k, "server_overview"); },
   async "roles.list"(env, k) { return simple(env, k, "role_list"); },
   async "channels.list"(env, k) { return simple(env, k, "channel_list"); },
+  async "channels.visibility"(env, k) { return listLike(env, k, "channel_visibility", { role: k.params.role, mode: k.params.mode }); },
+  async "channel.info"(env, k) {
+    let channel = env.message.channel;
+    if (k.target.channel) { const r = channelFor(env, k, k.target.channel); if (r.reply) return r.reply; channel = r.channel; }
+    const r = await callTool(env, "channel_info", {}, { channel, primary: k.primary });
+    record(env, "channel_info", r); return posts([r.post], { ok: !!r.outcome.ok, k });
+  },
 
   async "invite.create"(env, k) {
     const q = intentOf(env.text, `${env.message.channelId}:${env.message.author.id}`); // the existing, tested invite parsing (expiry, uses, channel)

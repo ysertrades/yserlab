@@ -20,6 +20,7 @@ export const intentCases = [
   ["server info", "server.overview"], ["tell me about this server", "server.overview"], ["server stats", "server.overview"], ["whats the server overview", "server.overview"],
   // roles
   ["Show me the moderators", "members.byRole", { roles }], ["who has the VIP role", "members.byRole"], ["show me the instructors", "members.byRole", { roles }], ["people with the moderator role", "members.byRole"],
+  ["Which channels do everyone have view access", "channels.visibility"], ["which channels can everyone see", "channels.visibility"], ["which channels are private", "channels.visibility"], ["what can everyone see", "channels.visibility"], ["which channels can the VIP role see", "channels.visibility", { roles }], ["which channels are read only", "channels.visibility"], ["who can see this channel", "channel.info"], ["which channels are hidden from everyone", "channels.visibility"],
   ["Show me the roles", "roles.list"], ["list the channels", "channels.list"],
   // creation
   ["Create a VIP category", "category.create"], ["create a category called Academy", "category.create"], ["Create a channel called announcements", "channel.create"], ["make a voice channel called lounge", "channel.create"],
@@ -143,6 +144,10 @@ export const dialogues = [
     { say: "the second one", mutations: [/^message_send:news$/], said: ["Sent in"], ref: true },
   ], maxSends: 1 },
   { id: "no-draft-no-send", turns: [{ say: "send it", unhandled: true, mutations: none }] },
+  { id: "channel-visibility", turns: [
+    { say: "Which channels do everyone have view access", primary: "channels.visibility", tool: "channel_visibility", mutations: none, said: ["can see"], notSaid: ["unable"] },
+    { say: "which channels are private", primary: "channels.visibility", mutations: none, said: ["Hidden from"] },
+  ] },
   { id: "invite", turns: [{ say: "Give me an invite", primary: "invite.create", mutations: none }] },
 ];
 

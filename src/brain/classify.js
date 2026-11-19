@@ -261,7 +261,7 @@ export function classify(raw, ctx = {}) {
   if (m && !/^(online|here|there|everyone|everybody|that|this|it|in|on|members|people|users)$/.test(m[1])) return out(R("members.search", "member_list", { resource: "members", params: { query: m[1] }, target: { query: m[1] } }));
   const role = roleOf(t, roleNames);
   const withRoleWord = /\b(?:everyone|everybody|people|members?|users|who|anyone|someone)\b.*\b(?:with|has|have|having)\s+(?:the\s+)?[\w &-]+?\s+role\b|\bwho (?:has|have|is)\s+(?:the\s+)?[\w &-]+?\s+role\b|\bmembers? (?:of|in) (?:the\s+)?[\w &-]+?\s+role\b|\b(?:show|list|find|get|see)\b[^\n]*?\brole (?:members?|people|holders)\b|\bwho(?:'s| is)? (?:a |an |the )?(?:moderator|instructor|admin)s?\b/.test(t);
-  if (role && (withRoleWord || /^(?:show|list|find|get|see|display|who|everyone|the|our|all)\b/.test(t) || ctx.correcting || /^(?:the\s+|our\s+)?[a-z][\w &-]*$/.test(t))) return out(R("members.byRole", "member_list", { resource: "members", target: { role }, params: { role }, tools: ["member_list"] }));
+  if (role && !/\bchannels?\b/.test(t) && (withRoleWord || /^(?:show|list|find|get|see|display|who|everyone|the|our|all)\b/.test(t) || ctx.correcting || /^(?:the\s+|our\s+)?[a-z][\w &-]*$/.test(t))) return out(R("members.byRole", "member_list", { resource: "members", target: { role }, params: { role }, tools: ["member_list"] }));
   if (withRoleWord) { const named = /\b(?:with|has|have|having|is)\s+(?:the\s+)?([\w &-]+?)\s+role\b/.exec(t)?.[1]; if (named) return out(R("members.byRole", "member_list", { resource: "members", target: { role: strip(named) }, params: { role: strip(named) } })); }
   if (OVERVIEW.test(t)) return out(R("server.overview", "server_overview", { resource: "server" }));
   if (LIST_MEMBERS.some(re => re.test(t)) && !/\b(create|make|add|delete|remove|ban|kick|mute|timeout|assign)\b/.test(t) && !/\bgive (?!me\b)/.test(t) && !generic) {
@@ -271,6 +271,20 @@ export function classify(raw, ctx = {}) {
     return out(R("members.list", "member_list", { resource: "members", params: { query: q, kind: bots, sort } }));
   }
 
+  /* who can see which channels: "which channels can everyone see", "which channels are private", "what can the VIP role see", "who can see this channel" */
+  if (/^(?:which|what|who|show|list|see|display|tell me|permissions?)\b/.test(t) && !/\b(create|make|set|give|delete|rename|move|hide|lock|add)\b/.test(t)) {
+    const visWords = /\b(view|see|seen|access|read|visible|invisible|private|hidden|public|locked|restricted|open to)\b/;
+    if ((/\b(?:channels?|categor(?:y|ies))\b/.test(t) && visWords.test(t) && !/^who\b|\b(?:this|that) channel\b|^permissions?\b/.test(t)) || /^what can (?:everyone|everybody|@everyone|the [\w &-]+ role|[\w&-]+) (?:see|view|access)\b/.test(t)) {
+      const mode = /\bread[- ]?only\b/.test(t) ? "readonly" : /\b(private|hidden|invisible|locked|restricted|can'?t see|cannot see|not visible)\b/.test(t) ? "hidden" : "visible";
+      const mentioned = roleNames.find(r => key(r) && key(t).includes(key(r)) && !/^(everyone)$/i.test(r));
+      const who = /\b(everyone|everybody|@everyone|all members|the public)\b/.test(t) || !mentioned ? null : mentioned;
+      return out(R("channels.visibility", "channel_visibility", { resource: "channels", target: { role: who }, params: { role: who ?? undefined, mode } }));
+    }
+    if (/^(?:who|which roles?|what roles?)\s+(?:can|could)\s+(?:see|view|access|write in|post in)\s+(?:this channel|that channel|this one|here|#[\w-]+|<#\d+>)/.test(t) || /^(?:permissions? (?:of|for)|what are the permissions (?:of|for)|who has access to)\s+(?:this channel|that channel|here|#[\w-]+|<#\d+>)/.test(t)) {
+      const named = /(#[\w-]+|<#\d+>)/.exec(t0)?.[1];
+      return out(R("channel.info", "channel_info", { resource: "channel", target: { channel: named?.replace(/^#/, "") ?? null } }));
+    }
+  }
   if (/\b(roles?)\b/.test(t) && /^(?:show|list|what|which|see|display)\b/.test(t) && !/\b(create|make|add|give|remove|delete|assign)\b/.test(t)) return out(R("roles.list", "role_list", { resource: "roles" }));
   if (/\b(channels?)\b/.test(t) && /^(?:show|list|what|which|see|display)\b/.test(t) && !/\b(create|make|delete|rename|move|permission|access|private|hide)\b/.test(t)) return out(R("channels.list", "channel_list", { resource: "channels" }));
   if (/\b(invites?|invitations?|server link|join link)\b/.test(t)) return out(R("invite.create", "invite_create", { resource: "invite", delegate: true }));
@@ -339,4 +353,4 @@ export function classifyMulti(original, ctx = {}) {
 }
 
 /** True for the intents the classifier owns and can run without a language model. */
-export const OWNED = new Set(["members.list", "members.byRole", "members.search", "members.count", "members.online", "server.overview", "roles.list", "channels.list", "invite.create", "draft.write", "draft.approve", "draft.revise", "draft.restore", "draft.show", "draft.send", "message.pin", "message.delete", "message.edit", "channel.create", "category.create", "role.create", "channel.access", "channel.rename", "channel.delete", "role.assign", "role.remove", "compound.setup", "memory.remember", "memory.forget", "memory.show", "repeat", "context.resume", "correction.channel"]);
+export const OWNED = new Set(["members.list", "members.byRole", "members.search", "members.count", "members.online", "server.overview", "roles.list", "channels.list", "channels.visibility", "channel.info", "invite.create", "draft.write", "draft.approve", "draft.revise", "draft.restore", "draft.show", "draft.send", "message.pin", "message.delete", "message.edit", "channel.create", "category.create", "role.create", "channel.access", "channel.rename", "channel.delete", "role.assign", "role.remove", "compound.setup", "memory.remember", "memory.forget", "memory.show", "repeat", "context.resume", "correction.channel"]);
