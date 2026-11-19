@@ -122,14 +122,14 @@ async function summarize(transcript) {
   const system = "You summarise a Discord conversation for the server owner. Write 3 to 6 short bullet points: the topics, decisions, open questions and anything needing the owner's attention. Plain words, no preamble.";
   try { const out = env.geminiKey ? await viaGemini(system, [], transcript) : await viaGroq(system, [], transcript); return out?.text ?? null; } catch { return null; }
 }
-export async function moderate(message, args, config) {
+export async function moderate(message, args, config, hooks = {}) {
   if (!message.guild) return textPost({ text: "Moderation only works inside a server." });
   const action = String(args.action ?? "").toLowerCase();
   if (WORKFLOWS.has(action)) return runWorkflow(message, args, config);
   if (TOOLS[action]) {
     const channel = channelsOf(message, args.channel)[0];
     if (!channel && args.channel && !/^(everyone|all)$/i.test(String(args.channel))) { const own = ["invite_create", "channel_create"].includes(action); if (!own) return textPost({ text: `I couldn't find the channel "${args.channel}".` }); }
-    const extras = { channel: channel ?? message.channel, summarize, resolveMember: async () => { const id = await targetOf(message, args.user); if (id) extras.targetId = id; return id ? message.guild.members.fetch(id).catch(() => null) : null; } };
+    const extras = { ...hooks, channel: channel ?? message.channel, summarize, resolveMember: async () => { const id = await targetOf(message, args.user); if (id) extras.targetId = id; return id ? message.guild.members.fetch(id).catch(() => null) : null; } };
     const call = { ...args, channels: action === "announce" || action === "announce_rich" ? channelsOf(message, args.channel) : undefined };
     return runTool(message, action, call, config, extras);
   }
@@ -227,7 +227,7 @@ async function extra(message, args, config, action, channel, reason) {
     const who = await permissionTarget(message, args.target ?? args.role ?? args.user);
     if (!who) return textPost({ text: unsure(message), accent: "down" });
     await channel.permissionOverwrites.edit(who.target, { ViewChannel: action === "hide" ? false : null }, { reason });
-    return textPost({ text: action === "hide" ? `🙈 ${channel} is hidden from ${who.label}: they can't see it at all.` : `👀 ${channel} is visible to ${who.label} again.` });
+    return textPost({ text: action === "hide" ? `🙈 ${channel} is hidden from ${who.label}: they can no longer see it at all.` : `👀 ${channel} is visible to ${who.label} again.` });
   }
   if (action === "delete_channel") {
     if (!(await confirm(message, `🗑️ Delete the channel ${channel} for good?`))) return textPost({ text: "Cancelled. Nothing was deleted." });

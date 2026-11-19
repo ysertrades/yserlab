@@ -19,6 +19,7 @@ import { moderate, sendFromApp, waiting } from "./mod.js";
 import { automod } from "./admin/automod.js";
 import { DANGEROUS, permNames } from "./admin/guard.js";
 import { intentOf } from "./admin/intent.js";
+import * as brain from "./brain/index.js";
 import { handleEmbed } from "./admin/embeds.js";
 import { remember } from "./people.js";
 import { pollJuice, publishTrump } from "./feeds.js";
@@ -126,9 +127,21 @@ client.on(Events.MessageCreate, async message => {  try {
     if (!owner) { await message.reply("Open YSER Lab in the app once so I know whose trades and model to use."); return; }
     if (message.guild && isAdmin(config, message.author.id) && await handleEmbed(message, text, config).catch(e => { console.warn("embed:", e?.message ?? e); return false; })) return; // make / recolour / edit / repost an embed
     await message.channel.sendTyping().catch(() => {});
+    // The intelligence layer first: structured intent, conversation memory and reference resolution. What it does not own continues below as before.
+    let brainContext = "";
+    if (message.guild && isAdmin(config, message.author.id)) {
+      const b = await brain.handle(message, text, config).catch(e => { console.warn("brain:", e?.message ?? e); return { handled: false, context: "" }; });
+      if (b.handled) {
+        if (b.say) await message.reply({ content: b.say.slice(0, 1990), allowedMentions: { repliedUser: false } });
+        for (const p of b.posts ?? []) await message.channel.send(p).catch(async () => message.reply({ content: "Done, but I couldn't post the details here." }).catch(() => null));
+        await log("brain", { note: `${b.k?.primary ?? "answer"} ${b.ok === false ? "failed" : "ok"}` }, b.ok !== false);
+        return;
+      }
+      brainContext = b.context ?? "";
+    }
     const quick = isAdmin(config, message.author.id) && message.guild ? intentOf(text, `${channelId}:${message.author.id}`) : null; // plain admin requests go straight to their tool
     if (quick?.say) { await message.reply({ content: quick.say, allowedMentions: { repliedUser: false } }); return; }
-    const out = quick?.action ? { mod: { action: quick.action, ...quick.args } } : await askUnified({ owner, channelId, discordId: message.author.id, text, context: await channelContext(message) });
+    const out = quick?.action ? { mod: { action: quick.action, ...quick.args } } : await askUnified({ owner, channelId, discordId: message.author.id, text, context: (await channelContext(message)) + (brainContext ? `\n[What I remember about this conversation (structured memory; trust it for "it", "that", "here", "the second one")]\n${brainContext}` : "") });
     if (out.chart) { await picker.startChart(message, owner, out.timeframe); return; }
     if (out.schedule) { // looking at, or cancelling, what is scheduled
       if (!isAdmin(config, message.author.id)) return;
@@ -143,7 +156,15 @@ client.on(Events.MessageCreate, async message => {  try {
       const NOW_ONLY = new Set(["event_create", "create_event", "tempban", "workflow", "setup", "setup_category", "setup_course", "setup_vip"]); // their "at" / delay is part of the request, not a time to run it
       const later = out.mod && NOW_ONLY.has(String(out.mod.action).toLowerCase()) ? null : schedule(message, out.mod ? "mod" : "send", out.mod ?? out.send); // "in 30 seconds", "at 5 pm", "every weekday at 9": saved for then
       if (later) { await message.channel.send(later); await log(out.mod ? "mod" : "send", { note: "scheduled" }); void noteResult(message.author.id, `(Scheduled: ${String(later.content ?? "").slice(0, 400)})`); return; }
-      const post = out.mod ? await moderate(message, out.mod, config) : await sendFromApp(message, out.send, { owner, config });
+      let call = out.mod;
+      if (call && message.guild) { // the model's choice is checked against the intent, and "it" / "the second one" / "here" are resolved from the conversation state
+        const g = brain.guard(message, text, call);
+        if (g.say) { await message.reply({ content: g.say, allowedMentions: { repliedUser: false } }); return; }
+        call = g.call; out.mod = call;
+      }
+      const hooks = { result: {}, outcome: {} };
+      const post = out.mod ? await moderate(message, out.mod, config, hooks) : await sendFromApp(message, out.send, { owner, config });
+      if (out.mod) brain.noteLLM(message, out.mod, hooks);
       if (!post) { await log("mod", { note: "completed (it reported in its own message)" }); return; }
       const sent = await message.channel.send(post).catch(async () => message.reply({ content: "Done, but I couldn't post the confirmation here." }).catch(() => null));
       if (out.mod) { // a clean-up's confirmation stays four seconds and goes; the owner's own message stays
@@ -194,6 +215,7 @@ client.on(Events.MessageCreate, async message => {  try {
       }
       return;
     }
+    brain.noteAssistantText(message, out.text);
     const parts = chunks(out.text);
     await message.reply({ content: parts[0], allowedMentions: { repliedUser: false } });
     for (const part of parts.slice(1)) await message.channel.send(part);
@@ -204,7 +226,7 @@ client.on(Events.MessageCreate, async message => {  try {
 });
 
 client.on(Events.InteractionCreate, async interaction => {
-  try { await picker.handle(interaction); }
+  try { if (await brain.handleListButton(interaction)) return; await picker.handle(interaction); }
   catch (e) { await log("interaction", { error: e?.message ?? String(e) }, false); }
 });
 

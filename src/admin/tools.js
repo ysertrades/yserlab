@@ -19,7 +19,13 @@ const kindName = type => ({ [ChannelType.GuildText]: "text", [ChannelType.GuildV
 const csv = v => (Array.isArray(v) ? v : String(v ?? "").split(/\s*(?:,|&|\+|\band\b)\s*/i)).map(x => String(x).trim()).filter(Boolean);
 const friendly = (message, text) => Object.assign(new Error(message), { friendly: text });
 
-export const findRole = (guild, q) => { const k = clean(q); if (!k) return null; return guild.roles.cache.find(r => clean(r.name) === k) ?? guild.roles.cache.find(r => clean(r.name).includes(k)) ?? null; };
+export const findRole = (guild, q) => {
+  const k = clean(q); if (!k) return null;
+  const forms = [k, k.replace(/s$/, "")].filter((x, i, a) => x && a.indexOf(x) === i); // "instructors" finds the role "Instructor"
+  for (const f of forms) { const hit = guild.roles.cache.find(r => clean(r.name) === f); if (hit) return hit; }
+  for (const f of forms) { const hit = guild.roles.cache.find(r => clean(r.name).includes(f)); if (hit) return hit; }
+  return null;
+};
 export const findChannel = (guild, q, types) => {
   const k = clean(q); if (!k) return null;
   const pool = guild.channels.cache.filter(c => !c.isThread?.() && (!types || types.includes(c.type)));
@@ -88,7 +94,8 @@ export const TOOLS = {
 
   /* ───────────── the server ───────────── */
   server_overview: {
-    cap: "info", risk: "read", bot: [], aliases: ["server_info", "members", "member_count", "server_summary", "server_settings"],
+    // "members" and "member_count" are NOT aliases of this: a member list and a member count are different requests (see brain/tools.js).
+    cap: "info", risk: "read", bot: [], aliases: ["server_info", "server_summary", "server_settings", "server_stats"],
     async run({ guild, client }) {
       const g = await client.guilds.fetch({ guild: guild.id, withCounts: true }).catch(() => guild);
       const total = g.approximateMemberCount ?? guild.memberCount, online = g.approximatePresenceCount;
@@ -129,7 +136,7 @@ export const TOOLS = {
   },
   channel_create: {
     cap: "channels", risk: "low", user: [P.ManageChannels], bot: [P.ManageChannels], aliases: ["create_channel", "category_create", "create_category"],
-    async run({ guild, args, reason, action }) {
+    async run({ guild, args, reason, action, result }) {
       const wantCat = action.includes("categor") || /categor/i.test(String(args.kind ?? args.type ?? ""));
       const type = wantCat ? ChannelType.GuildCategory : KINDS[String(args.kind ?? args.type ?? "text").toLowerCase()] ?? ChannelType.GuildText;
       const name = String(args.name ?? "").trim();
@@ -144,6 +151,7 @@ export const TOOLS = {
       if (!back) throw new Error("Discord did not return the new channel");
       const e = mode ? effective(back, guild.roles.everyone) : null;
       if (mode === "private" && e.view) throw new Error("created, but @everyone can still see it (check the category's permissions)");
+      Object.assign(result, { kind: kindName(type), id: back.id, name: back.name, parentId: parent?.id ?? null, parentName: parent?.name ?? null, private: mode === "private", roles: roles.map(r => r.name) });
       return panel({ title: `Created ${kindName(type)}`, accent: "up", lines: [`${type === ChannelType.GuildCategory ? "**" + back.name + "**" : back}${parent ? ` in **${parent.name}**` : ""}`, mode === "private" ? `🔒 Private: ${roles.length ? `only ${roles.map(r => `**${r.name}**`).join(", ")} (and administrators)` : "only administrators and I"} can see it. Verified: @everyone cannot.` : mode === "read_only" ? "📖 Read-only for everyone" + (roles.length ? ` except ${roles.map(r => `**${r.name}**`).join(", ")}` : "") + ". Verified." : "Open to anyone who can see its category."] });
     },
   },
@@ -197,7 +205,7 @@ export const TOOLS = {
   },
   role_create: {
     cap: "roles", risk: "low", user: [P.ManageRoles], bot: [P.ManageRoles], aliases: ["create_role"],
-    async run({ guild, args, reason, message }) {
+    async run({ guild, args, reason, message, result }) {
       const name = String(args.role ?? args.name ?? "").trim(); if (!name) throw friendly("no name", "What should the role be called?");
       const same = findRole(guild, name); if (same && clean(same.name) === clean(name)) throw friendly("exists", `There is already a role called **${same.name}**. Ask me to edit it instead.`);
       const color = args.color ? String(args.color).trim().replace(/^#?/, "#") : undefined;
@@ -205,6 +213,7 @@ export const TOOLS = {
       const d = delegable(message, perms); if (!d.ok) throw friendly("not delegable", `You can't hand out ${d.denied.join(", ")} because you don't hold ${d.denied.length > 1 ? "them" : "it"} yourself.`);
       const role = await guild.roles.create({ name: name.slice(0, 100), color: color && /^#[0-9a-f]{6}$/i.test(color) ? color : undefined, permissions: perms.map(n => P[n]), hoist: isTrue(args.hoist), mentionable: isTrue(args.mentionable), reason });
       const back = guild.roles.cache.get(role.id) ?? await guild.roles.fetch(role.id, { force: true });
+      Object.assign(result, { kind: "role", id: back.id, name: back.name });
       return panel({ title: "Role created", accent: "up", lines: [`**${back.name}**${color ? ` · ${color}` : ""}`, perms.length ? `Permissions: ${perms.join(", ")}` : "No special permissions", `-# Position ${back.position}. Move it in Server Settings, Roles if it should sit higher.`] });
     },
   },
@@ -244,7 +253,7 @@ export const TOOLS = {
   },
   role_assign: {
     cap: "members", risk: "low", user: [P.ManageRoles], bot: [P.ManageRoles], aliases: ["role_add", "role_remove", "role_unassign"],
-    async run({ guild, args, reason, message, resolveMember, action }) {
+    async run({ guild, args, reason, message, resolveMember, action, result }) {
       const role = findRole(guild, args.role); if (!role) throw friendly("no role", `I couldn't find a role called "${args.role ?? ""}".`);
       const member = await resolveMember(); if (!member) throw friendly("no member", "Tag the person (or give their ID) so I change the right member.");
       if (!botCanEditRole(guild, role)) throw friendly("hierarchy", `**${role.name}** is above my highest role, so I can't hand it out. Move my role higher in Server Settings, Roles.`);
@@ -255,6 +264,7 @@ export const TOOLS = {
       await (remove ? member.roles.remove(role, reason) : member.roles.add(role, reason));
       const fresh = await guild.members.fetch({ user: member.id, force: true });
       if (fresh.roles.cache.has(role.id) === remove) throw new Error("Discord did not apply the role change");
+      Object.assign(result, { kind: "role_change", roleId: role.id, roleName: role.name, memberId: member.id, removed: remove });
       return plain(remove ? `${tag(member.id)} no longer has **${role.name}**. Verified.` : `🎖️ ${tag(member.id)} now has **${role.name}**. Verified.`);
     },
   },
@@ -501,7 +511,11 @@ export async function runTool(message, name, args, config, extras = {}) {
   const spec = TOOLS[name]; if (!spec) return undefined;
   const guild = message.guild, t0 = Date.now(), A = config.ai?.admin ?? {};
   const base = { guild: guild.id, guildName: guild.name, user: message.author?.id, action: name, risk: spec.risk, args: Object.fromEntries(Object.entries(args).filter(([k, v]) => typeof v !== "object" && !/token|key|secret/i.test(k)).map(([k, v]) => [k, String(v).slice(0, 80)])), provider: extras.provider };
-  const finish = (extra, post) => { audit({ ...base, ms: Date.now() - t0, targetId: extras.targetId, ...extra }); return post; };
+  const finish = (extra, post) => {
+    audit({ ...base, ms: Date.now() - t0, targetId: extras.targetId, ...extra });
+    if (extras.outcome) Object.assign(extras.outcome, { ran: true, ok: !!extra.ok, error: extra.error, permission: extra.permission, confirmed: extra.confirmed }); // the brain reads what really happened from here, not from the wording of the reply
+    return post;
+  };
   if (A.incident) return finish({ ok: false, permission: "blocked: incident mode", error: "incident mode" }, plain("🛑 Administrator actions are switched off (incident mode). Say \"resume administrator actions\" when it's safe."));
   if ((A.disabled ?? []).includes(spec.cap)) return finish({ ok: false, permission: "blocked: capability off", error: "capability disabled" }, plain(`The **${spec.cap}** tools are switched off. Say "enable ${spec.cap} tools" to turn them back on.`));
   const channel = extras.channel ?? message.channel, me = guild.members.me;
@@ -509,7 +523,7 @@ export async function runTool(message, name, args, config, extras = {}) {
   if (um.length) return finish({ ok: false, permission: `denied: user lacks ${um.join(", ")}`, error: "user lacks permission" }, plain(`You don't have the Discord permission for that (${um.map(n => n.replace(/([A-Z])/g, " $1").trim().toLowerCase()).join(", ")}), so I can't do it for you.`));
   const bm = spec.bot?.length ? botMissing(guild, spec.bot, ["channels", "permissions", "messages"].includes(spec.cap) ? channel : undefined) : [];
   if (bm.length) return finish({ ok: false, permission: `denied: bot lacks ${bm.join(", ")}`, error: "bot lacks permission" }, plain(`I can't do that: ${sayMissing(bm)}`));
-  const ctx = { message, guild, channel, args, config, me, client: message.client, action: name, reason: String(args.reason || `Asked by ${message.author?.tag ?? "the owner"} via YSER Lab`).slice(0, 400), resolveMember: extras.resolveMember ?? (async () => null), summarize: extras.summarize };
+  const ctx = { message, guild, channel, args, config, me, client: message.client, action: name, reason: String(args.reason || `Asked by ${message.author?.tag ?? "the owner"} via YSER Lab`).slice(0, 400), resolveMember: extras.resolveMember ?? (async () => null), summarize: extras.summarize, result: extras.result ?? {}, convoKey: extras.convoKey };
   const note = { permission: "ok", target: extras.targetLabel };
   try {
     const trusted = (A.trusted ?? []).includes(name);

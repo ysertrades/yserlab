@@ -15,6 +15,8 @@ export const env = {
   groqModel: first("GROQ_MODEL"),
   geminiKey: first("GEMINI_API_KEY"),
   geminiModel: first("GEMINI_MODEL") || "gemini-flash-lite-latest",
+  nvidiaKey: first("NVIDIA_API_KEY", "NIM_API_KEY"),
+  nvidiaModel: first("NVIDIA_MODEL") || "meta/llama-3.3-70b-instruct",
   /** UNIFIED_AI=off keeps Discord on the bot's own answers instead of the shared assistant function. */
   unifiedAi: first("UNIFIED_AI").toLowerCase() !== "off",
 };

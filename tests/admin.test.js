@@ -67,7 +67,7 @@ test("intent: every way of asking for an invite creates one, and never asks abou
   assert.equal(intentOf("make a permanent invite", "k6").args.permanent, "true");
 });
 test("intent: server questions go to their tools; unrelated chat goes to the model", () => {
-  assert.equal(intentOf("How many members do we have?", "k").action, "server_overview");
+  assert.equal(intentOf("How many members do we have?", "k").action, "member_count");
   assert.equal(intentOf("show me all the roles", "k").action, "role_list");
   assert.equal(intentOf("what channels do we currently have?", "k").action, "channel_list");
   assert.equal(intentOf("Review our server protection and recommend improvements", "k").action, "permission_audit");

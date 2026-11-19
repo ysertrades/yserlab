@@ -1,0 +1,439 @@
+import { ChannelType } from "discord.js";
+import { runTool, findRole } from "../admin/tools.js";
+import { confirmButtons, panel } from "../admin/ui.js";
+import { intentOf } from "../admin/intent.js";
+import "./tools.js";
+import { handleListButton } from "./tools.js";
+import { classify, namesFrom, normalize, origCase } from "./classify.js";
+import { toolAllowed, validate } from "./registry.js";
+import { ask as askWhich, pickFromList, resolveChannel, resolveMember, resolveRole, sendable } from "./resolver.js";
+import { complete } from "./router.js";
+import * as mem from "./memory.js";
+
+/**
+ * The conversation manager. One entry point (handle) takes an owner's message in a server and runs the whole pipeline:
+ *   pending question? -> classify (structured intent) -> resolve references from the structured state -> check the tool is the right one
+ *   for the intent -> run it through the administrator's gate (permissions, confirmation, audit) -> verify the result from Discord ->
+ *   update the state -> answer.
+ * Whatever it does not own (general chat, trading questions, pictures...) is returned unhandled with the retrieved context, and the existing
+ * language-model path answers it as before. Nothing here asks the model to pick a Discord id or a tool for something deterministic.
+ */
+const plain = text => ({ content: String(text).slice(0, 1990), allowedMentions: { parse: [] } });
+const clip = (s, n = 80) => { const t = String(s ?? "").replace(/\s+/g, " ").trim(); return t.length > n ? t.slice(0, n - 1) + "…" : t; };
+const FRESH = 30 * 60_000;
+const fresh = e => e && Date.now() - e.at < FRESH;
+const say = (text, extra = {}) => ({ handled: true, say: text, ...extra });
+const posts = (list, extra = {}) => ({ handled: true, posts: list.filter(Boolean), ...extra });
+const isCat = c => c?.type === ChannelType.GuildCategory;
+
+/* ── drafting (the only place a language model is used for content) ── */
+const WRITE_SYSTEM = "You write messages for the owner of a trading community's Discord server. Use only the facts you are given: never invent times, prices, links, names, prizes or promises. Plain, confident, friendly. Light Discord markdown only (bold for the key line, a short list if needed). At most 900 characters. Return ONLY the message text, no preamble, no quotation marks.";
+const REVISE_SYSTEM = "You edit a Discord message exactly as the owner asks. Keep every fact that was not asked to change, and never add facts, times, links or names that are not in the message or the request. Return ONLY the full revised message text, no preamble, no quotation marks.";
+const styleLines = uid => mem.relevantPrefs(uid, "announcement write draft").map(p => `- ${p.text}`).join("\n");
+
+async function writeDraft(c, uid, { topic, when }) {
+  const prefs = styleLines(uid);
+  const out = await complete({ task: "write", system: WRITE_SYSTEM, temperature: 0.5, max: 700, messages: [{ role: "user", content: `Write an announcement.\nTopic: ${topic}${when ? `\nWhen: ${when}` : ""}${prefs ? `\nThe owner's saved preferences, follow them:\n${prefs}` : ""}` }] });
+  c.topic = `announcement about ${clip(topic, 60)}`;
+  return mem.newDraft(c, { text: out.text.trim().replace(/^["“]|["”]$/g, ""), topic });
+}
+async function reviseDraft(c, uid, d, instruction) {
+  const prefs = styleLines(uid);
+  const out = await complete({ task: "write", system: REVISE_SYSTEM, temperature: 0.3, max: 700, messages: [{ role: "user", content: `Current message:\n${d.text}\n\nChange requested: ${instruction}${prefs ? `\nThe owner's saved preferences:\n${prefs}` : ""}` }] });
+  return mem.reviseDraft(c, d, out.text.trim().replace(/^["“]|["”]$/g, ""), instruction);
+}
+const showDraft = (d, note) => plain(`**Draft** · version ${d.version}${d.status === "approved" ? " · approved" : ""}\n${d.text}\n\n-# ${note ?? 'Say "send it" (here, or "in #channel"), or tell me what to change.'}`);
+
+/* ── running a tool through the gate, and learning from what really happened ── */
+async function callTool(env, tool, args, { channel, primary } = {}) {
+  if (primary && !toolAllowed(primary, tool)) throw new Error(`the intent "${primary}" may not be answered with ${tool}`); // never substitute a related-but-different result
+  const v = validate(tool, args);
+  if (!v.ok) return { post: plain(`I can't do that yet: ${v.errors.join(", ")}.`), outcome: { ran: false, ok: false, error: v.errors.join(", ") }, result: {} };
+  const outcome = {}, result = {}, { message, config } = env;
+  const post = await runTool(message, tool, args, config, { channel: channel ?? message.channel, outcome, result, convoKey: mem.convoKey(message), resolveMember: env.resolveMember });
+  return { post, outcome, result };
+}
+const record = (env, tool, r, extra = {}) => mem.recordOp({ guild: env.message.guild.id, user: env.uid, action: tool, ok: !!r.outcome.ok, error: r.outcome.error, ids: r.result.id ?? r.result.messageId ?? null, ...extra });
+
+/** What a successful tool run taught the conversation: the entities it made or showed, and what "it" now means. */
+function absorb(c, r) {
+  const x = r.result ?? {};
+  if (x.kind === "category" || x.kind === "text" || x.kind === "voice" || x.kind === "announcement" || x.kind === "forum" || x.kind === "stage") {
+    const item = { id: x.id, name: x.name, kind: x.kind, parentId: x.parentId, parentName: x.parentName };
+    mem.noteEntity(c, "channels", item); mem.setFocus(c, x.kind === "category" ? "category" : "channel", item, "created");
+  } else if (x.kind === "role") { const item = { id: x.id, name: x.name }; mem.noteEntity(c, "roles", item); mem.setFocus(c, "role", item, "created"); }
+  else if (x.kind === "message") { const item = { id: x.id, channelId: x.channelId, name: `message in #${x.channelName ?? "?"}`, channelName: x.channelName, text: clip(x.text, 160), url: x.url }; if (!x.deleted) { mem.noteEntity(c, "messages", item); mem.setFocus(c, "message", item, x.edited ? "edited" : "sent"); } else c.entities.messages = c.entities.messages.filter(m => m.id !== x.id); }
+  else if (x.kind === "role_change") { mem.noteEntity(c, "members", { id: x.memberId, name: x.memberId }); mem.setFocus(c, "member", { id: x.memberId, name: x.memberId }, "role changed"); }
+  if (x.list) { mem.setList(c, x.list.kind, x.list.items, { role: x.role, total: x.list.total }); mem.setFocus(c, "members", x.list.items, "listed"); if (x.role) mem.noteEntity(c, "roles", x.role); }
+}
+
+const rolesOf = guild => [...guild.roles.cache.values()].filter(r => r.id !== guild.id).map(r => r.name);
+const findRoleIn = guild => q => findRole(guild, q);
+const asked = (c, k, field, question, extra = {}) => { mem.setPending(c, { kind: "fill", field, k, ask: question, ...extra }); return say(question, { ok: true }); };
+
+/** Picks the channel an instruction named: a unique match, or an honest question when several fit. */
+function channelFor(env, k, query, { types } = {}) {
+  const r = resolveChannel(env.message.guild, query, { current: env.message.channel, types });
+  if (r.channel) return { channel: r.channel };
+  if (r.ambiguous) {
+    const opts = r.ambiguous.map(x => ({ id: x.id, label: x.name }));
+    return { reply: asked(env.c, k, "channelId", `I found ${opts.length} channels with similar names. Which one should I use?\n${askWhich(r.ambiguous)}`, { options: opts }) };
+  }
+  const similar = (r.similar ?? []).map(x => `#${x.name}`).join(", ");
+  return { reply: say(`I couldn't find a channel called "${query}".${similar ? ` Did you mean ${similar}?` : ""}`, { ok: false }) };
+}
+
+/* ─────────────────────────── the handlers ─────────────────────────── */
+const HANDLERS = {
+  async "members.list"(env, k) { return listLike(env, k, "member_list", { query: k.params.query, kind: k.params.kind, sort: k.params.sort }); },
+  async "members.search"(env, k) { return listLike(env, k, "member_list", { query: k.params.query }); },
+  async "members.byRole"(env, k) { return listLike(env, k, "member_list", { role: k.params.role }); },
+  async "members.count"(env, k) { return simple(env, k, "member_count"); },
+  async "members.online"(env, k) { return simple(env, k, "member_online"); },
+  async "server.overview"(env, k) { return simple(env, k, "server_overview"); },
+  async "roles.list"(env, k) { return simple(env, k, "role_list"); },
+  async "channels.list"(env, k) { return simple(env, k, "channel_list"); },
+
+  async "invite.create"(env, k) {
+    const q = intentOf(env.text, `${env.message.channelId}:${env.message.author.id}`); // the existing, tested invite parsing (expiry, uses, channel)
+    const { moderate } = await import("../mod.js");
+    const post = await moderate(env.message, { action: q?.action ?? "invite_create", ...(q?.args ?? {}) }, env.config);
+    mem.recordOp({ guild: env.message.guild.id, user: env.uid, action: q?.action ?? "invite_create", ok: true });
+    return posts([post], { ok: true, k });
+  },
+
+  async "draft.write"(env, k) {
+    if (!k.params.topic) return asked(env.c, k, "topic", k.clarify ?? "What is the announcement about?");
+    let d; try { d = await writeDraft(env.c, env.uid, k.params); } catch (e) { return say(`I couldn't reach my writing models just now, so nothing was drafted (${clip(e.message, 100)}). Try again in a moment.`, { ok: false }); }
+    return posts([showDraft(d)], { ok: true, k, keep: true });
+  },
+  async "draft.revise"(env, k) {
+    const d = mem.currentDraft(env.c); if (!d) return say("There's no draft to change yet. Tell me what to write.", { ok: false });
+    let nd; try { nd = await reviseDraft(env.c, env.uid, d, k.params.instruction); } catch (e) { return say(`I couldn't reach my writing models, so the draft is unchanged (${clip(e.message, 100)}).`, { ok: false }); }
+    const sent = nd.sent.length ? `The version already posted in #${nd.sent.at(-1).channelName} is unchanged: say "edit the one you sent" to update it, or "send it" to post this as a new message.` : undefined;
+    return posts([showDraft(nd, sent)], { ok: true, k, keep: true });
+  },
+  async "draft.approve"(env) { const d = mem.currentDraft(env.c); if (!d) return say("There's nothing to approve yet.", { ok: false }); mem.approveDraft(env.c, d); return say(`Approved (version ${d.version}). Say "send it here" or "send it in #channel" whenever you're ready.`, { ok: true }); },
+
+  async "draft.send"(env, k) {
+    const { c, message } = env, d = mem.currentDraft(c);
+    if (!d) return { handled: false }; // nothing of mine to send: "send it" may mean something else (a picture, a card), so the existing path decides
+    let channel = message.channel;
+    if (k.target.other) return asked(c, k, "channel", "Which channel should I send it to?");
+    const picked = env.picked?.channelId; const named = picked ?? k.target.channel;
+    if (named) { const r = channelFor(env, k, picked ? `<#${picked}>` : named); if (r.reply) return r.reply; channel = r.channel; }
+    if (!sendable(channel)) return say(`I can't post messages in ${channel}. Tell me a text channel.`, { ok: false });
+    const earlier = d.sent.find(s => s.channelId === channel.id);
+    const key = `send:${d.id}:v${d.version}:${channel.id}`;
+    const done = mem.findOp(key, { ok: true });
+    if (done || d.sent.some(s => s.channelId === channel.id && s.version === d.version)) { const s = d.sent.find(x => x.channelId === channel.id && x.version === d.version) ?? {}; return say(`That version is already posted in ${channel}${s.url ? `: ${s.url}` : ""}. I didn't send it twice. Want it in another channel, or should I edit that message?`, { ok: true }); }
+    if (earlier && !env.picked?.choice) return asked(c, k, "choice", `I already posted an earlier version of this in ${channel}. Should I **edit** that message or post this as a **new** one?`, { options: ["edit", "new"] });
+    if (env.picked?.choice === "edit" && earlier) return doEdit(env, k, d, earlier);
+    const op = mem.recordOp({ key, guild: message.guild.id, user: env.uid, action: "message_send", ok: null, channelId: channel.id });
+    const r = await callTool(env, "message_send", { text: d.text, title: d.title, key: key.replace(/[^a-z0-9]/gi, "").slice(-24) }, { channel, primary: "draft.send" });
+    mem.updateOp(op.id, { ok: !!r.outcome.ok, error: r.outcome.error, ids: r.result.id });
+    if (!r.outcome.ok) return posts([r.post], { ok: false });
+    mem.markDraftSent(c, d, { channelId: channel.id, channelName: channel.name, messageId: r.result.id, url: r.result.url });
+    absorb(c, r); c.lastIntent = k;
+    return posts([r.post], { ok: true, k });
+  },
+
+  async "message.edit"(env, k) {
+    const { c } = env, d = mem.currentDraft(c); const last = d?.sent.at(-1);
+    if (!d || !last) return { handled: false };
+    if (k.params.instruction) { try { await reviseDraft(c, env.uid, d, k.params.instruction); } catch (e) { return say(`I couldn't reach my writing models, so nothing was edited (${clip(e.message, 100)}).`, { ok: false }); } }
+    else if (d.version === last.version) return asked(c, k, "instruction", "What should I change in it?");
+    return doEdit(env, k, d, last);
+  },
+
+  async "message.pin"(env, k) {
+    const target = messageTarget(env, "pin"); if (target.reply) return target.reply;
+    const channel = env.message.guild.channels.cache.get(target.item.channelId) ?? env.message.channel;
+    const r = await callTool(env, "message_pin", { messageId: target.item.id }, { channel, primary: "message.pin" });
+    record(env, "message_pin", r); if (r.outcome.ok) env.c.lastIntent = k;
+    return posts([r.post], { ok: !!r.outcome.ok, k });
+  },
+  async "message.delete"(env, k) {
+    const target = messageTarget(env, k.params.which ?? "that"); if (target.reply) return target.reply;
+    const channel = env.message.guild.channels.cache.get(target.item.channelId) ?? env.message.channel;
+    const r = await callTool(env, "message_remove", { messageId: target.item.id, preview: target.item.text }, { channel, primary: "message.delete" });
+    record(env, "message_remove", r); if (r.outcome.ok) { absorb(env.c, r); env.c.lastIntent = k; }
+    return posts([r.post], { ok: !!r.outcome.ok, k });
+  },
+
+  async "category.create"(env, k) { return createOne(env, k); },
+  async "channel.create"(env, k) {
+    const { c } = env;
+    if (k.params.count > 1 && !k.params.name && !k.params.names) return asked(c, k, "names", k.clarify ?? `What should the ${k.params.count} channels be called?`);
+    const names = k.params.names ?? (k.params.name ? [k.params.name] : []);
+    if (!names.length) return asked(c, k, "name", k.clarify ?? "What should the channel be called?");
+    const lines = [], out = [];
+    for (const n of names) { const r = await createOne(env, { ...k, params: { ...k.params, name: n, names: undefined, count: null } }); if (r.reply) return r.reply; out.push(r); }
+    return out.length === 1 ? out[0] : posts(out.flatMap(o => o.posts ?? []), { ok: out.every(o => o.ok), k });
+  },
+  async "role.create"(env, k) {
+    if (!k.params.name) return asked(env.c, k, "name", k.clarify ?? "What should the role be called?");
+    const dup = findRole(env.message.guild, k.params.name);
+    if (dup && dup.name.toLowerCase() === k.params.name.toLowerCase()) { mem.noteEntity(env.c, "roles", { id: dup.id, name: dup.name }); mem.setFocus(env.c, "role", { id: dup.id, name: dup.name }, "existing"); return say(`There's already a role called **${dup.name}**, so I didn't create another. I'll use that one.`, { ok: true }); }
+    const r = await callTool(env, "role_create", { name: k.params.name }, { primary: "role.create" });
+    record(env, "role_create", r); if (r.outcome.ok) { absorb(env.c, r); env.c.lastIntent = k; }
+    return posts([r.post], { ok: !!r.outcome.ok, k });
+  },
+
+  async "channel.access"(env, k) {
+    const { c, message } = env, guild = message.guild;
+    let channel = null;
+    if (env.picked?.channelId) channel = guild.channels.cache.get(env.picked.channelId);
+    else if (k.target.channel) { const r = channelFor(env, k, k.target.channel); if (r.reply) return r.reply; channel = r.channel; }
+    else { const f = c.focus?.type === "channel" || c.focus?.type === "category" ? c.focus.items[0] : c.entities.channels.find(fresh); channel = f ? guild.channels.cache.get(f.id) : null; }
+    if (!channel) return asked(c, k, "channel", "Which channel do you mean?");
+    const roles = String(k.params.roles ?? "").split(/\s*(?:,|&|\band\b)\s*/).filter(x => x && !/^(it|them|that|only|everyone|just|admins?|me|nobody|no one)$/i.test(x));
+    const mode = k.params.access ?? "private";
+    let post, ok = false;
+    if (mode === "private" && !roles.length) { // nobody named: hidden from everyone but administrators
+      const { moderate } = await import("../mod.js");
+      post = await moderate(message, { action: "hide", channel: channel.id, target: "everyone" }, env.config); ok = !channel.permissionsFor(guild.roles.everyone)?.has("ViewChannel");
+      if (ok) post = plain(`🔒 ${channel} is private now: @everyone can't see it (administrators still can). To let a role in, say "give access to <role>". Verified.`);
+      else post = plain(`I changed ${channel}'s permissions but couldn't confirm that @everyone lost access (a category or role setting may override it).`);
+    } else {
+      const r = await callTool(env, "channel_access", { access: mode, role: roles.join(", ") }, { channel, primary: "channel.access" });
+      record(env, "channel_access", r); ok = !!r.outcome.ok; post = r.post;
+    }
+    if (ok) { mem.noteEntity(c, "channels", { id: channel.id, name: channel.name, kind: isCat(channel) ? "category" : "text" }); mem.setFocus(c, isCat(channel) ? "category" : "channel", { id: channel.id, name: channel.name }, "changed"); c.lastIntent = k; }
+    return posts([post], { ok, k });
+  },
+
+  async "role.assign"(env, k) { return roleChange(env, k, false); },
+  async "role.remove"(env, k) { return roleChange(env, k, true); },
+
+  async "compound.setup"(env, k) { return runPlan(env, k); },
+
+  async "memory.remember"(env, k) {
+    const r = mem.setPref(env.uid, k.params.text);
+    return say(r.ok ? `Saved. I'll remember: "${clip(k.params.text, 120)}"` : `I didn't save that: ${r.why}.`, { ok: r.ok });
+  },
+  async "memory.forget"(env, k) { const n = mem.forgetPref(env.uid, k.params.text); return say(n ? `Forgotten (${n} item${n === 1 ? "" : "s"}).` : "I don't have anything saved matching that.", { ok: true }); },
+  async "memory.show"(env) { const p = mem.prefsOf(env.uid); return say(p.length ? `I remember:\n${p.map(x => `- ${x.text}`).join("\n")}` : "I haven't saved any preferences yet. Tell me \"remember that …\".", { ok: true }); },
+
+  async repeat(env) {
+    const last = env.c.lastIntent; if (!last) return say("I don't have a previous action to repeat.", { ok: false });
+    if (["channel.create", "category.create", "role.create"].includes(last.primary)) return asked(env.c, { ...last, params: { ...last.params, name: null, names: undefined } }, "name", `What should it be called this time?`);
+    return run(last, env);
+  },
+
+  async "correction.channel"(env, k) {
+    const { c, message } = env, d = mem.currentDraft(c), last = d?.sent.at(-1);
+    mem.addCorrection(c, { phrase: normalize(lastUserBefore(c)), wrong: `sent to #${k.params.wrong}`, right: `#${k.target.channel}`, text: env.text });
+    if (!d || !last) return say(`Understood: ${k.target.channel}, not ${k.params.wrong}. I haven't sent anything in this conversation, so nothing needs fixing.`, { ok: true });
+    const r = channelFor(env, k, k.target.channel); if (r.reply) return r.reply;
+    const out = await HANDLERS["draft.send"]({ ...env, picked: { channelId: r.channel.id } }, { ...k, primary: "draft.send", target: {}, params: {} });
+    const wrong = d.sent.find(s => s.channelId !== r.channel.id && (s.channelName ?? "").toLowerCase().includes(String(k.params.wrong).toLowerCase()));
+    if (wrong && out.ok) { mem.setFocus(c, "message", { id: wrong.messageId, channelId: wrong.channelId, name: `message in #${wrong.channelName}`, text: clip(d.text, 160) }, "wrong"); out.posts = [...(out.posts ?? []), plain(`You're right, that should have gone to ${r.channel}, not #${wrong.channelName}. It's posted in the right place now. Say **"delete that"** if you want me to remove the one in #${wrong.channelName}.`)]; }
+    return out;
+  },
+};
+const lastUserBefore = c => c.turns.filter(t => t.role === "user").slice(-2, -1)[0]?.text ?? "";
+
+async function simple(env, k, tool) {
+  const r = await callTool(env, tool, {}, { primary: k.primary });
+  record(env, tool, r); if (r.outcome.ok) { absorb(env.c, r); env.c.lastIntent = k; }
+  return posts([r.post], { ok: !!r.outcome.ok, k });
+}
+async function listLike(env, k, tool, args) {
+  const clean = Object.fromEntries(Object.entries(args).filter(([, v]) => v != null && v !== ""));
+  const r = await callTool(env, tool, clean, { primary: k.primary });
+  record(env, tool, r); if (r.outcome.ok) { absorb(env.c, r); env.c.lastIntent = k; env.c.topic = args.role ? `members with ${args.role}` : "the server's members"; }
+  return posts([r.post], { ok: !!r.outcome.ok, k });
+}
+
+/** The message "it/that/the previous one" means. One clear candidate is used; several equally plausible ones are listed and asked about. */
+function messageTarget(env, which) {
+  const { c } = env, k = env.k;
+  const mine = c.entities.messages.filter(fresh);
+  if (env.picked?.messageId) { const it = c.entities.messages.find(m => m.id === env.picked.messageId); if (it) return { item: it }; }
+  if (which === "previous") { if (mine.length >= 2) return { item: mine[1] }; return { reply: mine.length ? say("That's the only message I've sent in this conversation, so there's no earlier one. Did you mean that one?", { ok: false }) : { handled: false } }; }
+  const f = c.focus?.type === "message" && fresh(c.focus) && c.focus.items.length === 1 ? c.focus.items[0] : null;
+  if (which === "last" && mine[0]) return { item: mine[0] };
+  if (f) return { item: f };
+  if (mine.length === 1) return { item: mine[0] };
+  if (mine.length > 1) return { reply: asked(c, k, "messageId", `Which message do you mean?\n${mine.slice(0, 5).map((m, i) => `${i + 1}. ${m.name}: "${clip(m.text, 60)}"`).join("\n")}`, { options: mine.slice(0, 5).map(m => ({ id: m.id, label: `${m.name} ${m.text}` })) }) };
+  return { reply: { handled: false } }; // no message of mine is involved: the existing "reply to it and say delete this message" path handles it
+}
+
+async function doEdit(env, k, d, rec) {
+  const channel = env.message.guild.channels.cache.get(rec.channelId) ?? env.message.channel;
+  const r = await callTool(env, "message_update", { messageId: rec.messageId, text: d.text, title: d.title }, { channel, primary: "message.edit" });
+  record(env, "message_update", r);
+  if (r.outcome.ok) { rec.version = d.version; d.status = "sent"; absorb(env.c, r); env.c.lastIntent = k; }
+  return posts([r.post], { ok: !!r.outcome.ok, k });
+}
+
+/** Creates one channel or category, in the right category, once (it won't make a second copy of something that already exists). */
+async function createOne(env, k) {
+  const { c, message } = env, guild = message.guild, isCategory = k.params.kind === "category" || k.primary === "category.create";
+  if (!k.params.name) return asked(c, k, "name", k.clarify ?? (isCategory ? "What should I name it?" : "What should the channel be called?"));
+  let parent = null;
+  if (!isCategory) {
+    if (k.params.category) { const r = channelFor(env, k, k.params.category, { types: [ChannelType.GuildCategory] }); if (r.reply) return r.reply; parent = r.channel; }
+    else if (k.params.intoFocus) { const f = c.focus?.type === "category" && fresh(c.focus) ? c.focus.items[0] : c.entities.channels.find(e => e.kind === "category" && fresh(e)); if (f) parent = guild.channels.cache.get(f.id) ?? null; }
+  }
+  const same = [...guild.channels.cache.values()].find(x => x.name.toLowerCase().replace(/\s+/g, "-") === String(k.params.name).toLowerCase().replace(/\s+/g, "-") && isCat(x) === isCategory && (x.parentId ?? null) === (parent?.id ?? null));
+  if (same && !env.picked?.again) return asked(c, { ...k, params: { ...k.params } }, "again", `${isCategory ? "A category" : "A channel"} called **${same.name}** already exists${parent ? ` in ${parent.name}` : ""}. Create another one anyway? (yes / no)`, { yes: true });
+  const key = `create:${guild.id}:${isCategory ? "cat" : "ch"}:${String(k.params.name).toLowerCase()}:${parent?.id ?? ""}`;
+  const op = mem.recordOp({ key, guild: guild.id, user: env.uid, action: "channel_create", ok: null });
+  const args = { kind: isCategory ? "category" : k.params.kind ?? "text", name: k.params.name, private: k.params.private ? "true" : undefined, role: k.params.role, category: parent?.name };
+  const r = await callTool(env, "channel_create", args, { primary: k.primary });
+  mem.updateOp(op.id, { ok: !!r.outcome.ok, error: r.outcome.error, ids: r.result.id });
+  if (r.outcome.ok) { absorb(c, r); c.lastIntent = k; }
+  return posts([r.post], { ok: !!r.outcome.ok, k });
+}
+
+async function roleChange(env, k, remove) {
+  const { c, message } = env, guild = message.guild, find = findRoleIn(guild);
+  const rr = resolveRole(find, env.picked?.role ?? k.target.role, c);
+  if (rr.none) return asked(c, k, "role", `Which role should I ${remove ? "remove" : "give"}?`);
+  if (!rr.role) return say(`I couldn't find ${rr.named ? `a role called "${rr.named}"` : "that role"}. Name it again, or ask me to create it.`, { ok: false });
+  const who = env.picked?.user ?? k.target.user;
+  if (!who) return asked(c, k, "user", `Who should ${remove ? "lose" : "get"} **${rr.role.name}**?`);
+  const m = resolveMember(who, c, message);
+  if (m.problem) return say(m.problem, { ok: false });
+  if (m.ambiguous) return asked(c, k, "user", `I'm not sure which person you mean: ${m.ambiguous.map(i => `<@${i}>`).join(" or ")}. Tag the right one.`);
+  if (m.none) return asked(c, k, "user", `I couldn't tell who "${clip(who, 40)}" is. Tag them (@name) or give their ID.`);
+  const name = m.label ?? `<@${m.id}>`;
+  if (m.via !== "mention" && m.via !== "id") { // the target came from a reference, not a tag: confirm the exact person before changing anything
+    const ok = await confirmButtons(message, { title: `${remove ? "Remove" : "Give"} **${rr.role.name}** ${remove ? "from" : "to"} ${name}?`, lines: [`I read "${clip(who, 40)}" as <@${m.id}> (ID \`${m.id}\`)${m.index != null ? `, number ${m.index + 1} in the last list` : ""}.`], ttl: 30_000, danger: false });
+    if (!ok) return say("Cancelled. Nothing was changed.", { ok: false });
+  }
+  const r = await callTool({ ...env, resolveMember: async () => guild.members.fetch(m.id).catch(() => null) }, remove ? "role_remove" : "role_add", { role: rr.role.name, user: m.id }, { primary: remove ? "role.remove" : "role.assign" });
+  record(env, "role_assign", r, { targetId: m.id });
+  if (r.outcome.ok) { absorb(c, r); mem.noteEntity(c, "members", { id: m.id, name }); mem.noteEntity(c, "roles", { id: rr.role.id, name: rr.role.name }); c.lastIntent = k; }
+  return posts([r.post], { ok: !!r.outcome.ok, k });
+}
+
+/**
+ * A multi-part request as an ordered plan: everything it depends on is checked first (so nothing is half-built because a role is missing),
+ * steps run in order, a failed step stops what depends on it, and the report says exactly what was done, what failed and what was not attempted.
+ */
+async function runPlan(env, k) {
+  const { c, message } = env, guild = message.guild;
+  const roles = k.params.roles ?? [];
+  for (const q of roles) if (!findRole(guild, q)) return say(`There's no role called "${q}" yet, so I haven't built anything. Create the role first (say "create a ${q} role"), or tell me which existing role should get access.`, { ok: false });
+  const results = new Map(), lines = [];
+  for (const s of k.params.steps) {
+    const dead = (s.dependsOn ?? []).find(d => !results.get(d)?.ok);
+    if (dead) { lines.push(`⏭️ **${s.args.name}**: not attempted, because **${results.get(dead)?.name ?? dead}** failed`); results.set(s.id, { ok: false, skipped: true, name: s.args.name }); continue; }
+    const args = { ...s.args, private: s.args.private ? "true" : undefined };
+    const op = mem.recordOp({ key: `plan:${guild.id}:${s.args.kind}:${String(s.args.name).toLowerCase()}`, guild: guild.id, user: env.uid, action: "channel_create", ok: null });
+    const r = await callTool(env, s.tool, args, { primary: "compound.setup" });
+    mem.updateOp(op.id, { ok: !!r.outcome.ok, error: r.outcome.error, ids: r.result.id });
+    if (!r.outcome.ok) { lines.push(`❌ **${s.args.name}**: ${clip(String(r.post?.content ?? r.post?.components?.[0]?.toJSON?.().components?.map(x => x.content).join(" ") ?? r.outcome.error).replace(/^❌\s*/, ""), 160)}`); results.set(s.id, { ok: false, name: s.args.name }); continue; }
+    absorb(c, r);
+    const made = guild.channels.cache.get(r.result.id), roleOk = [];
+    for (const q of roles) { const role = findRole(guild, q); const can = made?.permissionsFor?.(role)?.has("ViewChannel"); roleOk.push(`${role.name} ${can ? "can" : "CANNOT"} see it`); if (!can) r.outcome.ok = false; }
+    lines.push(`${r.outcome.ok ? "✅" : "⚠️"} ${r.result.kind === "category" ? "Category" : "#"}**${r.result.name}**${r.result.parentName ? ` in ${r.result.parentName}` : ""}${r.result.private ? " · private" : ""}${roleOk.length ? ` · ${roleOk.join(", ")}` : ""}`);
+    results.set(s.id, { ok: !!r.outcome.ok, name: r.result.name });
+  }
+  const okAll = [...results.values()].every(x => x.ok), some = [...results.values()].some(x => x.ok);
+  c.lastIntent = okAll ? k : c.lastIntent;
+  return posts([panel({ title: okAll ? "Done" : some ? "Partly done" : "Nothing was created", accent: okAll ? "up" : some ? "amber" : "down", lines, footer: okAll ? "Each step was read back from Discord" : "Failed steps stopped what depended on them" })], { ok: okAll, k });
+}
+
+/* ─────────────────────────── the pipeline ─────────────────────────── */
+async function run(k, env) {
+  const h = HANDLERS[k.primary];
+  if (!h) return { handled: false };
+  env.k = k;
+  try { const out = await h(env, k); return out.handled === false ? out : { ...out, k }; } // every answer carries the intent it was for
+  catch (e) { console.warn("brain:", k.primary, e?.message ?? e); return say(`I couldn't complete that, so nothing is confirmed as changed (${clip(e?.message ?? e, 120)}).`, { ok: false, k }); }
+}
+
+/** The answer to a question the assistant asked: fills the missing piece and runs the original request. */
+async function answerPending(env) {
+  const { c, text } = env, p = c.pending; if (!p) return null;
+  const t = normalize(text);
+  if (/^(no|nope|cancel|never ?mind|stop|forget it|skip)\b/.test(t) && !p.yes) { mem.takePending(c); return say("Okay, cancelled.", { ok: true }); }
+  if (p.yes) { mem.takePending(c); return /^(y|yes|yeah|yep|sure|ok|okay|do it|go)\b/.test(t) ? run(p.k, { ...env, picked: { again: true } }) : say("Okay, I won't.", { ok: true }); }
+  const looksNew = /^(show|list|who|how|what|create|make|add|send|delete|remove|give|pin|find|write|draft|set|remember|forget|do|repeat|invite)\b/.test(t);
+  const other = classify(text, { convo: c, roleNames: rolesOf(env.message.guild), draft: mem.currentDraft(c) });
+  if (other.primary !== "unknown" && (looksNew || t.split(" ").length > 6)) { mem.takePending(c); return null; } // a new request, not an answer
+  mem.takePending(c);
+  const k = structuredClone(p.k), field = p.field, raw = String(text).trim().replace(/[.!]+$/, "");
+  const picked = {};
+  if (p.options && (field === "channelId" || field === "messageId")) { // answered with a number, an ordinal or a name from the list shown
+    const byOrd = pickFromList({ items: p.options }, t), byName = p.options.find(o => normalize(o.label).includes(t) || t.includes(normalize(o.label)));
+    const hit = byOrd.item ?? byName ?? (/^\d$/.test(t) ? p.options[Number(t) - 1] : null);
+    if (!hit) { mem.setPending(c, p); return say(`I still need to know which one: ${p.options.map((o, i) => `${i + 1}. ${o.label}`).join(" or ")}.`, { ok: false }); }
+    picked[field] = hit.id;
+  } else if (field === "topic") k.params.topic = origCase(raw, raw);
+  else if (field === "name") k.params.name = raw.replace(/^(?:call it|name it|it'?s|its|the name is|name:)\s*/i, "").replace(/^["“']|["”']$/g, "");
+  else if (field === "names") { k.params.names = namesFrom(raw); if (!k.params.names.length) { mem.setPending(c, p); return say("I couldn't read any names there. Give me the names, separated by commas.", { ok: false }); } }
+  else if (field === "channel") { k.target.channel = raw.replace(/^(?:in|to|into|on)\s+(?:the\s+)?/i, "").replace(/\s+channel$/i, ""); }
+  else if (field === "instruction") k.params.instruction = raw;
+  else if (field === "choice") { picked.choice = /\bedit|update|change|replace\b/.test(t) ? "edit" : /\bnew|another|post|send|fresh\b/.test(t) ? "new" : null; if (!picked.choice) { mem.setPending(c, p); return say("Should I **edit** the earlier message or post a **new** one?", { ok: false }); } }
+  else if (field === "user") k.target.user = raw, k.target.ordinal = null;
+  else if (field === "role") k.target.role = raw.replace(/^the\s+/i, "").replace(/\s+role$/i, "");
+  else if (field === "roles") k.params.roles = raw;
+  return run(k, { ...env, picked });
+}
+
+/**
+ * Handles one owner message. Returns { handled: true, say? | posts? } when the assistant owns it and has answered, or
+ * { handled: false, context } for the language model path (with the retrieved conversation context to give it).
+ */
+export async function handle(message, text, config, deps = {}) {
+  const guild = message.guild; if (!guild) return { handled: false, context: "" };
+  const uid = message.author.id, c = mem.getConvo(mem.convoKey(message));
+  const env = { message, text, config, c, uid, resolveMember: deps.resolveMember };
+  mem.addTurn(c, "user", text);
+  let out = c.pending ? await answerPending(env) : null;
+  if (!out) {
+    const k = classify(text, { convo: c, roleNames: rolesOf(guild), draft: mem.currentDraft(c) });
+    if (k.primary === "unknown") return { handled: false, context: mem.contextBlock(c, uid, text), classified: k };
+    if (k.correction && c.lastIntent) mem.addCorrection(c, { phrase: normalize(lastUserBefore(c)), wrong: c.lastIntent.primary, right: { primary: k.primary, action: k.action, params: k.params, target: k.target }, text });
+    out = await run(k, env);
+    if (out.handled && k.correction && out.ok && out.posts?.length) out.posts = [plain(`Understood, you meant ${k.primary.replace(".", " ")}. Here it is:`), ...out.posts];
+  }
+  if (!out.handled) return { handled: false, context: mem.contextBlock(c, uid, text) };
+  mem.addTurn(c, "assistant", out.say ?? (out.ok === false ? "(that did not work)" : `(did: ${out.k?.primary ?? "it"})`));
+  mem.touch(c);
+  return out;
+}
+
+/** After the language-model path ran something, remembers what it was (so "do that again", "it" and corrections still work). */
+export function noteLLM(message, call, hooks = {}) {
+  try {
+    const c = mem.getConvo(mem.convoKey(message));
+    const r = { outcome: hooks.outcome ?? {}, result: hooks.result ?? {} };
+    if (r.outcome.ok) absorb(c, r);
+    c.lastIntent = { primary: "model:" + call.action, action: call.action, params: {}, target: {} };
+    mem.recordOp({ guild: message.guild?.id, user: message.author?.id, action: call.action, ok: !!r.outcome.ok, error: r.outcome.error, ids: r.result.id ?? null, via: "model" });
+    mem.addTurn(c, "assistant", `(ran ${call.action}${r.outcome.ok === false ? ", it failed" : ""})`);
+  } catch { /* the answer already went out */ }
+}
+export const noteAssistantText = (message, text) => { try { mem.addTurn(mem.getConvo(mem.convoKey(message)), "assistant", text); } catch { /* never blocks an answer */ } };
+
+/** The context for the language-model path: the structured state, retrieved for this message. */
+export const contextFor = (message, text) => message.guild ? mem.contextBlock(mem.getConvo(mem.convoKey(message)), message.author.id, text) : "";
+
+/**
+ * Guards a call the language model chose: the action must exist, the intent the classifier would have given must agree with the tool
+ * (a model that answers "members" with a server overview is overruled), and references in its arguments ("it", "the second one", "here")
+ * are resolved from the state. Returns { call } to run, or { say } to answer instead.
+ */
+export function guard(message, text, call) {
+  const c = mem.getConvo(mem.convoKey(message)), action = String(call.action ?? "").toLowerCase();
+  const k = classify(text, { convo: c, roleNames: message.guild ? rolesOf(message.guild) : [], draft: mem.currentDraft(c) });
+  if (k.primary !== "unknown" && !toolAllowed(k.primary, action) && k.action && k.action !== "plan") return { overruled: { from: action, to: k.action, primary: k.primary }, call: { ...call, action: k.action, ...(k.params?.role ? { role: k.params.role } : {}) } };
+  const v = validate(action, call);
+  if (!v.ok && /unknown action/.test(v.errors[0])) return { say: `I tried to run "${action}", which isn't something I can do. Tell me again what you want and I'll pick the right action.` };
+  const out = { ...call };
+  if (/^(here|this channel)$/i.test(String(out.channel ?? ""))) delete out.channel;
+  const f = c.focus;
+  if (/^(it|that|this)$/i.test(String(out.channel ?? "")) && (f?.type === "channel" || f?.type === "category")) out.channel = f.items[0].id;
+  const ord = String(out.user ?? "");
+  if (/\b(first|second|third|fourth|fifth|last|number \d+)\b/i.test(ord) && c.list?.kind === "members") { const p = pickFromList(c.list, ord); if (p.item) out.user = p.item.id; }
+  else if (/^(him|her|them|that (person|member|user))$/i.test(ord) && c.entities.members[0]) out.user = c.entities.members[0].id;
+  return { call: out };
+}
+
+export { handleListButton, absorb };

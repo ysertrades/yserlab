@@ -98,7 +98,8 @@ function detect(t, key) {
   if (/\b(review|audit|check)\b.*\b(server )?(protection|security|permissions|safety)\b|\b(weaknesses|vulnerabilit)/i.test(t) && !/\bchannel\b.*\bpermission\b.*\b(for|to)\b/i.test(t)) return { action: "permission_audit", args: {} };
   if (/\bwhich roles?\b.*\b(administrator|admin|dangerous|powerful)\b|\brole audit\b|\bunused roles?\b/i.test(t)) return { action: "role_audit", args: {} };
   if (/\b(anyone|someone|people|users?)\b.*\bspamm?(ing|ed)?\b|\bcheck\b.*\bspam\b|\bsuspicious links?\b|\bscam links?\b/i.test(t)) return { action: "scan_spam", args: {} };
-  if (/\bhow many\b.*\b(members?|people|users)\b|\b(member|user) count\b|\bwho owns\b|\bserver owner\b|\b(summary|overview|info(?:rmation)?|details|configuration|settings|structure)\b.*\b(of |about )?(the |this |our )?server\b|\btell me about (the|this|our) server\b/i.test(t)) return { action: "server_overview", args: {} };
+  if (/\bhow many\b.*\b(members?|people|users)\b|\b(member|user) count\b/i.test(t)) return { action: "member_count", args: {} }; // a count, not the whole overview
+  if (/\bwho owns\b|\bserver owner\b|\b(summary|overview|info(?:rmation)?|details|configuration|settings|structure)\b.*\b(of |about )?(the |this |our )?server\b|\btell me about (the|this|our) server\b/i.test(t)) return { action: "server_overview", args: {} };
   if (/\b(show|list|what|which|see)\b.*\broles\b/i.test(t) && !/\b(create|make|add|give|remove|delete|assign)\b/i.test(t)) return { action: "role_list", args: {} };
   if (/\b(show|list|what|which|see)\b.*\bchannels\b/i.test(t) && !/\b(create|make|delete|rename|move|permission|access|private|hide)\b/i.test(t)) return { action: "channel_list", args: {} };
   if (/\b(upcoming|scheduled|next)\b.*\bevents?\b|\bshow\b.*\bevents\b/i.test(t) && !/\b(create|make|cancel)\b/i.test(t)) return { action: "event_list", args: {} };
