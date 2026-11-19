@@ -19,6 +19,7 @@ import { moderate, sendFromApp, waiting } from "./mod.js";
 import { automod } from "./admin/automod.js";
 import { DANGEROUS, permNames } from "./admin/guard.js";
 import { intentOf } from "./admin/intent.js";
+import { handleEmbed } from "./admin/embeds.js";
 import { remember } from "./people.js";
 import { pollJuice, publishTrump } from "./feeds.js";
 import { cancel, list as listJobs, schedule, tick as tickJobs } from "./sched.js";
@@ -123,6 +124,7 @@ client.on(Events.MessageCreate, async message => {  try {
     const text = stripMention(message.content, client.user.id);
     if (!text) { if (tagged) await message.reply({ content: "Yes? Ask me anything about your model or your trades.", allowedMentions: { repliedUser: false } }); return; }
     if (!owner) { await message.reply("Open YSER Lab in the app once so I know whose trades and model to use."); return; }
+    if (message.guild && isAdmin(config, message.author.id) && await handleEmbed(message, text, config).catch(e => { console.warn("embed:", e?.message ?? e); return false; })) return; // make / recolour / edit / repost an embed
     await message.channel.sendTyping().catch(() => {});
     const quick = isAdmin(config, message.author.id) && message.guild ? intentOf(text, `${channelId}:${message.author.id}`) : null; // plain admin requests go straight to their tool
     if (quick?.say) { await message.reply({ content: quick.say, allowedMentions: { repliedUser: false } }); return; }

@@ -60,14 +60,16 @@ export async function channelContext(message) {
   try {
     const lines = [];
     const name = m => m.author?.id === message.client.user.id ? "You (YSER Lab)" : (m.member?.displayName ?? m.author?.username ?? "someone");
-    const text = m => String(m.content || (m.embeds?.[0]?.description ?? m.embeds?.[0]?.title ?? "") || (m.attachments?.size ? "[attachment]" : "")).replace(/\s+/g, " ").slice(0, 280);
+    // A Components V2 message has no content: its words live in its text displays, so they are collected from there (otherwise an embed the bot just posted is invisible to what follows).
+    const inside = c => [typeof c?.content === "string" ? c.content : "", ...(c?.components ?? []).map(inside)].filter(Boolean).join(" ");
+    const text = m => String(m.content || (m.components?.length ? (m.components.map(inside).join(" ") ? "[embed] " + m.components.map(inside).join(" ") : "") : "") || (m.embeds?.[0]?.description ?? m.embeds?.[0]?.title ?? "") || (m.attachments?.size ? "[attachment]" : "")).replace(/\s+/g, " ").slice(0, 420);
     const batch = await message.channel.messages.fetch({ limit: 12, before: message.id });
     for (const m of [...batch.values()].reverse()) { const t = text(m); if (t) lines.push(`${name(m)}: ${t}`); }
     if (message.reference?.messageId) {
       const ref = await message.channel.messages.fetch(message.reference.messageId).catch(() => null);
       if (ref) lines.push(`(They are replying to this message from ${name(ref)}: ${text(ref)})`);
     }
-    return lines.join("\n");
+    return "[How to answer: do what was asked right away. Ask a question only if something essential is truly missing, never about something already said. Use only facts the owner gave; never invent amounts, prizes, times, links or names. When they say \"it\" or \"that\", it is the latest thing above.]\n" + lines.join("\n");
   } catch { return ""; }
 }
 

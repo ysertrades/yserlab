@@ -28,6 +28,10 @@ What was built, how it is protected, what has been tested, and what is **not** d
 
 Older actions kept as they were: purge, slowmode, lock/unlock, hide/unhide, set_permission, kick, ban, unban, timeout, nickname, dm, say, poll, pin, react, remind (a real notification), countdown, voice_*, delete_channel (now with confirm buttons), move/clone channel, topic, nsfw.
 
+## Embeds and announcements (src/admin/embeds.js)
+
+"Make an embed announcing a giveaway starting tomorrow" is written at once from what was said (relative dates become real dates; prizes, amounts, times, links and handles are never invented, and lines containing them are removed unless the request gave them). The embed is remembered as a draft (6 hours), so the next messages act on it in place: "change the colour to dark" (names, hex, and `not purple` is understood), "make it shorter" / "change the title to ..." (the model rewrites only what was asked), "post it in #lab" (a copy goes there with the same colour). It never asks a question the request already answers. What the bot posted as a Components V2 message is now also readable by the assistant (its text displays are collected), so follow-ups know what `it` is.
+
 ## Safety rules that are enforced in code (not in the prompt)
 
 - Only the owner (and admins, when the panel allows) can reach the administrator at all (`access.js`); on top of that the requester must hold the Discord permission the action needs (the server owner and Administrators always do).

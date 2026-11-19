@@ -7,9 +7,9 @@ import { colour } from "../post.js";
  */
 export const LIMITS = { text: 4000, components: 40, rowButtons: 5 };
 
-export function panel({ title, lines = [], accent = "accent", footer, rows = [], pings = [] }) {
-  const box = new ContainerBuilder().setAccentColor(colour(accent));
-  const head = title ? `### ${title}` : "";
+export function panel({ title, lines = [], accent = "accent", footer, rows = [], pings = [], heading = "###" }) {
+  const box = new ContainerBuilder().setAccentColor(typeof accent === "number" ? accent : /^#[0-9a-f]{6}$/i.test(accent) ? parseInt(accent.slice(1), 16) : colour(accent));
+  const head = title ? `${heading} ${title}` : "";
   const foot = footer ? `-# ${footer}` : "";
   const room = LIMITS.text - head.length - foot.length - 40;
   let body = lines.filter(x => x != null && x !== "").join("\n");
