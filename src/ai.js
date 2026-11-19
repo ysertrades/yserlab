@@ -58,15 +58,18 @@ function summary(rows, recent = 25) {
     lines.length ? `Most recent trades:\n${lines.join("\n")}` : "",
   ].filter(Boolean).join("\n");
 }
+/** True when the user wants to know where something comes from (only then do lesson names and sources go into the prompt). */
+export const asksForSource = q => /\b(sources?|cite|citations?|references?|where (did|do|does) (you|that|this|it) (get|learn|read|come)|which (lesson|pdf|video|page|document|file)|what (lesson|pdf|page|document)|page (number|\d+)|exact(ly)? (quote|words|wording|what)|quote (it|that|the|exactly)|in which (lesson|pdf|video))\b/i.test(q);
 const asksAboutJournal = q => /\b(trades?|journal|win ?rate|pnl|p&l|profit|loss(es)?|streak|r[- ]?multiple|performance|month|week|today|yesterday|average|best|worst|instrument|session|how (am i|have i)|my (results|numbers|stats))\b/i.test(q);
 
-const SYSTEM = `You are YSER Lab, the personal trading mentor of one trader, living in their Discord server. You know three things completely: THEIR OWN MODEL (their playbook, which always comes first), the whole TTrades Trading Education Center (the textbook behind it: every lesson, diagram, PDF handout and video), and their journal numbers.
+const SYSTEM = `You are YSER Lab, the personal trading mentor of one trader, living in their Discord server. You are an experienced instructor of THEIR trading model (their playbook, which always comes first) and of the fractal model course behind it, and you read their journal numbers. The reference material below is what you know, not something you look up.
 How to answer:
-- Never say "TTrades": the fractal model is just "the fractal model", the education center is "the education center"; drop that word from lesson titles when you cite them.
-- Answer from the material below, in the trader's own terms (their model's vocabulary first). Name the lesson you draw from, e.g. "(lesson: Understanding Fair Value Gaps)". If their model and a lesson differ, follow their model and say what the lesson adds or does differently.
+- Never say "TTrades": the method is just "the fractal model".
+- Teach like a knowledgeable instructor speaking from your own expertise, in the trader's own terms (their model's vocabulary first). Never mention or hint at where something came from: no "according to...", "the lesson says", "the education center", "the PDF", "your uploaded...", "the document", "the material", "the passage", "the knowledge base", no lesson or file names, no page numbers, no "lesson:" tags, and no talk of searching, retrieval or context. Only when the user explicitly asks where it comes from, or asks for a source, lesson name, page number or an exact quote, reveal it from the SOURCE NOTES when they are given (and say plainly when you have no source for a claim).
+- Terms and rules must match the reference exactly. If their model and the course differ, give their model's version as the rule; mention a variation only when it changes what they should do, in plain words ("a common variation is..."), without naming a source.
 - You are also a sharp general assistant: when they ask about anything else (markets, economics, news, science, coding, writing, life), answer it properly from your own knowledge, without forcing it back to trading, and say when you are not sure or the facts may have changed.
 - Reason, don't just look up. A request that is new (not word for word in the material) is worked out from the rules you know: combine the concepts (a candle 2 closure whose entry is a CISD on the lower timeframe is ONE idea built from two) and answer or draw the combination, instead of replying that you don't have it.
-- Be precise on THEIR model and the education center: give the actual rules, conditions, steps and levels the material states, not generalities, and never invent rules or numbers there; if the material doesn't cover it, say so plainly and then reason from what it does say.
+- Be precise on THEIR model and the fractal model course: give the actual rules, conditions, steps and levels, not generalities, and never invent rules or numbers there. If the specifics are not covered, say so in plain words ("I don't have a rule for that in your model") and then reason from the rules you do know or give the general trading convention, saying "in general" so it is clear it is not part of their model.
 - Be direct and brief: a few sentences for simple questions, a short structured answer (bullets or numbered steps) for how-to or explain-it questions. Plain words, Discord markdown sparingly, no filler.
 - Numbers about their trading come only from the journal summary. Never give financial advice or tell them to take a trade; you help them study, review and stay consistent.
 - If they ask you to send or show a picture, chart or screenshot from a trade THEY logged, call show_trade_chart.
@@ -140,7 +143,7 @@ const list = v => (Array.isArray(v) ? v.filter(Boolean) : []);
 const conceptText = c => [
   `## ${c.name}${c.kind ? ` (${c.kind})` : ""}${list(c.timeframes).length ? ` [${c.timeframes.join(", ")}]` : ""}`,
   c.look_for && `Look for: ${c.look_for}`,
-  c.visual && `How the PDF draws it: ${c.visual}`,
+  c.visual && `How it looks on the chart: ${c.visual}`,
   list(c.must).length && `Must hold: ${c.must.join("; ")}`,
   list(c.steps).length && `Steps: ${c.steps.map((s, i) => `${i + 1}) ${s}`).join(" ")}`,
   list(c.not).length && `Doesn't count: ${c.not.join("; ")}`,
@@ -159,7 +162,7 @@ export function modelText(doc, limit = 22000) {
   const phases = list(doc.checklist?.phases);
   if (phases.length) parts.push("CHECKLIST BEFORE A TRADE:\n" + phases.map(ph => `${ph.name}${ph.timeframe ? ` (${ph.timeframe})` : ""}: ${list(ph.items).map(i => i.text).join(" | ")}`).join("\n"));
   const text = parts.join("\n\n");
-  return text.length > limit ? text.slice(0, limit) + "\n…(the rest of the model is cut for length)" : text;
+  return text.length > limit ? text.slice(0, limit) : text;
 }
 
 const modelIndexes = new WeakMap();
@@ -191,7 +194,7 @@ export function modelFor(doc, query, limit = 7000) {
     const rest = modelText(doc, limit - head.length);
     return rest;
   }
-  return out.join("\n\n") + "\n(only the parts of the model that match the question are shown)";
+  return out.join("\n\n");
 }
 
 /** Everything the AI is told for one question; `scale` shrinks it for a provider with less room. */
@@ -205,9 +208,10 @@ export function context({ doc, rows, text, history = [], big = false, scale = 1 
   const smt = asksAboutSmt(query);
   if (smt && !big) room.edu = Math.round(room.edu * .5); // the owner's SMT rules take that room
   const edu = hasKnowledge() ? recall(query, { chars: room.edu, perLesson: big ? 4 : 3 }) : { text: "", lessons: [] };
-  const parts = [SYSTEM, ...(smt ? [`THE OWNER'S RULES FOR SMT, 2S/3S, STRENGTH SWITCH AND PSP (authoritative; follow them exactly, and when you teach one, run the strong/weak and switch tests out loud, name the one condition that decided it, and end with a one-line question for the student):\n${SMT_RULES}`] : []),`THEIR MODEL (from the PDFs they uploaded in the app; their playbook, it comes first):\n${big ? modelText(doc, room.model) : modelFor(doc, query, room.model)}`];
-  if (edu.text) parts.push(`TTRADES EDUCATION CENTER (the textbook; passages that match the question):\n${edu.text}`);
-  if (hasKnowledge() && (big || asksForStructure(text))) parts.push(`STRUCTURE OF THE EDUCATION CENTER (the four courses and their lessons, as the site lists them, newest first; a lesson can belong to more than one course):\n${structureText({ overview: big, titles: big || scale >= 1 })}`);
+  const parts = [SYSTEM, ...(smt ? [`RULES FOR SMT, 2S/3S, THE STRENGTH SWITCH AND PSP (authoritative; apply them exactly, never attribute them to anyone; when you teach one, run the strong/weak and switch tests out loud, name the one condition that decided it, and end with a one-line question for the student):\n${SMT_RULES}`] : []),`THEIR TRADING MODEL (their playbook; it comes first):\n${big ? modelText(doc, room.model) : modelFor(doc, query, room.model)}`];
+  if (edu.text) parts.push(`REFERENCE: THE FRACTAL MODEL COURSE (background knowledge for answering; never mention it or its sections):\n${edu.text}`);
+  if (hasKnowledge() && asksForStructure(text)) parts.push(`COURSE OUTLINE (only for a question about what is covered or in what order; the four courses and their lessons, newest first; a lesson can belong to more than one course):\n${structureText({ overview: big, titles: big || scale >= 1 })}`);
+  if (edu.sources?.length && asksForSource(`${follow} ${text}`)) parts.push(`SOURCE NOTES (the user asked where this comes from: reveal what they asked for, quote exactly when they ask for a quote, and never invent page numbers):\n${edu.sources.map(s => `- ${s.lesson}${s.kind ? ` (${s.kind})` : ""}${s.heading ? `, section: ${s.heading}` : ""}`).join("\n")}`);
   parts.push(`THEIR JOURNAL:\n${summary(rows, room.journal)}\n\nNow: ${new Date().toString().slice(0, 33)}`);
   return { system: parts.join("\n\n"), lessons: edu.lessons };
 }

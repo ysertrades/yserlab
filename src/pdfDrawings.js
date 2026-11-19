@@ -74,12 +74,12 @@ export function specFromDrawing(d) {
     const subtitle = fit(firstSentence(above[0]) || above[0], 125);
     const second = sentences(above[0] ?? "")[1] ?? "";
     const caption = fit(below[0] ?? (above.length > 1 ? above[above.length - 1] : second), 110);
-    return { title, subtitle, caption, assumed: `From your PDF: ${d.pdf}, page ${d.page}.`, panels, divider: panels.length === 2 };
+    return { title, subtitle, caption, assumed: "", panels, divider: panels.length === 2 };
   }
   const title = String(d.pdf).slice(0, 60);
   const body = String(d.text).replace(new RegExp("^\\s*" + title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"), "").trim();
   const s = sentences(body);
-  return { title, subtitle: fit(s[0], 105), caption: fit(s[1], 85), assumed: `From your PDF: ${d.pdf}, page ${d.page}.`, panels, divider: panels.length === 2 };
+  return { title, subtitle: fit(s[0], 105), caption: fit(s[1], 85), assumed: "", panels, divider: panels.length === 2 };
 }
 
 /** The PDF whose entire name is in the request (the longest name when several are), or null. */

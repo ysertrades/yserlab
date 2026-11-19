@@ -255,6 +255,7 @@ export const TOOLS = {
     cap: "members", risk: "low", user: [P.ManageRoles], bot: [P.ManageRoles], aliases: ["role_add", "role_remove", "role_unassign"],
     async run({ guild, args, reason, message, resolveMember, action, result }) {
       const role = findRole(guild, args.role); if (!role) throw friendly("no role", `I couldn't find a role called "${args.role ?? ""}".`);
+      const want = clean(args.role); if (clean(role.name) !== want && clean(role.name) !== want.replace(/s$/, "")) throw friendly("not exact", `I found **${role.name}**, which isn't exactly "${args.role}". Say the exact role name so I never hand out the wrong one.`);
       const member = await resolveMember(); if (!member) throw friendly("no member", "Tag the person (or give their ID) so I change the right member.");
       if (!botCanEditRole(guild, role)) throw friendly("hierarchy", `**${role.name}** is above my highest role, so I can't hand it out. Move my role higher in Server Settings, Roles.`);
       if (!userCanEditRole(message, role)) throw friendly("hierarchy", `You can't manage **${role.name}** because it is not below your highest role.`);

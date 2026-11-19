@@ -1,11 +1,14 @@
 import { ChannelType } from "discord.js";
-import { runTool, findRole } from "../admin/tools.js";
+import { runTool, findRole, TOOLS } from "../admin/tools.js";
+import { userMissing } from "../admin/guard.js";
+import { PermissionFlagsBits as P } from "discord.js";
 import { confirmButtons, panel } from "../admin/ui.js";
 import { intentOf } from "../admin/intent.js";
 import "./tools.js";
 import { handleListButton } from "./tools.js";
 import { classify, namesFrom, normalize, origCase } from "./classify.js";
-import { toolAllowed, validate } from "./registry.js";
+const channelNamesOf = guild => [...guild.channels.cache.values()].map(c => c.name);
+import { knownAction, toolAllowed, validate } from "./registry.js";
 import { ask as askWhich, pickFromList, resolveChannel, resolveMember, resolveRole, sendable } from "./resolver.js";
 import { complete } from "./router.js";
 import * as mem from "./memory.js";
@@ -19,6 +22,7 @@ import * as mem from "./memory.js";
  * language-model path answers it as before. Nothing here asks the model to pick a Discord id or a tool for something deterministic.
  */
 const plain = text => ({ content: String(text).slice(0, 1990), allowedMentions: { parse: [] } });
+const oneLine = (s, n = 300) => String(s ?? "").replace(/[\u200b-\u200f\u2060\ufeff]/g, "").replace(/\s+/g, " ").trim().slice(0, n);
 const clip = (s, n = 80) => { const t = String(s ?? "").replace(/\s+/g, " ").trim(); return t.length > n ? t.slice(0, n - 1) + "…" : t; };
 const FRESH = 30 * 60_000;
 const fresh = e => e && Date.now() - e.at < FRESH;
@@ -31,15 +35,15 @@ const WRITE_SYSTEM = "You write messages for the owner of a trading community's 
 const REVISE_SYSTEM = "You edit a Discord message exactly as the owner asks. Keep every fact that was not asked to change, and never add facts, times, links or names that are not in the message or the request. Return ONLY the full revised message text, no preamble, no quotation marks.";
 const styleLines = uid => mem.relevantPrefs(uid, "announcement write draft").map(p => `- ${p.text}`).join("\n");
 
-async function writeDraft(c, uid, { topic, when }) {
-  const prefs = styleLines(uid);
-  const out = await complete({ task: "write", system: WRITE_SYSTEM, temperature: 0.5, max: 700, messages: [{ role: "user", content: `Write an announcement.\nTopic: ${topic}${when ? `\nWhen: ${when}` : ""}${prefs ? `\nThe owner's saved preferences, follow them:\n${prefs}` : ""}` }] });
+async function writeDraft(c, uid, { topic, when, sameFormat }) {
+  const prefs = styleLines(uid), before = sameFormat ? c.drafts[0]?.text : null;
+  const out = await complete({ task: "write", system: WRITE_SYSTEM, temperature: 0.5, max: 700, messages: [{ role: "user", content: `Write an announcement.\nTopic: ${oneLine(topic)}${when ? `\nWhen: ${oneLine(when, 80)}` : ""}${prefs ? `\nThe owner's saved preferences, follow them:\n${prefs}` : ""}${before ? `\nUse the same structure, length and style as this earlier message (new facts only from the topic):\n${before.slice(0, 700)}` : ""}` }] });
   c.topic = `announcement about ${clip(topic, 60)}`;
   return mem.newDraft(c, { text: out.text.trim().replace(/^["“]|["”]$/g, ""), topic });
 }
 async function reviseDraft(c, uid, d, instruction) {
   const prefs = styleLines(uid);
-  const out = await complete({ task: "write", system: REVISE_SYSTEM, temperature: 0.3, max: 700, messages: [{ role: "user", content: `Current message:\n${d.text}\n\nChange requested: ${instruction}${prefs ? `\nThe owner's saved preferences:\n${prefs}` : ""}` }] });
+  const out = await complete({ task: "write", system: REVISE_SYSTEM, temperature: 0.3, max: 700, messages: [{ role: "user", content: `Current message:\n${d.text}\n\nChange requested: ${oneLine(instruction)}${prefs ? `\nThe owner's saved preferences:\n${prefs}` : ""}` }] });
   return mem.reviseDraft(c, d, out.text.trim().replace(/^["“]|["”]$/g, ""), instruction);
 }
 const showDraft = (d, note) => plain(`**Draft** · version ${d.version}${d.status === "approved" ? " · approved" : ""}\n${d.text}\n\n-# ${note ?? 'Say "send it" (here, or "in #channel"), or tell me what to change.'}`);
@@ -64,6 +68,7 @@ function absorb(c, r) {
   } else if (x.kind === "role") { const item = { id: x.id, name: x.name }; mem.noteEntity(c, "roles", item); mem.setFocus(c, "role", item, "created"); }
   else if (x.kind === "message") { const item = { id: x.id, channelId: x.channelId, name: `message in #${x.channelName ?? "?"}`, channelName: x.channelName, text: clip(x.text, 160), url: x.url }; if (!x.deleted) { mem.noteEntity(c, "messages", item); mem.setFocus(c, "message", item, x.edited ? "edited" : "sent"); } else c.entities.messages = c.entities.messages.filter(m => m.id !== x.id); }
   else if (x.kind === "role_change") { mem.noteEntity(c, "members", { id: x.memberId, name: x.memberId }); mem.setFocus(c, "member", { id: x.memberId, name: x.memberId }, "role changed"); }
+  if (x.list?.items?.length === 1) mem.noteEntity(c, "members", { id: x.list.items[0].id, name: x.list.items[0].label });
   if (x.list) { mem.setList(c, x.list.kind, x.list.items, { role: x.role, total: x.list.total }); mem.setFocus(c, "members", x.list.items, "listed"); if (x.role) mem.noteEntity(c, "roles", x.role); }
 }
 
@@ -119,18 +124,22 @@ const HANDLERS = {
     const { c, message } = env, d = mem.currentDraft(c);
     if (!d) return { handled: false }; // nothing of mine to send: "send it" may mean something else (a picture, a card), so the existing path decides
     let channel = message.channel;
-    if (k.target.other) return asked(c, k, "channel", "Which channel should I send it to?");
+    if (k.target.other || k.target.dangling) return asked(c, k, "channel", "Which channel should I send it to?");
+    if (k.target.channels?.length) { const outs = []; for (const n of k.target.channels) { const r = await HANDLERS["draft.send"]({ ...env, picked: undefined }, { ...k, target: { channel: n } }); outs.push(r); if (r.ok === false || c.pending) break; } return posts(outs.flatMap(o => [o.say ? plain(o.say) : null, ...(o.posts ?? [])]), { ok: outs.every(o => o.ok !== false), k }); }
+    if (k.target.sameAsBefore) { const ids = [...new Set(d.sent.map(s => s.channelId))]; if (ids.length === 1) env = { ...env, picked: { ...env.picked, channelId: ids[0] } }; else return asked(c, k, "channel", ids.length ? `Which one? I sent it to ${d.sent.map(s => `#${s.channelName}`).filter((x, i, a) => a.indexOf(x) === i).join(" and ")} before.` : "I haven't sent it anywhere yet. Which channel?"); }
     const picked = env.picked?.channelId; const named = picked ?? k.target.channel;
     if (named) { const r = channelFor(env, k, picked ? `<#${picked}>` : named); if (r.reply) return r.reply; channel = r.channel; }
     if (!sendable(channel)) return say(`I can't post messages in ${channel}. Tell me a text channel.`, { ok: false });
     const earlier = d.sent.find(s => s.channelId === channel.id);
     const key = `send:${d.id}:v${d.version}:${channel.id}`;
+    const flying = mem.findOp(key, { since: Date.now() - 60_000 });
+    if (flying && flying.ok === null) return say("I'm already sending that one.", { ok: true });
     const done = mem.findOp(key, { ok: true });
     if (done || d.sent.some(s => s.channelId === channel.id && s.version === d.version)) { const s = d.sent.find(x => x.channelId === channel.id && x.version === d.version) ?? {}; return say(`That version is already posted in ${channel}${s.url ? `: ${s.url}` : ""}. I didn't send it twice. Want it in another channel, or should I edit that message?`, { ok: true }); }
     if (earlier && !env.picked?.choice) return asked(c, k, "choice", `I already posted an earlier version of this in ${channel}. Should I **edit** that message or post this as a **new** one?`, { options: ["edit", "new"] });
     if (env.picked?.choice === "edit" && earlier) return doEdit(env, k, d, earlier);
     const op = mem.recordOp({ key, guild: message.guild.id, user: env.uid, action: "message_send", ok: null, channelId: channel.id });
-    const r = await callTool(env, "message_send", { text: d.text, title: d.title, key: key.replace(/[^a-z0-9]/gi, "").slice(-24) }, { channel, primary: "draft.send" });
+    const r = await callTool(env, "message_send", { text: d.text, title: d.title, key: key.replace(/[^a-z0-9]/gi, "").slice(-24), allowEveryone: /(^|\s)@(everyone|here)\b|\bping (everyone|the server)|\bnotify everyone/i.test(env.text) }, { channel, primary: "draft.send" });
     mem.updateOp(op.id, { ok: !!r.outcome.ok, error: r.outcome.error, ids: r.result.id });
     if (!r.outcome.ok) return posts([r.post], { ok: false });
     mem.markDraftSent(c, d, { channelId: channel.id, channelName: channel.name, messageId: r.result.id, url: r.result.url });
@@ -169,6 +178,7 @@ const HANDLERS = {
     if (!names.length) return asked(c, k, "name", k.clarify ?? "What should the channel be called?");
     const lines = [], out = [];
     for (const n of names) { const r = await createOne(env, { ...k, params: { ...k.params, name: n, names: undefined, count: null } }); if (r.reply) return r.reply; out.push(r); }
+    if (out.length > 1) mem.setList(c, "channels", c.entities.channels.slice(0, out.length).reverse().map(e => ({ id: e.id, label: e.name })), { batch: true });
     return out.length === 1 ? out[0] : posts(out.flatMap(o => o.posts ?? []), { ok: out.every(o => o.ok), k });
   },
   async "role.create"(env, k) {
@@ -191,8 +201,11 @@ const HANDLERS = {
     const mode = k.params.access ?? "private";
     let post, ok = false;
     if (mode === "private" && !roles.length) { // nobody named: hidden from everyone but administrators
+      const lacks = userMissing(message, [P.ManageChannels, P.ManageRoles]);
+      if (lacks.length) return posts([plain(`You don't have the Discord permission for that (${lacks.join(", ")}), so I can't change who sees ${channel}.`)], { ok: false });
       const { moderate } = await import("../mod.js");
       post = await moderate(message, { action: "hide", channel: channel.id, target: "everyone" }, env.config); ok = !channel.permissionsFor(guild.roles.everyone)?.has("ViewChannel");
+      mem.recordOp({ guild: guild.id, user: env.uid, action: "channel_access", ok, ids: channel.id });
       if (ok) post = plain(`🔒 ${channel} is private now: @everyone can't see it (administrators still can). To let a role in, say "give access to <role>". Verified.`);
       else post = plain(`I changed ${channel}'s permissions but couldn't confirm that @everyone lost access (a category or role setting may override it).`);
     } else {
@@ -206,7 +219,22 @@ const HANDLERS = {
   async "role.assign"(env, k) { return roleChange(env, k, false); },
   async "role.remove"(env, k) { return roleChange(env, k, true); },
 
-  async "compound.setup"(env, k) { return runPlan(env, k); },
+  async "compound.setup"(env, k) { return k.multi ? runMulti(env, k) : runPlan(env, k); },
+
+  async "draft.show"(env) { const d = mem.currentDraft(env.c); return d ? posts([showDraft(d)], { ok: true }) : say("There's no draft yet.", { ok: false }); },
+  async "draft.restore"(env, k) {
+    const d = mem.currentDraft(env.c); if (!d) return say("There's no draft to go back in.", { ok: false });
+    const r = mem.restoreDraft(env.c, d, k.params.which);
+    if (!r) return say(k.params.which === "approved" ? "You haven't approved a version of this draft yet, so I don't know which to go back to." : "There's no earlier version to go back to.", { ok: false });
+    return posts([showDraft(r, `Back to the ${k.params.which} version.`)], { ok: true });
+  },
+  async "context.resume"(env) {
+    const p = env.c.parked ?? env.c.pending;
+    if (!p) { const d = mem.currentDraft(env.c); return d ? posts([showDraft(d, "This is where we stopped.")], { ok: true }) : say("Nothing was left unfinished in this conversation.", { ok: false }); }
+    env.c.parked = null; mem.setPending(env.c, p); return { ...say(p.ask ?? "Where were we? Tell me what's missing.", { ok: true }), resumed: p.k };
+  },
+  async "channel.rename"(env, k) { return channelEdit(env, k, "rename"); },
+  async "channel.delete"(env, k) { return channelEdit(env, k, "delete"); },
 
   async "memory.remember"(env, k) {
     const r = mem.setPref(env.uid, k.params.text);
@@ -251,6 +279,7 @@ function messageTarget(env, which) {
   const { c } = env, k = env.k;
   const mine = c.entities.messages.filter(fresh);
   if (env.picked?.messageId) { const it = c.entities.messages.find(m => m.id === env.picked.messageId); if (it) return { item: it }; }
+  if (k.params?.which === "in") { const want = String(k.params.channel ?? "").toLowerCase().replace(/[^a-z0-9]/g, ""); const hit = mine.find(m => String(m.channelName ?? "").toLowerCase().replace(/[^a-z0-9]/g, "").includes(want)); return hit ? { item: hit } : { reply: say(`I haven't sent anything in #${k.params.channel} that I could delete.`, { ok: false }) }; }
   if (which === "previous") { if (mine.length >= 2) return { item: mine[1] }; return { reply: mine.length ? say("That's the only message I've sent in this conversation, so there's no earlier one. Did you mean that one?", { ok: false }) : { handled: false } }; }
   const f = c.focus?.type === "message" && fresh(c.focus) && c.focus.items.length === 1 ? c.focus.items[0] : null;
   if (which === "last" && mine[0]) return { item: mine[0] };
@@ -293,6 +322,7 @@ async function roleChange(env, k, remove) {
   const rr = resolveRole(find, env.picked?.role ?? k.target.role, c);
   if (rr.none) return asked(c, k, "role", `Which role should I ${remove ? "remove" : "give"}?`);
   if (!rr.role) return say(`I couldn't find ${rr.named ? `a role called "${rr.named}"` : "that role"}. Name it again, or ask me to create it.`, { ok: false });
+  if (rr.named) { const k1 = String(rr.named).toLowerCase().replace(/[^a-z0-9]/g, ""), k2 = rr.role.name.toLowerCase().replace(/[^a-z0-9]/g, ""); if (k2 !== k1 && k2 !== k1.replace(/s$/, "")) return say(`I found **${rr.role.name}**, which isn't exactly "${rr.named}". Say the exact role name so I never hand out the wrong one.`, { ok: false }); }
   const who = env.picked?.user ?? k.target.user;
   if (!who) return asked(c, k, "user", `Who should ${remove ? "lose" : "get"} **${rr.role.name}**?`);
   const m = resolveMember(who, c, message);
@@ -308,6 +338,49 @@ async function roleChange(env, k, remove) {
   record(env, "role_assign", r, { targetId: m.id });
   if (r.outcome.ok) { absorb(c, r); mem.noteEntity(c, "members", { id: m.id, name }); mem.noteEntity(c, "roles", { id: rr.role.id, name: rr.role.name }); c.lastIntent = k; }
   return posts([r.post], { ok: !!r.outcome.ok, k });
+}
+
+/** Renames or deletes a channel the owner pointed at: by position in the last batch ("the second one"), or the one just made or discussed. */
+async function channelEdit(env, k, what) {
+  const { c, message } = env, guild = message.guild;
+  let channel = null;
+  if (k.target.ordinal != null && c.list?.kind === "channels") { const p = pickFromList(c.list, `${k.target.ordinal + 1 === 0 ? "last" : ["first", "second", "third", "fourth", "fifth"][k.target.ordinal] ?? "number " + (k.target.ordinal + 1)}`); if (p.item) channel = guild.channels.cache.get(p.item.id); }
+  else if (k.target.channel) { const r = channelFor(env, k, k.target.channel); if (r.reply) return r.reply; channel = r.channel; }
+  else { const f = c.focus?.type === "channel" || c.focus?.type === "category" ? c.focus.items[0] : c.entities.channels.find(fresh); channel = f ? guild.channels.cache.get(f.id) : null; }
+  if (!channel) return asked(c, k, "channel", k.target.ordinal != null ? "I don't have a list of channels to pick from. Which channel do you mean?" : "Which channel do you mean?");
+  const { moderate } = await import("../mod.js");
+  if (what === "rename") {
+    const name = env.picked?.name ?? k.params.name;
+    if (!name) return asked(c, { ...k, target: { ...k.target, ordinal: null, channel: channel.id } }, "name", `What should ${channel} be renamed to?`);
+    const clean = String(name).toLowerCase().replace(/[^a-z0-9_-]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 90) || String(name).slice(0, 90);
+    const post = await moderate(message, { action: "rename_channel", channel: channel.id, name: isCat(channel) ? String(name).slice(0, 90) : clean }, env.config);
+    const back = await guild.channels.fetch(channel.id).catch(() => null), ok = !!back && back.name === (isCat(channel) ? String(name).slice(0, 90) : clean);
+    mem.recordOp({ guild: guild.id, user: env.uid, action: "rename_channel", ok, ids: channel.id });
+    if (ok) { mem.noteEntity(c, "channels", { id: channel.id, name: back.name, kind: isCat(channel) ? "category" : "text" }); mem.setFocus(c, isCat(channel) ? "category" : "channel", { id: channel.id, name: back.name }, "renamed"); c.lastIntent = k; }
+    return posts([ok ? post : plain("I tried to rename it but Discord didn't apply the change, so nothing is confirmed as renamed.")], { ok, k });
+  }
+  const id = channel.id, post = await moderate(message, { action: "delete_channel", channel: id }, env.config);
+  const gone = !(await guild.channels.fetch(id).catch(() => null));
+  mem.recordOp({ guild: guild.id, user: env.uid, action: "delete_channel", ok: gone, ids: id });
+  if (gone) { c.entities.channels = c.entities.channels.filter(e => e.id !== id); c.focus = null; c.lastIntent = k; }
+  return posts([post], { ok: gone, k });
+}
+
+/** Runs each clause of a multi-instruction message in order, classifying each with what the earlier ones produced; a failed or unanswered clause stops the rest. */
+async function runMulti(env, k) {
+  const { c, message } = env, out = []; let ok = true, ran = 0;
+  for (const part of k.params.clauses) {
+    const ctx = { convo: c, roleNames: rolesOf(message.guild), draft: mem.currentDraft(c), channelNames: channelNamesOf(message.guild), noMulti: true };
+    let kk = classify(part, ctx);
+    if (kk.primary === "unknown" && k.params.verb) kk = classify(`${k.params.verb} ${part}`, ctx);
+    if (kk.primary === "unknown") { out.push(plain(`I couldn't tell what "${clip(part, 50)}" should do, so I stopped there.`)); ok = false; break; }
+    const r = await run(kk, { ...env, text: part, picked: undefined });
+    if (r.handled === false) { out.push(plain(`I stopped at "${clip(part, 50)}": that one isn't something I can do from here.`)); ok = false; break; }
+    ran++;
+    if (r.say) out.push(plain(r.say)); out.push(...(r.posts ?? []));
+    if (r.ok === false || c.pending) { ok = r.ok !== false; if (r.ok === false && ran < k.params.clauses.length) out.push(plain("I stopped there, so the rest wasn't done.")); break; }
+  }
+  return posts(out, { ok, k });
 }
 
 /**
@@ -340,10 +413,10 @@ async function runPlan(env, k) {
 
 /* ─────────────────────────── the pipeline ─────────────────────────── */
 async function run(k, env) {
-  const h = HANDLERS[k.primary];
+  const h = k.multi ? HANDLERS["compound.setup"] : HANDLERS[k.primary];
   if (!h) return { handled: false };
   env.k = k;
-  try { const out = await h(env, k); return out.handled === false ? out : { ...out, k }; } // every answer carries the intent it was for
+  try { const out = await h(env, k); return out.handled === false ? out : { ...out, k: out.resumed ?? k }; } // every answer carries the intent it was for
   catch (e) { console.warn("brain:", k.primary, e?.message ?? e); return say(`I couldn't complete that, so nothing is confirmed as changed (${clip(e?.message ?? e, 120)}).`, { ok: false, k }); }
 }
 
@@ -355,7 +428,7 @@ async function answerPending(env) {
   if (p.yes) { mem.takePending(c); return /^(y|yes|yeah|yep|sure|ok|okay|do it|go)\b/.test(t) ? run(p.k, { ...env, picked: { again: true } }) : say("Okay, I won't.", { ok: true }); }
   const looksNew = /^(show|list|who|how|what|create|make|add|send|delete|remove|give|pin|find|write|draft|set|remember|forget|do|repeat|invite)\b/.test(t);
   const other = classify(text, { convo: c, roleNames: rolesOf(env.message.guild), draft: mem.currentDraft(c) });
-  if (other.primary !== "unknown" && (looksNew || t.split(" ").length > 6)) { mem.takePending(c); return null; } // a new request, not an answer
+  if (other.primary !== "unknown" && (looksNew || t.split(" ").length > 6)) { c.parked = p; mem.takePending(c); return null; } // a new request, not an answer: the unfinished question is kept so "continue where we stopped" can resume it
   mem.takePending(c);
   const k = structuredClone(p.k), field = p.field, raw = String(text).trim().replace(/[.!]+$/, "");
   const picked = {};
@@ -380,16 +453,17 @@ async function answerPending(env) {
  * Handles one owner message. Returns { handled: true, say? | posts? } when the assistant owns it and has answered, or
  * { handled: false, context } for the language model path (with the retrieved conversation context to give it).
  */
-export async function handle(message, text, config, deps = {}) {
+async function handleNow(message, text, config, deps = {}) {
   const guild = message.guild; if (!guild) return { handled: false, context: "" };
   const uid = message.author.id, c = mem.getConvo(mem.convoKey(message));
   const env = { message, text, config, c, uid, resolveMember: deps.resolveMember };
   mem.addTurn(c, "user", text);
   let out = c.pending ? await answerPending(env) : null;
   if (!out) {
-    const k = classify(text, { convo: c, roleNames: rolesOf(guild), draft: mem.currentDraft(c) });
+    const k = classify(text, { convo: c, roleNames: rolesOf(guild), draft: mem.currentDraft(c), channelNames: channelNamesOf(guild) });
     if (k.primary === "unknown") return { handled: false, context: mem.contextBlock(c, uid, text), classified: k };
     if (k.correction && c.lastIntent) mem.addCorrection(c, { phrase: normalize(lastUserBefore(c)), wrong: c.lastIntent.primary, right: { primary: k.primary, action: k.action, params: k.params, target: k.target }, text });
+    if (k.primary === "memory.remember") { const last = c.turns.at(-1); if (last?.role === "user") last.text = "(asked me to remember a preference)"; } // saved notes are never replayed as conversation text
     out = await run(k, env);
     if (out.handled && k.correction && out.ok && out.posts?.length) out.posts = [plain(`Understood, you meant ${k.primary.replace(".", " ")}. Here it is:`), ...out.posts];
   }
@@ -397,6 +471,16 @@ export async function handle(message, text, config, deps = {}) {
   mem.addTurn(c, "assistant", out.say ?? (out.ok === false ? "(that did not work)" : `(did: ${out.k?.primary ?? "it"})`));
   mem.touch(c);
   return out;
+}
+
+/** One message at a time per person: replies stay paired with their questions and a repeated command can't race itself. */
+const chains = new Map();
+export function handle(message, text, config, deps = {}) {
+  const key = mem.convoKey(message), prev = chains.get(key) ?? Promise.resolve();
+  const next = prev.catch(() => {}).then(() => handleNow(message, text, config, deps));
+  chains.set(key, next);
+  next.finally(() => { if (chains.get(key) === next) chains.delete(key); }).catch(() => {});
+  return next;
 }
 
 /** After the language-model path ran something, remembers what it was (so "do that again", "it" and corrections still work). */
@@ -416,17 +500,41 @@ export const noteAssistantText = (message, text) => { try { mem.addTurn(mem.getC
 export const contextFor = (message, text) => message.guild ? mem.contextBlock(mem.getConvo(mem.convoKey(message)), message.author.id, text) : "";
 
 /**
- * Guards a call the language model chose: the action must exist, the intent the classifier would have given must agree with the tool
- * (a model that answers "members" with a server overview is overruled), and references in its arguments ("it", "the second one", "here")
- * are resolved from the state. Returns { call } to run, or { say } to answer instead.
+ * Guards a call the language model chose. The model's text can be steered by whatever it read (other people's messages, a pasted document),
+ * so its choice is never trusted on its own:
+ *  - the action must exist (own properties only) and, when the classifier knows the intent, must be a tool that may answer it;
+ *  - a risky or changing action needs words in the OWNER's message that actually ask for it (an unrelated message can't trigger a purge);
+ *  - the assistant's own safety settings are never changed from a model's choice, only from a direct command;
+ *  - @everyone/@here in text it wrote is made harmless unless the owner's message asked for a ping;
+ *  - references in its arguments ("it", "the second one", "here") are resolved from the state.
+ * Returns { call } to run, or { say } to answer instead.
  */
+const STEMS = {
+  purge: ["delet", "clear", "purg", "clean", "remov", "wipe"], lock: ["lock", "freez", "silenc"], unlock: ["unlock", "open", "unfreez"],
+  set_permission: ["permission", "allow", "deny", "let ", "view", "see", "send", "access", "block"], permission: ["permission", "allow", "deny", "access"], permissions: ["permission", "allow", "deny", "access"],
+  hide: ["hide", "hidden", "private", "invisible", "see"], unhide: ["unhide", "show", "visible", "reveal"], delete_channel: ["delet", "remov"], nickname: ["nick", "rename", "call "],
+  dm: ["dm", "message", "tell", "pm", "private"], say: ["say", "post", "write", "announc", "tell", "send", "type"], announce: ["announc", "post", "send", "tell"], announce_rich: ["announc", "post", "send", "tell"],
+  slowmode: ["slow"], role_delete: ["delet", "remov"], delete_role: ["delet", "remov"], kick: ["kick", "remov"], ban: ["ban"], tempban: ["ban"], unban: ["unban"], timeout: ["timeout", "mute", "silenc", "time out"], untimeout: ["unmute", "untimeout", "timeout"],
+  move_channel: ["move", "put"], clone_channel: ["clone", "copy", "duplicat"], rename_channel: ["rename", "call ", "name"], role_edit: ["edit", "change", "colo", "rename", "permission"], edit_role: ["edit", "change", "colo", "rename", "permission"],
+  voice_mute: ["mute"], voice_unmute: ["unmute"], voice_disconnect: ["disconnect", "kick", "remov"], voice_move: ["move"], warn: ["warn"], channel_reorder: ["move", "reorder", "position"],
+  event_cancel: ["cancel", "delet", "remov"], invite_revoke: ["revoke", "delet", "remov", "cancel", "disable"], message_remove: ["delet", "remov"], message_delete: ["delet", "remov"],
+};
+const SAFE_READS = new Set(["server_overview", "server_info", "member_list", "member_count", "member_online", "member_info", "role_list", "role_info", "role_members", "channel_list", "channel_info", "event_list", "invite_list", "mod_log", "mod_history", "read_messages", "recent_messages", "permission_audit", "role_audit", "scan_spam", "summarize_channel", "whois"]);
 export function guard(message, text, call) {
   const c = mem.getConvo(mem.convoKey(message)), action = String(call.action ?? "").toLowerCase();
   const k = classify(text, { convo: c, roleNames: message.guild ? rolesOf(message.guild) : [], draft: mem.currentDraft(c) });
-  if (k.primary !== "unknown" && !toolAllowed(k.primary, action) && k.action && k.action !== "plan") return { overruled: { from: action, to: k.action, primary: k.primary }, call: { ...call, action: k.action, ...(k.params?.role ? { role: k.params.role } : {}) } };
-  const v = validate(action, call);
-  if (!v.ok && /unknown action/.test(v.errors[0])) return { say: `I tried to run "${action}", which isn't something I can do. Tell me again what you want and I'll pick the right action.` };
-  const out = { ...call };
+  if (!knownAction(action)) return { say: `I tried to run "${String(action).slice(0, 40)}", which isn't something I can do. Tell me again what you want and I'll pick the right action.` };
+  if (k.primary !== "unknown" && !toolAllowed(k.primary, action)) {
+    if (k.action && k.action !== "plan" && Object.hasOwn(TOOLS, k.action)) return { overruled: { from: action, to: k.action, primary: k.primary }, call: { ...call, action: k.action, ...(k.params?.role ? { role: k.params.role } : {}) } };
+    return { say: "I understood that as something I handle myself, not a server action, so I didn't run anything." };
+  }
+  if (action === "ai_control" && !/^(status|)$/.test(String(call.op ?? "status").toLowerCase())) return { say: "I only change my own safety settings from a direct command (for example \"disable invites tools\"), never from my own guess, so I left them alone." };
+  if (!SAFE_READS.has(action) && k.primary === "unknown") {
+    const stems = STEMS[action] ?? [action.split("_")[0]], said = " " + String(text).toLowerCase() + " ";
+    if (!stems.some(w => said.includes(w))) return { say: `I wasn't sure you asked me to do that (${action.replace(/_/g, " ")}), so I did nothing. Tell me plainly what you'd like.` };
+  }
+  const out = { ...call }, wanted = /@everyone|@here|\bping (everyone|the server)|\bnotify everyone/i.test(String(text));
+  for (const f of ["text", "title", "reason"]) if (typeof out[f] === "string" && !wanted) out[f] = out[f].replace(/@(everyone|here)/gi, "@\u200b$1");
   if (/^(here|this channel)$/i.test(String(out.channel ?? ""))) delete out.channel;
   const f = c.focus;
   if (/^(it|that|this)$/i.test(String(out.channel ?? "")) && (f?.type === "channel" || f?.type === "category")) out.channel = f.items[0].id;

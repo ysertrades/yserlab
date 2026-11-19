@@ -1,4 +1,4 @@
-﻿import { env } from "./env.js";
+import { env } from "./env.js";
 import { fonts, svgToPng } from "./render.js";
 import { Index, recall } from "./knowledge.js";
 import { modelFor } from "./ai.js";
@@ -372,7 +372,7 @@ const conceptBrief = c => [`${c.name}${asList(c.timeframes).length ? ` [${c.time
 /** A concept from the owner's PDFs as a slide of words: what to look for, then its steps. */
 export function conceptSlide(c) {
   const steps = asList(c.steps).map(s => String(s).replace(/^\s*\d+[.)]\s*/, "")).slice(0, 6).map((s, i) => `${i + 1}. ${s}`);
-  return { title: String(c.name).slice(0, 60), subtitle: String(c.look_for ?? "").slice(0, 105), lines: steps.length ? steps : asList(c.must).slice(0, 6), assumed: "From your PDFs." };
+  return { title: String(c.name).slice(0, 60), subtitle: String(c.look_for ?? "").slice(0, 105), lines: steps.length ? steps : asList(c.must).slice(0, 6), assumed: "" };
 }
 
 function systemFor(request, doc, lessons, concept = null) {
@@ -579,7 +579,7 @@ let templateIndex = null;
 export function nearest(request, n = 3) {
   templateIndex ??= new Index(TEMPLATES.map(t => ({ h: t.name, t: `${t.name}. ${t.about}`, id: t.id, name: t.name })));
   const names = templateIndex.search(request, n).map(h => h.chunk.name);
-  for (const m of matchDrawings(request, 6)) if (!names.includes(m.drawing.pdf) && names.length < n + 2) names.push(m.drawing.pdf + " (your PDF)");
+  for (const m of matchDrawings(request, 6)) if (!names.includes(m.drawing.pdf) && names.length < n + 2) names.push(m.drawing.pdf + " (from your model)");
   return names;
 }
 const clarifyText = request => {

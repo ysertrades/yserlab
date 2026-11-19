@@ -58,6 +58,8 @@ export function makeWorld({ botFlags = [P.Administrator], memberCount = null, me
       get parent() { return parentId ? guild.channels.cache.get(parentId) : null; },
       isSendable: () => type !== ChannelType.GuildCategory && type !== ChannelType.GuildVoice,
       toString: () => `<#${id}>`,
+      setName: async n => { ch.name = n; mut("rename_channel", `${id}->${n}`); },
+      delete: async () => { guild.channels.cache.delete(id); mut("delete_channel", id); },
       setParent: async p => { ch.parentId = p; parentId = p; },
       permissionsFor(target) {
         const tid = target?.id ?? target;

@@ -75,7 +75,7 @@ async function runLater(job) {
   const guild = await client.guilds.fetch(job.guildId).catch(() => null);
   const channel = await client.channels.fetch(job.channelId).catch(() => null);
   if (!guild || !channel) return null;
-  const ctx = { client, guild, channel, channelId: channel.id, guildId: guild.id, id: undefined, author: { id: job.ownerId, tag: "the schedule" }, reference: null, mentions: { users: new Map(), channels: { first: () => null, values: () => [] } } };
+  const ctx = { __scheduled: true, client, guild, channel, channelId: channel.id, guildId: guild.id, id: undefined, author: { id: job.ownerId, tag: "the schedule" }, reference: null, mentions: { users: new Map(), channels: { first: () => null, values: () => [] } } };
   const post = job.kind === "mod" ? await moderate(ctx, job.args, config) : await sendFromApp(ctx, job.args, { owner, config });
   await log(job.kind === "mod" ? "mod" : "send", { note: "scheduled: " + JSON.stringify(job.args).slice(0, 160) });
   return job.kind === "mod" ? post : null; // a moderation action says what it did; a send already is the post
@@ -195,19 +195,19 @@ client.on(Events.MessageCreate, async message => {  try {
         if (out.count > 1) { // several images: a lesson in slides, one post, in order
           const { images, lessons } = await designSlides(out.diagram, { doc, count: out.count });
           const from = lessons.slice(0, 2).map(l => l.title.replace(/TTrades\s*/gi, "")).join(" · ");
-          await message.reply({ ...galleryPost({ images, text: `**${images.map(i => i.spec.title).filter(Boolean)[0]?.slice(0, 60) ?? "Slides"}** · ${images.length} slides`, footer: from ? `From: ${from}` : undefined }), allowedMentions: { repliedUser: false } });
-          await log("diagram", { note: `${images.length} slides: ${out.diagram.slice(0, 100)}` });
+          await message.reply({ ...galleryPost({ images, text: `**${images.map(i => i.spec.title).filter(Boolean)[0]?.slice(0, 60) ?? "Slides"}** · ${images.length} slides` }), allowedMentions: { repliedUser: false } });
+          await log("diagram", { sources: from, note: `${images.length} slides: ${out.diagram.slice(0, 100)}` });
           return;
         }
         const { png, spec, lessons, more } = await designDiagram(isGenericSs(text) ? text : out.diagram, { doc, said: text });
         if (more?.length) { // a whole PDF was asked for: its pages, in order, in one post
-          await message.reply({ ...galleryPost({ images: [{ png }, ...more], text: `**${String(spec.title).slice(0, 60)}** · from your PDF` }), allowedMentions: { repliedUser: false } });
+          await message.reply({ ...galleryPost({ images: [{ png }, ...more], text: `**${String(spec.title).slice(0, 60)}** · ${1 + more.length} pages` }), allowedMentions: { repliedUser: false } });
           await log("diagram", { note: `${spec.title}: ${1 + more.length} pages from the PDF` });
           return;
         }
         const from = lessons.slice(0, 2).map(l => l.title.replace(/TTrades\s*/gi, "")).join(" · ");
-        await message.reply({ ...picturePost({ png, name: "diagram.png", text: spec.title ? `**${String(spec.title).slice(0, 80)}**` : undefined, footer: from ? `From: ${from}` : undefined }), allowedMentions: { repliedUser: false } });
-        await log("diagram", { note: out.diagram.slice(0, 120) });
+        await message.reply({ ...picturePost({ png, name: "diagram.png", text: spec.title ? `**${String(spec.title).slice(0, 80)}**` : undefined }), allowedMentions: { repliedUser: false } });
+        await log("diagram", { sources: from, note: out.diagram.slice(0, 120) });
       } catch (e) {
         if (e instanceof Clarify) { await message.reply({ content: e.message, allowedMentions: { repliedUser: false } }); return; } // not understood: ask, don't guess
         await log("diagram", { error: e?.message ?? String(e) }, false);

@@ -12,7 +12,9 @@
   "scripts": {
     "start": "node src/index.js",
     "test": "node --test",
-    "eval": "node eval/run.js"
+    "eval": "node eval/run.js",
+    "eval:scenarios": "node eval/run-scenarios.js",
+    "eval:perf": "node eval/perf.js"
   },
   "dependencies": {
     "@napi-rs/canvas": "^0.1.80",
@@ -29,3 +31,4 @@
     "youtube-transcript": "^1.3.1"
   }
 }
+

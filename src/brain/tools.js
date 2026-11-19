@@ -139,12 +139,15 @@ Object.assign(TOOLS, {
   message_send: {
     cap: "messages", risk: "low", user: [P.SendMessages], bot: [P.SendMessages], aliases: ["send_draft", "post_message"],
     // Idempotent: the same key sends once. If Discord times out, the channel is read before anything is sent again.
-    async run({ guild, channel, args, me, result }) {
+    async run({ guild, channel, args, me, result, message }) {
       const text = String(args.text ?? "").trim(); if (!text) throw friendly("no text", "There is nothing to send yet.");
       if (!channel?.isSendable?.()) throw friendly("no channel", "I can't post in that channel.");
-      const all = /(^|[\s>*_~(])@(everyone|here)\b/i.test(text);
-      const post = panel({ title: args.title ? String(args.title).slice(0, 200) : undefined, lines: [text.slice(0, 3600)], pings: [...text.matchAll(/<@!?(\d{15,})>/g)].map(m => m[1]) });
-      if (all) post.allowedMentions = { parse: ["everyone"], users: post.allowedMentions.users };
+      const rp = message.member && channel.permissionsFor?.(message.member); // the requester must themselves be able to see and write in the target channel
+      if (message.member && rp && !(rp.has(P.ViewChannel) && rp.has(P.SendMessages))) throw friendly("requester", `You can't see or write in ${channel}, so I won't post there for you.`);
+      // A ping only happens when the owner's own request asked for it; text written by a model, a saved note or someone else's words never notifies anyone.
+      const body = args.allowEveryone ? text : text.replace(/@(everyone|here)/gi, "@\u200b$1");
+      const post = panel({ title: args.title ? String(args.title).slice(0, 200) : undefined, lines: [body.slice(0, 3600)], pings: [] });
+      if (args.allowEveryone && /(^|[\s>*_~(])@(everyone|here)\b/i.test(text)) post.allowedMentions = { parse: ["everyone"], users: [] };
       const nonce = String(args.key ?? Math.random().toString(36).slice(2)).slice(0, 25);
       let sent = null, failure = null;
       try { sent = await withTimeout(channel.send({ ...post, nonce, enforceNonce: true }), 15_000); } catch (e) { failure = e; }

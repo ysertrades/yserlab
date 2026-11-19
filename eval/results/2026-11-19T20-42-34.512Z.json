@@ -1,0 +1,2511 @@
+{
+  "timestamp": "2026-11-19T20:42:34.512Z",
+  "filter": {},
+  "scenarios": 245,
+  "passed": 158,
+  "overall": {
+    "intent": {
+      "ok": 180,
+      "n": 244,
+      "rate": 0.7377049180327869
+    },
+    "tool": {
+      "ok": 197,
+      "n": 245,
+      "rate": 0.8040816326530612
+    },
+    "args": {
+      "ok": 67,
+      "n": 104,
+      "rate": 0.6442307692307693
+    },
+    "ref": {
+      "ok": 29,
+      "n": 58,
+      "rate": 0.5
+    },
+    "unnecessary": {
+      "ok": 3,
+      "n": 218,
+      "rate": 0.013761467889908258
+    },
+    "missing": {
+      "ok": 10,
+      "n": 27,
+      "rate": 0.37037037037037035
+    },
+    "confirm": {
+      "ok": 78,
+      "n": 84,
+      "rate": 0.9285714285714286
+    },
+    "exec": {
+      "ok": 65,
+      "n": 108,
+      "rate": 0.6018518518518519
+    },
+    "unintended": {
+      "ok": 3,
+      "n": 243,
+      "rate": 0.012345679012345678
+    },
+    "scenario": {
+      "ok": 158,
+      "n": 245,
+      "rate": 0.6448979591836734
+    }
+  },
+  "categories": {
+    "members": {
+      "n": 43,
+      "intent": {
+        "ok": 33,
+        "n": 43,
+        "rate": 0.7674418604651163
+      },
+      "tool": {
+        "ok": 34,
+        "n": 43,
+        "rate": 0.7906976744186046
+      },
+      "args": {
+        "ok": 11,
+        "n": 15,
+        "rate": 0.7333333333333333
+      },
+      "ref": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 43,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "exec": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 43,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 32,
+        "n": 43,
+        "rate": 0.7441860465116279
+      }
+    },
+    "drafts": {
+      "n": 49,
+      "intent": {
+        "ok": 40,
+        "n": 49,
+        "rate": 0.8163265306122449
+      },
+      "tool": {
+        "ok": 45,
+        "n": 49,
+        "rate": 0.9183673469387755
+      },
+      "args": {
+        "ok": 21,
+        "n": 28,
+        "rate": 0.75
+      },
+      "ref": {
+        "ok": 1,
+        "n": 2,
+        "rate": 0.5
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 46,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 3,
+        "rate": 0
+      },
+      "confirm": {
+        "ok": 23,
+        "n": 24,
+        "rate": 0.9583333333333334
+      },
+      "exec": {
+        "ok": 22,
+        "n": 27,
+        "rate": 0.8148148148148148
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 49,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 39,
+        "n": 49,
+        "rate": 0.7959183673469388
+      }
+    },
+    "creation": {
+      "n": 31,
+      "intent": {
+        "ok": 26,
+        "n": 30,
+        "rate": 0.8666666666666667
+      },
+      "tool": {
+        "ok": 27,
+        "n": 31,
+        "rate": 0.8709677419354839
+      },
+      "args": {
+        "ok": 18,
+        "n": 22,
+        "rate": 0.8181818181818182
+      },
+      "ref": {
+        "ok": 7,
+        "n": 10,
+        "rate": 0.7
+      },
+      "unnecessary": {
+        "ok": 1,
+        "n": 26,
+        "rate": 0.038461538461538464
+      },
+      "missing": {
+        "ok": 1,
+        "n": 5,
+        "rate": 0.2
+      },
+      "confirm": {
+        "ok": 20,
+        "n": 20,
+        "rate": 1
+      },
+      "exec": {
+        "ok": 19,
+        "n": 23,
+        "rate": 0.8260869565217391
+      },
+      "unintended": {
+        "ok": 2,
+        "n": 31,
+        "rate": 0.06451612903225806
+      },
+      "scenario": {
+        "ok": 24,
+        "n": 31,
+        "rate": 0.7741935483870968
+      }
+    },
+    "refs": {
+      "n": 31,
+      "intent": {
+        "ok": 15,
+        "n": 31,
+        "rate": 0.4838709677419355
+      },
+      "tool": {
+        "ok": 19,
+        "n": 31,
+        "rate": 0.6129032258064516
+      },
+      "args": {
+        "ok": 2,
+        "n": 12,
+        "rate": 0.16666666666666666
+      },
+      "ref": {
+        "ok": 11,
+        "n": 31,
+        "rate": 0.3548387096774194
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 27,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 3,
+        "n": 4,
+        "rate": 0.75
+      },
+      "confirm": {
+        "ok": 13,
+        "n": 17,
+        "rate": 0.7647058823529411
+      },
+      "exec": {
+        "ok": 8,
+        "n": 24,
+        "rate": 0.3333333333333333
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 29,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 11,
+        "n": 31,
+        "rate": 0.3548387096774194
+      }
+    },
+    "corrections": {
+      "n": 15,
+      "intent": {
+        "ok": 6,
+        "n": 15,
+        "rate": 0.4
+      },
+      "tool": {
+        "ok": 5,
+        "n": 15,
+        "rate": 0.3333333333333333
+      },
+      "args": {
+        "ok": 3,
+        "n": 7,
+        "rate": 0.42857142857142855
+      },
+      "ref": {
+        "ok": 1,
+        "n": 4,
+        "rate": 0.25
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 15,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 4,
+        "n": 4,
+        "rate": 1
+      },
+      "exec": {
+        "ok": 2,
+        "n": 5,
+        "rate": 0.4
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 15,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 5,
+        "n": 15,
+        "rate": 0.3333333333333333
+      }
+    },
+    "multi": {
+      "n": 15,
+      "intent": {
+        "ok": 11,
+        "n": 15,
+        "rate": 0.7333333333333333
+      },
+      "tool": {
+        "ok": 10,
+        "n": 15,
+        "rate": 0.6666666666666666
+      },
+      "args": {
+        "ok": 2,
+        "n": 6,
+        "rate": 0.3333333333333333
+      },
+      "ref": {
+        "ok": 1,
+        "n": 1,
+        "rate": 1
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 15,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 10,
+        "n": 11,
+        "rate": 0.9090909090909091
+      },
+      "exec": {
+        "ok": 1,
+        "n": 12,
+        "rate": 0.08333333333333333
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 15,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 1,
+        "n": 15,
+        "rate": 0.06666666666666667
+      }
+    },
+    "missing": {
+      "n": 18,
+      "intent": {
+        "ok": 13,
+        "n": 18,
+        "rate": 0.7222222222222222
+      },
+      "tool": {
+        "ok": 16,
+        "n": 18,
+        "rate": 0.8888888888888888
+      },
+      "args": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "ref": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 3,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 6,
+        "n": 15,
+        "rate": 0.4
+      },
+      "confirm": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "exec": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unintended": {
+        "ok": 1,
+        "n": 18,
+        "rate": 0.05555555555555555
+      },
+      "scenario": {
+        "ok": 12,
+        "n": 18,
+        "rate": 0.6666666666666666
+      }
+    },
+    "long": {
+      "n": 10,
+      "intent": {
+        "ok": 9,
+        "n": 10,
+        "rate": 0.9
+      },
+      "tool": {
+        "ok": 9,
+        "n": 10,
+        "rate": 0.9
+      },
+      "args": {
+        "ok": 6,
+        "n": 7,
+        "rate": 0.8571428571428571
+      },
+      "ref": {
+        "ok": 8,
+        "n": 10,
+        "rate": 0.8
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 10,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 8,
+        "n": 8,
+        "rate": 1
+      },
+      "exec": {
+        "ok": 9,
+        "n": 10,
+        "rate": 0.9
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 10,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 8,
+        "n": 10,
+        "rate": 0.8
+      }
+    },
+    "memory": {
+      "n": 10,
+      "intent": {
+        "ok": 7,
+        "n": 10,
+        "rate": 0.7
+      },
+      "tool": {
+        "ok": 10,
+        "n": 10,
+        "rate": 1
+      },
+      "args": {
+        "ok": 4,
+        "n": 7,
+        "rate": 0.5714285714285714
+      },
+      "ref": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unnecessary": {
+        "ok": 0,
+        "n": 10,
+        "rate": 0
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "exec": {
+        "ok": 4,
+        "n": 7,
+        "rate": 0.5714285714285714
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 10,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 6,
+        "n": 10,
+        "rate": 0.6
+      }
+    },
+    "llm": {
+      "n": 23,
+      "intent": {
+        "ok": 20,
+        "n": 23,
+        "rate": 0.8695652173913043
+      },
+      "tool": {
+        "ok": 22,
+        "n": 23,
+        "rate": 0.9565217391304348
+      },
+      "args": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "ref": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unnecessary": {
+        "ok": 2,
+        "n": 23,
+        "rate": 0.08695652173913043
+      },
+      "missing": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "confirm": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "exec": {
+        "ok": 0,
+        "n": 0,
+        "rate": null
+      },
+      "unintended": {
+        "ok": 0,
+        "n": 23,
+        "rate": 0
+      },
+      "scenario": {
+        "ok": 20,
+        "n": 23,
+        "rate": 0.8695652173913043
+      }
+    }
+  },
+  "latency": {
+    "avgTurnMs": 1.9841607569721145,
+    "p95TurnMs": 1.4552000000001044,
+    "turns": 502,
+    "memoryRetrievalAvgMs": 0.004420183673469276,
+    "memoryRetrievalMaxMs": 0.34375499999999876
+  },
+  "failureKinds": {
+    "intent": 64,
+    "tool": 48,
+    "said": 23,
+    "args": 17,
+    "notSaid": 1,
+    "state": 24,
+    "mutation-missing": 28,
+    "confirm": 6,
+    "mutation-unintended": 3,
+    "clarify-unnecessary": 3,
+    "clarify-missing": 10
+  },
+  "failures": [
+    {
+      "id": "members-04",
+      "category": "members",
+      "difficulty": 4,
+      "say": "yo show me all the ppl in this server",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted members.list",
+        "tool: recorded no operation, wanted member_list",
+        "said: reply lacks /Ahmed/",
+        "said: reply lacks /Lina/",
+        "said: reply lacks /Omar/",
+        "said: reply lacks /Sara/"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "members-06",
+      "category": "members",
+      "difficulty": 1,
+      "say": "members pls",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted members.list",
+        "tool: recorded no operation, wanted member_list",
+        "said: reply lacks /Ahmed/",
+        "said: reply lacks /Lina/",
+        "said: reply lacks /Omar/",
+        "said: reply lacks /Sara/"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "members-09",
+      "category": "members",
+      "difficulty": 3,
+      "say": "show me only the bots",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted members.list",
+        "tool: recorded no operation, wanted member_list",
+        "args: no classification",
+        "said: reply lacks /YSER Lab/"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "args",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "members-11",
+      "category": "members",
+      "difficulty": 3,
+      "say": "who are the newest members",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted members.list",
+        "tool: recorded no operation, wanted member_list",
+        "args: no classification"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "args"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "members-12",
+      "category": "members",
+      "difficulty": 2,
+      "say": "find member Sara",
+      "prev": [],
+      "reasons": [
+        "intent: got members.list, wanted members.search",
+        "args: query=undefined (wanted /sara/i)",
+        "notSaid: reply contains /Ahmed/"
+      ],
+      "kinds": [
+        "intent",
+        "args",
+        "notSaid"
+      ],
+      "reply": " ### Members (6) 1. 👤 <@100000000000000001> · Ahmed · Instructor · joined <t:1700000000:D> · `100000000000000001` 2. 👤 <@100000000000000004> · Lina · joined <t:1700000000:D> · `100000000000000004` 3. 👤 <@100000000000000003> · Omar · Inst"
+    },
+    {
+      "id": "members-13",
+      "category": "members",
+      "difficulty": 4,
+      "say": "is Omar in the server?",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted members.search",
+        "tool: recorded no operation, wanted member_list",
+        "args: no classification",
+        "said: reply lacks /Omar/"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "args",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "members-17",
+      "category": "members",
+      "difficulty": 3,
+      "say": "how many ppl are here",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted members.count",
+        "tool: recorded no operation, wanted member_count"
+      ],
+      "kinds": [
+        "intent",
+        "tool"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "members-19",
+      "category": "members",
+      "difficulty": 4,
+      "say": "how big is our community",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted members.count",
+        "tool: recorded no operation, wanted member_count"
+      ],
+      "kinds": [
+        "intent",
+        "tool"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "members-23",
+      "category": "members",
+      "difficulty": 3,
+      "say": "anyone online?",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted members.online",
+        "tool: recorded no operation, wanted member_online"
+      ],
+      "kinds": [
+        "intent",
+        "tool"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "members-25",
+      "category": "members",
+      "difficulty": 3,
+      "say": "how many are online",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted members.online",
+        "tool: recorded no operation, wanted member_online"
+      ],
+      "kinds": [
+        "intent",
+        "tool"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "members-41",
+      "category": "members",
+      "difficulty": 3,
+      "say": "give me the list of everyone in the server with the instructor role",
+      "prev": [],
+      "reasons": [
+        "said: reply lacks /Ahmed/",
+        "said: reply lacks /Omar/",
+        "warning: admin member_list: no role"
+      ],
+      "kinds": [
+        "said"
+      ],
+      "reply": " ❌ I couldn't find a role called \"server with the instructor\"."
+    },
+    {
+      "id": "drafts-04",
+      "category": "drafts",
+      "difficulty": 4,
+      "say": "pls write sth announcing the webinar on friday",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted draft.write",
+        "args: no classification",
+        "said: reply lacks /version 1/"
+      ],
+      "kinds": [
+        "intent",
+        "args",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "drafts-07",
+      "category": "drafts",
+      "difficulty": 3,
+      "say": "write another one about the webinar",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted draft.write",
+        "args: no classification",
+        "said: reply lacks /version 1/"
+      ],
+      "kinds": [
+        "intent",
+        "args",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "drafts-16",
+      "category": "drafts",
+      "difficulty": 3,
+      "say": "can you make it shorter",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted draft.revise",
+        "said: reply lacks /version 2/"
+      ],
+      "kinds": [
+        "intent",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "drafts-20",
+      "category": "drafts",
+      "difficulty": 3,
+      "say": "yes that's the one",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted draft.approve",
+        "state: the resulting state is wrong ()",
+        "said: reply lacks /approved/"
+      ],
+      "kinds": [
+        "intent",
+        "state",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "drafts-24",
+      "category": "drafts",
+      "difficulty": 3,
+      "say": "ok send",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted draft.send",
+        "tool: recorded no operation, wanted message_send",
+        "mutation-missing: changes [] lack [\"message_send:general\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "drafts-31",
+      "category": "drafts",
+      "difficulty": 3,
+      "say": "send it in annoucements",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "args: channel=\"announcement\" (wanted /announcements/i)"
+      ],
+      "kinds": [
+        "args"
+      ],
+      "reply": " 📣 Sent in <#100000000000000334>. https://discord.com/channels/g1/100000000000000334/100000000000000337"
+    },
+    {
+      "id": "drafts-32",
+      "category": "drafts",
+      "difficulty": 3,
+      "say": "send in announcements",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted draft.send",
+        "tool: recorded no operation, wanted message_send",
+        "args: no classification",
+        "mutation-missing: changes [] lack [\"message_send:announcements\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "args",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "drafts-36",
+      "category": "drafts",
+      "difficulty": 3,
+      "say": "pin the message you sent",
+      "prev": [
+        "write an announcement about the live stream",
+        "send it here"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted message.pin",
+        "tool: recorded no operation, wanted message_pin",
+        "state: the resulting state is wrong ()",
+        "mutation-missing: changes [] lack [\"/^pin:/\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "state",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "drafts-40",
+      "category": "drafts",
+      "difficulty": 4,
+      "say": "remove the one in staff",
+      "prev": [
+        "write an announcement about the live stream",
+        "send it here",
+        "send it in staff"
+      ],
+      "reasons": [
+        "intent: got draft.revise, wanted message.delete",
+        "tool: recorded no operation, wanted message_remove",
+        "state: the resulting state is wrong ( **Draft** · version 2 📣 **the live stream** Join us tomorrow at 9:30 ET. Bring your ques)",
+        "confirm: no confirm panel, but the target came from a reference / the action is risky",
+        "mutation-missing: changes [] lack [\"/^message_delete:/\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "state",
+        "confirm",
+        "mutation-missing"
+      ],
+      "reply": " **Draft** · version 2 📣 **the live stream** Join us tomorrow at 9:30 ET. Bring your questions and your charts. Everyone is welcome to watch. (revised) -# The version already posted in #staff is unchanged: say \"edit the one you sent\" to up"
+    },
+    {
+      "id": "drafts-49",
+      "category": "drafts",
+      "difficulty": 3,
+      "say": "show me the draft",
+      "prev": [
+        "write an announcement about the live stream",
+        "make it shorter"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted draft.show",
+        "said: reply lacks /live stream/",
+        "said: reply lacks /version 2/"
+      ],
+      "kinds": [
+        "intent",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "creation-21",
+      "category": "creation",
+      "difficulty": 3,
+      "say": "create role Student",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted role.create",
+        "tool: recorded no operation, wanted role_create",
+        "args: no classification",
+        "mutation-missing: changes [] lack [\"role_create:Student\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "args",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "creation-23",
+      "category": "creation",
+      "difficulty": 2,
+      "say": "Make it private",
+      "prev": [
+        "Create a channel called announcements"
+      ],
+      "reasons": [
+        "tool: recorded no operation, wanted channel_access"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "reply": " 🔒 <#100000000000000610> is private now: @everyone can't see it (administrators still can). To let a role in, say \"give access to <role>\". Verified."
+    },
+    {
+      "id": "creation-25",
+      "category": "creation",
+      "difficulty": 3,
+      "say": "make that channel read only",
+      "prev": [
+        "Create a channel called announcements"
+      ],
+      "reasons": [
+        "tool: recorded no operation, wanted channel_access",
+        "state: the resulting state is wrong (I couldn't find a channel called \"channel\".)"
+      ],
+      "kinds": [
+        "tool",
+        "state"
+      ],
+      "reply": "I couldn't find a channel called \"channel\"."
+    },
+    {
+      "id": "creation-28",
+      "category": "creation",
+      "difficulty": 2,
+      "say": "add a channel called lessons in the Academy category",
+      "prev": [],
+      "reasons": [
+        "intent: got category.create, wanted channel.create",
+        "args: name=\"channel called lessons in the Academy\" (wanted lessons)",
+        "state: the resulting state is wrong ( ### Created category **channel called lessons in the Academy** Open to anyone who can see)",
+        "mutation-unintended: changes [\"channel_create:category:channel called lessons in the Academy\"] lack [\"channel_create:lessons\"] extra [\"channel_create:category:channel called lessons in the Academy\"]"
+      ],
+      "kinds": [
+        "intent",
+        "args",
+        "state",
+        "mutation-unintended"
+      ],
+      "reply": " ### Created category **channel called lessons in the Academy** Open to anyone who can see its category."
+    },
+    {
+      "id": "creation-29",
+      "category": "creation",
+      "difficulty": 3,
+      "say": "create a channel called lessons in the Academy category",
+      "prev": [],
+      "reasons": [
+        "intent: got category.create, wanted channel.create",
+        "mutation-unintended: changes [\"channel_create:category:channel called lessons in the Academy\"] extra [\"channel_create:category:channel called lessons in the Academy\"]",
+        "said: reply lacks /couldn't find|doesn't exist|not found/"
+      ],
+      "kinds": [
+        "intent",
+        "mutation-unintended",
+        "said"
+      ],
+      "reply": " ### Created category **channel called lessons in the Academy** Open to anyone who can see its category."
+    },
+    {
+      "id": "creation-30",
+      "category": "creation",
+      "difficulty": 3,
+      "say": "set up a private channel for staff",
+      "prev": [],
+      "reasons": [
+        "tool: recorded no operation, wanted channel_create",
+        "args: name=null (wanted staff)",
+        "clarify-unnecessary: asked a question it did not need to (What should the channel be called?)",
+        "mutation-missing: changes [] lack [\"channel_create:staff\"]"
+      ],
+      "kinds": [
+        "tool",
+        "args",
+        "clarify-unnecessary",
+        "mutation-missing"
+      ],
+      "reply": "What should the channel be called?"
+    },
+    {
+      "id": "creation-31",
+      "category": "creation",
+      "difficulty": 3,
+      "say": "add 2 channels to it",
+      "prev": [
+        "create a category called Academy"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.create",
+        "clarify-missing: did not ask, though it must",
+        "said: reply lacks /called/"
+      ],
+      "kinds": [
+        "intent",
+        "clarify-missing",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-03",
+      "category": "refs",
+      "difficulty": 3,
+      "say": "give Mentor to number 3",
+      "prev": [
+        "Create a Mentor role",
+        "show me the members"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted role.assign",
+        "tool: recorded no operation, wanted role_assign",
+        "confirm: no confirm panel, but the target came from a reference / the action is risky",
+        "mutation-missing: changes [] lack [\"role_add:Mentor->100000000000000003\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "confirm",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-05",
+      "category": "refs",
+      "difficulty": 2,
+      "say": "give that role to the first person",
+      "prev": [
+        "Create a Mentor role",
+        "show me the members"
+      ],
+      "reasons": [
+        "tool: recorded no operation, wanted role_assign",
+        "confirm: no confirm panel, but the target came from a reference / the action is risky",
+        "mutation-missing: changes [] lack [\"role_add:Mentor->100000000000000001\"]"
+      ],
+      "kinds": [
+        "tool",
+        "confirm",
+        "mutation-missing"
+      ],
+      "reply": "I couldn't find a role called \"role\". Name it again, or ask me to create it."
+    },
+    {
+      "id": "refs-08",
+      "category": "refs",
+      "difficulty": 3,
+      "say": "give it to <@100000000000000002>",
+      "prev": [
+        "Create a Mentor role"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted role.assign",
+        "tool: recorded no operation, wanted role_assign",
+        "mutation-missing: changes [] lack [\"role_add:Mentor->100000000000000002\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-09",
+      "category": "refs",
+      "difficulty": 3,
+      "say": "give <@100000000000000004> the Mentor role",
+      "prev": [
+        "Create a Mentor role"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted role.assign",
+        "tool: recorded no operation, wanted role_assign",
+        "mutation-missing: changes [] lack [\"role_add:Mentor->100000000000000004\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-10",
+      "category": "refs",
+      "difficulty": 4,
+      "say": "give it to her",
+      "prev": [
+        "Create a Mentor role",
+        "find Sara"
+      ],
+      "reasons": [
+        "tool: recorded no operation, wanted role_assign",
+        "confirm: no confirm panel, but the target came from a reference / the action is risky",
+        "mutation-missing: changes [] lack [\"role_add:Mentor->100000000000000002\"]"
+      ],
+      "kinds": [
+        "tool",
+        "confirm",
+        "mutation-missing"
+      ],
+      "reply": "I'm not sure who you mean: no member was mentioned recently."
+    },
+    {
+      "id": "refs-12",
+      "category": "refs",
+      "difficulty": 4,
+      "say": "take it off the first one",
+      "prev": [
+        "who has the instructor role"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted role.remove",
+        "tool: recorded no operation, wanted role_assign",
+        "confirm: no confirm panel, but the target came from a reference / the action is risky",
+        "mutation-missing: changes [] lack [\"role_remove:Instructor->100000000000000001\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "confirm",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-13",
+      "category": "refs",
+      "difficulty": 3,
+      "say": "actually change the second one",
+      "prev": [
+        "create a category called Academy",
+        "add channels called lessons and quizzes"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.rename | channel.edit",
+        "clarify-missing: did not ask, though it must"
+      ],
+      "kinds": [
+        "intent",
+        "clarify-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-14",
+      "category": "refs",
+      "difficulty": 4,
+      "say": "rename the second one to q-and-a",
+      "prev": [
+        "create a category called Academy",
+        "add channels called lessons and quizzes"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.rename",
+        "tool: recorded no operation, wanted rename_channel",
+        "args: no classification"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "args"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-15",
+      "category": "refs",
+      "difficulty": 3,
+      "say": "use the previous one",
+      "prev": [
+        "write an announcement about the live stream",
+        "make it shorter"
+      ],
+      "reasons": [
+        "intent: got draft.revise, wanted draft.restore",
+        "state: the resulting state is wrong ( **Draft** · version 3 📣 **the live stream** Join us tomorrow at 9:30 ET! (revised) -# Sa)"
+      ],
+      "kinds": [
+        "intent",
+        "state"
+      ],
+      "reply": " **Draft** · version 3 📣 **the live stream** Join us tomorrow at 9:30 ET! (revised) -# Say \"send it\" (here, or \"in #channel\"), or tell me what to change."
+    },
+    {
+      "id": "refs-16",
+      "category": "refs",
+      "difficulty": 3,
+      "say": "go back to the first version",
+      "prev": [
+        "write an announcement about the live stream",
+        "make it more professional"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted draft.restore",
+        "state: the resulting state is wrong ()"
+      ],
+      "kinds": [
+        "intent",
+        "state"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-17",
+      "category": "refs",
+      "difficulty": 4,
+      "say": "use the version I approved",
+      "prev": [
+        "write an announcement about the live stream",
+        "perfect",
+        "make it shorter"
+      ],
+      "reasons": [
+        "intent: got draft.revise, wanted draft.restore",
+        "state: the resulting state is wrong ( **Draft** · version 3 📣 **the live stream** Join us tomorrow at 9:30 ET! (revised) -# Sa)"
+      ],
+      "kinds": [
+        "intent",
+        "state"
+      ],
+      "reply": " **Draft** · version 3 📣 **the live stream** Join us tomorrow at 9:30 ET! (revised) -# Say \"send it\" (here, or \"in #channel\"), or tell me what to change."
+    },
+    {
+      "id": "refs-18",
+      "category": "refs",
+      "difficulty": 4,
+      "say": "send it here",
+      "prev": [
+        "write an announcement about the live stream",
+        "perfect",
+        "make it shorter",
+        "use the version I approved"
+      ],
+      "reasons": [
+        "state: the resulting state is wrong ( 📣 Sent in <#100000000000000773>. https://discord.com/channels/g1/100000000000000773/1000)"
+      ],
+      "kinds": [
+        "state"
+      ],
+      "reply": " 📣 Sent in <#100000000000000773>. https://discord.com/channels/g1/100000000000000773/100000000000000779"
+    },
+    {
+      "id": "refs-19",
+      "category": "refs",
+      "difficulty": 4,
+      "say": "put those there",
+      "prev": [
+        "create a channel called lessons",
+        "create a channel called quizzes",
+        "create a category called Academy"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.move",
+        "tool: recorded no operation, wanted move_channel",
+        "args: no classification",
+        "state: the resulting state is wrong ()"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "args",
+        "state"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-23",
+      "category": "refs",
+      "difficulty": 4,
+      "say": "continue where we stopped",
+      "prev": [
+        "create a private category",
+        "how many members do we have"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted category.create",
+        "clarify-missing: did not ask, though it must",
+        "said: reply lacks /name/"
+      ],
+      "kinds": [
+        "intent",
+        "clarify-missing",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-24",
+      "category": "refs",
+      "difficulty": 4,
+      "say": "continue where we stopped",
+      "prev": [
+        "write an announcement about the live stream",
+        "make it shorter",
+        "show me the members"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted context.resume",
+        "state: the resulting state is wrong ()",
+        "said: reply lacks /version 2/"
+      ],
+      "kinds": [
+        "intent",
+        "state",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-25",
+      "category": "refs",
+      "difficulty": 4,
+      "say": "put a channel called lessons in there",
+      "prev": [
+        "create a category called Academy"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.create",
+        "tool: recorded no operation, wanted channel_create",
+        "state: the resulting state is wrong ()",
+        "mutation-missing: changes [] lack [\"channel_create:lessons\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "state",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-26",
+      "category": "refs",
+      "difficulty": 3,
+      "say": "make that one read only",
+      "prev": [
+        "Create a channel called announcements"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.access",
+        "tool: recorded no operation, wanted channel_access",
+        "args: no classification",
+        "state: the resulting state is wrong ()"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "args",
+        "state"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-27",
+      "category": "refs",
+      "difficulty": 3,
+      "say": "hide it from everyone",
+      "prev": [
+        "Create a channel called staff"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.access",
+        "tool: recorded no operation, wanted channel_access",
+        "state: the resulting state is wrong ()"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "state"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-29",
+      "category": "refs",
+      "difficulty": 3,
+      "say": "send the same thing in staff",
+      "prev": [
+        "write an announcement about the live stream",
+        "send it here"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted draft.send",
+        "tool: recorded no operation, wanted message_send",
+        "mutation-missing: changes [] lack [\"message_send:staff\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "refs-30",
+      "category": "refs",
+      "difficulty": 4,
+      "say": "send it to the same channel as before",
+      "prev": [
+        "write an announcement about the live stream",
+        "send it in announcements",
+        "make it shorter"
+      ],
+      "reasons": [
+        "clarify-missing: did not ask, though it must"
+      ],
+      "kinds": [
+        "clarify-missing"
+      ],
+      "reply": "I couldn't find a channel called \"same\"."
+    },
+    {
+      "id": "corrections-03",
+      "category": "corrections",
+      "difficulty": 3,
+      "say": "no list them",
+      "prev": [
+        "how many members do we have"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted members.list",
+        "tool: recorded no operation, wanted member_list",
+        "said: reply lacks /Ahmed/",
+        "said: reply lacks /Lina/",
+        "said: reply lacks /Omar/",
+        "said: reply lacks /Sara/"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "corrections-04",
+      "category": "corrections",
+      "difficulty": 3,
+      "say": "that's wrong, I meant the roles",
+      "prev": [
+        "list the channels"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted roles.list",
+        "tool: recorded no operation, wanted role_list",
+        "said: reply lacks /Instructor/"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "corrections-05",
+      "category": "corrections",
+      "difficulty": 4,
+      "say": "no, i meant instructors not moderators",
+      "prev": [
+        "who has the moderator role"
+      ],
+      "reasons": [
+        "intent: got correction.channel, wanted members.byRole",
+        "tool: recorded no operation, wanted member_list",
+        "args: role=undefined (wanted /instructor/i)",
+        "said: reply lacks /Ahmed/",
+        "said: reply lacks /Omar/"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "args",
+        "said"
+      ],
+      "reply": "Understood: instructors, not moderators. I haven't sent anything in this conversation, so nothing needs fixing."
+    },
+    {
+      "id": "corrections-06",
+      "category": "corrections",
+      "difficulty": 2,
+      "say": "no, make it private",
+      "prev": [
+        "Create a channel called announcements"
+      ],
+      "reasons": [
+        "tool: recorded no operation, wanted channel_access"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "reply": " Understood, you meant channel access. Here it is: 🔒 <#100000000000000901> is private now: @everyone can't see it (administrators still can). To let a role in, say \"give access to <role>\". Verified."
+    },
+    {
+      "id": "corrections-08",
+      "category": "corrections",
+      "difficulty": 3,
+      "say": "wrong channel, send it in announcements",
+      "prev": [
+        "write an announcement about the live stream",
+        "send it here"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted correction.channel | draft.send",
+        "tool: recorded no operation, wanted message_send",
+        "state: the resulting state is wrong ()",
+        "mutation-missing: changes [] lack [\"message_send:announcements\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "state",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "corrections-09",
+      "category": "corrections",
+      "difficulty": 4,
+      "say": "not here, in staff",
+      "prev": [
+        "write an announcement about the live stream",
+        "send it here"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted correction.channel | draft.send",
+        "tool: recorded no operation, wanted message_send",
+        "state: the resulting state is wrong ()",
+        "mutation-missing: changes [] lack [\"message_send:staff\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "state",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "corrections-10",
+      "category": "corrections",
+      "difficulty": 4,
+      "say": "sorry I meant announcements",
+      "prev": [
+        "write an announcement about the live stream",
+        "send it in staff"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted correction.channel | draft.send",
+        "tool: recorded no operation, wanted message_send",
+        "state: the resulting state is wrong ()",
+        "mutation-missing: changes [] lack [\"message_send:announcements\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "state",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "corrections-11",
+      "category": "corrections",
+      "difficulty": 2,
+      "say": "nope the members",
+      "prev": [
+        "Show me the server information"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted members.list",
+        "tool: recorded no operation, wanted member_list",
+        "said: reply lacks /Ahmed/",
+        "said: reply lacks /Lina/",
+        "said: reply lacks /Omar/",
+        "said: reply lacks /Sara/"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "corrections-12",
+      "category": "corrections",
+      "difficulty": 4,
+      "say": "no i meant how many",
+      "prev": [
+        "who is online"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted members.count",
+        "tool: recorded no operation, wanted member_count"
+      ],
+      "kinds": [
+        "intent",
+        "tool"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "corrections-15",
+      "category": "corrections",
+      "difficulty": 3,
+      "say": "no I meant channels",
+      "prev": [
+        "list the roles"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted channels.list",
+        "tool: recorded no operation, wanted channel_list",
+        "said: reply lacks /general/"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "multi-01",
+      "category": "multi",
+      "difficulty": 4,
+      "say": "create a role called Mentor and give it to <@100000000000000001>",
+      "prev": [],
+      "reasons": [
+        "mutation-missing: changes [\"role_create:Mentor\"] lack [\"role_add:Mentor->100000000000000001\"]"
+      ],
+      "kinds": [
+        "mutation-missing"
+      ],
+      "reply": " ### Role created **Mentor** No special permissions -# Position 1. Move it in Server Settings, Roles if it should sit higher."
+    },
+    {
+      "id": "multi-02",
+      "category": "multi",
+      "difficulty": 4,
+      "say": "create a VIP category with announcements and chat channels",
+      "prev": [],
+      "reasons": [
+        "intent: got category.create, wanted compound.setup",
+        "mutation-missing: changes [\"channel_create:category:VIP\"] lack [\"channel_create:announcements\",\"channel_create:chat\"]"
+      ],
+      "kinds": [
+        "intent",
+        "mutation-missing"
+      ],
+      "reply": " ### Created category **VIP** Open to anyone who can see its category."
+    },
+    {
+      "id": "multi-03",
+      "category": "multi",
+      "difficulty": 4,
+      "say": "create a private staff channel and a public lounge channel",
+      "prev": [],
+      "reasons": [
+        "intent: got channel.create, wanted compound.setup",
+        "state: the resulting state is wrong ( ### Created text <#100000000000000977> 🔒 Private: only administrators and I can see it. )",
+        "mutation-missing: changes [\"channel_create:staff\"] lack [\"channel_create:lounge\"]"
+      ],
+      "kinds": [
+        "intent",
+        "state",
+        "mutation-missing"
+      ],
+      "reply": " ### Created text <#100000000000000977> 🔒 Private: only administrators and I can see it. Verified: @everyone cannot."
+    },
+    {
+      "id": "multi-04",
+      "category": "multi",
+      "difficulty": 3,
+      "say": "write an announcement about the stream and send it here",
+      "prev": [],
+      "reasons": [
+        "tool: recorded no operation, wanted message_send",
+        "state: the resulting state is wrong ( **Draft** · version 1 📣 **the stream and send it here** Join us tomorrow at 9:30 ET. Bri)",
+        "mutation-missing: changes [] lack [\"message_send:general\"]"
+      ],
+      "kinds": [
+        "tool",
+        "state",
+        "mutation-missing"
+      ],
+      "reply": " **Draft** · version 1 📣 **the stream and send it here** Join us tomorrow at 9:30 ET. Bring your questions and your charts. Everyone is welcome to watch. -# Say \"send it\" (here, or \"in #channel\"), or tell me what to change."
+    },
+    {
+      "id": "multi-05",
+      "category": "multi",
+      "difficulty": 3,
+      "say": "show me the members and the server info",
+      "prev": [],
+      "reasons": [
+        "said: reply lacks /Ahmed/"
+      ],
+      "kinds": [
+        "said"
+      ],
+      "reply": " ### Test Server 👥 **6** members · 2 online 💬 1 text · 🔊 0 voice · 🗂️ 0 categories · 🧵 0 forums 🎖️ 3 roles · 😀 0 emoji 🚀 Boost level 0 · 0 boosts 👑 Owner: <@owner1> 🛡️ Verification: low · explicit-content filter off · 2FA for mode"
+    },
+    {
+      "id": "multi-06",
+      "category": "multi",
+      "difficulty": 3,
+      "say": "send it here and pin it",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "state: the resulting state is wrong ( 📣 Sent in <#100000000000000988>. https://discord.com/channels/g1/100000000000000988/1000)",
+        "mutation-missing: changes [\"message_send:general\"] lack [\"/^pin:/\"]"
+      ],
+      "kinds": [
+        "state",
+        "mutation-missing"
+      ],
+      "reply": " 📣 Sent in <#100000000000000988>. https://discord.com/channels/g1/100000000000000988/100000000000000991"
+    },
+    {
+      "id": "multi-07",
+      "category": "multi",
+      "difficulty": 3,
+      "say": "send it in announcements and staff",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "mutation-missing: changes [\"message_send:announcements\"] lack [\"message_send:staff\"]"
+      ],
+      "kinds": [
+        "mutation-missing"
+      ],
+      "reply": " 📣 Sent in <#100000000000000995>. https://discord.com/channels/g1/100000000000000995/100000000000000999"
+    },
+    {
+      "id": "multi-09",
+      "category": "multi",
+      "difficulty": 4,
+      "say": "make it shorter and send it here",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "mutation-missing: changes [] lack [\"message_send:general\"]"
+      ],
+      "kinds": [
+        "mutation-missing"
+      ],
+      "reply": " **Draft** · version 2 📣 **the live stream** Join us tomorrow at 9:30 ET! -# Say \"send it\" (here, or \"in #channel\"), or tell me what to change."
+    },
+    {
+      "id": "multi-10",
+      "category": "multi",
+      "difficulty": 4,
+      "say": "delete that and send it again in staff",
+      "prev": [
+        "write an announcement about the live stream",
+        "send it here"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted message.delete",
+        "tool: recorded no operation, wanted message_remove",
+        "confirm: no confirm panel, but the target came from a reference / the action is risky",
+        "mutation-missing: changes [] lack [\"/^message_delete:/\",\"message_send:staff\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "confirm",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "multi-11",
+      "category": "multi",
+      "difficulty": 3,
+      "say": "create a role called Student and a role called Alumni",
+      "prev": [],
+      "reasons": [
+        "mutation-missing: changes [\"role_create:Student\"] lack [\"role_create:Alumni\"]"
+      ],
+      "kinds": [
+        "mutation-missing"
+      ],
+      "reply": " ### Role created **Student** No special permissions -# Position 1. Move it in Server Settings, Roles if it should sit higher."
+    },
+    {
+      "id": "multi-12",
+      "category": "multi",
+      "difficulty": 3,
+      "say": "create channels called lessons and quizzes",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.create",
+        "tool: recorded no operation, wanted channel_create",
+        "args: no classification",
+        "mutation-missing: changes [] lack [\"channel_create:lessons\",\"channel_create:quizzes\"]"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "args",
+        "mutation-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "multi-13",
+      "category": "multi",
+      "difficulty": 3,
+      "say": "list roles and channels",
+      "prev": [],
+      "reasons": [
+        "tool: recorded role_list, wanted channel_list",
+        "said: reply lacks /Channels/"
+      ],
+      "kinds": [
+        "tool",
+        "said"
+      ],
+      "reply": " ### Roles (3) **YSER Lab** · ⚠️ Administrator **Instructor** **Moderator**"
+    },
+    {
+      "id": "multi-14",
+      "category": "multi",
+      "difficulty": 4,
+      "say": "how many members and who is online",
+      "prev": [],
+      "reasons": [
+        "tool: recorded member_count, wanted member_online"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "reply": " 👥 **6** members · about 2 online right now."
+    },
+    {
+      "id": "multi-15",
+      "category": "multi",
+      "difficulty": 3,
+      "say": "make a voice channel called lounge and a text channel called chat",
+      "prev": [],
+      "reasons": [
+        "mutation-missing: changes [\"channel_create:lounge\"] lack [\"channel_create:chat\"]"
+      ],
+      "kinds": [
+        "mutation-missing"
+      ],
+      "reply": " ### Created voice <#100000000000001040> Open to anyone who can see its category."
+    },
+    {
+      "id": "missing-02",
+      "category": "missing",
+      "difficulty": 1,
+      "say": "create a role",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted role.create",
+        "clarify-missing: did not ask, though it must",
+        "said: reply lacks /called/"
+      ],
+      "kinds": [
+        "intent",
+        "clarify-missing",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "missing-06",
+      "category": "missing",
+      "difficulty": 3,
+      "say": "give the VIP role",
+      "prev": [],
+      "reasons": [
+        "intent: got members.byRole, wanted role.assign",
+        "tool: recorded member_list, wanted no operation",
+        "clarify-missing: did not ask, though it must"
+      ],
+      "kinds": [
+        "intent",
+        "tool",
+        "clarify-missing"
+      ],
+      "reply": " ### Members with **VIP** (1) 1. 👤 <@100000000000000003> · Omar · Instructor, VIP · joined <t:1700000000:D> · `100000000000000003` -# Showing 1-1 of 1 · server has 6 members"
+    },
+    {
+      "id": "missing-12",
+      "category": "missing",
+      "difficulty": 4,
+      "say": "send it to",
+      "prev": [
+        "write an announcement about the live stream"
+      ],
+      "reasons": [
+        "tool: recorded message_send, wanted no operation",
+        "clarify-missing: did not ask, though it must",
+        "mutation-unintended: changes [\"message_send:general\"] extra [\"message_send:general\"]"
+      ],
+      "kinds": [
+        "tool",
+        "clarify-missing",
+        "mutation-unintended"
+      ],
+      "reply": " 📣 Sent in <#100000000000001088>. https://discord.com/channels/g1/100000000000001088/100000000000001091"
+    },
+    {
+      "id": "missing-15",
+      "category": "missing",
+      "difficulty": 3,
+      "say": "create a channel called",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.create",
+        "clarify-missing: did not ask, though it must"
+      ],
+      "kinds": [
+        "intent",
+        "clarify-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "missing-16",
+      "category": "missing",
+      "difficulty": 3,
+      "say": "rename the channel",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.rename",
+        "clarify-missing: did not ask, though it must"
+      ],
+      "kinds": [
+        "intent",
+        "clarify-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "missing-17",
+      "category": "missing",
+      "difficulty": 3,
+      "say": "delete the channel",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted channel.delete",
+        "clarify-missing: did not ask, though it must"
+      ],
+      "kinds": [
+        "intent",
+        "clarify-missing"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "long-06",
+      "category": "long",
+      "difficulty": 4,
+      "say": "make it private",
+      "prev": [
+        "create a channel called announcements",
+        "show me the members",
+        "who has the moderator role",
+        "show me the roles"
+      ],
+      "reasons": [
+        "tool: recorded no operation, wanted channel_access"
+      ],
+      "kinds": [
+        "tool"
+      ],
+      "reply": " 🔒 <#100000000000001200> is private now: @everyone can't see it (administrators still can). To let a role in, say \"give access to <role>\". Verified."
+    },
+    {
+      "id": "long-07",
+      "category": "long",
+      "difficulty": 4,
+      "say": "go back to the first version",
+      "prev": [
+        "write an announcement about the live stream",
+        "make it more professional",
+        "show me the members",
+        "who is online"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted draft.restore",
+        "state: the resulting state is wrong ()"
+      ],
+      "kinds": [
+        "intent",
+        "state"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "memory-06",
+      "category": "memory",
+      "difficulty": 5,
+      "say": "write another announcement about the webinar, use the same format as last time",
+      "prev": [
+        "write an announcement about the live stream",
+        "make it shorter",
+        "send it here"
+      ],
+      "reasons": [
+        "args: topic=\"the webinar, use the same format as last time\" (wanted v => /webinar/i.test(v) && !/format|last time/i.test(v))",
+        "state: the resulting state is wrong ( **Draft** · version 1 📣 **the webinar, use the same format as last time** Join us tomorr)"
+      ],
+      "kinds": [
+        "args",
+        "state"
+      ],
+      "reply": " **Draft** · version 1 📣 **the webinar, use the same format as last time** Join us tomorrow at 9:30 ET. Bring your questions and your charts. Everyone is welcome to watch. -# Say \"send it\" (here, or \"in #channel\"), or tell me what to chang"
+    },
+    {
+      "id": "memory-07",
+      "category": "memory",
+      "difficulty": 3,
+      "say": "from now on keep announcements short",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted memory.remember",
+        "state: the resulting state is wrong ()"
+      ],
+      "kinds": [
+        "intent",
+        "state"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "memory-08",
+      "category": "memory",
+      "difficulty": 3,
+      "say": "always sign announcements with YSER Team",
+      "prev": [],
+      "reasons": [
+        "intent: got left-to-model, wanted memory.remember",
+        "state: the resulting state is wrong ()"
+      ],
+      "kinds": [
+        "intent",
+        "state"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "memory-09",
+      "category": "memory",
+      "difficulty": 4,
+      "say": "what announcement style do I like",
+      "prev": [
+        "Remember that I prefer short announcements"
+      ],
+      "reasons": [
+        "intent: got left-to-model, wanted memory.show",
+        "said: reply lacks /short announcements/"
+      ],
+      "kinds": [
+        "intent",
+        "said"
+      ],
+      "reply": ""
+    },
+    {
+      "id": "llm-13",
+      "category": "llm",
+      "difficulty": 5,
+      "say": "how many members does a typical trading community have",
+      "prev": [],
+      "reasons": [
+        "intent: got members.count, wanted left-to-model",
+        "tool: recorded member_count, wanted no operation"
+      ],
+      "kinds": [
+        "intent",
+        "tool"
+      ],
+      "reply": " 👥 **6** members · about 2 online right now."
+    },
+    {
+      "id": "llm-14",
+      "category": "llm",
+      "difficulty": 5,
+      "say": "write a post-mortem of my losing trade",
+      "prev": [],
+      "reasons": [
+        "intent: got draft.write, wanted left-to-model",
+        "clarify-unnecessary: asked a question it did not need to (What is the announcement about?)"
+      ],
+      "kinds": [
+        "intent",
+        "clarify-unnecessary"
+      ],
+      "reply": "What is the announcement about?"
+    },
+    {
+      "id": "llm-15",
+      "category": "llm",
+      "difficulty": 5,
+      "say": "give me a post-trade checklist",
+      "prev": [],
+      "reasons": [
+        "intent: got draft.write, wanted left-to-model",
+        "clarify-unnecessary: asked a question it did not need to (What is the announcement about?)"
+      ],
+      "kinds": [
+        "intent",
+        "clarify-unnecessary"
+      ],
+      "reply": "What is the announcement about?"
+    }
+  ],
+  "status": {
+    "members-01": true,
+    "members-02": true,
+    "members-03": true,
+    "members-04": false,
+    "members-05": true,
+    "members-06": false,
+    "members-07": true,
+    "members-08": true,
+    "members-09": false,
+    "members-10": true,
+    "members-11": false,
+    "members-12": false,
+    "members-13": false,
+    "members-14": true,
+    "members-15": true,
+    "members-16": true,
+    "members-17": false,
+    "members-18": true,
+    "members-19": false,
+    "members-20": true,
+    "members-21": true,
+    "members-22": true,
+    "members-23": false,
+    "members-24": true,
+    "members-25": false,
+    "members-26": true,
+    "members-27": true,
+    "members-28": true,
+    "members-29": true,
+    "members-30": true,
+    "members-31": true,
+    "members-32": true,
+    "members-33": true,
+    "members-34": true,
+    "members-35": true,
+    "members-36": true,
+    "members-37": true,
+    "members-38": true,
+    "members-39": true,
+    "members-40": true,
+    "members-41": false,
+    "members-42": true,
+    "members-43": true,
+    "drafts-01": true,
+    "drafts-02": true,
+    "drafts-03": true,
+    "drafts-04": false,
+    "drafts-05": true,
+    "drafts-06": true,
+    "drafts-07": false,
+    "drafts-08": true,
+    "drafts-09": true,
+    "drafts-10": true,
+    "drafts-11": true,
+    "drafts-12": true,
+    "drafts-13": true,
+    "drafts-14": true,
+    "drafts-15": true,
+    "drafts-16": false,
+    "drafts-17": true,
+    "drafts-18": true,
+    "drafts-19": true,
+    "drafts-20": false,
+    "drafts-21": true,
+    "drafts-22": true,
+    "drafts-23": true,
+    "drafts-24": false,
+    "drafts-25": true,
+    "drafts-26": true,
+    "drafts-27": true,
+    "drafts-28": true,
+    "drafts-29": true,
+    "drafts-30": true,
+    "drafts-31": false,
+    "drafts-32": false,
+    "drafts-33": true,
+    "drafts-34": true,
+    "drafts-35": true,
+    "drafts-36": false,
+    "drafts-37": true,
+    "drafts-38": true,
+    "drafts-39": true,
+    "drafts-40": false,
+    "drafts-41": true,
+    "drafts-42": true,
+    "drafts-43": true,
+    "drafts-44": true,
+    "drafts-45": true,
+    "drafts-46": true,
+    "drafts-47": true,
+    "drafts-48": true,
+    "drafts-49": false,
+    "creation-01": true,
+    "creation-02": true,
+    "creation-03": true,
+    "creation-04": true,
+    "creation-05": true,
+    "creation-06": true,
+    "creation-07": true,
+    "creation-08": true,
+    "creation-09": true,
+    "creation-10": true,
+    "creation-11": true,
+    "creation-12": true,
+    "creation-13": true,
+    "creation-14": true,
+    "creation-15": true,
+    "creation-16": true,
+    "creation-17": true,
+    "creation-18": true,
+    "creation-19": true,
+    "creation-20": true,
+    "creation-21": false,
+    "creation-22": true,
+    "creation-23": false,
+    "creation-24": true,
+    "creation-25": false,
+    "creation-26": true,
+    "creation-27": true,
+    "creation-28": false,
+    "creation-29": false,
+    "creation-30": false,
+    "creation-31": false,
+    "refs-01": true,
+    "refs-02": true,
+    "refs-03": false,
+    "refs-04": true,
+    "refs-05": false,
+    "refs-06": true,
+    "refs-07": true,
+    "refs-08": false,
+    "refs-09": false,
+    "refs-10": false,
+    "refs-11": true,
+    "refs-12": false,
+    "refs-13": false,
+    "refs-14": false,
+    "refs-15": false,
+    "refs-16": false,
+    "refs-17": false,
+    "refs-18": false,
+    "refs-19": false,
+    "refs-20": true,
+    "refs-21": true,
+    "refs-22": true,
+    "refs-23": false,
+    "refs-24": false,
+    "refs-25": false,
+    "refs-26": false,
+    "refs-27": false,
+    "refs-28": true,
+    "refs-29": false,
+    "refs-30": false,
+    "refs-31": true,
+    "corrections-01": true,
+    "corrections-02": true,
+    "corrections-03": false,
+    "corrections-04": false,
+    "corrections-05": false,
+    "corrections-06": false,
+    "corrections-07": true,
+    "corrections-08": false,
+    "corrections-09": false,
+    "corrections-10": false,
+    "corrections-11": false,
+    "corrections-12": false,
+    "corrections-13": true,
+    "corrections-14": true,
+    "corrections-15": false,
+    "multi-01": false,
+    "multi-02": false,
+    "multi-03": false,
+    "multi-04": false,
+    "multi-05": false,
+    "multi-06": false,
+    "multi-07": false,
+    "multi-08": true,
+    "multi-09": false,
+    "multi-10": false,
+    "multi-11": false,
+    "multi-12": false,
+    "multi-13": false,
+    "multi-14": false,
+    "multi-15": false,
+    "missing-01": true,
+    "missing-02": false,
+    "missing-03": true,
+    "missing-04": true,
+    "missing-05": true,
+    "missing-06": false,
+    "missing-07": true,
+    "missing-08": true,
+    "missing-09": true,
+    "missing-10": true,
+    "missing-11": true,
+    "missing-12": false,
+    "missing-13": true,
+    "missing-14": true,
+    "missing-15": false,
+    "missing-16": false,
+    "missing-17": false,
+    "missing-18": true,
+    "long-01": true,
+    "long-02": true,
+    "long-03": true,
+    "long-04": true,
+    "long-05": true,
+    "long-06": false,
+    "long-07": false,
+    "long-08": true,
+    "long-09": true,
+    "long-10": true,
+    "memory-01": true,
+    "memory-02": true,
+    "memory-03": true,
+    "memory-04": true,
+    "memory-05": true,
+    "memory-06": false,
+    "memory-07": false,
+    "memory-08": false,
+    "memory-09": false,
+    "memory-10": true,
+    "llm-01": true,
+    "llm-02": true,
+    "llm-03": true,
+    "llm-04": true,
+    "llm-05": true,
+    "llm-06": true,
+    "llm-07": true,
+    "llm-08": true,
+    "llm-09": true,
+    "llm-10": true,
+    "llm-11": true,
+    "llm-12": true,
+    "llm-13": false,
+    "llm-14": false,
+    "llm-15": false,
+    "llm-16": true,
+    "llm-17": true,
+    "llm-18": true,
+    "llm-19": true,
+    "llm-20": true,
+    "llm-21": true,
+    "llm-22": true,
+    "llm-23": true
+  }
+}

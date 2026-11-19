@@ -7,14 +7,14 @@ import { env } from "../env.js";
  * Simple operations (listing members, counting, pinning) never reach a model at all: they are deterministic tools.
  */
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const openai = (url, key, models) => async ({ system, messages, temperature, max, json }) => {
+const openai = (url, key, models) => async ({ system, messages, temperature, max, json, timeoutMs = 40_000 }) => {
   let last = "no model answered";
   for (const model of models()) {
     try {
       const body = { model, messages: [{ role: "system", content: system }, ...messages], temperature, max_tokens: max };
       if (json) body.response_format = { type: "json_object" };
       if (model.startsWith("openai/gpt-oss")) body.reasoning_effort = "low";
-      const r = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${key()}` }, body: JSON.stringify(body), signal: AbortSignal.timeout(40_000) });
+      const r = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${key()}` }, body: JSON.stringify(body), signal: AbortSignal.timeout(timeoutMs) });
       if (!r.ok) { last = `status ${r.status}`; continue; }
       const text = String((await r.json()).choices?.[0]?.message?.content ?? "").replace(/<think>[\s\S]*?<\/think>/g, "").trim();
       if (text) return { text, model };
@@ -29,11 +29,11 @@ const PROVIDERS = {
   nvidia: { enabled: () => !!env.nvidiaKey, call: openai("https://integrate.api.nvidia.com/v1/chat/completions", () => env.nvidiaKey, () => [env.nvidiaModel]) },
   gemini: {
     enabled: () => !!env.geminiKey,
-    async call({ system, messages, temperature, max, json }) {
+    async call({ system, messages, temperature, max, json, timeoutMs = 45_000 }) {
       let last = "no model answered";
       for (const model of [...new Set([env.geminiModel, "gemini-flash-latest"].filter(Boolean))]) {
         try {
-          const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": env.geminiKey }, signal: AbortSignal.timeout(45_000),
+          const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": env.geminiKey }, signal: AbortSignal.timeout(timeoutMs),
             body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents: messages.map(m => ({ role: m.role === "assistant" ? "model" : "user", parts: [{ text: m.content }] })), generationConfig: { temperature, maxOutputTokens: max, ...(json ? { responseMimeType: "application/json" } : {}) } }) });
           if (!r.ok) { last = `status ${r.status}`; continue; }
           const text = ((await r.json()).candidates?.[0]?.content?.parts ?? []).map(p => p.text ?? "").join("").trim();
@@ -60,19 +60,22 @@ export const providerStatus = () => Object.keys(providers).map(n => ({ name: n, 
  * One text completion for a job. Tries the job's providers in order (skipping ones that just failed, unless nothing else is left), retries a
  * provider once on a transient failure, and returns { text, provider, model, tried }. Throws only when every provider failed.
  */
-export async function complete({ task = "general", system, messages, temperature = 0.4, max = 900, json = false, retries = 1 }) {
+export async function complete({ task = "general", system, messages, temperature = 0.4, max = 900, json = false, retries = 1, deadlineMs = 25_000 }) {
+  const t0 = Date.now();
   const order = (ORDER[task] ?? ORDER.general).filter(n => providers[n]?.enabled());
   if (!order.length) throw Object.assign(new Error("no AI provider is configured"), { code: "no_provider" });
   const live = order.filter(n => (cooldown.get(n) ?? 0) <= Date.now()), queue = live.length ? live : order, tried = [];
   for (const name of queue) {
     for (let attempt = 0; attempt <= retries; attempt++) {
+      const left = deadlineMs - (Date.now() - t0);
+      if (left < 1500) { tried.push({ provider: name, error: "out of time" }); break; } // one deadline for the whole call, not per provider
       try {
-        const out = await providers[name].call({ system, messages, temperature, max, json });
+        const out = await providers[name].call({ system, messages, temperature, max, json, timeoutMs: left });
         cooldown.delete(name);
         return { ...out, provider: name, tried };
       } catch (e) {
         tried.push({ provider: name, error: String(e?.message ?? e).slice(0, 80) });
-        if (attempt < retries) await sleep(300);
+        if (attempt < retries && queue.length === 1) await sleep(300); // with another provider to try, move on at once
       }
     }
     cooldown.set(name, Date.now() + COOL);

@@ -310,7 +310,7 @@ test("model path guard: a model that answers 'members' with a server overview is
   assert.match(brain.guard(m, "x", { action: "delete_everything" }).say, /isn't something I can do/);
 });
 test("classifier: normalisation and structure", () => {
-  assert.equal(normalize("  Show me MEMEBRS pls!! "), "show me members please");
+  assert.equal(normalize("  Show me MEMEBRS pls!! "), "show me members"); // politeness words carry no intent and are dropped
   const k = classify("Show me everyone with the instructor role.", {});
   assert.deepEqual([k.primary, k.action, k.target.role], ["members.byRole", "member_list", "instructor"]);
   for (const f of ["primary", "secondary", "action", "resource", "target", "params", "refs", "needs", "confidence"]) assert.ok(f in k, f);

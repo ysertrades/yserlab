@@ -1,5 +1,5 @@
 import { PermissionFlagsBits as P } from "discord.js";
-import { permsOf, allowOf } from "./admin/guard.js";
+import { permsOf, allowOf, userMissing } from "./admin/guard.js";
 import { TOOLS, runTool } from "./admin/tools.js";
 import "./admin/control.js";
 import { runWorkflow } from "./admin/workflows.js";
@@ -139,9 +139,12 @@ export async function moderate(message, args, config, hooks = {}) {
   audit({ guild: message.guild.id, user: message.author?.id, action, target: args.user ? String(args.user).slice(0, 60) : undefined, risk: "legacy", permission: "ok", ok: !/couldn't|can't|don't|not sure|won't|missing|cancel/i.test(said), error: said.slice(0, 120), ms: Date.now() - t0 });
   return post;
 }
+const LEGACY_NEEDS = { purge: [P.ManageMessages], pin: [P.ManageMessages], unpin: [P.ManageMessages], lock: [P.ManageChannels], unlock: [P.ManageChannels], hide: [P.ManageChannels], unhide: [P.ManageChannels], set_permission: [P.ManageChannels], permission: [P.ManageChannels], permissions: [P.ManageChannels], delete_channel: [P.ManageChannels], move_channel: [P.ManageChannels], clone_channel: [P.ManageChannels], rename_channel: [P.ManageChannels], topic: [P.ManageChannels], nsfw: [P.ManageChannels], slowmode: [P.ManageChannels], kick: [P.KickMembers], ban: [P.BanMembers], unban: [P.BanMembers], timeout: [P.ModerateMembers], mute: [P.ModerateMembers], untimeout: [P.ModerateMembers], unmute: [P.ModerateMembers], nickname: [P.ManageNicknames], role_add: [P.ManageRoles], role_remove: [P.ManageRoles], create_role: [P.ManageRoles], edit_role: [P.ManageRoles], delete_role: [P.ManageRoles], voice_mute: [P.MuteMembers], voice_unmute: [P.MuteMembers], voice_disconnect: [P.MoveMembers], voice_move: [P.MoveMembers] };
 async function moderateLegacy(message, args, config) {
   if (!message.guild) return textPost({ text: "Moderation only works inside a server." });
   const action = String(args.action ?? "").toLowerCase();
+  const lacks = LEGACY_NEEDS[action] ? userMissing(message, LEGACY_NEEDS[action]) : [];
+  if (lacks.length) return textPost({ text: `You don't have the Discord permission for that (${lacks.join(", ").replace(/([A-Z])/g, " $1").trim().toLowerCase()}), so I can't do it for you.`, accent: "down" });
   const channel = channelsOf(message, args.channel)[0];
   if (!channel) return textPost({ text: `I couldn't find the channel "${args.channel}".`, accent: "down" });
   const reason = String(args.reason || `Asked by ${message.author.tag}`).slice(0, 400);

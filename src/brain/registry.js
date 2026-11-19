@@ -37,7 +37,8 @@ export const INTENT_TOOLS = {
   "draft.send": ["message_send"], "message.pin": ["message_pin"], "message.delete": ["message_remove"], "message.edit": ["message_update"],
   "compound.setup": ["channel_create", "role_assign", "channel_access"],
 };
-export const toolAllowed = (primary, tool) => !INTENT_TOOLS[primary] || INTENT_TOOLS[primary].includes(tool);
+export const toolAllowed = (primary, tool) => !!INTENT_TOOLS[primary] && INTENT_TOOLS[primary].includes(tool); // default deny: an intent with no tool list may not run any tool
+for (const p of ["draft.write", "draft.revise", "draft.approve", "draft.show", "draft.restore", "memory.remember", "memory.forget", "memory.show", "repeat", "correction.channel", "context.resume"]) INTENT_TOOLS[p] ??= [];
 
 /** Everything the registry says about a tool, joining the schema with the gate's own permission data. */
 export function describe(name) {
@@ -48,7 +49,7 @@ export function describe(name) {
 
 /** Actions the older moderation path accepts (they are not registry tools). */
 const LEGACY = new Set(["purge", "timeout", "untimeout", "mute", "unmute", "kick", "ban", "unban", "warn", "slowmode", "lock", "unlock", "say", "poll", "pin", "unpin", "react", "create_channel", "rename_channel", "topic", "dm", "role_add", "role_remove", "nickname", "countdown", "set_permission", "permission", "permissions", "hide", "unhide", "delete_channel", "move_channel", "clone_channel", "nsfw", "create_role", "edit_role", "delete_role", "voice_mute", "voice_unmute", "voice_disconnect", "voice_move", "thread_archive", "thread_lock", "remind", "reminder", "alert", "member_info", "whois", "read_messages", "recent_messages", "workflow", "setup", "setup_category", "setup_course", "setup_vip"]);
-export const knownAction = a => !!TOOLS[a] || LEGACY.has(a);
+export const knownAction = a => Object.hasOwn(TOOLS, a) || LEGACY.has(a);
 
 /** Validates a model's call: the action exists, and the arguments it relies on are present. Returns { ok, errors }. */
 export function validate(action, args = {}) {

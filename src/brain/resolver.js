@@ -1,6 +1,6 @@
 import { ChannelType } from "discord.js";
 import { candidates } from "../people.js";
-import { ordinalOf } from "./classify.js";
+import { ordinalOf, osa } from "./classify.js";
 
 /**
  * Reference resolution: turns "here", "#announcements", "the second person", "him", "the channel we made" into real Discord ids, using the
@@ -23,6 +23,9 @@ export function resolveChannel(guild, query, { current, types } = {}) {
   const set = exact.length ? exact : part;
   if (set.length === 1) return { channel: set[0] };
   if (set.length > 1) return { ambiguous: set.slice(0, 5) };
+  const near = pool.filter(c => k.length >= 4 && osa(norm(c.name), k) <= (k.length > 7 ? 2 : 1)); // a typo in a channel name still finds it, but only when exactly one channel is that close
+  if (near.length === 1) return { channel: near[0] };
+  if (near.length > 1) return { ambiguous: near.slice(0, 5) };
   return { none: true, similar: pool.filter(c => norm(c.name).slice(0, 4) === k.slice(0, 4)).slice(0, 3) };
 }
 export const sendable = c => !!c?.isSendable?.() && (!c.type || TEXTISH.includes(c.type) || c.isThread?.());

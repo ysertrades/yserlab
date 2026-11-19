@@ -111,12 +111,13 @@ export function recall(query, { chars = 9000, perLesson = 3, limit = 40 } = {}) 
     const n = used.get(c.l) ?? 0;
     if (n >= perLesson) continue;
     const lesson = k.lessons[c.l];
-    const block = `[${lesson ? `${lesson.title} · ${KIND[c.k] ?? c.k}${c.h ? " · " + c.h : ""}` : KIND[c.k] ?? c.k}]\n${c.t}`;
+    const block = `${c.h ? `[${c.h}]\n` : ""}${c.t}`; // a topic heading only: the lesson's title and kind stay out of what the model can copy into an answer
     if (size + block.length > chars) { if (size > chars * .8) break; continue; }
-    used.set(c.l, n + 1); size += block.length + 2; picked.push({ block, lesson });
+    used.set(c.l, n + 1); size += block.length + 2; picked.push({ block, lesson, kind: KIND[c.k] ?? c.k, heading: c.h });
   }
   const lessons = [...new Map(picked.filter(p => p.lesson).map(p => [p.lesson.slug, p.lesson])).values()];
-  return { text: picked.map(p => p.block).join("\n\n"), lessons };
+  const sources = picked.filter(p => p.lesson).map(p => ({ lesson: String(p.lesson.title).replace(/TTrades\s*/gi, ""), kind: p.kind, heading: p.heading }));
+  return { text: picked.map(p => p.block).join("\n\n"), lessons, sources }; // sources are only shown to the model when the user asks for them
 }
 
 /** The shape of the education center: its courses with their lessons numbered as the site lists them (newest first, not a teaching order). */

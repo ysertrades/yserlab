@@ -13,7 +13,7 @@ export const permNames = bitfield => new PermissionsBitField(bitfield).toArray()
 /** True for the server's owner and anyone with Administrator; otherwise they must hold every permission listed. Scheduled jobs (no member) were checked when they were set up. */
 export function userCan(message, flags) {
   const member = message.member;
-  if (!member) return true;
+  if (!member) return message.__scheduled === true; // fail closed: only a job that was checked when it was set up runs without a member
   if (message.guild?.ownerId === member.id || member.permissions?.has(P.Administrator)) return true;
   return member.permissions?.has(permList(flags)) ?? false;
 }
@@ -35,7 +35,8 @@ export const botCanEditRole = (guild, role) => !!role && role.id !== guild.id &&
 /** The person asking may only touch roles below their own (the owner may touch all). */
 export function userCanEditRole(message, role) {
   const m = message.member;
-  if (!m || message.guild.ownerId === m.id) return true;
+  if (!m) return message.__scheduled === true;
+  if (message.guild.ownerId === m.id) return true;
   return role.position < m.roles.highest.position;
 }
 export function botCanEditMember(guild, member) {
@@ -45,6 +46,7 @@ export function botCanEditMember(guild, member) {
 }
 export function userCanEditMember(message, member) {
   const m = message.member;
+  if (!m && message.__scheduled !== true) return false;
   if (!m || message.guild.ownerId === m.id) return member.id !== message.guild.ownerId;
   return member.id !== message.guild.ownerId && member.roles.highest.position < m.roles.highest.position;
 }
@@ -52,7 +54,7 @@ export function userCanEditMember(message, member) {
 export function delegable(message, names) {
   const wanted = names.map(n => P[n]).filter(Boolean);
   const m = message.member;
-  if (!m) return { ok: true, denied: [] };
+  if (!m) return { ok: message.__scheduled === true, denied: message.__scheduled === true ? [] : names };
   const owner = message.guild.ownerId === m.id;
   const denied = names.filter(n => n === "Administrator" ? !owner : !(owner || m.permissions.has(P.Administrator) || m.permissions.has(P[n])));
   return { ok: !denied.length, denied, wanted };
