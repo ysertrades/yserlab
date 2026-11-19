@@ -10,8 +10,17 @@ import { say } from "../admin/giveaways.js";
  * yserbot functions as /giveaway and the AI, so the three can never disagree.
  */
 let last = "";
+const people = new Map(); // id -> { name, avatar }, so a winner is looked up once
 const num = v => (Number.isFinite(Number(v)) ? Number(v) : null);
 
+async function personOf(guild, id) {
+  if (people.has(id)) return people.get(id);
+  const m = guild.members.cache.get(id) ?? await guild.members.fetch(id).catch(() => null);
+  const u = m?.user ?? guild.client.users.cache.get(id) ?? await guild.client.users.fetch(id).catch(() => null);
+  const p = { name: m?.displayName ?? u?.globalName ?? u?.username ?? null, avatar: (m ?? u)?.displayAvatarURL?.({ size: 64, extension: "png" }) ?? null };
+  if (people.size > 500) people.clear();
+  people.set(id, p); return p;
+}
 export async function syncGiveaways(client, { force = false } = {}) {
   const a = api(); if (!db || !a) return;
   const rows = [], now = new Date().toISOString();
@@ -19,7 +28,12 @@ export async function syncGiveaways(client, { force = false } = {}) {
     const { active, ended } = a.list(guild.id, guild);
     const nameOf = id => guild.members.cache.get(id)?.displayName ?? guild.members.cache.get(id)?.user?.username ?? null;
     for (const g of active) rows.push({ id: `a:${g.messageId}`, guild_id: guild.id, status: "active", channel_id: g.channelId, message_id: g.messageId, short_id: g.dropId, prize: g.title, winners: g.winners, entrants: g.entrants, ends_at: num(g.endsAt), started_at: num(g.startedAt), host_id: g.hostId, required_role: g.requiredRoleId, min_age: g.minAccountAgeDays || 0, bonus_roles: g.bonusRoles ?? [], bonus_users: (g.bonusUsers ?? []).map(b => ({ ...b, name: nameOf(b.id) })), winner_list: [], image_url: g.imageUrl, updated_at: now });
-    for (const e of ended) rows.push({ id: `e:${e.shortId}`, guild_id: guild.id, status: "ended", channel_id: e.channelId, message_id: e.messageId, short_id: e.shortId, prize: e.title, winners: e.winners, entrants: e.entrants, ends_at: null, ended_at: num(e.endedAt), host_id: e.hostId, required_role: e.requiredRoleId, min_age: e.minAccountAgeDays || 0, bonus_roles: [], bonus_users: [], winner_list: e.winnersList ?? [], image_url: e.imageUrl, updated_at: now });
+    for (const e of ended) {
+      const winnersList = [];
+      for (const w of (e.winnersList ?? []).slice(0, 50)) { const p = await personOf(guild, w.id); winnersList.push({ id: w.id, name: p.name ?? w.name, avatar: p.avatar, sent: e.prizeSentTo?.[w.id] ?? null }); }
+      e.winnersList = winnersList;
+    }
+    for (const e of ended) rows.push({ id: `e:${e.shortId}`, guild_id: guild.id, status: "ended", channel_id: e.channelId, message_id: e.messageId, short_id: e.shortId, prize: e.title, winners: e.winners, entrants: e.entrants, ends_at: null, ended_at: num(e.endedAt), host_id: e.hostId, required_role: e.requiredRoleId, min_age: e.minAccountAgeDays || 0, bonus_roles: [], bonus_users: [], winner_list: e.winnersList ?? [], image_url: e.imageUrl, prize_sent: !!e.prizeDmSent, prize_text: e.prizeDmText ?? null, updated_at: now });
   }
   const sig = JSON.stringify(rows.map(({ updated_at, ...r }) => r));
   if (!force && sig === last) return;
@@ -63,6 +77,11 @@ export async function giveawayJob(client, p) {
     case "clear_history": out = a.clearHistory(guild.id); break;
     case "participants": out = await a.participants(guild.id, { messageId: p.messageId }, ctx); if (!out.ok) fail(out); break;
     case "remove_entrant": out = await a.removeParticipant(guild.id, { messageId: p.messageId, userId: p.userId }, ctx); if (!out.ok) fail(out); break;
+    case "send_prize": {
+      out = await a.sendPrize(guild.id, { shortId: p.shortId, text: p.text, winnerId: p.winnerId || null, imageData: p.imageData || null, imageUrl: p.imageUrl || null }, ctx);
+      if (!out.ok) fail(out);
+      people.clear(); break;
+    }
     case "restart": out = await a.restartEmpty(guild.id, p, ctx); if (!out.ok) fail(out); break;
     case "update": {
       const patch = { ...(p.patch ?? {}) };

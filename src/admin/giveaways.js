@@ -18,7 +18,7 @@ const ERRORS = {
   bad_prize: "Give the giveaway a prize.", bad_winners: "Winners must be between 1 and 50.", bad_duration: "A giveaway lasts from 10 seconds up to 30 days.",
   bad_channel: "I can't use that channel for a giveaway.", bad_role: "I couldn't find one of the roles.", bad_age: "The minimum account age must be 0 to 3650 days.", bad_mention: "I couldn't find the role to ping.",
   guild_unavailable: "I can't see this server right now.", unknown_giveaway: "I couldn't find that giveaway.", not_found: "That giveaway isn't running (it may have ended).",
-  end_in_past: "The new end time would already be over.", too_long: "A giveaway can run for 30 days at most.", message_deleted: "The giveaway's message was deleted.", channel_gone: "The giveaway's channel is gone.",
+  end_in_past: "The new end time would already be over.", no_winners: "Nobody won this giveaway, so there is nobody to send a prize to.", empty_prize: "Write the prize message first.", unknown_winner: "That member is not a winner of this giveaway.", too_long: "A giveaway can run for 30 days at most.", message_deleted: "The giveaway's message was deleted.", channel_gone: "The giveaway's channel is gone.",
 };
 export const say = r => ERRORS[r?.error] ?? `${r?.error ?? "it failed"}${r?.detail ? ` (${r.detail})` : ""}`;
 const gaw = () => { const a = api(); if (!a) throw friendly("not loaded", "The giveaway system isn't available right now (it failed to load). Check the bot's log."); return a; };

@@ -78,6 +78,7 @@ function list(guildId, guild) {
       winners: d.winnersCount ?? 1, entrants: (d.entrants || []).length,
       endedAt: d.endedAt ?? d.createdAt ?? null,
       prizeDmSent: !!d.prizeDmSent,
+      prizeDmText: d.prizeDmText || null, // YSERLAB: what was last sent, shown in the app
       prizeSentTo: d.prizeSentTo || {},
       revealed: !!d.revealed,
       empty: !!d.empty || ((d.entrants || []).length === 0 && !(d.currentWinners || []).length),
