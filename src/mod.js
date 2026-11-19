@@ -2,7 +2,6 @@ import { PermissionFlagsBits as P } from "discord.js";
 import { permsOf, allowOf } from "./admin/guard.js";
 import { TOOLS, runTool } from "./admin/tools.js";
 import "./admin/control.js";
-import "./admin/giveaways.js";
 import { runWorkflow } from "./admin/workflows.js";
 import { audit } from "./admin/audit.js";
 import { confirmButtons } from "./admin/ui.js";
@@ -129,7 +128,7 @@ export async function moderate(message, args, config) {
   if (WORKFLOWS.has(action)) return runWorkflow(message, args, config);
   if (TOOLS[action]) {
     const channel = channelsOf(message, args.channel)[0];
-    if (!channel && args.channel && !/^(everyone|all)$/i.test(String(args.channel))) { const own = ["invite_create", "channel_create", "giveaway_start", "start_giveaway", "giveaway", "giveaway_create"].includes(action); if (!own) return textPost({ text: `I couldn't find the channel "${args.channel}".` }); }
+    if (!channel && args.channel && !/^(everyone|all)$/i.test(String(args.channel))) { const own = ["invite_create", "channel_create"].includes(action); if (!own) return textPost({ text: `I couldn't find the channel "${args.channel}".` }); }
     const extras = { channel: channel ?? message.channel, summarize, resolveMember: async () => { const id = await targetOf(message, args.user); if (id) extras.targetId = id; return id ? message.guild.members.fetch(id).catch(() => null) : null; } };
     const call = { ...args, channels: action === "announce" || action === "announce_rich" ? channelsOf(message, args.channel) : undefined };
     return runTool(message, action, call, config, extras);
