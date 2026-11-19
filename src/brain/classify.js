@@ -217,6 +217,16 @@ export function classify(raw, ctx = {}) {
   if (m && /channel|category|#|<#/.test(m[1])) return out(R("channel.delete", "delete_channel", { resource: "channel", target: { channel: /^(?:it|that|this|(?:the |that |this )?(?:channel|category))$/.test(m[1]) ? null : m[1].replace(/^#/, "") } }));
   if (/^(?:continue|resume|carry on|pick up)(?: where (?:we|i) (?:stopped|left off|were)| from before| that| again)?$/.test(t)) return out(R("context.resume", "context_resume"));
 
+  /* a permission that was just shown: "remove that permission", "take it away from everyone", "give it back" */
+  const showedPermission = convo.focus?.type === "permission";
+  const permTarget = txt => { if (!txt) return {}; const o = ordinalOf(txt); const names = txt.split(/\s*(?:,|\band\b|&)\s*/).map(x => x.replace(/^(?:the\s+)/, "").replace(/\s+channels?$/, "").replace(/^#/, "").trim()).filter(x => x && !/^(everyone|everybody|@everyone|all|them|those|these|it|that|this|all of them|every channel|all channels)$/.test(x) && ordinalOf(x) == null); return { ordinal: o, channels: names.length ? names : undefined }; };
+  m = /^(?:now |and |also |ok(?:ay)?[, ]+)*(?:remove|revoke|take away|take off|disable|turn off|delete|get rid of|cancel)\s+(?:that|this|those|these|the|it)\s+(?:permission|access|view access|visibility|view|right)s?(?:\s+(?:from|for|on|in)\s+(.+))?$/.exec(t0) ?? (showedPermission ? /^(?:now |and |also |ok(?:ay)?[, ]+)*(?:undo (?:it|that)|revert (?:it|that)|take (?:it|that|them) (?:away|off)|remove (?:it|that|them)|revoke (?:it|that)|turn (?:it|that) off|hide (?:them|those|these|it all)|make (?:them|those|these) (?:private|hidden))(?:\s+(?:from|for|on|in)\s+(.+))?$/.exec(t0) : null);
+  if (m) return out(R("permission.revoke", "permission_change", { resource: "permission", target: permTarget(m[1]), params: { what: "revoke" } }));
+  m = /^(?:now |and |also |ok(?:ay)?[, ]+)*(?:give|restore|add|grant|allow|bring)\s+(?:that|this|those|these|the|it)\s+(?:permission|access|view access|visibility|view|right)s?(?:\s+back)?(?:\s+(?:to|for|on|in)\s+(.+))?$/.exec(t0) ?? (showedPermission ? /^(?:now |and |also |ok(?:ay)?[, ]+)*(?:give (?:it|that|them) back|put (?:it|that|them) back|restore (?:it|that|them)|undo (?:that|it)|let (?:them|everyone) see (?:them|it|those))(?:\s+(?:to|for|on|in)\s+(.+))?$/.exec(t0) : null);
+  if (m) return out(R("permission.grant", "permission_change", { resource: "permission", target: permTarget(m[1]), params: { what: "grant" } }));
+  m = /^(?:now |and |also )*(?:hide|make private)\s+(?:the\s+)?((?:first|second|third|fourth|fifth|last)(?: one| channel)?|(?:number|no\.?)\s*\d+)(?:\s+from\s+(?:everyone|everybody))?$/.exec(t0);
+  if (m) return out(R("channel.access", "channel_access", { resource: "channel", target: { channel: null, ordinal: ordinalOf(m[1]) }, params: { access: "private", roles: null } }));
+
   /* creating things */
   m = /\b(create|make|add|new|set up|build|put)\b\s+(?:an?\s+|the\s+|another\s+)?(?:new\s+)?(.*)$/.exec(t0);
   if (m) {
@@ -353,4 +363,4 @@ export function classifyMulti(original, ctx = {}) {
 }
 
 /** True for the intents the classifier owns and can run without a language model. */
-export const OWNED = new Set(["members.list", "members.byRole", "members.search", "members.count", "members.online", "server.overview", "roles.list", "channels.list", "channels.visibility", "channel.info", "invite.create", "draft.write", "draft.approve", "draft.revise", "draft.restore", "draft.show", "draft.send", "message.pin", "message.delete", "message.edit", "channel.create", "category.create", "role.create", "channel.access", "channel.rename", "channel.delete", "role.assign", "role.remove", "compound.setup", "memory.remember", "memory.forget", "memory.show", "repeat", "context.resume", "correction.channel"]);
+export const OWNED = new Set(["members.list", "members.byRole", "members.search", "members.count", "members.online", "server.overview", "roles.list", "channels.list", "channels.visibility", "permission.revoke", "permission.grant", "channel.info", "invite.create", "draft.write", "draft.approve", "draft.revise", "draft.restore", "draft.show", "draft.send", "message.pin", "message.delete", "message.edit", "channel.create", "category.create", "role.create", "channel.access", "channel.rename", "channel.delete", "role.assign", "role.remove", "compound.setup", "memory.remember", "memory.forget", "memory.show", "repeat", "context.resume", "correction.channel"]);

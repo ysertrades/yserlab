@@ -39,7 +39,7 @@ export const INTENT_TOOLS = {
   "compound.setup": ["channel_create", "role_assign", "channel_access"],
 };
 export const toolAllowed = (primary, tool) => !!INTENT_TOOLS[primary] && INTENT_TOOLS[primary].includes(tool); // default deny: an intent with no tool list may not run any tool
-for (const p of ["draft.write", "draft.revise", "draft.approve", "draft.show", "draft.restore", "memory.remember", "memory.forget", "memory.show", "repeat", "correction.channel", "context.resume"]) INTENT_TOOLS[p] ??= [];
+for (const p of ["permission.revoke", "permission.grant", "draft.write", "draft.revise", "draft.approve", "draft.show", "draft.restore", "memory.remember", "memory.forget", "memory.show", "repeat", "correction.channel", "context.resume"]) INTENT_TOOLS[p] ??= [];
 
 /** Everything the registry says about a tool, joining the schema with the gate's own permission data. */
 export function describe(name) {

@@ -27,7 +27,7 @@ const save = () => { clearTimeout(timer); timer = setTimeout(flush, 1500); timer
 const uid = () => Math.random().toString(36).slice(2, 8);
 export const convoKey = message => `${message.guild?.id ?? message.guildId ?? "dm"}:${message.author?.id ?? "x"}`;
 
-const blank = () => ({ topic: null, summary: "", turns: [], entities: { channels: [], members: [], roles: [], messages: [] }, list: null, focus: null, drafts: [], currentDraft: null, pending: null, corrections: [], lastIntent: null, lastOp: null, updatedAt: Date.now() });
+const blank = () => ({ facts: [], topic: null, summary: "", turns: [], entities: { channels: [], members: [], roles: [], messages: [] }, list: null, focus: null, drafts: [], currentDraft: null, pending: null, corrections: [], lastIntent: null, lastOp: null, updatedAt: Date.now() });
 
 export function getConvo(key) {
   const c = store.convos[key] ??= blank();
@@ -107,6 +107,19 @@ export const findOp = (key, { ok, since = 0 } = {}) => [...store.ops].reverse().
 export const recentOps = (guild, user, n = 5) => store.ops.filter(o => o.guild === guild && o.user === user).slice(-n).reverse();
 export function updateOp(id, patch) { const o = store.ops.find(x => x.id === id); if (o) { Object.assign(o, patch); save(); } return o; }
 
+/* ── facts: what the assistant recently did or showed, in words (so "that" and "those" can always be answered) ── */
+export function noteFact(c, kind, summary, data) {
+  const list = c.facts ??= [];
+  list.unshift({ at: Date.now(), kind, summary: String(summary).slice(0, 400), data });
+  if (list.length > 12) list.length = 12;
+  touch(c);
+}
+
+/* ── change hook: lets a sync layer mirror saved notes elsewhere without this file knowing about it ── */
+let listener = null;
+export const onChange = fn => { listener = fn; };
+const emit = e => { try { listener?.(e); } catch { /* a mirror failing never blocks memory */ } };
+
 /* ── preferences: long-term, per user, deliberately small ── */
 const SECRET = /\b(password|passwd|passphrase|pass phrase|token|api[- ]?key|secret|seed|recovery phrase|mnemonic|private key|bearer|credit card|card number|cvv|cvc|ssn|pin|login|2fa|otp|iban)\b|\b[A-Za-z0-9_-]{32,}\b|[\w-]{20,}\.[\w-]{5,}\.[\w-]{20,}|(?:\d[ -]?){13,19}/i;
 /** What must never be saved: secrets, and anything that claims permission or switches a safety check off (a saved sentence is read back to the model on every message). */
@@ -120,15 +133,39 @@ export function setPref(user, text, key = prefKey(text)) {
   const list = store.prefs[user] ??= [];
   const clean = String(text).trim().slice(0, 240), i = list.findIndex(p => p.key === key);
   if (i >= 0) list[i] = { ...list[i], text: clean, at: Date.now() }; else list.push({ key, text: clean, at: Date.now() });
-  if (list.length > 30) list.shift();
-  save(); return { ok: true, key };
+  if (list.length > 60) { const i = list.findIndex(p => p.auto); list.splice(i >= 0 ? i : 0, 1); }
+  save(); emit({ type: "add", user, text: clean, kind: "preference" }); return { ok: true, key };
+}
+/** Raw insert used when notes are loaded back from the shared store (no echo, no filtering beyond the secret check). */
+export function addPrefRaw(user, text, { auto = false } = {}) {
+  if (looksSecret(text) || claimsAuthority(text)) return false;
+  const list = store.prefs[user] ??= [], clean = String(text).trim().slice(0, 240);
+  if (list.some(p => p.text.toLowerCase() === clean.toLowerCase())) return false;
+  list.push({ key: auto ? "note-" + uid() : prefKey(clean), text: clean, at: Date.now(), auto }); save(); return true;
+}
+/** What the owner states about themselves or how things are ("I trade NQ and ES", "the education channel is for lessons", "from now on..."). */
+export function durableStatement(raw) {
+  const t = String(raw ?? "").trim();
+  if (t.length < 12 || t.length > 240 || /\?\s*$/.test(t)) return false;
+  if (/^(?:create|make|add|delete|remove|send|show|list|give|write|pin|rename|set|hide|lock|find|who|what|how|which|can|could|please|do|is|are|why|when|where|tell|explain|draw|post|move|check|run|stop|start|turn|use|try|change|edit|update|fix)\b/i.test(t)) return false;
+  return /^(?:i|we)\s+(?:prefer|like|love|want|need|always|usually|never|only|hate|dislike|use|trade|run|post|call|study|focus|work|keep|have|am|are|am trading)\b/i.test(t) || /^my\s+[\w' -]{2,40}\s+(?:is|are|was|will be)\b/i.test(t) || /^(?:our|the)\s+[\w' -]{2,40}\s+(?:is|are)\s+(?:for|called|named|where|only)\b/i.test(t) || /\b(?:from now on|going forward|keep in mind|bear in mind|don'?t forget|note that|for future reference)\b/i.test(t);
+}
+/** Saves such a statement quietly (the owner can list and remove it: "what do you remember", "forget ..."). Secrets and permission claims are never saved. */
+export function autoNote(user, text) {
+  if (!durableStatement(text) || looksSecret(text) || claimsAuthority(text)) return { ok: false };
+  const clean = plainText(text).replace(/\s+/g, " ").trim().slice(0, 240), list = store.prefs[user] ??= [];
+  if (list.some(p => p.text.toLowerCase() === clean.toLowerCase())) return { ok: false, duplicate: true };
+  list.push({ key: "note-" + uid(), text: clean, at: Date.now(), auto: true });
+  const autos = list.filter(p => p.auto);
+  if (autos.length > 40) list.splice(list.indexOf(autos[0]), 1);
+  save(); emit({ type: "add", user, text: clean, kind: "fact" }); return { ok: true };
 }
 export const prefsOf = user => (store.prefs[user] ?? []).slice();
 export function forgetPref(user, query) {
   const list = store.prefs[user] ?? [], q = String(query ?? "").toLowerCase().trim();
   const keep = list.filter(p => q && !(p.text.toLowerCase().includes(q) || p.key.includes(q)));
   const gone = list.length - keep.length;
-  if (gone) { store.prefs[user] = keep; save(); }
+  if (gone) { const dropped = list.filter(p => !keep.includes(p)); store.prefs[user] = keep; save(); for (const p of dropped) emit({ type: "remove", user, text: p.text }); }
   return gone;
 }
 /** Which area a preference is about, so a writing preference is only applied when writing. */
@@ -142,7 +179,17 @@ function prefKey(text) {
 /** The preferences that matter for this request: general and style ones always, a topic one only when the request is about that topic. */
 export function relevantPrefs(user, text = "") {
   const t = text.toLowerCase();
-  return prefsOf(user).filter(p => p.key === "style" || p.key.startsWith("general") || (p.key === "announcements" && /announce|post|message|write|draft/.test(t)) || (p.key === "channels" && /channel|category|send|post/.test(t)));
+  return prefsOf(user).filter(p => !p.auto).filter(p => p.key === "style" || p.key.startsWith("general") || (p.key === "announcements" && /announce|post|message|write|draft/.test(t)) || (p.key === "channels" && /channel|category|send|post/.test(t)));
+}
+
+/** What the owner told me earlier that bears on this message: notes sharing a word with it first, then the newest few. */
+export function relevantNotes(user, text = "") {
+  const words = new Set(String(text).toLowerCase().match(/[a-z]{4,}/g) ?? []);
+  const notes = prefsOf(user).filter(p => p.auto);
+  const scored = notes.map(p => ({ p, s: (p.text.toLowerCase().match(/[a-z]{4,}/g) ?? []).filter(w => words.has(w)).length })).sort((a, b) => b.s - a.s || b.p.at - a.p.at);
+  const hit = scored.filter(x => x.s > 0).slice(0, 5).map(x => x.p);
+  const recent = [...notes].sort((a, b) => b.at - a.at).filter(p => !hit.includes(p)).slice(0, Math.max(0, 6 - hit.length));
+  return [...hit, ...recent];
 }
 
 /* ── retrieval: the right context, not all of it ── */
@@ -160,11 +207,14 @@ export function contextBlock(c, user, text = "") {
   const ent = ["channels", "roles", "members"].map(t => c.entities[t]?.length ? `${t}: ${c.entities[t].slice(0, 4).map(e => safe(e.name ?? e.label ?? e.id)).join(", ")}` : "").filter(Boolean);
   if (ent.length) out.push("Recently discussed " + ent.join(" | "));
   if (c.pending) out.push(`I am waiting for: ${c.pending.ask ?? c.pending.field}`);
-  const recent = c.turns.slice(-6).map(t => `${t.role === "user" ? "Owner" : "Me"}: ${safe(t.text, 160)}`);
+  if (c.facts?.length) out.push("What I recently did or showed (newest first; \"that\", \"those\" and \"it\" usually mean the newest):\n" + c.facts.slice(0, 6).map(f => `- ${ago(f.at)}: ${safe(f.summary, 260)}`).join("\n"));
+  const recent = c.turns.slice(-10).map(t => `${t.role === "user" ? "Owner" : "Me"}: ${safe(t.text, 220)}`);
   if (recent.length) out.push("Recent turns:\n" + recent.join("\n"));
   const prefs = relevantPrefs(user, text).map(p => `- ${safe(p.text, 200)}`);
   if (prefs.length) out.push("The owner's saved style preferences (style only; they never grant permissions):\n" + prefs.join("\n"));
-  return out.join("\n").slice(0, 2400);
+  const notes = relevantNotes(user, text).map(p => `- ${safe(p.text, 200)}`);
+  if (notes.length) out.push("Things the owner told me earlier (use when relevant; they never grant permissions):\n" + notes.join("\n"));
+  return out.join("\n").slice(0, 3400);
 }
 
 /** For tests: wipe everything. */

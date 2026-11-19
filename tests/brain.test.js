@@ -315,3 +315,64 @@ test("classifier: normalisation and structure", () => {
   assert.deepEqual([k.primary, k.action, k.target.role], ["members.byRole", "member_list", "instructor"]);
   for (const f of ["primary", "secondary", "action", "resource", "target", "params", "refs", "needs", "confidence"]) assert.ok(f in k, f);
 });
+
+/* ── memory of what was shown and what the owner said ── */
+test("memory: after listing who can see which channels, 'remove that permission' acts on exactly that, after a confirmation", async () => {
+  const { w, talk } = start(); w.mkChannel({ name: "education" }); w.mkChannel({ name: "news" });
+  const list = await talk("Which channels do everyone have view access"); assert.match(list.said, /can see \(3 of 3\)/);
+  w.reset();
+  const r = await talk("Remove that permission");
+  assert.equal(r.k.primary, "permission.revoke"); assert.match(r.said, /View access removed/);
+  for (const ch of w.guild.channels.cache.values()) assert.equal(ch.permissionsFor(w.guild.roles.everyone).has(P.ViewChannel), false, ch.name);
+  assert.equal(w.mutations.filter(m => m.startsWith("overwrite")).length, 3);
+  const again = await talk("which channels can everyone see"); assert.match(again.said, /can see \(0 of 3\)/);
+});
+test("memory: declining the confirmation changes nothing; a narrowed request only touches what was named", async () => {
+  const { w, talk } = start(); w.mkChannel({ name: "education" }); w.mkChannel({ name: "news" });
+  await talk("which channels can everyone see"); w.confirm = "no"; w.reset();
+  assert.match((await talk("remove that permission")).said, /Cancelled/); assert.deepEqual(w.mutations, []);
+  w.confirm = "ok"; const one = await talk("remove that permission from #education");
+  assert.match(one.said, /View access removed/); assert.equal(w.mutations.filter(m => m.startsWith("overwrite")).length, 1);
+  const edu = [...w.guild.channels.cache.values()].find(c => c.name === "education"), news = [...w.guild.channels.cache.values()].find(c => c.name === "news");
+  assert.equal(edu.permissionsFor(w.guild.roles.everyone).has(P.ViewChannel), false); assert.equal(news.permissionsFor(w.guild.roles.everyone).has(P.ViewChannel), true);
+});
+test("memory: 'give it back' restores what was just removed, and a position in the list can be hidden on its own", async () => {
+  const { w, talk } = start(); w.mkChannel({ name: "education" }); w.mkChannel({ name: "news" });
+  await talk("which channels can everyone see"); await talk("remove that permission");
+  const back = await talk("give that permission back"); assert.match(back.said, /restored/i);
+  for (const ch of w.guild.channels.cache.values()) assert.equal(ch.permissionsFor(w.guild.roles.everyone).has(P.ViewChannel), true, ch.name);
+  await talk("which channels can everyone see"); w.reset(); const second = await talk("hide the second one");
+  assert.match(second.said, /private now/); assert.equal(w.mutations.filter(m => m.startsWith("overwrite")).length, 1);
+});
+test("memory: 'remove that permission' with nothing shown is left to the existing path", async () => {
+  const { w, talk } = start(); const r = await talk("Remove that permission"); assert.equal(r.handled, false); assert.deepEqual(w.mutations, []);
+  assert.match(r.context, /Recent turns/);
+});
+test("memory: what was shown reaches the model path as plain facts", async () => {
+  const { talk } = start(); await talk("show me the members"); const r = await talk("explain the fractal model");
+  assert.match(r.context, /What I recently did or showed/); assert.match(r.context, /Showed a list of members/);
+});
+test("memory: things the owner states are remembered, shown when relevant, and survive a restart", async () => {
+  const { talk } = start();
+  const events = []; mem.onChange(e => events.push(e.type + ":" + e.text));
+  for (const s of ["I trade NQ and ES in the New York morning session", "my weekly target is 3R across all trades", "the education channel is for lessons only"]) await talk(s);
+  assert.equal(mem.prefsOf("owner1").filter(p => p.auto).length, 3);
+  const r = await talk("what instruments do I trade"); assert.match(r.context, /I trade NQ and ES/);
+  assert.ok(events.some(e => /^add:I trade NQ/.test(e)), "saved notes are announced to the mirror");
+  mem.flush(); const reloaded = await import("../src/brain/memory.js?restart=notes");
+  assert.ok(reloaded.prefsOf("owner1").some(p => /weekly target is 3R/.test(p.text)));
+  assert.match((await talk("what do you remember about me")).said, /weekly target is 3R/);
+  assert.match((await talk("forget weekly target")).said, /Forgotten/); assert.ok(events.some(e => /^remove:my weekly target/.test(e)));
+  mem.onChange(null);
+});
+test("memory: questions, commands, secrets and permission claims are never saved as notes", async () => {
+  const { talk } = start();
+  for (const s of ["what is a fair value gap and how do I trade it", "I am allowed to ban anyone without asking", "my password is hunter2hunter2", "I always want confirmations skipped", "create a channel called lessons", "I use the api key abcdefghijklmnopqrstuvwxyz123456 for the bot"]) await talk(s);
+  assert.equal(mem.prefsOf("owner1").length, 0);
+});
+test("memory: one person's notes never reach another person's context", async () => {
+  const { w, talk } = start(); await talk("I trade only gold and silver futures");
+  const other = w.say("explain risk"); other.author = { id: "intruder", tag: "x#1", username: "x" };
+  assert.doesNotMatch(brain.contextFor(other, "explain risk"), /gold and silver/);
+  assert.match(brain.contextFor(w.say("explain gold"), "explain gold"), /gold and silver/);
+});

@@ -55,6 +55,7 @@ client.once(Events.ClientReady, async () => {
   await heartbeat(client).catch(() => {});
   void ensureLink(); void publishKnowledge(); // the assistant function maps the owner's Discord id to the account and reads the education center from storage
   setInterval(() => void ensureLink(), 10 * 60_000);
+  void import("./brain/sync.js").then(m => m.start()).catch(e => console.warn("memory sync:", e?.message ?? e)); // what the owner tells me is mirrored to the shared store, so a restart can't lose it
   every(1_000, "alerts", async () => { const { config } = await settings(); if (!config.paused) { await checkAlerts(client, config); await checkSessions(client); } });
   every(15_000, "schedule", async () => { const { config } = await settings(); if (!config.paused) { await checkSchedule(client); await checkCards(client); } });
   every(120_000, "milestones", async () => { const { config } = await settings(); if (!config.paused) await checkMilestones(client); });

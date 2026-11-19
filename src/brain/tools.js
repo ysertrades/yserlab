@@ -114,7 +114,8 @@ Object.assign(TOOLS, {
       const see = rows.filter(r => r.view), hide = rows.filter(r => !r.view), ro = see.filter(r => !r.send);
       const list = rs => rs.slice(0, 40).map(r => `• ${r.c}${r.c.parent ? " · " + r.c.parent.name : ""}${r.view && !r.send && mode !== "readonly" ? " (read only)" : ""}`).concat(rs.length > 40 ? [`-# and ${rs.length - 40} more`] : []);
       const pick = mode === "hidden" ? hide : mode === "readonly" ? ro : see;
-      Object.assign(result, { visible: see.length, hidden: hide.length, readonly: ro.length });
+      const brief = rs => rs.map(r => ({ id: r.c.id, name: r.c.name }));
+      Object.assign(result, { visible: see.length, hidden: hide.length, readonly: ro.length, visibility: { role: { id: role.id, name: role.id === guild.id ? "@everyone" : role.name }, mode, visible: brief(see), hidden: brief(hide), readonly: brief(ro) } });
       const title = mode === "hidden" ? `Hidden from ${label} (${hide.length})` : mode === "readonly" ? `Read-only for ${label} (${ro.length})` : `Channels ${label} can see (${see.length} of ${rows.length})`;
       return panel({ title: title.replace(/\*\*/g, ""), accent: "accent", lines: [pick.length ? list(pick).join("\n") : "None.", mode === "visible" && hide.length ? `\n🔒 Hidden from ${label}: ${hide.length} channel${hide.length === 1 ? "" : "s"}` : "", "-# From each channel's permissions as Discord reports them; a role with Administrator sees everything."].filter(Boolean) });
     },

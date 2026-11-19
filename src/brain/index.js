@@ -1,6 +1,6 @@
 import { ChannelType } from "discord.js";
 import { runTool, findRole, TOOLS } from "../admin/tools.js";
-import { userMissing } from "../admin/guard.js";
+import { userMissing, botMissing } from "../admin/guard.js";
 import { PermissionFlagsBits as P } from "discord.js";
 import { confirmButtons, panel } from "../admin/ui.js";
 import { intentOf } from "../admin/intent.js";
@@ -68,6 +68,14 @@ function absorb(c, r) {
   } else if (x.kind === "role") { const item = { id: x.id, name: x.name }; mem.noteEntity(c, "roles", item); mem.setFocus(c, "role", item, "created"); }
   else if (x.kind === "message") { const item = { id: x.id, channelId: x.channelId, name: `message in #${x.channelName ?? "?"}`, channelName: x.channelName, text: clip(x.text, 160), url: x.url }; if (!x.deleted) { mem.noteEntity(c, "messages", item); mem.setFocus(c, "message", item, x.edited ? "edited" : "sent"); } else c.entities.messages = c.entities.messages.filter(m => m.id !== x.id); }
   else if (x.kind === "role_change") { mem.noteEntity(c, "members", { id: x.memberId, name: x.memberId }); mem.setFocus(c, "member", { id: x.memberId, name: x.memberId }, "role changed"); }
+  if (x.visibility) {
+    const v = x.visibility, names = rs => rs.map(r => "#" + r.name).join(", ") || "none";
+    mem.setFocus(c, "permission", [{ id: v.role.id, name: `view access for ${v.role.name}`, perm: "ViewChannel", role: v.role, mode: v.mode, visible: v.visible, hidden: v.hidden, readonly: v.readonly }], "listed");
+    mem.setList(c, "channels", (v.mode === "hidden" ? v.hidden : v.mode === "readonly" ? v.readonly : v.visible).map(ch => ({ id: ch.id, label: ch.name })), { permission: true });
+    mem.noteFact(c, "permission", `Showed which channels ${v.role.name} can see. Can see (${v.visible.length}): ${names(v.visible)}. Hidden (${v.hidden.length}): ${names(v.hidden)}. The permission was View Channel for ${v.role.name}.`, { role: v.role, mode: v.mode, visible: v.visible, hidden: v.hidden, readonly: v.readonly });
+  }
+  if (x.list && x.list.items?.length) mem.noteFact(c, "list", `Showed a list of ${x.list.kind}${x.role ? " with " + x.role.name : ""} (${x.list.items.length}): ${x.list.items.slice(0, 8).map(i => i.label).join(", ")}`, { kind: x.list.kind });
+  if (x.kind && x.id && !x.visibility && !x.list) mem.noteFact(c, "result", `${x.deleted ? "Deleted" : x.edited ? "Edited" : x.pinned ? "Pinned" : "Made"} ${x.kind} ${x.name ?? x.channelName ?? x.id}`, { id: x.id, kind: x.kind });
   if (x.list?.items?.length === 1) mem.noteEntity(c, "members", { id: x.list.items[0].id, name: x.list.items[0].label });
   if (x.list) { mem.setList(c, x.list.kind, x.list.items, { role: x.role, total: x.list.total }); mem.setFocus(c, "members", x.list.items, "listed"); if (x.role) mem.noteEntity(c, "roles", x.role); }
 }
@@ -201,6 +209,7 @@ const HANDLERS = {
     const { c, message } = env, guild = message.guild;
     let channel = null;
     if (env.picked?.channelId) channel = guild.channels.cache.get(env.picked.channelId);
+    else if (k.target.ordinal != null && c.list?.kind === "channels") { const p = pickFromList(c.list, k.target.ordinal < 0 ? "last" : ["first", "second", "third", "fourth", "fifth"][k.target.ordinal] ?? `number ${k.target.ordinal + 1}`); if (p.item) channel = guild.channels.cache.get(p.item.id); else if (p.outOfRange) return say(`The last list had only ${p.count} channels.`, { ok: false }); }
     else if (k.target.channel) { const r = channelFor(env, k, k.target.channel); if (r.reply) return r.reply; channel = r.channel; }
     else { const f = c.focus?.type === "channel" || c.focus?.type === "category" ? c.focus.items[0] : c.entities.channels.find(fresh); channel = f ? guild.channels.cache.get(f.id) : null; }
     if (!channel) return asked(c, k, "channel", "Which channel do you mean?");
@@ -240,6 +249,8 @@ const HANDLERS = {
     if (!p) { const d = mem.currentDraft(env.c); return d ? posts([showDraft(d, "This is where we stopped.")], { ok: true }) : say("Nothing was left unfinished in this conversation.", { ok: false }); }
     env.c.parked = null; mem.setPending(env.c, p); return { ...say(p.ask ?? "Where were we? Tell me what's missing.", { ok: true }), resumed: p.k };
   },
+  async "permission.revoke"(env, k) { return permissionChange(env, k, "revoke"); },
+  async "permission.grant"(env, k) { return permissionChange(env, k, "grant"); },
   async "channel.rename"(env, k) { return channelEdit(env, k, "rename"); },
   async "channel.delete"(env, k) { return channelEdit(env, k, "delete"); },
 
@@ -345,6 +356,48 @@ async function roleChange(env, k, remove) {
   record(env, "role_assign", r, { targetId: m.id });
   if (r.outcome.ok) { absorb(c, r); mem.noteEntity(c, "members", { id: m.id, name }); mem.noteEntity(c, "roles", { id: rr.role.id, name: rr.role.name }); c.lastIntent = k; }
   return posts([r.post], { ok: !!r.outcome.ok, k });
+}
+
+/**
+ * "Remove that permission" / "give it back": acts on the permission the assistant last showed (for example View Channel for @everyone on the
+ * channels listed), after listing exactly what will change and asking for confirmation. Every change is read back from Discord.
+ */
+async function permissionChange(env, k, what) {
+  const { c, message } = env, guild = message.guild, revoke = what === "revoke";
+  const f = (c.focus?.type === "permission" && fresh(c.focus) ? c.focus.items[0] : null) ?? c.facts?.find(x => x.kind === "permission" && Date.now() - x.at < FRESH * 2)?.data ?? null;
+  if (!f) return { handled: false }; // nothing was shown that "that permission" could mean: the existing path decides
+  const role = guild.roles.cache.get(f.role?.id) ?? guild.roles.everyone, label = role.id === guild.id ? "@everyone" : role.name;
+  let pool = (revoke ? f.visible : f.hidden) ?? [];
+  if (k.target.ordinal != null && c.list?.kind === "channels") { const p = pickFromList(c.list, k.target.ordinal < 0 ? "last" : ["first", "second", "third", "fourth", "fifth"][k.target.ordinal] ?? `number ${k.target.ordinal + 1}`); if (p.outOfRange) return say(`The last list had only ${p.count} channels.`, { ok: false }); pool = p.item ? [{ id: p.item.id, name: p.item.label }] : pool; }
+  if (k.target.channels?.length) {
+    const want = k.target.channels.map(n => { const r = resolveChannel(guild, n, { current: message.channel }); return r.channel?.id; });
+    if (want.some(x => !x)) return say(`I couldn't match ${k.target.channels.filter((n, i) => !want[i]).map(n => '"' + n + '"').join(", ")} to a channel.`, { ok: false });
+    pool = pool.filter(x => want.includes(x.id));
+  }
+  const chans = pool.map(x => guild.channels.cache.get(x.id)).filter(Boolean);
+  if (!chans.length) return say(revoke ? `${label} can't see any of those channels, so there's nothing to remove.` : `There are no hidden channels from that list to give ${label} access to.`, { ok: true });
+  const lacks = userMissing(message, [P.ManageChannels, P.ManageRoles]);
+  if (lacks.length) return say(`You don't have the Discord permission for that (${lacks.join(", ")}), so I can't change channel access for you.`, { ok: false });
+  const botLacks = chans.map(ch => botMissing(guild, [P.ManageChannels, P.ManageRoles], ch)).find(x => x.length);
+  if (botLacks) return say(`I can't do that: I'm missing ${botLacks.join(", ")} on at least one of those channels.`, { ok: false });
+  const ok = await confirmButtons(message, { title: `${revoke ? "Remove" : "Give back"} View Channel ${revoke ? "from" : "for"} ${label} on ${chans.length} channel${chans.length === 1 ? "" : "s"}?`, lines: [...chans.slice(0, 15).map(ch => `• ${ch}`), chans.length > 15 ? `-# and ${chans.length - 15} more` : "", revoke ? "They will no longer be able to see these channels." : "This puts their access back to the default for these channels."].filter(Boolean), ttl: 30_000 });
+  if (!ok) return say("Cancelled. Nothing was changed.", { ok: false });
+  const lines = [], done = [];
+  for (const ch of chans) {
+    try {
+      await ch.permissionOverwrites.edit(role, { ViewChannel: revoke ? false : null }, { reason: `Asked by ${message.author?.tag ?? "the owner"} via YSER Lab` });
+      const back = await guild.channels.fetch(ch.id, { force: true }).catch(() => null), sees = !!back?.permissionsFor(role)?.has(P.ViewChannel);
+      if (revoke ? sees : false) { lines.push(`❌ ${ch}: it is still visible (a category or role setting overrides it)`); continue; }
+      lines.push(`✅ ${ch}${!revoke && !sees ? " (reset, but another setting still hides it)" : ""}`); done.push(ch);
+    } catch (e) { lines.push(`❌ ${ch}: ${/Missing/i.test(String(e?.message)) ? "I'm missing a permission there" : "Discord refused it"}`); }
+  }
+  const moved = new Set(done.map(d => d.id));
+  const next = { ...f, visible: revoke ? f.visible.filter(x => !moved.has(x.id)) : [...f.visible, ...done.map(d => ({ id: d.id, name: d.name }))], hidden: revoke ? [...(f.hidden ?? []), ...done.map(d => ({ id: d.id, name: d.name }))] : (f.hidden ?? []).filter(x => !moved.has(x.id)) };
+  mem.setFocus(c, "permission", [{ ...c.focus?.items?.[0], ...next, id: f.role?.id, name: `view access for ${label}`, perm: "ViewChannel" }], "changed");
+  mem.noteFact(c, "permission", `${revoke ? "Removed" : "Restored"} View Channel for ${label} on ${done.map(d => "#" + d.name).join(", ") || "no channel"}`, next);
+  mem.recordOp({ guild: guild.id, user: env.uid, action: "channel_permission", ok: done.length === chans.length, ids: done.map(d => d.id).join(",") });
+  if (done.length) c.lastIntent = k;
+  return posts([panel({ title: done.length === chans.length ? (revoke ? "View access removed" : "View access restored") : "Partly done", accent: done.length === chans.length ? "up" : "amber", lines, footer: "Read back from Discord" })], { ok: done.length === chans.length, k });
 }
 
 /** Renames or deletes a channel the owner pointed at: by position in the last batch ("the second one"), or the one just made or discussed. */
@@ -468,6 +521,7 @@ async function handleNow(message, text, config, deps = {}) {
   let out = c.pending ? await answerPending(env) : null;
   if (!out) {
     const k = classify(text, { convo: c, roleNames: rolesOf(guild), draft: mem.currentDraft(c), channelNames: channelNamesOf(guild) });
+    if (k.primary === "unknown") mem.autoNote(uid, text); // something the owner told me (a preference, how things are): kept for later and shown when relevant
     if (k.primary === "unknown") return { handled: false, context: mem.contextBlock(c, uid, text), classified: k };
     if (k.correction && c.lastIntent) mem.addCorrection(c, { phrase: normalize(lastUserBefore(c)), wrong: c.lastIntent.primary, right: { primary: k.primary, action: k.action, params: k.params, target: k.target }, text });
     if (k.primary === "memory.remember") { const last = c.turns.at(-1); if (last?.role === "user") last.text = "(asked me to remember a preference)"; } // saved notes are never replayed as conversation text
