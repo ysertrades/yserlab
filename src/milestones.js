@@ -52,26 +52,23 @@ const DOWN = "#f06b6b";
 const day = d => d ? new Date(`${d}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
 const span = r => !r?.len ? "-" : r.from === r.to ? day(r.from) : `${day(r.from)} \u2013 ${day(r.to)}`;
 function streakBadge(m) {
-  const n = m.n, recent = (m.recent ?? []).slice(-28), cols = Math.max(recent.length, 1), PX = 112, PW = 976, gap = 8, bw = Math.min(30, (PW - (cols - 1) * gap) / cols);
+  const n = m.n, recent = (m.recent ?? []).slice(-28), cols = Math.max(recent.length, 1), PX = 88, PW = 1024, gap = 8, bw = Math.min(30, (PW - (cols - 1) * gap) / cols);
   const rx = PX + (PW - (cols * bw + (cols - 1) * gap)) / 2;
-  const ribbon = recent.map((r, i) => { const h = r.cur ? 92 : 62, x = rx + i * (bw + gap); return `<rect x="${x.toFixed(1)}" y="${(350 - h / 2).toFixed(1)}" width="${bw.toFixed(1)}" height="${h}" rx="6" fill="${r.win ? C.up : DOWN}" fill-opacity="${r.cur ? 1 : .42}"/>`; }).join("");
-  const card = (x, label, tone, run, kind) => `<rect x="${x}" y="412" width="476" height="124" rx="20" fill="#ffffff" fill-opacity=".04"/>
-    <circle cx="${x + 30}" cy="446" r="6" fill="${tone}"/><text x="${x + 46}" y="453" font-family="Inter, sans-serif" font-weight="600" font-size="19" letter-spacing="2" fill="${C.muted}">${label}</text>
-    <text x="${x + 28}" y="504" font-family="'Geist Mono', monospace" font-weight="600" font-size="44" fill="${tone}">${run?.len ?? 0}</text>
-    <text x="${x + 28 + String(run?.len ?? 0).length * 27 + 14}" y="504" font-family="Inter, sans-serif" font-weight="600" font-size="28" fill="${C.text}">${kind}${(run?.len ?? 0) === 1 ? "" : kind === "win" ? "s" : "es"}</text>
-    <text x="${x + 448}" y="504" text-anchor="end" font-family="Inter, sans-serif" font-weight="500" font-size="21" fill="#6f6f76">${esc(span(run))}</text>`;
+  const ribbon = recent.map((r, i) => { const h = r.cur ? 92 : 62, x = rx + i * (bw + gap); return `<rect x="${x.toFixed(1)}" y="${(306 - h / 2).toFixed(1)}" width="${bw.toFixed(1)}" height="${h}" rx="6" fill="${r.win ? C.up : DOWN}" fill-opacity="${r.cur ? 1 : .42}"/>`; }).join("");
+  const card = (x, label, tone, run, kind) => `<rect x="${x}" y="420" width="500" height="128" rx="20" fill="#ffffff" fill-opacity=".04"/>
+    <circle cx="${x + 30}" cy="456" r="6" fill="${tone}"/><text x="${x + 46}" y="463" font-family="Inter, sans-serif" font-weight="600" font-size="19" letter-spacing="2" fill="${C.muted}">${label}</text>
+    <text x="${x + 28}" y="516" font-family="'Geist Mono', monospace" font-weight="600" font-size="44" fill="${tone}">${run?.len ?? 0}</text>
+    <text x="${x + 28 + String(run?.len ?? 0).length * 27 + 14}" y="516" font-family="Inter, sans-serif" font-weight="600" font-size="28" fill="${C.text}">${kind}${(run?.len ?? 0) === 1 ? "" : kind === "win" ? "s" : "es"}</text>
+    <text x="${x + 472}" y="516" text-anchor="end" font-family="Inter, sans-serif" font-weight="500" font-size="21" fill="#6f6f76">${esc(span(run))}</text>`;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="${C.bg}"/>
-  <rect x="40" y="40" width="1120" height="550" rx="36" fill="${C.s1}" stroke="${C.up}" stroke-opacity=".55" stroke-width="2"/>
-  <g transform="translate(84 76) scale(.5)" fill="${C.text}">${MARK.map(d => `<path d="${d}"/>`).join("")}</g>
-  <text x="148" y="108" font-family="Inter, sans-serif" font-weight="800" font-size="24" letter-spacing="3" fill="${C.text}">YSER LAB</text>
-  <rect x="84" y="150" width="1032" height="406" rx="28" fill="#1b1b1e" stroke="#ffffff" stroke-opacity=".07" stroke-width="2"/>
-  <rect x="112" y="176" width="92" height="92" rx="28" fill="${C.up}" fill-opacity=".13" stroke="${C.up}" stroke-opacity=".28" stroke-width="2"/>
-  <g transform="translate(130 194) scale(2.2)" fill="none" stroke="${C.up}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${FLAME}"/></g>
-  <text x="228" y="206" font-family="Inter, sans-serif" font-weight="600" font-size="21" letter-spacing="3" fill="${C.muted}">CURRENT STREAK</text>
-  <text x="226" y="262" font-family="'Geist Mono', monospace" font-weight="600" font-size="62" fill="${C.up}">${n}</text>
-  <text x="${226 + String(n).length * 38 + 18}" y="260" font-family="Inter, sans-serif" font-weight="600" font-size="36" fill="${C.text}">${n === 1 ? "win" : "wins"} in a row</text>
+  <rect x="60" y="60" width="1080" height="510" rx="32" fill="#1b1b1e"/>
+  <rect x="88" y="96" width="92" height="92" rx="28" fill="${C.up}" fill-opacity=".13" stroke="${C.up}" stroke-opacity=".28" stroke-width="2"/>
+  <g transform="translate(106 114) scale(2.2)" fill="none" stroke="${C.up}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${FLAME}"/></g>
+  <text x="204" y="126" font-family="Inter, sans-serif" font-weight="600" font-size="21" letter-spacing="3" fill="${C.muted}">CURRENT STREAK</text>
+  <text x="202" y="182" font-family="'Geist Mono', monospace" font-weight="600" font-size="62" fill="${C.up}">${n}</text>
+  <text x="${202 + String(n).length * 38 + 18}" y="180" font-family="Inter, sans-serif" font-weight="600" font-size="36" fill="${C.text}">${n === 1 ? "win" : "wins"} in a row</text>
   ${ribbon}
-  ${card(112, "BEST RUN", C.up, m.bestWin, "win")}
+  ${card(88, "BEST RUN", C.up, m.bestWin, "win")}
   ${card(612, "WORST RUN", DOWN, m.worstLoss, "loss")}</svg>`;
 }
 
