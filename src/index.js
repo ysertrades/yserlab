@@ -1,4 +1,4 @@
-import { Client, Events, GatewayIntentBits, Partials } from "discord.js";
+import { Client, Events, GatewayIntentBits, MessageFlags, Partials } from "discord.js";
 import { env, missing } from "./env.js";
 import { settings, log } from "./store.js";
 import { isAdmin, mayUseAi } from "./access.js";
@@ -16,6 +16,9 @@ import { cardOnRequest } from "./cards.js";
 import { picturePost, galleryPost } from "./post.js";
 import { fonts } from "./render.js";
 import { moderate, sendFromApp, waiting } from "./mod.js";
+import { automod } from "./admin/automod.js";
+import { DANGEROUS, permNames } from "./admin/guard.js";
+import { intentOf } from "./admin/intent.js";
 import { remember } from "./people.js";
 import { pollJuice, publishTrump } from "./feeds.js";
 import { cancel, list as listJobs, schedule, tick as tickJobs } from "./sched.js";
@@ -76,14 +79,32 @@ async function runLater(job) {
   return job.kind === "mod" ? post : null; // a moderation action says what it did; a send already is the post
 }
 
-client.on(Events.MessageCreate, async message => {
+/** The role-picker buttons the administrator posts: press to add the role, press again to remove it. Refuses any role with powerful permissions or above the bot, and reads the result back. */
+client.on(Events.InteractionCreate, async interaction => {
+  if (!interaction.isButton() || !interaction.customId.startsWith("rolebtn:")) return;
+  const say = content => (interaction.deferred || interaction.replied ? interaction.editReply({ content }) : interaction.reply({ content, flags: MessageFlags.Ephemeral })).catch(() => {});
   try {
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+    const guild = interaction.guild, role = guild?.roles.cache.get(interaction.customId.slice(8)), me = guild?.members.me;
+    if (!role) return say("That role no longer exists.");
+    if (role.managed || !me?.permissions.has("ManageRoles") || role.position >= me.roles.highest.position) return say("I can't hand out that role right now. Ask an admin.");
+    if (permNames(role.permissions).some(p => DANGEROUS.includes(p))) return say("That role carries powerful permissions, so it can't be self-assigned.");
+    const had = interaction.member.roles.cache.has(role.id);
+    await (had ? interaction.member.roles.remove(role, "role panel") : interaction.member.roles.add(role, "role panel"));
+    const fresh = await guild.members.fetch({ user: interaction.user.id, force: true });
+    if (fresh.roles.cache.has(role.id) === had) return say("Discord did not apply that change. Try again.");
+    await say(had ? `Removed **${role.name}**.` : `You now have **${role.name}**.`);
+  } catch (e) { console.warn("role button:", e?.message ?? e); await say("I couldn't change that role just now."); }
+});
+
+client.on(Events.MessageCreate, async message => {  try {
     remember(message); // learns who is who, so "tag Ahmed" later means the right person
     // Never answers a bot, a webhook, a system message or itself (the bot's own posts and other bots' never start a conversation).
     if (message.author.bot || message.webhookId || message.system || message.author.id === client.user?.id || !message.content && !message.attachments.size) return;
     if (waiting.has(`${message.channelId}:${message.author.id}`)) return; // the answer to a question just asked (yes / no), not a new request
     const { config, owner } = await settings();
     if (config.paused) return;
+    if (await automod(message, config).catch(() => false)) return; // server protection, when the owner has switched it on
     const tagged = message.mentions.has(client.user, { ignoreEveryone: true, ignoreRoles: true });
     const channelId = message.channelId, parentId = message.channel.parentId;
     const open = (config.ai.channels ?? []).includes(channelId) || (!!parentId && (config.ai.channels ?? []).includes(parentId));
@@ -103,7 +124,9 @@ client.on(Events.MessageCreate, async message => {
     if (!text) { if (tagged) await message.reply({ content: "Yes? Ask me anything about your model or your trades.", allowedMentions: { repliedUser: false } }); return; }
     if (!owner) { await message.reply("Open YSER Lab in the app once so I know whose trades and model to use."); return; }
     await message.channel.sendTyping().catch(() => {});
-    const out = await askUnified({ owner, channelId, discordId: message.author.id, text, context: await channelContext(message) });
+    const quick = isAdmin(config, message.author.id) && message.guild ? intentOf(text, `${channelId}:${message.author.id}`) : null; // plain admin requests go straight to their tool
+    if (quick?.say) { await message.reply({ content: quick.say, allowedMentions: { repliedUser: false } }); return; }
+    const out = quick?.action ? { mod: { action: quick.action, ...quick.args } } : await askUnified({ owner, channelId, discordId: message.author.id, text, context: await channelContext(message) });
     if (out.chart) { await picker.startChart(message, owner, out.timeframe); return; }
     if (out.schedule) { // looking at, or cancelling, what is scheduled
       if (!isAdmin(config, message.author.id)) return;
@@ -115,9 +138,11 @@ client.on(Events.MessageCreate, async message => {
     }
     if (out.mod || out.send) { // moderation and sending: the owner's word only
       if (!isAdmin(config, message.author.id)) { await message.reply({ content: "Only my owner can do that.", allowedMentions: { repliedUser: false } }); return; }
-      const later = schedule(message, out.mod ? "mod" : "send", out.mod ?? out.send); // "in 30 seconds", "at 5 pm", "every weekday at 9": saved for then
+      const NOW_ONLY = new Set(["event_create", "create_event", "tempban", "workflow", "setup", "setup_category", "setup_course", "setup_vip"]); // their "at" / delay is part of the request, not a time to run it
+      const later = out.mod && NOW_ONLY.has(String(out.mod.action).toLowerCase()) ? null : schedule(message, out.mod ? "mod" : "send", out.mod ?? out.send); // "in 30 seconds", "at 5 pm", "every weekday at 9": saved for then
       if (later) { await message.channel.send(later); await log(out.mod ? "mod" : "send", { note: "scheduled" }); void noteResult(message.author.id, `(Scheduled: ${String(later.content ?? "").slice(0, 400)})`); return; }
       const post = out.mod ? await moderate(message, out.mod, config) : await sendFromApp(message, out.send, { owner, config });
+      if (!post) { await log("mod", { note: "completed (it reported in its own message)" }); return; }
       const sent = await message.channel.send(post).catch(async () => message.reply({ content: "Done, but I couldn't post the confirmation here." }).catch(() => null));
       if (out.mod) { // the owner's request goes after the action; a clean-up's confirmation stays four seconds and goes too
         const quiet = ["purge", "slowmode", "remind", "reminder", "alert"].includes(String(out.mod.action).toLowerCase());

@@ -49,6 +49,10 @@ export const DEFAULTS = {
     access: "owner",
     /** Channels and forums where the bot answers without being tagged. */
     channels: [],
+    /** The Discord administrator: incident = block every action; disabled = tool groups switched off; trusted = risky actions that run without a confirmation. */
+    admin: { incident: false, disabled: [], trusted: [], confirmSeconds: 30 },
+    /** Server protection (see admin/automod.js for every rule). Off until switched on. */
+    automod: { on: false },
   },
 };
 

@@ -1,4 +1,12 @@
 import { PermissionFlagsBits as P } from "discord.js";
+import { permsOf, allowOf } from "./admin/guard.js";
+import { TOOLS, runTool } from "./admin/tools.js";
+import "./admin/control.js";
+import { runWorkflow } from "./admin/workflows.js";
+import { audit } from "./admin/audit.js";
+import { confirmButtons } from "./admin/ui.js";
+import { env } from "./env.js";
+import { viaGemini, viaGroq } from "./ai.js";
 import { isAdmin } from "./access.js";
 import { newsPicture } from "./calendar/news.js";
 import { cardOnRequest } from "./cards.js";
@@ -50,19 +58,11 @@ const unsure = message => message.__ambiguous?.length ? `I'm not sure which one 
 const YES = /^\s*(y|yes|yeah|yep|yup|confirm|confirmed|do it|go|go ahead|sure|ok|okay)\b/i;
 /** Asks the owner to confirm, in the channel, naming who it is about; true only on a clear yes within 20 seconds. */
 /** Who is being asked right now (channel:user). Their reply is the answer to the question, so the main handler must not treat it as a new request. */
-export const waiting = new Set();
+export const waiting = new Set(); // kept for the main handler; confirmations are now buttons, so nothing waits on a typed reply
+/** Asks the requester to confirm with buttons that expire (see admin/ui.js); true only on Confirm. */
 async function confirm(message, text) {
-  if (!message.id || !message.channel?.awaitMessages) return true; // scheduled: nobody to ask
-  const key = `${message.channelId}:${message.author.id}`;
-  waiting.add(key);
-  try { return await ask_(message, text); } finally { setTimeout(() => waiting.delete(key), 1500); }
-}
-async function ask_(message, text) {
-  const ask = await message.channel.send({ content: `${text}\nReply **yes** within 20 seconds to do it.`, allowedMentions: { users: idsIn(text), parse: [] } });
-  const got = await message.channel.awaitMessages({ filter: m => m.author.id === message.author.id, max: 1, time: 20_000 }).catch(() => null);
-  const reply = got?.first();
-  ask.delete().catch(() => {}); if (reply && YES.test(reply.content)) reply.delete().catch(() => {});
-  return !!reply && YES.test(reply.content);
+  const [title, ...rest] = String(text).split("\n");
+  return confirmButtons(message, { title: title.replace(/\*\*/g, "**"), lines: rest, ttl: 30_000 });
 }
 
 /** Every channel a request names ("news, results and #general"), or this one. */
@@ -107,38 +107,6 @@ async function purge(channel, { count, userId, keepId }) {
 
 const mins = n => { n = Math.round(n); return n >= 1440 ? `${Math.round(n / 1440)} day${n >= 2880 ? "s" : ""}` : n >= 60 ? `${Math.round(n / 60)} hour${n >= 120 ? "s" : ""}` : `${n} minute${n === 1 ? "" : "s"}`; };
 
-/** What people say for each permission, mapped to Discord's own. "view" is seeing the channel at all; "send" is writing in it: they are different things. */
-const PERMS = [
-  [/\b(view|see|seeing|viewing|visible|visibility|access|show|hide|hidden)\b/, "ViewChannel", "view the channel"],
-  [/\b(read ?(the )?history|history|read messages|past messages)\b/, "ReadMessageHistory", "read message history"],
-  [/\b(send|sending|write|writing|talk|talking|chat|chatting|speak in text|post|posting|messages?)\b/, "SendMessages", "send messages"],
-  [/\b(react|reacting|reactions?)\b/, "AddReactions", "add reactions"],
-  [/\b(attach|attachments?|files?|upload|uploads|images?|pictures?)\b/, "AttachFiles", "attach files"],
-  [/\b(embed|embeds|links?)\b/, "EmbedLinks", "embed links"],
-  [/\b(mention ?everyone|@everyone|everyone ping|ping everyone)\b/, "MentionEveryone", "mention @everyone"],
-  [/\b(external emoji|custom emoji|emojis?)\b/, "UseExternalEmojis", "use external emoji"],
-  [/\b(stickers?)\b/, "UseExternalStickers", "use external stickers"],
-  [/\b(threads?)\b/, "CreatePublicThreads", "create threads"],
-  [/\b(slash|app commands?|bot commands?|commands?)\b/, "UseApplicationCommands", "use commands"],
-  [/\b(polls?)\b/, "SendPolls", "create polls"],
-  [/\b(manage messages|delete messages|pin)\b/, "ManageMessages", "manage messages"],
-  [/\b(invites?)\b/, "CreateInstantInvite", "create invites"],
-  [/\b(connect|join|joining)\b/, "Connect", "connect to voice"],
-  [/\b(speak|speaking|voice|mic|microphone)\b/, "Speak", "speak in voice"],
-  [/\b(stream|streaming|video|camera|screen ?share)\b/, "Stream", "stream"],
-];
-const permsOf = spec => {
-  const out = [];
-  for (const part of String(spec ?? "").toLowerCase().split(/\s*(?:,|&|\+|\band\b|\/)\s*/).filter(Boolean)) {
-    const direct = Object.keys(P).find(k => k.toLowerCase() === part.replace(/[^a-z]/g, ""));
-    if (direct) { out.push([direct, part]); continue; }
-    const hit = PERMS.find(([re]) => re.test(part));
-    if (hit) out.push([hit[1], hit[2]]);
-  }
-  return [...new Map(out.map(x => [x[0], x])).values()];
-};
-const allowOf = v => /^(false|no|off|deny|denied|remove|disable|disallow|block|hide)$/i.test(String(v ?? "").trim()) ? false : /^(true|yes|on|allow|allowed|enable|grant|show|let)$/i.test(String(v ?? "").trim()) ? true : /^(reset|neutral|default|clear|null|inherit)$/i.test(String(v ?? "").trim()) ? null : undefined;
-
 /** The role or person a channel permission is about: "everyone" (default), a role name, or someone tagged. */
 async function permissionTarget(message, who) {
   const q = String(who ?? "").trim().toLowerCase().replace(/^@/, "");
@@ -148,8 +116,30 @@ async function permissionTarget(message, who) {
   const id = await targetOf(message, who);
   return id ? { target: id, label: tag(id) } : null;
 }
-/** Runs one moderation request; returns the post to reply with. */
+/** The one entry point for every Discord action the AI asks for. Registered tools go through the gate (permissions, confirmation, audit, verification); the older actions below run as before. */
+const WORKFLOWS = new Set(["workflow", "setup", "setup_category", "setup_course", "setup_vip"]);
+async function summarize(transcript) {
+  const system = "You summarise a Discord conversation for the server owner. Write 3 to 6 short bullet points: the topics, decisions, open questions and anything needing the owner's attention. Plain words, no preamble.";
+  try { const out = env.geminiKey ? await viaGemini(system, [], transcript) : await viaGroq(system, [], transcript); return out?.text ?? null; } catch { return null; }
+}
 export async function moderate(message, args, config) {
+  if (!message.guild) return textPost({ text: "Moderation only works inside a server." });
+  const action = String(args.action ?? "").toLowerCase();
+  if (WORKFLOWS.has(action)) return runWorkflow(message, args, config);
+  if (TOOLS[action]) {
+    const channel = channelsOf(message, args.channel)[0];
+    if (!channel && args.channel && !/^(everyone|all)$/i.test(String(args.channel))) { const own = action === "invite_create" || action === "channel_create"; if (!own) return textPost({ text: `I couldn't find the channel "${args.channel}".` }); }
+    const extras = { channel: channel ?? message.channel, summarize, resolveMember: async () => { const id = await targetOf(message, args.user); if (id) extras.targetId = id; return id ? message.guild.members.fetch(id).catch(() => null) : null; } };
+    const call = { ...args, channels: action === "announce" || action === "announce_rich" ? channelsOf(message, args.channel) : undefined };
+    return runTool(message, action, call, config, extras);
+  }
+  const t0 = Date.now();
+  const post = await moderateLegacy(message, args, config);
+  const said = String(post?.content ?? "");
+  audit({ guild: message.guild.id, user: message.author?.id, action, target: args.user ? String(args.user).slice(0, 60) : undefined, risk: "legacy", permission: "ok", ok: !/couldn't|can't|don't|not sure|won't|missing|cancel/i.test(said), error: said.slice(0, 120), ms: Date.now() - t0 });
+  return post;
+}
+async function moderateLegacy(message, args, config) {
   if (!message.guild) return textPost({ text: "Moderation only works inside a server." });
   const action = String(args.action ?? "").toLowerCase();
   const channel = channelsOf(message, args.channel)[0];

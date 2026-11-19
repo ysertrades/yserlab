@@ -66,6 +66,8 @@ export function cancel(id) {
   save();
   return before - jobs.length;
 }
+/** Saves a job built elsewhere (a temporary ban's unban, a workflow's later step). */
+export function addJob(job) { const j = { id: short(), repeat: null, ...job }; jobs.push(j); save(); return j; }
 export const addCountdown = (job) => { jobs.push({ id: short(), kind: "countdown", repeat: null, ...job }); save(); };
 
 /** Called every second: runs what is due. `run(job)` does the work and returns a post to show in the channel the job was asked in (or null). */
