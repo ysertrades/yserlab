@@ -86,6 +86,8 @@ export function intentOf(raw, key) {
 }
 
 function detect(t, key) {
+  // Deleting a message: only when asked, and only the one meant (a reply, or "my last message"). Never as a side effect of anything else.
+  if (/^(?:please\s+)?(?:delete|remove)\s+(?:this|that|the above|it|my last|my previous|my latest)(?:\s+one)?(?:\s+message)?(?:\s+(?:sent|written|posted)\s+by\s+me)?$/i.test(t) || /^(?:please\s+)?(?:delete|remove)\s+(?:this|that)\s+message\b/i.test(t)) return { action: "message_delete", args: { which: /\b(last|previous|latest)\b/i.test(t) ? "last" : "reply" } };
   let r = invite(t);
   if (r) return r;
   if (/\bresume\b.*\b(administrator|admin)\b.*\b(actions?|tools?)\b/i.test(t)) return { action: "ai_control", args: { op: "incident_off" } };

@@ -1,6 +1,6 @@
 import { ChannelType, GuildScheduledEventEntityType, GuildScheduledEventPrivacyLevel, OverwriteType, PermissionFlagsBits as P } from "discord.js";
 import { audit, addWarning, allWarnings, recentAudit, warningsOf } from "./audit.js";
-import { DANGEROUS, botCanEditMember, botCanEditRole, botMissing, delegable, nameOfPerm, permNames, sayMissing, userCanEditMember, userCanEditRole, userMissing, permsOf } from "./guard.js";
+import { DANGEROUS, botCanEditMember, botCanEditRole, botMissing, delegable, nameOfPerm, permNames, sayMissing, userCan, userCanEditMember, userCanEditRole, userMissing, permsOf } from "./guard.js";
 import { confirmButtons, panel } from "./ui.js";
 import { whenOf, addJob } from "../sched.js";
 
@@ -459,7 +459,22 @@ export const TOOLS = {
       return plain(`📣 Announcement posted in ${sent.join(" ")}.`);
     },
   },
-  role_panel: {
+  message_delete: {
+    cap: "messages", risk: "low", silent: true, bot: [P.ManageMessages], aliases: ["delete_message", "delete_this_message"],
+    // Messages are only ever deleted on a plain request like this one: "delete this message" (a reply to it), "delete my last message".
+    async run({ channel, message, args }) {
+      let target = null;
+      if (message.reference?.messageId) target = await channel.messages.fetch(message.reference.messageId).catch(() => null);
+      else if (/last|previous|latest/i.test(String(args.which ?? ""))) target = [...(await channel.messages.fetch({ limit: 15, before: message.id })).values()].find(m => m.author.id === message.author.id) ?? null;
+      if (!target) throw friendly("no target", "Reply to the message you want deleted and say \"delete this message\" (or say \"delete my last message\").");
+      const mine = target.author.id === message.client.user.id, theirs = target.author.id === message.author.id;
+      if (!mine && !theirs && !userCan(message, P.ManageMessages)) throw friendly("not allowed", "You can't delete other people's messages here (it needs Manage Messages).");
+      await target.delete();
+      const still = await channel.messages.fetch(target.id).catch(() => null);
+      if (still) throw new Error("the message is still there");
+      return null; // nothing more is posted: the message simply goes
+    },
+  },  role_panel: {
     cap: "community", risk: "low", user: [P.ManageRoles], bot: [P.ManageRoles, P.SendMessages],
     async run({ guild, channel, args }) {
       const asked = csv(args.role ?? args.roles), roles = asked.map(q => findRole(guild, q)), bad = asked.filter((q, i) => !roles[i]);
@@ -504,7 +519,7 @@ export async function runTool(message, name, args, config, extras = {}) {
       note.confirmed = true;
     }
     const post = await spec.run(ctx);
-    return finish({ ...note, ok: true }, post ?? plain("Done."));
+    return finish({ ...note, ok: true }, post ?? (spec.silent ? null : plain("Done.")));
   } catch (e) {
     console.warn(`admin ${name}:`, e?.message ?? e);
     return finish({ ...note, ok: false, error: String(e?.message ?? e).slice(0, 300) }, plain(`❌ ${FAIL(e)}`));

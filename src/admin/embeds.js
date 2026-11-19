@@ -8,6 +8,7 @@ import { env } from "../env.js";
 import { audit } from "./audit.js";
 import { botMissing, sayMissing } from "./guard.js";
 import { panel } from "./ui.js";
+import { findRole } from "./tools.js";
 
 /**
  * Embeds and announcements, done the way a person would expect. "Make an embed announcing a giveaway starting tomorrow" is written straight
@@ -87,12 +88,24 @@ export function embedPost(d, pings = []) {
 
 /* ── understanding what was asked ── */
 const WORD = "(?:embed|announcement|message|post|panel|card|notice|it|that|this)";
-export function embedIntent(text, hasDraft) {
-  const t = String(text ?? "").replace(/<@!?\d+>/g, "").replace(/\s+/g, " ").trim();
+/** One message can hold several instructions ("make the colour dark. send it to #lab, then mention everyone below it"): they are read one by one and done in order. */
+export function clausesOf(text) {
+  const t = String(text ?? "").replace(/<@!?\d+>/g, " ").trim();
+  return t.split(/[\n;]+|(?<=[.!?])\s+(?=[A-Za-z<@#])|\s*,?\s*\b(?:and\s+then|then|after\s+that|and\s+also|also)\b\s+|\s*,\s*(?:and\s+)?(?=(?:send|post|put|move|mention|ping|tag|notify|make|change|set)\b)|\s+and\s+(?=(?:send|post|put|move|mention|ping|tag|notify|change|set)\b)/i).map(s => s.replace(/\s+/g, " ").trim().replace(/[.!]+$/, "")).filter(Boolean);
+}
+const PING_TO = "(@?every ?one|@?here|everybody|all members|<@&\\d+>|(?:the\\s+)?[\\w][\\w -]*?\\s+role)";
+export function embedIntent(clause, hasDraft) {
+  const t = String(clause ?? "").replace(/\s+/g, " ").trim();
   if (!t) return null;
   const channel = /<#(\d{15,})>/.exec(t)?.[1];
+  const ping = new RegExp(`^(?:please\\s+|now\\s+|and\\s+)?(?:mention|ping|tag|notify|alert)\\s+${PING_TO}(?:\\s+(?:below|under|underneath|beneath|after|right after|here|there|now|too|as well)(?:\\s+(?:it|the (?:embed|message|announcement)|that|this))?)?(?:\\s+in\\s+(?:the\\s+)?(?:<#\\d+>|#?[\\w-]+(?:\\s+channel)?))?$`, "i").exec(t);
+  if (ping) {
+    const who = ping[1].toLowerCase();
+    const mention = /every ?one|everybody|all members/.test(who) ? "@everyone" : /here/.test(who) ? "@here" : /<@&(\d+)>/.exec(ping[1])?.[1] ?? ping[1].replace(/^the\s+/i, "").replace(/\s+role$/i, "").trim();
+    return { op: "ping", mention, channel, name: /\bin\s+(?:the\s+)?#?([\w-]+)(?:\s+channel)?$/i.exec(t)?.[1] };
+  }
   if (hasDraft) {
-    if (/^(?:please\s+|now\s+)?(?:post|send|put|move|publish|share|repost|forward|drop)\s+(?:it|this|that|the (?:embed|announcement|message))?\s*(?:in|to|into|on)?\s*(?:the\s+)?(?:<#\d+>|#?[\w-]+(?: channel)?)\s*\.?$/i.test(t) && (channel || /\b(in|to|into)\b/i.test(t))) return { op: "repost", channel, name: /(?:in|to|into|on)\s+(?:the\s+)?#?([\w-]+)(?:\s+channel)?\s*\.?$/i.exec(t)?.[1] };
+    if (/^(?:please\s+|now\s+)?(?:post|send|put|move|publish|share|repost|forward|drop)\s+(?:it|this|that|the (?:embed|announcement|message))?\s*(?:in|to|into|on)?\s*(?:the\s+)?(?:<#\d+>|#?[\w-]+(?: channel)?)$/i.test(t) && (channel || /\b(in|to|into)\b/i.test(t))) return { op: "repost", channel, name: /(?:in|to|into|on)\s+(?:the\s+)?#?([\w-]+)(?:\s+channel)?$/i.exec(t)?.[1] };
     const asksColour = /\b(colou?r|accent|tint|shade)\b/i.test(t) || new RegExp(`\\b(?:make|turn|paint|set|change)\\s+${WORD}\\b.*\\b(?:dark|black|purple|blue|green|red|gold|yellow|orange|pink|white|grey|gray|teal|cyan|#[0-9a-f]{6})\\b`, "i").test(t);
     if (asksColour && colourOf(t)) return { op: "colour", colour: colourOf(t) };
     if ((new RegExp(`\\b${WORD}\\b`, "i").test(t) || /\b(title|heading|description|body|footer)\b/i.test(t)) && /\b(shorter|longer|shorten|expand|title|heading|description|body|line|footer|add|remove|delete|rewrite|rephrase|replace|translate|professional|casual|exciting|simpler|bold|emoji)\b/i.test(t) && t.length < 260 && !/\b(role|channel|invite|member|server|permission)\b/i.test(t.replace(/<#\d+>/g, ""))) return { op: "edit", request: t };
@@ -100,53 +113,79 @@ export function embedIntent(text, hasDraft) {
   if (/\b(make|create|write|draft|prepare|build|compose|design|send|post|do)\b.*\b(embed|announcement|announce|announcing|panel|notice)\b|^announce\b/i.test(t) && !/\b(delete|remove|edit|change)\b.*\b(embed|announcement)\b/i.test(t)) return { op: "create", request: t, channel };
   return null;
 }
+/** The steps a whole message asks for, in order; null when none of it is about an embed. */
+export function embedPlan(text, hasDraft) {
+  const plan = []; let draft = hasDraft;
+  for (const clause of clausesOf(text)) {
+    const step = embedIntent(clause, draft);
+    if (!step) { if (plan.length) continue; else return null; }
+    if (step.op === "create") draft = true;
+    // a ping on its own, with no embed behind it, is only taken when it is the whole message
+    if (step.op === "ping" && !draft && clausesOf(text).length > 1) continue;
+    plan.push(step);
+  }
+  return plan.length ? plan : null;
+}
 
 /** Handles an embed request. Returns true when it did (the message is fully handled, nothing else should answer). */
 export async function handleEmbed(message, text, config) {
-  const draft = draftOf(message), intent = embedIntent(text, !!draft);
-  if (!intent || !message.guild) return false;
-  const t0 = Date.now(), base = { guild: message.guild.id, user: message.author.id, action: `embed_${intent.op}`, risk: "low", permission: "ok" };
-  const channelFor = () => (intent.channel ? message.guild.channels.cache.get(intent.channel) : null) ?? (intent.name ? message.guild.channels.cache.find(c => c.isSendable?.() && c.name.toLowerCase().replace(/[^a-z0-9]+/g, "").includes(intent.name.toLowerCase().replace(/[^a-z0-9]+/g, ""))) : null) ?? message.channel;
-  const fail = async why => { audit({ ...base, ok: false, error: why, ms: Date.now() - t0 }); await message.channel.send({ content: why, allowedMentions: { parse: [] } }).catch(() => {}); return true; };
-  try {
-    if (intent.op === "create") {
-      const target = intent.channel ? channelFor() : message.channel;
-      const miss = botMissing(message.guild, [P.SendMessages, P.ViewChannel], target); if (miss.length) return fail(`I can't post there: ${sayMissing(miss)}`);
-      const made = await compose(intent.request);
-      const d = { ...made, colour: colourOf(intent.request) ?? "#8d9bff" };
-      const sent = await target.send(embedPost(d));
-      if (!sent?.id) return fail("Discord did not confirm that the embed was sent.");
-      setDraft(message, { ...d, messageId: sent.id, channelId: target.id });
-      audit({ ...base, ok: true, target: `#${target.name}`, ms: Date.now() - t0 });
-      return true;
+  if (!message.guild) return false;
+  const first = draftOf(message), plan = embedPlan(text, !!first);
+  if (!plan) return false;
+  const guild = message.guild, t0 = Date.now();
+  const base = op => ({ guild: guild.id, user: message.author.id, action: `embed_${op}`, risk: "low", permission: "ok" });
+  const say = content => message.channel.send({ content, allowedMentions: { parse: [] } }).catch(() => {});
+  const fail = async (op, why) => { audit({ ...base(op), ok: false, error: why, ms: Date.now() - t0 }); await say(why); return true; };
+  const find = (step, fallback) => (step.channel ? guild.channels.cache.get(step.channel) : null) ?? (step.name ? guild.channels.cache.find(c => c.isSendable?.() && c.name.toLowerCase().replace(/[^a-z0-9]+/g, "").includes(step.name.toLowerCase().replace(/[^a-z0-9]+/g, ""))) : null) ?? fallback;
+  let cur = first;
+  for (const step of plan) {
+    try {
+      if (step.op === "create") {
+        const target = step.channel ? find(step, message.channel) : message.channel;
+        const miss = botMissing(guild, [P.SendMessages, P.ViewChannel], target); if (miss.length) return fail("create", `I can't post there: ${sayMissing(miss)}`);
+        const made = await compose(step.request);
+        const d = { ...made, colour: colourOf(step.request) ?? "#8d9bff" };
+        const sent = await target.send(embedPost(d));
+        if (!sent?.id) return fail("create", "Discord did not confirm that the embed was sent.");
+        cur = { ...d, messageId: sent.id, channelId: target.id, at: Date.now() }; setDraft(message, cur);
+        audit({ ...base("create"), ok: true, target: `#${target.name}`, ms: Date.now() - t0 });
+      } else if (step.op === "colour" || step.op === "edit") {
+        if (!cur) return false;
+        const channel = guild.channels.cache.get(cur.channelId) ?? message.channel;
+        const old = await channel.messages.fetch(cur.messageId).catch(() => null);
+        if (!old || old.author.id !== message.client.user.id) return fail(step.op, "I can't find the embed I made any more (it may have been deleted). Ask me to make it again.");
+        let d = { ...cur };
+        if (step.op === "colour") d.colour = step.colour;
+        else { const changed = await compose(step.request, cur); if (!changed) return fail("edit", "I couldn't reach my writing model just now, so I left the embed as it was. Try again in a minute."); d = { ...d, ...changed }; }
+        const post = embedPost(d);
+        await old.edit({ components: post.components, flags: post.flags });
+        cur = d; setDraft(message, cur);
+        audit({ ...base(step.op), ok: true, target: `#${channel.name}`, ms: Date.now() - t0 });
+      } else if (step.op === "repost") {
+        if (!cur) return false;
+        const target = find(step, message.channel);
+        if (target.id === cur.channelId && !step.channel && !step.name) return fail("repost", "It is already in this channel. Tell me which channel to post it in.");
+        const miss = botMissing(guild, [P.SendMessages, P.ViewChannel], target); if (miss.length) return fail("repost", `I can't post in ${target}: ${sayMissing(miss)}`);
+        const sent = await target.send(embedPost(cur));
+        if (!sent?.id) return fail("repost", "Discord did not confirm that it was posted.");
+        cur = { ...cur, messageId: sent.id, channelId: target.id }; setDraft(message, cur);
+        audit({ ...base("repost"), ok: true, target: `#${target.name}`, ms: Date.now() - t0 });
+        await message.channel.send({ content: `📣 Posted in ${target}.`, allowedMentions: { parse: [] } }).then(m => setTimeout(() => m.delete().catch(() => {}), 6000)).catch(() => {});
+      } else if (step.op === "ping") {
+        // The mention goes in a message of its own, in the channel the embed is in (or the one named), right below it.
+        const target = step.channel || step.name ? find(step, message.channel) : cur ? guild.channels.cache.get(cur.channelId) ?? message.channel : message.channel;
+        const everyone = step.mention === "@everyone" || step.mention === "@here";
+        const role = everyone ? null : /^\d{15,}$/.test(step.mention) ? guild.roles.cache.get(step.mention) : findRole(guild, step.mention);
+        if (!everyone && !role) return fail("ping", `I couldn't find a role called "${step.mention}", so I mentioned nobody.`);
+        const miss = botMissing(guild, [P.SendMessages, P.ViewChannel, ...(everyone ? [P.MentionEveryone] : [])], target); if (miss.length) return fail("ping", `I can't mention them in ${target}: ${sayMissing(miss)}`);
+        const sent = await target.send(everyone ? { content: step.mention, allowedMentions: { parse: ["everyone"] } } : { content: `<@&${role.id}>`, allowedMentions: { roles: [role.id] } });
+        if (!sent?.id) return fail("ping", "Discord did not confirm that the mention was sent.");
+        audit({ ...base("ping"), ok: true, target: `#${target.name} ${everyone ? step.mention : role.name}`, ms: Date.now() - t0 });
+      }
+    } catch (e) {
+      console.warn("embed:", e?.message ?? e);
+      return fail(step.op, /Missing (Permissions|Access)|50013|50001/.test(String(e?.message)) ? "Discord refused it: I'm missing a permission there." : "I couldn't finish that, so I stopped there.");
     }
-    if (intent.op === "colour" || intent.op === "edit") {
-      const channel = message.guild.channels.cache.get(draft.channelId) ?? message.channel;
-      const old = await channel.messages.fetch(draft.messageId).catch(() => null);
-      if (!old || old.author.id !== message.client.user.id) return fail("I can't find the embed I made any more (it may have been deleted). Ask me to make it again.");
-      let d = { ...draft };
-      if (intent.op === "colour") d.colour = intent.colour;
-      else { const changed = await compose(intent.request, draft); if (!changed) return fail("I couldn't reach my writing model just now, so I left the embed as it was. Try again in a minute."); d = { ...d, ...changed }; }
-      const post = embedPost(d);
-      await old.edit({ components: post.components, flags: post.flags });
-      setDraft(message, d);
-      audit({ ...base, ok: true, target: `#${channel.name}`, ms: Date.now() - t0 });
-      return true;
-    }
-    if (intent.op === "repost") {
-      const target = channelFor();
-      if (target.id === draft.channelId && !intent.channel && !intent.name) return fail("It is already in this channel. Tell me which channel to post it in.");
-      const miss = botMissing(message.guild, [P.SendMessages, P.ViewChannel], target); if (miss.length) return fail(`I can't post in ${target}: ${sayMissing(miss)}`);
-      const sent = await target.send(embedPost(draft));
-      if (!sent?.id) return fail("Discord did not confirm that it was posted.");
-      setDraft(message, { ...draft, messageId: sent.id, channelId: target.id });
-      audit({ ...base, ok: true, target: `#${target.name}`, ms: Date.now() - t0 });
-      await message.channel.send({ content: `📣 Posted in ${target}.`, allowedMentions: { parse: [] } }).then(m => setTimeout(() => m.delete().catch(() => {}), 6000)).catch(() => {});
-      return true;
-    }
-  } catch (e) {
-    console.warn("embed:", e?.message ?? e);
-    return fail(/Missing (Permissions|Access)|50013|50001/.test(String(e?.message)) ? "Discord refused it: I'm missing a permission there." : "I couldn't finish that, so nothing was changed.");
   }
-  return false;
+  return true;
 }

@@ -105,3 +105,50 @@ test("with the writing model down, an edit leaves the embed alone and says so; a
   await handleEmbed(w.message("make it shorter"), "make it shorter", cfg);
   assert.equal(textOf(w.sent[0].payload), before); assert.ok(w.ai.sent.some(m => /left the embed as it was/.test(m.payload.content ?? "")));
 });
+
+/* ── the follow-up conversation from the second screenshot ── */
+test("one message with two instructions does both, in order: recolour, then send it to the other channel", async () => {
+  forgetDrafts();
+  useWriter(async () => JSON.stringify({ title: "🎁 Giveaway Tomorrow", body: "**Date:** Thursday, November 19\nGet ready for our community giveaway. Details to follow." }));
+  const w = world(), cfg = { ai: {} };
+  await handleEmbed(w.message("x"), "Make for me an announcement of giveaway running tomorrow in a day embed", cfg);
+  assert.equal(w.sent.length, 1);
+  const t = "Make the embed colour dark\nSend it to <#123456789012345678>";
+  await handleEmbed(w.message(t), t.replace("<#123456789012345678>", "yser-lab").replace("Send it to yser-lab", "Send it to yser-lab"), cfg);
+  assert.equal(accentOf(w.sent[0].payload), 0x2b2d31, "the embed was recoloured");
+  assert.equal(w.lab.sent.length, 1, "and the same message also sent it to the other channel"); assert.equal(accentOf(w.lab.sent[0].payload), 0x2b2d31);
+});
+test("'mention everyone below it' sends a mention of its own under the embed, in the embed's channel, and nothing else", async () => {
+  forgetDrafts();
+  useWriter(async () => JSON.stringify({ title: "Giveaway Tomorrow", body: "Details to follow." }));
+  const w = world(), cfg = { ai: {} };
+  await handleEmbed(w.message("x"), "make an announcement of a giveaway tomorrow", cfg);
+  await handleEmbed(w.message("x"), "send it to yser-lab", cfg);
+  const before = w.ai.sent.length, labBefore = w.lab.sent.length;
+  assert.equal(await handleEmbed(w.message("x"), "mention everyone below it", cfg), true);
+  assert.equal(w.ai.sent.length, before, "nothing in the first channel (the embed now lives in the lab channel)");
+  const ping = w.lab.sent[labBefore]; assert.equal(ping.payload.content, "@everyone"); assert.deepEqual(ping.payload.allowedMentions, { parse: ["everyone"] });
+  assert.equal(w.lab.sent.length, labBefore + 1);
+});
+test("'send it there and mention everyone' is one message and two steps", async () => {
+  forgetDrafts();
+  useWriter(async () => JSON.stringify({ title: "Giveaway", body: "Details to follow." }));
+  const w = world(), cfg = { ai: {} };
+  await handleEmbed(w.message("x"), "make an announcement for the session", cfg);
+  await handleEmbed(w.message("x"), "send it to yser-lab and mention everyone below it", cfg);
+  assert.equal(w.lab.sent.length, 2); assert.ok(w.lab.sent[0].payload.components); assert.equal(w.lab.sent[1].payload.content, "@everyone");
+});
+test("a mention of a role works by name or mention, and an unknown role mentions nobody", async () => {
+  forgetDrafts();
+  const w = world(), cfg = { ai: {} }; w.guild.roles = { cache: new Collection([["900000000000000001", { id: "900000000000000001", name: "VIP" }]]) };
+  assert.equal(await handleEmbed(w.message("x"), "mention <@&900000000000000001>", cfg), true);
+  assert.equal(w.ai.sent.at(-1).payload.content, "<@&900000000000000001>");
+  await handleEmbed(w.message("x"), "ping the Ghost role", cfg);
+  assert.match(w.ai.sent.at(-1).payload.content, /couldn't find a role called "Ghost"/);
+});
+test("the bot never deletes the owner's own messages as a side effect", async () => {
+  const src = fs.readFileSync(new URL("../src/index.js", import.meta.url), "utf8");
+  assert.ok(!/message\.delete\(/.test(src.replace(/\/\/.*$/gm, "")), "index.js must not delete the owner's request");
+  const emb = fs.readFileSync(new URL("../src/admin/embeds.js", import.meta.url), "utf8");
+  assert.ok(!/message\.delete\(/.test(emb), "embeds.js must not delete the owner's message");
+});

@@ -220,3 +220,24 @@ test("the owner's control tool is owner-only", async () => {
   const post = await runTool(m, "ai_control", { op: "disable", group: "roles" }, config());
   assert.match(text(post), /Only the owner/i);
 });
+
+/* ── deleting a message happens only on a plain request ── */
+test("message_delete removes the replied-to message and says nothing; without a target it deletes nothing", async () => {
+  const g = mkGuild(), m = mkMessage(g);
+  const gone = []; let present = true;
+  const target = { id: "t1", author: { id: "owner1" }, delete: async () => { gone.push("t1"); present = false; } };
+  m.channel.messages = { fetch: async id => (id === "t1" ? (present ? target : null) : new Collection([["t1", target]])) };
+  m.reference = { messageId: "t1" };
+  const post = await runTool(m, "message_delete", { which: "reply" }, config());
+  assert.equal(post, null, "no confirmation message is posted"); assert.deepEqual(gone, ["t1"]);
+  const g2 = mkGuild(), m2 = mkMessage(g2); m2.channel.messages = { fetch: async () => new Collection() };
+  const none = await runTool(m2, "message_delete", { which: "reply" }, config());
+  assert.match(text(none), /Reply to the message you want deleted/);
+});
+test("someone else's message needs the requester to hold Manage Messages", async () => {
+  const g = mkGuild(), m = mkMessage(g, { flags: [P.ViewChannel], owner: false });
+  const other = { id: "t2", author: { id: "stranger" }, delete: async () => { throw new Error("must not be called"); } };
+  m.channel.messages = { fetch: async () => other }; m.reference = { messageId: "t2" };
+  const post = await runTool(m, "message_delete", { which: "reply" }, config());
+  assert.match(text(post), /can't delete other people's messages|permission/i);
+});

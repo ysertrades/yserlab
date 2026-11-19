@@ -154,9 +154,9 @@ client.on(Events.MessageCreate, async message => {  try {
       const post = out.mod ? await moderate(message, out.mod, config) : await sendFromApp(message, out.send, { owner, config });
       if (!post) { await log("mod", { note: "completed (it reported in its own message)" }); return; }
       const sent = await message.channel.send(post).catch(async () => message.reply({ content: "Done, but I couldn't post the confirmation here." }).catch(() => null));
-      if (out.mod) { // the owner's request goes after the action; a clean-up's confirmation stays four seconds and goes too
+      if (out.mod) { // a clean-up's confirmation stays four seconds and goes; the owner's own message stays
         const quiet = ["purge", "slowmode", "remind", "reminder", "alert"].includes(String(out.mod.action).toLowerCase());
-        setTimeout(() => { if (quiet) sent?.delete?.().catch(() => {}); message.delete().catch(() => {}); }, 4000);
+        setTimeout(() => { if (quiet) sent?.delete?.().catch(() => {}); }, 4000); // only the bot's own confirmation goes; the owner's message is never deleted unless they ask for that
       }
       await log(out.mod ? "mod" : "send", { note: JSON.stringify(out.mod ?? out.send).slice(0, 180) });
       void noteResult(message.author.id, `(I did it: ${JSON.stringify(out.mod ?? out.send).slice(0, 300)}. I answered: ${String(post?.content ?? "").slice(0, 500)})`);
