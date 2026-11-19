@@ -47,7 +47,8 @@ function checkCard(interaction, messageId, channelId, meta, { notYet = false } =
   const g = interaction.guildId;
   const b = brand.getBrand(g);
   const token = ev.makeToken(g, interaction.user.id, messageId, channelId || meta?.channelId || interaction.channelId);
-  const url = `${baseUrl()}/verify?t=${encodeURIComponent(token)}`;
+  // YSERLAB: the check page is on the app's own domain, at /giveaway-entry (VERIFY_PAGE_URL overrides it).
+  const url = `${(process.env.VERIFY_PAGE_URL || 'https://yser.app/giveaway-entry').replace(/\/+$/, '')}?t=${encodeURIComponent(token)}`;
   const prize = meta?.prize ? `**${meta.prize}**` : 'this drop';
   const minutes = Math.round(ev.TOKEN_TTL_MS / 60000);
 

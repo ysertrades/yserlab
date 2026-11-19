@@ -20,6 +20,7 @@ const require = createRequire(import.meta.url);
 const PUBLIC = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../vendor/yserbot/web/public");
 const COOKIE = "qb_verify", COOKIE_TTL = 30 * 60 * 1000, LIMIT = { windowMs: 60_000, max: 20 }, MAX_BODY = 32 * 1024;
 const TYPES = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".woff2": "font/woff2", ".ttf": "font/ttf", ".png": "image/png", ".jpg": "image/jpeg" };
+const ORIGINS = (process.env.VERIFY_PAGE_ORIGIN || "https://yser.app,https://www.yser.app").split(",").map(s => s.trim()).filter(Boolean);
 const hits = new Map(), used = new Map();
 
 const limited = key => { const now = Date.now(), r = hits.get(key); if (!r || r.resetAt < now) { hits.set(key, { count: 1, resetAt: now + LIMIT.windowMs }); if (hits.size > 5000) for (const [k, v] of hits) if (v.resetAt < now) hits.delete(k); return false; } r.count++; return r.count > LIMIT.max; };
@@ -51,6 +52,10 @@ export function startVerifyServer(client) {
   const server = http.createServer(async (req, res) => {
     try {
       const url = new URL(req.url, "http://x"), p = url.pathname;
+      // The check page lives on the app's own domain (yser.app/giveaway-entry) and calls this API from there.
+      const origin = req.headers.origin;
+      if (p.startsWith("/api/") && origin && ORIGINS.includes(origin)) { res.setHeader("access-control-allow-origin", origin); res.setHeader("vary", "Origin"); res.setHeader("access-control-allow-methods", "GET, POST, OPTIONS"); res.setHeader("access-control-allow-headers", "content-type"); res.setHeader("access-control-max-age", "600"); }
+      if (req.method === "OPTIONS" && p.startsWith("/api/")) return send(res, ORIGINS.includes(origin) ? 204 : 403, "");
       if (p === "/verify" || p === "/verify/") {
         const t = url.searchParams.get("t");
         if (t) return send(res, 302, "", { location: "/verify", "set-cookie": `${COOKIE}=${encodeURIComponent(t)}; Max-Age=${COOKIE_TTL / 1000}; Path=/; HttpOnly; Secure; SameSite=Lax` });

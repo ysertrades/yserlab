@@ -320,6 +320,8 @@ async function participants(guildId, body, { guild }) {
     }
   } catch (_) {}
 
+  // YSERLAB: entrants the bot has not seen are looked up one by one, so the list shows names, not numbers.
+  await Promise.all(ids.filter(id => !guild.members.cache.has(id)).slice(0, 200).map(id => guild.members.fetch(id).catch(() => guild.client.users.fetch(id).catch(() => null))));
   const rows = [];
   for (const id of ids) {
     const m = guild.members.cache.get(id);
@@ -342,7 +344,8 @@ async function participants(guildId, body, { guild }) {
     }
     rows.push({
       id,
-      tag: u?.tag || u?.username || id,
+      tag: m?.displayName || u?.globalName || u?.username || u?.tag || id,
+      username: u?.username || null,
       avatar: u?.displayAvatarURL?.({ size: 64 }) || null,
       accountAgeDays: ageDays != null ? Math.round(ageDays * 10) / 10 : null,
       serverJoinDays: joinDays != null ? Math.round(joinDays * 10) / 10 : null,
