@@ -46,7 +46,37 @@ function art({ kind, n, rate }) {
   <circle cx="${lx}" cy="${ly}" r="22" fill="none" stroke="${C.up}" stroke-opacity=".4" stroke-width="3"/><circle cx="${lx}" cy="${ly}" r="11" fill="${C.up}"/>`;
 }
 
+/** The streak card is the web app's streak monitor, drawn flat: the flame tile and the current run, the ribbon of the latest trades with the run lit, then the best and the worst run. */
+const FLAME = "M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z";
+const DOWN = "#f06b6b";
+const day = d => d ? new Date(`${d}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
+const span = r => !r?.len ? "-" : r.from === r.to ? day(r.from) : `${day(r.from)} \u2013 ${day(r.to)}`;
+function streakBadge(m) {
+  const n = m.n, recent = (m.recent ?? []).slice(-28), cols = Math.max(recent.length, 1), PX = 112, PW = 976, gap = 8, bw = Math.min(30, (PW - (cols - 1) * gap) / cols);
+  const rx = PX + (PW - (cols * bw + (cols - 1) * gap)) / 2;
+  const ribbon = recent.map((r, i) => { const h = r.cur ? 92 : 62, x = rx + i * (bw + gap); return `<rect x="${x.toFixed(1)}" y="${(350 - h / 2).toFixed(1)}" width="${bw.toFixed(1)}" height="${h}" rx="6" fill="${r.win ? C.up : DOWN}" fill-opacity="${r.cur ? 1 : .42}"/>`; }).join("");
+  const card = (x, label, tone, run, kind) => `<rect x="${x}" y="412" width="476" height="124" rx="20" fill="#ffffff" fill-opacity=".04"/>
+    <circle cx="${x + 30}" cy="446" r="6" fill="${tone}"/><text x="${x + 46}" y="453" font-family="Inter, sans-serif" font-weight="600" font-size="19" letter-spacing="2" fill="${C.muted}">${label}</text>
+    <text x="${x + 28}" y="504" font-family="'Geist Mono', monospace" font-weight="600" font-size="44" fill="${tone}">${run?.len ?? 0}</text>
+    <text x="${x + 28 + String(run?.len ?? 0).length * 27 + 14}" y="504" font-family="Inter, sans-serif" font-weight="600" font-size="28" fill="${C.text}">${kind}${(run?.len ?? 0) === 1 ? "" : kind === "win" ? "s" : "es"}</text>
+    <text x="${x + 448}" y="504" text-anchor="end" font-family="Inter, sans-serif" font-weight="500" font-size="21" fill="#6f6f76">${esc(span(run))}</text>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="${C.bg}"/>
+  <rect x="40" y="40" width="1120" height="550" rx="36" fill="${C.s1}" stroke="${C.up}" stroke-opacity=".55" stroke-width="2"/>
+  <g transform="translate(84 76) scale(.5)" fill="${C.text}">${MARK.map(d => `<path d="${d}"/>`).join("")}</g>
+  <text x="148" y="108" font-family="Inter, sans-serif" font-weight="800" font-size="24" letter-spacing="3" fill="${C.text}">YSER LAB</text>
+  <rect x="84" y="150" width="1032" height="406" rx="28" fill="#1b1b1e" stroke="#ffffff" stroke-opacity=".07" stroke-width="2"/>
+  <rect x="112" y="176" width="92" height="92" rx="28" fill="${C.up}" fill-opacity=".13" stroke="${C.up}" stroke-opacity=".28" stroke-width="2"/>
+  <g transform="translate(130 194) scale(2.2)" fill="none" stroke="${C.up}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${FLAME}"/></g>
+  <text x="228" y="206" font-family="Inter, sans-serif" font-weight="600" font-size="21" letter-spacing="3" fill="${C.muted}">CURRENT STREAK</text>
+  <text x="226" y="262" font-family="'Geist Mono', monospace" font-weight="600" font-size="62" fill="${C.up}">${n}</text>
+  <text x="${226 + String(n).length * 38 + 18}" y="260" font-family="Inter, sans-serif" font-weight="600" font-size="36" fill="${C.text}">${n === 1 ? "win" : "wins"} in a row</text>
+  ${ribbon}
+  ${card(112, "BEST RUN", C.up, m.bestWin, "win")}
+  ${card(612, "WORST RUN", DOWN, m.worstLoss, "loss")}</svg>`;
+}
+
 function badge(m) {
+  if (m.kind === "streak") return streakBadge(m);
   const { kicker, big, line } = m, bigSize = String(big).length > 6 ? 96 : String(big).length > 3 ? 150 : 190;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="${C.bg}"/>
   <rect x="40" y="40" width="1120" height="550" rx="36" fill="${C.s1}" stroke="${C.up}" stroke-opacity=".55" stroke-width="2"/>
@@ -60,7 +90,15 @@ function badge(m) {
 }
 const order = (a, b) => (a.trade_date + (a.traded_at ?? a.created_at)).localeCompare(b.trade_date + (b.traded_at ?? b.created_at));
 
-export { badge };
+/** Decisive trades (a win or a loss) in order, the run you are on, and the best winning and worst losing runs, as the web app's streak monitor counts them. */
+function runs(list) {
+  const dec = list.filter(e => isWin(e) || isLoss(e)), all = [];
+  let cur = null;
+  for (const e of dec) { const win = isWin(e); if (cur && cur.win === win) { cur.len++; cur.to = e.trade_date; cur.ids.push(e.id); } else { cur = { win, len: 1, from: e.trade_date, to: e.trade_date, ids: [e.id] }; all.push(cur); } }
+  const last = all[all.length - 1], inCur = new Set(last?.ids ?? []);
+  const best = (w) => all.filter(r => r.win === w).sort((a, b) => b.len - a.len)[0];
+  return { recent: dec.slice(-28).map(e => ({ win: isWin(e), cur: inCur.has(e.id) })), bestWin: best(true), worstLoss: best(false) };
+}export { badge };
 export function find(rows, config) {
   const list = [...rows].filter(e => e.pnl != null || e.r_multiple != null).sort(order);
   const out = [];
@@ -69,7 +107,7 @@ export function find(rows, config) {
   let n = 0;
   for (let i = list.length - 1; i >= 0 && isWin(list[i]); i--) n++;
   const startId = list[list.length - n]?.id;
-  for (const t of config.milestones.streaks ?? []) if (n >= t && startId) out.push({ key: `ms:streak:${t}:${startId}`, kind: "streak", n, kicker: "WIN STREAK", big: `${t}`, line: `${t} winning trades in a row`, text: `**${t} wins in a row.** The streak is on.` });
+  for (const t of config.milestones.streaks ?? []) if (n >= t && startId) out.push({ key: `ms:streak:${t}:${startId}`, kind: "streak", n, ...runs(list), kicker: "WIN STREAK", big: `${t}`, line: `${t} winning trades in a row`, text: `**${t} wins in a row.** The streak is on.` });
   // This month's win rate (at least 10 trades, so it means something).
   const month = list[list.length - 1].trade_date.slice(0, 7);
   const inMonth = list.filter(e => e.trade_date.startsWith(month));
