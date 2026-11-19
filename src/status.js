@@ -20,7 +20,8 @@ export async function heartbeat(client) {
       channels.push({ id: c.id, name: c.name, kind: KIND[c.type], parent: c.parent?.name ?? null, canSend: !!perms?.has(PermissionFlagsBits.SendMessages) || c.type === 15 && !!perms?.has(PermissionFlagsBits.SendMessagesInThreads) });
     }
     channels.sort((a, b) => (a.parent ?? "").localeCompare(b.parent ?? "") || a.name.localeCompare(b.name));
-    guilds.push({ id: guild.id, name: guild.name, channels });
+    const roles = [...guild.roles.cache.values()].filter(r => r.id !== guild.id && !r.managed).sort((a, b) => b.position - a.position).map(r => ({ id: r.id, name: r.name, color: r.color ? `#${r.color.toString(16).padStart(6, "0")}` : null }));
+    guilds.push({ id: guild.id, name: guild.name, channels, roles });
   }
   const { config } = await settings();
   let next = null;

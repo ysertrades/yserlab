@@ -10,3 +10,4 @@ knowledge/model/*
 !knowledge/model/drawings.json
 
 data/
+vendor/yserbot/data/

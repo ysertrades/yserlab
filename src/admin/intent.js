@@ -4,6 +4,7 @@
  * the model as before. A request that is clear but missing one essential detail (a name) asks for it once and remembers what it was doing, so the
  * next message is taken as the answer.
  */
+import { giveawayIntent } from "./giveawayIntent.js";
 const pending = new Map(); // "channel:user" -> { action, args, ask, at }
 const TTL = 3 * 60_000;
 const COLOURS = { purple: "#9b59b6", violet: "#8d9bff", red: "#e74c3c", blue: "#3d5afe", green: "#3ccf7a", gold: "#f1c40f", yellow: "#f1c40f", orange: "#e67e22", pink: "#ff6fb5", white: "#ffffff", black: "#111111", grey: "#8e8e94", gray: "#8e8e94", teal: "#1abc9c", cyan: "#5cc8f2" };
@@ -66,6 +67,8 @@ function create(t, key) {
 
 /** Returns { action, args } to run, { say } to reply with (and maybe remember), or null when the message is not one of these. */
 export function intentOf(raw, key) {
+  const gi = giveawayIntent(raw); // giveaways first: they need the raw text (the mentions of roles and members carry the extra entries)
+  if (gi) { pending.delete(key); if (gi.pending) pending.set(key, { ...gi.pending, at: Date.now() }); return gi; }
   const t = clean(raw);
   if (!t) return null;
   const waiting = pending.get(key);

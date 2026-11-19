@@ -6,6 +6,7 @@ import { postCard } from "./cards.js";
 import { events, pick } from "./calendar/feed.js";
 import { alertCard } from "./calendar/visuals.js";
 import { mentions } from "./access.js";
+import { giveawayJob } from "./giveaway/sync.js";
 
 /**
  * Things the app asks for: the "Post to Discord" button on a card (job kind "card", carrying the picture as SVG) and the "Send now"
@@ -47,6 +48,8 @@ export async function checkJobs(client) {
         const sent = await deliver(client, channels, () => picturePost({ text: p.title ? `**${String(p.title).slice(0, 200)}**` : undefined, png, name: "card.png" }), "cards.manual");
         result = { sent };
         if (!sent && !config.dryRun) throw new Error(channels?.length ? "couldn't send (paused or no access)" : "pick a channel for card posts in YSER Lab");
+      } else if (job.kind === "giveaway") {
+        result = (await giveawayJob(client, job.payload ?? {})) ?? { ok: true };
       } else if (job.kind === "run" && RUNNERS[job.payload?.feature]) {
         result = { sent: await RUNNERS[job.payload.feature](client, config) };
       } else throw new Error("unknown job");

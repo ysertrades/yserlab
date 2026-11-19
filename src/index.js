@@ -20,6 +20,9 @@ import { automod } from "./admin/automod.js";
 import { DANGEROUS, permNames } from "./admin/guard.js";
 import { intentOf } from "./admin/intent.js";
 import { handleEmbed } from "./admin/embeds.js";
+import { routeInteraction, routeText, startGiveaways } from "./giveaway/index.js";
+import { startVerifyServer } from "./giveaway/verifyServer.js";
+import { syncGiveaways } from "./giveaway/sync.js";
 import { remember } from "./people.js";
 import { pollJuice, publishTrump } from "./feeds.js";
 import { cancel, list as listJobs, schedule, tick as tickJobs } from "./sched.js";
@@ -49,15 +52,18 @@ client.once(Events.ClientReady, async () => {
   console.log(`YSER Lab ready as ${client.user.tag} in ${client.guilds.cache.size} server(s)`);
   await settings(true);
   // The old Journal bot registered slash commands; this bot has none, so they are removed.
-  await client.application.commands.set([]).catch(() => {});
+  // /giveaway and /verify (the yserbot systems) are the only slash commands; if they cannot load, the old behaviour (none) stands.
+  if (!(await startGiveaways(client).catch(e => { console.warn("giveaways:", e?.message ?? e); return false; }))) await client.application.commands.set([]).catch(() => {});
   await log("bot", { note: `online as ${client.user.tag}` });
   await heartbeat(client).catch(() => {});
+  try { startVerifyServer(client); } catch (e) { console.warn("verify server:", e?.message ?? e); }
   void ensureLink(); void publishKnowledge(); // the assistant function maps the owner's Discord id to the account and reads the education center from storage
   setInterval(() => void ensureLink(), 10 * 60_000);
   every(1_000, "alerts", async () => { const { config } = await settings(); if (!config.paused) { await checkAlerts(client, config); await checkSessions(client); } });
   every(15_000, "schedule", async () => { const { config } = await settings(); if (!config.paused) { await checkSchedule(client); await checkCards(client); } });
   every(120_000, "milestones", async () => { const { config } = await settings(); if (!config.paused) await checkMilestones(client); });
   every(4_000, "jobs", () => checkJobs(client));
+  every(15_000, "giveaways", () => syncGiveaways(client)); // the app's giveaway panel reads this copy
   every(1_000, "later", () => tickJobs(client, runLater)); // what the owner asked to happen at a time or after a delay
   every(30_000, "status", () => heartbeat(client));
   every(3_000, "juice", () => pollJuice()); // FinancialJuice headlines for the app's live wire (a new one reaches the page within seconds)
@@ -82,6 +88,7 @@ async function runLater(job) {
 
 /** The role-picker buttons the administrator posts: press to add the role, press again to remove it. Refuses any role with powerful permissions or above the bot, and reads the result back. */
 client.on(Events.InteractionCreate, async interaction => {
+  if (await routeInteraction(interaction, client).catch(e => { console.warn("giveaway interaction:", e?.message ?? e); return true; })) return; // /giveaway, /verify and their buttons
   if (!interaction.isButton() || !interaction.customId.startsWith("rolebtn:")) return;
   const say = content => (interaction.deferred || interaction.replied ? interaction.editReply({ content }) : interaction.reply({ content, flags: MessageFlags.Ephemeral })).catch(() => {});
   try {
@@ -100,6 +107,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 client.on(Events.MessageCreate, async message => {  try {
     remember(message); // learns who is who, so "tag Ahmed" later means the right person
+    if (!message.author.bot && message.guild && /^g\.reroll\b/i.test(message.content ?? "") && await routeText(message)) return; // yserbot's text command
     // Never answers a bot, a webhook, a system message or itself (the bot's own posts and other bots' never start a conversation).
     if (message.author.bot || message.webhookId || message.system || message.author.id === client.user?.id || !message.content && !message.attachments.size) return;
     if (waiting.has(`${message.channelId}:${message.author.id}`)) return; // the answer to a question just asked (yes / no), not a new request

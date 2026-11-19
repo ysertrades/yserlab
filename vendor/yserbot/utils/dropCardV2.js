@@ -1,0 +1,152 @@
+'use strict';
+
+/**
+ * Components V2 drop cards.
+ * IS_COMPONENTS_V2 = 1 << 15
+ */
+
+const IS_COMPONENTS_V2 = 1 << 15;
+const ACCENT = 0x9397EE;
+
+function text(content) {
+  return { type: 10, content: String(content).slice(0, 4000) };
+}
+function separator(divider = true) {
+  return { type: 14, divider: !!divider, spacing: 1 };
+}
+function button({ customId, label, style = 1, emoji }) {
+  const b = { type: 2, style, label, custom_id: customId };
+  if (emoji) b.emoji = typeof emoji === 'string' ? { name: emoji } : emoji;
+  return b;
+}
+function row(...buttons) {
+  return { type: 1, components: buttons };
+}
+function media(url) {
+  // https CDN links and attachment:// files uploaded with the message
+  if (!url) return null;
+  const u = String(url);
+  if (!/^https:\/\//i.test(u) && !/^attachment:\/\//i.test(u)) return null;
+  return { type: 12, items: [{ media: { url: u } }] };
+}
+function sectionWithThumb(content, iconUrl) {
+  if (!iconUrl) return text(content);
+  return {
+    type: 9,
+    components: [text(content)],
+    accessory: { type: 11, media: { url: iconUrl } },
+  };
+}
+function container(children, accent = ACCENT) {
+  return { type: 17, accent_color: accent, components: children.filter(Boolean) };
+}
+function line(label, value) {
+  return label + ': **' + value + '**';
+}
+
+function buildLiveV2({
+  prize, winnersCount, ends, endsAt, entries,
+  requirements = [], dropId, iconUrl = null, imageUrl = null,
+  brand = require('./brand').current().name,
+}) {
+  const req = requirements.length ? '\n\n' + requirements.join('\n') : '';
+  const body =
+    line('Prize', prize) + '\n' +
+    line('Winners', winnersCount) + '\n' +
+    line('Ends', ends) + '\n' +
+    line('Entries', entries) +
+    req;
+
+  const kids = [];
+  // 1) Title + stats (server icon as small thumbnail)
+  kids.push(sectionWithThumb('# ' + brand + ' Giveaway\n\n' + body, iconUrl));
+  // 2) Banner under stats (not under the button)
+  const gallery = media(imageUrl);
+  if (gallery) kids.push(gallery);
+  // 3) Divider + Enter
+  kids.push(separator(true));
+  kids.push(row(
+    button({
+      customId: 'giveaway_enter', label: 'Enter', style: 1, emoji: '🎁',
+    }),
+    button({
+      customId: 'giveaway_check', label: 'Check entry', style: 2, emoji: '🎟️',
+    }),
+  ));
+  // 4) Divider + footer
+  kids.push(separator(true));
+  kids.push(text('-# Drop ID: ' + require('./brand').dropRef(dropId) + '  ·  ends ' + endsAt));
+
+  return { flags: IS_COMPONENTS_V2, components: [container(kids)], embeds: [], content: null };
+}
+
+function buildClosedV2({
+  prize, entries, winnersCount, hostId, dropId,
+  iconUrl = null, imageUrl = null, brand = require('./brand').current().name,
+}) {
+  const n =Number(winnersCount) || 1;
+  const selectedLine = n === 1
+    ? 'The winner has been selected. Reveal to see if you won.'
+    : 'The winners have been selected. Reveal to see if you won.';
+  const winnersLabel = n === 1 ? 'Winner' : 'Winners';
+  const body =
+    selectedLine + '\n\n' +
+    line('Valid entries', entries) + '  ·  ' + line(winnersLabel, n);
+  const host = hostId ? '<@' + hostId + '>' : brand;
+
+  const kids = [];
+  kids.push(sectionWithThumb('# GIVEAWAY HAS ENDED 🎉\n\n' + body, iconUrl));
+  const gallery = media(imageUrl);
+  if (gallery) kids.push(gallery);
+  kids.push(separator(true));
+  kids.push(row(button({
+    customId: 'giveaway_reveal', label: 'Reveal', style: 3, emoji: '🎁',
+  })));
+  kids.push(separator(true));
+  kids.push(text('-# Giveaway provided by ' + host + '  ·  Drop ID: ' + require('./brand').dropRef(dropId)));
+
+  return { flags: IS_COMPONENTS_V2, components: [container(kids)], embeds: [], content: null };
+}
+
+/**
+ * Between the timer running out and the reveal card: the gift-box GIF, a
+ * divider and one large line. `gifName` is the attachment sent with it.
+ */
+function buildDrawingV2({ winnersCount, gifName }) {
+  const n = Number(winnersCount) || 1;
+  const kids = [];
+  const gallery = gifName ? media('attachment://' + gifName) : null;
+  if (gallery) { kids.push(gallery); kids.push(separator(true)); }
+  kids.push(text('# 🎲 Drawing ' + (n === 1 ? 'winner' : 'winners') + '…'));
+  return { flags: IS_COMPONENTS_V2, components: [container(kids)], embeds: [], content: null };
+}
+
+/**
+ * Nobody entered — keep Components V2 so the live Enter card is fully replaced.
+ * Classic embeds cannot overwrite a V2 message (that left Enter stuck on screen).
+ */
+function buildEmptyV2({
+  prize, hostId, dropId,
+  iconUrl = null, imageUrl = null, brand = require('./brand').current().name,
+}) {
+  const host = hostId ? '<@' + hostId + '>' : brand;
+  const body =
+    'Nobody entered this giveaway.\n\n' +
+    line('Prize', prize) + '  ·  ' + line('Entries', '0');
+
+  const kids = [];
+  kids.push(sectionWithThumb('# GIVEAWAY ENDED — NO ENTRIES\n\n' + body, iconUrl));
+  const gallery = media(imageUrl);
+  if (gallery) kids.push(gallery);
+  kids.push(separator(true));
+  kids.push(row(button({
+    customId: 'giveaway_ended', label: 'Ended — no entries', style: 2, emoji: '📭',
+  })));
+  kids.push(separator(true));
+  kids.push(text('-# Giveaway provided by ' + host + '  ·  Drop ID: ' + require('./brand').dropRef(dropId)));
+
+  return { flags: IS_COMPONENTS_V2, components: [container(kids)], embeds: [], content: null };
+}
+
+module.exports = { IS_COMPONENTS_V2, buildLiveV2, buildClosedV2, buildEmptyV2, buildDrawingV2 };
+
