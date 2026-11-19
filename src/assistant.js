@@ -20,13 +20,13 @@ const FUNCTION = () => `${env.supabaseUrl}/functions/v1/assistant`;
 const clientTools = TOOLS[0].functionDeclarations;
 let lastError = null;
 
-export async function askUnified({ owner, channelId, discordId, text }) {
+export async function askUnified({ owner, channelId, discordId, text, context }) {
   if (env.unifiedAi !== false && env.supabaseKey && discordId) {
     try {
       const res = await fetch(FUNCTION(), {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${env.supabaseKey}`, apikey: env.supabaseKey },
-        body: JSON.stringify({ task: "chat", discord_id: discordId, message: text, channel: channelId, client_tools: clientTools }),
+        body: JSON.stringify({ task: "chat", discord_id: discordId, message: text, channel: channelId, client_tools: clientTools, context }),
         signal: AbortSignal.timeout(65_000),
       });
       const out = await res.json().catch(() => ({}));
@@ -46,6 +46,30 @@ export async function askUnified({ owner, channelId, discordId, text }) {
   return ask({ owner, channelId, text }); // the bot's own answer, as before
 }
 export const assistantError = () => lastError;
+
+/** Tells the assistant what the bot just did for the owner (a moderation result, a card, a reminder), so the conversation remembers the outcome. */
+export async function noteResult(discordId, text) {
+  if (env.unifiedAi === false || !env.supabaseKey || !discordId || !text) return;
+  try {
+    await fetch(FUNCTION(), { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${env.supabaseKey}`, apikey: env.supabaseKey }, body: JSON.stringify({ task: "note", discord_id: discordId, text: String(text).slice(0, 1500) }), signal: AbortSignal.timeout(15_000) });
+  } catch { /* the note is a courtesy; the answer already went out */ }
+}
+
+/** The last messages in the channel, and the one being replied to, as plain lines: what "that" and "it" refer to when the owner follows up. */
+export async function channelContext(message) {
+  try {
+    const lines = [];
+    const name = m => m.author?.id === message.client.user.id ? "You (YSER Lab)" : (m.member?.displayName ?? m.author?.username ?? "someone");
+    const text = m => String(m.content || (m.embeds?.[0]?.description ?? m.embeds?.[0]?.title ?? "") || (m.attachments?.size ? "[attachment]" : "")).replace(/\s+/g, " ").slice(0, 280);
+    const batch = await message.channel.messages.fetch({ limit: 12, before: message.id });
+    for (const m of [...batch.values()].reverse()) { const t = text(m); if (t) lines.push(`${name(m)}: ${t}`); }
+    if (message.reference?.messageId) {
+      const ref = await message.channel.messages.fetch(message.reference.messageId).catch(() => null);
+      if (ref) lines.push(`(They are replying to this message from ${name(ref)}: ${text(ref)})`);
+    }
+    return lines.join("\n");
+  } catch { return ""; }
+}
 
 /** The owner's Discord id, tied to the owner's account, so the function can tell whose data a Discord message is about. */
 export async function ensureLink() {

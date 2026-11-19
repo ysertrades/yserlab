@@ -16,6 +16,8 @@ import { addCountdown, whenOf } from "./sched.js";
  */
 const DAY = 86_400_000;
 const tag = id => `<@${id}>`;
+/** Who a message may notify: the people it tags, and everyone only when the owner asked for it with @everyone or @here. */
+const pingsOf = t => ({ users: idsIn(t), parse: /(^|[\s>*_~(])@(everyone|here)\b/i.test(String(t ?? "")) ? ["everyone"] : [] });
 
 async function targetOf(message, who) {
   const bot = message.client.user.id;
@@ -208,7 +210,7 @@ export async function sendFromApp(message, args, { owner, config }) {
     } else if (what === "text" || args.text) {
       if (!args.text) return textPost({ text: "What should I write?", accent: "down" });
       const words = tagText(String(args.text).slice(0, 1990), { me: message.author.id });
-      await sendAll(() => ({ content: words, allowedMentions: { users: idsIn(words), parse: [] } }));
+      await sendAll(() => ({ content: words, allowedMentions: pingsOf(words) }));
     } else return textPost({ text: "I can send the news (today, tomorrow or the week), a PnL card, or a message of yours.", accent: "down" });
     return textPost({ text: `📤 Sent to ${targets.join(" ")}.` });
   } catch (e) {
@@ -296,7 +298,18 @@ async function extra(message, args, config, action, channel, reason) {
     if (!batch?.size) return textPost({ text: `I couldn't read messages in ${channel}.`, accent: "down" });
     const lines = [...batch.values()].reverse().map(m => `**${m.member?.displayName ?? m.author.username}**: ${String(m.content || (m.attachments.size ? "[attachment]" : "[embed]")).replace(/\s+/g, " ").slice(0, 160)}`);
     return textPost({ text: `📜 Last ${lines.length} in ${channel}\n${lines.join("\n")}` });
-  }  if (action === "say" || action === "announce") { if (!text) return textPost({ text: "What should I say?", accent: "down" }); for (const c of channelsOf(message, args.channel)) await c.send({ content: text.slice(0, 1990), allowedMentions: { users: idsIn(text), parse: [] } }); return textPost({ text: `📤 Said it in ${channelsOf(message, args.channel).join(" ")}.` }); }
+  }  if (action === "remind" || action === "reminder" || action === "alert") {
+    // A reminder that really notifies: it tags the person (the owner unless someone else is named), and everyone if asked, in the channel it was set in, and also sends a private message.
+    const what = String(args.text ?? args.reason ?? "").trim() || "your reminder";
+    const named = args.user && !/^(me|myself)$/i.test(String(args.user).trim()) ? await targetOf(message, args.user) : null;
+    const id = named ?? me;
+    const words = tagText(what, { me });
+    const everyone = /(^|[\s>*_~(])@(everyone|here)\b/i.test(words);
+    const post = `⏰ ${everyone ? "" : `${tag(id)} `}**Reminder:** ${words}`;
+    await channel.send({ content: post.slice(0, 1990), allowedMentions: pingsOf(post) });
+    if (!everyone) message.client.users.fetch(id).then(u => u.send({ content: `⏰ **Reminder:** ${words.replace(/<@!?\d+>/g, "").trim() || what}`.slice(0, 1990), allowedMentions: { parse: [] } })).catch(() => {});
+    return textPost({ text: "-# ⏰ Reminder sent." });
+  }  if (action === "say" || action === "announce") { if (!text) return textPost({ text: "What should I say?", accent: "down" }); for (const c of channelsOf(message, args.channel)) await c.send({ content: text.slice(0, 1990), allowedMentions: pingsOf(text) }); return textPost({ text: `📤 Said it in ${channelsOf(message, args.channel).join(" ")}.` }); }
   if (action === "poll") {
     const options = pollOptions(args.options);
     if (!args.question || options.length < 2) return textPost({ text: "A poll needs a question and at least two options.", accent: "down" });

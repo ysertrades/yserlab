@@ -10,7 +10,7 @@ import { checkJobs } from "./jobs.js";
 import { heartbeat, offline } from "./status.js";
 import * as picker from "./picker.js";
 import { modelDoc } from "./ai.js";
-import { askUnified, ensureLink, publishKnowledge } from "./assistant.js";
+import { askUnified, noteResult, channelContext, ensureLink, publishKnowledge } from "./assistant.js";
 import { designDiagram, designSlides, isGenericSs, Clarify } from "./diagram.js";
 import { cardOnRequest } from "./cards.js";
 import { picturePost, galleryPost } from "./post.js";
@@ -103,7 +103,7 @@ client.on(Events.MessageCreate, async message => {
     if (!text) { if (tagged) await message.reply({ content: "Yes? Ask me anything about your model or your trades.", allowedMentions: { repliedUser: false } }); return; }
     if (!owner) { await message.reply("Open YSER Lab in the app once so I know whose trades and model to use."); return; }
     await message.channel.sendTyping().catch(() => {});
-    const out = await askUnified({ owner, channelId, discordId: message.author.id, text });
+    const out = await askUnified({ owner, channelId, discordId: message.author.id, text, context: await channelContext(message) });
     if (out.chart) { await picker.startChart(message, owner, out.timeframe); return; }
     if (out.schedule) { // looking at, or cancelling, what is scheduled
       if (!isAdmin(config, message.author.id)) return;
@@ -116,14 +116,15 @@ client.on(Events.MessageCreate, async message => {
     if (out.mod || out.send) { // moderation and sending: the owner's word only
       if (!isAdmin(config, message.author.id)) { await message.reply({ content: "Only my owner can do that.", allowedMentions: { repliedUser: false } }); return; }
       const later = schedule(message, out.mod ? "mod" : "send", out.mod ?? out.send); // "in 30 seconds", "at 5 pm", "every weekday at 9": saved for then
-      if (later) { await message.channel.send(later); await log(out.mod ? "mod" : "send", { note: "scheduled" }); return; }
+      if (later) { await message.channel.send(later); await log(out.mod ? "mod" : "send", { note: "scheduled" }); void noteResult(message.author.id, `(Scheduled: ${String(later.content ?? "").slice(0, 400)})`); return; }
       const post = out.mod ? await moderate(message, out.mod, config) : await sendFromApp(message, out.send, { owner, config });
       const sent = await message.channel.send(post).catch(async () => message.reply({ content: "Done, but I couldn't post the confirmation here." }).catch(() => null));
       if (out.mod) { // the owner's request goes after the action; a clean-up's confirmation stays four seconds and goes too
-        const quiet = ["purge", "slowmode"].includes(String(out.mod.action).toLowerCase());
+        const quiet = ["purge", "slowmode", "remind", "reminder", "alert"].includes(String(out.mod.action).toLowerCase());
         setTimeout(() => { if (quiet) sent?.delete?.().catch(() => {}); message.delete().catch(() => {}); }, 4000);
       }
       await log(out.mod ? "mod" : "send", { note: JSON.stringify(out.mod ?? out.send).slice(0, 180) });
+      void noteResult(message.author.id, `(I did it: ${JSON.stringify(out.mod ?? out.send).slice(0, 300)}. I answered: ${String(post?.content ?? "").slice(0, 500)})`);
       return;
     }
     if (out.card) {
