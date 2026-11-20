@@ -389,12 +389,13 @@ export const TOOLS = {
   /* ───────────── events, threads, messages ───────────── */
   event_create: {
     cap: "events", risk: "low", user: [P.ManageEvents], bot: [P.ManageEvents], aliases: ["create_event"],
-    async run({ guild, args, reason }) {
+    async run({ guild, args, reason, result }) {
       const name = String(args.name ?? args.text ?? "").trim(); if (!name) throw friendly("no name", "What is the event called?");
       const start = whenOf(args); if (!start) throw friendly("no time", "When does it start? Give a day and time in New York time (for example 2026-11-21 18:00).");
       if (start < Date.now() + 60_000) throw friendly("past", "That time has already passed (New York time). Give me a future date and time.");
       const hours = Math.max(0.25, Math.min(24, Number(args.hours) || 1)), voice = args.channel ? findChannel(guild, args.channel, [ChannelType.GuildVoice, ChannelType.GuildStageVoice]) : null;
       const ev = await guild.scheduledEvents.create({ name: name.slice(0, 100), description: args.description ? String(args.description).slice(0, 1000) : undefined, scheduledStartTime: new Date(start), scheduledEndTime: voice ? undefined : new Date(start + hours * 3_600_000), privacyLevel: GuildScheduledEventPrivacyLevel.GuildOnly, entityType: voice ? (voice.type === ChannelType.GuildStageVoice ? GuildScheduledEventEntityType.StageInstance : GuildScheduledEventEntityType.Voice) : GuildScheduledEventEntityType.External, channel: voice ?? undefined, entityMetadata: voice ? undefined : { location: String(args.location ?? "Online").slice(0, 100) }, reason });
+      Object.assign(result, { kind: "event", id: ev.id, name: ev.name, start });
       return panel({ title: "Event created", accent: "up", lines: [`**${ev.name}**`, `Starts ${stamp(start, "F")} (${stamp(start)})`, voice ? `In ${voice}` : `Location: ${args.location ?? "Online"}`, ev.url], footer: "Verified with Discord" });
     },
   },

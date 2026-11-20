@@ -239,6 +239,10 @@ export function classify(raw, ctx = {}) {
   m = /^(?:now |and |also )*(?:hide|make private)\s+(?:the\s+)?((?:first|second|third|fourth|fifth|last)(?: one| channel)?|(?:number|no\.?)\s*\d+)(?:\s+from\s+(?:everyone|everybody))?$/.exec(t0);
   if (m) return out(R("channel.access", "channel_access", { resource: "channel", target: { channel: null, ordinal: ordinalOf(m[1]) }, params: { access: "private", roles: null } }));
 
+  /* an event, usually for an announcement just made: "create an event for it", "schedule an event tomorrow at 6pm" */
+  m = /^(?:now |and |also |ok(?:ay)?[, ]+)*(?:create|make|schedule|set up|add|put|build)\s+(?:me\s+)?(?:an?\s+|the\s+)?(?:discord\s+|scheduled\s+|server\s+|calendar\s+)?event\b(.*)$/.exec(t0);
+  if (m) { const rest = m[1].trim(), named = /\b(?:called|named|titled)\s+["']?([^"',]+?)["']?(?=\s+(?:at|on|for|tomorrow|today|tonight|next|starting|from|in|with)\b|$)/.exec(rest)?.[1]; return out(R("event.create", "event_create", { resource: "event", params: { name: named ? origCase(original, named.trim()) : null, rest, fromContext: /\b(?:for|from|about|based on|out of|of)\s+(?:it|that|this|the (?:announcement|embed|message|post|stream|session))\b/.test(rest) || !named } })); }
+
   /* creating things */
   m = /\b(create|make|add|new|set up|build|put)\b\s+(?:an?\s+|the\s+|another\s+)?(?:new\s+)?(.*)$/.exec(t0);
   if (m) {
@@ -376,4 +380,4 @@ export function classifyMulti(original, ctx = {}) {
 }
 
 /** True for the intents the classifier owns and can run without a language model. */
-export const OWNED = new Set(["members.list", "members.byRole", "members.search", "members.count", "members.online", "server.overview", "roles.list", "channels.list", "channels.visibility", "permission.revoke", "permission.grant", "channel.info", "invite.create", "draft.write", "draft.approve", "draft.revise", "draft.restore", "draft.show", "draft.send", "message.pin", "message.delete", "message.edit", "channel.create", "category.create", "role.create", "channel.access", "channel.rename", "channel.delete", "role.assign", "role.remove", "compound.setup", "memory.remember", "memory.forget", "memory.show", "repeat", "context.resume", "correction.channel"]);
+export const OWNED = new Set(["members.list", "members.byRole", "members.search", "members.count", "members.online", "server.overview", "roles.list", "channels.list", "channels.visibility", "event.create", "permission.revoke", "permission.grant", "channel.info", "invite.create", "draft.write", "draft.approve", "draft.revise", "draft.restore", "draft.show", "draft.send", "message.pin", "message.delete", "message.edit", "channel.create", "category.create", "role.create", "channel.access", "channel.rename", "channel.delete", "role.assign", "role.remove", "compound.setup", "memory.remember", "memory.forget", "memory.show", "repeat", "context.resume", "correction.channel"]);

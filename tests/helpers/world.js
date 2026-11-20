@@ -103,6 +103,7 @@ export function makeWorld({ botFlags = [P.Administrator], memberCount = null, me
   guild.mkChannel = mkChannel;
   guild.invites = { create: async (ch, o) => ({ code: "abc", url: "https://discord.gg/abc", expiresTimestamp: null, maxUses: o.maxUses, channelId: ch.id }), fetch: async () => ({ code: "abc", url: "https://discord.gg/abc" }) };
   guild.fetchOwner = async () => ({ id: "owner1" });
+  guild.scheduledEvents = { create: async o => { mut("event_create", o.name); const ev = { id: nextId(), name: o.name, url: "https://discord.com/events/x", start: o.scheduledStartTime }; guild.events = [...(guild.events ?? []), { ...ev, ...o }]; return ev; }, fetch: async () => new Collection((guild.events ?? []).map(e => [e.id, e])) };
 
   const general = mkChannel({ name: "general" });
   const client = { user: { id: "bot" }, guilds: { fetch: async () => ({ approximateMemberCount: cache.size, approximatePresenceCount: 2 }) }, channels: { cache: guild.channels.cache } };

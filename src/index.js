@@ -20,7 +20,7 @@ import { automod } from "./admin/automod.js";
 import { DANGEROUS, permNames } from "./admin/guard.js";
 import { intentOf } from "./admin/intent.js";
 import * as brain from "./brain/index.js";
-import { handleEmbed } from "./admin/embeds.js";
+import { handleEmbed, draftOf } from "./admin/embeds.js";
 import { remember } from "./people.js";
 import { pollJuice, publishTrump } from "./feeds.js";
 import { cancel, list as listJobs, schedule, tick as tickJobs } from "./sched.js";
@@ -126,7 +126,7 @@ client.on(Events.MessageCreate, async message => {  try {
     const text = stripMention(message.content, client.user.id);
     if (!text) { if (tagged) await message.reply({ content: "Yes? Ask me anything about your model or your trades.", allowedMentions: { repliedUser: false } }); return; }
     if (!owner) { await message.reply("Open YSER Lab in the app once so I know whose trades and model to use."); return; }
-    if (message.guild && isAdmin(config, message.author.id) && await handleEmbed(message, text, config).catch(e => { console.warn("embed:", e?.message ?? e); return false; })) return; // make / recolour / edit / repost an embed
+    if (message.guild && isAdmin(config, message.author.id) && await handleEmbed(message, text, config).catch(e => { console.warn("embed:", e?.message ?? e); return false; })) { brain.noteEmbed(message, draftOf(message)); return; } // make / recolour / edit / repost an embed, then remembered, so "it" means that announcement
     await message.channel.sendTyping().catch(() => {});
     // The intelligence layer first: structured intent, conversation memory and reference resolution. What it does not own continues below as before.
     let brainContext = "";

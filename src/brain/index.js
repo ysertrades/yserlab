@@ -11,6 +11,7 @@ const channelNamesOf = guild => [...guild.channels.cache.values()].map(c => c.na
 import { knownAction, toolAllowed, validate } from "./registry.js";
 import { ask as askWhich, pickFromList, resolveChannel, resolveMember, resolveRole, sendable } from "./resolver.js";
 import { complete } from "./router.js";
+import { parseWhen } from "./when.js";
 import * as mem from "./memory.js";
 
 /**
@@ -248,6 +249,21 @@ const HANDLERS = {
     const p = env.c.parked ?? env.c.pending;
     if (!p) { const d = mem.currentDraft(env.c); return d ? posts([showDraft(d, "This is where we stopped.")], { ok: true }) : say("Nothing was left unfinished in this conversation.", { ok: false }); }
     env.c.parked = null; mem.setPending(env.c, p); return { ...say(p.ask ?? "Where were we? Tell me what's missing.", { ok: true }), resumed: p.k };
+  },
+  async "event.create"(env, k) {
+    const { c, message } = env, src = c.embed && Date.now() - c.embed.at < 6 * 3_600_000 ? c.embed : (() => { const d = mem.currentDraft(c); return d ? { title: d.title || String(d.text).split("\n")[0].replace(/[*_#]/g, "").slice(0, 80), body: d.text } : null; })();
+    const strip = s => String(s ?? "").replace(/[*_~`]/g, "").replace(/^[^\p{L}\p{N}]+/u, "").replace(/\s+/g, " ").trim();
+    const name = strip(k.params.name ?? env.picked?.name ?? src?.title).slice(0, 100);
+    if (!name) return asked(c, k, "name", "What is the event called?");
+    const hint = src ? `${src.title} ${src.body}` : "";
+    const wanted = `${k.params.rest ?? ""} ${env.picked?.when ?? ""}`;
+    const w = parseWhen(wanted, { hint });
+    if (w.needTime || w.problem) return asked(c, k, "when", w.needTime ? "What time should it start? (New York time, for example 6pm)" : "When should it start? Give a day and a time (New York time), for example tomorrow at 6pm.");
+    const body = String(src?.body ?? ""), where = /\*{0,2}where:?\*{0,2}\s*(.+)/i.exec(body)?.[1], description = String(k.params.description ?? body.split("\n").filter(l => l.trim()).map(l => l.trim()).join("\n")).replace(/\*\*/g, "").slice(0, 900);
+    const r = await callTool(env, "event_create", { name, at: w.at, description: description || undefined, location: where ? strip(where).slice(0, 100) : undefined }, { primary: "event.create" });
+    record(env, "event_create", r);
+    if (r.outcome.ok) { mem.noteEntity(c, "events", { id: r.result.id, name: r.result.name }); mem.noteFact(c, "result", `Created the Discord event "${r.result.name}" for ${w.at} (New York time)${where ? ` at ${strip(where)}` : ""}`, { id: r.result.id }); c.lastIntent = k; }
+    return posts([r.post], { ok: !!r.outcome.ok, k });
   },
   async "permission.revoke"(env, k) { return permissionChange(env, k, "revoke"); },
   async "permission.grant"(env, k) { return permissionChange(env, k, "grant"); },
@@ -517,6 +533,7 @@ async function answerPending(env) {
     else k.target.channel = raw.replace(/^(?:in|to|into|on)\s+(?:the\s+)?/i, "").replace(/\s+channel$/i, "");
   }
   else if (field === "instruction") k.params.instruction = raw;
+  else if (field === "when") picked.when = raw;
   else if (field === "choice") { picked.choice = /\bedit|update|change|replace\b/.test(t) ? "edit" : /\bnew|another|post|send|fresh\b/.test(t) ? "new" : null; if (!picked.choice) { mem.setPending(c, p); return say("Should I **edit** the earlier message or post a **new** one?", { ok: false }); } }
   else if (field === "user") k.target.user = raw, k.target.ordinal = null;
   else if (field === "role") k.target.role = raw.replace(/^the\s+/i, "").replace(/\s+role$/i, "");
@@ -557,6 +574,19 @@ export function handle(message, text, config, deps = {}) {
   chains.set(key, next);
   next.finally(() => { if (chains.get(key) === next) chains.delete(key); }).catch(() => {});
   return next;
+}
+
+/** Remembers an embed the embed writer made or changed (it keeps its own draft), so "it" in the next message means that announcement. */
+export function noteEmbed(message, d) {
+  try {
+    if (!d?.messageId) return;
+    const c = mem.getConvo(mem.convoKey(message)), channel = message.guild?.channels.cache.get(d.channelId);
+    c.embed = { title: d.title, body: d.body, channelId: d.channelId, messageId: d.messageId, at: Date.now() };
+    const item = { id: d.messageId, channelId: d.channelId, name: `embed in #${channel?.name ?? "?"}`, channelName: channel?.name, text: String(d.title ?? "").slice(0, 160), url: `https://discord.com/channels/${message.guild.id}/${d.channelId}/${d.messageId}` };
+    mem.noteEntity(c, "messages", item); mem.setFocus(c, "message", item, "embed");
+    mem.noteFact(c, "embed", `Made an announcement embed titled "${String(d.title ?? "").slice(0, 80)}" in #${channel?.name ?? "?"}. Its text: ${String(d.body ?? "").replace(/\s+/g, " ").slice(0, 300)}`, { messageId: d.messageId });
+    c.topic = `announcement: ${String(d.title ?? "").slice(0, 60)}`; mem.addTurn(c, "assistant", `(made an embed: ${String(d.title ?? "").slice(0, 80)})`);
+  } catch { /* the embed already went out */ }
 }
 
 /** After the language-model path ran something, remembers what it was (so "do that again", "it" and corrections still work). */

@@ -10,6 +10,7 @@ import "./tools.js";
 export const SCHEMAS = {
   member_list: { purpose: "List the actual members of the server (filter by role, name, humans/bots; paged).", required: [], optional: ["role", "query", "kind", "sort"], verifies: "members come straight from Discord's member list" },
   channel_visibility: { purpose: "Which channels @everyone or a role can see, or which are hidden / read-only for them.", required: [], optional: ["role", "mode"], verifies: "read from the channels' permissions" },
+  event_create: { purpose: "Create a Discord scheduled event (name, start time in New York time, description, location).", required: ["name"], optional: ["at", "description", "location", "hours", "channel"], verifies: "returned by Discord with its link" },
   member_count: { purpose: "The number of members.", required: [], optional: [] },
   member_online: { purpose: "Who or how many are online (needs the Presence intent for names).", required: [], optional: [] },
   server_overview: { purpose: "Server information: name, owner, channels, roles, boosts, safety settings.", required: [], optional: [] },
@@ -32,7 +33,7 @@ for (const [name, s] of Object.entries(SCHEMAS)) s.name = name;
 export const INTENT_TOOLS = {
   "members.list": ["member_list"], "members.byRole": ["member_list", "role_members"], "members.search": ["member_list", "member_search"],
   "members.count": ["member_count"], "members.online": ["member_online"],
-  "server.overview": ["server_overview"], "channels.visibility": ["channel_visibility"], "channel.info": ["channel_info"], "roles.list": ["role_list"], "channels.list": ["channel_list"], "invite.create": ["invite_create"],
+  "server.overview": ["server_overview"], "channels.visibility": ["channel_visibility"], "event.create": ["event_create"], "channel.info": ["channel_info"], "roles.list": ["role_list"], "channels.list": ["channel_list"], "invite.create": ["invite_create"],
   "channel.create": ["channel_create"], "category.create": ["channel_create"], "role.create": ["role_create"], "channel.access": ["channel_access", "hide"],
   "role.assign": ["role_assign", "role_add"], "role.remove": ["role_assign", "role_remove"],
   "draft.send": ["message_send"], "message.pin": ["message_pin"], "message.delete": ["message_remove"], "message.edit": ["message_update"],

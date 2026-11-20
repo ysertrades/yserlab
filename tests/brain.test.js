@@ -317,6 +317,26 @@ test("classifier: normalisation and structure", () => {
 });
 
 /* ── memory of what was shown and what the owner said ── */
+test("embeds: an embed the embed writer made is remembered, and 'create an event for it' uses its title and details, asking only for the time", async () => {
+  const { w, talk } = start(); const lab = w.mkChannel({ name: "YSER-lab" });
+  const sent = await lab.send({ components: [], content: "embed" }); w.reset();
+  brain.noteEmbed(w.say("x"), { title: "📈 Live Trading Stream Tomorrow", body: "Join us tomorrow, Friday, November 20, for a live trading session.\n\n**When:** Tomorrow\n**Where:** Main voice channel\n\nDetails to follow.", channelId: lab.id, messageId: sent.id });
+  const ask = await talk("Create an event for it"); assert.equal(ask.k.primary, "event.create"); assert.match(ask.said, /What time/i); assert.deepEqual(w.mutations, []);
+  const done = await talk("6pm"); assert.match(done.said, /Event created/); assert.deepEqual(w.mutations, ["event_create:Live Trading Stream Tomorrow"]);
+  const ev = w.guild.events[0]; assert.match(String(ev.description), /live trading session/); assert.equal(ev.entityMetadata.location, "Main voice channel");
+  assert.match(ev.scheduledStartTime.toISOString(), /-11-20T2[23]:00:00/); // 18:00 New York on the 20th
+  assert.match(brain.contextFor(w.say("x"), "what did we do"), /Created the Discord event/);
+});
+test("embeds: the embed is a message 'it' can mean: pin it works", async () => {
+  const { w, talk } = start(); const ch = w.general; const m = await ch.send({ components: [], content: "embed" });
+  brain.noteEmbed(w.say("x"), { title: "Stream", body: "tomorrow", channelId: ch.id, messageId: m.id }); w.reset();
+  assert.match((await talk("pin it")).said, /Pinned/); assert.equal(ch.store.find(x => x.id === m.id).pinned, true);
+});
+test("events: an event with a time in the request needs no question; a past or missing time is asked about", async () => {
+  const { w, talk } = start();
+  const r = await talk("schedule an event called Review Night tomorrow at 8pm"); assert.match(r.said, /Event created/); assert.equal(w.guild.events[0].name, "Review Night");
+  const q = await talk("create an event called Q and A"); assert.match(q.said, /day and a time|What time/i);
+});
 test("permissions: 'add view permission on all channels' is never read as creating a channel, and 'add it' restores after a listing", async () => {
   const { w, talk } = start(); w.mkChannel({ name: "education" });
   for (const ch of w.guild.channels.cache.values()) await ch.permissionOverwrites.edit(w.guild.roles.everyone, { ViewChannel: false }); w.reset();
