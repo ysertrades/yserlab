@@ -317,6 +317,31 @@ test("classifier: normalisation and structure", () => {
 });
 
 /* ── memory of what was shown and what the owner said ── */
+test("permissions: 'add it back' after a removal restores it; 'give everyone view access to all channels' works from a cold start", async () => {
+  const { w, talk } = start(); w.mkChannel({ name: "education" }); w.mkChannel({ name: "news" });
+  await talk("which channels can everyone see"); await talk("remove that permission");
+  const back = await talk("Add it back"); assert.equal(back.k.primary, "permission.grant"); assert.match(back.said, /restored/i);
+  for (const ch of w.guild.channels.cache.values()) assert.equal(ch.permissionsFor(w.guild.roles.everyone).has(P.ViewChannel), true, ch.name);
+  for (const ch of w.guild.channels.cache.values()) await ch.permissionOverwrites.edit(w.guild.roles.everyone, { ViewChannel: false }); w.reset();
+  const all = await talk("Give everyone view access to all channels"); assert.equal(all.k.primary, "permission.grant"); assert.match(all.said, /restored/i);
+  assert.equal(w.mutations.filter(m => m.startsWith("overwrite")).length, 3);
+  for (const ch of w.guild.channels.cache.values()) assert.equal(ch.permissionsFor(w.guild.roles.everyone).has(P.ViewChannel), true, ch.name);
+});
+test("permissions: without saying which channels it asks once, and 'all the channels' is the answer, not a channel name", async () => {
+  const { w, talk } = start(); w.mkChannel({ name: "education" });
+  for (const ch of w.guild.channels.cache.values()) await ch.permissionOverwrites.edit(w.guild.roles.everyone, { ViewChannel: false }); w.reset();
+  const q = await talk("give everyone view access"); assert.match(q.said, /Which channels/); assert.deepEqual(w.mutations, []);
+  const a = await talk("All the channels"); assert.match(a.said, /restored/i); assert.doesNotMatch(a.said, /couldn't find/i);
+  for (const ch of w.guild.channels.cache.values()) assert.equal(ch.permissionsFor(w.guild.roles.everyone).has(P.ViewChannel), true, ch.name);
+});
+test("permissions: hide all channels from everyone, and one named channel, each after a confirmation", async () => {
+  const { w, talk } = start(); w.mkChannel({ name: "education" }); w.mkChannel({ name: "news" }); w.reset();
+  const one = await talk("stop everyone from seeing #news"); assert.equal(one.k.primary, "permission.revoke"); assert.equal(w.mutations.length, 1);
+  assert.equal([...w.guild.channels.cache.values()].find(c => c.name === "news").permissionsFor(w.guild.roles.everyone).has(P.ViewChannel), false);
+  w.confirm = "no"; w.reset(); assert.match((await talk("hide all channels from everyone")).said, /Cancelled/); assert.deepEqual(w.mutations, []);
+  w.confirm = "ok"; await talk("hide all channels from everyone");
+  for (const ch of w.guild.channels.cache.values()) assert.equal(ch.permissionsFor(w.guild.roles.everyone).has(P.ViewChannel), false, ch.name);
+});
 test("memory: after listing who can see which channels, 'remove that permission' acts on exactly that, after a confirmation", async () => {
   const { w, talk } = start(); w.mkChannel({ name: "education" }); w.mkChannel({ name: "news" });
   const list = await talk("Which channels do everyone have view access"); assert.match(list.said, /can see \(3 of 3\)/);

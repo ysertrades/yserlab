@@ -364,10 +364,20 @@ async function roleChange(env, k, remove) {
  */
 async function permissionChange(env, k, what) {
   const { c, message } = env, guild = message.guild, revoke = what === "revoke";
-  const f = (c.focus?.type === "permission" && fresh(c.focus) ? c.focus.items[0] : null) ?? c.facts?.find(x => x.kind === "permission" && Date.now() - x.at < FRESH * 2)?.data ?? null;
-  if (!f) return { handled: false }; // nothing was shown that "that permission" could mean: the existing path decides
+  const explicit = !!k.params.explicit;
+  let f = explicit ? null : ((c.focus?.type === "permission" && fresh(c.focus) ? c.focus.items[0] : null) ?? c.facts?.find(x => x.kind === "permission" && Date.now() - x.at < FRESH * 2)?.data ?? null);
+  if (!f && !explicit) return { handled: false }; // nothing was shown that "that permission" could mean: the existing path decides
+  if (explicit) { // the owner named what to change: read the live permissions instead of relying on an earlier list
+    let who = guild.roles.everyone;
+    if (k.target.role) { who = findRole(guild, k.target.role); if (!who) return say(`I couldn't find a role called "${k.target.role}".`, { ok: false }); }
+    if (!k.target.all && !k.target.channels?.length && k.target.ordinal == null && !k.target.here) return asked(c, k, "channel", `Which channels? Name them, or say "all channels".`);
+    const rows = [...guild.channels.cache.values()].filter(ch => !ch.isThread?.() && ch.type !== ChannelType.GuildCategory).map(ch => ({ id: ch.id, name: ch.name, view: !!ch.permissionsFor(who)?.has(P.ViewChannel) }));
+    f = { role: { id: who.id, name: who.id === guild.id ? "@everyone" : who.name }, visible: rows.filter(r => r.view).map(r => ({ id: r.id, name: r.name })), hidden: rows.filter(r => !r.view).map(r => ({ id: r.id, name: r.name })) };
+    if (k.target.here) k = { ...k, target: { ...k.target, channels: undefined } };
+  }
   const role = guild.roles.cache.get(f.role?.id) ?? guild.roles.everyone, label = role.id === guild.id ? "@everyone" : role.name;
   let pool = (revoke ? f.visible : f.hidden) ?? [];
+  if (k.target.here) pool = [...(f.visible ?? []), ...(f.hidden ?? [])].filter(x => x.id === message.channel.id);
   if (k.target.ordinal != null && c.list?.kind === "channels") { const p = pickFromList(c.list, k.target.ordinal < 0 ? "last" : ["first", "second", "third", "fourth", "fifth"][k.target.ordinal] ?? `number ${k.target.ordinal + 1}`); if (p.outOfRange) return say(`The last list had only ${p.count} channels.`, { ok: false }); pool = p.item ? [{ id: p.item.id, name: p.item.label }] : pool; }
   if (k.target.channels?.length) {
     const want = k.target.channels.map(n => { const r = resolveChannel(guild, n, { current: message.channel }); return r.channel?.id; });
@@ -500,7 +510,12 @@ async function answerPending(env) {
   } else if (field === "topic") k.params.topic = origCase(raw, raw);
   else if (field === "name") k.params.name = raw.replace(/^(?:call it|name it|it'?s|its|the name is|name:)\s*/i, "").replace(/^["“']|["”']$/g, "");
   else if (field === "names") { k.params.names = namesFrom(raw); if (!k.params.names.length) { mem.setPending(c, p); return say("I couldn't read any names there. Give me the names, separated by commas.", { ok: false }); } }
-  else if (field === "channel") { k.target.channel = raw.replace(/^(?:in|to|into|on)\s+(?:the\s+)?/i, "").replace(/\s+channel$/i, ""); }
+  else if (field === "channel") {
+    const all = /^(?:all|every|everything|all of them)(?: of)?(?: the)?(?: channels?)?$|^(?:the )?channels$/i.test(raw);
+    if (all) { k.target.all = true; delete k.target.channel; }
+    else if (k.primary.startsWith("permission.")) k.target.channels = raw.split(/\s*(?:,|\band\b|&)\s*/).map(x => x.replace(/^(?:in|to|into|on|the)\s+/i, "").replace(/\s+channels?$/i, "").replace(/^#/, "").trim()).filter(Boolean);
+    else k.target.channel = raw.replace(/^(?:in|to|into|on)\s+(?:the\s+)?/i, "").replace(/\s+channel$/i, "");
+  }
   else if (field === "instruction") k.params.instruction = raw;
   else if (field === "choice") { picked.choice = /\bedit|update|change|replace\b/.test(t) ? "edit" : /\bnew|another|post|send|fresh\b/.test(t) ? "new" : null; if (!picked.choice) { mem.setPending(c, p); return say("Should I **edit** the earlier message or post a **new** one?", { ok: false }); } }
   else if (field === "user") k.target.user = raw, k.target.ordinal = null;

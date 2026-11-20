@@ -21,6 +21,7 @@ export const intentCases = [
   // roles
   ["Show me the moderators", "members.byRole", { roles }], ["who has the VIP role", "members.byRole"], ["show me the instructors", "members.byRole", { roles }], ["people with the moderator role", "members.byRole"],
   ["Which channels do everyone have view access", "channels.visibility"], ["which channels can everyone see", "channels.visibility"], ["which channels are private", "channels.visibility"], ["what can everyone see", "channels.visibility"], ["which channels can the VIP role see", "channels.visibility", { roles }], ["which channels are read only", "channels.visibility"], ["who can see this channel", "channel.info"], ["which channels are hidden from everyone", "channels.visibility"],
+  ["Give everyone view access to all channels", "permission.grant"], ["let everyone see all the channels", "permission.grant"], ["hide all channels from everyone", "permission.revoke"], ["stop everyone from seeing #news", "permission.revoke"], ["remove view access from everyone on all channels", "permission.revoke"], ["make all channels visible", "permission.grant"],
   ["Remove that permission", "permission.revoke"], ["revoke that access", "permission.revoke"], ["take away that view access from #education", "permission.revoke"], ["give that permission back", "permission.grant"], ["hide the second one", "channel.access"],
   ["Show me the roles", "roles.list"], ["list the channels", "channels.list"],
   // creation
