@@ -317,6 +317,23 @@ test("classifier: normalisation and structure", () => {
 });
 
 /* ── memory of what was shown and what the owner said ── */
+test("permissions: 'add view permission on all channels' is never read as creating a channel, and 'add it' restores after a listing", async () => {
+  const { w, talk } = start(); w.mkChannel({ name: "education" });
+  for (const ch of w.guild.channels.cache.values()) await ch.permissionOverwrites.edit(w.guild.roles.everyone, { ViewChannel: false }); w.reset();
+  const before = w.guild.channels.cache.size;
+  const r = await talk("Add view permission on all channels"); assert.equal(r.k.primary, "permission.grant"); assert.equal(w.guild.channels.cache.size, before);
+  assert.deepEqual(w.mutations.filter(m => m.startsWith("channel_create")), []);
+  for (const ch of w.guild.channels.cache.values()) assert.equal(ch.permissionsFor(w.guild.roles.everyone).has(P.ViewChannel), true, ch.name);
+  for (const ch of w.guild.channels.cache.values()) await ch.permissionOverwrites.edit(w.guild.roles.everyone, { ViewChannel: false });
+  await talk("Which channels that direct have view permissions on everyone"); const add = await talk("Add it");
+  assert.equal(add.k.primary, "permission.grant"); assert.match(add.said, /restored/i);
+  for (const q of ["add view permissions to everyone", "add access for all channels", "add a view permission on all"]) assert.notEqual(classifyOnly(q), "channel.create", q);
+});
+function classifyOnly(q) { return classify(q, { roleNames: [] }).primary; }
+test("model path: a harmless read the model picks is not blocked as 'unsure'", () => {
+  const { w } = start(); const g = brain.guard(w.say("x"), "gibberish that matches nothing", { action: "channel_visibility" });
+  assert.equal(g.say, undefined); assert.equal(g.call.action, "channel_visibility");
+});
 test("permissions: 'add it back' after a removal restores it; 'give everyone view access to all channels' works from a cold start", async () => {
   const { w, talk } = start(); w.mkChannel({ name: "education" }); w.mkChannel({ name: "news" });
   await talk("which channels can everyone see"); await talk("remove that permission");

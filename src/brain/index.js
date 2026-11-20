@@ -595,7 +595,7 @@ const STEMS = {
   voice_mute: ["mute"], voice_unmute: ["unmute"], voice_disconnect: ["disconnect", "kick", "remov"], voice_move: ["move"], warn: ["warn"], channel_reorder: ["move", "reorder", "position"],
   event_cancel: ["cancel", "delet", "remov"], invite_revoke: ["revoke", "delet", "remov", "cancel", "disable"], message_remove: ["delet", "remov"], message_delete: ["delet", "remov"],
 };
-const SAFE_READS = new Set(["server_overview", "server_info", "member_list", "member_count", "member_online", "member_info", "role_list", "role_info", "role_members", "channel_list", "channel_info", "event_list", "invite_list", "mod_log", "mod_history", "read_messages", "recent_messages", "permission_audit", "role_audit", "scan_spam", "summarize_channel", "whois"]);
+const SAFE_READS = new Set(["channel_visibility", "server_overview", "server_info", "member_list", "member_count", "member_online", "member_info", "role_list", "role_info", "role_members", "channel_list", "channel_info", "event_list", "invite_list", "mod_log", "mod_history", "read_messages", "recent_messages", "permission_audit", "role_audit", "scan_spam", "summarize_channel", "whois"]);
 export function guard(message, text, call) {
   const c = mem.getConvo(mem.convoKey(message)), action = String(call.action ?? "").toLowerCase();
   const k = classify(text, { convo: c, roleNames: message.guild ? rolesOf(message.guild) : [], draft: mem.currentDraft(c) });
