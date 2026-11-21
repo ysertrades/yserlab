@@ -13,6 +13,9 @@ import { ask as askWhich, pickFromList, resolveChannel, resolveMember, resolveRo
 import { complete } from "./router.js";
 import { parseWhen } from "./when.js";
 import * as mem from "./memory.js";
+import * as conv from "./converse.js";
+import * as work from "./working.js";
+import "./summary.js";
 
 /**
  * The conversation manager. One entry point (handle) takes an owner's message in a server and runs the whole pipeline:
@@ -238,6 +241,7 @@ const HANDLERS = {
 
   async "compound.setup"(env, k) { return k.multi ? runMulti(env, k) : runPlan(env, k); },
 
+  async "artifact.send"(env, k) { return conv.sendArtifacts(env, k, OPS); },
   async "draft.show"(env) { const d = mem.currentDraft(env.c); return d ? posts([showDraft(d)], { ok: true }) : say("There's no draft yet.", { ok: false }); },
   async "draft.restore"(env, k) {
     const d = mem.currentDraft(env.c); if (!d) return say("There's no draft to go back in.", { ok: false });
@@ -497,6 +501,9 @@ async function runPlan(env, k) {
   return posts([panel({ title: okAll ? "Done" : some ? "Partly done" : "Nothing was created", accent: okAll ? "up" : some ? "amber" : "down", lines, footer: okAll ? "Each step was read back from Discord" : "Failed steps stopped what depended on them" })], { ok: okAll, k });
 }
 
+/** What the conversation module needs from this file, handed over rather than imported (no cycle). */
+const OPS = { say, posts, asked, callTool, absorb, channelFor, sendable, run: (k, env) => run(k, env) };
+
 /* ─────────────────────────── the pipeline ─────────────────────────── */
 async function run(k, env) {
   const h = k.multi ? HANDLERS["compound.setup"] : HANDLERS[k.primary];
@@ -550,17 +557,23 @@ async function handleNow(message, text, config, deps = {}) {
   const uid = message.author.id, c = mem.getConvo(mem.convoKey(message));
   const env = { message, text, config, c, uid, resolveMember: deps.resolveMember };
   mem.addTurn(c, "user", text);
-  let out = c.pending ? await answerPending(env) : null;
+  let out = null, u = null; // u: what the conversation module understood about this message (its subject, a rewritten question, the exact source)
+  if (c.pending?.kind === "source") { const a = await conv.answerSource(env, OPS); if (a?.handled === false) u = a; else out = a; } // "the first one", "yes": the answer to which-one
+  if (!out && !u) out = c.pending ? await answerPending(env) : null;
   if (!out) {
     const k = classify(text, { convo: c, roleNames: rolesOf(guild), draft: mem.currentDraft(c), channelNames: channelNamesOf(guild) });
-    if (k.primary === "unknown") mem.autoNote(uid, text); // something the owner told me (a preference, how things are): kept for later and shown when relevant
-    if (k.primary === "unknown") return { handled: false, context: mem.contextBlock(c, uid, text), classified: k };
-    if (k.correction && c.lastIntent) mem.addCorrection(c, { phrase: normalize(lastUserBefore(c)), wrong: c.lastIntent.primary, right: { primary: k.primary, action: k.action, params: k.params, target: k.target }, text });
-    if (k.primary === "memory.remember") { const last = c.turns.at(-1); if (last?.role === "user") last.text = "(asked me to remember a preference)"; } // saved notes are never replayed as conversation text
-    out = await run(k, env);
-    if (out.handled && k.correction && out.ok && out.posts?.length) out.posts = [plain(`Understood, you meant ${k.primary.replace(".", " ")}. Here it is:`), ...out.posts];
+    if (k.primary === "unknown" && !u) mem.autoNote(uid, text); // something the owner told me (a preference, how things are): kept for later and shown when relevant
+    u ??= await conv.understand(env, k, OPS);
+    if (u.handled) out = u; // a question about which one, "send it", "save this"
+    else if (k.primary === "unknown" || u.source) return { handled: false, context: conv.contextFor(message, text, mem.contextBlock(c, uid, text), u), classified: k, rewrite: u.rewrite ?? null, source: u.source ?? null };
+    else {
+      if (k.correction && c.lastIntent) mem.addCorrection(c, { phrase: normalize(lastUserBefore(c)), wrong: c.lastIntent.primary, right: { primary: k.primary, action: k.action, params: k.params, target: k.target }, text });
+      if (k.primary === "memory.remember") { const last = c.turns.at(-1); if (last?.role === "user") last.text = "(asked me to remember a preference)"; } // saved notes are never replayed as conversation text
+      out = await run(k, env);
+      if (out.handled && k.correction && out.ok && out.posts?.length) out.posts = [plain(`Understood, you meant ${k.primary.replace(".", " ")}. Here it is:`), ...out.posts];
+    }
   }
-  if (!out.handled) return { handled: false, context: mem.contextBlock(c, uid, text) };
+  if (!out.handled) return { handled: false, context: conv.contextFor(message, text, mem.contextBlock(c, uid, text), u ?? {}), rewrite: u?.rewrite ?? null };
   mem.addTurn(c, "assistant", out.say ?? (out.ok === false ? "(that did not work)" : `(did: ${out.k?.primary ?? "it"})`));
   mem.touch(c);
   return out;
@@ -577,9 +590,10 @@ export function handle(message, text, config, deps = {}) {
 }
 
 /** Remembers an embed the embed writer made or changed (it keeps its own draft), so "it" in the next message means that announcement. */
-export function noteEmbed(message, d) {
+export function noteEmbed(message, d, meta = {}) {
   try {
     if (!d?.messageId) return;
+    conv.noteEmbedArtifact(message, d, meta ?? {}); // the embed is an artifact too: its text, its sources and the Discord ids it was really sent with
     const c = mem.getConvo(mem.convoKey(message)), channel = message.guild?.channels.cache.get(d.channelId);
     c.embed = { title: d.title, body: d.body, channelId: d.channelId, messageId: d.messageId, at: Date.now() };
     const item = { id: d.messageId, channelId: d.channelId, name: `embed in #${channel?.name ?? "?"}`, channelName: channel?.name, text: String(d.title ?? "").slice(0, 160), url: `https://discord.com/channels/${message.guild.id}/${d.channelId}/${d.messageId}` };
@@ -600,7 +614,12 @@ export function noteLLM(message, call, hooks = {}) {
     mem.addTurn(c, "assistant", `(ran ${call.action}${r.outcome.ok === false ? ", it failed" : ""})`);
   } catch { /* the answer already went out */ }
 }
-export const noteAssistantText = (message, text) => { try { mem.addTurn(mem.getConvo(mem.convoKey(message)), "assistant", text); } catch { /* never blocks an answer */ } };
+/** The model's answer was sent: it is a turn, and (when it explains something) an artifact, kept whole, with the topic moved along. */
+export const noteAssistantText = (message, text, meta = {}) => { try { mem.addTurn(mem.getConvo(mem.convoKey(message)), "assistant", text); conv.noteAnswer(message, text, meta ?? {}); } catch { /* never blocks an answer */ } };
+/** Before the embed writer: resolves "make an embed for this" to the stored explanation it means (or asks which). See converse.js. */
+export const prepareEmbed = conv.prepareEmbed;
+/** The conversation's working memory in one shape (topic, active artifacts, pending and completed actions...). */
+export const workingMemory = message => work.view(mem.getConvo(mem.convoKey(message)), message);
 
 /** The context for the language-model path: the structured state, retrieved for this message. */
 export const contextFor = (message, text) => message.guild ? mem.contextBlock(mem.getConvo(mem.convoKey(message)), message.author.id, text) : "";

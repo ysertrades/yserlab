@@ -1,0 +1,100 @@
+{
+ "label": "after",
+ "architecture": "current",
+ "at": "2026-11-21T00:11:07.004Z",
+ "total": 221,
+ "passed": 221,
+ "metrics": {
+  "follow": [
+   144,
+   144
+  ],
+  "resolve": [
+   214,
+   214
+  ],
+  "transform": [
+   145,
+   145
+  ],
+  "action": [
+   46,
+   46
+  ],
+  "ask": [
+   19,
+   19
+  ],
+  "noask": [
+   127,
+   127
+  ],
+  "persist": [
+   24,
+   24
+  ],
+  "steps": [
+   796,
+   796
+  ]
+ },
+ "categories": {
+  "follow-up": [
+   36,
+   36
+  ],
+  "transform": [
+   32,
+   32
+  ],
+  "modify": [
+   8,
+   8
+  ],
+  "action": [
+   22,
+   22
+  ],
+  "multi-topic": [
+   16,
+   16
+  ],
+  "topic-switch": [
+   10,
+   10
+  ],
+  "persistence": [
+   8,
+   8
+  ],
+  "provider": [
+   6,
+   6
+  ],
+  "ambiguity": [
+   8,
+   8
+  ],
+  "isolation": [
+   10,
+   10
+  ],
+  "long-history": [
+   6,
+   6
+  ],
+  "verification": [
+   8,
+   8
+  ],
+  "spec": [
+   10,
+   10
+  ],
+  "held-out": [
+   41,
+   41
+  ]
+ },
+ "failing": []
+}

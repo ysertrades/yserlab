@@ -52,3 +52,5 @@ Both run against a stand-in server (`tests/helpers/world.js`). They prove the lo
 
 * The in-app assistant (Supabase edge function in the charts repo) does not read this memory yet; sharing drafts and preferences between Discord and the app needs a table with per-user access control and a change to that function.
 * The model-path guard resolves references and rejects unknown actions, but free-form model output is not otherwise re-classified.
+
+> Conversation understanding, artifact memory, topic tracking and the context evaluation are described in [CONTEXT_MEMORY.md](CONTEXT_MEMORY.md).

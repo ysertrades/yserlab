@@ -126,10 +126,14 @@ client.on(Events.MessageCreate, async message => {  try {
     const text = stripMention(message.content, client.user.id);
     if (!text) { if (tagged) await message.reply({ content: "Yes? Ask me anything about your model or your trades.", allowedMentions: { repliedUser: false } }); return; }
     if (!owner) { await message.reply("Open YSER Lab in the app once so I know whose trades and model to use."); return; }
-    if (message.guild && isAdmin(config, message.author.id) && await handleEmbed(message, text, config).catch(e => { console.warn("embed:", e?.message ?? e); return false; })) { brain.noteEmbed(message, draftOf(message)); return; } // make / recolour / edit / repost an embed, then remembered, so "it" means that announcement
+    // "Make an embed for this" means the explanation it points at: the intelligence layer resolves that (or asks which) before any embed is written, and what is sent to the writer is the stored text, never the sentence that asked.
+    const owner0 = message.guild && isAdmin(config, message.author.id);
+    const prep = owner0 ? await brain.prepareEmbed(message, text, config).catch(() => null) : null;
+    if (prep?.say) { await message.reply({ content: prep.say.slice(0, 1990), allowedMentions: { repliedUser: false } }); return; }
+    if (owner0 && !prep?.skipEmbed && await handleEmbed(message, prep?.text ?? text, config, prep?.opts).catch(e => { console.warn("embed:", e?.message ?? e); return false; })) { brain.noteEmbed(message, draftOf(message), prep?.meta); return; } // make / recolour / edit / repost an embed, then remembered (with the text it was made from), so "it" means that announcement
     await message.channel.sendTyping().catch(() => {});
     // The intelligence layer first: structured intent, conversation memory and reference resolution. What it does not own continues below as before.
-    let brainContext = "";
+    let brainContext = "", brainRewrite = null;
     if (message.guild && isAdmin(config, message.author.id)) {
       const b = await brain.handle(message, text, config).catch(e => { console.warn("brain:", e?.message ?? e); return { handled: false, context: "" }; });
       if (b.handled) {
@@ -138,11 +142,11 @@ client.on(Events.MessageCreate, async message => {  try {
         await log("brain", { note: `${b.k?.primary ?? "answer"} ${b.ok === false ? "failed" : "ok"}` }, b.ok !== false);
         return;
       }
-      brainContext = b.context ?? "";
+      brainContext = b.context ?? ""; brainRewrite = b.rewrite ?? null; // a follow-up says its subject out loud ("how is IFVG used in trading?") and carries the exact source when it needs one
     }
     const quick = isAdmin(config, message.author.id) && message.guild ? intentOf(text, `${channelId}:${message.author.id}`) : null; // plain admin requests go straight to their tool
     if (quick?.say) { await message.reply({ content: quick.say, allowedMentions: { repliedUser: false } }); return; }
-    const out = quick?.action ? { mod: { action: quick.action, ...quick.args } } : await askUnified({ owner, channelId, discordId: message.author.id, text, context: (await channelContext(message)) + (brainContext ? `\n[What I remember about this conversation (structured memory; trust it for "it", "that", "here", "the second one")]\n${brainContext}` : "") });
+    const out = quick?.action ? { mod: { action: quick.action, ...quick.args } } : await askUnified({ owner, channelId, discordId: message.author.id, text: brainRewrite ?? text, context: (await channelContext(message)) + (brainContext ? `\n[What I remember about this conversation (structured memory; trust it for "it", "that", "here", "the second one")]\n${brainContext}` : "") });
     if (out.chart) { await picker.startChart(message, owner, out.timeframe); return; }
     if (out.schedule) { // looking at, or cancelling, what is scheduled
       if (!isAdmin(config, message.author.id)) return;
@@ -216,7 +220,7 @@ client.on(Events.MessageCreate, async message => {  try {
       }
       return;
     }
-    brain.noteAssistantText(message, out.text);
+    brain.noteAssistantText(message, out.text, { original: text, rewrite: brainRewrite }); // kept whole, as content the next message can point at
     const parts = chunks(out.text);
     await message.reply({ content: parts[0], allowedMentions: { repliedUser: false } });
     for (const part of parts.slice(1)) await message.channel.send(part);

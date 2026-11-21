@@ -36,7 +36,7 @@ export const INTENT_TOOLS = {
   "server.overview": ["server_overview"], "channels.visibility": ["channel_visibility"], "event.create": ["event_create"], "channel.info": ["channel_info"], "roles.list": ["role_list"], "channels.list": ["channel_list"], "invite.create": ["invite_create"],
   "channel.create": ["channel_create"], "category.create": ["channel_create"], "role.create": ["role_create"], "channel.access": ["channel_access", "hide"],
   "role.assign": ["role_assign", "role_add"], "role.remove": ["role_assign", "role_remove"],
-  "draft.send": ["message_send"], "message.pin": ["message_pin"], "message.delete": ["message_remove"], "message.edit": ["message_update"],
+  "draft.send": ["message_send"], "artifact.send": ["message_send"], "artifact.save": [], "message.pin": ["message_pin"], "message.delete": ["message_remove"], "message.edit": ["message_update"],
   "compound.setup": ["channel_create", "role_assign", "channel_access"],
 };
 export const toolAllowed = (primary, tool) => !!INTENT_TOOLS[primary] && INTENT_TOOLS[primary].includes(tool); // default deny: an intent with no tool list may not run any tool

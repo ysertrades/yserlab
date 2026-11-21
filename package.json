@@ -14,7 +14,9 @@
     "test": "node --test",
     "eval": "node eval/run.js",
     "eval:scenarios": "node eval/run-scenarios.js",
-    "eval:perf": "node eval/perf.js"
+    "eval:perf": "node eval/perf.js",
+    "eval:context": "node eval/run-context.js",
+    "eval:perf-context": "node eval/perf-context.js"
   },
   "dependencies": {
     "@napi-rs/canvas": "^0.1.80",

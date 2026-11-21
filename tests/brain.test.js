@@ -7,6 +7,7 @@ import os from "node:os";
 import path from "node:path";
 import fs from "node:fs";
 import { ChannelType, PermissionFlagsBits as P } from "discord.js";
+import { DateTime } from "luxon";
 
 process.env.SUPABASE_SERVICE_KEY = ""; process.env.SUPABASE_SERVICE_ROLE_KEY = ""; process.env.OWNER_ID = "owner1";
 process.env.YSER_DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), "yser-brain-"));
@@ -320,11 +321,11 @@ test("classifier: normalisation and structure", () => {
 test("embeds: an embed the embed writer made is remembered, and 'create an event for it' uses its title and details, asking only for the time", async () => {
   const { w, talk } = start(); const lab = w.mkChannel({ name: "YSER-lab" });
   const sent = await lab.send({ components: [], content: "embed" }); w.reset();
-  brain.noteEmbed(w.say("x"), { title: "📈 Live Trading Stream Tomorrow", body: "Join us tomorrow, Friday, November 20, for a live trading session.\n\n**When:** Tomorrow\n**Where:** Main voice channel\n\nDetails to follow.", channelId: lab.id, messageId: sent.id });
+  brain.noteEmbed(w.say("x"), { title: "📈 Live Trading Stream Tomorrow", body: `Join us tomorrow, ${DateTime.now().setZone("America/New_York").plus({ days: 1 }).toFormat("cccc, LLLL d")}, for a live trading session.\n\n**When:** Tomorrow\n**Where:** Main voice channel\n\nDetails to follow.`, channelId: lab.id, messageId: sent.id });
   const ask = await talk("Create an event for it"); assert.equal(ask.k.primary, "event.create"); assert.match(ask.said, /What time/i); assert.deepEqual(w.mutations, []);
   const done = await talk("6pm"); assert.match(done.said, /Event created/); assert.deepEqual(w.mutations, ["event_create:Live Trading Stream Tomorrow"]);
   const ev = w.guild.events[0]; assert.match(String(ev.description), /live trading session/); assert.equal(ev.entityMetadata.location, "Main voice channel");
-  assert.match(ev.scheduledStartTime.toISOString(), /-11-20T2[23]:00:00/); // 18:00 New York on the 20th
+  assert.match(ev.scheduledStartTime.toISOString(), new RegExp(`-${DateTime.now().setZone("America/New_York").plus({ days: 1 }).toFormat("LL-dd")}T2[23]:00:00`)); // 18:00 New York tomorrow (the test never depends on today's date or the hour it runs)
   assert.match(brain.contextFor(w.say("x"), "what did we do"), /Created the Discord event/);
 });
 test("embeds: the embed is a message 'it' can mean: pin it works", async () => {
